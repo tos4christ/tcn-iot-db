@@ -1,7 +1,7 @@
 import React from "react";
 import {NavLink, Link, withRouter, Redirect} from 'react-router-dom';
 
- class Downtime extends React.Component {
+ class Average extends React.Component {
   render() {
     return (
       <div>
@@ -11,4 +11,4 @@ import {NavLink, Link, withRouter, Redirect} from 'react-router-dom';
   }
 }
 
-export default Downtime
+export default Average

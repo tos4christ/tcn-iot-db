@@ -6,10 +6,24 @@
     /* Add the blur effect */
 }
 
-/* Downtime CSS */
+/* Home CSS */
 .message {
   height: 100px;
   text-align: center;
   font-size: 25px;
   color: aliceblue;
+}
+.ul-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ul-menu li {
+  display: block;
+  padding: 5px;
+  background-color: aqua;
+  margin: 10px;
+  width: 40%;
+  border-radius: 10px;
+  font-size:large;
 }

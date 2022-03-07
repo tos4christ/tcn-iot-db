@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 import './components/css/Header.css';
-import Downtime from './components/Downtime';
+import Home from './components/Home';
 import Header from './components/Header';
 
 class App extends React.Component {
@@ -12,7 +12,7 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <Header />
-          <Downtime />
+          <Home />
         </div>
       </Router>      
     )
