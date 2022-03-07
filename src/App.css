@@ -1,0 +1,15 @@
+.App {  
+    background-image: url('/public/11.jpg');
+    background-repeat:inherit;
+    height: 100em;
+    width: auto;
+    /* Add the blur effect */
+}
+
+/* Downtime CSS */
+.message {
+  height: 100px;
+  text-align: center;
+  font-size: 25px;
+  color: aliceblue;
+}
