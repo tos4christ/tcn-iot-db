@@ -87,9 +87,8 @@ import Row from "./table/row";
         this.setState(prevState => {
           prevState.tableRows = TableRow;
           return {tableRows: prevState.tableRows}
-        })
-        console.log(TableRow, 'table rows')
-      })
+        });
+      });
     }
     
   }
@@ -105,28 +104,37 @@ import Row from "./table/row";
         <div>
           <h2 className="history-text"> Get History</h2>
           {/* Select Station */}
-          <label className="input-text block-display"> 
-            Select Station 
+          <div className="options">
+            <label> 
+              Select Station 
+            </label>
             <select onChange={this.setStation} ref={node => this.stationsOption = node} >
               {stationArray}
             </select>
-          </label>
-
+          </div>
           {/* Select Equipment */}
-          <label className="input-text block-display"> 
-            Select Equipment
+          <div className="options">
+            <label> 
+              Select Equipment
+            </label>
             <select onChange={this.setEquipment} ref={node => this.equipmentOption = node} >
               <option disabled>Select an Equipment</option>
               { this.state.equipment.map( (equip, index) => <option value={equip} key={index}>{equip}</option>)}
             </select>
-          </label>
-
-          <label className="history-text label"> Start Date </label> <input type={'datetime-local'} name="startDate" onChange={this.setDate} ref={node => this.startDate = node}></input>
-          <br />
-          <label className="history-text label"> End Date </label> <input type={'datetime-local'} name='endDate' onChange={this.setDate} ref={node => this.endDate = node}></input>
+          </div>
+          {/* Select Start Date */}    
+          <div className="options">
+            <label> Start Date </label> 
+            <input type={'datetime-local'} name="startDate" onChange={this.setDate} ref={node => this.startDate = node}></input>
+          </div>
+          {/* Select End Date */}
+          <div className="options">
+            <label> End Date </label>
+            <input type={'datetime-local'} name='endDate' onChange={this.setDate} ref={node => this.endDate = node}></input>
+          </div>
           <button className="submit-button" onClick={this.handleSubmit}> Submit </button>
         </div>
-        <div>
+        <div className="table-div">
           <table className="tg">
             <Header />
             <tbody>
