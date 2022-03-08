@@ -34,20 +34,20 @@ class Header extends React.Component {
                         <span className="icon-bar"></span>
                         <span className="icon-bar"></span>
                     </button>
-                    <Link to='/api/v1/' className='navbar-brand'>
+                    <Link to='/' className='navbar-brand'>
                         <img className='homelogo' src={logo} alt="site logo"/>
                     </Link>
                 </div>
                 <div className="collapse navbar-collapse" id="myNavbar">
                     <ul className="nav navbar-nav ul-links">
                         <li className='nav-item'> 
-                            <NavLink className='nav-link text-info' to='/api/v1/feeds'>Latest News  |</NavLink>
+                            <NavLink className='nav-link text-info' to='/'>Developer  |</NavLink>
                         </li>
                         <li className='nav-item'>
-                            <NavLink className='nav-link text-info' to='/api/v1/articles'> Contact  |</NavLink>
+                            <NavLink className='nav-link text-info' to='/'>Products  |</NavLink>
                         </li>
                         <li className='nav-item'>
-                            <NavLink className='nav-link text-info' to='/api/v1/gifs'>Tour  |</NavLink>
+                            <NavLink className='nav-link text-info' to='/'>Tour  |</NavLink>
                         </li>
                         <li className='nav-item'>
                             <NavLink className='nav-link text-info' to={route}>{heading}</NavLink>

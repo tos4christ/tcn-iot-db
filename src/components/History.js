@@ -48,6 +48,7 @@ import Row from "./table/row";
     });
   }
   handleSubmit() {
+    // this.setState({tableRows: []})
     const station = this.state.selectedStation;
     const equipment = this.state.selectedEquipment;
     const startDate = this.state.startDate[0];
@@ -55,6 +56,7 @@ import Row from "./table/row";
     const startTime = this.state.startDate[1];
     const endTime = this.state.endDate[1];
     // verify that the startDate is lower than the endDate
+    // This is already handled at the backend by replacing the lower to be the start
     const getHistory = station && equipment && startDate && endDate && startTime && endTime;
     if(getHistory) {
       const url = '/lines/history';
@@ -89,8 +91,7 @@ import Row from "./table/row";
           return {tableRows: prevState.tableRows}
         });
       });
-    }
-    
+    }    
   }
   render() {
     // get the stations from the keys of the object

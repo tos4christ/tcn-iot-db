@@ -1,11 +1,10 @@
 import React from "react";
-import {NavLink, Link, withRouter, Route, Switch} from 'react-router-dom';
+import { Link, withRouter, Route, Switch } from 'react-router-dom';
 import Downtime from './Downtime';
 import History from './History';
 import Profile from './Profile';
 import Uptime from './Uptime';
 import Average from './Average';
-import { Redirect } from "react-router-dom";
 
  class Home extends React.Component {
    constructor(props) {
@@ -52,8 +51,7 @@ import { Redirect } from "react-router-dom";
           <Route path={`/history`}> <History /> </Route>
           <Route path={`/profile`}> <Profile /> </Route>
           <Route path={`/average`}> <Average /> </Route>
-        </Switch>
-        
+        </Switch>        
       </div>
     )         
   }
