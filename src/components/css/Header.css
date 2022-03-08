@@ -44,6 +44,12 @@
     padding-bottom: 0;
   }
 }
+@media screen and (max-height: 700px) {
+  .App {
+    width: 140%;
+    overflow: hidden;
+  }
+}
 
 .navbar-toggle {
   margin-top: 20px;

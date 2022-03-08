@@ -1,8 +1,9 @@
 .App {  
     background-image: url('/public/11.jpg');
-    background-repeat:inherit;
+    background-repeat: space;
     height: 100em;
-    width: auto;
+    width: 110%;
+    overflow: hidden;
     /* Add the blur effect */
 }
 
@@ -26,4 +27,32 @@
   width: 40%;
   border-radius: 10px;
   font-size:large;
+}
+
+/* History CSS */
+.history-text {
+  color: white;
+  text-align: center;
+}
+.input-text {
+  color: black;
+  text-align: center;
+}
+.block-display {
+  display: block;
+}
+label input, select {
+  width: 12em;
+  padding: 3px;
+  margin: 0 5px;
+}
+.label {
+  margin-left: 50px;
+  margin-right: 10px;
+  padding: 3px;
+  font-size: 14px;
+}
+.submit-button {
+  margin-left: 14em;
+  margin-top: 1em;
 }
