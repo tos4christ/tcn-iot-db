@@ -1,8 +1,8 @@
 import React from "react";
 import {NavLink, Link, withRouter, Redirect} from 'react-router-dom';
 import stations from "./stations";
-import Header from "./table/header";
-import Row from "./table/row";
+import Header from "./table/HistoryHeader";
+import Row from "./table/HistoryRow";
 
  class History extends React.Component {
   constructor(props) {
