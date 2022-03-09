@@ -1,8 +1,9 @@
 import React from "react";
-import {NavLink, Link, withRouter, Redirect} from 'react-router-dom';
+import {NavLink, Link, withRouter} from 'react-router-dom';
 import stations from "./stations";
 import Header from "./table/HistoryHeader";
 import Row from "./table/HistoryRow";
+import { Spinner, Button } from "react-bootstrap";
 
  class History extends React.Component {
   constructor(props) {
@@ -17,7 +18,8 @@ import Row from "./table/HistoryRow";
       equipment: [],
       startDate: '',
       endDate : '',
-      tableRows: []
+      tableRows: [],
+      loading: false
     }
   }
   componentDidMount() {
@@ -68,32 +70,38 @@ import Row from "./table/HistoryRow";
         startTime,
         endTime
       };
-      fetch(url, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+      // add a spinner method while request is loading
+      this.setState({loading: true}, () => {
+        console.log('is it loading? ', this.state.loading);
+        fetch(url, {
+          method: 'POST',
+          mode: 'cors',
+          cache: 'no-cache',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then( resp => {
+          // retrieve the data and use it to populate the view
+          const TableRow = [];
+          const datas = resp.res;
+          // create the table that would show the data history
+          datas.forEach((data, index) => {
+             TableRow.push(<Row data={data} key={index} />)
+          });
+          this.setState(prevState => {
+            prevState.tableRows = TableRow;
+            return {tableRows: prevState.tableRows, loading: false}
+          });
+        });
       })
-      .then(response => response.json())
-      .then( resp => {
-        // retrieve the data and use it to populate the view
-        const TableRow = [];
-        const datas = resp.res;
-        // create the table that would show the data history
-        datas.forEach((data, index) => {
-           TableRow.push(<Row data={data} key={index} />)
-        });
-        this.setState(prevState => {
-          prevState.tableRows = TableRow;
-          return {tableRows: prevState.tableRows}
-        });
-      });
+      
     }    
   }
   render() {
+    const { loading, tableRows } = this.state;
     // get the stations from the keys of the object
     const stationer = Object.keys(stations);
     // population the stations inside the options element for the select element's use
@@ -136,12 +144,26 @@ import Row from "./table/HistoryRow";
           <button className="submit-button" onClick={this.handleSubmit}> Submit </button>
         </div>
         <div className="table-div">
-          <table className="tg">
-            <Header />
-            <tbody>
-              {this.state.tableRows}
-            </tbody>
-          </table>
+        {loading ? 
+        <Button className="spinner" variant="primary" disabled>
+        <Spinner
+          as="span"
+          animation="border"
+          size="sm"
+          role="status"
+          aria-hidden="true"
+        />
+        Loading...
+      </Button>
+        : 
+        <table className="tg">
+        <Header />
+        <tbody>
+          {tableRows}              
+        </tbody>
+      </table>
+      }      
+          
         </div>
       </div> 
     )         

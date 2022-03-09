@@ -7,6 +7,13 @@
     /* Add the blur effect */
 }
 
+.spinner {
+  color: pink;
+  padding: 1em;
+  font-size: 16px;
+  margin-left: 15em;
+}
+
 /* Home CSS */
 .message {
   height: 100px;
