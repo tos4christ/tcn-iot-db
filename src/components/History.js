@@ -72,7 +72,6 @@ import { Spinner, Button } from "react-bootstrap";
       };
       // add a spinner method while request is loading
       this.setState({loading: true}, () => {
-        console.log('is it loading? ', this.state.loading);
         fetch(url, {
           method: 'POST',
           mode: 'cors',
@@ -96,8 +95,7 @@ import { Spinner, Button } from "react-bootstrap";
             return {tableRows: prevState.tableRows, loading: false}
           });
         });
-      })
-      
+      })      
     }    
   }
   render() {
@@ -144,26 +142,25 @@ import { Spinner, Button } from "react-bootstrap";
           <button className="submit-button" onClick={this.handleSubmit}> Submit </button>
         </div>
         <div className="table-div">
-        {loading ? 
-        <Button className="spinner" variant="primary" disabled>
-        <Spinner
-          as="span"
-          animation="border"
-          size="sm"
-          role="status"
-          aria-hidden="true"
-        />
-        Loading...
-      </Button>
-        : 
-        <table className="tg">
-        <Header />
-        <tbody>
-          {tableRows}              
-        </tbody>
-      </table>
-      }      
-          
+          {loading ? 
+            <Button className="spinner" variant="primary" disabled>
+            <Spinner
+              as="span"
+              animation="border"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
+            Loading... Please Wait
+          </Button>
+            : 
+            <table className="tg">
+            <Header />
+            <tbody>
+              {tableRows}              
+            </tbody>
+          </table>
+          }         
         </div>
       </div> 
     )         
