@@ -7,8 +7,14 @@ import Home from './components/Home';
 import Header from './components/Header';
 
 class App extends React.Component {
-  render() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      client: ''
+    }
+  }
 
+  render() {
     return (
       <Router>
         <div className="App">
@@ -16,8 +22,7 @@ class App extends React.Component {
           <Home />
         </div>
       </Router>      
-    )
-    
+    )    
   };
 }
 

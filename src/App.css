@@ -2,11 +2,16 @@
     background-image: url('/public/11.jpg');
     background-repeat: space;
     
-    width: 110%;
+    width: 120%;
     overflow: scroll;
     /* Add the blur effect */
 }
-
+.hidden {
+  display: 'none';
+}
+.menu {
+  margin: 0;
+}
 .spinner {
   color: pink;
   padding: 1em;
@@ -23,17 +28,27 @@
   width: 60%;
   margin-left: 2em;
 }
+.menu-list {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
 .ul-menu {
+  flex-grow: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0;
+}
+.display-div {
+  flex-grow: 4;
 }
 .ul-menu li {
   display: block;
   padding: 5px;
   background-color: aqua;
   margin: 10px;
-  width: 40%;
+  width: 50%;
   border-radius: 10px;
   font-size:large;
 }

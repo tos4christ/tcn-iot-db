@@ -2,10 +2,10 @@
 .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
         overflow:hidden;padding:10px 0px;word-break:normal;}
 .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-        font-weight:normal;overflow:hidden;padding:10px 0px;word-break:normal;}
+        font-weight:normal;overflow:hidden;padding:0px 0px;word-break:normal; color: aliceblue;}
 .tg .tg-e7p8{font-family:"Courier New", Courier, monospace !important;;font-size:16px;text-align:left;vertical-align:top}
 .tg .tg-zb4j{background-color:#329a9d;font-family:"Courier New", Courier, monospace !important;;font-size:16px;text-align:left;
-        vertical-align:top; padding: 0.2em}
+        vertical-align:top; padding: 0}
 input {
   padding: 0;
   margin: 0;
@@ -13,4 +13,9 @@ input {
 .tg td {
   padding: 0;
   margin: 0;
+}
+li {
+        list-style: none;
+        margin-left: 0;
+        color: aliceblue;
 }
