@@ -1,8 +1,8 @@
 .App {  
     background-image: url('/public/11.jpg');
     background-repeat: space;
-    
-    width: 120%;
+    background-attachment: fixed;
+    width: 100%;
     overflow: scroll;
     /* Add the blur effect */
 }
@@ -21,11 +21,11 @@
 
 /* Home CSS */
 .message {
-  height: 100px;
+  height: 50px;
   text-align: center;
   font-size: 25px;
   color: aliceblue;
-  width: 60%;
+  width: 100%;
   margin-left: 2em;
 }
 .menu-list {
@@ -42,6 +42,8 @@
 }
 .display-div {
   flex-grow: 4;
+  margin-top: 0;
+  padding-top: 0;
 }
 .ul-menu li {
   display: block;

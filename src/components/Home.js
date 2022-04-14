@@ -7,6 +7,7 @@ import Profile from './Profile';
 import Uptime from './Uptime';
 import Average from './Average';
 import websocketClient from "./utility/socketConnection";
+import websocket from "websocket";
 
 
  class Home extends React.Component {
@@ -32,6 +33,8 @@ import websocketClient from "./utility/socketConnection";
        eket: {},
        gwagwalada: {},
        gereguPs: {},
+       omokuPs1: {},
+       ihovborNippPs : {},
        total: 198,
        message: "",
        received: [],
@@ -61,6 +64,7 @@ import websocketClient from "./utility/socketConnection";
       (websocketClient) => {
         this.setState({ connected: true }, () => {
           this.websocketClient = websocketClient;
+          console.log(websocketClient, 'the client')
         });
       }
     );
@@ -87,6 +91,7 @@ import websocketClient from "./utility/socketConnection";
     .then(response => response.json())
     .then( res => {
       const data = res.res;
+
       this.setState(prevState => {
         const returnObject = {};
         if(data && data.length > 0) {
@@ -101,6 +106,26 @@ import websocketClient from "./utility/socketConnection";
     .catch(e => console.log(e));
    }
   render() {
+    // console.log(this.state)
+    const riversIppPs = this.state.riversIppPs.mw ? this.state.riversIppPs.mw.toFixed(2) : 0;
+    const afamViTs = this.state.afamViTs.mw ? this.state.afamViTs.mw.toFixed(2) : 0;
+    const gereguPs = this.state.gereguPs.mw ? this.state.gereguPs.mw.toFixed(2) : 0;
+    const omotosho2 = this.state.omotosho2.mw ? this.state.omotosho2.mw.toFixed(2) : 0;
+    const omotoshoNippPs = this.state.omotoshoNippPs.mw ? this.state.omotoshoNippPs.mw.toFixed(2) : 0;
+    const delta3 = this.state.delta3.mw ? this.state.delta3.mw.toFixed(2) : 0;
+    const sapeleNippPs = this.state.sapeleNippPs.mw ? this.state.sapeleNippPs.mw.toFixed(2) : 0;
+    const omokuPs1 = this.state.omokuPs1.mw ? this.state.omokuPs1.mw.toFixed(2) : 0;
+    const odukpaniGs = this.state.odukpaniGs.mw ? this.state.odukpaniGs.mw.toFixed(2) : 0;
+    const ikotEkpene = this.state.ikotEkpene.mw ? this.state.ikotEkpene.mw.toFixed(2) : 0;
+    const alaoji = this.state.alaoji.mw ? this.state.alaoji.mw.toFixed(2) : 0;
+    const ekim = this.state.ekim.mw ? this.state.ekim.mw.toFixed(2) : 0;
+    const gwagwalada = this.state.gwagwalada.mw ? this.state.gwagwalada.mw.toFixed(2) : 0;
+    const lokojaTs = this.state.lokojaTs.mw ? this.state.lokojaTs.mw.toFixed(2) : 0;
+    const phMain = this.state.phMain.mw ? this.state.phMain.mw.toFixed(2) : 0;
+    const eket = this.state.eket.mw ? this.state.eket.mw.toFixed(2) : 0;
+    const azura = this.state.ihovborNippPs.mw ? this.state.ihovborNippPs.mw.toFixed(2) : 0;
+    const totalGeneration = Number(azura) + Number(phMain) + Number(riversIppPs) + Number(afamViTs) + Number(gereguPs) + Number(omotosho2) + Number(omotoshoNippPs) + Number(delta3) + Number(sapeleNippPs) + Number(omokuPs1);
+    const totalTransmission = Number(eket) + Number(phMain) + Number(lokojaTs) + Number(gwagwalada) + Number(ekim) + Number(alaoji) + Number(ikotEkpene) + Number(odukpaniGs);
     return (
       <div className="menu">
         <div className="message text-white rounded">
@@ -125,7 +150,7 @@ import websocketClient from "./utility/socketConnection";
             </li>
           </ul>
           <div className="display-div">
-          <h2>Generating Stations</h2>
+          <h2 className="text-white">Generating Stations</h2>
           <table className="tg">
             <thead>
               <tr>
@@ -185,6 +210,27 @@ import websocketClient from "./utility/socketConnection";
                 <th>CN</th>
                 <th>{this.state.sapeleNippPs.mw ? this.state.sapeleNippPs.mw.toFixed(2) : 0 }</th>
                 <th>{this.state.sapeleNippPs.kv ? this.state.sapeleNippPs.kv : 0 }</th>
+              </tr>
+              <tr>
+                <th>8</th>
+                <th>OMOKU</th>
+                <th>CN</th>
+                <th>{this.state.omokuPs1.mw ? this.state.omokuPs1.mw.toFixed(2) : 0 }</th>
+                <th>{this.state.omokuPs1.kv ? this.state.omokuPs1.kv : 0 }</th>
+              </tr>
+              <tr>
+                <th>9</th>
+                <th>AZURA</th>
+                <th>CN</th>
+                <th>{this.state.ihovborNippPs.mw ? this.state.ihovborNippPs.mw.toFixed(2) : 0 }</th>
+                <th>{this.state.ihovborNippPs.kv ? this.state.ihovborNippPs.kv : 0 }</th>
+              </tr>
+              <tr>
+                <th>7</th>
+                <th>TRANS AMADI</th>
+                <th>CN</th>
+                <th>{this.state.phMain.mw ? this.state.phMain.mw.toFixed(2) : 0 }</th>
+                <th>{this.state.phMain.kv ? this.state.phMain.kv : 0 }</th>
               </tr>
               <tr className="hidden">
                 <th>8</th>
@@ -246,13 +292,13 @@ import websocketClient from "./utility/socketConnection";
                 <th></th>
                 <th>TOTAL</th>
                 <th></th>
-                <th>{this.state.total}</th>
+                <th>{totalGeneration.toFixed(2)}</th>
                 <th></th>
               </tr>              
             </tbody>
           </table>
 
-          <h2>Transmission Stations</h2>
+          <h2 className="text-white">Transmission Stations</h2>
           <table className="tg">
             <thead>
               <tr>
@@ -324,7 +370,7 @@ import websocketClient from "./utility/socketConnection";
                 <th></th>
                 <th>TOTAL</th>
                 <th></th>
-                <th>{this.state.total}</th>
+                <th>{totalTransmission.toFixed(2)}</th>
                 <th></th>
               </tr>
             </tbody>

@@ -16,7 +16,7 @@ const settings = {
       },
     },
     websockets: {
-      url: "ws://102.89.11.82:80/websockets"
+      url: "ws://127.0.0.1:3000/websockets"
     }
   };
   
