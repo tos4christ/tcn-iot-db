@@ -6,8 +6,6 @@ import History from './History';
 import Profile from './Profile';
 import Uptime from './Uptime';
 import Average from './Average';
-import websocketClient from "./utility/socketConnection";
-import websocket from "websocket";
 
 
  class Home extends React.Component {
@@ -44,30 +42,6 @@ import websocket from "websocket";
    componentDidMount() {
      this.streamInterval = setInterval(() => this.streamReadings(), 3000);
      this.streamReadings();
-     websocketClient(
-      {
-        queryParams: {
-          favoritePizza: "supreme",
-        },
-        onMessage: (message) => {
-          console.log(message);
-          this.setState(({ received }) => {
-            return {
-              received: [...received, message],
-            };
-          });
-        },
-        onDisconnect: () => {
-          this.setState({ connected: false });
-        },
-      },
-      (websocketClient) => {
-        this.setState({ connected: true }, () => {
-          this.websocketClient = websocketClient;
-          console.log(websocketClient, 'the client')
-        });
-      }
-    );
    }
    componentWillUnmount() {
      clearInterval(this.streamInterval)
@@ -79,7 +53,7 @@ import websocket from "websocket";
     })
    }
    streamReadings() {
-     const url = '/lines/all';
+     const url = 'lines/all';
     fetch(url, {
       method: 'GET',
       mode: 'no-cors',

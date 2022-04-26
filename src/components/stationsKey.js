@@ -1,0 +1,20 @@
+export default {
+    "OMOTOSHO 2" : 'omotosho2',
+    "EKET" : 'eket',
+    "PORTHARCOURT MAIN" : 'phMain',
+    "AFAM 6" : 'afamViTs',
+    "ALAOJI" : 'alaoji',
+    "LOKOJA TS" : 'lokojaTs',
+    "SAPELE NIPPPs" : 'sapeleNippPs',
+    "OMOTOSHO NIPPPS" : 'omotoshoNippPs',
+    "ODUKPANI GS" : 'odukpaniGs',
+    "OMOTOSHO 1" : 'omotosho1',
+    "DELTA 3" : 'delta3',
+    "EKIM" : 'ekim',
+    "GEREGU PS" : 'gereguPs',
+    "IKOT EKPENE" : 'ikotEkpene',
+    "RIVERS IPPPS" : 'riversIppPs',
+    "GWAGWALADA TS" : 'gwagwalada',
+    "OMOKU GS" : 'omokuGs',
+    "IHOVBOR TS" : 'ihovborNippPs'
+};

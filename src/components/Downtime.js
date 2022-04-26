@@ -1,5 +1,6 @@
 import React from "react";
 import stations from "./stations";
+import stationsKey from "./stationsKey";
 import { Spinner, Button } from "react-bootstrap";
 
  class Downtime extends React.Component {
@@ -43,8 +44,8 @@ import { Spinner, Button } from "react-bootstrap";
     });
   }
   handleSubmit() {
-    const station = this.state.selectedStation;
-    const equipment = this.state.selectedEquipment;
+    const station = stationsKey[this.state.selectedStation];
+    const equipment = this.state.selectedEquipment.toLowerCase();
     const startDate = this.state.startDate[0];
     const endDate = this.state.endDate[0];
     const startTime = this.state.startDate[1];

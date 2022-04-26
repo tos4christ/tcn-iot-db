@@ -1,6 +1,7 @@
 import React from "react";
 import {NavLink, Link, withRouter} from 'react-router-dom';
 import stations from "./stations";
+import stationsKey from "./stationsKey";
 import Header from "./table/HistoryHeader";
 import Row from "./table/HistoryRow";
 import { Spinner, Button } from "react-bootstrap";
@@ -51,8 +52,8 @@ import { Spinner, Button } from "react-bootstrap";
   }
   handleSubmit() {
     // this.setState({tableRows: []})
-    const station = this.state.selectedStation;
-    const equipment = this.state.selectedEquipment;
+    const station = stationsKey[this.state.selectedStation];
+    const equipment = this.state.selectedEquipment.toLowerCase();
     const startDate = this.state.startDate[0];
     const endDate = this.state.endDate[0];
     const startTime = this.state.startDate[1];
