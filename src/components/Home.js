@@ -15,25 +15,35 @@ import Average from './Average';
      this.toggleDisplay = this.toggleDisplay.bind(this);
      this.state = {
        display : this.props.location.pathname.length > 1 ? 'none' : '',
-       omotoshoNippPs: {},
-       odukpaniGs: {},
-       ikotEkpene: {},
-       alaoji: {},
-       riversIppPs: {},
-       ekim: {},
-       lokojaTs: {},
-       phMain: {},
-       omotosho1: {},
-       sapeleNippPs: {},
-       afamViTs: {},
-       omotosho2: {},
-       delta3: {},
-       eket: {},
-       gwagwalada: {},
-       gereguPs: {},
-       omokuPs1: {},
-       ihovborNippPs : {},
-       total: 198,
+       "OMOTOSHO NIPP": {},
+       "TRANS AMADI": {},
+       "AZURA": {},
+       "GEREGU NIPP": {},
+       "PARAS ENERGY": {},
+       "ASABA": {},
+       "UGWUAJI": {},
+       "DELTA 2": {},
+       "OLORUNSOGO NIPP": {},
+       "IHOVBOR NIPP": {},
+       "OMOKU GS": {},
+       "GWAGWALADA": {},
+       "RIVERS IPP": {},
+       "IKOT EKPENE": {},
+       "GEREGU GAS": {},
+       "EKIM": {},
+       "DELTA 3": {},
+       "OMOTOSHO GAS" : {},
+       "ODUKPANI GS": {},
+       "SAPELE STEAM": {},
+       "SAPELE NIPP": {},
+       "LOKOJA TS": {},
+       "ALAOJI": {},
+       "AFAM VI": {},
+       "PORT-HARCOURT MAIN": {},
+       "EKET": {},
+       "OMOTOSHO 2": {},
+       "OLORUNSOGO GAS": {},
+       "GBARAIN": {},
        message: "",
        received: [],
        connected: false,
@@ -65,13 +75,15 @@ import Average from './Average';
     .then(response => response.json())
     .then( res => {
       const data = res.res;
-
+      // console.log(data, 'the stream data')
       this.setState(prevState => {
         const returnObject = {};
         if(data && data.length > 0) {
           data.forEach(element => {
-            prevState[element.station] = element
-            returnObject[element.station] = prevState[element.station]
+            if(element.mw !== null) {
+              prevState[element.station] = element
+              returnObject[element.station] = prevState[element.station]
+            }            
           });
         }
         return returnObject;
@@ -81,29 +93,49 @@ import Average from './Average';
    }
   render() {
     // console.log(this.state)
-    const riversIppPs = this.state.riversIppPs.mw ? this.state.riversIppPs.mw.toFixed(2) : 0;
-    const afamViTs = this.state.afamViTs.mw ? this.state.afamViTs.mw.toFixed(2) : 0;
-    const gereguPs = this.state.gereguPs.mw ? this.state.gereguPs.mw.toFixed(2) : 0;
-    const omotosho2 = this.state.omotosho2.mw ? this.state.omotosho2.mw.toFixed(2) : 0;
-    const omotoshoNippPs = this.state.omotoshoNippPs.mw ? this.state.omotoshoNippPs.mw.toFixed(2) : 0;
-    const delta3 = this.state.delta3.mw ? this.state.delta3.mw.toFixed(2) : 0;
-    const sapeleNippPs = this.state.sapeleNippPs.mw ? this.state.sapeleNippPs.mw.toFixed(2) : 0;
-    const omokuPs1 = this.state.omokuPs1.mw ? this.state.omokuPs1.mw.toFixed(2) : 0;
-    const odukpaniGs = this.state.odukpaniGs.mw ? this.state.odukpaniGs.mw.toFixed(2) : 0;
-    const ikotEkpene = this.state.ikotEkpene.mw ? this.state.ikotEkpene.mw.toFixed(2) : 0;
-    const alaoji = this.state.alaoji.mw ? this.state.alaoji.mw.toFixed(2) : 0;
-    const ekim = this.state.ekim.mw ? this.state.ekim.mw.toFixed(2) : 0;
-    const gwagwalada = this.state.gwagwalada.mw ? this.state.gwagwalada.mw.toFixed(2) : 0;
-    const lokojaTs = this.state.lokojaTs.mw ? this.state.lokojaTs.mw.toFixed(2) : 0;
-    const phMain = this.state.phMain.mw ? this.state.phMain.mw.toFixed(2) : 0;
-    const eket = this.state.eket.mw ? this.state.eket.mw.toFixed(2) : 0;
-    const azura = this.state.ihovborNippPs.mw ? this.state.ihovborNippPs.mw.toFixed(2) : 0;
-    const totalGeneration = Number(azura) + Number(phMain) + Number(riversIppPs) + Number(afamViTs) + Number(gereguPs) + Number(omotosho2) + Number(omotoshoNippPs) + Number(delta3) + Number(sapeleNippPs) + Number(omokuPs1);
-    const totalTransmission = Number(eket) + Number(phMain) + Number(lokojaTs) + Number(gwagwalada) + Number(ekim) + Number(alaoji) + Number(ikotEkpene) + Number(odukpaniGs);
+    const riversIppPs = this.state["RIVERS IPP"].mw ? this.state["RIVERS IPP"].mw.toFixed(2) : 0;
+    const afamViTs = this.state["AFAM VI"].mw ? this.state["AFAM VI"].mw.toFixed(2) : 0;
+    const parasEnergyPs = this.state["PARAS ENERGY"].mw ? this.state["PARAS ENERGY"].mw.toFixed(2) : 0;
+    const gereguNipp = this.state["GEREGU NIPP"].mw ? this.state["GEREGU NIPP"].mw.toFixed(2) : 0;
+    const gereguGas = this.state["GEREGU GAS"].mw ? this.state["GEREGU GAS"].mw.toFixed(2) : 0;
+    const omotosho2 = this.state["OMOTOSHO 2"].mw ? this.state["OMOTOSHO 2"].mw.toFixed(2) : 0;
+    const omotosho1 = this.state["OMOTOSHO GAS"].mw ? this.state["OMOTOSHO GAS"].mw.toFixed(2) : 0;
+    const omotoshoNippPs = this.state["OMOTOSHO NIPP"].mw ? this.state["OMOTOSHO NIPP"].mw.toFixed(2) : 0;
+    const delta3 = this.state["DELTA 3"].mw ? this.state["DELTA 3"].mw.toFixed(2) : 0;
+    const sapeleNippPs = this.state["SAPELE NIPP"].mw ? this.state["SAPELE NIPP"].mw.toFixed(2) : 0;
+    const sapeleSteam = this.state["SAPELE STEAM"].mw ? this.state["SAPELE STEAM"].mw.toFixed(2) : 0;
+    const omokuPs1 = this.state["OMOKU GS"].mw ? this.state["OMOKU GS"].mw.toFixed(2) : 0;
+    const odukpaniGs = this.state["ODUKPANI GS"].mw ? this.state["ODUKPANI GS"].mw.toFixed(2) : 0;
+    const ikotEkpene = this.state["IKOT EKPENE"].mw ? this.state["IKOT EKPENE"].mw.toFixed(2) : 0;
+    const alaoji = this.state.ALAOJI.mw ? this.state.ALAOJI.mw.toFixed(2) : 0;
+    const ekim = this.state.EKIM.mw ? this.state.EKIM.mw.toFixed(2) : 0;
+    const gwagwalada = this.state.GWAGWALADA.mw ? this.state.GWAGWALADA.mw.toFixed(2) : 0;
+    const lokojaTs = this.state["LOKOJA TS"].mw ? this.state["LOKOJA TS"].mw.toFixed(2) : 0;
+    const phMain = this.state["PORT-HARCOURT MAIN"].mw ? this.state["PORT-HARCOURT MAIN"].mw.toFixed(2) : 0;
+    const eket = this.state.EKET.mw ? this.state.EKET.mw.toFixed(2) : 0;
+    const azura = this.state.AZURA.mw ? this.state.AZURA.mw.toFixed(2) : 0;
+    const delta2 = this.state["DELTA 2"].mw ? this.state["DELTA 2"].mw.toFixed(2) : 0;
+    const olorunsogo1 = this.state["OLORUNSOGO NIPP"].mw ? this.state["OLORUNSOGO NIPP"].mw.toFixed(2) : 0;
+    const ugwuaji = this.state.UGWUAJI.mw ? this.state.UGWUAJI.mw.toFixed(2) : 0;
+    const asaba = this.state.ASABA.mw ? this.state.ASABA.mw.toFixed(2) : 0;
+    const ihovborNippPs = this.state["IHOVBOR NIPP"].mw ? this.state["IHOVBOR NIPP"].mw.toFixed(2) : 0;
+    const transAmadi = this.state["TRANS AMADI"].mw ? this.state["TRANS AMADI"].mw.toFixed(2) : 0;
+    const ibomPs = (ekim ? Number(ekim) : 0) + (eket ? Number(eket) : 0);
+    const olorunsogo2 = this.state["OLORUNSOGO GAS"].mw ? this.state["OLORUNSOGO GAS"].mw.toFixed(2) : 0;
+    const gbarain = this.state.GBARAIN.mw ? this.state.GBARAIN.mw.toFixed(2) : 0;
+
+    const totalGeneration = Number(olorunsogo1) + Number(olorunsogo2) + Number(gbarain) + Number(ibomPs) + Number(parasEnergyPs) + Number(delta2) 
+    + Number(azura) + Number(transAmadi) + Number(riversIppPs) + Number(afamViTs) + Number(gereguGas) 
+    + Number(gereguNipp) + Number(alaoji) + Number(odukpaniGs) + Number(omotosho2) + Number(omotosho1) 
+    + Number(omotoshoNippPs) + Number(delta3) + Number(sapeleNippPs) + Number(sapeleSteam) + Number(omokuPs1)
+     + Number(ihovborNippPs);
+
+    const totalTransmission = Number(asaba) + Number(ugwuaji) + Number(eket) + Number(phMain) + Number(lokojaTs)
+     + Number(gwagwalada) + Number(ekim) + Number(ikotEkpene);
     return (
       <div className="menu">
-        <div className="message text-white rounded">
-          TCN Tool to query equipment parameters and state
+        <div className="text-white rounded">
+          <span className="message">TCN Tool to query equipment parameters and state</span>
         </div>
         <div className="menu-list" style={{display: `${this.state.display}`}}>
           <ul className="ul-menu text-center">
@@ -124,7 +156,7 @@ import Average from './Average';
             </li>
           </ul>
           <div className="display-div">
-          <h2 className="text-white">Generating Stations</h2>
+          <h2 className="text-danger">IoT POWER STATIONS TABLE</h2>
           <table className="tg">
             <thead>
               <tr>
@@ -132,7 +164,7 @@ import Average from './Average';
                 <th className="tg-zb4j">STATIONS</th>
                 <th className="tg-zb4j">STATUS</th>
                 <th className="tg-zb4j">POWER(MW)</th>
-                <th className="tg-zb4j">VOLTAGE</th>
+                <th className="tg-zb4j text-danger"><span className="text-danger">VOLTAGE(KV) </span></th>
               </tr>
             </thead>
             <tbody>
@@ -140,128 +172,157 @@ import Average from './Average';
                 <th>1</th>
                 <th>RIVERS IPP</th>
                 <th>CN</th>
-                <th>{this.state.riversIppPs.mw ? this.state.riversIppPs.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.riversIppPs.kv ? this.state.riversIppPs.kv : 0 }</th>
+                <th>{this.state["RIVERS IPP"].mw ? this.state["RIVERS IPP"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["RIVERS IPP"].kv ? this.state["RIVERS IPP"].kv : 0 }</th>
               </tr>
               <tr>
                 <th>2</th>
-                <th>AFAM 6</th>
+                <th>AFAM VI</th>
                 <th>CN</th>
-                <th>{this.state.afamViTs.mw ? this.state.afamViTs.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.afamViTs.kv ? this.state.afamViTs.kv : 0 }</th>
+                <th>{this.state["AFAM VI"].mw ? this.state["AFAM VI"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["AFAM VI"].kv ? this.state["AFAM VI"].kv : 0 }</th>
               </tr>
               <tr>
                 <th>3</th>
                 <th>GEREGU GAS</th>
                 <th>CN</th>
-                <th>{this.state.gereguPs.mw ? this.state.gereguPs.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.gereguPs.kv ? this.state.gereguPs.kv : 0 }</th>
+                <th>{this.state["GEREGU GAS"].mw ? this.state["GEREGU GAS"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["GEREGU GAS"].kv ? this.state["GEREGU GAS"].kv : 0 }</th>
               </tr>
               <tr>
                 <th>4</th>
                 <th>OMOTOSHO GAS</th>
-                <th>NC</th>
-                <th>{this.state.omotosho2.mw ? this.state.omotosho2.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.omotosho2.kv ? this.state.omotosho2.kv : 0 }</th>
+                <th>CN</th>
+                <th>{this.state["OMOTOSHO GAS"].mw ? this.state["OMOTOSHO GAS"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["OMOTOSHO GAS"].kv ? this.state["OMOTOSHO GAS"].kv : 0 }</th>
               </tr>
               <tr>
                 <th>5</th>
                 <th>OMOTOSHO NIPP</th>
                 <th>CN</th>
-                <th>{this.state.omotoshoNippPs.mw ? this.state.omotoshoNippPs.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.omotoshoNippPs.kv ? this.state.omotoshoNippPs.kv : 0 }</th>
+                <th>{this.state["OMOTOSHO NIPP"].mw ? this.state["OMOTOSHO NIPP"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["OMOTOSHO NIPP"].kv ? this.state["OMOTOSHO NIPP"].kv : 0 }</th>
               </tr>
               <tr>
                 <th>6</th>
                 <th>DELTA-3</th>
                 <th>CN</th>
-                <th>{this.state.delta3.mw ? this.state.delta3.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.delta3.kv ? this.state.delta3.kv : 0 }</th>
+                <th>{this.state["DELTA 3"].mw ? this.state["DELTA 3"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["DELTA 3"].kv ? this.state["DELTA 3"].kv : 0 }</th>
               </tr>
               <tr>
                 <th>7</th>
                 <th>SAPELE NIPP</th>
                 <th>CN</th>
-                <th>{this.state.sapeleNippPs.mw ? this.state.sapeleNippPs.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.sapeleNippPs.kv ? this.state.sapeleNippPs.kv : 0 }</th>
+                <th>{this.state["SAPELE NIPP"].mw ? this.state["SAPELE NIPP"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["SAPELE NIPP"].kv ? this.state["SAPELE NIPP"].kv : 0 }</th>
               </tr>
               <tr>
                 <th>8</th>
                 <th>OMOKU</th>
                 <th>CN</th>
-                <th>{this.state.omokuPs1.mw ? this.state.omokuPs1.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.omokuPs1.kv ? this.state.omokuPs1.kv : 0 }</th>
+                <th>{this.state["OMOKU GS"].mw ? this.state["OMOKU GS"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["OMOKU GS"].kv ? this.state["OMOKU GS"].kv : 0 }</th>
               </tr>
               <tr>
                 <th>9</th>
                 <th>AZURA</th>
                 <th>CN</th>
-                <th>{this.state.ihovborNippPs.mw ? this.state.ihovborNippPs.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.ihovborNippPs.kv ? this.state.ihovborNippPs.kv : 0 }</th>
+                <th>{this.state.AZURA.mw ? this.state.AZURA.mw.toFixed(2) : 0 }</th>
+                <th>{this.state.AZURA.kv ? this.state.AZURA.kv : 0 }</th>
               </tr>
               <tr>
-                <th>7</th>
+                <th>10</th>
                 <th>TRANS AMADI</th>
                 <th>CN</th>
-                <th>{this.state.phMain.mw ? this.state.phMain.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.phMain.kv ? this.state.phMain.kv : 0 }</th>
+                <th>{this.state["TRANS AMADI"].mw ? this.state["TRANS AMADI"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["TRANS AMADI"].kv ? this.state["TRANS AMADI"].kv : 0 }</th>
               </tr>
-              <tr className="hidden">
-                <th>8</th>
+              <tr className="">
+                <th>11</th>
                 <th>GEREGU NIPP</th>
                 <th>CN</th>
-                <th>N/A</th>
-                <th>N/A</th>
+                <th>{this.state["GEREGU NIPP"].mw ? this.state["GEREGU NIPP"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["GEREGU NIPP"].kv ? this.state["GEREGU NIPP"].kv : 0 }</th>
               </tr>
-              <tr className="hidden" >
-                <th>9</th>
+              <tr className="" >
+                <th>12</th>
                 <th>GBARAIN</th>
-                <th>NC</th>
-                <th>N/A</th>
-                <th>N/A</th>
+                <th>CN</th>
+                <th>{this.state.GBARAIN.mw ? this.state.GBARAIN.mw.toFixed(2) : 0 }</th>
+                <th>{this.state.GBARAIN.kv ? this.state.GBARAIN.kv : 0 }</th>
               </tr>
-              <tr className="hidden">
-                <th>10</th>
+              <tr className="">
+                <th>13</th>
                 <th>DADI-KOWA HYDRO</th>
                 <th>PNDG</th>
                 <th>0</th>
                 <th>---</th>
               </tr>
-              <tr className="hidden">
-                <th>11</th>
-                <th>PARAS ENERGY</th>
-                <th>NC</th>
-                <th>N/A</th>
-                <th>N/A</th>
-              </tr>
-              <tr className="hidden">
-                <th>12</th>
-                <th>OMOKU</th>
-                <th>NC</th>
-                <th>N/A</th>
-                <th>N/A</th>
-              </tr>
-              <tr className="hidden">
-                <th>13</th>
-                <th>DELTA-2</th>
-                <th>NC</th>
-                <th>N/A</th>
-                <th>N/A</th>
-              </tr>
-              <tr className="hidden">
+              <tr className="">
                 <th>14</th>
+                <th>PARAS ENERGY</th>
+                <th>CN</th>
+                <th>{this.state["PARAS ENERGY"].mw ? this.state["PARAS ENERGY"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["PARAS ENERGY"].kv ? this.state["PARAS ENERGY"].kv : 0 }</th>
+              </tr>
+              <tr className="">
+                <th>15</th>
+                <th>IBOM POWER</th>
+                <th>CN</th>
+                <th>{Number(ibomPs).toFixed(2)}</th>
+                <th>{this.state.EKIM.kv ? this.state.EKIM.kv : this.state.EKET.kv ? this.state.EKET.kv : 0 }</th>
+              </tr>
+              <tr className="">
+                <th>16</th>
+                <th>DELTA-2</th>
+                <th>CN</th>
+                <th>{this.state["DELTA 2"].mw ? this.state["DELTA 2"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["DELTA 2"].kv ? this.state["DELTA 2"].kv : 0 }</th>
+              </tr>
+              <tr className="">
+                <th>17</th>
                 <th>OLORUNSOGO GAS</th>
                 <th>CN</th>
-                <th>N/A</th>
-                <th>N/A</th>
+                <th>{this.state["OLORUNSOGO GAS"].mw ? this.state["OLORUNSOGO GAS"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["OLORUNSOGO GAS"].kv ? this.state["OLORUNSOGO GAS"].kv : 0 }</th>
               </tr>
-              <tr className="hidden">
-                <th>15</th>
+              <tr className="">
+                <th>18</th>
                 <th>OLORUNSOGO NIPP</th>
                 <th>CN</th>
-                <th>N/A</th>
-                <th>N/A</th>
-              </tr>              
+                <th>{this.state["OLORUNSOGO NIPP"].mw ? this.state["OLORUNSOGO NIPP"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["OLORUNSOGO NIPP"].kv ? this.state["OLORUNSOGO NIPP"].kv : 0 }</th>
+              </tr>
+              <tr className="">
+                <th>19</th>
+                <th>SAPELE STEAM</th>
+                <th>CN</th>
+                <th>{this.state["SAPELE STEAM"].mw ? this.state["SAPELE STEAM"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["SAPELE STEAM"].kv ? this.state["SAPELE STEAM"].kv : 0 }</th>
+              </tr>
+              <tr>
+              <th>20</th>
+                <th>ODUKPANI</th>
+                <th>CN</th>
+                <th>{this.state["ODUKPANI GS"].mw ? this.state["ODUKPANI GS"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["ODUKPANI GS"].kv ? this.state["ODUKPANI GS"].kv : 0 }</th>
+              </tr>
+              <tr>
+                <th>21</th>
+                <th>ALAOJI NIPP</th>
+                <th>CN</th>
+                <th>{this.state.ALAOJI.mw ? this.state.ALAOJI.mw.toFixed(2) : 0 }</th>
+                <th>{this.state.ALAOJI.kv ? this.state.ALAOJI.kv : 0 }</th>
+              </tr>
+              <tr className="">
+                <th>22</th>
+                <th>IHOVBOR NIPPS</th>
+                <th>CN</th>
+                <th>{this.state["IHOVBOR NIPP"].mw ? this.state["IHOVBOR NIPP"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["IHOVBOR NIPP"].kv ? this.state["IHOVBOR NIPP"].kv : 0 }</th>
+              </tr>
+              <tr></tr>
               <tr >
                 <th></th>
                 <th>TOTAL</th>
@@ -272,7 +333,7 @@ import Average from './Average';
             </tbody>
           </table>
 
-          <h2 className="text-white">Transmission Stations</h2>
+          <h2 className="text-white">IoT Transmission Stations</h2>
           <table className="tg">
             <thead>
               <tr>
@@ -285,61 +346,68 @@ import Average from './Average';
             </thead>
             <tbody>
               <tr>
-              <th>1</th>
-                <th>ODUKPANI</th>
-                <th>CN</th>
-                <th>{this.state.odukpaniGs.mw ? this.state.odukpaniGs.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.odukpaniGs.kv ? this.state.odukpaniGs.kv : 0 }</th>
-              </tr>
-              <tr>
-                <th>2</th>
+                <th>101</th>
                 <th>IKOT EKPENE TS</th>
                 <th>CN</th>
-                <th>{this.state.ikotEkpene.mw ? this.state.ikotEkpene.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.ikotEkpene.kv ? this.state.ikotEkpene.kv : 0 }</th>
+                <th>{this.state["IKOT EKPENE"].mw ? this.state["IKOT EKPENE"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["IKOT EKPENE"].kv ? this.state["IKOT EKPENE"].kv : 0 }</th>
               </tr>
               <tr>
-                <th>3</th>
-                <th>ALAOJI NIPP</th>
+                <th>102</th>
+                <th>GWAGWALADA TS</th>
                 <th>CN</th>
-                <th>{this.state.alaoji.mw ? this.state.alaoji.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.alaoji.kv ? this.state.alaoji.kv : 0 }</th>
+                <th>{this.state.GWAGWALADA.mw ? this.state.GWAGWALADA.mw.toFixed(2) : 0 }</th>
+                <th>{this.state.GWAGWALADA.kv ? this.state.GWAGWALADA.kv : 0 }</th>
               </tr>
               <tr>
-                <th>4</th>
-                <th>EKIM TS</th>
-                <th>CN</th>
-                <th>{this.state.ekim.mw ? this.state.ekim.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.ekim.kv ? this.state.ekim.kv : 0 }</th>
-              </tr>
-              <tr>
-                <th>5</th>
-                <th>GWAWALADA TS</th>
-                <th>CN</th>
-                <th>{this.state.gwagwalada.mw ? this.state.gwagwalada.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.gwagwalada.kv ? this.state.gwagwalada.kv : 0 }</th>
-              </tr>
-              <tr>
-                <th>6</th>
+                <th>103</th>
                 <th>LOKOJA TS</th>
                 <th>CN</th>
-                <th>{this.state.lokojaTs.mw ? this.state.lokojaTs.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.lokojaTs.kv ? this.state.lokojaTs.kv : 0 }</th>
+                <th>{this.state["LOKOJA TS"].mw ? this.state["LOKOJA TS"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["LOKOJA TS"].kv ? this.state["LOKOJA TS"].kv : 0 }</th>
+              </tr>
+              <tr className="">
+                <th>104</th>
+                <th>ASABA</th>
+                <th>CN</th>
+                <th>{this.state.ASABA.mw ? this.state.ASABA.mw.toFixed(2) : 0 }</th>
+                <th>{this.state.ASABA.kv ? this.state.ASABA.kv : 0 }</th>
+              </tr>
+              <tr className="">
+                <th>105</th>
+                <th>UGWAJI</th>
+                <th>CN</th>
+                <th>{this.state.UGWUAJI.mw ? this.state.UGWUAJI.mw.toFixed(2) : 0 }</th>
+                <th>{this.state.UGWUAJI.kv ? this.state.UGWUAJI.kv : 0 }</th>
+              </tr>
+              <tr className="">
+                <th>106</th>
+                <th>MAKURDI</th>
+                <th>CN</th>
+                <th>{this.state.UGWUAJI.mw ? this.state.UGWUAJI.mw.toFixed(2) : 0 }</th>
+                <th>{this.state.UGWUAJI.kv ? this.state.UGWUAJI.kv : 0 }</th>
               </tr>
               <tr>
-                <th>7</th>
+                <th>107</th>
+                <th>EKIM TS</th>
+                <th>CN</th>
+                <th>{this.state.EKIM.mw ? this.state.EKIM.mw.toFixed(2) : 0 }</th>
+                <th>{this.state.EKIM.kv ? this.state.EKIM.kv : 0 }</th>
+              </tr>
+              <tr>
+                <th>108</th>
                 <th>PORTHARCOURT MAIN TS</th>
                 <th>CN</th>
-                <th>{this.state.phMain.mw ? this.state.phMain.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.phMain.kv ? this.state.phMain.kv : 0 }</th>
+                <th>{this.state["PORT-HARCOURT MAIN"].mw ? this.state["PORT-HARCOURT MAIN"].mw.toFixed(2) : 0 }</th>
+                <th>{this.state["PORT-HARCOURT MAIN"].kv ? this.state["PORT-HARCOURT MAIN"].kv : 0 }</th>
               </tr>
               <tr>
-                <th>8</th>
+                <th>109</th>
                 <th>EKET TS</th>
                 <th>CN</th>
-                <th>{this.state.eket.mw ? this.state.eket.mw.toFixed(2) : 0 }</th>
-                <th>{this.state.eket.kv ? this.state.eket.kv : 0 }</th>
-              </tr>
+                <th>{this.state.EKET.mw ? this.state.EKET.mw.toFixed(2) : 0 }</th>
+                <th>{this.state.EKET.kv ? this.state.EKET.kv : 0 }</th>
+              </tr>              
               <tr>
                 <th></th>
                 <th>TOTAL</th>

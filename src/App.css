@@ -22,11 +22,11 @@
 /* Home CSS */
 .message {
   height: 50px;
-  text-align: center;
+  text-align: left;
   font-size: 25px;
   color: aliceblue;
-  width: 100%;
-  margin-left: 2em;
+  width: 70%;
+  padding-left: 4em;
 }
 .menu-list {
   display: flex;
@@ -58,8 +58,9 @@
 /* History CSS */
 .history-text {
   color: white;
-  text-align: center;
-  margin-right: 4em;
+  text-align: left;
+  margin-left: 4em;
+  margin-bottom: 1em;
 }
 .input-text {
   color: black;

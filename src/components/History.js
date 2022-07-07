@@ -5,6 +5,7 @@ import stationsKey from "./stationsKey";
 import Header from "./table/HistoryHeader";
 import Row from "./table/HistoryRow";
 import { Spinner, Button } from "react-bootstrap";
+import ReactHtmlTableToExcel from "react-html-table-to-excel";
 
  class History extends React.Component {
   constructor(props) {
@@ -27,6 +28,7 @@ import { Spinner, Button } from "react-bootstrap";
     this.setState( prevState => {
       prevState.selectedStation = this.stationsOption.options[this.stationsOption.selectedIndex].value;
       const equipment = stations[prevState.selectedStation];
+      // equipment.unshift("Aggregate");
       return {selectedStation : prevState.selectedStation, equipment, selectedEquipment: equipment[0]}
     })
   }
@@ -155,12 +157,21 @@ import { Spinner, Button } from "react-bootstrap";
             Loading... Please Wait
           </Button>
             : 
-            <table className="tg">
-            <Header />
-            <tbody>
-              {tableRows}              
-            </tbody>
-          </table>
+            <div>
+              <ReactHtmlTableToExcel
+                className="btn btn-info"
+                table="emp"
+                filename="ExcelReport"
+                sheet="Sheet"
+                buttonText="Export excel"
+                />
+              <table id="emp" className="tg">
+                <Header />
+                <tbody>
+                  {tableRows}              
+                </tbody>
+              </table>
+            </div>
           }         
         </div>
       </div> 

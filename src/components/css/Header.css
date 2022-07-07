@@ -50,6 +50,12 @@
     width: 160%;
     overflow: hidden;
   }
+  .right-nav {
+    width: 15%;
+    margin-left: 5%;
+    padding: 0;
+    float: right;
+  }
 }
 
 .navbar-toggle {

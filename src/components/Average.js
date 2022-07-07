@@ -17,9 +17,6 @@ import { Spinner, Button } from "react-bootstrap";
       selectedEquipment: '',
       equipment: [],
       startDate: '',
-      endDate : '',
-      parameter: '',
-      profileType: '',
       loading: false,
       tableRows: []
     }
@@ -50,25 +47,16 @@ import { Spinner, Button } from "react-bootstrap";
   handleSubmit() {
     const station = stationsKey[this.state.selectedStation];
     const equipment = this.state.selectedEquipment.toLowerCase();
-    const startDate = this.state.startDate[0];
-    const endDate = this.state.endDate[0];
-    const startTime = this.state.startDate[1];
-    const endTime = this.state.endDate[1];
-    const { parameter } = this.state;
-    const { profileType } = this.state;
+    const checkDate = this.state.startDate[0];
+    // console.log(checkDate, 'the check date')
     // verify that the startDate is lower than the endDate
-    const getProfile = station && equipment && startDate && endDate && startTime && endTime && parameter && profileType;
-    if(getProfile) {
-      const url = '/lines/profile';
+    const getAverage = station && equipment && checkDate;
+    if(getAverage) {
+      const url = '/lines/average';
       const data = {
         station,
         equipment,
-        startDate,
-        endDate,
-        startTime,
-        endTime,
-        profileType,
-        parameter
+        checkDate
       };
       // add a spinner method while request is loading
       this.setState({loading: true}, () => {
@@ -88,16 +76,18 @@ import { Spinner, Button } from "react-bootstrap";
           const data = resp.res[0];
           const station = this.state.selectedStation;
           const equipment = this.state.selectedEquipment;
-          const { parameter } = this.state;
           // create the table that would show the data history          
           data.station = station;
           data.equipment = equipment;
-          data.parameter = parameter;
           TableRow.push(<Row data={data} key='1' />)        
           this.setState(prevState => {
             prevState.tableRows = TableRow;
             return {tableRows: prevState.tableRows, loading: false}
           });
+        })
+        .catch(e => {
+          console.log(e); 
+          this.setState({loading: false});
         });
       })
     }    
@@ -114,7 +104,7 @@ import { Spinner, Button } from "react-bootstrap";
       <div>
         <a style={{margin: '10px', 'fontSize': '15px'}} type="button" href="/"> back</a>        
         <div>
-          <h2 className="history-text"> Get average of an equipment</h2>
+          <h2 className="history-text"> Get 5 mins average of an equipment for the selected date</h2>
           {/* Select Station */}
           <div className="options">
             <label> 
@@ -136,14 +126,10 @@ import { Spinner, Button } from "react-bootstrap";
           </div>
           {/* Select Start Date */}    
           <div className="options">
-            <label> Start Date </label> 
+            <label> Date </label> 
             <input type={'datetime-local'} name="startDate" onChange={this.setDate} ref={node => this.startDate = node}></input>
           </div>
-          {/* Select End Date */}
-          <div className="options">
-            <label> End Date </label>
-            <input type={'datetime-local'} name='endDate' onChange={this.setDate} ref={node => this.endDate = node}></input>
-          </div>
+          
           <button className="submit-button" onClick={this.handleSubmit}> Submit </button>
         </div>
         <div className="table-div">
@@ -162,7 +148,7 @@ import { Spinner, Button } from "react-bootstrap";
             <table className="tg">
             <Header />
             <tbody>
-                           
+                 {tableRows}          
             </tbody>
           </table>
           }         
