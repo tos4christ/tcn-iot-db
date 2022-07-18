@@ -1,31 +1,32 @@
 import React from 'react';
-import { BrowserRouter as Router, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import './App.css';
 import './components/css/Header.css';
 import './components/css/table.css';
+import './components/css/style.css';
+import './components/css/login.css';
+import "./components/css/bootstrap.min.css";
+import "./components/css/slicknav.min.css";
+import "./components/css/icofont.css";
+import "./components/css/font-awesome.min.css";
+import "./components/css/responsive.css";
 import Home from './components/Home';
 import Header from './components/Header';
 import SignUp from '../src/components/Users/SignUp';
 import SignIn from '../src/components/Users/SignIn';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   setUserDetails() {
 
   }
   render() {
     return (
       <Router>
-        <Switch >
-          <Route path={'/'}>
-            <SignIn setUser={this.setUserDetails} />
-          </Route>
+        <Switch >          
           <Route path={'/signin'}>
             <SignIn setUser={this.setUserDetails} />
           </Route>
-          <Route path={'/signup'}>
+          <Route exact path={'/signup'}>
             <SignUp />
           </Route>          
           {/* This is the protected path after successful login */}
@@ -34,6 +35,9 @@ class App extends React.Component {
               <Header />
               <Home />
             </div>
+          </Route>
+          <Route path={'/'}>
+            <SignIn setUser={this.setUserDetails} />
           </Route>
         </Switch>
       </Router>      

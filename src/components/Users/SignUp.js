@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
-import ls from 'local-storage';
+// import ls from 'local-storage';
 // import fetchJsonp from 'fetch-jsonp';
-import Text from "../components/Inputs/Text";
-import Button from "../components/Inputs/Button";
-import Link from "../components/Inputs/Links";
+import Text from "../../components/Inputs/Text";
+import Button from "../../components/Inputs/Button";
+import Link from "../../components/Inputs/Links";
 
 const SignUp = (props) => {
   const history = useHistory();

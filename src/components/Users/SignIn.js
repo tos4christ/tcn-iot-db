@@ -1,8 +1,8 @@
 import React from "react";
 import { withRouter } from 'react-router-dom';
-import Text from "../components/Inputs/Text";
-import Button from "../components/Inputs/Button";
-import Link from "../components/Inputs/Links";
+import Text from "../../components/Inputs/Text";
+import Button from "../../components/Inputs/Button";
+import Link from "../../components/Inputs/Links";
 // import socket from "../utility/socketioConnection";
 
 class SignIn extends React.Component {
@@ -41,7 +41,7 @@ class SignIn extends React.Component {
     .then((res) => res.json())
     .then((response) => {
       // check the response to see if this is their first login attempt
-      const firstLogin = response.status;
+      // const firstLogin = response.status;
 
       // If first login then redirect to change password page
       this.props.history.push({pathname: `/changePassword`});
