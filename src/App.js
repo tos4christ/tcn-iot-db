@@ -6,7 +6,6 @@ import './components/css/table.css';
 import './components/css/style.css';
 import './components/css/login.css';
 import "./components/css/bootstrap.min.css";
-import "./components/css/slicknav.min.css";
 import "./components/css/icofont.css";
 import "./components/css/font-awesome.min.css";
 import "./components/css/responsive.css";
@@ -24,9 +23,11 @@ class App extends React.Component {
       <Router>
         <Switch >          
           <Route path={'/signin'}>
+            <Header />
             <SignIn setUser={this.setUserDetails} />
           </Route>
           <Route exact path={'/signup'}>
+            <Header />
             <SignUp />
           </Route>          
           {/* This is the protected path after successful login */}
@@ -37,6 +38,7 @@ class App extends React.Component {
             </div>
           </Route>
           <Route path={'/'}>
+            <Header />
             <SignIn setUser={this.setUserDetails} />
           </Route>
         </Switch>
