@@ -23,6 +23,7 @@
 .navbar-header {
   padding: 0 0 10px 0;
   height: 5em;
+  width: 10%;
 }
 @media screen and (min-height: 700px) {
   .navbar-header {
