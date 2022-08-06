@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import Text from "../../components/Inputs/Text";
 import Button from "../../components/Inputs/Button";
 import Link from "../../components/Inputs/Links";
-import websocketClient from "../utility/socketConnection";
+// import websocketClient from "../utility/socketConnection";
 // import socket from "../utility/socketioConnection";
 
 
@@ -16,9 +16,6 @@ class SignIn extends React.Component {
       email: '',
       password: ''
     }
-  }
-  componentDidMount() {
-    websocketClient();
   }
   setEmail(email) {
     this.setState({email:email})
