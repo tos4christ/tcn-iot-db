@@ -16,7 +16,7 @@ const settings = {
       },
     },
     websockets: {
-      url: "ws://172.16.200.3:443/websockets"
+      url: "wss://172.16.200.3:443/websockets"
     }
   };
   
