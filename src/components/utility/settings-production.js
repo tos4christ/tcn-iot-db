@@ -15,6 +15,9 @@ const settings = {
         pathAfterFailure: "/documents",
       },
     },
+    websockets: {
+      url: "ws://172.16.200.3:443/websockets"
+    }
   };
   
   export default settings;
