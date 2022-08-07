@@ -26,7 +26,7 @@ class Header extends React.Component {
     }
     const { value } = this.state; 
     return (      
-        <nav className='header navbar-expand-md justify-content-center navbar-inverse'>
+        <nav className='header navbar-expand-sm navbar-inverse'>
             <div className='container-fluid'>
                 <div className='navbar-header'>
                     <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
