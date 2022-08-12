@@ -6,7 +6,6 @@ import History from './History';
 import Profile from './Profile';
 import Uptime from './Uptime';
 import Average from './Average';
-import localStorage from "local-storage";
 
 
  class Home extends React.Component {
@@ -63,15 +62,15 @@ import localStorage from "local-storage";
   //  }
    streamReadings() {
      const url = 'lines/all';
-     const token = localStorage.getItem("token");
+     const token = JSON.stringify(localStorage.getItem("token"));
     fetch(url, {
       method: 'GET',
       mode: 'no-cors',
       cache: 'no-cache',
       headers: {
+        'Authorization': token,
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': token
+        'Accept': 'application/json'        
       }
     })
     .then(response => response.json())
