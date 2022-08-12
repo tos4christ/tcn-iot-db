@@ -6,6 +6,7 @@ import History from './History';
 import Profile from './Profile';
 import Uptime from './Uptime';
 import Average from './Average';
+import localStorage from "local-storage";
 
 
  class Home extends React.Component {
@@ -67,7 +68,9 @@ import Average from './Average';
       mode: 'no-cors',
       cache: 'no-cache',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': localStorage.getItem("token")
       }
     })
     .then(response => response.json())
