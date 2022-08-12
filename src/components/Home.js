@@ -14,7 +14,6 @@ import Average from './Average';
      this.streamReadings = this.streamReadings.bind(this);
      this.toggleDisplay = this.toggleDisplay.bind(this);
      this.state = {
-       display : this.props.location.pathname.length > 1 ? 'none' : '',
        "OMOTOSHO NIPP": {},
        "TRANS AMADI": {},
        "AZURA": {},

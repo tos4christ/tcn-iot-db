@@ -52,7 +52,7 @@ class SignIn extends React.Component {
 
       // If first login then redirect to change password page
       // this.props.history.push({pathname: `/changePassword`});
-      
+      console.log('it returned success', token);
       //If this is not the first login Redirect to home page
       this.props.history.push({pathname: `/home`});
     })
