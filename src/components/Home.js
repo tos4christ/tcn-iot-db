@@ -6,7 +6,6 @@ import History from './History';
 import Profile from './Profile';
 import Uptime from './Uptime';
 import Average from './Average';
-import localStorage from "local-storage";
 
 
  class Home extends React.Component {
