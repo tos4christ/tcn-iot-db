@@ -46,7 +46,7 @@ class SignIn extends React.Component {
       // const firstLogin = response.status;
 
       // If first login then redirect to change password page
-      this.props.history.push({pathname: `/changePassword`});
+      // this.props.history.push({pathname: `/changePassword`});
       
       //If this is not the first login Redirect to home page
       this.props.history.push({pathname: `/home`});
@@ -76,9 +76,7 @@ class SignIn extends React.Component {
                 nameChange={ this.setPassword }
               />
               <Link
-                question="Not Registered? "
-                link="Sign Up"
-                linkTo="/signup"
+                question="Sign In"
               />
               <Button id="" text={"Login"} onClick={() => "coming"} />
             </form>
