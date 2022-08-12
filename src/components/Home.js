@@ -12,7 +12,6 @@ import Average from './Average';
    constructor(props) {
      super(props);
      this.streamReadings = this.streamReadings.bind(this);
-     this.toggleDisplay = this.toggleDisplay.bind(this);
      this.state = {
        "OMOTOSHO NIPP": {},
        "TRANS AMADI": {},
