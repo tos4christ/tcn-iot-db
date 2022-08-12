@@ -46,7 +46,7 @@ class SignIn extends React.Component {
       const token = response.data.token ? response.data.token : null;
       //get the token from the response
       //pass the user data to the state of the App
-      localStorage.setItem("token", token);
+      localStorage.setItem("token", JSON.stringify(token));
       // check the response to see if this is their first login attempt
       // const firstLogin = response.status;
 

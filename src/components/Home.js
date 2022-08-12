@@ -63,6 +63,7 @@ import localStorage from "local-storage";
   //  }
    streamReadings() {
      const url = 'lines/all';
+     const token = localStorage.getItem("token");
     fetch(url, {
       method: 'GET',
       mode: 'no-cors',
@@ -70,7 +71,7 @@ import localStorage from "local-storage";
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': localStorage.getItem("token")
+        'Authorization': token
       }
     })
     .then(response => response.json())
