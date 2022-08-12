@@ -23,12 +23,16 @@ class App extends React.Component {
       <Router>
         <Switch >          
           <Route path={'/signin'}>
-            <Header />
-            <SignIn setUser={this.setUserDetails} />
+            <div className='App'>              
+              <Header />
+              <SignIn setUser={this.setUserDetails} />
+            </div>
           </Route>
           <Route exact path={'/signup'}>
-            <Header />
-            <SignUp />
+            <div className='App'>              
+              <Header />
+              <SignUp />
+            </div>
           </Route>          
           {/* This is the protected path after successful login */}
           <Route path={'/home'}>
@@ -38,8 +42,10 @@ class App extends React.Component {
             </div>
           </Route>
           <Route path={'/'}>
-            <Header />
-            <SignIn setUser={this.setUserDetails} />
+            <div className='App'>              
+              <Header />
+              <SignIn setUser={this.setUserDetails} />
+            </div>
           </Route>
         </Switch>
       </Router>      
