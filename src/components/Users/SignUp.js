@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
-// import ls from 'local-storage';
+import ls from 'local-storage';
 // import fetchJsonp from 'fetch-jsonp';
 import Text from "../../components/Inputs/Text";
 import Button from "../../components/Inputs/Button";
@@ -32,8 +32,10 @@ const SignUp = (props) => {
       }
     })
     .then( (res) => res.json())
-    .then( (response) => {
+    .then( (response) => {      
+      //get the token from the response
       //pass the user data to the state of the App
+      localStorage.setItem("token", feederArray);
       // This would push to the signin page for the user to now login
       history.push(`/signin`);
     })
