@@ -32,10 +32,7 @@ const SignUp = (props) => {
       }
     })
     .then( (res) => res.json())
-    .then( (response) => {      
-      //get the token from the response
-      //pass the user data to the state of the App
-      localStorage.setItem("token", feederArray);
+    .then( (response) => {
       // This would push to the signin page for the user to now login
       history.push(`/signin`);
     })
