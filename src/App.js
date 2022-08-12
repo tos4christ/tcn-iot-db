@@ -5,7 +5,7 @@ import './components/css/Header.css';
 import './components/css/table.css';
 import './components/css/style.css';
 import './components/css/login.css';
-//import "./components/css/bootstrap.min.css";
+import "./components/css/bootstrap.min.css";
 import "./components/css/icofont.css";
 import "./components/css/font-awesome.min.css";
 import "./components/css/responsive.css";

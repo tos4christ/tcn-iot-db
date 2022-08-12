@@ -5,7 +5,6 @@ import stationsKey from "./stationsKey";
 import Header from "./table/HistoryHeader";
 import Row from "./table/HistoryRow";
 import { Spinner, Button } from "react-bootstrap";
-import ReactHtmlTableToExcel from "react-html-table-to-excel";
 
  class History extends React.Component {
   constructor(props) {
@@ -158,13 +157,13 @@ import ReactHtmlTableToExcel from "react-html-table-to-excel";
           </Button>
             : 
             <div>
-              <ReactHtmlTableToExcel
+              {/* <ReactHtmlTableToExcel
                 className="btn btn-info"
                 table="emp"
                 filename="ExcelReport"
                 sheet="Sheet"
                 buttonText="Export excel"
-                />
+                /> */}
               <table id="emp" className="tg">
                 <Header />
                 <tbody>
