@@ -55,12 +55,12 @@ import Average from './Average';
    componentWillUnmount() {
      clearInterval(this.streamInterval)
    }
-   toggleDisplay(e) {
-    this.setState(prevState => {
-      prevState.display = this.state.display === '' ? 'none' : '';
-      return {display : prevState.display}
-    })
-   }
+  //  toggleDisplay(e) {
+  //   this.setState(prevState => {
+  //     prevState.display = this.state.display === '' ? 'none' : '';
+  //     return {display : prevState.display}
+  //   })
+  //  }
    streamReadings() {
      const url = 'lines/all';
     fetch(url, {
@@ -136,7 +136,7 @@ import Average from './Average';
         <div className="text-white rounded">
           <span className="message">TCN Tool to query equipment parameters and state</span>
         </div>
-        <div className="menu-list" style={{display: `${this.state.display}`}}>
+        <div className="menu-list">
           <ul className="ul-menu text-center">
             <li>
               <Link to={'/downtime'} onClick={this.toggleDisplay} type="button">Downtime</Link>
