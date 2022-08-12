@@ -25,6 +25,7 @@ class SignIn extends React.Component {
   }
   handleSubmission = (e) => {
     e.preventDefault();
+    console.log('I tried signing in');
     const url = "/signin";
     const email = this.state.email;
     const password = this.state.password;
