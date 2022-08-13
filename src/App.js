@@ -13,6 +13,7 @@ import Home from './components/Home';
 import Header from './components/Header';
 import SignUp from '../src/components/Users/SignUp';
 import SignIn from '../src/components/Users/SignIn';
+import Protected from './components/Protected';
 
 class App extends React.Component {
   setUserDetails() {
@@ -35,12 +36,17 @@ class App extends React.Component {
             </div>
           </Route>          
           {/* This is the protected path after successful login */}
-          <Route path={'/home'}>
-            <div className="App">
-              <Header />
-              <Home />
-            </div>
-          </Route>
+          <Route 
+          path={'/home'}
+          element={
+            <Protected isLoggedIn={localStorage.getItem("isLoggedIn")}>
+              <div className="App">
+                <Header />
+                <Home />
+              </div>
+            </Protected>
+          }
+          />
           <Route path={'/'}>
             <div className='App'>              
               <Header />
