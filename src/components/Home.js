@@ -68,9 +68,9 @@ import Average from './Average';
       mode: 'no-cors',
       cache: 'no-cache',
       headers: {
-        'Authorization': token,
+        Authorization: token,
         'Content-Type': 'application/json',
-        'Accept': 'application/json'        
+        Accept: 'application/json'        
       }
     })
     .then(response => response.json())
