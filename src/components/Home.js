@@ -69,7 +69,7 @@ import Average from './Average';
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
-        credentials: 'include'        
+        credentials: 'include'
       },    
     })
     .then(response => response.json())

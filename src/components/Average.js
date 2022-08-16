@@ -48,6 +48,7 @@ import { Spinner, Button } from "react-bootstrap";
     const station = stationsKey[this.state.selectedStation];
     const equipment = this.state.selectedEquipment.toLowerCase();
     const checkDate = this.state.startDate[0];
+    const token = JSON.stringify(localStorage.getItem("token"));
     // console.log(checkDate, 'the check date')
     // verify that the startDate is lower than the endDate
     const getAverage = station && equipment && checkDate;
@@ -62,10 +63,10 @@ import { Spinner, Button } from "react-bootstrap";
       this.setState({loading: true}, () => {
         fetch(url, {
           method: 'POST',
-          mode: 'cors',
-          cache: 'no-cache',
           headers: {
-            'Content-Type': 'application/json'
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            credentials: 'include'
           },
           body: JSON.stringify(data)
         })

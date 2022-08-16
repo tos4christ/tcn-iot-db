@@ -50,6 +50,7 @@ import { Spinner, Button } from "react-bootstrap";
     const endDate = this.state.endDate[0];
     const startTime = this.state.startDate[1];
     const endTime = this.state.endDate[1];
+    const token = JSON.stringify(localStorage.getItem("token"));
     // verify that the startDate is lower than the endDate
     const getDowntime = station && equipment && startDate && endDate && startTime && endTime;
     if(getDowntime) {
@@ -66,10 +67,10 @@ import { Spinner, Button } from "react-bootstrap";
       this.setState({loading: true}, () => {
         fetch(url, {
           method: 'POST',
-          mode: 'cors',
-          cache: 'no-cache',
           headers: {
-            'Content-Type': 'application/json'
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            credentials: 'include'
           },
           body: JSON.stringify(data)
         })
