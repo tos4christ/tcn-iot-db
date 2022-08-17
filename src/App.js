@@ -36,11 +36,11 @@ class App extends React.Component {
             </div>
           </Route>          
           {/* This is the protected path after successful login */}
-          <Route path={'/home'} element={ <Home isLoggedIn={localStorage.getItem("isLoggedIn")} />} >
-            {/* <div className="App">
+          <Route path={'/home'} >
+            <div className="App">
               <Header />
-              <Home />
-            </div> */}
+              <Home isLoggedIn={localStorage.getItem("isLoggedIn")} />
+            </div>
           </Route>
           <Route path={'/'}>
             <div className='App'>              

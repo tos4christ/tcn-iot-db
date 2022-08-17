@@ -6,7 +6,6 @@ import History from './History';
 import Profile from './Profile';
 import Uptime from './Uptime';
 import Average from './Average';
-import Header from "./Header";
 
 
  class Home extends React.Component {
@@ -95,6 +94,7 @@ import Header from "./Header";
   render() {
     // console.log(this.state)
     const { isLoggedIn } = this.props;
+    console.log(isLoggedIn, 'this is logged in')
     if (!isLoggedIn) {
       return <Redirect to={'/'}/>
     }
@@ -139,8 +139,6 @@ import Header from "./Header";
      + Number(gwagwalada) + Number(ekim) + Number(ikotEkpene);
     return (
       <>
-      
-      <Header />
       <div className="menu">
         <div className="text-white rounded">
           <span className="message">TCN Tool to query equipment parameters and state</span>
