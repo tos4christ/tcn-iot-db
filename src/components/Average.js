@@ -48,7 +48,7 @@ import { Spinner, Button } from "react-bootstrap";
     const station = stationsKey[this.state.selectedStation];
     const equipment = this.state.selectedEquipment.toLowerCase();
     const checkDate = this.state.startDate[0];
-    const token = JSON.stringify(localStorage.getItem("token"));
+    const token = localStorage.getItem("token");
     // console.log(checkDate, 'the check date')
     // verify that the startDate is lower than the endDate
     const getAverage = station && equipment && checkDate;

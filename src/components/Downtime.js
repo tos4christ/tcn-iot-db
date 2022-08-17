@@ -50,7 +50,7 @@ import { Spinner, Button } from "react-bootstrap";
     const endDate = this.state.endDate[0];
     const startTime = this.state.startDate[1];
     const endTime = this.state.endDate[1];
-    const token = JSON.stringify(localStorage.getItem("token"));
+    const token = localStorage.getItem("token");
     // verify that the startDate is lower than the endDate
     const getDowntime = station && equipment && startDate && endDate && startTime && endTime;
     if(getDowntime) {

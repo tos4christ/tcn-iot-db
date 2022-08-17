@@ -62,8 +62,8 @@ import Average from './Average';
   //  }
    streamReadings() {
      const url = 'lines/all';
-     const token = JSON.stringify(localStorage.getItem("token"));
-     console.log(token, 'this is the token');
+     const token = localStorage.getItem("token");
+     // console.log(token, 'this is the token');
     fetch(url, {
       method: 'GET',
       headers: {

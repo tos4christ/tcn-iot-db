@@ -71,7 +71,7 @@ import { Spinner, Button } from "react-bootstrap";
     const startTime = this.state.startDate[1];
     const endTime = this.state.endDate[1];
     const { parameter, profileType } = this.state;
-    const token = JSON.stringify(localStorage.getItem("token"));
+    const token = localStorage.getItem("token");
     // verify that the startDate is lower than the endDate
     const getProfile = station && equipment && startDate && endDate && startTime && endTime && parameter && profileType;
     if(getProfile) {
