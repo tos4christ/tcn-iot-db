@@ -1,11 +1,12 @@
 import React from "react";
-import { Link, withRouter, Route, Switch } from 'react-router-dom';
+import { Link, withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Spinner, Button, Table } from "react-bootstrap";
 import Downtime from './Downtime';
 import History from './History';
 import Profile from './Profile';
 import Uptime from './Uptime';
 import Average from './Average';
+import Header from "./Header";
 
 
  class Home extends React.Component {
@@ -93,6 +94,10 @@ import Average from './Average';
    }
   render() {
     // console.log(this.state)
+    const { isLoggedIn } = this.props;
+    if (!isLoggedIn) {
+      return <Redirect to={'/'}/>
+    }
     const riversIppPs = this.state["RIVERS IPP"].mw ? this.state["RIVERS IPP"].mw.toFixed(2) : 0;
     const afamViTs = this.state["AFAM VI"].mw ? this.state["AFAM VI"].mw.toFixed(2) : 0;
     const parasEnergyPs = this.state["PARAS ENERGY"].mw ? this.state["PARAS ENERGY"].mw.toFixed(2) : 0;
@@ -133,6 +138,9 @@ import Average from './Average';
     const totalTransmission = Number(asaba) + Number(ugwuaji) + Number(eket) + Number(phMain) + Number(lokojaTs)
      + Number(gwagwalada) + Number(ekim) + Number(ikotEkpene);
     return (
+      <>
+      
+      <Header />
       <div className="menu">
         <div className="text-white rounded">
           <span className="message">TCN Tool to query equipment parameters and state</span>
@@ -427,6 +435,7 @@ import Average from './Average';
           <Route path={`/average`}> <Average /> </Route>
         </Switch>        
       </div>
+    </>
     )         
   }
 }
