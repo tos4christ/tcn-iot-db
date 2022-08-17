@@ -94,7 +94,7 @@ import Average from './Average';
   render() {
     // console.log(this.state)
     const { isLoggedIn } = this.props;
-    console.log(isLoggedIn, 'this is logged in')
+    // console.log(isLoggedIn, 'this is logged in')
     if (!isLoggedIn) {
       return <Redirect to={'/'}/>
     }

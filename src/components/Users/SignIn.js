@@ -43,7 +43,7 @@ class SignIn extends React.Component {
     })
     .then((res) => res.json())
     .then((response) => {
-      console.log(response.data.isLoggedIn, 'islogged in from the server')
+      // console.log(response.data.isLoggedIn, 'islogged in from the server')
       const token = response.data.token ? response.data.token : null;
       const isLoggedIn = response.data.isLoggedIn ? response.data.isLoggedIn : false;
       //get the token from the response
@@ -55,7 +55,7 @@ class SignIn extends React.Component {
 
       // If first login then redirect to change password page
       // this.props.history.push({pathname: `/changePassword`});
-      console.log('it returned success', token);
+      // console.log('it returned success', token);
       //If this is not the first login Redirect to home page
       this.props.history.push({pathname: `/home`});
     })
