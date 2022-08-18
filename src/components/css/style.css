@@ -1775,7 +1775,8 @@ h4.post-title a {
 ---------------------------------------*/
 /* Login and Signup */
 .responders-bg {
-  background-color: #fff;
+  /* background-color: #fff; */
+  background: url("../../../public/tcn-nas-background.jpeg");
   height: 100vh;
 }
 .signup-bg-user {
