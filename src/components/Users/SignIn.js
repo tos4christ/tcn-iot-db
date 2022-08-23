@@ -90,7 +90,7 @@ class SignIn extends React.Component {
     const ek1m = this.state.ekim.lines ? this.state.ekim.lines[0].td.mw : 0;
     const e21m = this.state.eket.lines ? this.state.eket.lines[0].td.mw : 0;
     const e22m = this.state.eket.lines ? this.state.eket.lines[1].td.mw : 0;
-    const ibom = ek1m + e21m + e22m;
+    const ibom = -(e21m + e22m) - -(ek1m);
     return (
       <div className="py-4 responders-bg container-fluid bg-light">
         <div className="row mt-4">
