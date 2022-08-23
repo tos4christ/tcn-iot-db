@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, withRouter, Route, Switch, Redirect } from 'react-router-dom';
+import socket from "./utility/socketIO";
 import { Spinner, Button, Table } from "react-bootstrap";
 
 
@@ -52,6 +53,7 @@ import { Spinner, Button, Table } from "react-bootstrap";
   };
    }
    componentDidMount() {
+    socket.emit("connected", {sign: "this is the remote signal"});
      this.streamInterval = setInterval(() => this.streamReadings(), 3000);
      this.streamReadings();
    }
