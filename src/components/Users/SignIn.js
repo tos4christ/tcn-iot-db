@@ -79,10 +79,12 @@ class SignIn extends React.Component {
   };
   
   render() {
-    const ek1m = this.state.ekim.lines[0]?.td?.mw ? this.state.ekim.lines[0].td.mw : 0;
-    const e21m = this.state.eket.lines[0]?.td?.mw ? this.state.eket.lines[0].td.mw : 0;
-    const e22m = this.state.eket.lines[1]?.td?.mw ? this.state.eket.lines[1].td.mw : 0;
-    const ibom = ek1m + e21m + e22m;
+    console.log(this.state.ekim, 'ekim data');
+    console.log(this.state.eket, 'eket state data');
+    // const ek1m = this.state.ekim.lines[0]?.td?.mw ? this.state.ekim.lines[0].td.mw : 0;
+    // const e21m = this.state.eket.lines[0]?.td?.mw ? this.state.eket.lines[0].td.mw : 0;
+    // const e22m = this.state.eket.lines[1]?.td?.mw ? this.state.eket.lines[1].td.mw : 0;
+    // const ibom = ek1m + e21m + e22m;
     return (
       <div className="py-4 responders-bg container-fluid bg-light">
         <div className="row mt-4">
