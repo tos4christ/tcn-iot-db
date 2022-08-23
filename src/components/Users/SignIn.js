@@ -15,14 +15,18 @@ class SignIn extends React.Component {
     this.setPassword = this.setPassword.bind(this);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      eket: {},
+      ekim: {}
     }
   }
   componentDidMount() {
     socket.emit("connected", {data: "this is a new connection"});
     socket.on("client_message_1", data => {
       const { message } = data;
+      const station = message.id;
       console.log(message, 'c1 message');
+      this.setState({station: message})
     });
     socket.on("client_message_2", data => {
       const { message } = data;
@@ -75,11 +79,15 @@ class SignIn extends React.Component {
   };
   
   render() {
+    const ek1m = this.state.ekim.lines[0].td.mw;
+    const e21m = this.state.eket.lines[0].td.mw;
+    const e22m = this.state.eket.lines[1].td.mw;
+    const ibom = ek1m + e21m + e22m;
     return (
       <div className="py-4 responders-bg container-fluid bg-light">
         <div className="row mt-4">
           <div className="col-sm-4 mx-auto mt-4 pt-4 bg-white shadow">
-            <div className="login-bg"></div>
+            <div className="login-bg">{Number(ibom).toFixed(2)}</div>
             <form className="mt-3" onSubmit={this.handleSubmission} autoComplete="on">
               <Text
                 type={"email"}
