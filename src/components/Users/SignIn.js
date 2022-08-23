@@ -26,7 +26,7 @@ class SignIn extends React.Component {
       const { message } = data;
       const station = message["id"];
       const returnObject = {}
-      console.log(station, 'c1 message');
+      console.log(message, 'c1 message');
       this.setState(prevState => {
         prevState[station] = message;
         returnObject[station] = prevState[station]
