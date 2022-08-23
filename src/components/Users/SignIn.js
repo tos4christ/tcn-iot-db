@@ -24,7 +24,8 @@ class SignIn extends React.Component {
     socket.emit("connected", {data: "this is a new connection"});
     socket.on("client_message_1", data => {
       const { message } = data;
-      const station = message["id"];
+      const parsedMessage = JSON.parse(message)
+      const station = parsedMessage.id;
       const returnObject = {}
       console.log(message, 'c1 message');
       this.setState(prevState => {
