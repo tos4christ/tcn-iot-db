@@ -27,7 +27,7 @@ class SignIn extends React.Component {
       const parsedMessage = JSON.parse(message)
       const station = parsedMessage.id;
       const returnObject = {}
-      console.log(parsedMessage, 'c1 message');
+      // console.log(parsedMessage, 'c1 message');
       this.setState(prevState => {
         prevState[station] = parsedMessage;
         returnObject[station] = prevState[station]
@@ -85,17 +85,17 @@ class SignIn extends React.Component {
   };
   
   render() {
-    console.log(this.state.ekim, 'ekim data');
-    console.log(this.state.eket, 'eket state data');
-    // const ek1m = this.state.ekim.lines[0]?.td?.mw ? this.state.ekim.lines[0].td.mw : 0;
-    // const e21m = this.state.eket.lines[0]?.td?.mw ? this.state.eket.lines[0].td.mw : 0;
-    // const e22m = this.state.eket.lines[1]?.td?.mw ? this.state.eket.lines[1].td.mw : 0;
-    // const ibom = ek1m + e21m + e22m;
+    // console.log(this.state.ekim, 'ekim data');
+    // console.log(this.state.eket, 'eket state data');
+    const ek1m = this.state.ekim.lines[0]?.td?.mw ? this.state.ekim.lines[0].td.mw : 0;
+    const e21m = this.state.eket.lines[0]?.td?.mw ? this.state.eket.lines[0].td.mw : 0;
+    const e22m = this.state.eket.lines[1]?.td?.mw ? this.state.eket.lines[1].td.mw : 0;
+    const ibom = ek1m + e21m + e22m;
     return (
       <div className="py-4 responders-bg container-fluid bg-light">
         <div className="row mt-4">
           <div className="col-sm-4 mx-auto mt-4 pt-4 bg-white shadow">
-            {/* <div className="login-bg">{Number(ibom).toFixed(2)}</div> */}
+            <div className="login-bg">{Number(ibom).toFixed(2)}</div>
             <form className="mt-3" onSubmit={this.handleSubmission} autoComplete="on">
               <Text
                 type={"email"}
