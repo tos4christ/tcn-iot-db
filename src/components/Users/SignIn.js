@@ -85,7 +85,7 @@ class SignIn extends React.Component {
   };
   
   render() {
-    console.log(this.state, 'state data');
+    // console.log(this.state, 'state data');
     // console.log(this.state.eket, 'eket state data');
     const ek1m = this.state.ekim.lines ? this.state.ekim.lines[0].td.mw : 0;
     const e21m = this.state.eket.lines ? this.state.eket.lines[0].td.mw : 0;
