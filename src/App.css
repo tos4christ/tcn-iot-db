@@ -80,8 +80,8 @@
   margin-left: 1em;
   color: white;
 }
-.options select {
-  width: 10%;
+.options select, .options input[type="datetime-local"] {
+  width: 20%;
   height: 5vh;
 }
 .submit-button {
