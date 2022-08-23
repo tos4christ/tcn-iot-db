@@ -2,16 +2,18 @@ import React from "react";
 
 const Links = ({ link, linkTo, question }) => {
   return (
-    <div className="d-flex">
-      <p>
+    <div className="d-flex justify-content-between">
+      <p className="text-primary">
         {question}
-        <a href={linkTo} className="text-primary ">
+        <a href={linkTo}>
           {link}
         </a>
       </p>
-      <a href="/" className="text-success ml-auto">
-        Back to home page
-      </a>
+      <p className="ml-5">
+        <a href="/" className="text-success">
+          Back to home page
+        </a>
+      </p>
     </div>
   );
 };

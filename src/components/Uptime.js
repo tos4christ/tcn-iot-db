@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from 'react-router-dom';
 import stations from "./stations";
 import stationsKey from "./stationsKey";
 import Header from "./table/ProfileHeader";
@@ -104,6 +105,10 @@ import { Spinner, Button } from "react-bootstrap";
   }
 
   render() {
+    const { isLoggedIn } = this.props;
+    if (!isLoggedIn) {
+      return <Redirect to={'/'}/>
+    }
     const { loading, tableRows } = this.state;
     // get the stations from the keys of the object
     const stationer = Object.keys(stations);
@@ -111,8 +116,8 @@ import { Spinner, Button } from "react-bootstrap";
     const stationArray = [<option disabled key={0}>Select Station</option>];
     stationer.forEach((station, index) => stationArray.push(<option value={station} key={index + 1}> {station} </option>));
     return (
-      <div>
-        <a style={{margin: '10px', 'fontSize': '15px'}} type="button" href="/"> back</a>        
+      <div className="item-div">
+        <a style={{margin: '10px', 'fontSize': '15px'}} type="button" href="/home"> back</a>        
         <div>
           <h2 className="history-text"> Get Uptime of an equipment</h2>
           {/* Select Station */}

@@ -1,17 +1,14 @@
 import React from "react";
 import { Link, withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Spinner, Button, Table } from "react-bootstrap";
-import Downtime from './Downtime';
-import History from './History';
-import Profile from './Profile';
-import Uptime from './Uptime';
-import Average from './Average';
+
 
 
  class Home extends React.Component {
    constructor(props) {
      super(props);
      this.streamReadings = this.streamReadings.bind(this);
+     this.toggleDisplay = this.toggleDisplay.bind(this);
      this.state = { 
       'EKET': {},
       'PORT-HARCOURT MAIN' : {},
@@ -51,6 +48,7 @@ import Average from './Average';
       message: "",
       received: [],
       connected: false,
+      display: ''
   };
    }
    componentDidMount() {
@@ -60,12 +58,12 @@ import Average from './Average';
    componentWillUnmount() {
      clearInterval(this.streamInterval)
    }
-  //  toggleDisplay(e) {
-  //   this.setState(prevState => {
-  //     prevState.display = this.state.display === '' ? 'none' : '';
-  //     return {display : prevState.display}
-  //   })
-  //  }
+   toggleDisplay(e) {
+    this.setState(prevState => {
+      prevState.display = this.state.display === '' ? 'none' : '';
+      return {display : prevState.display}
+    })
+   }
    streamReadings() {
      const url = 'lines/all';
      const token = localStorage.getItem("token");
@@ -156,7 +154,7 @@ import Average from './Average';
         <div className="menu-list">
           <ul className="ul-menu text-center">
             <li>
-              <Link to={'/downtime'} onClick={this.toggleDisplay} type="button">Downtime</Link>
+              <Link to={`/downtime`} onClick={this.toggleDisplay} type="button">Downtime</Link>
             </li>
             <li>
               <Link to={'/uptime'} onClick={this.toggleDisplay} type="button">Uptime</Link>
@@ -462,14 +460,7 @@ import Average from './Average';
             </tbody>
           </table>
           </div>
-        </div>
-        <Switch>
-          <Route path={`/downtime`}> <Downtime /> </Route>
-          <Route path={`/uptime`}> <Uptime /> </Route>
-          <Route path={`/history`}> <History /> </Route>
-          <Route path={`/profile`}> <Profile /> </Route>
-          <Route path={`/average`}> <Average /> </Route>
-        </Switch>        
+        </div>              
       </div>
     </>
     )         

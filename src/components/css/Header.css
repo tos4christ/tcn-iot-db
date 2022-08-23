@@ -68,8 +68,7 @@ nav {
   }
   .header {
     padding-top: 1em;
-    padding-bottom: 0;
-    
+    padding-bottom: 0;    
   }
 }
 @media screen and (max-height: 700px) {
@@ -84,7 +83,41 @@ nav {
     float: right;
   }
 }
-
 .navbar-toggle {
   margin-top: 20px;
+}
+
+/* 
+---- Footer Area -----
+*/
+.copyright-area {
+  text-align: center;
+}
+.copyright-area ul li {
+  display: inline-block;
+}
+.copyright-area ul li a {
+  width: 35px;
+  height: 35px;
+  color: #0074da;
+  background: rgb(115, 231, 240);
+  display: inline-block;
+  line-height: 35px;
+  font-size: 16px;
+  border-radius: 100%;
+  margin: 0 5px;
+}
+.copyright-area ul li a:hover {
+  background: #0074da;
+  color: rgb(14, 13, 13);
+}
+.copyright-area ul {
+  margin-bottom: 30px;
+}
+.copyright-area p {
+  color: rgb(10, 10, 10);
+}
+.copyright-area p a {
+  color: rgb(31, 20, 20);
+  border-bottom: 1px solid #fff;
 }

@@ -9,7 +9,7 @@ class Header extends React.Component {
     return (
       <thead>
         <tr>
-        <th className="tg-zb4j">Date</th>
+          <th className="tg-zb4j">Date</th>
           <th className="tg-zb4j">Time</th>
           <th className="tg-zb4j">Station</th>
           <th className="tg-zb4j">Equipment</th>

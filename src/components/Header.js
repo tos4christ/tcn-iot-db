@@ -28,8 +28,7 @@ class Header extends React.Component {
     }
     const { value } = this.state; 
     return (      
-        <nav className='navbar navbar-expand-md navbar-inverse'>
-            <div className='container-fluid'>
+        <nav className='navbar navbar-expand-md container-fluid'>            
                 <div className='navbar-header'>
                     <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#myNavbar">
                         <span className="icon-bar"></span>
@@ -45,7 +44,7 @@ class Header extends React.Component {
                         <li className='nav-item'>
 
                         </li>
-                        <li className='nav-item'> 
+                        <li className='nav-item'>   
                             <NavLink className='nav-link text-white p-4' to='/'>Developer </NavLink>
                         </li>
                         <li className='nav-item'>
@@ -63,8 +62,7 @@ class Header extends React.Component {
                             </NavLink>
                         </li>   
                     </ul>                                          
-                </div>
-            </div>              
+                </div>                          
         </nav>              
     );
   }
