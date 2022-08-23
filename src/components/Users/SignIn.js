@@ -25,8 +25,13 @@ class SignIn extends React.Component {
     socket.on("client_message_1", data => {
       const { message } = data;
       const station = message.id;
+      const returnObject = {}
       console.log(message, 'c1 message');
-      this.setState({station: message})
+      this.setState(prevState => {
+        prevState[station] = message;
+        returnObject[station] = prevState[station]
+        return returnObject;
+      })
     });
     socket.on("client_message_2", data => {
       const { message } = data;
