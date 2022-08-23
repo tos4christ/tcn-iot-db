@@ -19,7 +19,16 @@ class SignIn extends React.Component {
     }
   }
   componentDidMount() {
-    socket.emit("connected", {data: "this is a new connection"})
+    socket.emit("connected", {data: "this is a new connection"});
+    socket.on("client_message_1", data => {
+      const { message } = data;
+      console.log(message, 'c1 message');
+    });
+    socket.on("client_message_2", data => {
+      const { message } = data;
+      console.log(message, 'c2 message');
+    })
+    
   }
   setEmail(email) {
     this.setState({email:email})
