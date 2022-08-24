@@ -98,6 +98,7 @@ export default (state_data) => {
     const ugwuaji_u2a = state_data?.gbarain?.lines ? state_data.gbarain.lines.filter(line => line.id === "u2a").td : {mw: null, V: null};
 
     // Calculate the stations
+    console.log(ekim_ek1m, eket_e21m, eket_e22m, 'check the equipment')
     
     const station_array = { 
         'EKET': {mw: Number(
