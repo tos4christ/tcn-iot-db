@@ -4,9 +4,8 @@ import Text from "../../components/Inputs/Text";
 import Button from "../../components/Inputs/Button";
 import Link from "../../components/Inputs/Links";
 import socket from "../utility/socketIO";
+import stations_adder from "../stations_adder";
 // import websocketClient from "../utility/socketConnection";
-// import socket from "../utility/socketioConnection";
-
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -16,8 +15,6 @@ class SignIn extends React.Component {
     this.state = {
       email: '',
       password: '',
-      eket: {},
-      ekim: {}
     }
   }
   componentDidMount() {
@@ -95,10 +92,8 @@ class SignIn extends React.Component {
   render() {
     // console.log(this.state, 'state data');
     // console.log(this.state.eket, 'eket state data');
-    const ek1m = this.state.ekim.lines ? this.state.ekim.lines[0].td.mw : 0;
-    const e21m = this.state.eket.lines ? this.state.eket.lines[0].td.mw : 0;
-    const e22m = this.state.eket.lines ? this.state.eket.lines[1].td.mw : 0;
-    const ibom = -(e21m + e22m) - -(ek1m);
+    const stations_array = stations_adder(this.state);
+    console.log(stations_array, 'the stations array')
     return (
       <div className="py-4 responders-bg container-fluid bg-light">
         <div className="row mt-4">
