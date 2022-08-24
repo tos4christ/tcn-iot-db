@@ -98,7 +98,7 @@ class SignIn extends React.Component {
       <div className="py-4 responders-bg container-fluid bg-light">
         <div className="row mt-4">
           <div className="col-sm-4 mx-auto mt-4 pt-4 bg-white shadow">
-            <div className="login-bg">Ibom Power: {Number(ibom).toFixed(2)}</div>
+            <div className="login-bg"></div>
             <form className="mt-3" onSubmit={this.handleSubmission} autoComplete="on">
               <Text
                 type={"email"}
