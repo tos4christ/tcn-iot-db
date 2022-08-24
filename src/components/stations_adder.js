@@ -3,7 +3,7 @@ export default (state_data) => {
         return;
     }
     // console.log(state_data, 'the state data');
-    // return;
+    return;
     const ekim_ek1m = state_data.ekim.lines ? state_data.ekim.lines.filter(line => line.id === "ek1m").td : {mw: null, V: null};
     const eket_e21m = state_data.eket.lines ? state_data.eket.lines.filter(line => line.id === "e21m").td : {mw: null, V: null};
     const eket_e22m = state_data.eket.lines ? state_data.eket.lines.filter(line => line.id === "e22m").td : {mw: null, V: null};
@@ -103,6 +103,8 @@ export default (state_data) => {
     const eket_kv =  eket_e21m.V ? eket_e21m.V : eket_e22m.V ? eket_e22m.V : 0;
     const phmain_mw = phMain_m21p.mw ? phMain_m21p.mw : 0;
     const phmain_kv = phMain_m21p.V ? phMain_m21p.V : 0;
+    const dadkowa_mw = (dadinKowaGs_w21b.mw ? dadinKowaGs_w21b.mw : 0) + (dadinKowaGs_w23e.mw ? dadinKowaGs_w23e.mw : 0);
+    const dadkowa_kv = dadinKowaGs_w21b.V ? dadinKowaGs_w21b.V : 0;
     
     const station_array = { 
         'EKET': {mw: Number(eket_mw).toFixed(2), kv: eket_kv},
@@ -180,5 +182,3 @@ export default (state_data) => {
     };
     return station_array;
 }
-const dadkowa_mw = (dadinKowaGs_w21b.mw ? dadinKowaGs_w21b.mw : 0) + (dadinKowaGs_w23e.mw ? dadinKowaGs_w23e.mw : 0);
-const dadkowa_kv = dadinKowaGs_w21b.V ? dadinKowaGs_w21b.V : 0;
