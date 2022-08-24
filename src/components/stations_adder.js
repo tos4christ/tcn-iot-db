@@ -2,11 +2,11 @@ export default (state_data) => {
     if (!state_data) {
         return;
     }
-    console.log(state_data, 'the state data');
+    // console.log(state_data, 'the state data');
     // return;
-    const ekim_ek1m = state_data.ekim.lines ? state_data.ekim.lines.filter(line => line.id === "ek1m").td : {mw: null, V: null};
-    const eket_e21m = state_data.eket.lines ? state_data.eket.lines.filter(line => line.id === "e21m").td : {mw: null, V: null};
-    const eket_e22m = state_data.eket.lines ? state_data.eket.lines.filter(line => line.id === "e22m").td : {mw: null, V: null};
+    const ekim_ek1m = state_data.ekim.lines ? state_data.ekim.lines.filter(line => line.id === "ek1m") : {mw: null, V: null};
+    const eket_e21m = state_data.eket.lines ? state_data.eket.lines.filter(line => line.id === "e21m") : {mw: null, V: null};
+    const eket_e22m = state_data.eket.lines ? state_data.eket.lines.filter(line => line.id === "e22m") : {mw: null, V: null};
     const kainjiTs_k1j = state_data.kainjiTs.lines ? state_data.kainjiTs.lines.filter(line => line.id === "k1j").td : {mw: null, V: null};
     const kainjiTs_k2j = state_data.kainjiTs.lines ? state_data.kainjiTs.lines.filter(line => line.id === "k2j").td : {mw: null, V: null};
     const kainjiTs_k3r = state_data.kainjiTs.lines ? state_data.kainjiTs.lines.filter(line => line.id === "k3r").td : {mw: null, V: null};
