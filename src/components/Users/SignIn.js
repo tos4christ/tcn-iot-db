@@ -11,7 +11,7 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.setEmail = this.setEmail.bind(this);
-    this.get_stations = this.get_stations.bind(this);
+    this.get_stations = this.compose_stations.bind(this);
     this.setPassword = this.setPassword.bind(this);
     this.state = {
       email: '',
