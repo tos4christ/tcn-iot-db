@@ -24,7 +24,7 @@ class SignIn extends React.Component {
     socket.emit("connected", {data: "this is a new connection"});
     socket.on("client_message_1", data => {
       const { message } = data;
-      const parsedMessage = JSON.parse(message)
+      const parsedMessage = JSON.parse(message);
       const station = parsedMessage.id;
       const returnObject = {}
       // console.log(parsedMessage, 'c1 message');
@@ -36,7 +36,15 @@ class SignIn extends React.Component {
     });
     socket.on("client_message_2", data => {
       const { message } = data;
-      console.log(message, 'c2 message');
+      const parsedMessage = JSON.parse(message);
+      const station = parsedMessage.id;
+      const returnObject = {}
+      // console.log(parsedMessage, 'c2 message');
+      this.setState(prevState => {
+        prevState[station] = parsedMessage;
+        returnObject[station] = prevState[station]
+        return returnObject;
+      })
     })
     
   }
