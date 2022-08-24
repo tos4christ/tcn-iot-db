@@ -15,8 +15,41 @@ class SignIn extends React.Component {
     this.state = {
       email: '',
       password: '',
+      afamIv_vPs: {},
+      shiroroPs: {},
+      egbinPs: {},
+      kainjiTs: {},
+      jebbaTs: {},
+      okpaiGs: {},
+      deltaGs: {},
+      omotosho2: {},
+      omotosho1: {},
+      eket: {},
+      phMain: {},
+      afamViTs: {},
+      alaoji: {},
+      sapeleNippPs: {},
+      omotoshoNippPs: {},
+      odukpaniGs: {},
+      ekim: {},
+      gereguPs: {},
+      ikotEkpene: {},
+      riversIppPs: {},
+      omokuPs1: {},
+      ihovborNippPs: {},
+      olorunsogo1: {},
+      delta2: {},
+      delta3: {},
+      parasEnergyPs: {},
+      olorunsogoPhase1Gs: {},
+      gbarain: {},
+      dadinKowaGs: {},
+      asaba: {},
+      lokojaTs: {},
+      ugwuaji: {},
+      gwagwalada: {}
     }
-  }
+  } 
   componentDidMount() {
     socket.emit("connected", {data: "this is a new connection"});
     socket.on("client_message_1", data => {
@@ -98,7 +131,7 @@ class SignIn extends React.Component {
       <div className="py-4 responders-bg container-fluid bg-light">
         <div className="row mt-4">
           <div className="col-sm-4 mx-auto mt-4 pt-4 bg-white shadow">
-            <div className="login-bg"></div>
+            <div className="login-bg">Ibom Power: {Number(ibom).toFixed(2)}</div>
             <form className="mt-3" onSubmit={this.handleSubmission} autoComplete="on">
               <Text
                 type={"email"}
