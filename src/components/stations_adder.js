@@ -2,8 +2,8 @@ export default (state_data) => {
     if (!state_data) {
         return;
     }
-    console.log(state_data, 'the state data');
-    return;
+    // console.log(state_data, 'the state data');
+    // return;
     const ekim_ek1m = state_data?.ekim?.lines ? state_data.ekim.lines.filter(line => line.id === "ek1m").td : {mw: null, V: null};
     const eket_e21m = state_data?.eket?.lines ? state_data.eket.lines.filter(line => line.id === "e21m").td : {mw: null, V: null};
     const eket_e22m = state_data?.eket?.lines ? state_data.eket.lines.filter(line => line.id === "e22m").td : {mw: null, V: null};
