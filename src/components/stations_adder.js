@@ -99,11 +99,10 @@ export default (state_data) => {
 
     // Calculate the stations
     console.log(ekim_ek1m, ihovborNippPs_ohl1, eket_e22m, 'check the equipment')
-    
+    const eket_mw = (eket_e21m.td ? eket_e21m.td.mw : 0) + (eket_e22m.td ? eket_e22m.td.mw : 0);
+    const eket_kv = (eket_e21m.td ? eket_e21m.td.V : eket_e22m.td ? eket_e22m.td.V : 0);
     return { 
-        'EKET': {mw: Number(
-            (eket_e21m.td ? eket_e21m.td.mw : 0) + (eket_e22m.td ? eket_e22m.td.mw : 0)
-            ).toFixed(2), kv: (eket_e21m.td ? eket_e21m.td.V : eket_e22m.td ? eket_e22m.td.V : 0)},
+        'EKET': {mw: Number(eket_mw).toFixed(2), kv: eket_kv},
         'PORT-HARCOURT MAIN' : {mw: Number(
             (phMain_m21p.td ? phMain_m21p.td.mw : 0)
             ).toFixed(2), kv: (phMain_m21p.td ? phMain_m21p.td.V : 0)},
