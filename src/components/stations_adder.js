@@ -99,12 +99,14 @@ export default (state_data) => {
 
     // Calculate the stations
     // console.log(ekim_ek1m, eket_e21m, eket_e22m, 'check the equipment')
+    const eket_mw =  (eket_e21m.mw ? eket_e21m.mw : 0) + (eket_e22m.mw ? eket_e22m.mw : 0);
+    const eket_kv =  eket_e21m.V ? eket_e21m.V : eket_e22m.V ? eket_e22m.V : 0;
+    const phmain_mw = phMain_m21p.mw ? phMain_m21p.mw : 0;
+    const phmain_kv = phMain_m21p.V ? phMain_m21p.V : 0;
     
     const station_array = { 
-        'EKET': {mw: Number(
-            eket_e21m.mw ? eket_e21m.mw : 0 + eket_e22m.mw ? eket_e22m.mw : 0
-            ).toFixed(2), kv: eket_e21m.V ? eket_e21m.V : eket_e22m.V ? eket_e22m.V : 0},
-        'PORT-HARCOURT MAIN' : {mw: Number(phMain_m21p.mw ? phMain_m21p.mw : 0).toFixed(2), kv: phMain_m21p.V ? phMain_m21p.V : 0},
+        'EKET': {mw: Number(eket_mw).toFixed(2), kv: eket_kv},
+        'PORT-HARCOURT MAIN' : {mw: Number(phmain_mw).toFixed(2), kv: phmain_kv},
         'LOKOJA TS' : {mw: Number(
             (lokojaTs_j1l.mw ? lokojaTs_j1l.mw : 0 + lokojaTs_j2l.mw ? lokojaTs_j2l.mw : 0) - 
             (lokojaTs_l6g.mw ? lokojaTs_l6g.mw : 0 + lokojaTs_l7g.mw ? lokojaTs_l7g.mw : 0)
@@ -174,7 +176,9 @@ export default (state_data) => {
         'OLORUNSOGO (GAS)' : {mw: Number(
             olorunsogo1_tr1.mw?olorunsogo1_tr1.mw:0 + olorunsogo1_tr2.mw?olorunsogo1_tr2.mw:0 + olorunsogoPhase1Gs_tr3.mw?olorunsogoPhase1Gs_tr3.mw:0 + olorunsogoPhase1Gs_tr4.mw?olorunsogoPhase1Gs_tr4.mw:0
                 ).toFixed(2), kv: olorunsogo1_tr1.V?olorunsogo1_tr1.V:0},
-        'DADINKOWA G.S (HYDRO)' : {mw: Number(dadinKowaGs_w21b.mw?dadinKowaGs_w21b.mw:0 + dadinKowaGs_w23e.mw?dadinKowaGs_w23e.mw:0).toFixed(2), kv: dadinKowaGs_w21b.V?dadinKowaGs_w21b.V:0},
+        'DADINKOWA G.S (HYDRO)' : {mw: Number(dadkowa_mw).toFixed(2), kv: dadkowa_kv},
     };
     return station_array;
 }
+const dadkowa_mw = (dadinKowaGs_w21b.mw ? dadinKowaGs_w21b.mw : 0) + (dadinKowaGs_w23e.mw ? dadinKowaGs_w23e.mw : 0);
+const dadkowa_kv = dadinKowaGs_w21b.V ? dadinKowaGs_w21b.V : 0;
