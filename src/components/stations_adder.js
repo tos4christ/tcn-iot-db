@@ -1,4 +1,4 @@
-export default (state_data) => {
+const get_stations =  (state_data) => {
     if (!state_data) {
         return;
     }
@@ -229,3 +229,5 @@ export default (state_data) => {
     };
     // return station_array;
 }
+
+export default get_stations;

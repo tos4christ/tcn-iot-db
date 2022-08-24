@@ -4,13 +4,14 @@ import Text from "../../components/Inputs/Text";
 import Button from "../../components/Inputs/Button";
 import Link from "../../components/Inputs/Links";
 import socket from "../utility/socketIO";
-import stations_adder from "../stations_adder";
+import get_stations from "../stations_adder";
 // import websocketClient from "../utility/socketConnection";
 
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.setEmail = this.setEmail.bind(this);
+    this.get_stations = this.get_stations.bind(this);
     this.setPassword = this.setPassword.bind(this);
     this.state = {
       email: '',
@@ -75,8 +76,7 @@ class SignIn extends React.Component {
         returnObject[station] = prevState[station]
         return returnObject;
       })
-    })
-    
+    });    
   }
   setEmail(email) {
     this.setState({email:email})
@@ -121,13 +121,17 @@ class SignIn extends React.Component {
     })
     .catch((error) => console.error(error.message));
   };
+  compose_stations(data) {
+    return get_stations(data)
+  }
   
   render() {
     // console.log(this.state, 'state data');
     // console.log(this.state.eket, 'eket state data');
     const data = this.state;
-    const stations_array = stations_adder(data);
-    console.log(stations_array, 'the stations array')
+    const stations_array_1 = get_stations(data);
+    const stations_array_2 = this.compose_stations(data);
+    console.log(stations_array_1, 'the stations array', stations_array_2)
     return (
       <div className="py-4 responders-bg container-fluid bg-light">
         <div className="row mt-4">
