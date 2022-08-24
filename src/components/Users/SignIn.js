@@ -125,7 +125,8 @@ class SignIn extends React.Component {
   render() {
     // console.log(this.state, 'state data');
     // console.log(this.state.eket, 'eket state data');
-    const stations_array = stations_adder(this.state);
+    const data = this.state;
+    const stations_array = stations_adder(data);
     console.log(stations_array, 'the stations array')
     return (
       <div className="py-4 responders-bg container-fluid bg-light">
