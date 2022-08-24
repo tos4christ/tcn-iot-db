@@ -100,7 +100,7 @@ export default (state_data) => {
     // Calculate the stations
     console.log(ekim_ek1m, ihovborNippPs_ohl1, eket_e22m, 'check the equipment')
     
-    const station_array = { 
+    return { 
         'EKET': {mw: Number(
             (eket_e21m.td ? eket_e21m.td.mw : 0) + (eket_e22m.td ? eket_e22m.td.mw : 0)
             ).toFixed(2), kv: (eket_e21m.td ? eket_e21m.td.V : eket_e22m.td ? eket_e22m.td.V : 0)},
@@ -228,5 +228,5 @@ export default (state_data) => {
             (dadinKowaGs_w21b.td ?dadinKowaGs_w21b.td.mw:0) + (dadinKowaGs_w23e.td ?dadinKowaGs_w23e.td.mw:0)
             ).toFixed(2), kv: dadinKowaGs_w21b.td ?dadinKowaGs_w21b.td.V:0},
     };
-    return station_array;
+    // return station_array;
 }
