@@ -157,7 +157,7 @@ input[type="select"] {
   /* background-color: #fff; */
   background: url("../../../public/tcn-nas-background.jpeg");
   height: 100vh;
-  width: fit-content;
+  width: 100%;
 }
 .signup-bg-user {
   background: url("../img/signup-head-user.png");
