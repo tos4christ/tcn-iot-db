@@ -51,7 +51,7 @@ nav {
   height: 5em;
   width: 10%;
 }
-@media screen and (min-height: 700px) {
+@media screen and (min-height: 1050px) {
   .navbar-header {
     width: 10%;
     padding: 0 0 4% 3%;
@@ -71,10 +71,10 @@ nav {
     padding-bottom: 0;    
   }
 }
-@media screen and (max-height: 700px) {
+@media screen and (max-height: 1000px) {
   .App {
     width: 160%;
-    overflow: hidden;
+    overflow: scroll;
   }
   .right-nav {
     width: 15%;
