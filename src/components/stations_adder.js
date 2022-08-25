@@ -1,4 +1,4 @@
-const get_stations =  (state_data) => {
+const get_stations =  function(state_data) {
     if (!state_data) {
         return;
     }
