@@ -225,7 +225,7 @@ class SignIn extends React.Component {
     const eket_kv = (eket_e21m.td ? eket_e21m.td.V : eket_e22m.td ? eket_e22m.td.V : 0);
     const ekim_mw = (ekim_ek1m.td ? ekim_ek1m.td.mw : 0);
     const ekim_kv = (ekim_ek1m.td ? ekim_ek1m.td.V : 0);
-    console.log(eket_mw, eket_kv, 'eket', ekim_mw, ekim_kv, 'ekim', 'check the equipment')
+    console.log( eket_e21m, eket_e22m, ekim_ek1m, eket_mw, eket_kv, 'eket', ekim_mw, ekim_kv, 'ekim', 'check the equipment')
 
     return (
       <div className="py-4 responders-bg container-fluid bg-light">
