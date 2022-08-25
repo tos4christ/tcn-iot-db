@@ -218,7 +218,7 @@ const get_stations =  function(state_data) {
         'OLORUNSOGO (GAS)' : {mw: Number(
             (olorunsogo1_tr1[0]?.gd ?olorunsogo1_tr1[0].gd.mw:0) + (olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.mw:0) + 
             (olorunsogoPhase1Gs_tr3[0]?.gd ?olorunsogoPhase1Gs_tr3[0].gd.mw:0) + (olorunsogoPhase1Gs_tr4[0]?.gd ?olorunsogoPhase1Gs_tr4[0].gd.mw:0)
-                ).toFixed(2), kv: (olorunsogo1_tr1[0]?.gd ?olorunsogo1_tr1[0].gd.V:0)},
+                ).toFixed(2), kv: (olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.V:0)},
         'DADINKOWA G.S (HYDRO)' : {mw: Number(
             (dadinKowaGs_w21b[0]?.td ?dadinKowaGs_w21b[0].td.mw:0) + (dadinKowaGs_w23e[0]?.td ?dadinKowaGs_w23e[0].td.mw:0)
             ).toFixed(2), kv: dadinKowaGs_w21b[0]?.td ?dadinKowaGs_w21b[0].td.V:0},
