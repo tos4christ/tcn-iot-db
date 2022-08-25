@@ -124,6 +124,7 @@ class SignIn extends React.Component {
   render() {
     const stations_array = get_stations(this.state);
     // console.log( stations_array, 'check the equipment')
+    console.log(this.state);
 
     return (
       <div className="py-4 responders-bg container-fluid bg-light">

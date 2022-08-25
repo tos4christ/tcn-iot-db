@@ -100,7 +100,7 @@ const get_stations =  function(state_data) {
     // Calculate the stations
     const o_nipp_add = (olorunsogoPhase1Gs_r1w[0]?.gd ?olorunsogoPhase1Gs_r1w[0].gd.mw:0) + (olorunsogoPhase1Gs_r2a[0]?.gd ?olorunsogoPhase1Gs_r2a[0].gd.mw:0);
     const o_nipp_sub = (olorunsogo1_tr1[0]?.gd ?olorunsogo1_tr1[0].gd.mw:0) + (olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.mw:0) + (olorunsogoPhase1Gs_tr3[0]?.gd ?olorunsogoPhase1Gs_tr3[0].gd.mw:0) + (olorunsogoPhase1Gs_tr4[0]?.gd ?olorunsogoPhase1Gs_tr4[0].gd.mw:0);
-    console.log(o_nipp_add, o_nipp_sub, 'olorunsogo nipp check')
+    console.log(olorunsogoPhase1Gs_r1w, o_nipp_add, o_nipp_sub, 'olorunsogo nipp check')
     // const eket_mw = (eket_e21m.td ? eket_e21m.td.mw : 0) + (eket_e22m.td ? eket_e22m.td.mw : 0);
     // const eket_kv = (eket_e21m.td ? eket_e21m.td.V : eket_e22m.td ? eket_e22m.td.V : 0);
     return { 
