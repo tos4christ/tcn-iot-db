@@ -1,0 +1,22 @@
+.container-fluid {
+  height: max-content;
+}
+input {
+  margin: 0;
+  padding: 0 10px;
+  height: 30px;
+  width: 10%;
+}
+.form-inputs{
+  margin: 2px;
+  display: inline-block;
+  padding: 0;
+}
+.form-inputs input {
+  width: auto;
+  margin: 2px 0 2px 2px;
+}
+.form-inputs label {
+  width: auto;
+  margin: 2px 2px 2px 0px;
+}

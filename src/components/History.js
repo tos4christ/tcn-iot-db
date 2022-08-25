@@ -1,11 +1,10 @@
 import React from "react";
-import {NavLink, Link, withRouter} from 'react-router-dom';
+import {Redirect, withRouter} from 'react-router-dom';
 import stations from "./stations";
 import stationsKey from "./stationsKey";
 import Header from "./table/HistoryHeader";
 import Row from "./table/HistoryRow";
 import { Spinner, Button } from "react-bootstrap";
-import ReactHtmlTableToExcel from "react-html-table-to-excel";
 
  class History extends React.Component {
   constructor(props) {
@@ -59,7 +58,8 @@ import ReactHtmlTableToExcel from "react-html-table-to-excel";
     const startDate = this.state.startDate[0];
     const endDate = this.state.endDate[0];
     const startTime = this.state.startDate[1];
-    const endTime = this.state.endDate[1];
+    const endTime = this.state.endDate[1];    
+    const token = localStorage.getItem("token");
     // verify that the startDate is lower than the endDate
     // This is already handled at the backend by replacing the lower to be the start
     const getHistory = station && equipment && startDate && endDate && startTime && endTime;
@@ -77,10 +77,10 @@ import ReactHtmlTableToExcel from "react-html-table-to-excel";
       this.setState({loading: true}, () => {
         fetch(url, {
           method: 'POST',
-          mode: 'cors',
-          cache: 'no-cache',
           headers: {
-            'Content-Type': 'application/json'
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            credentials: 'include'
           },
           body: JSON.stringify(data)
         })
@@ -102,6 +102,10 @@ import ReactHtmlTableToExcel from "react-html-table-to-excel";
     }    
   }
   render() {
+    const { isLoggedIn } = this.props;
+    if (!isLoggedIn) {
+      return <Redirect to={'/'}/>
+    }
     const { loading, tableRows } = this.state;
     // get the stations from the keys of the object
     const stationer = Object.keys(stations);
@@ -109,8 +113,8 @@ import ReactHtmlTableToExcel from "react-html-table-to-excel";
     const stationArray = [<option disabled key={0}>Select Station</option>];
     stationer.forEach((station, index) => stationArray.push(<option value={station} key={index + 1}> {station} </option>));
     return (
-      <div>
-        <a style={{margin: '10px', 'fontSize': '15px'}} type="button" href="/"> back</a>        
+      <div className="item-div">
+        <a style={{margin: '10px', 'fontSize': '15px'}} type="button" href="/home"> back</a>        
         <div>
           <h2 className="history-text"> Get History</h2>
           {/* Select Station */}
@@ -158,13 +162,13 @@ import ReactHtmlTableToExcel from "react-html-table-to-excel";
           </Button>
             : 
             <div>
-              <ReactHtmlTableToExcel
+              {/* <ReactHtmlTableToExcel
                 className="btn btn-info"
                 table="emp"
                 filename="ExcelReport"
                 sheet="Sheet"
                 buttonText="Export excel"
-                />
+                /> */}
               <table id="emp" className="tg">
                 <Header />
                 <tbody>

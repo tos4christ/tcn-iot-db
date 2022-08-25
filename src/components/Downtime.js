@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter, Redirect } from "react-router-dom";
 import stations from "./stations";
 import stationsKey from "./stationsKey";
 import { Spinner, Button } from "react-bootstrap";
@@ -21,6 +22,7 @@ import { Spinner, Button } from "react-bootstrap";
     }
   }
   componentDidMount() {
+    console.log('im here now')
     this.setStation();
   }
   setDate(e) {    
@@ -50,6 +52,7 @@ import { Spinner, Button } from "react-bootstrap";
     const endDate = this.state.endDate[0];
     const startTime = this.state.startDate[1];
     const endTime = this.state.endDate[1];
+    const token = localStorage.getItem("token");
     // verify that the startDate is lower than the endDate
     const getDowntime = station && equipment && startDate && endDate && startTime && endTime;
     if(getDowntime) {
@@ -66,10 +69,10 @@ import { Spinner, Button } from "react-bootstrap";
       this.setState({loading: true}, () => {
         fetch(url, {
           method: 'POST',
-          mode: 'cors',
-          cache: 'no-cache',
           headers: {
-            'Content-Type': 'application/json'
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            credentials: 'include'
           },
           body: JSON.stringify(data)
         })
@@ -111,6 +114,10 @@ import { Spinner, Button } from "react-bootstrap";
   }
 
   render() {
+    const { isLoggedIn } = this.props;
+    if (!isLoggedIn) {
+      return <Redirect to={'/'}/>
+    }
     const { loading, tableLis } = this.state;
     // get the stations from the keys of the object
     const stationer = Object.keys(stations);
@@ -118,8 +125,8 @@ import { Spinner, Button } from "react-bootstrap";
     const stationArray = [<option disabled key={0}>Select Station</option>];
     stationer.forEach((station, index) => stationArray.push(<option value={station} key={index + 1}> {station} </option>));
     return (
-      <div>
-        <a style={{margin: '10px', 'fontSize': '15px'}} type="button" href="/"> back</a>        
+      <div className="item-div">
+        <a style={{margin: '10px', 'fontSize': '15px'}} type="button" href="/home"> back</a>        
         <div>
           <h2 className="history-text"> Get Downtime of an equipment</h2>
           {/* Select Station */}
@@ -176,4 +183,4 @@ import { Spinner, Button } from "react-bootstrap";
   }
 }
 
-export default Downtime
+export default withRouter(Downtime)
