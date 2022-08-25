@@ -97,12 +97,6 @@ const get_stations =  function(state_data) {
     const ugwuaji_u1a = state_data.gbarain.lines ? state_data.gbarain.lines.filter(line => line.id === "u1a") : [{mw: null, V: null}];
     const ugwuaji_u2a = state_data.gbarain.lines ? state_data.gbarain.lines.filter(line => line.id === "u2a") : [{mw: null, V: null}];
 
-    // Calculate the stations
-    const o_nipp_add = (olorunsogoPhase1Gs_r1w[0]?.td ?olorunsogoPhase1Gs_r1w[0].td.mw:0) + (olorunsogoPhase1Gs_r2a[0]?.gd ?olorunsogoPhase1Gs_r2a[0].gd.mw:0);
-    const o_nipp_sub = (olorunsogo1_tr1[0]?.gd ?olorunsogo1_tr1[0].gd.mw:0) + (olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.mw:0) + (olorunsogoPhase1Gs_tr3[0]?.gd ?olorunsogoPhase1Gs_tr3[0].gd.mw:0) + (olorunsogoPhase1Gs_tr4[0]?.gd ?olorunsogoPhase1Gs_tr4[0].gd.mw:0);
-    console.log(olorunsogoPhase1Gs_r2a, o_nipp_add, o_nipp_sub, 'olorunsogo nipp check')
-    // const eket_mw = (eket_e21m.td ? eket_e21m.td.mw : 0) + (eket_e22m.td ? eket_e22m.td.mw : 0);
-    // const eket_kv = (eket_e21m.td ? eket_e21m.td.V : eket_e22m.td ? eket_e22m.td.V : 0);
     return { 
         'EKET': {mw: Number(
             (eket_e21m[0]?.td ? eket_e21m[0].td.mw : 0) + (eket_e22m[0]?.td ? eket_e22m[0].td.mw : 0)
@@ -195,10 +189,10 @@ const get_stations =  function(state_data) {
             (ihovborNippPs_gt3[0]?.gd ?ihovborNippPs_gt3[0].gd.mw:0) + (ihovborNippPs_gt4[0]?.gd ?ihovborNippPs_gt4[0].gd.mw:0)
                 ).toFixed(2), kv: (ihovborNippPs_gt1[0]?.gd ?ihovborNippPs_gt1[0].gd.V:0)},
         'OLORUNSOGO NIPP' : {mw: Number(
-            ((olorunsogoPhase1Gs_r1w[0]?.gd ?olorunsogoPhase1Gs_r1w[0].gd.mw:0) + (olorunsogoPhase1Gs_r2a[0]?.gd ?olorunsogoPhase1Gs_r2a[0].gd.mw:0)) - 
+            ((olorunsogoPhase1Gs_r1w[0]?.td ?olorunsogoPhase1Gs_r1w[0].td.mw:0) + (olorunsogoPhase1Gs_r2a[0]?.td ?olorunsogoPhase1Gs_r2a[0].td.mw:0)) - 
             ((olorunsogo1_tr1[0]?.gd ?olorunsogo1_tr1[0].gd.mw:0) + (olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.mw:0) + 
             (olorunsogoPhase1Gs_tr3[0]?.gd ?olorunsogoPhase1Gs_tr3[0].gd.mw:0) + (olorunsogoPhase1Gs_tr4[0]?.gd ?olorunsogoPhase1Gs_tr4[0].gd.mw:0))
-                ).toFixed(2), kv: (olorunsogoPhase1Gs_r1w[0]?.gd ?olorunsogoPhase1Gs_r1w[0].gd.V:0)},
+                ).toFixed(2), kv: (olorunsogoPhase1Gs_r1w[0]?.td ?olorunsogoPhase1Gs_r1w[0].td.V:0)},
         'PARAS ENERGY (GAS)' : {mw: Number(
             (parasEnergyPs_132cb[0]?.gd ?parasEnergyPs_132cb[0].gd.mw:0)
             ).toFixed(2), kv: (parasEnergyPs_132cb[0]?.gd ?parasEnergyPs_132cb[0].gd.V:0)},
