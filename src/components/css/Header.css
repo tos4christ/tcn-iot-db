@@ -73,7 +73,7 @@ nav {
 }
 @media screen and (max-height: 1000px) {
   .App {
-    width: 160%;
+    width: 100%;
     overflow: scroll;
   }
   .right-nav {

@@ -156,17 +156,17 @@ import { Spinner, Button, Table } from "react-bootstrap";
             </li>
           </ul>
           <div className="display-div">
-          <h2 className="text-danger">IoT POWER STATIONS TABLE</h2>
-          <table className="tg">
-            <thead>
-              <tr>
-                <th className="tg-zb4j">S/N</th>
-                <th className="tg-zb4j">STATIONS</th>
-                <th className="tg-zb4j">STATUS</th>
-                <th className="tg-zb4j">POWER(MW)</th>
-                <th className="tg-zb4j text-danger"><span className="text-danger">VOLTAGE(KV) </span></th>
-              </tr>
-            </thead>
+            <h2 className="text-danger">IoT POWER STATIONS TABLE</h2>
+            <table className="tg">
+              <thead>
+                <tr>
+                  <th className="tg-zb4j">S/N</th>
+                  <th className="tg-zb4j">STATIONS</th>
+                  <th className="tg-zb4j">STATUS</th>
+                  <th className="tg-zb4j">POWER(MW)</th>
+                  <th className="tg-zb4j text-danger"><span className="text-danger">VOLTAGE(KV) </span></th>
+                </tr>
+              </thead>
             <tbody>
               <tr>
                 <th>1</th>
@@ -366,85 +366,85 @@ import { Spinner, Button, Table } from "react-bootstrap";
                 <th></th>
               </tr>              
             </tbody>
-          </table>
+            </table>
 
-          <h2 className="text-white">IoT Transmission Stations</h2>
-          <table className="tg">
-            <thead>
-              <tr>
-                <th className="tg-zb4j">S/N</th>
-                <th className="tg-zb4j">STATIONS</th>
-                <th className="tg-zb4j">STATUS</th>
-                <th className="tg-zb4j">POWER(MW)</th>
-                <th className="tg-zb4j">VOLTAGE</th>
-              </tr>
-            </thead>
-              <tbody>
+            <h2 className="text-white">IoT Transmission Stations</h2>
+            <table className="tg">
+              <thead>
                 <tr>
-                  <th>101</th>
-                  <th>IKOT EKPENE TS</th>
-                  <th>CN</th>
-                  <th>{ikotekpene_ts.mw}</th>
-                  <th>{ikotekpene_ts.kv}</th>
+                  <th className="tg-zb4j">S/N</th>
+                  <th className="tg-zb4j">STATIONS</th>
+                  <th className="tg-zb4j">STATUS</th>
+                  <th className="tg-zb4j">POWER(MW)</th>
+                  <th className="tg-zb4j">VOLTAGE</th>
                 </tr>
-                <tr>
-                  <th>102</th>
-                  <th>GWAGWALADA TS</th>
-                  <th>CN</th>
-                  <th>{gwagwalada_ts.mw}</th>
-                  <th>{gwagwalada_ts.kv}</th>
-                </tr>
-                <tr>
-                  <th>103</th>
-                  <th>LOKOJA TS</th>
-                  <th>CN</th>
-                  <th>{lokoja_ts.mw}</th>
-                  <th>{lokoja_ts.kv}</th>
-                </tr>
-                <tr className="">
-                  <th>104</th>
-                  <th>ASABA TS</th>
-                  <th>CN</th>
-                  <th>{asaba_ts.mw}</th>
-                  <th>{asaba_ts.kv}</th>
-                </tr>
-                <tr className="">
-                  <th>105</th>
-                  <th>UGWAJI TS</th>
-                  <th>CN</th>
-                  <th>{ugwuaji_ts.mw}</th>
-                  <th>{ugwuaji_ts.kv}</th>
-                </tr>
-                <tr>
-                  <th>107</th>
-                  <th>EKIM TS</th>
-                  <th>CN</th>
-                  <th>{ekim_ts.mw}</th>
-                  <th>{ekim_ts.kv}</th>
-                </tr>
-                <tr>
-                  <th>108</th>
-                  <th>PORTHARCOURT MAIN TS</th>
-                  <th>CN</th>
-                  <th>{phMain_ts.mw}</th>
-                  <th>{phMain_ts.kv}</th>
-                </tr>
-                <tr>
-                  <th>109</th>
-                  <th>EKET TS</th>
-                  <th>CN</th>
-                  <th>{eket_ts.mw}</th>
-                  <th>{eket_ts.kv}</th>
-                </tr>              
-                <tr>
-                  <th></th>
-                  <th>TOTAL</th>
-                  <th></th>
-                  <th>{totalTransmission.toFixed(2)}</th>
-                  <th></th>
-                </tr>
-            </tbody>
-          </table>
+              </thead>
+                <tbody>
+                  <tr>
+                    <th>101</th>
+                    <th>IKOT EKPENE TS</th>
+                    <th>CN</th>
+                    <th>{ikotekpene_ts.mw}</th>
+                    <th>{ikotekpene_ts.kv}</th>
+                  </tr>
+                  <tr>
+                    <th>102</th>
+                    <th>GWAGWALADA TS</th>
+                    <th>CN</th>
+                    <th>{gwagwalada_ts.mw}</th>
+                    <th>{gwagwalada_ts.kv}</th>
+                  </tr>
+                  <tr>
+                    <th>103</th>
+                    <th>LOKOJA TS</th>
+                    <th>CN</th>
+                    <th>{lokoja_ts.mw}</th>
+                    <th>{lokoja_ts.kv}</th>
+                  </tr>
+                  <tr className="">
+                    <th>104</th>
+                    <th>ASABA TS</th>
+                    <th>CN</th>
+                    <th>{asaba_ts.mw}</th>
+                    <th>{asaba_ts.kv}</th>
+                  </tr>
+                  <tr className="">
+                    <th>105</th>
+                    <th>UGWAJI TS</th>
+                    <th>CN</th>
+                    <th>{ugwuaji_ts.mw}</th>
+                    <th>{ugwuaji_ts.kv}</th>
+                  </tr>
+                  <tr>
+                    <th>107</th>
+                    <th>EKIM TS</th>
+                    <th>CN</th>
+                    <th>{ekim_ts.mw}</th>
+                    <th>{ekim_ts.kv}</th>
+                  </tr>
+                  <tr>
+                    <th>108</th>
+                    <th>PORTHARCOURT MAIN TS</th>
+                    <th>CN</th>
+                    <th>{phMain_ts.mw}</th>
+                    <th>{phMain_ts.kv}</th>
+                  </tr>
+                  <tr>
+                    <th>109</th>
+                    <th>EKET TS</th>
+                    <th>CN</th>
+                    <th>{eket_ts.mw}</th>
+                    <th>{eket_ts.kv}</th>
+                  </tr>              
+                  <tr>
+                    <th></th>
+                    <th>TOTAL</th>
+                    <th></th>
+                    <th>{totalTransmission.toFixed(2)}</th>
+                    <th></th>
+                  </tr>
+              </tbody>
+            </table>
           </div>
         </div>              
       </div>
