@@ -7,7 +7,6 @@ import { Spinner, Button, Table } from "react-bootstrap";
  class Home extends React.Component {
    constructor(props) {
      super(props);
-     this.streamReadings = this.streamReadings.bind(this);
      this.toggleDisplay = this.toggleDisplay.bind(this);
      this.state = { 
       afamIv_vPs: {},
