@@ -221,11 +221,11 @@ class SignIn extends React.Component {
     const ugwuaji_u2a = state_data.gbarain.lines ? state_data.gbarain.lines.filter(line => line.id === "u2a") : {mw: null, V: null};
 
     
-    const eket_mw = (eket_e21m[0].td ? eket_e21m[0].td.mw : 0) + (eket_e22m[0].td ? eket_e22m[0].td.mw : 0);
-    const eket_kv = (eket_e21m[0].td ? eket_e21m[0].td.V : eket_e22m[0].td ? eket_e22m[0].td.V : 0);
-    const ekim_mw = (ekim_ek1m[0].td ? ekim_ek1m[0].td.mw : 0);
-    const ekim_kv = (ekim_ek1m[0].td ? ekim_ek1m[0].td.V : 0);
-    console.log( eket_e21m[0].td, eket_e21m[0]["td"], eket_e22m, ekim_ek1m, eket_mw, eket_kv, 'eket', ekim_mw, ekim_kv, 'ekim', 'check the equipment')
+    const eket_mw = (eket_e21m[0]?.td ? eket_e21m[0].td.mw : 0) + (eket_e22m[0]?.td ? eket_e22m[0].td.mw : 0);
+    const eket_kv = (eket_e21m[0]?.td ? eket_e21m[0].td.V : eket_e22m[0]?.td ? eket_e22m[0].td.V : 0);
+    const ekim_mw = (ekim_ek1m[0]?.td ? ekim_ek1m[0].td.mw : 0);
+    const ekim_kv = (ekim_ek1m[0]?.td ? ekim_ek1m[0].td.V : 0);
+    console.log( eket_e21m[0]?.td, eket_e22m, ekim_ek1m, eket_mw, eket_kv, 'eket', ekim_mw, ekim_kv, 'ekim', 'check the equipment')
 
     return (
       <div className="py-4 responders-bg container-fluid bg-light">
