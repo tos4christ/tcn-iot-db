@@ -1,9 +1,8 @@
 import React from "react";
 import { Link, withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import socket from "./utility/socketIO";
+import get_stations from "./stations_adder";
 import { Spinner, Button, Table } from "react-bootstrap";
-
-
 
  class Home extends React.Component {
    constructor(props) {
@@ -11,54 +10,70 @@ import { Spinner, Button, Table } from "react-bootstrap";
      this.streamReadings = this.streamReadings.bind(this);
      this.toggleDisplay = this.toggleDisplay.bind(this);
      this.state = { 
-      'EKET': {},
-      'PORT-HARCOURT MAIN' : {},
-      'LOKOJA TS' : {},
-      'EKIM' : {},
-      'IKOT EKPENE' : {}, 
-      'GWAGWALADA' : {},
-      'UGWUAJI' : {},
-      'ASABA' : {},
-      'SHIRORO (HYDRO)' : {},
-      'AFAM IV & V (GAS)' : {},
-      'KAINJI (HYDRO)' : {},
-      'EGBIN (STEAM)' : {},
-      'OKPAI (GAS/STEAM)' : {},
-      'DELTA (GAS)' : {},
-      'JEBBA (HYDRO)' : {},
-      'AFAM VI (GAS/STEAM)' : {},
-      'ALAOJI NIPP (GAS)' : {},
-      'SAPELE (STEAM)' : {},
-      'SAPELE NIPP (GAS)' : {},
-      'ODUKPANI NIPP (GAS)' : {},
-      'OMOTOSHO (GAS)' : {},
-      'GEREGU (GAS)' : {},
-      'RIVERS IPP (GAS)' : {},
-      'OMOKU (GAS)' : {},
-      'IHOVBOR NIPP (GAS)' : {},
-      'OLORUNSOGO NIPP' : {},
-      'PARAS ENERGY (GAS)' : {},
-      'OMOTOSHO NIPP (GAS)' : {},
-      'GEREGU NIPP (GAS)' : {},
-      'AZURA-EDO IPP (GAS)' : {},
-      'TRANS-AMADI (GAS)' : {},
-      'IBOM POWER (GAS)' : {},
-      'GBARAIN NIPP (GAS)' : {},
-      'OLORUNSOGO (GAS)' : {},
-      'DADINKOWA G.S (HYDRO)' : {},
+      afamIv_vPs: {},
+      shiroroPs: {},
+      egbinPs: {},
+      kainjiTs: {},
+      jebbaTs: {},
+      okpaiGs: {},
+      deltaGs: {},
+      omotosho2: {},
+      omotosho1: {},
+      eket: {},
+      phMain: {},
+      afamViTs: {},
+      alaoji: {},
+      sapeleNippPs: {},
+      omotoshoNippPs: {},
+      odukpaniGs: {},
+      ekim: {},
+      gereguPs: {},
+      ikotEkpene: {},
+      riversIppPs: {},
+      omokuPs1: {},
+      ihovborNippPs: {},
+      olorunsogo1: {},
+      delta2: {},
+      delta3: {},
+      parasEnergyPs: {},
+      olorunsogoPhase1Gs: {},
+      gbarain: {},
+      dadinKowaGs: {},
+      asaba: {},
+      lokojaTs: {},
+      ugwuaji: {},
+      gwagwalada: {},
       message: "",
       received: [],
       connected: false,
       display: ''
-  };
+     };
    }
    componentDidMount() {
-    socket.emit("connected", {sign: "this is the remote signal"});
-     this.streamInterval = setInterval(() => this.streamReadings(), 3000);
-     this.streamReadings();
-   }
-   componentWillUnmount() {
-     clearInterval(this.streamInterval)
+    socket.on("client_message_1", data => {
+      const { message } = data;
+      const parsedMessage = JSON.parse(message);
+      const station = parsedMessage.id;
+      const returnObject = {}
+      // console.log(parsedMessage, 'c1 message');
+      this.setState(prevState => {
+        prevState[station] = parsedMessage;
+        returnObject[station] = prevState[station]
+        return returnObject;
+      })
+    });
+    socket.on("client_message_2", data => {
+      const { message } = data;
+      const parsedMessage = JSON.parse(message);
+      const station = parsedMessage.id;
+      const returnObject = {}
+      // console.log(parsedMessage, 'c2 message');
+      this.setState(prevState => {
+        prevState[station] = parsedMessage;
+        returnObject[station] = prevState[station]
+        return returnObject;
+      })
+    });
    }
    toggleDisplay(e) {
     this.setState(prevState => {
@@ -66,86 +81,56 @@ import { Spinner, Button, Table } from "react-bootstrap";
       return {display : prevState.display}
     })
    }
-   streamReadings() {
-     const url = 'lines/all';
-     const token = localStorage.getItem("token");
-     // console.log(token, 'this is the token');
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        credentials: 'include'
-      },    
-    })
-    .then(response => response.json())
-    .then( res => {
-      const data = res.res;
-      // console.log(data, 'the stream data')
-      this.setState(prevState => {
-        const returnObject = {};
-        if(data && data.length > 0) {
-          data.forEach(element => {
-            if(element.mw !== null) {
-              prevState[element.station] = element
-              returnObject[element.station] = prevState[element.station]
-            }            
-          });
-        }
-        return returnObject;
-      });
-    })
-    .catch(e => console.log(e));
-   }
   render() {
     const { isLoggedIn } = this.props;
     if (!isLoggedIn) {
       return <Redirect to={'/'}/>
     }
-    const riversIppPs = this.state["RIVERS IPP (GAS)"].mw ? this.state["RIVERS IPP (GAS)"].mw.toFixed(2) : 0;
-    const afamViTs = this.state["AFAM VI (GAS/STEAM)"].mw ? this.state["AFAM VI (GAS/STEAM)"].mw.toFixed(2) : 0;
-    const parasEnergyPs = this.state["PARAS ENERGY (GAS)"].mw ? this.state["PARAS ENERGY (GAS)"].mw.toFixed(2) : 0;
-    const gereguNipp = this.state["GEREGU NIPP (GAS)"].mw ? this.state["GEREGU NIPP (GAS)"].mw.toFixed(2) : 0;
-    const gereguGas = this.state["GEREGU (GAS)"].mw ? this.state["GEREGU (GAS)"].mw.toFixed(2) : 0;
-    const omotoshoGas = this.state["OMOTOSHO (GAS)"].mw ? this.state["OMOTOSHO (GAS)"].mw.toFixed(2) : 0;
-    const omotoshoNippPs = this.state["OMOTOSHO NIPP (GAS)"].mw ? this.state["OMOTOSHO NIPP (GAS)"].mw.toFixed(2) : 0;
-    const sapeleNippPs = this.state["SAPELE NIPP (GAS)"].mw ? this.state["SAPELE NIPP (GAS)"].mw.toFixed(2) : 0;
-    const sapeleSteam = this.state["SAPELE (STEAM)"].mw ? this.state["SAPELE (STEAM)"].mw.toFixed(2) : 0;
-    const omokuPs1 = this.state["OMOKU (GAS)"].mw ? this.state["OMOKU (GAS)"].mw.toFixed(2) : 0;
-    const odukpaniGs = this.state["ODUKPANI NIPP (GAS)"].mw ? this.state["ODUKPANI NIPP (GAS)"].mw.toFixed(2) : 0;
-    const alaoji = this.state["ALAOJI NIPP (GAS)"].mw ? this.state["ALAOJI NIPP (GAS)"].mw.toFixed(2) : 0;
-    const azura = this.state["AZURA-EDO IPP (GAS)"].mw ? this.state["AZURA-EDO IPP (GAS)"].mw.toFixed(2) : 0;
-    const olorunsogoNipp = this.state["OLORUNSOGO NIPP"].mw ? this.state["OLORUNSOGO NIPP"].mw.toFixed(2) : 0;
-    const ihovborNippPs = this.state["IHOVBOR NIPP (GAS)"].mw ? this.state["IHOVBOR NIPP (GAS)"].mw.toFixed(2) : 0;
-    const transAmadi = this.state["TRANS-AMADI (GAS)"].mw ? this.state["TRANS-AMADI (GAS)"].mw.toFixed(2) : 0;
-    const ibomPs = this.state["IBOM POWER (GAS)"].mw ? this.state["IBOM POWER (GAS)"].mw.toFixed(2) : 0;
-    const olorunsogoGas = this.state["OLORUNSOGO (GAS)"].mw ? this.state["OLORUNSOGO (GAS)"].mw.toFixed(2) : 0;
-    const gbarain = this.state["GBARAIN NIPP (GAS)"].mw ? this.state["GBARAIN NIPP (GAS)"].mw.toFixed(2) : 0;
-    const shiroro = this.state["SHIRORO (HYDRO)"].mw ? this.state["SHIRORO (HYDRO)"].mw.toFixed(2) : 0;
-    const afam45 = this.state["AFAM IV & V (GAS)"].mw ? this.state["AFAM IV & V (GAS)"].mw.toFixed(2) : 0;
-    const kainji = this.state["KAINJI (HYDRO)"].mw ? this.state["KAINJI (HYDRO)"].mw.toFixed(2) : 0;
-    const egbin = this.state["EGBIN (STEAM)"].mw ? this.state["EGBIN (STEAM)"].mw.toFixed(2) : 0;
-    const okpai = this.state["OKPAI (GAS/STEAM)"].mw ? this.state["OKPAI (GAS/STEAM)"].mw.toFixed(2) : 0;
-    const delta = this.state["DELTA (GAS)"].mw ? this.state["DELTA (GAS)"].mw.toFixed(2) : 0;
-    const jebba = this.state["JEBBA (HYDRO)"].mw ? this.state["JEBBA (HYDRO)"].mw.toFixed(2) : 0;
-    const dadinkowa = this.state["DADINKOWA G.S (HYDRO)"].mw ? this.state["DADINKOWA G.S (HYDRO)"].mw.toFixed(2) : 0;
-    const ugwuajiTs = this.state.UGWUAJI.mw ? this.state.UGWUAJI.mw.toFixed(2) : 0;
-    const asabaTs = this.state.ASABA.mw ? this.state.ASABA.mw.toFixed(2) : 0;
-    const ekimTs = this.state.EKIM.mw ? this.state.EKIM.mw.toFixed(2) : 0;
-    const gwagwaladaTs = this.state.GWAGWALADA.mw ? this.state.GWAGWALADA.mw.toFixed(2) : 0;
-    const lokojaTs = this.state["LOKOJA TS"].mw ? this.state["LOKOJA TS"].mw.toFixed(2) : 0;
-    const phMainTs = this.state["PORT-HARCOURT MAIN"].mw ? this.state["PORT-HARCOURT MAIN"].mw.toFixed(2) : 0;
-    const ikotEkpeneTs = this.state["IKOT EKPENE"].mw ? this.state["IKOT EKPENE"].mw.toFixed(2) : 0;
-    const eketTs = this.state.EKET.mw ? this.state.EKET.mw.toFixed(2) : 0;
+    const stations_array = get_stations(this.state);
+    const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
+    const ihovbor_gs = stations_array['IHOVBOR NIPP (GAS)'];
+    const omoku_gs = stations_array['OMOKU (GAS)'];
+    const riversipp_gs = stations_array['RIVERS IPP (GAS)'];
+    const geregugas_gs = stations_array['GEREGU (GAS)'];
+    const omotosogas_gs = stations_array['OMOTOSHO (GAS)'];
+    const odukpani_gs = stations_array['ODUKPANI NIPP (GAS)'];
+    const sapelenipp_gs = stations_array['SAPELE NIPP (GAS)'];
+    const sapelesteam_gs = stations_array['SAPELE (STEAM)'];
+    const alaoji_gs = stations_array['ALAOJI NIPP (GAS)'];
+    const afam6_gs = stations_array['AFAM VI (GAS/STEAM)'];
+    const jebba_gs = stations_array['JEBBA (HYDRO)'];
+    const delta_gs = stations_array['DELTA (GAS)'];
+    const okpai_gs = stations_array['OKPAI (GAS/STEAM)'];
+    const egbin_gs = stations_array['EGBIN (STEAM)'];
+    const kainji_gs = stations_array['KAINJI (HYDRO)'];
+    const afam4_gs = stations_array['AFAM IV & V (GAS)'];
+    const shiroro_gs = stations_array['SHIRORO (HYDRO)'];
+    const paras_gs = stations_array['PARAS ENERGY (GAS)'];
+    const omotosonipp_gs = stations_array['OMOTOSHO NIPP (GAS)'];
+    const geregunipp_gs = stations_array['GEREGU NIPP (GAS)'];
+    const azura_gs = stations_array['AZURA-EDO IPP (GAS)'];
+    const transamadi_gs = stations_array['TRANS-AMADI (GAS)'];
+    const ibom_gs = stations_array['IBOM POWER (GAS)'];
+    const gbarain_gs = stations_array['GBARAIN NIPP (GAS)'];
+    const olorunsogogas_gs = stations_array['OLORUNSOGO (GAS)'];
+    const dadinkowa_gs = stations_array['DADINKOWA G.S (HYDRO)'];
+    const asaba_ts = stations_array['ASABA'];
+    const ugwuaji_ts = stations_array['UGWUAJI'];
+    const gwagwalada_ts = stations_array['GWAGWALADA'];
+    const ikotekpene_ts = stations_array['IKOT EKPENE'];
+    const ekim_ts = stations_array['EKIM'];    
+    const phMain_ts = stations_array['PORT-HARCOURT MAIN'];
+    const lokoja_ts = stations_array['LOKOJA TS'];
+    const eket_ts = stations_array['EKET'];
 
-    const totalGeneration = Number(riversIppPs) + Number(afamViTs) + Number(parasEnergyPs) + Number(gereguGas) +
-    Number(gereguNipp) + Number(omotoshoGas) + Number(omotoshoNippPs) + Number(sapeleNippPs) + Number(sapeleSteam) +
-    Number(omokuPs1) + Number(odukpaniGs) + Number(alaoji) + Number(azura) + Number(olorunsogoNipp) + Number(ihovborNippPs) +
-    Number(transAmadi) + Number(ibomPs) + Number(olorunsogoGas) + Number(gbarain) + Number(shiroro) + Number(afam45) +
-    Number(kainji) + Number(egbin) + Number(okpai) + Number(delta) + Number(jebba) + Number(dadinkowa);
+    const totalGeneration = Number(riversipp_gs.mw) + Number(afam6_gs.mw) + Number(paras_gs.mw) + Number(geregugas_gs.mw) +
+    Number(geregunipp_gs.mw) + Number(omotosogas_gs.mw) + Number(omotosonipp_gs.mw) + Number(sapelenipp_gs.mw) + Number(sapelesteam_gs.mw) +
+    Number(omoku_gs.mw) + Number(odukpani_gs.mw) + Number(alaoji_gs.mw) + Number(azura_gs.mw) + Number(olorunsogonipp_gs.mw) + Number(ihovbor_gs.mw) +
+    Number(transamadi_gs.mw) + Number(ibom_gs.mw) + Number(olorunsogogas_gs.mw) + Number(gbarain_gs.mw) + Number(shiroro_gs.mw) + Number(afam4_gs.mw) +
+    Number(kainji_gs.mw) + Number(egbin_gs.mw) + Number(okpai_gs.mw) + Number(delta_gs.mw) + Number(jebba_gs.mw) + Number(dadinkowa_gs.mw);
     
-    const totalTransmission = Number(ugwuajiTs) + Number(asabaTs) + Number(ekimTs) + Number(gwagwaladaTs) + Number(lokojaTs) +
-    Number(phMainTs) + Number(ikotEkpeneTs) + Number(eketTs);
+    const totalTransmission = Number(ugwuaji_ts.mw) + Number(asaba_ts.mw) + Number(ekim_ts.mw) + Number(gwagwalada_ts.mw) + Number(lokoja_ts.mw) +
+    Number(phMain_ts.mw) + Number(ikotekpene_ts.mw) + Number(eket_ts.mw);
         
     return (
       <>
@@ -188,190 +173,190 @@ import { Spinner, Button, Table } from "react-bootstrap";
                 <th>1</th>
                 <th>RIVERS IPP (GAS)</th>
                 <th>CN</th>
-                <th>{Number(riversIppPs).toFixed(2)}</th>
-                <th>{this.state["RIVERS IPP (GAS)"].kv ? this.state["RIVERS IPP (GAS)"].kv : 0 }</th>
+                <th>{riversipp_gs.mw}</th>
+                <th>{riversipp_gs.kv}</th>
               </tr>
               <tr>
                 <th>2</th>
                 <th>AFAM VI (GAS/STEAM)</th>
                 <th>CN</th>
-                <th>{Number(afamViTs).toFixed(2)}</th>
-                <th>{this.state["AFAM VI (GAS/STEAM)"].kv ? this.state["AFAM VI (GAS/STEAM)"].kv : 0 }</th>
+                <th>{afam6_gs.mw}</th>
+                <th>{afam6_gs.kv}</th>
               </tr>
               <tr>
                 <th>3</th>
                 <th>GEREGU (GAS)</th>
                 <th>CN</th>
-                <th>{Number(gereguGas).toFixed(2)}</th>
-                <th>{this.state["GEREGU (GAS)"].kv ? this.state["GEREGU (GAS)"].kv : 0 }</th>
+                <th>{geregugas_gs.mw}</th>
+                <th>{geregugas_gs.kv}</th>
               </tr>
               <tr>
                 <th>4</th>
                 <th>OMOTOSHO (GAS)</th>
                 <th>CN</th>
-                <th>{Number(omotoshoGas).toFixed(2)}</th>
-                <th>{this.state["OMOTOSHO (GAS)"].kv ? this.state["OMOTOSHO (GAS)"].kv : 0 }</th>
+                <th>{omotosogas_gs.mw}</th>
+                <th>{omotosogas_gs.kv}</th>
               </tr>
               <tr>
                 <th>5</th>
                 <th>OMOTOSHO NIPP (GAS)</th>
                 <th>CN</th>
-                <th>{Number(omotoshoNippPs).toFixed(2)}</th>
-                <th>{this.state["OMOTOSHO NIPP (GAS)"].kv ? this.state["OMOTOSHO NIPP (GAS)"].kv : 0 }</th>
+                <th>{omotosonipp_gs.mw}</th>
+                <th>{omotosonipp_gs.kv}</th>
               </tr>
               <tr>
                 <th>6</th>
                 <th>DELTA (GAS)</th>
                 <th>CN</th>
-                <th>{Number(delta).toFixed(2)}</th>
-                <th>{this.state["DELTA (GAS)"].kv ? this.state["DELTA (GAS)"].kv : 0 }</th>
+                <th>{delta_gs.mw}</th>
+                <th>{delta_gs.kv}</th>
               </tr>
               <tr>
                 <th>7</th>
                 <th>SAPELE NIPP (GAS)</th>
                 <th>CN</th>
-                <th>{Number(sapeleNippPs).toFixed(2)}</th>
-                <th>{this.state["SAPELE NIPP (GAS)"].kv ? this.state["SAPELE NIPP (GAS)"].kv : 0 }</th>
+                <th>{sapelenipp_gs.mw}</th>
+                <th>{sapelenipp_gs.kv}</th>
               </tr>
               <tr>
                 <th>8</th>
                 <th>OMOKU (GAS)</th>
                 <th>CN</th>
-                <th>{Number(omokuPs1).toFixed(2)}</th>
-                <th>{this.state["OMOKU (GAS)"].kv ? this.state["OMOKU (GAS)"].kv : 0 }</th>
+                <th>{omoku_gs.mw}</th>
+                <th>{omoku_gs.kv}</th>
               </tr>
               <tr>
                 <th>9</th>
                 <th>AZURA-EDO IPP (GAS)</th>
                 <th>CN</th>
-                <th>{Number(azura).toFixed(2)}</th>
-                <th>{this.state["AZURA-EDO IPP (GAS)"].kv ? this.state["AZURA-EDO IPP (GAS)"].kv : 0 }</th>
+                <th>{azura_gs.mw}</th>
+                <th>{azura_gs.kv}</th>
               </tr>
               <tr>
                 <th>10</th>
                 <th>TRANS-AMADI (GAS)</th>
                 <th>CN</th>
-                <th>{Number(transAmadi).toFixed(2)}</th>
-                <th>{this.state["TRANS-AMADI (GAS)"].kv ? this.state["TRANS-AMADI (GAS)"].kv : 0 }</th>
+                <th>{transamadi_gs.mw}</th>
+                <th>{transamadi_gs.kv}</th>
               </tr>
               <tr className="">
                 <th>11</th>
                 <th>GEREGU NIPP (GAS)</th>
                 <th>CN</th>
-                <th>{Number(gereguNipp).toFixed(2)}</th>
-                <th>{this.state["GEREGU NIPP (GAS)"].kv ? this.state["GEREGU NIPP (GAS)"].kv : 0 }</th>
+                <th>{geregunipp_gs.mw}</th>
+                <th>{geregunipp_gs.kv}</th>
               </tr>
               <tr className="" >
                 <th>12</th>
                 <th>GBARAIN NIPP (GAS)</th>
                 <th>CN</th>
-                <th>{Number(gbarain).toFixed(2)}</th>
-                <th>{this.state["GBARAIN NIPP (GAS)"].kv ? this.state["GBARAIN NIPP (GAS)"].kv : 0 }</th>
+                <th>{gbarain_gs.mw}</th>
+                <th>{gbarain_gs.kv}</th>
               </tr>
               <tr className="">
                 <th>13</th>
                 <th>DADINKOWA G.S (HYDRO)</th>
                 <th>CN</th>
-                <th>{Number(dadinkowa).toFixed(2)}</th>
-                <th>{this.state["DADINKOWA G.S (HYDRO)"].kv ? this.state["DADINKOWA G.S (HYDRO)"].kv : 0 }</th>
+                <th>{dadinkowa_gs.mw}</th>
+                <th>{dadinkowa_gs.kv}</th>
               </tr>
               <tr className="">
                 <th>14</th>
                 <th>PARAS ENERGY (GAS)</th>
                 <th>CN</th>
-                <th>{Number(parasEnergyPs).toFixed(2)}</th>
-                <th>{this.state["PARAS ENERGY (GAS)"].kv ? this.state["PARAS ENERGY (GAS)"].kv : 0 }</th>
+                <th>{paras_gs.mw}</th>
+                <th>{paras_gs.kv}</th>
               </tr>
               <tr className="">
                 <th>15</th>
                 <th>IBOM POWER (GAS)</th>
                 <th>CN</th>
-                <th>{Number(ibomPs).toFixed(2)}</th>
-                <th>{this.state["IBOM POWER (GAS)"].kv ? this.state["IBOM POWER (GAS)"].kv : 0 }</th>
+                <th>{ibom_gs.mw}</th>
+                <th>{ibom_gs.kv}</th>
               </tr>
               <tr className="">
                 <th>16</th>
                 <th>JEBBA (HYDRO)</th>
                 <th>CN</th>
-                <th>{Number(jebba).toFixed(2)}</th>
-                <th>{this.state["JEBBA (HYDRO)"].kv ? this.state["JEBBA (HYDRO)"].kv : 0 }</th>
+                <th>{jebba_gs.mw}</th>
+                <th>{jebba_gs.kv}</th>
               </tr>
               <tr className="">
                 <th>17</th>
                 <th>OLORUNSOGO (GAS)</th>
                 <th>CN</th>
-                <th>{Number(olorunsogoGas).toFixed(2)}</th>
-                <th>{this.state["OLORUNSOGO (GAS)"].kv ? this.state["OLORUNSOGO (GAS)"].kv : 0 }</th>
+                <th>{olorunsogogas_gs.mw}</th>
+                <th>{olorunsogogas_gs.kv}</th>
               </tr>
               <tr className="">
                 <th>18</th>
                 <th>OLORUNSOGO NIPP</th>
                 <th>CN</th>
-                <th>{Number(olorunsogoNipp).toFixed(2)}</th>
-                <th>{this.state["OLORUNSOGO NIPP"].kv ? this.state["OLORUNSOGO NIPP"].kv : 0 }</th>
+                <th>{olorunsogonipp_gs.mw}</th>
+                <th>{olorunsogonipp_gs.kv}</th>
               </tr>
               <tr className="">
                 <th>19</th>
                 <th>SAPELE (STEAM)</th>
                 <th>CN</th>
-                <th>{Number(sapeleSteam).toFixed(2)}</th>
-                <th>{this.state["SAPELE (STEAM)"].kv ? this.state["SAPELE (STEAM)"].kv : 0 }</th>
+                <th>{sapelesteam_gs.mw}</th>
+                <th>{sapelesteam_gs.kv}</th>
               </tr>
               <tr>
                 <th>20</th>
                 <th>ODUKPANI NIPP (GAS)</th>
                 <th>CN</th>
-                <th>{Number(odukpaniGs).toFixed(2)}</th>
-                <th>{this.state["ODUKPANI NIPP (GAS)"].kv ? this.state["ODUKPANI NIPP (GAS)"].kv : 0 }</th>
+                <th>{odukpani_gs.mw}</th>
+                <th>{odukpani_gs.kv}</th>
               </tr>
               <tr>
                 <th>21</th>
                 <th>ALAOJI NIPP (GAS)</th>
                 <th>CN</th>
-                <th>{Number(alaoji).toFixed(2)}</th>
-                <th>{this.state["ALAOJI NIPP (GAS)"].kv ? this.state["ALAOJI NIPP (GAS)"].kv : 0 }</th>
+                <th>{alaoji_gs.mw}</th>
+                <th>{alaoji_gs.kv}</th>
               </tr>
               <tr className="">
                 <th>22</th>
                 <th>IHOVBOR NIPP (GAS)</th>
                 <th>CN</th>
-                <th>{Number(ihovborNippPs).toFixed(2)}</th>
-                <th>{this.state["IHOVBOR NIPP (GAS)"].kv ? this.state["IHOVBOR NIPP (GAS)"].kv : 0 }</th>
+                <th>{ihovbor_gs.mw}</th>
+                <th>{ihovbor_gs.kv}</th>
               </tr>
               <tr className="">
                 <th>23</th>
                 <th>SHIRORO (HYDRO)</th>
                 <th>CN</th>
-                <th>{Number(shiroro).toFixed(2)}</th>
-                <th>{this.state["SHIRORO (HYDRO)"].kv ? this.state["SHIRORO (HYDRO)"].kv : 0 }</th>
+                <th>{shiroro_gs.mw}</th>
+                <th>{shiroro_gs.kv}</th>
               </tr>
               <tr className="">
                 <th>24</th>
                 <th>{'AFAM IV & V (GAS)'}</th>
                 <th>CN</th>
-                <th>{Number(afam45).toFixed(2)}</th>
-                <th>{this.state["AFAM IV & V (GAS)"].kv ? this.state["AFAM IV & V (GAS)"].kv : 0 }</th>
+                <th>{afam4_gs.mw}</th>
+                <th>{afam4_gs.kv}</th>
               </tr>
               <tr className="">
                 <th>25</th>
                 <th>KAINJI (HYDRO)</th>
                 <th>CN</th>
-                <th>{Number(kainji).toFixed(2)}</th>
-                <th>{this.state["KAINJI (HYDRO)"].kv ? this.state["KAINJI (HYDRO)"].kv : 0 }</th>
+                <th>{kainji_gs.mw}</th>
+                <th>{kainji_gs.kv}</th>
               </tr>
               <tr className="">
                 <th>26</th>
                 <th>EGBIN (STEAM)</th>
                 <th>CN</th>
-                <th>{Number(egbin).toFixed(2)}</th>
-                <th>{this.state["EGBIN (STEAM)"].kv ? this.state["EGBIN (STEAM)"].kv : 0 }</th>
+                <th>{egbin_gs.mw}</th>
+                <th>{egbin_gs.kv}</th>
               </tr>
               <tr className="">
                 <th>27</th>
                 <th>OKPAI (GAS/STEAM)</th>
                 <th>CN</th>
-                <th>{Number(okpai).toFixed(2)}</th>
-                <th>{this.state["OKPAI (GAS/STEAM)"].kv ? this.state["OKPAI (GAS/STEAM)"].kv : 0 }</th>
+                <th>{okpai_gs.mw}</th>
+                <th>{okpai_gs.kv}</th>
               </tr>
               <tr></tr>
               <tr >
@@ -400,57 +385,57 @@ import { Spinner, Button, Table } from "react-bootstrap";
                   <th>101</th>
                   <th>IKOT EKPENE TS</th>
                   <th>CN</th>
-                  <th>{Number(ikotEkpeneTs).toFixed(2)}</th>
-                  <th>{this.state["IKOT EKPENE"].kv ? this.state["IKOT EKPENE"].kv : 0 }</th>
+                  <th>{ikotekpene_ts.mw}</th>
+                  <th>{ikotekpene_ts.kv}</th>
                 </tr>
                 <tr>
                   <th>102</th>
                   <th>GWAGWALADA TS</th>
                   <th>CN</th>
-                  <th>{Number(gwagwaladaTs).toFixed(2)}</th>
-                  <th>{this.state.GWAGWALADA.kv ? this.state.GWAGWALADA.kv : 0 }</th>
+                  <th>{gwagwalada_ts.mw}</th>
+                  <th>{gwagwalada_ts.kv}</th>
                 </tr>
                 <tr>
                   <th>103</th>
                   <th>LOKOJA TS</th>
                   <th>CN</th>
-                  <th>{Number(lokojaTs).toFixed(2)}</th>
-                  <th>{this.state["LOKOJA TS"].kv ? this.state["LOKOJA TS"].kv : 0 }</th>
+                  <th>{lokoja_ts.mw}</th>
+                  <th>{lokoja_ts.kv}</th>
                 </tr>
                 <tr className="">
                   <th>104</th>
                   <th>ASABA TS</th>
                   <th>CN</th>
-                  <th>{Number(asabaTs).toFixed(2)}</th>
-                  <th>{this.state.ASABA.kv ? this.state.ASABA.kv : 0 }</th>
+                  <th>{asaba_ts.mw}</th>
+                  <th>{asaba_ts.kv}</th>
                 </tr>
                 <tr className="">
                   <th>105</th>
                   <th>UGWAJI TS</th>
                   <th>CN</th>
-                  <th>{Number(ugwuajiTs).toFixed(2)}</th>
-                  <th>{this.state.UGWUAJI.kv ? this.state.UGWUAJI.kv : 0 }</th>
+                  <th>{ugwuaji_ts.mw}</th>
+                  <th>{ugwuaji_ts.kv}</th>
                 </tr>
                 <tr>
                   <th>107</th>
                   <th>EKIM TS</th>
                   <th>CN</th>
-                  <th>{Number(ekimTs).toFixed(2)}</th>
-                  <th>{this.state.EKIM.kv ? this.state.EKIM.kv : 0 }</th>
+                  <th>{ekim_ts.mw}</th>
+                  <th>{ekim_ts.kv}</th>
                 </tr>
                 <tr>
                   <th>108</th>
                   <th>PORTHARCOURT MAIN TS</th>
                   <th>CN</th>
-                  <th>{Number(phMainTs).toFixed(2)}</th>
-                  <th>{this.state["PORT-HARCOURT MAIN"].kv ? this.state["PORT-HARCOURT MAIN"].kv : 0 }</th>
+                  <th>{phMain_ts.mw}</th>
+                  <th>{phMain_ts.kv}</th>
                 </tr>
                 <tr>
                   <th>109</th>
                   <th>EKET TS</th>
                   <th>CN</th>
-                  <th>{Number(eketTs).toFixed(2)}</th>
-                  <th>{this.state.EKET.kv ? this.state.EKET.kv : 0 }</th>
+                  <th>{eket_ts.mw}</th>
+                  <th>{eket_ts.kv}</th>
                 </tr>              
                 <tr>
                   <th></th>

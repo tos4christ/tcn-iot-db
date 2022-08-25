@@ -3,9 +3,6 @@ import { withRouter } from 'react-router-dom';
 import Text from "../../components/Inputs/Text";
 import Button from "../../components/Inputs/Button";
 import Link from "../../components/Inputs/Links";
-import socket from "../utility/socketIO";
-import get_stations from "../stations_adder";
-// import websocketClient from "../utility/socketConnection";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -15,68 +12,8 @@ class SignIn extends React.Component {
     this.state = {
       email: '',
       password: '',
-      afamIv_vPs: {},
-      shiroroPs: {},
-      egbinPs: {},
-      kainjiTs: {},
-      jebbaTs: {},
-      okpaiGs: {},
-      deltaGs: {},
-      omotosho2: {},
-      omotosho1: {},
-      eket: {},
-      phMain: {},
-      afamViTs: {},
-      alaoji: {},
-      sapeleNippPs: {},
-      omotoshoNippPs: {},
-      odukpaniGs: {},
-      ekim: {},
-      gereguPs: {},
-      ikotEkpene: {},
-      riversIppPs: {},
-      omokuPs1: {},
-      ihovborNippPs: {},
-      olorunsogo1: {},
-      delta2: {},
-      delta3: {},
-      parasEnergyPs: {},
-      olorunsogoPhase1Gs: {},
-      gbarain: {},
-      dadinKowaGs: {},
-      asaba: {},
-      lokojaTs: {},
-      ugwuaji: {},
-      gwagwalada: {}
     }
   } 
-  componentDidMount() {
-    socket.emit("connected", {data: "this is a new connection"});
-    socket.on("client_message_1", data => {
-      const { message } = data;
-      const parsedMessage = JSON.parse(message);
-      const station = parsedMessage.id;
-      const returnObject = {}
-      // console.log(parsedMessage, 'c1 message');
-      this.setState(prevState => {
-        prevState[station] = parsedMessage;
-        returnObject[station] = prevState[station]
-        return returnObject;
-      })
-    });
-    socket.on("client_message_2", data => {
-      const { message } = data;
-      const parsedMessage = JSON.parse(message);
-      const station = parsedMessage.id;
-      const returnObject = {}
-      // console.log(parsedMessage, 'c2 message');
-      this.setState(prevState => {
-        prevState[station] = parsedMessage;
-        returnObject[station] = prevState[station]
-        return returnObject;
-      })
-    });    
-  }
   setEmail(email) {
     this.setState({email:email})
   }
@@ -122,9 +59,6 @@ class SignIn extends React.Component {
   };
   
   render() {
-    const stations_array = get_stations(this.state);
-    console.log( stations_array, 'check the equipment')
-
     return (
       <div className="py-4 responders-bg container-fluid bg-light">
         <div className="row mt-4">
