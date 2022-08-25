@@ -5,14 +5,23 @@ import './components/css/Header.css';
 import './components/css/table.css';
 import './components/css/style.css';
 import './components/css/login.css';
-import "./components/css/bootstrap.min.css";
+import bootstrap from 'bootstrap'; // eslint-disable-line no-unused-vars
+import 'bootstrap/dist/js/bootstrap'
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import "./components/css/icofont.css";
 import "./components/css/font-awesome.min.css";
-import "./components/css/responsive.css";
 import Home from './components/Home';
 import Header from './components/Header';
 import SignUp from '../src/components/Users/SignUp';
 import SignIn from '../src/components/Users/SignIn';
+import Downtime from './components/Downtime';
+import History from './components/History';
+import Profile from './components/Profile';
+import Uptime from './components/Uptime';
+import Average from './components/Average';
+import Footer from './components/Footer';
+// import 'bootstrap/dist/css/bootstrap.min.css'
+// import Protected from './components/Protected';
 
 class App extends React.Component {
   setUserDetails() {
@@ -21,27 +30,64 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Switch >          
-          <Route path={'/signin'}>
-            <Header />
-            <SignIn setUser={this.setUserDetails} />
-          </Route>
-          <Route exact path={'/signup'}>
-            <Header />
-            <SignUp />
-          </Route>          
-          {/* This is the protected path after successful login */}
-          <Route path={'/home'}>
-            <div className="App">
+        <Switch >
+          <Route exact path={'/'}>
+            <div className='App'>              
               <Header />
-              <Home />
+              <SignIn />
             </div>
           </Route>
-          <Route path={'/'}>
-            <Header />
-            <SignIn setUser={this.setUserDetails} />
+          <Route exact path={'/signin'}>
+            <div className='App'>              
+              <Header />
+              <SignIn />
+            </div>
+          </Route>
+          <Route exact path={'/signup'}>
+            <div className='App'>              
+              <Header />
+              <SignUp />
+            </div>
+          </Route>
+          {/* This is the protected path after successful login */}
+          <Route exact path={'/home'} >
+            <div className="App">
+              <Header />
+              <Home isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>
+          </Route>          
+          <Route exact path={`/downtime`}>
+            <div className='App'>
+              <Header />
+              <Downtime isLoggedIn={localStorage.getItem("isLoggedIn")}/> 
+            </div>            
+          </Route>
+          <Route exact path={`/uptime`}>
+            <div className='App'>
+              <Header />
+              <Uptime isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>
+          </Route>
+          <Route exact path={`/history`}>
+            <div className='App'>
+              <Header />
+              <History isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>             
+          </Route>
+          <Route exact path={`/profile`}>
+            <div className='App'>
+              <Header />
+              <Profile isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>            
+          </Route>
+          <Route exact path={`/average`}>
+            <div className='App'>
+              <Header />
+              <Average isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>            
           </Route>
         </Switch>
+        {/* <Footer /> */}
       </Router>      
     )    
   };

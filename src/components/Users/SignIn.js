@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import Text from "../../components/Inputs/Text";
 import Button from "../../components/Inputs/Button";
 import Link from "../../components/Inputs/Links";
-// import socket from "../utility/socketioConnection";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -12,9 +11,9 @@ class SignIn extends React.Component {
     this.setPassword = this.setPassword.bind(this);
     this.state = {
       email: '',
-      password: ''
+      password: '',
     }
-  }
+  } 
   setEmail(email) {
     this.setState({email:email})
   }
@@ -40,12 +39,19 @@ class SignIn extends React.Component {
     })
     .then((res) => res.json())
     .then((response) => {
+      // console.log(response.data.isLoggedIn, 'islogged in from the server')
+      const token = response.data.token ? response.data.token : null;
+      const isLoggedIn = response.data.isLoggedIn ? response.data.isLoggedIn : false;
+      //get the token from the response
+      //pass the user data to the state of the App
+      localStorage.setItem("token", token);
+      localStorage.setItem("isLoggedIn", isLoggedIn);
       // check the response to see if this is their first login attempt
       // const firstLogin = response.status;
 
       // If first login then redirect to change password page
-      this.props.history.push({pathname: `/changePassword`});
-      
+      // this.props.history.push({pathname: `/changePassword`});
+      // console.log('it returned success', token);
       //If this is not the first login Redirect to home page
       this.props.history.push({pathname: `/home`});
     })
@@ -74,9 +80,7 @@ class SignIn extends React.Component {
                 nameChange={ this.setPassword }
               />
               <Link
-                question="Not Registered? "
-                link="Sign Up"
-                linkTo="/signup"
+                question="Sign In"
               />
               <Button id="" text={"Login"} onClick={() => "coming"} />
             </form>

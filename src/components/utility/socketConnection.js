@@ -3,11 +3,12 @@ import settings from "./settings";
 
 const websocketClient = (options = {}, onConnect = null) => {
   let url = settings?.websockets?.url;
+  let new_url = location.origin.replace(/^http/, 'ws')
   if (options.queryParams) {
     url = `${url}?${queryString.stringify(options.queryParams)}`;
   }
-  console.log(url, 'the url')
-  let client = new WebSocket(url);
+  console.log(new_url, 'the new url')
+  let client = new WebSocket(new_url);
   client.addEventListener("open", () => {
     console.log(`[websockets] Connected to ${settings?.websockets?.url}`);
   });
