@@ -1,10 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import './App.css';
-import './components/css/Header.css';
-import './components/css/table.css';
-import './components/css/style.css';
-import './components/css/login.css';
 import bootstrap from 'bootstrap'; // eslint-disable-line no-unused-vars
 import 'bootstrap/dist/js/bootstrap'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
@@ -19,9 +15,7 @@ import History from './components/History';
 import Profile from './components/Profile';
 import Uptime from './components/Uptime';
 import Average from './components/Average';
-import Footer from './components/Footer';
-// import 'bootstrap/dist/css/bootstrap.min.css'
-// import Protected from './components/Protected';
+// import Footer from './components/Footer';
 
 class App extends React.Component {
   setUserDetails() {

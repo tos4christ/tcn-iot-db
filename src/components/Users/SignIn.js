@@ -60,9 +60,9 @@ class SignIn extends React.Component {
   
   render() {
     return (
-      <div className="py-4 responders-bg container-fluid bg-light">
+      <div className="py-4 responders-bg container bg-light">
         <div className="row mt-4">
-          <div className="col-sm-4 mx-auto mt-4 pt-4 bg-white shadow">
+          <div className="col-sm-4 mx-auto mt-4  bg-white shadow">
             <div className="login-bg"></div>
             <form className="mt-3" onSubmit={this.handleSubmission} autoComplete="on">
               <Text

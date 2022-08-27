@@ -1,8 +1,8 @@
 import React from "react";
-import { Link, withRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 import socket from "./utility/socketIO";
 import get_stations from "./stations_adder";
-import { Spinner, Button, Table } from "react-bootstrap";
+// import { Spinner, Button, Table } from "react-bootstrap";
 
  class Home extends React.Component {
    constructor(props) {
@@ -135,7 +135,7 @@ import { Spinner, Button, Table } from "react-bootstrap";
       <>
       <div className="menu">
         <div className="text-white rounded">
-          <span className="message">TCN Tool to query equipment parameters and state</span>
+          <h2 className="message">TCN Tool to query equipment parameters and state</h2>
         </div>
         <div className="menu-list">
           <ul className="ul-menu text-center">
@@ -445,6 +445,9 @@ import { Spinner, Button, Table } from "react-bootstrap";
                   </tr>
               </tbody>
             </table>
+          </div>
+          <div className="counter-div">
+
           </div>
         </div>              
       </div>
