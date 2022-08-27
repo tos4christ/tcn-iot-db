@@ -1,5 +1,5 @@
 import React from "react";
-import {Redirect, withRouter} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import stations from "./stations";
 import stationsKey from "./stationsKey";
 import Header from "./table/HistoryHeader";

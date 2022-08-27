@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink, Link, withRouter, Redirect} from 'react-router-dom';
+import {NavLink, Link, withRouter} from 'react-router-dom';
 import ls from 'local-storage';
 import logo from './img/tcnLogo.png';
 
@@ -14,16 +14,13 @@ class Header extends React.Component {
     this.setState({value: newValue});
   };
   render() {
-    let route, heading;
+    let heading;
     const location = this.props.location.pathname;
     if(location === '/' || location === '/api/v1/auth/signin' || location === '/signout' || !ls.get('token')) {
-      route = '/api/v1/auth/signin';
       heading = 'Sign In';
     } else {
-      route = '/signout';
       heading = 'Sign Out';
     }
-    const { value } = this.state; 
     return (      
         <nav className='nav-containers container-fluid'>            
                 <div className='navbar-header'>

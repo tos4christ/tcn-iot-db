@@ -1,4 +1,4 @@
-export default {
+const stationsKey = {
     "OMOTOSHO 2" : 'omotosho2',
     "EKET" : 'eket',
     "PORTHARCOURT MAIN" : 'phMain',
@@ -29,3 +29,5 @@ export default {
     "GBARAIN" : 'gbarain',
     "OLORUNSOGO GAS": 'olorunsogoPhase1Gs',
 };
+
+export default stationsKey;

@@ -1,4 +1,4 @@
-export default {
+const stations = {
     "OMOTOSHO 2" : ['TR4', 'TR3', 'OMOTOSHO 2'],
     "EKET" : ['E21M', 'E22M', 'EKET'],
     "PORTHARCOURT MAIN" : ['M21P', 'PORTHARCOURT MAIN'],
@@ -30,3 +30,5 @@ export default {
     'IBOM POWER' : ['IBOM POWER'],
     "OLORUNSOGO GAS": ['R2A', 'R1W', 'TR3', 'TR4', "OLORUNSOGO GAS"],
 };
+
+export default stations;
