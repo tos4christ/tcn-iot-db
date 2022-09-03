@@ -299,34 +299,44 @@ background-color:#232323;
 .nav-containers {
     display: flex;
     flex-direction: row;
-    background-color: #666;
+    background-color: #fff;
     overflow: visible;
+    border: #0074da solid 2px;
+    padding: 0;
 }
 .nav-container li:nth-of-type(5) {
     flex-grow: 5;
     float: right;
     padding: 0;
 }
-
 .nav-container {
     display: flex;
     flex-direction: row;
-    background-color: #666;
+    background-color: #fff;
+    margin: 0em 3em 0.2em -1em;
+    padding: 0;
 }
 .navbar-body {
     flex-grow: 7;
     margin-left: 4em;
+    padding: 0;
 }
 .nav-link {
     padding: 0;
     margin: 0;
+    color: red;
+}
+a.nav-link, .nav-item, a {
+    color: red;
+    font-weight: 1000;
+    font-family: 'Courier New', Courier, monospace;
 }
 .nav-item {
     padding: 0;
     margin: 30px 20px 10px 20px;
 }
 .navbar-header {
-padding: 0 0 10px 0;
+padding: 0 0 0px 0;
 height: 5em;
 flex-grow: 3;
 }
@@ -336,7 +346,7 @@ margin-top: 20px;
 .homelogo {
 width: 5rem;
 height: 4rem;
-margin: 20px;
+margin: 10px;
 padding: 0;
 }
 .homelogin {

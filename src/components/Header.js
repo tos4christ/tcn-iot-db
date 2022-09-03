@@ -29,7 +29,7 @@ class Header extends React.Component {
                     </Link>
                 </div>
                 <div className="navbar-body" >
-                    <ul className="nav-container nav-pills">
+                    <ul className="nav-container">
                         <li className='nav-item'>
 
                         </li>
