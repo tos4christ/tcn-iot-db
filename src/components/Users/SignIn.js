@@ -41,23 +41,25 @@ class SignIn extends React.Component {
     .then((response) => {
       console.log(response, 'this is the response', typeof response);
       if (response.data === 'new') {
-        this.props.history.push({pathname: `/updatepassword?email=${email}`});
-      }
-      // console.log(response.data.isLoggedIn, 'islogged in from the server')
-      const token = response.data.token ? response.data.token : null;
-      const isLoggedIn = response.data.isLoggedIn ? response.data.isLoggedIn : false;
-      //get the token from the response
-      //pass the user data to the state of the App
-      localStorage.setItem("token", token);
-      localStorage.setItem("isLoggedIn", isLoggedIn);
-      // check the response to see if this is their first login attempt
-      // const firstLogin = response.status;
+        return this.props.history.push({pathname: `/updatepassword?email=${email}`});
+      } else {
+        // console.log(response.data.isLoggedIn, 'islogged in from the server')
+        const token = response.data.token ? response.data.token : null;
+        const isLoggedIn = response.data.isLoggedIn ? response.data.isLoggedIn : false;
+        //get the token from the response
+        //pass the user data to the state of the App
+        localStorage.setItem("token", token);
+        localStorage.setItem("isLoggedIn", isLoggedIn);
+        // check the response to see if this is their first login attempt
+        // const firstLogin = response.status;
 
-      // If first login then redirect to change password page
-      // this.props.history.push({pathname: `/changePassword`});
-      // console.log('it returned success', token);
-      //If this is not the first login Redirect to home page
-      this.props.history.push({pathname: `/home`});
+        // If first login then redirect to change password page
+        // this.props.history.push({pathname: `/changePassword`});
+        // console.log('it returned success', token);
+        //If this is not the first login Redirect to home page
+        return this.props.history.push({pathname: `/home`});
+      }
+      
     })
     .catch((error) => console.error(error.message));
   };
