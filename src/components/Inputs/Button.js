@@ -1,13 +1,11 @@
 import React from "react";
 
-const Button = ({ text, onClick, id }) => {
+const Button = ({ text, show }) => {
   return (
     <div className="lower-btn">
       <button
-        className="btn btn-r mb-0 bg-success text-light px-4 py-2"
+        className={`btn mb-0 bg-success text-light px2 py-2 ${show}`}
         type="submit"
-        onClick={onClick}
-        id={id}
       >
         {text}
       </button>

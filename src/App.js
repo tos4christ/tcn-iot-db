@@ -15,6 +15,7 @@ import History from './components/History';
 import Profile from './components/Profile';
 import Uptime from './components/Uptime';
 import Average from './components/Average';
+import UpdatePassword from './components/Users/UpdatePassword';
 // import Footer from './components/Footer';
 
 class App extends React.Component {
@@ -41,6 +42,12 @@ class App extends React.Component {
             <div className='App'>              
               <Header />
               <SignUp />
+            </div>
+          </Route>
+          <Route exact path={'/updatepassword'}>
+            <div className='App'>              
+              <Header />
+              <UpdatePassword />
             </div>
           </Route>
           {/* This is the protected path after successful login */}

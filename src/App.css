@@ -223,7 +223,8 @@ background-size: contain;
 background-repeat: no-repeat;
 }
 .lower-btn {
-padding-left: 40%;
+padding-left: 30%;
+margin: 1em;
 }
 .history-text {
 color: white;
@@ -415,6 +416,24 @@ border-collapse:collapse;border-spacing:0;
     padding: 5px;
     width: 5em;
     word-wrap: break-word;
+}
+
+.disabled {
+pointer-events: none;
+opacity: .65;
+}
+.enabled {
+pointer-events: visible;
+margin-right: 20px;
+}
+.update_password {
+    margin: 2em;
+}
+.update_password h2 {
+    margin: 1em;
+    color: #0074da;
+    text-align: justify;
+    width: 100%;
 }
 
 
