@@ -16,8 +16,7 @@ class UpdatePassword extends React.Component {
     }
   }
   componentDidMount() {
-    const search = this.props.location.search;
-    const email = new URLSearchParams(search).get('email');
+    const email = localStorage.getItem("email");
     this.setState({email});
   }
 
@@ -28,12 +27,9 @@ class UpdatePassword extends React.Component {
       this.setState({show: check});
     }
   }
-
   setPassWord(e) {
-    console.log(e)
     this.setState({password: e});
   }
-
   handleSubmit(e) {
     e.preventDefault();
     const url = "https://tcnnas.org/changepassword";
@@ -53,13 +49,12 @@ class UpdatePassword extends React.Component {
     .then( (response) => {
       // console.log(response, 'the response')
       // This would push to the signin page for the user to now login
-      this.props.history.push({pathname: `/signin`});
+      this.props.history.push({pathname: `/home`});
     })
     .catch( e => console.error(e));
   }
 
   render() {
-    const email = "";
     return (
       <div className="py-4 responders-bg container-fluid bg-light">
         <div className="row my-4">
