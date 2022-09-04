@@ -54,7 +54,7 @@ class App extends React.Component {
           <Route exact path={'/home'} >
             <div className="App">
               <Header />
-              <Home isLoggedIn={true}/>
+              <Home isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
           </Route>          
           <Route exact path={`/downtime`}>
