@@ -41,7 +41,7 @@ class SignIn extends React.Component {
     .then((response) => {
       console.log(response, 'this is the response', typeof response);
       if (response.data === 'new') {
-        return this.props.history.push({pathname: `/updatepassword?email=${email}`});
+        this.props.history.push({pathname: `/updatepassword?email=${email}`});
       } else {
         // console.log(response.data.isLoggedIn, 'islogged in from the server')
         const token = response.data.token ? response.data.token : null;
