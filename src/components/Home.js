@@ -154,6 +154,9 @@ import get_stations from "./stations_adder";
             <li>
               <Link to={'/average'} onClick={this.toggleDisplay} type="button">Average</Link>
             </li>
+            <li>
+              <Link to={'/updatepassword'} onClick={this.toggleDisplay} type="button">Change Password</Link>
+            </li>
           </ul>
           <div className="display-div">
             <h2 className="text-danger">IoT POWER STATIONS TABLE</h2>

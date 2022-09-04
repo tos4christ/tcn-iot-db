@@ -32,7 +32,7 @@ class App extends React.Component {
               <SignIn />
             </div>
           </Route>
-          <Route exact path={'/signin'}>
+          <Route  exact path={'/signin'}>
             <div className='App'>              
               <Header />
               <SignIn />
@@ -54,7 +54,7 @@ class App extends React.Component {
           <Route exact path={'/home'} >
             <div className="App">
               <Header />
-              <Home isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+              <Home isLoggedIn={true}/>
             </div>
           </Route>          
           <Route exact path={`/downtime`}>

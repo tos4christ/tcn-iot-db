@@ -13,7 +13,7 @@ class SignIn extends React.Component {
       email: '',
       password: '',
     }
-  } 
+  }
   setEmail(email) {
     this.setState({email:email})
   }
@@ -28,6 +28,7 @@ class SignIn extends React.Component {
     if (email === "" || password === "") {
       return;
     }
+    localStorage.setItem("email", email);
     const data = { email, password };
     fetch(url, {
       method: "POST",
@@ -64,7 +65,7 @@ class SignIn extends React.Component {
     .catch((error) => console.error(error.message));
   };
   
-  render() {
+  render() {    
     return (
       <div className="py-4 responders-bg container bg-light">
         <div className="row mt-4">
