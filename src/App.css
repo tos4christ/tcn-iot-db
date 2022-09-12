@@ -184,7 +184,7 @@ padding: 0;
 background-color:#232323;
 }
 .display-div table {
-    margin: auto;
+    margin: 0;
 }
 .display-div h2 {
     margin: 10px;
@@ -195,6 +195,82 @@ background-color:#232323;
 }
 }
 
+.display-div {
+    flex-grow: 3;
+    margin: 0;
+    padding: 0;
+    background-color:#232323;
+    }
+    .display-div table {
+        margin: 1em 4em;
+        width: 100%;
+        padding: 0;
+    }
+    .display-div h2 {
+        margin: 10px;
+        text-align: center;
+    }
+
+thead, tbody {
+    display: block;
+    width: 100%;
+}
+tr {
+    display: flex;
+    width: 100%;
+}
+td, th {
+    display: inline;
+    flex-wrap: nowrap;
+    text-align: justify;
+}
+table.tg thead tr th:nth-of-type(1), table.tg tbody tr td:nth-of-type(1) {
+    width: 4em;
+    font-size: large;
+}
+table.tg thead tr th:nth-of-type(2), table.tg tbody tr td:nth-of-type(2) {
+    width: 14em;
+    font-size: large;
+}
+table.tg thead tr th:nth-of-type(3), table.tg tbody tr td:nth-of-type(3) {
+    width: 5em;
+    font-size: large;
+}
+table.tg thead tr th:nth-of-type(4), table.tg tbody tr td:nth-of-type(4) {
+    width: 8em;
+    font-size: large;
+}
+table.tg thead tr th:nth-of-type(5), table.tg tbody tr td:nth-of-type(5) {
+    width: 8em;
+    font-size: large;
+}
+
+
+
+/* table tbody tr {
+    display: flex;
+}
+table thead tr {
+    display: flex;
+}
+
+table tbody tr th:nth-of-type(1) {
+    flex-grow: 1;
+}
+table tbody tr th:nth-of-type(2) {
+    flex-grow: 2;
+}
+
+table thead tr th:nth-of-type(1) {
+    flex-grow: 1;
+    width: 70px;
+}
+table thead tr th:nth-of-type(2) {
+    flex-grow: 2;
+}
+.table-header {
+
+} */
 .App {  
 background-image: url('/public/tcn-nas-background.jpeg');
 opacity: 1;
@@ -279,19 +355,6 @@ margin: 0;
 display: flex;
 flex-direction: row;
 margin: 0;
-}
-.display-div {
-flex-grow: 3;
-margin: 0;
-padding: 0;
-background-color:#232323;
-}
-.display-div table {
-    margin: auto;
-}
-.display-div h2 {
-    margin: 10px;
-    text-align: center;
 }
 .counter-div {
     flex-grow: 10;
@@ -396,25 +459,16 @@ height: max-content;
 .tg  {
 border-collapse:collapse;border-spacing:0;
 }
-.tg td{
+.tg td, .tg th{
     border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-    overflow:hidden;padding:0px 0px;word-break:normal;
-}
-.tg th{
-    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-    font-weight:normal;overflow:hidden;padding:0px 0px;word-break:normal; color: aliceblue;
-}
-.tg .tg-e7p8{
-    font-family:"Courier New", Courier, monospace !important;;font-size:16px;text-align:left;vertical-align:top
+    overflow:hidden;padding:0px 0px;word-break:normal; color: aliceblue;text-align: center;
 }
 .tg .tg-zb4j{
     background-color:#329a9d;
     font-family:"Courier New", Courier, monospace !important;;
-    font-size: 20px;
-    text-align: center;
     padding: 5px;
-    width: 5em;
     word-wrap: break-word;
+    text-align: center;
 }
 
 .disabled {
