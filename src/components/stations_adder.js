@@ -95,8 +95,7 @@ const get_stations =  function(state_data) {
     const ugwuaji_u1a = state_data.gbarain.lines ? state_data.gbarain.lines.filter(line => line.id === "u1a") : [{mw: null, V: null}];
     const ugwuaji_u2a = state_data.gbarain.lines ? state_data.gbarain.lines.filter(line => line.id === "u2a") : [{mw: null, V: null}];    
 
-    console.log(odukpaniGs_d1b, odukpaniGs_d2b, 'the odukpanis');
-    
+    // console.log(ikotEkpene_d1k, ikotEkpene_d2k, odukpaniGs_d2b, 'the odukpanis');
     return { 
         'EKET': {mw: Number(
             Math.abs((eket_e21m[0]?.td ? eket_e21m[0].td.mw : 0) + (eket_e22m[0]?.td ? eket_e22m[0].td.mw : 0))
@@ -146,9 +145,9 @@ const get_stations =  function(state_data) {
             (okpaiGs_k1t[0]?.td ?okpaiGs_k1t[0].td.mw:0) + (okpaiGs_k2t[0]?.td ?okpaiGs_k2t[0].td.mw:0)
             ).toFixed(2), kv: (okpaiGs_k1t[0]?.td ?okpaiGs_k1t[0].td.V:0)},
         'DELTA (GAS)' : {mw: Number(
-            (delta2_tr3[0]?.gd ?delta2_tr3[0].gd.mw:0) + (delta2_tr4[0]?.gd ?delta2_tr4[0].gd.mw:0) + 
-            (delta3_tr5[0]?.gd ?delta3_tr5[0].gd.mw:0) + (delta3_tr6[0]?.gd ?delta3_tr6[0].gd.mw:0) + 
-            (deltaGs_g3b[0]?.td ?deltaGs_g3b[0].td.mw:0) + (deltaGs_s4g[0]?.td ?deltaGs_s4g[0].td.mw:0)   
+            Math.abs(delta2_tr3[0]?.gd ?delta2_tr3[0].gd.mw:0) + Math.abs(delta2_tr4[0]?.gd ?delta2_tr4[0].gd.mw:0) + 
+            Math.abs(delta3_tr5[0]?.gd ?delta3_tr5[0].gd.mw:0) + Math.abs(delta3_tr6[0]?.gd ?delta3_tr6[0].gd.mw:0) + 
+            Math.abs(deltaGs_g3b[0]?.td ?deltaGs_g3b[0].td.mw:0) + Math.abs(deltaGs_s4g[0]?.td ?deltaGs_s4g[0].td.mw:0)   
                 ).toFixed(2), kv: (deltaGs_g3b[0]?.td ?deltaGs_g3b[0].td.V:0)},
         'JEBBA (HYDRO)' : {mw: Number(
             (jebbaTs_b8j[0]?.td ?jebbaTs_b8j[0].td.mw:0) + (jebbaTs_b9j[0]?.td ?jebbaTs_b9j[0].td.mw:0)
@@ -157,7 +156,7 @@ const get_stations =  function(state_data) {
             (afamViTs_ada200[0]?.td ?afamViTs_ada200[0].td.mw:0) + (afamViTs_adb200[0]?.td ?afamViTs_adb200[0].td.mw:0)
             ).toFixed(2), kv: (afamViTs_ada200[0]?.td ?afamViTs_ada200[0].td.V:0)},
         'ALAOJI NIPP (GAS)' : {mw: Number(
-            (alaoji_l7a[0]?.td ?alaoji_l7a[0].td.mw:0) + (alaoji_l8a[0]?.td ?alaoji_l8a[0].td.mw:0)
+            Math.abs(alaoji_l7a[0]?.td ?alaoji_l7a[0].td.mw:0) + Math.abs(alaoji_l8a[0]?.td ?alaoji_l8a[0].td.mw:0)
             ).toFixed(2), kv: (alaoji_l7a[0]?.td ?alaoji_l7a[0].td.V:0)},
         'SAPELE (STEAM)' : {mw: Number(
             Math.abs((sapeleNippPs_st1[0]?.gd ?sapeleNippPs_st1[0].gd.mw:0) + (sapeleNippPs_st3[0]?.gd ?sapeleNippPs_st3[0].gd.mw:0))
@@ -167,16 +166,16 @@ const get_stations =  function(state_data) {
             (sapeleNippPs_gt3[0]?.gd ?sapeleNippPs_gt3[0].gd.mw:0) + (sapeleNippPs_gt4[0]?.gd ?sapeleNippPs_gt4[0].gd.mw:0))
                 ).toFixed(2), kv: (sapeleNippPs_gt1[0]?.gd ?sapeleNippPs_gt1[0].gd.V:0)},
         'ODUKPANI NIPP (GAS)' : {mw: Number(
-            Math.abs((odukpaniGs_d1b[0]?.td ?odukpaniGs_d1b[0].td.mw:0) + (odukpaniGs_d2b[0]?.td ?odukpaniGs_d2b[0].td.mw:0) + 
-            (ikotEkpene_d1k[0]?.td ?ikotEkpene_d1k[0].td.mw:0) + (ikotEkpene_d2k[0]?.td ?ikotEkpene_d2k[0].td.mw:0))
+            Math.abs(Math.abs(odukpaniGs_d1b[0]?.td ?odukpaniGs_d1b[0].td.mw:0) + Math.abs(odukpaniGs_d2b[0]?.td ?odukpaniGs_d2b[0].td.mw:0) + 
+            Math.abs(ikotEkpene_d1k[0]?.td ?ikotEkpene_d1k[0].td.mw:0) + Math.abs(ikotEkpene_d2k[0]?.td ?ikotEkpene_d2k[0].td.mw:0))
                 ).toFixed(2), kv: (odukpaniGs_d1b[0]?.td ?odukpaniGs_d1b[0].td.V:0)},
         'OMOTOSHO (GAS)' : {mw: Number(
-            (omotosho1_tr1[0]?.gd ?omotosho1_tr1[0].gd.mw:0) + (omotosho1_tr2[0]?.gd ?omotosho1_tr2[0].gd.mw:0) + 
-            (omotosho2_tr3[0]?.gd ?omotosho2_tr3[0].gd.mw:0) + (omotosho2_tr4[0]?.gd ?omotosho2_tr4[0].gd.mw:0)
+            Math.abs(omotosho1_tr1[0]?.gd ?omotosho1_tr1[0].gd.mw:0) + Math.abs(omotosho1_tr2[0]?.gd ?omotosho1_tr2[0].gd.mw:0) + 
+            Math.abs(omotosho2_tr3[0]?.gd ?omotosho2_tr3[0].gd.mw:0) + Math.abs(omotosho2_tr4[0]?.gd ?omotosho2_tr4[0].gd.mw:0)
                 ).toFixed(2), kv: (omotosho1_tr1[0]?.gd ?omotosho1_tr1[0].gd.V:0)},
         'GEREGU (GAS)' : {mw: Number(
-            (gereguPs_gt11[0]?.gd ?gereguPs_gt11[0].gd.mw:0) + (gereguPs_gt12[0]?.gd ?gereguPs_gt12[0].gd.mw:0) + 
-            (gereguPs_gt13[0]?.gd ?gereguPs_gt13[0].gd.mw:0)
+            Math.abs(gereguPs_gt11[0]?.gd ?gereguPs_gt11[0].gd.mw:0) + Math.abs(gereguPs_gt12[0]?.gd ?gereguPs_gt12[0].gd.mw:0) + 
+            Math.abs(gereguPs_gt13[0]?.gd ?gereguPs_gt13[0].gd.mw:0)
                 ).toFixed(2), kv: (gereguPs_gt11[0]?.gd ?gereguPs_gt11[0].gd.V:0)},
         'RIVERS IPP (GAS)' : {mw: Number(
             Math.abs(riversIppPs_gt1[0]?.gd ?riversIppPs_gt1[0].gd.mw:0)
@@ -197,8 +196,8 @@ const get_stations =  function(state_data) {
             (parasEnergyPs_132cb[0]?.gd ?parasEnergyPs_132cb[0].gd.mw:0)
             ).toFixed(2), kv: (parasEnergyPs_132cb[0]?.gd ?parasEnergyPs_132cb[0].gd.V:0)},
         'OMOTOSHO NIPP (GAS)' : {mw: Number(
-            Math.abs((omotoshoNippPs_tr1[0]?.gd ?omotoshoNippPs_tr1[0].gd.mw:0) + (omotoshoNippPs_tr2[0]?.gd ?omotoshoNippPs_tr2[0].gd.mw:0) + 
-            (omotoshoNippPs_tr3[0]?.gd ?omotoshoNippPs_tr3[0].gd.mw:0) + (omotoshoNippPs_tr4[0]?.gd ?omotoshoNippPs_tr4[0].gd.mw:0))
+            Math.abs(Math.abs(omotoshoNippPs_tr1[0]?.gd ?omotoshoNippPs_tr1[0].gd.mw:0) + Math.abs(omotoshoNippPs_tr2[0]?.gd ?omotoshoNippPs_tr2[0].gd.mw:0) + 
+            Math.abs(omotoshoNippPs_tr3[0]?.gd ?omotoshoNippPs_tr3[0].gd.mw:0) + Math.abs(omotoshoNippPs_tr4[0]?.gd ?omotoshoNippPs_tr4[0].gd.mw:0))
                 ).toFixed(2), kv: (omotoshoNippPs_tr1[0]?.gd ?omotoshoNippPs_tr1[0].gd.V:0)},
         'GEREGU NIPP (GAS)' : {mw: Number(
             -((gereguPs_r1j[0]?.gd ?gereguPs_r1j[0].gd.mw:0) + (gereguPs_r1j[0]?.gd ?gereguPs_r1j[0].gd.mw:0)) - 
@@ -218,8 +217,8 @@ const get_stations =  function(state_data) {
             (gbarain_st1[0]?.gd ?gbarain_st1[0].gd.mw:0) + (gbarain_st2[0]?.gd ?gbarain_st2[0].gd.mw:0)
             ).toFixed(2), kv: (gbarain_st1[0]?.gd ?gbarain_st1[0].gd.V:0)},
         'OLORUNSOGO (GAS)' : {mw: Number(
-            (olorunsogo1_tr1[0]?.gd ?olorunsogo1_tr1[0].gd.mw:0) + (olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.mw:0) + 
-            (olorunsogoPhase1Gs_tr3[0]?.gd ?olorunsogoPhase1Gs_tr3[0].gd.mw:0) + (olorunsogoPhase1Gs_tr4[0]?.gd ?olorunsogoPhase1Gs_tr4[0].gd.mw:0)
+            Math.abs(olorunsogo1_tr1[0]?.gd ?olorunsogo1_tr1[0].gd.mw:0) + Math.abs(olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.mw:0) + 
+            Math.abs(olorunsogoPhase1Gs_tr3[0]?.gd ?olorunsogoPhase1Gs_tr3[0].gd.mw:0) + Math.abs(olorunsogoPhase1Gs_tr4[0]?.gd ?olorunsogoPhase1Gs_tr4[0].gd.mw:0)
                 ).toFixed(2), kv: (olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.V:0)},
         'DADINKOWA G.S (HYDRO)' : {mw: Number(
             (dadinKowaGs_w21b[0]?.td ?dadinKowaGs_w21b[0].td.mw:0) + (dadinKowaGs_w23e[0]?.td ?dadinKowaGs_w23e[0].td.mw:0)
