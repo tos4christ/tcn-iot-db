@@ -256,6 +256,19 @@ table.ncc-counter-tg thead tr th:nth-of-type(2) {
 }
 
 
+/*----------------------------
+---------- NCC TABLE CSS ---------
+----------------------------*/
+body {
+    line-height: 24px;
+    font-size: 14px;
+    color: #666666;
+    font-family: "Raleway", sans-serif;
+    font-weight: 400;
+    width: 63%;
+    overflow: scroll;
+    }
+
 
 /*--------------------------------------
 --------- SIGNIN AND SIGNUP CSS START ---------
@@ -609,15 +622,7 @@ margin-right: 20px;
 /* ------------------------
 --------- Elements --------
 ------------------------ */
-body {
-line-height: 24px;
-font-size: 14px;
-color: #666666;
-font-family: "Raleway", sans-serif;
-font-weight: 400;
-width: 63%;
-overflow: scroll;
-}
+
 nav {
     display: flex;
     flex-direction: row;
