@@ -15,6 +15,8 @@ import History from './components/History';
 import Profile from './components/Profile';
 import Uptime from './components/Uptime';
 import Average from './components/Average';
+import PageOne from './components/PageOne';
+import PageTwo from './components/PageTwo';
 import UpdatePassword from './components/Users/UpdatePassword';
 // import Footer from './components/Footer';
 
@@ -89,6 +91,12 @@ class App extends React.Component {
               <Header />
               <Average isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>            
+          </Route>
+          <Route exact path={`/pageone`}>
+              <PageOne />           
+          </Route>
+          <Route exact path={`/pagetwo`}>
+              <PageTwo />         
           </Route>
         </Switch>
         {/* <Footer /> */}

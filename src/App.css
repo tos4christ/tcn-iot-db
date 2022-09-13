@@ -8,15 +8,9 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 /**
  *** CSS Indexing ***
  * THEME DEFAULT CSS
- * RESET CSS
+ * TABLE CSS
+ * NCC TABLE CSS 
  * HEADER AREA CSS
- * HERO AREA CSS
- * ABOUT AREA CSS
- * FEATURE AREA CSS
- * DOWNLOAD AREA CSS
- * BLOG AREA CSS
- * MAP AND FOOTER AREA CSS
- 
 **/
 
 
@@ -26,11 +20,240 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 
 
 /*----------------------------
----------- RESET CSS ---------
+---------- TABLE CSS ---------
 ----------------------------*/
+.display-div {
+    flex-grow: 3;
+    margin: 0;
+    padding: 0;
+    background-color:#232323;
+}
+.display-div table {
+    margin: 1em 4em;
+    width: 100%;
+    padding: 0;
+}
+.display-div h2 {
+    margin: 10px;
+    text-align: center;
+}
 
+thead, tbody {
+    display: block;
+    width: 100%;
+}
+tr {
+    display: flex;
+    width: 100%;
+}
+td, th {
+    display: inline;
+    flex-wrap: nowrap;
+    text-align: justify;
+}
+table.tg thead tr th:nth-of-type(1), table.tg tbody tr td:nth-of-type(1) {
+    width: 4em;
+    font-size: large;
+}
+table.tg thead tr th:nth-of-type(2), table.tg tbody tr td:nth-of-type(2) {
+    width: 14em;
+    font-size: large;
+}
+table.tg thead tr th:nth-of-type(3), table.tg tbody tr td:nth-of-type(3) {
+    width: 5em;
+    font-size: large;
+}
+table.tg thead tr th:nth-of-type(4), table.tg tbody tr td:nth-of-type(4) {
+    width: 8em;
+    font-size: large;
+}
+table.tg thead tr th:nth-of-type(5), table.tg tbody tr td:nth-of-type(5) {
+    width: 8em;
+    font-size: large;
+}
+.text-white {
+    color: aliceblue;
+    padding: 0 0 5px 0;
+    margin: 0 0 5px 0;
+}
+.menu {
+    margin: 0;
+}
+.menu-list {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+.counter-div {
+    flex-grow: 10;
+}
+.tg  {
+    border-collapse:collapse;border-spacing:0;
+}
+.tg td, .tg th{
+    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:0px 0px;word-break:normal; color: aliceblue;text-align: center;
+}
+.tg .tg-zb4j{
+    background-color:#329a9d;
+    font-family:"Courier New", Courier, monospace !important;;
+    padding: 5px;
+    word-wrap: break-word;
+    text-align: center;
+}
 
+/*----------------------------
+---------- NCC TABLE CSS ---------
+----------------------------*/
+.ncc-menu {
+    margin: 0;
+}
+.ncc-menu-list {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+.ncc-counter-div {
+    flex-grow: 1;
+    margin-top: 27.7em;
+}
+.ncc-display-div {
+    flex-grow: 3;
+    margin: 1em 0 2em 15em;
+    padding: 0;
+}
+.ncc-display-div table {
+    margin: 1em 1em 1em 4em;
+    width: 100%;
+    padding: 0;
+    
+}
+.ncc-display-div h2 {
+    margin: 10px;
+    text-align: center;
+}
 
+thead, tbody {
+    display: block;
+    width: 100%;
+}
+tr {
+    display: flex;
+    width: 100%;
+}
+td, th {
+    display: inline;
+    flex-wrap: nowrap;
+    text-align: justify;
+}
+table.ncc-tg thead tr th:nth-of-type(1), table.ncc-tg tbody tr td:nth-of-type(1) {
+    width: 4em;
+    font-size: large;
+    background-color:rgb(204, 199, 199);
+}
+table.ncc-tg thead tr th:nth-of-type(2), table.ncc-tg tbody tr td:nth-of-type(2) {
+    width: 14em;
+    font-size: large;
+    background-color:rgb(204, 199, 199);
+}
+table.ncc-tg thead tr th:nth-of-type(3), table.ncc-tg tbody tr td:nth-of-type(3) {
+    width: 5em;
+    font-size: large;
+    background-color:rgb(204, 199, 199);
+}
+table.ncc-tg thead tr th:nth-of-type(4), table.ncc-tg tbody tr td:nth-of-type(4) {
+    width: 8em;
+    font-size: large;
+    background-color:rgb(204, 199, 199);
+    text-align: center;
+}
+table.ncc-tg thead tr th:nth-of-type(5), table.ncc-tg tbody tr td:nth-of-type(5) {
+    width: 8em;
+    font-size: large;
+    background-color:rgb(204, 199, 199);
+}
+table.ncc-tg tbody tr td:nth-of-type(1) {
+    color: blue;
+}
+table.ncc-tg tbody tr td:nth-of-type(2), table.ncc-tg tbody tr td:nth-of-type(3), table.ncc-tg tbody tr td:nth-of-type(4) {
+    font-weight: 600;
+}
+table.ncc-tg tbody tr td:nth-of-type(5) {
+    color: red;
+}
+.ncc-text-white {
+    color: aliceblue;
+    padding: 0 0 5px 0;
+    margin: 0 0 5px 0;
+}
+.ncc-tg th{
+    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:0px 0px;word-break:normal; color: blue;text-align: start;
+}
+.ncc-tg td {
+    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:0px 0px;word-break:normal;text-align: start;
+}
+.ncc-tg .ncc-tg-zb4j{
+    font-family:"Courier New", Courier, monospace !important;;
+    padding: 5px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.ncc-counter-tg th{
+    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:0px 0px;word-break:normal; color: blue;text-align: start;
+}
+.ncc-counter-tg td {
+    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:0px 0px;word-break:normal;text-align: center;
+}
+.ncc-counter-tg .ncc-counter-tg-zb4j{
+    font-family:"Courier New", Courier, monospace !important;;
+    padding: 5px;
+    word-wrap: break-word;
+    text-align: start;
+}
+
+table.ncc-counter-tg tbody tr td:nth-of-type(1) {
+    width: 4em;
+    font-size: large;
+    background-color:rgb(204, 199, 199);
+}
+table.ncc-counter-tg tbody tr td:nth-of-type(2) {
+    width: 8em;
+    font-size: large;
+    background-color:rgb(204, 199, 199);
+    color: black;
+    font-weight: 600;
+}
+table.ncc-counter-tg tbody tr:nth-child(1) td:nth-child(1) {    
+    font-size: large;
+    color: green;
+}
+table.ncc-counter-tg tbody tr:nth-child(2) td:nth-child(1), table.ncc-counter-tg tbody tr:nth-child(3) td:nth-child(1) {    
+    font-size: large;
+    color: red;
+}
+table.ncc-counter-tg tbody tr:nth-child(2) td:nth-child(2) {    
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+table.ncc-counter-tg thead tr th:nth-of-type(1) {
+ width: 0;
+ margin: 0;
+ padding: 0;
+ border: none;
+}
+table.ncc-counter-tg thead tr th:nth-of-type(2) {
+    width: 100%;
+    color: black;
+    font-size: large;
+    text-align: start;
+    padding: 0.4em 1em;
+}
 
 
 
@@ -195,82 +418,6 @@ background-color:#232323;
 }
 }
 
-.display-div {
-    flex-grow: 3;
-    margin: 0;
-    padding: 0;
-    background-color:#232323;
-    }
-    .display-div table {
-        margin: 1em 4em;
-        width: 100%;
-        padding: 0;
-    }
-    .display-div h2 {
-        margin: 10px;
-        text-align: center;
-    }
-
-thead, tbody {
-    display: block;
-    width: 100%;
-}
-tr {
-    display: flex;
-    width: 100%;
-}
-td, th {
-    display: inline;
-    flex-wrap: nowrap;
-    text-align: justify;
-}
-table.tg thead tr th:nth-of-type(1), table.tg tbody tr td:nth-of-type(1) {
-    width: 4em;
-    font-size: large;
-}
-table.tg thead tr th:nth-of-type(2), table.tg tbody tr td:nth-of-type(2) {
-    width: 14em;
-    font-size: large;
-}
-table.tg thead tr th:nth-of-type(3), table.tg tbody tr td:nth-of-type(3) {
-    width: 5em;
-    font-size: large;
-}
-table.tg thead tr th:nth-of-type(4), table.tg tbody tr td:nth-of-type(4) {
-    width: 8em;
-    font-size: large;
-}
-table.tg thead tr th:nth-of-type(5), table.tg tbody tr td:nth-of-type(5) {
-    width: 8em;
-    font-size: large;
-}
-
-
-
-/* table tbody tr {
-    display: flex;
-}
-table thead tr {
-    display: flex;
-}
-
-table tbody tr th:nth-of-type(1) {
-    flex-grow: 1;
-}
-table tbody tr th:nth-of-type(2) {
-    flex-grow: 2;
-}
-
-table thead tr th:nth-of-type(1) {
-    flex-grow: 1;
-    width: 70px;
-}
-table thead tr th:nth-of-type(2) {
-    flex-grow: 2;
-}
-.table-header {
-
-} */
 .App {  
 background-image: url('/public/tcn-nas-background.jpeg');
 opacity: 1;
@@ -342,22 +489,6 @@ padding: 1em 0;
 .input-text {
 color: black;
 text-align: center;
-}
-.text-white {
-color: aliceblue;
-padding: 0 0 5px 0;
-margin: 0 0 5px 0;
-}
-.menu {
-margin: 0;
-}
-.menu-list {
-display: flex;
-flex-direction: row;
-margin: 0;
-}
-.counter-div {
-    flex-grow: 10;
 }
 .nav-containers {
     display: flex;
@@ -456,21 +587,6 @@ height: max-content;
     margin-right: 20%;
     background-color:#232323;
 }
-.tg  {
-border-collapse:collapse;border-spacing:0;
-}
-.tg td, .tg th{
-    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-    overflow:hidden;padding:0px 0px;word-break:normal; color: aliceblue;text-align: center;
-}
-.tg .tg-zb4j{
-    background-color:#329a9d;
-    font-family:"Courier New", Courier, monospace !important;;
-    padding: 5px;
-    word-wrap: break-word;
-    text-align: center;
-}
-
 .disabled {
 pointer-events: none;
 opacity: .65;
