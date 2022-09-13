@@ -230,7 +230,7 @@ import get_stations from "./stations_adder";
               </tbody>
             </table>            
           </div>
-          <div className="ncc-counter-div">
+          <div className="ncc-counter-div-2">
             <table className="ncc-counter-tg">
                 <thead>
                     <tr>
