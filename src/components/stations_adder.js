@@ -95,7 +95,7 @@ const get_stations =  function(state_data) {
     const ugwuaji_u1a = state_data.gbarain.lines ? state_data.gbarain.lines.filter(line => line.id === "u1a") : [{mw: null, V: null}];
     const ugwuaji_u2a = state_data.gbarain.lines ? state_data.gbarain.lines.filter(line => line.id === "u2a") : [{mw: null, V: null}];    
 
-    // console.log(ikotEkpene_d1k, ikotEkpene_d2k, odukpaniGs_d2b, 'the odukpanis');
+    console.log(omotosho2_tr3, omotosho2_tr4, 'the omotoshos');
     return { 
         'EKET': {mw: Number(
             Math.abs((eket_e21m[0]?.td ? eket_e21m[0].td.mw : 0) + (eket_e22m[0]?.td ? eket_e22m[0].td.mw : 0))
