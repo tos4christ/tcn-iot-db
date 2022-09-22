@@ -84,24 +84,13 @@ import get_stations from "./stations_adder";
    }
   render() {
     const stations_array = get_stations(this.state);
-    const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
-    const ihovbor_gs = stations_array['IHOVBOR NIPP (GAS)'];
     const omoku_gs = stations_array['OMOKU (GAS)'];
     const riversipp_gs = stations_array['RIVERS IPP (GAS)'];
     const geregugas_gs = stations_array['GEREGU (GAS)'];
     const omotosogas_gs = stations_array['OMOTOSHO (GAS)'];
-    const odukpani_gs = stations_array['ODUKPANI NIPP (GAS)'];
     const sapelenipp_gs = stations_array['SAPELE NIPP (GAS)'];
-    const sapelesteam_gs = stations_array['SAPELE (STEAM)'];
-    const alaoji_gs = stations_array['ALAOJI NIPP (GAS)'];
     const afam6_gs = stations_array['AFAM VI (GAS/STEAM)'];
-    const jebba_gs = stations_array['JEBBA (HYDRO)'];
     const delta_gs = stations_array['DELTA (GAS)'];
-    const okpai_gs = stations_array['OKPAI (GAS/STEAM)'];
-    const egbin_gs = stations_array['EGBIN (STEAM)'];
-    const kainji_gs = stations_array['KAINJI (HYDRO)'];
-    const afam4_gs = stations_array['AFAM IV & V (GAS)'];
-    const shiroro_gs = stations_array['SHIRORO (HYDRO)'];
     const paras_gs = stations_array['PARAS ENERGY (GAS)'];
     const omotosonipp_gs = stations_array['OMOTOSHO NIPP (GAS)'];
     const geregunipp_gs = stations_array['GEREGU NIPP (GAS)'];
@@ -109,7 +98,6 @@ import get_stations from "./stations_adder";
     const transamadi_gs = stations_array['TRANS-AMADI (GAS)'];
     const ibom_gs = stations_array['IBOM POWER (GAS)'];
     const gbarain_gs = stations_array['GBARAIN NIPP (GAS)'];
-    const olorunsogogas_gs = stations_array['OLORUNSOGO (GAS)'];
     const dadinkowa_gs = stations_array['DADINKOWA G.S (HYDRO)'];
 
     // const totalGeneration = Number(riversipp_gs.mw) + Number(afam6_gs.mw) + Number(paras_gs.mw) + Number(geregugas_gs.mw) +
