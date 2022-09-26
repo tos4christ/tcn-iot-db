@@ -27,6 +27,7 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
     margin: 0;
     padding: 0;
     background-color:#232323;
+    opacity: 0.7;
 }
 .display-div table {
     margin: 1em 4em;
@@ -130,7 +131,6 @@ table.tg thead tr th:nth-of-type(5), table.tg tbody tr td:nth-of-type(5) {
     margin: 1em 1em 1em 1em;
     width: 100%;
     padding: 0;
-    
 }
 .ncc-display-div h2 {
     margin: 10px;
