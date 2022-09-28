@@ -28,6 +28,14 @@ const stationsKey = {
     "IBOM POWER" : 'IBOM POWER',
     "GBARAIN" : 'gbarain',
     "OLORUNSOGO GAS": 'olorunsogoPhase1Gs',
+    "OKPAI GS" : 'okpaiGs',
+    "JEBBA GS" : 'jebbaTs',
+    "DADINKOWA GS" : 'dadinKowaGs',
+    "KAINJI GS" : 'kainjiTs',
+    "EGBIN GS" : 'egbinPs',
+    "AFAM IV GS" : 'afamIv_vPs',
+    "SHIRORO GS" : 'shiroroPs',
+    "DELTA 4" : 'deltaGs'
 };
 
 export default stationsKey;
