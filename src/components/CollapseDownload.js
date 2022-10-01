@@ -48,7 +48,7 @@ import { Spinner, Button } from "react-bootstrap";
           },
           body: JSON.stringify(data)
         })
-        .then(response => response.json())
+        // .then(response => response.json())
         .then( resp => {
           // Return a message
           console.log(resp, 'the response')
