@@ -58,7 +58,8 @@ import { Spinner, Button } from "react-bootstrap";
     const startDate = this.state.startDate[0];
     const endDate = this.state.endDate[0];
     const startTime = this.state.startDate[1];
-    const endTime = this.state.endDate[1];    
+    const endTime = this.state.endDate[1];
+    console.log(startDate, startTime, 'the start date and time');
     const token = localStorage.getItem("token");
     // verify that the startDate is lower than the endDate
     // This is already handled at the backend by replacing the lower to be the start

@@ -18,6 +18,8 @@ import Average from './components/Average';
 import PageOne from './components/PageOne';
 import PageTwo from './components/PageTwo';
 import UpdatePassword from './components/Users/UpdatePassword';
+import Tem from './components/TemDownload';
+import Collapse from './components/CollapseDownload';
 // import Footer from './components/Footer';
 
 class App extends React.Component {
@@ -90,6 +92,18 @@ class App extends React.Component {
             <div className='App'>
               <Header />
               <Average isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>            
+          </Route>
+          <Route exact path={`/tem`}>
+            <div className='App'>
+              <Header />
+              <Tem isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>            
+          </Route>
+          <Route exact path={`/collapse`}>
+            <div className='App'>
+              <Header />
+              <Collapse isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>            
           </Route>
           <Route exact path={`/pageone`}>
