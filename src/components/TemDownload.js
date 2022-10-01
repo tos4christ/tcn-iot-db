@@ -42,9 +42,17 @@ import { Spinner, Button } from "react-bootstrap";
           },
           body: JSON.stringify(data)
         })
-        .then(response => response.json())
-        .then( resp => {
-          // respond to message of download with a carousel or just send the user back to the tems page
+        .then(response => response.blob())
+        .then( blob => {
+          // Return a message
+          this.setState({loading: false})
+          var url = window.URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = "tem.xlsx";
+          document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+          a.click();
+          a.remove();  //afterwards we remove the element again 
         });
       })      
     }    
