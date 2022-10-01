@@ -51,7 +51,7 @@ import { Spinner, Button } from "react-bootstrap";
         .then(response => response.json())
         .then( resp => {
           // Return a message
-          
+          console.log(resp, 'the response')
         });
       })      
     }    
