@@ -31,7 +31,6 @@ import { Spinner, Button } from "react-bootstrap";
       const data = {
         startDate
       };
-      console.log(startDate, 'the start date');
       // add a spinner method while request is loading
       this.setState({loading: true}, () => {
         fetch(url, {
