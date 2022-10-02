@@ -26,9 +26,9 @@ class App extends React.Component {
   setUserDetails() {
 
   }
-  // componentDidMount() {
-  //   localStorage.setItem("isLoggedIn", true);
-  // }
+  componentDidMount() {
+    localStorage.setItem("isLoggedIn", true);
+  }
   render() {
     return (
       <Router>

@@ -74,17 +74,19 @@ import { Spinner, Button } from "react-bootstrap";
         <a style={{margin: '10px', 'fontSize': '15px'}} type="button" href="/home"> back</a>        
         <div>
           <h2 className="history-text"> Get Report </h2>
+          <div className="line"> </div>
           {/* Select Start Date */}    
-          <div className="options">
+          <div className="report options">
             <label> Start Date </label> 
             <input type={'datetime-local'} name="startDate" onChange={this.setDate} ref={node => this.startDate = node}></input>
           </div>
           {/* Select End Date */}
-          <div className="options">
+          <div className="report options">
             <label> End Date </label>
             <input type={'datetime-local'} name='endDate' onChange={this.setDate} ref={node => this.endDate = node}></input>
           </div>
-          <button className="submit-button" onClick={this.handleSubmit}> Download Report </button>
+          <div className="line"> </div>
+          <button className="tem submit-button" onClick={this.handleSubmit}> Download Report </button>
         </div>
         <div className="table-div">
           {loading ? 

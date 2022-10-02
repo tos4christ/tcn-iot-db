@@ -14,6 +14,20 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 **/
 
 
+.tem input, .report input {
+    width: 8em;
+}
+.tem, .report {
+    margin: 3em 0 3em 12em
+}
+button.tem {
+    margin: 2em 0 2em 20em
+}
+div.line {
+    border-top:rgb(115, 231, 240) solid 4px
+}
+
+
 /*----------------------------------
 --------- THEME DEFAULT CSS --------
 ----------------------------------*/
@@ -38,7 +52,6 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
     margin: 10px;
     text-align: center;
 }
-
 thead, tbody {
     display: block;
     width: 100%;
@@ -101,6 +114,56 @@ table.tg thead tr th:nth-of-type(5), table.tg tbody tr td:nth-of-type(5) {
     padding: 5px;
     word-wrap: break-word;
     text-align: center;
+}
+
+
+/*----------------------------
+---------- HISTORY TABLE CSS ---------
+----------------------------*/
+.history-tg .history-tg-zb4j{
+    background-color:#329a9d;
+    font-family:"Courier New", Courier, monospace !important;;
+    padding: 5px;
+    word-wrap: break-word;
+    text-align: center;
+}
+.history-tg  {
+    border-collapse:collapse;border-spacing:0;
+}
+.history-tg td, .history-tg th{
+    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:0px 0px;word-break:normal; color: aliceblue;text-align: center;
+}
+div.tbale-div {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+table.history-tg thead tr th:nth-of-type(1), table.history-tg tbody tr td:nth-of-type(1) {
+    width: 12em;
+    /* padding: 1em;
+    font-size: 16px; */
+}
+table.history-tg thead tr th:nth-of-type(2), table.history-tg tbody tr td:nth-of-type(2) {
+    width: 8em;    
+}
+table.history-tg thead tr th:nth-of-type(3), table.history-tg tbody tr td:nth-of-type(3) {
+    width: 8em;
+}
+table.history-tg thead tr th:nth-of-type(4), table.history-tg tbody tr td:nth-of-type(4) {
+    width: 8em;
+}
+table.history-tg thead tr th:nth-of-type(5), table.history-tg tbody tr td:nth-of-type(5) {
+    width: 8em;
+}
+table.history-tg thead tr th:nth-of-type(6), table.history-tg tbody tr td:nth-of-type(6) {
+    width: 8em;
+}
+table.history-tg thead tr th:nth-of-type(7), table.history-tg tbody tr td:nth-of-type(7) {
+    width: 8em;
+}
+table.history-tg thead tr th:nth-of-type(8), table.history-tg tbody tr td:nth-of-type(8) {
+    width: 8em;
 }
 
 /*----------------------------

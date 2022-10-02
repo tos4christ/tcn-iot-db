@@ -170,7 +170,7 @@ import { Spinner, Button } from "react-bootstrap";
                 sheet="Sheet"
                 buttonText="Export excel"
                 /> */}
-              <table id="emp" className="tg">
+              <table id="emp" className="history-tg">
                 <Header />
                 <tbody>
                   {tableRows}              

@@ -68,12 +68,14 @@ import { Spinner, Button } from "react-bootstrap";
         <a style={{margin: '10px', 'fontSize': '15px'}} type="button" href="/home"> back</a>        
         <div>
           <h2 className="history-text"> Select a Date to download Generation Assets</h2>
+          <div className="line"> </div>
           {/* Select Start Date */}    
-          <div className="options">
+          <div className="tem options">
             <label> Report Date </label> 
             <input type={'date'} name="startDate" onChange={this.setDate} ref={node => this.startDate = node}></input>
           </div>
-          <button className="submit-button" onClick={this.handleSubmit}> Download Data </button>
+          <div className="line"> </div>
+          <button className=" tem submit-button" onClick={this.handleSubmit}> Download Data </button>
         </div>
         <div className="table-div">
           {loading ? 
