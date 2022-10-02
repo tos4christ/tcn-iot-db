@@ -153,6 +153,12 @@ import get_stations from "./stations_adder";
         <div className="menu-list">
           <ul className="ul-menu text-center">
             <li>
+              <Link to={`/downtime`} onClick={this.toggleDisplay} type="button">Analyze Generation</Link>
+            </li>
+            <li>
+              <Link to={`/downtime`} onClick={this.toggleDisplay} type="button">TEM Sheet Download</Link>
+            </li>
+            <li>
               <Link to={`/downtime`} onClick={this.toggleDisplay} type="button">Downtime</Link>
             </li>
             <li>
