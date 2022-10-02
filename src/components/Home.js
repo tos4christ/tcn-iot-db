@@ -153,10 +153,10 @@ import get_stations from "./stations_adder";
         <div className="menu-list">
           <ul className="ul-menu text-center">
             <li>
-              <Link to={`/downtime`} onClick={this.toggleDisplay} type="button">Analyze Generation</Link>
+              <Link to={`/collapse`} onClick={this.toggleDisplay} type="button">Analyze Generation</Link>
             </li>
             <li>
-              <Link to={`/downtime`} onClick={this.toggleDisplay} type="button">TEM Sheet Download</Link>
+              <Link to={`/tem`} onClick={this.toggleDisplay} type="button">TEM Sheet Download</Link>
             </li>
             <li>
               <Link to={`/downtime`} onClick={this.toggleDisplay} type="button">Downtime</Link>
@@ -313,7 +313,7 @@ import get_stations from "./stations_adder";
                   <td>18</td>
                   <td>OLORUNSOGO NIPP</td>
                   <td>{this.checkConnection(olorunsogonipp_gs.mw, olorunsogonipp_gs.kv)}</td>
-                  <td>{olorunsogonipp_gs.mw}</td>
+                  <td>{Number(olorunsogonipp_gs.mw) <= -3 ? 0 : Number(olorunsogonipp_gs.mw)}</td>
                   <td>{olorunsogonipp_gs.kv}</td>
                 </tr>
                 <tr>
