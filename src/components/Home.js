@@ -10,6 +10,8 @@ import get_stations from "./stations_adder";
      this.toggleDisplay = this.toggleDisplay.bind(this);
      this.state = { 
       afamIv_vPs: {},
+      afamVPs: {},
+      transamadiGs: {},
       shiroroPs: {},
       egbinPs: {},
       kainjiTs: {},
@@ -24,7 +26,7 @@ import get_stations from "./stations_adder";
       alaoji: {},
       sapeleNippPs: {},
       omotoshoNippPs: {},
-      odukpaniGs: {},
+      odukpaniNippPs: {},
       ekim: {},
       gereguPs: {},
       ikotEkpene: {},

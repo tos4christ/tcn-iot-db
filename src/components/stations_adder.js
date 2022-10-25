@@ -21,6 +21,11 @@ const get_stations =  function(state_data) {
     const shiroroPs_411g4 = state_data.shiroroPs.units ? state_data.shiroroPs.units.filter(line => line.id === "411g4") : [{mw: null, V: null}];
     const afamIv_vPs_gt17 = state_data.afamIv_vPs.units ? state_data.afamIv_vPs.units.filter(line => line.id === "gt17") : [{mw: null, V: null}];
     const afamIv_vPs_gt18 = state_data.afamIv_vPs.units ? state_data.afamIv_vPs.units.filter(line => line.id === "gt18") : [{mw: null, V: null}];
+    // New topic added
+    const afamVPs_gt20 = state_data.afamVPs.units ? state_data.afamVPs.units.filter(line => line.id === "gt20") : [{mw: null, V: null}];
+    const transamadiGs_m21p = state_data.transamadiGs.lines ? state_data.transamadiGs.lines.filter(line => line.id === "m21p") : [{mw: null, V: null}];
+    const transamadiGs_m22p = state_data.transamadiGs.lines ? state_data.transamadiGs.lines.filter(line => line.id === "m22p") : [{mw: null, V: null}];
+
     const omotosho1_tr1 = state_data.omotosho1.lines ? state_data.omotosho1.lines.filter(line => line.id === "tr1") : [{mw: null, V: null}];
     const omotosho1_tr2 = state_data.omotosho1.lines ? state_data.omotosho1.lines.filter(line => line.id === "tr2") : [{mw: null, V: null}];
     const omotosho2_tr3 = state_data.omotosho2.lines ? state_data.omotosho2.lines.filter(line => line.id === "tr3") : [{mw: null, V: null}];
@@ -36,8 +41,16 @@ const get_stations =  function(state_data) {
     const afamViTs_ada200 = state_data.afamViTs.lines ? state_data.afamViTs.lines.filter(line => line.id === "ada200") : [{mw: null, V: null}];
     const afamViTs_adb200 = state_data.afamViTs.lines ? state_data.afamViTs.lines.filter(line => line.id === "adb200") : [{mw: null, V: null}];
     const phMain_m21p = state_data.phMain.lines ? state_data.phMain.lines.filter(line => line.id === "m21p") : [{mw: null, V: null}];
-    const odukpaniGs_d1b = state_data.odukpaniGs.lines ? state_data.odukpaniGs.lines.filter(line => line.id === "d1b") : [{mw: null, V: null}];
-    const odukpaniGs_d2b = state_data.odukpaniGs.lines ? state_data.odukpaniGs.lines.filter(line => line.id === "d2b") : [{mw: null, V: null}];
+    // Old topics removed
+    // const odukpaniGs_d1b = state_data.odukpaniGs.lines ? state_data.odukpaniGs.lines.filter(line => line.id === "d1b") : [{mw: null, V: null}];
+    // const odukpaniGs_d2b = state_data.odukpaniGs.lines ? state_data.odukpaniGs.lines.filter(line => line.id === "d2b") : [{mw: null, V: null}];
+    // New topics added
+    const odukpaniNippPs_gt1 = state_data.odukpaniNippPs.units ? state_data.odukpaniNippPs.units.filter(line => line.id === "gt1") : [{mw: null, V: null}];
+    const odukpaniNippPs_gt2 = state_data.odukpaniNippPs.units ? state_data.odukpaniNippPs.units.filter(line => line.id === "gt2") : [{mw: null, V: null}];
+    const odukpaniNippPs_gt3 = state_data.odukpaniNippPs.units ? state_data.odukpaniNippPs.units.filter(line => line.id === "gt3") : [{mw: null, V: null}];
+    const odukpaniNippPs_gt4 = state_data.odukpaniNippPs.units ? state_data.odukpaniNippPs.units.filter(line => line.id === "gt4") : [{mw: null, V: null}];
+    const odukpaniNippPs_gt5 = state_data.odukpaniNippPs.units ? state_data.odukpaniNippPs.units.filter(line => line.id === "gt5") : [{mw: null, V: null}];
+
     const omotoshoNippPs_tr1 = state_data.omotoshoNippPs.units ? state_data.omotoshoNippPs.units.filter(line => line.id === "tr1") : [{mw: null, V: null}];
     const omotoshoNippPs_tr2 = state_data.omotoshoNippPs.units ? state_data.omotoshoNippPs.units.filter(line => line.id === "tr2") : [{mw: null, V: null}];
     const omotoshoNippPs_tr3 = state_data.omotoshoNippPs.units ? state_data.omotoshoNippPs.units.filter(line => line.id === "tr3") : [{mw: null, V: null}];
@@ -130,7 +143,8 @@ const get_stations =  function(state_data) {
             (shiroroPs_411g3[0]?.gd ?shiroroPs_411g3[0].gd.mw:0) + (shiroroPs_411g4[0]?.gd ?shiroroPs_411g4[0].gd.mw:0)  
                 ).toFixed(2), kv: (shiroroPs_411g1[0]?.gd ?shiroroPs_411g1[0].gd.V:0)},
         'AFAM IV & V (GAS)' : {mw: Number(
-            (afamIv_vPs_gt17[0]?.td ?afamIv_vPs_gt17[0].td.mw:0) + (afamIv_vPs_gt18[0]?.td ?afamIv_vPs_gt18[0].td.mw:0)
+            (afamIv_vPs_gt17[0]?.td ?afamIv_vPs_gt17[0].td.mw:0) + (afamIv_vPs_gt18[0]?.td ?afamIv_vPs_gt18[0].td.mw:0) +
+            Math.abs(afamVPs_gt20[0]?.gd ?afamVPs_gt20[0].gd.mw:0)
             ).toFixed(2), kv: (afamIv_vPs_gt17[0]?.td ?afamIv_vPs_gt17[0].td.V:0)},
         'KAINJI (HYDRO)' : {mw: Number(
             (kainjiTs_k1f[0]?.td ?kainjiTs_k1f[0].td.mw:0) + (kainjiTs_k1j[0]?.td ?kainjiTs_k1j[0].td.mw:0) + 
@@ -166,9 +180,10 @@ const get_stations =  function(state_data) {
             (sapeleNippPs_gt3[0]?.gd ?sapeleNippPs_gt3[0].gd.mw:0) + (sapeleNippPs_gt4[0]?.gd ?sapeleNippPs_gt4[0].gd.mw:0))
                 ).toFixed(2), kv: (sapeleNippPs_gt1[0]?.gd ?sapeleNippPs_gt1[0].gd.V:0)},
         'ODUKPANI NIPP (GAS)' : {mw: Number(
-            Math.abs(Math.abs(odukpaniGs_d1b[0]?.td ?odukpaniGs_d1b[0].td.mw:0) + Math.abs(odukpaniGs_d2b[0]?.td ?odukpaniGs_d2b[0].td.mw:0) + 
-            Math.abs(ikotEkpene_d1k[0]?.td ?ikotEkpene_d1k[0].td.mw:0) + Math.abs(ikotEkpene_d2k[0]?.td ?ikotEkpene_d2k[0].td.mw:0))
-                ).toFixed(2), kv: (odukpaniGs_d1b[0]?.td ?odukpaniGs_d1b[0].td.V:0)},
+            Math.abs(odukpaniNippPs_gt1[0]?.gd ? odukpaniNippPs_gt1[0].gd.mw:0) + Math.abs(odukpaniNippPs_gt2[0]?.gd ?odukpaniNippPs_gt2[0].gd.mw:0) + 
+            Math.abs(odukpaniNippPs_gt3[0]?.gd ?odukpaniNippPs_gt3[0].gd.mw:0) + Math.abs(odukpaniNippPs_gt4[0]?.gd ?odukpaniNippPs_gt4[0].gd.mw:0) +
+            Math.abs(odukpaniNippPs_gt5[0]?.gd ?odukpaniNippPs_gt5[0].gd.mw:0)
+                ).toFixed(2), kv: (odukpaniNippPs_gt1[0]?.gd ? odukpaniNippPs_gt1[0].gd.V:0)},
         'OMOTOSHO (GAS)' : {mw: Number(
             Math.abs(omotosho1_tr1[0]?.gd ?omotosho1_tr1[0].gd.mw:0) + Math.abs(omotosho1_tr2[0]?.gd ?omotosho1_tr2[0].gd.mw:0) + 
             Math.abs(omotosho2_tr3[0]?.gd ?omotosho2_tr3[0].gd.mw:0) + Math.abs(omotosho2_tr4[0]?.gd ?omotosho2_tr4[0].gd.mw:0)
@@ -208,8 +223,8 @@ const get_stations =  function(state_data) {
             -((ihovborNippPs_ohl1[0]?.gd ?ihovborNippPs_ohl1[0].gd.mw:0) + (ihovborNippPs_ohl2[0]?.gd ?ihovborNippPs_ohl2[0].gd.mw:0))
         ).toFixed(2), kv: (ihovborNippPs_ohl1[0]?.gd ?ihovborNippPs_ohl1[0].gd.V:0)},
         'TRANS-AMADI (GAS)' : {mw: Number(
-            Math.abs(phMain_m21p[0]?.td ?phMain_m21p[0].td.mw:0)
-            ).toFixed(2), kv: phMain_m21p[0]?.td ?phMain_m21p[0].td.V:0},
+            Math.abs(transamadiGs_m21p[0]?.td ?transamadiGs_m21p[0].td.mw:0) + Math.abs(transamadiGs_m22p[0]?.td ?transamadiGs_m22p[0].td.mw:0)
+            ).toFixed(2), kv: transamadiGs_m21p[0]?.td ?transamadiGs_m21p[0].td.V:0},
         'IBOM POWER (GAS)' : {mw: Number(
             -((eket_e21m[0]?.td ?eket_e21m[0].td.mw:0) + (eket_e22m[0]?.td ?eket_e22m[0].td.mw:0)) - (ekim_ek1m[0]?.td ?ekim_ek1m[0].td.mw:0)
         ).toFixed(2), kv: (eket_e21m[0]?.td ?eket_e21m[0].td.V:0)},
