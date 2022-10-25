@@ -10,8 +10,8 @@ import get_stations from "./stations_adder";
      this.toggleDisplay = this.toggleDisplay.bind(this);
      this.state = { 
       afamIv_vPs: {},
-      afamVPs: {mw: 0},
-      transamadiGs: {mw:0},
+      afamVPs: {},
+      transamadiGs: {},
       shiroroPs: {},
       egbinPs: {},
       kainjiTs: {},
@@ -26,7 +26,7 @@ import get_stations from "./stations_adder";
       alaoji: {},
       sapeleNippPs: {},
       omotoshoNippPs: {},
-      odukpaniNippPs: {mw:0},
+      odukpaniNippPs: {},
       ekim: {},
       gereguPs: {},
       ikotEkpene: {},
@@ -100,8 +100,7 @@ import get_stations from "./stations_adder";
     if (!isLoggedIn) {
       return <Redirect to={'/'}/>
     }
-    const state_data = this.state;
-    const stations_array = get_stations(state_data);
+    const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
     const ihovbor_gs = stations_array['IHOVBOR NIPP (GAS)'];
     const omoku_gs = stations_array['OMOKU (GAS)'];
