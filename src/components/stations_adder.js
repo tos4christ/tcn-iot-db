@@ -23,7 +23,7 @@ const get_stations =  function(state_data) {
     const afamIv_vPs_gt17 = state_data.afamIv_vPs.units ? state_data.afamIv_vPs.units.filter(line => line.id === "gt17") : [{mw: null, V: null}];
     const afamIv_vPs_gt18 = state_data.afamIv_vPs.units ? state_data.afamIv_vPs.units.filter(line => line.id === "gt18") : [{mw: null, V: null}];
     // New topic added
-    // const afamVPs_gt20 = state_data.afamVPs.units ? state_data.afamVPs.units.filter(line => line.id === "gt20") : [{mw: null, V: null}];
+    const afamVPs_gt20 = state_data.afamVPs?.units ? state_data.afamVPs.units.filter(line => line.id === "gt20") : [{mw: null, V: null}];
     const transamadiGs_m21p = state_data.transamadiGs.lines ? state_data.transamadiGs.lines.filter(line => line.id === "m21p") : [{mw: null, V: null}];
     const transamadiGs_m22p = state_data.transamadiGs.lines ? state_data.transamadiGs.lines.filter(line => line.id === "m22p") : [{mw: null, V: null}];
 
