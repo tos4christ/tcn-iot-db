@@ -143,10 +143,9 @@ const get_stations =  function(state_data) {
             (shiroroPs_411g1[0]?.gd ?shiroroPs_411g1[0].gd.mw:0) + (shiroroPs_411g2[0]?.gd ?shiroroPs_411g2[0].gd.mw:0) + 
             (shiroroPs_411g3[0]?.gd ?shiroroPs_411g3[0].gd.mw:0) + (shiroroPs_411g4[0]?.gd ?shiroroPs_411g4[0].gd.mw:0)  
                 ).toFixed(2), kv: (shiroroPs_411g1[0]?.gd ?shiroroPs_411g1[0].gd.V:0)},
-        'AFAM IV & V (GAS)' : {mw: true ? 0 : Number(
-            (afamIv_vPs_gt17[0]?.td ?afamIv_vPs_gt17[0].td.mw:0) + (afamIv_vPs_gt18[0]?.td ?afamIv_vPs_gt18[0].td.mw:0) +
-            Math.abs(afamVPs_gt20[0]?.gd ?afamVPs_gt20[0].gd.mw:0)
-            ).toFixed(2), kv: true ? 0 : (afamIv_vPs_gt17[0]?.td ?afamIv_vPs_gt17[0].td.V:0)},
+        'AFAM IV & V (GAS)' : {mw: Number(
+            (afamIv_vPs_gt17[0]?.td ?afamIv_vPs_gt17[0].td.mw:0) + (afamIv_vPs_gt18[0]?.td ?afamIv_vPs_gt18[0].td.mw:0) 
+            ).toFixed(2), kv: (afamIv_vPs_gt17[0]?.td ?afamIv_vPs_gt17[0].td.V:0)},
         'KAINJI (HYDRO)' : {mw: Number(
             (kainjiTs_k1f[0]?.td ?kainjiTs_k1f[0].td.mw:0) + (kainjiTs_k1j[0]?.td ?kainjiTs_k1j[0].td.mw:0) + 
             (kainjiTs_k2j[0]?.td ?kainjiTs_k2j[0].td.mw:0) + (kainjiTs_k3r[0]?.td ?kainjiTs_k3r[0].td.mw:0)
