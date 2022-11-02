@@ -205,7 +205,7 @@ const get_stations =  function(state_data) {
             (ihovborNippPs_gt3[0]?.gd ?ihovborNippPs_gt3[0].gd.mw:0) + (ihovborNippPs_gt4[0]?.gd ?ihovborNippPs_gt4[0].gd.mw:0))
                 ).toFixed(2), kv: (ihovborNippPs_gt1[0]?.gd ?ihovborNippPs_gt1[0].gd.V:0)},
         'OLORUNSOGO NIPP' : {mw: !state_data.olorunsogoPhase1Gs.lines ? 0  : Number(
-            ((olorunsogoPhase1Gs_r1w[0]?.td ? (olorunsogoPhase1Gs_r1w[0].td.A / 1.62344817):0) + (olorunsogoPhase1Gs_r2a[0]?.td ?olorunsogoPhase1Gs_r2a[0].td.mw:0)) - 
+            ((olorunsogoPhase1Gs_r1w[0]?.td ? (olorunsogoPhase1Gs_r1w[0].td.mw * 1.62344817):0) + (olorunsogoPhase1Gs_r2a[0]?.td ?olorunsogoPhase1Gs_r2a[0].td.mw:0)) - 
             ((olorunsogo1_tr1[0]?.gd ?olorunsogo1_tr1[0].gd.mw:0) + (olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.mw:0) + 
             (olorunsogoPhase1Gs_tr3[0]?.gd ?olorunsogoPhase1Gs_tr3[0].gd.mw:0) + (olorunsogoPhase1Gs_tr4[0]?.gd ?olorunsogoPhase1Gs_tr4[0].gd.mw:0))
                 ).toFixed(2), kv: (olorunsogoPhase1Gs_r2a[0]?.td ?olorunsogoPhase1Gs_r2a[0].td.V:0)},
