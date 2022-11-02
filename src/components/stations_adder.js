@@ -208,7 +208,7 @@ const get_stations =  function(state_data) {
             ((olorunsogoPhase1Gs_r1w[0]?.td ? (olorunsogoPhase1Gs_r1w[0].td.amp / 1.76):0) + (olorunsogoPhase1Gs_r2a[0]?.td ?olorunsogoPhase1Gs_r2a[0].td.mw:0)) - 
             ((olorunsogo1_tr1[0]?.gd ?olorunsogo1_tr1[0].gd.mw:0) + (olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.mw:0) + 
             (olorunsogoPhase1Gs_tr3[0]?.gd ?olorunsogoPhase1Gs_tr3[0].gd.mw:0) + (olorunsogoPhase1Gs_tr4[0]?.gd ?olorunsogoPhase1Gs_tr4[0].gd.mw:0))
-                ).toFixed(2), kv: (olorunsogoPhase1Gs_r1w[0]?.td ?olorunsogoPhase1Gs_r1w[0].td.V:0)},
+                ).toFixed(2), kv: (olorunsogoPhase1Gs_r2a[0]?.td ?olorunsogoPhase1Gs_r2a[0].td.V:0)},
         'PARAS ENERGY (GAS)' : {mw: Number(
             (parasEnergyPs_132cb[0]?.gd ?parasEnergyPs_132cb[0].gd.mw:0)
             ).toFixed(2), kv: (parasEnergyPs_132cb[0]?.gd ?parasEnergyPs_132cb[0].gd.V:0)},
