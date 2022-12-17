@@ -17,6 +17,7 @@ import Uptime from './components/Uptime';
 import Average from './components/Average';
 import PageOne from './components/PageOne';
 import PageTwo from './components/PageTwo';
+import FullPage from './components/FullPage';
 import UpdatePassword from './components/Users/UpdatePassword';
 import Tem from './components/TemDownload';
 import Collapse from './components/CollapseDownload';
@@ -111,6 +112,9 @@ class App extends React.Component {
           </Route>
           <Route exact path={`/pagetwo`}>
               <PageTwo />         
+          </Route>
+          <Route exact path={`/fullpage`}>
+              <FullPage />         
           </Route>
         </Switch>
         {/* <Footer /> */}
