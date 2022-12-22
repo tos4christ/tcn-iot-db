@@ -24,21 +24,6 @@ import { Spinner, Button } from "react-bootstrap";
   }
   componentDidMount() {
     this.setStation();
-    const url = 'http://10.5.30.162';
-    const url1 = 'http://10.5.30.162/Meters.htm';
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => response.json())
-    .then( resp => {
-      console.log(resp, 'the response packet');
-    })
-    .catch(e => {
-      console.log(e);
-    });
   }
   setDate(e) {    
     const name = e.target.name;
