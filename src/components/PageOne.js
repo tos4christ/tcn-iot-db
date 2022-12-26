@@ -7,6 +7,7 @@ import get_stations from "./stations_adder";
    constructor(props) {
      super(props);
      this.state = { 
+      frequency: "",
       afamIv_vPs: {},
       shiroroPs: {},
       egbinPs: {},
@@ -68,6 +69,16 @@ import get_stations from "./stations_adder";
         return returnObject;
       })
     });
+    socket.on("frequency", data => {
+      const { message } = data;
+      const parsedMessage = JSON.parse(message);
+      const returnObject = {}
+      this.setState(prevState => {
+        prevState["frequency"] = parsedMessage;
+        returnObject["frequency"] = prevState["frequency"]
+        return returnObject;
+      })
+    });
    }
    checkConnection(mw, kv) {
     mw = Number(mw);
@@ -110,6 +121,7 @@ import get_stations from "./stations_adder";
       <>
       <div className="ncc-menu">
         <div className="ncc-menu-list">
+          <div style={{color: "darkred", fontSize: 20}}> Frequency:  { this.state.frequency }</div>
           <div className="ncc-display-div">
             <h2 className="text-danger">IoT POWER STATIONS TABLE</h2>
             <table className="ncc-tg">

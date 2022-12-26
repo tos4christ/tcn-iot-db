@@ -133,8 +133,8 @@ import get_stations from "./stations_adder";
     return (
       <>
       <div className="ncc-menu">
-        <span> { this.state.frequency }</span>
         <div className="ncc-menu-list">
+          <div style={{color: "darkred", fontSize: 20}}> Frequency:  { this.state.frequency }</div>
           <div className="ncc-display-div">
             <h2 className="text-danger">IoT POWER STATIONS TABLE</h2>
             <table className="ncc-tg">

@@ -9,6 +9,7 @@ import get_stations from "./stations_adder";
      super(props);
      this.toggleDisplay = this.toggleDisplay.bind(this);
      this.state = { 
+      frequency: "",
       afamIv_vPs: {},
       afamVPs: {},
       transamadiGs: {},
@@ -72,6 +73,16 @@ import get_stations from "./stations_adder";
       this.setState(prevState => {
         prevState[station] = parsedMessage;
         returnObject[station] = prevState[station]
+        return returnObject;
+      })
+    });
+    socket.on("frequency", data => {
+      const { message } = data;
+      const parsedMessage = JSON.parse(message);
+      const returnObject = {}
+      this.setState(prevState => {
+        prevState["frequency"] = parsedMessage;
+        returnObject["frequency"] = prevState["frequency"]
         return returnObject;
       })
     });
@@ -180,6 +191,7 @@ import get_stations from "./stations_adder";
             </li>
           </ul>
           <div className="display-div">
+            <h1 style={{color: "darkred", fontSize: 20}}> Frequency:  { this.state.frequency }</h1>
             <h2 className="text-danger">IoT POWER STATIONS TABLE</h2>
             <table className="tg">
               <thead>
