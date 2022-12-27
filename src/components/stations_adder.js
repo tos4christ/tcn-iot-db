@@ -147,7 +147,7 @@ const get_stations =  function(state_data) {
         'AFAM IV & V (GAS)' : {mw: Number(
             (afamIv_vPs_gt17[0]?.td ?afamIv_vPs_gt17[0].td.mw:0) + (afamIv_vPs_gt18[0]?.td ?afamIv_vPs_gt18[0].td.mw:0) +
             (afamVPs_gt20[0]?.gd ? Math.abs(afamVPs_gt20[0].gd.mw) : 0)
-            ).toFixed(2), kv: (afamIv_vPs_gt17[0]?.td ?afamIv_vPs_gt17[0].td.V:0)},
+            ).toFixed(2), kv: (afamIv_vPs_gt18[0]?.td ?afamIv_vPs_gt18[0].td.V:0)},
         'KAINJI (HYDRO)' : {mw: Number(
             (kainjiTs_k1f[0]?.td ?kainjiTs_k1f[0].td.mw:0) + (kainjiTs_k1j[0]?.td ?kainjiTs_k1j[0].td.mw:0) + 
             (kainjiTs_k2j[0]?.td ?kainjiTs_k2j[0].td.mw:0) + (kainjiTs_k3r[0]?.td ?kainjiTs_k3r[0].td.mw:0)
@@ -236,7 +236,7 @@ const get_stations =  function(state_data) {
         'OLORUNSOGO (GAS)' : {mw: Number(
             Math.abs(olorunsogo1_tr1[0]?.gd ?olorunsogo1_tr1[0].gd.mw:0) + Math.abs(olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.mw:0) + 
             Math.abs(olorunsogoPhase1Gs_tr3[0]?.gd ?olorunsogoPhase1Gs_tr3[0].gd.mw:0) + Math.abs(olorunsogoPhase1Gs_tr4[0]?.gd ?olorunsogoPhase1Gs_tr4[0].gd.mw:0)
-                ).toFixed(2), kv: (olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.V:0)},
+                ).toFixed(2), kv: (olorunsogo1_tr1[0]?.gd ?olorunsogo1_tr1[0].gd.V:0)},
         'DADINKOWA G.S (HYDRO)' : {mw: Number(
             (dadinKowaGs_w21b[0]?.td ?dadinKowaGs_w21b[0].td.mw:0) + (dadinKowaGs_w23e[0]?.td ?dadinKowaGs_w23e[0].td.mw:0)
             ).toFixed(2), kv: dadinKowaGs_w21b[0]?.td ?dadinKowaGs_w21b[0].td.V:0},

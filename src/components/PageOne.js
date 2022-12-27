@@ -130,7 +130,7 @@ import get_stations from "./stations_adder";
                   <th className="ncc-tg-zb4j">STATIONS</th>
                   <th className="ncc-tg-zb4j">STATUS</th>
                   <th className="ncc-tg-zb4j">POWER(MW)</th>
-                  <th className="ncc-tg-zb4j text-danger">VOLTAGE(KV)</th>
+                  <th className="ncc-tg-zb4j text-danger">VOLTAGE(kV)</th>
                 </tr>
               </thead>
               <tbody>

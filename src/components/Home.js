@@ -200,7 +200,7 @@ import get_stations from "./stations_adder";
                   <th className="tg-zb4j">STATIONS</th>
                   <th className="tg-zb4j">STATUS</th>
                   <th className="tg-zb4j">POWER(MW)</th>
-                  <th className="tg-zb4j text-danger">VOLTAGE(KV)</th>
+                  <th className="tg-zb4j text-danger">VOLTAGE(kV)</th>
                 </tr>
               </thead>
               <tbody>
@@ -412,7 +412,7 @@ import get_stations from "./stations_adder";
                   <th className="tg-zb4j">STATIONS</th>
                   <th className="tg-zb4j">STATUS</th>
                   <th className="tg-zb4j">POWER(MW)</th>
-                  <th className="tg-zb4j">VOLTAGE</th>
+                  <th className="tg-zb4j">VOLTAGE(kV)</th>
                 </tr>
               </thead>
                 <tbody>
