@@ -6,7 +6,8 @@ import { Spinner, Button } from "react-bootstrap";
   constructor(props) {
     super(props);
     this.setDate = this.setDate.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitLoad = this.handleSubmitLoad.bind(this);
+    this.handleSubmitFrequency = this.handleSubmitFrequency.bind(this);
     this.state = {
       startDate: '',
       loading: false
@@ -19,7 +20,7 @@ import { Spinner, Button } from "react-bootstrap";
       return {name : prevState[name]}
     })
   }
-  handleSubmit() {
+  handleSubmitLoad() {
     const startDate = this.state.startDate[0];
     // console.log(startDate, startTime, 'the start date and time');
     const token = localStorage.getItem("token");
@@ -57,6 +58,44 @@ import { Spinner, Button } from "react-bootstrap";
       })      
     }    
   }
+  handleSubmitFrequency() {
+    const startDate = this.state.startDate[0];
+    // console.log(startDate, startTime, 'the start date and time');
+    const token = localStorage.getItem("token");
+    // verify that the startDate is lower than the endDate
+    // This is already handled at the backend by replacing the lower to be the start
+    const getFrequency = startDate;
+    if(getFrequency) {
+      const url = '/frequency';
+      const data = {
+        startDate
+      };
+      // add a spinner method while request is loading
+      this.setState({loading: true}, () => {
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            credentials: 'include'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.blob())
+        .then( blob => {
+          // Return a message
+          this.setState({loading: false})
+          var url = window.URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = "frequency.xlsx";
+          document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+          a.click();
+          a.remove();  //afterwards we remove the element again 
+        });
+      })      
+    }    
+  }
   render() {
     const { isLoggedIn } = this.props;
     if (!isLoggedIn) {
@@ -75,7 +114,18 @@ import { Spinner, Button } from "react-bootstrap";
             <input type={'date'} name="startDate" onChange={this.setDate} ref={node => this.startDate = node}></input>
           </div>
           <div className="line"> </div>
-          <button className=" tem submit-button" onClick={this.handleSubmit}> Download Data </button>
+          <button className=" tem submit-button" onClick={this.handleSubmitLoad}> Download Load Data </button>
+        </div>
+        <div>
+          <h2 className="history-text"> Select a Date to download Frequency Data</h2>
+          <div className="line"> </div>
+          {/* Select Start Date */}    
+          <div className="tem options">
+            <label> Report Date </label> 
+            <input type={'date'} name="startDate" onChange={this.setDate} ref={node => this.startDate = node}></input>
+          </div>
+          <div className="line"> </div>
+          <button className=" tem submit-button" onClick={this.handleSubmitFrequency}> Download Frequency Data </button>
         </div>
         <div className="table-div">
           {loading ? 
