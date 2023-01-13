@@ -151,7 +151,7 @@ const get_stations =  function(state_data) {
         'KAINJI (HYDRO)' : {mw: Number(
             (kainjiTs_k1f[0]?.td ?kainjiTs_k1f[0].td.mw:0) + (kainjiTs_k1j[0]?.td ?kainjiTs_k1j[0].td.mw:0) + 
             (kainjiTs_k2j[0]?.td ?kainjiTs_k2j[0].td.mw:0) + (kainjiTs_k3r[0]?.td ?kainjiTs_k3r[0].td.mw:0)
-                ).toFixed(2), kv: (kainjiTs_k1f[0]?.td ?kainjiTs_k1f[0].td.V:0)},
+                ).toFixed(2), kv: (kainjiTs_k2j[0]?.td ?kainjiTs_k2j[0].td.V:0)},
         'EGBIN (STEAM)' : {mw: Number(
             (egbinPs_st1[0]?.gd ?egbinPs_st1[0].gd.mw:0) + (egbinPs_st2[0]?.gd ?egbinPs_st2[0].gd.mw:0) + 
             (egbinPs_st3[0]?.gd ?egbinPs_st3[0].gd.mw:0) + (egbinPs_st4[0]?.gd ?egbinPs_st4[0].gd.mw:0) + 
