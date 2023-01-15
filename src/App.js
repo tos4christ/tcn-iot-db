@@ -107,13 +107,13 @@ class App extends React.Component {
               <Collapse isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>            
           </Route>
-          <Route exact path={`/pageone`}>
+          <Route exact path={`/nccnaspageone`}>
               <PageOne />           
           </Route>
-          <Route exact path={`/pagetwo`}>
+          <Route exact path={`/nccnaspagetwo`}>
               <PageTwo />         
           </Route>
-          <Route exact path={`/fullpage`}>
+          <Route exact path={`/nccnasfullpage`}>
               <FullPage />         
           </Route>
         </Switch>

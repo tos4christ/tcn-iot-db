@@ -45,7 +45,7 @@ import get_stations from "./stations_adder";
      };
    }
    componentDidMount() {
-    socket.on("client_message_1", data => {
+    socket.on("client_message_111", data => {
       const { message } = data;
       const parsedMessage = JSON.parse(message);
       const station = parsedMessage.id;
@@ -57,7 +57,7 @@ import get_stations from "./stations_adder";
         return returnObject;
       })
     });
-    socket.on("client_message_2", data => {
+    socket.on("client_message_222", data => {
       const { message } = data;
       const parsedMessage = JSON.parse(message);
       const station = parsedMessage.id;
@@ -69,7 +69,7 @@ import get_stations from "./stations_adder";
         return returnObject;
       })
     });
-    socket.on("frequency", data => {
+    socket.on("frequency000", data => {
       const { message } = data;
       const parsedMessage = JSON.parse(message);
       const returnObject = {}
