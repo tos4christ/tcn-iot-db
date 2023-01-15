@@ -27,10 +27,9 @@ class App extends React.Component {
   setUserDetails() {
 
   }
-  componentDidMount() {
-    // <button onClick={() => window.location.reload(true)}>Refresh</button>
-    window.location.reload(true);
-  }
+  // componentDidMount() {
+  //   localStorage.setItem("isLoggedIn", true);
+  // }
   render() {
     return (
       <Router>
