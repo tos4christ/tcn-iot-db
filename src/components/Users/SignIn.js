@@ -13,6 +13,7 @@ class SignIn extends React.Component {
     this.state = {
       email: '',
       password: '',
+      message: ''
     }
   }
   setEmail(email) {
@@ -61,7 +62,9 @@ class SignIn extends React.Component {
         //If this is not the first login Redirect to home page
         return this.props.history.push({pathname: `/home`});
       } else if (response.status === "Error") {
-        console.log("oya now");
+        this.setEmail({email: ""});
+        this.setPassword({password: ""});
+        this.setState({message: "Incorrect Password"});
         return this.props.history.push({pathname: `/signin`});
       }
       
@@ -95,6 +98,7 @@ class SignIn extends React.Component {
               />
               <Button id="" text={"Login"} onClick={() => "do nothing"} />
             </form>
+              <span>{this.state.message}</span>
           </div>
         </div>
       </div>
