@@ -90,7 +90,7 @@ class SignIn extends React.Component {
               <Link
                 question="Sign In"
               />
-              <Button id="" text={"Login"} onClick={() => this.handleSubmission} />
+              <Button id="" text={"Login"} onClick={() => "do nothing"} />
             </form>
           </div>
         </div>
