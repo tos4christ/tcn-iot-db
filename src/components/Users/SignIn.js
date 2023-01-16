@@ -61,7 +61,8 @@ class SignIn extends React.Component {
         //If this is not the first login Redirect to home page
         return this.props.history.push({pathname: `/home`});
       } else if (response.status === "Error") {
-        return this.props.history.push({pathname: `/`});
+        console.log("oya now");
+        return this.props.history.push({pathname: `/signin`});
       }
       
     })
