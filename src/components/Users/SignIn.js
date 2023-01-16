@@ -41,7 +41,7 @@ class SignIn extends React.Component {
     })
     .then((res) => res.json())
     .then((response) => {
-      // console.log(response, 'this is the response', typeof response);
+      console.log(response, 'this is the response', typeof response);
       if (response.data === 'new') {
         this.props.history.push({pathname: `/updatepassword?email=${email}`});
       } else {
