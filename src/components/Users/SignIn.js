@@ -11,9 +11,9 @@ class SignIn extends React.Component {
     this.setPassword = this.setPassword.bind(this);
     this.handleSubmission = this.handleSubmission.bind(this);
     this.state = {
-      email: '',
-      password: '',
-      message: ''
+      email: "User Email",
+      password: "Password",
+      message: ""
     }
   }
   setEmail(email) {
@@ -81,14 +81,14 @@ class SignIn extends React.Component {
             <form className="mt-3" onSubmit={this.handleSubmission} autoComplete="on">
               <Text
                 type={"email"}
-                placeholder={"User Email"}
+                placeholder={this.state.email}
                 name={"email"}
                 icon={"fa fa-envelope"}
                 nameChange={ this.setEmail }
               />
               <Text
                 type={"password"}
-                placeholder={"Password"}
+                placeholder={this.state.password}
                 name={"password"}
                 icon={"fa fa-lock"}
                 nameChange={ this.setPassword }
