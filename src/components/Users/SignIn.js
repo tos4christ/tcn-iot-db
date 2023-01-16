@@ -9,6 +9,7 @@ class SignIn extends React.Component {
     super(props);
     this.setEmail = this.setEmail.bind(this);
     this.setPassword = this.setPassword.bind(this);
+    this.handleSubmission = this.handleSubmission.bind(this);
     this.state = {
       email: '',
       password: '',
@@ -89,7 +90,7 @@ class SignIn extends React.Component {
               <Link
                 question="Sign In"
               />
-              <Button id="" text={"Login"} onClick={() => "coming"} />
+              <Button id="" text={"Login"} onClick={() => this.handleSubmission} />
             </form>
           </div>
         </div>
