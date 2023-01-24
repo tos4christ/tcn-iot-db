@@ -9,7 +9,8 @@ import { Spinner, Button } from "react-bootstrap";
     this.handleSubmitLoad = this.handleSubmitLoad.bind(this);
     this.handleSubmitFrequency = this.handleSubmitFrequency.bind(this);
     this.state = {
-      startDate: '',
+      startDate_load: '',
+      startDate_frequency: '',
       loading: false
     }
   }
@@ -21,7 +22,7 @@ import { Spinner, Button } from "react-bootstrap";
     })
   }
   handleSubmitLoad() {
-    const startDate = this.state.startDate[0];
+    const startDate = this.state.startDate_load[0];
     // console.log(startDate, startTime, 'the start date and time');
     const token = localStorage.getItem("token");
     // verify that the startDate is lower than the endDate
@@ -59,7 +60,7 @@ import { Spinner, Button } from "react-bootstrap";
     }    
   }
   handleSubmitFrequency() {
-    const startDate = this.state.startDate[0];
+    const startDate = this.state.startDate_frequency[0];
     // console.log(startDate, startTime, 'the start date and time');
     const token = localStorage.getItem("token");
     // verify that the startDate is lower than the endDate
@@ -111,7 +112,7 @@ import { Spinner, Button } from "react-bootstrap";
           {/* Select Start Date */}    
           <div className="tem options">
             <label> Report Date </label> 
-            <input type={'date'} name="startDate" onChange={this.setDate} ref={node => this.startDate = node}></input>
+            <input type={'date'} name="startDate_load" onChange={this.setDate} ref={node => this.startDate_load = node}></input>
           </div>
           <div className="line"> </div>
           <button className=" tem submit-button" onClick={this.handleSubmitLoad}> Download Load Data </button>
@@ -122,7 +123,7 @@ import { Spinner, Button } from "react-bootstrap";
           {/* Select Start Date */}    
           <div className="tem options">
             <label> Report Date </label> 
-            <input type={'date'} name="startDate" onChange={this.setDate} ref={node => this.startDate = node}></input>
+            <input type={'date'} name="startDate_frequency" onChange={this.setDate} ref={node => this.startDate_frequency = node}></input>
           </div>
           <div className="line"> </div>
           <button className=" tem submit-button" onClick={this.handleSubmitFrequency}> Download Frequency Data </button>
