@@ -1,18 +1,14 @@
 import React from "react";
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import socket from "./utility/socketIO";
 import get_stations from "./stations_adder";
-// import { Spinner, Button, Table } from "react-bootstrap";
 
- class Home extends React.Component {
+ class FullPage extends React.Component {
    constructor(props) {
      super(props);
-     this.toggleDisplay = this.toggleDisplay.bind(this);
      this.state = { 
       frequency: "",
       afamIv_vPs: {},
-      afamVPs: {},
-      transamadiGs: {},
       shiroroPs: {},
       egbinPs: {},
       kainjiTs: {},
@@ -27,7 +23,7 @@ import get_stations from "./stations_adder";
       alaoji: {},
       sapeleNippPs: {},
       omotoshoNippPs: {},
-      odukpaniNippPs: {},
+      odukpaniGs: {},
       ekim: {},
       gereguPs: {},
       ikotEkpene: {},
@@ -45,10 +41,7 @@ import get_stations from "./stations_adder";
       lokojaTs: {},
       ugwuaji: {},
       gwagwalada: {},
-      message: "",
-      received: [],
       connected: false,
-      display: ''
      };
    }
    componentDidMount() {
@@ -87,12 +80,6 @@ import get_stations from "./stations_adder";
       })
     });
    }
-   toggleDisplay(e) {
-    this.setState(prevState => {
-      prevState.display = this.state.display === '' ? 'none' : '';
-      return {display : prevState.display}
-    })
-   }
    checkConnection(mw, kv) {
     mw = Number(mw);
     kv = Number(kv);
@@ -107,10 +94,6 @@ import get_stations from "./stations_adder";
     }
    }
   render() {
-    const { isLoggedIn } = this.props;
-    if (!isLoggedIn) {
-      return <Redirect to={'/'}/>
-    }
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
     const ihovbor_gs = stations_array['IHOVBOR NIPP (GAS)'];
@@ -139,72 +122,32 @@ import get_stations from "./stations_adder";
     const gbarain_gs = stations_array['GBARAIN NIPP (GAS)'];
     const olorunsogogas_gs = stations_array['OLORUNSOGO (GAS)'];
     const dadinkowa_gs = stations_array['DADINKOWA G.S (HYDRO)'];
-    const asaba_ts = stations_array['ASABA'];
-    const ugwuaji_ts = stations_array['UGWUAJI'];
-    const gwagwalada_ts = stations_array['GWAGWALADA'];
-    const ikotekpene_ts = stations_array['IKOT EKPENE'];
-    const ekim_ts = stations_array['EKIM'];    
-    const phMain_ts = stations_array['PORT-HARCOURT MAIN'];
-    const lokoja_ts = stations_array['LOKOJA TS'];
-    const eket_ts = stations_array['EKET'];
 
-    const totalGeneration = Number(riversipp_gs.mw) + Number(afam6_gs.mw) + Number(paras_gs.mw) + Number(geregugas_gs.mw) +
+    const totalGeneration = Number(riversipp_gs.mw) + Number(afam6_gs.mw) + Number(paras_gs.mw) + Number(geregugas_gs.mw) + 
     Number(geregunipp_gs.mw) + Number(omotosogas_gs.mw) + Number(omotosonipp_gs.mw) + Number(sapelenipp_gs.mw) + Number(sapelesteam_gs.mw) +
-    Number(omoku_gs.mw) + Number(odukpani_gs.mw) + Number(alaoji_gs.mw) + Number(azura_gs.mw) + Number(olorunsogonipp_gs.mw) + Number(ihovbor_gs.mw) +
-    Number(transamadi_gs.mw) + Number(ibom_gs.mw) + Number(olorunsogogas_gs.mw) + Number(gbarain_gs.mw) + Number(shiroro_gs.mw) + Number(afam4_gs.mw) +
+    Number(omoku_gs.mw) + Number(odukpani_gs.mw) + Number(alaoji_gs.mw) + Number(azura_gs.mw) + 
+    (Number(olorunsogonipp_gs.mw) <= -3 ? 0 : Number(olorunsogonipp_gs.mw)) + Number(ihovbor_gs.mw) + Number(transamadi_gs.mw) +
+    Number(ibom_gs.mw) + Number(olorunsogogas_gs.mw) + Number(gbarain_gs.mw) + Number(shiroro_gs.mw) + Number(afam4_gs.mw) + 
     Number(kainji_gs.mw) + Number(egbin_gs.mw) + Number(okpai_gs.mw) + Number(delta_gs.mw) + Number(jebba_gs.mw) + Number(dadinkowa_gs.mw);
-    
-    const totalTransmission = Number(ugwuaji_ts.mw) + Number(asaba_ts.mw) + Number(ekim_ts.mw) + Number(gwagwalada_ts.mw) + Number(lokoja_ts.mw) +
-    Number(phMain_ts.mw) + Number(ikotekpene_ts.mw) + Number(eket_ts.mw);
         
     return (
       <>
-      <div className="menu">
-        <div className="text-white rounded">
-          <h2 className="message">TCN Tool to query equipment parameters and state</h2>
-        </div>
-        <div className="menu-list">
-          <ul className="ul-menu text-center">
-            <li>
-              <Link to={`/collapse`} onClick={this.toggleDisplay} type="button">Analyze Generation</Link>
-            </li>
-            <li>
-              <Link to={`/tem`} onClick={this.toggleDisplay} type="button">TEM Sheet Download</Link>
-            </li>
-            <li>
-              <Link to={`/downtime`} onClick={this.toggleDisplay} type="button">Downtime</Link>
-            </li>
-            <li>
-              <Link to={'/uptime'} onClick={this.toggleDisplay} type="button">Uptime</Link>
-            </li>
-            <li>
-              <Link to={'/history'} onClick={this.toggleDisplay} type="button">History</Link>
-            </li>
-            <li>
-              <Link to={'/profile'} onClick={this.toggleDisplay} type="button">Profile</Link>
-            </li>
-            <li>
-              <Link to={'/average'} onClick={this.toggleDisplay} type="button">Average</Link>
-            </li>
-            <li>
-              <Link to={'/updatepassword'} onClick={this.toggleDisplay} type="button">Change Password</Link>
-            </li>
-          </ul>
-          <div className="display-div">
-            <h1 className="text-danger"> Frequency:  { this.state.frequency }</h1>
-            <h2 className="text-danger">IoT POWER STATIONS TABLE</h2>
-            <table className="tg">
+      <div className="ncc-menu">
+        <div className="ncc-menu-list">
+          <div className="ncc-display-div">
+            <h2 className="text-danger">IoT POWER STATIONS TABLE  -- Frequency:  { this.state.frequency }Hz</h2>
+            <table className="ncc-tg">
               <thead>
                 <tr>
-                  <th className="tg-zb4j">S/N</th>
-                  <th className="tg-zb4j">STATIONS</th>
-                  <th className="tg-zb4j">STATUS</th>
-                  <th className="tg-zb4j">POWER(MW)</th>
-                  <th className="tg-zb4j text-danger">VOLTAGE(kV)</th>
+                  <th className="ncc-tg-zb4j">S/N</th>
+                  <th className="ncc-tg-zb4j">STATIONS</th>
+                  <th className="ncc-tg-zb4j">STATUS</th>
+                  <th className="ncc-tg-zb4j">POWER(MW)</th>
+                  <th className="ncc-tg-zb4j text-danger">VOLTAGE(kV)</th>
                 </tr>
               </thead>
               <tbody>
-              <tr>
+                <tr>
                   <td>1</td>
                   <td>RIVERS IPP (GAS)</td>
                   <td>{this.checkConnection(riversipp_gs.mw, riversipp_gs.kv)}</td>
@@ -394,102 +337,45 @@ import get_stations from "./stations_adder";
                   <td>{okpai_gs.kv}</td>
                 </tr>
                 <tr></tr>
-                <tr >
+                <tr>
                   <td></td>
-                  <td>TOTAL</td>
+                  <td>TOTAL GENERATION</td>
                   <td></td>
                   <td>{totalGeneration.toFixed(2)}</td>
                   <td></td>
-                </tr>              
+                </tr> 
               </tbody>
-            </table>
-
-            <h2 className="text-white">IoT Transmission Stations</h2>
-            <table className="tg">
-              <thead>
-                <tr>
-                  <th className="tg-zb4j">S/N</th>
-                  <th className="tg-zb4j">STATIONS</th>
-                  <th className="tg-zb4j">STATUS</th>
-                  <th className="tg-zb4j">POWER(MW)</th>
-                  <th className="tg-zb4j">VOLTAGE(kV)</th>
-                </tr>
-              </thead>
+            </table>            
+          </div>
+          <div className="ncc-counter-div">
+            <table className="ncc-counter-tg">
+                <thead>
+                    <tr>
+                    <th className="ncc-counter-tg-zb4j"></th>
+                    <th className="ncc-counter-tg-zb4j">LEGEND</th>
+                    </tr>
+                </thead>
                 <tbody>
-                  <tr>
-                    <td>101</td>
-                    <td>IKOT EKPENE TS</td>
-                    <td>{this.checkConnection(ikotekpene_ts.mw, ikotekpene_ts.kv)}</td>
-                    <td>{ikotekpene_ts.mw}</td>
-                    <td>{ikotekpene_ts.kv}</td>
-                  </tr>
-                  <tr>
-                    <td>102</td>
-                    <td>GWAGWALADA TS</td>
-                    <td>{this.checkConnection(gwagwalada_ts.mw, gwagwalada_ts.kv)}</td>
-                    <td>{gwagwalada_ts.mw}</td>
-                    <td>{gwagwalada_ts.kv}</td>
-                  </tr>
-                  <tr>
-                    <td>103</td>
-                    <td>LOKOJA TS</td>
-                    <td>{this.checkConnection(lokoja_ts.mw, lokoja_ts.kv)}</td>
-                    <td>{lokoja_ts.mw}</td>
-                    <td>{lokoja_ts.kv}</td>
-                  </tr>
-                  <tr>
-                    <td>104</td>
-                    <td>ASABA TS</td>
-                    <td>{this.checkConnection(asaba_ts.mw, asaba_ts.kv)}</td>
-                    <td>{asaba_ts.mw}</td>
-                    <td>{asaba_ts.kv}</td>
-                  </tr>
-                  <tr>
-                    <td>105</td>
-                    <td>UGWAJI TS</td>
-                    <td>{this.checkConnection(ugwuaji_ts.mw, ugwuaji_ts.kv)}</td>
-                    <td>{ugwuaji_ts.mw}</td>
-                    <td>{ugwuaji_ts.kv}</td>
-                  </tr>
-                  <tr>
-                    <td>107</td>
-                    <td>EKIM TS</td>
-                    <td>{this.checkConnection(ekim_ts.mw, ekim_ts.kv)}</td>
-                    <td>{ekim_ts.mw}</td>
-                    <td>{ekim_ts.kv}</td>
-                  </tr>
-                  <tr>
-                    <td>108</td>
-                    <td>PORTHARCOURT MAIN TS</td>
-                    <td>{this.checkConnection(phMain_ts.mw, phMain_ts.kv)}</td>
-                    <td>{phMain_ts.mw}</td>
-                    <td>{phMain_ts.kv}</td>
-                  </tr>
-                  <tr>
-                    <td>109</td>
-                    <td>EKET TS</td>
-                    <td>{this.checkConnection(eket_ts.mw, eket_ts.kv)}</td>
-                    <td>{eket_ts.mw}</td>
-                    <td>{eket_ts.kv}</td>
-                  </tr>              
-                  <tr>
-                    <td></td>
-                    <td>TOTAL</td>
-                    <td></td>
-                    <td>{totalTransmission.toFixed(2)}</td>
-                    <td></td>
-                  </tr>
-              </tbody>
-            </table>
+                    <tr>
+                    <td>CN</td>
+                    <td>CONNECTED</td>
+                    </tr>
+                    <tr>
+                    <td>NC</td>
+                    <td>NOT CONNECTED</td>
+                    </tr>
+                    <tr>
+                    <td>PNDG</td>
+                    <td>PENDING</td>
+                    </tr>                                        
+                </tbody>
+                </table> 
           </div>
-          <div className="counter-div">
-
-          </div>
-        </div>              
+        </div>
       </div>
     </>
     )         
   }
 }
 
-export default withRouter(Home);
+export default withRouter(FullPage);

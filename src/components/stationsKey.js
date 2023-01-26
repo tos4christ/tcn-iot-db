@@ -1,4 +1,4 @@
-export default {
+const stationsKey = {
     "OMOTOSHO 2" : 'omotosho2',
     "EKET" : 'eket',
     "PORTHARCOURT MAIN" : 'phMain',
@@ -28,4 +28,14 @@ export default {
     "IBOM POWER" : 'IBOM POWER',
     "GBARAIN" : 'gbarain',
     "OLORUNSOGO GAS": 'olorunsogoPhase1Gs',
+    "OKPAI GS" : 'okpaiGs',
+    "JEBBA GS" : 'jebbaTs',
+    "DADINKOWA GS" : 'dadinKowaGs',
+    "KAINJI GS" : 'kainjiTs',
+    "EGBIN GS" : 'egbinPs',
+    "AFAM IV GS" : 'afamIv_vPs',
+    "SHIRORO GS" : 'shiroroPs',
+    "DELTA 4" : 'deltaGs'
 };
+
+export default stationsKey;
