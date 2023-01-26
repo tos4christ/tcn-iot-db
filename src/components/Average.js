@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from 'react-router-dom';
 import stations from "./stations";
 import stationsKey from "./stationsKey";
 import Header from "./table/ProfileHeader";
@@ -48,6 +49,7 @@ import { Spinner, Button } from "react-bootstrap";
     const station = stationsKey[this.state.selectedStation];
     const equipment = this.state.selectedEquipment.toLowerCase();
     const checkDate = this.state.startDate[0];
+    const token = localStorage.getItem("token");
     // console.log(checkDate, 'the check date')
     // verify that the startDate is lower than the endDate
     const getAverage = station && equipment && checkDate;
@@ -62,10 +64,10 @@ import { Spinner, Button } from "react-bootstrap";
       this.setState({loading: true}, () => {
         fetch(url, {
           method: 'POST',
-          mode: 'cors',
-          cache: 'no-cache',
           headers: {
-            'Content-Type': 'application/json'
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            credentials: 'include'
           },
           body: JSON.stringify(data)
         })
@@ -94,6 +96,10 @@ import { Spinner, Button } from "react-bootstrap";
   }
 
   render() {
+    const { isLoggedIn } = this.props;
+    if (!isLoggedIn) {
+      return <Redirect to={'/'}/>
+    }
     const { loading, tableRows } = this.state;
     // get the stations from the keys of the object
     const stationer = Object.keys(stations);
@@ -101,8 +107,8 @@ import { Spinner, Button } from "react-bootstrap";
     const stationArray = [<option disabled key={0}>Select Station</option>];
     stationer.forEach((station, index) => stationArray.push(<option value={station} key={index + 1}> {station} </option>));
     return (
-      <div>
-        <a style={{margin: '10px', 'fontSize': '15px'}} type="button" href="/"> back</a>        
+      <div className="item-div">
+        <a style={{margin: '10px', 'fontSize': '15px'}} type="button" href="/home"> back</a>        
         <div>
           <h2 className="history-text"> Get 5 mins average of an equipment for the selected date</h2>
           {/* Select Station */}
