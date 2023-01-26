@@ -24,7 +24,9 @@ import Collapse from './components/CollapseDownload';
 // import Footer from './components/Footer';
 
 class App extends React.Component {
-  setUserDetails() {
+  constructor(props) {
+    super(props);
+  }
 
   }
   // componentDidMount() {
