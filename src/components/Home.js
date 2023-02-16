@@ -191,7 +191,7 @@ import get_stations from "./stations_adder";
             </li>
           </ul>
           <div className="display-div">
-            <h1 className="text-danger"> Frequency:  { this.state.frequency }</h1>
+            <h1 className="text-danger"> Frequency:  { this.state.frequency } Hz</h1>
             <h2 className="text-danger">IoT POWER STATIONS TABLE</h2>
             <table className="tg">
               <thead>
