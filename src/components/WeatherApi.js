@@ -35,7 +35,7 @@ function WeatherApi({tickets}) {
     console.log(url, " the url");
     fetch(url, {
     method: "GET",
-    mode: "no-cors",
+    mode: "cors",
     headers: {
         "Content-Type": "application/json",
     },
