@@ -31,14 +31,17 @@ function WeatherApi({tickets}) {
     });
   function getWeather(e) {
     e.preventDefault();
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}`;
+    const url_1 = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}`;
+    const url = '/frequency/weather';
     console.log(url, " the url");
+    const body = {url: url_1}
     fetch(url, {
-    method: "GET",
+    method: "POST",
     mode: "cors",
+    body: JSON.stringify(body),
     headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "https://tcnnas.org",
+        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With"
     },
