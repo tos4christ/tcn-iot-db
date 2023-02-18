@@ -22,6 +22,7 @@ import UpdatePassword from './components/Users/UpdatePassword';
 import Tem from './components/TemDownload';
 import Collapse from './components/CollapseDownload';
 // import Footer from './components/Footer';
+import WeatherApi from './components/WeatherApi';
 
 class App extends React.Component {
   setUserDetails() {
@@ -115,6 +116,9 @@ class App extends React.Component {
           </Route>
           <Route exact path={`/nccnasfullpage`}>
               <FullPage />         
+          </Route>
+          <Route exact path={`/api/nccweather`}>
+              <WeatherApi />         
           </Route>
         </Switch>
         {/* <Footer /> */}
