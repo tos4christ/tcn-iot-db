@@ -37,14 +37,10 @@ function WeatherApi({tickets}) {
     const body = {url: url_1}
     fetch(url, {
     method: "POST",
-    mode: "cors",
-    body: JSON.stringify(body),
     headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With"
     },
+    body: JSON.stringify(body),
     })
     .then(res => res.json())
     .then((response) => {
