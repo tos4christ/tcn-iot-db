@@ -17,6 +17,17 @@ function WeatherApi({tickets}) {
     const [historical_display, setHistorical] = useState(false);
     const [long, setLong] = useState(0);
     const [lat, setLat] = useState(0);
+    const [station_name, setStationName] = useState(null);
+    const [weather_main, setWeatherMain] = useState(null);
+    const [weather_description , setWeatherDescription] = useState(null);
+    const [temp, setTemp] = useState(null);
+    const [feels_like, setFeelsLike] = useState(null);
+    const [humidity, setHumidity] = useState(null);
+    const [pressure, setPressure] = useState(null);
+    const [wind_speed, setWindSpeed] = useState(null);
+    const [wind_degree, setWindDegree] = useState(null);
+    const [wind_gust, setWindGust] = useState(null);
+    const [weather_date, setWeatherDate] = useState(null);
  
   useEffect(() => {
         // if(Array.isArray(tickets) && tickets.length > 0) {
@@ -33,7 +44,6 @@ function WeatherApi({tickets}) {
     e.preventDefault();
     const url_1 = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}`;
     const url = '/frequency/weather';
-    console.log(url, " the url");
     const body = {url: url_1}
     fetch(url, {
     method: "POST",
@@ -48,8 +58,18 @@ function WeatherApi({tickets}) {
         // Note that the weather is return in Kelvin
         // Subtract 273.15 from the resulting temperature to 
         // get its actual value
-
-
+        const { weather } = response;
+        setStationName(weather.name);
+        setWeatherMain(weather.weather[0].main);
+        setWeatherDescription(weather.weather[0].description);
+        setTemp(weather.main.temp);
+        setFeelsLike(weather.main.feels_like);
+        setHumidity(weather.main.humidity);
+        setPressure(weather.main.pressure);
+        setWindSpeed(weather.wind.speed);
+        setWindDegree(weather.wind.deg);
+        setWindGust(weather.wind.gust);
+        setWeatherDate(weather.dt);
     })
     .catch((error) => console.error(error.message));
 }
@@ -114,28 +134,30 @@ function WeatherApi({tickets}) {
   
         </div>
         <div className='row display'>
+           { !station_name ? '' : ( <div>
+            <h1> Station Name: { station_name}</h1>
             <label className='disco_form_label'>                    
-                
+                <span>The main weather is {weather_main}</span>
+                <span>Weather Description: {weather_description}</span>
             </label>
             <label className='disco_form_label'>                    
-                
+                <span>Current Temperature is {Number(temp) - 273.15} Celsius</span>
+                <span> Room Temperature feels like: {Number(feels_like) - 273.15} Celcius</span>
             </label>
             <label className='disco_form_label'>                    
-                
+                <span>Humidity: {humidity}</span>
+                <span>Pressure: {pressure}</span>
             </label>
             <label className='disco_form_label'>                    
-                
+                <span> Current Wind Speed is {wind_speed}Km/H </span>
+                <span> @ Wind Degree {wind_degree} degrees</span>
+                <span> with Wind Gust @ {wind_gust}</span>
             </label>
             <label className='disco_form_label'>                    
-                
-            </label>
-            <label className='disco_form_label'>                    
-                
-            </label>
-            <label className='disco_form_label'>                    
-                
-            </label>
-            
+                Date: {weather_date} in epoch Time
+            </label> 
+            </div>)
+            }
         </div>
     </div>
   );
