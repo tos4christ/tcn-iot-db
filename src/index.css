@@ -10,7 +10,7 @@ body {
   padding: 1em;
 }
 .weather_display {
-  margin: 1em 1em 1em 3em;
+  margin: 2em 1em 1em 10em;
   background-color: antiquewhite;
 }
 .weather_label h1 {
@@ -31,7 +31,6 @@ body {
   background-color: aqua;
 }
 .display {
-  margin: 2em 0 0 10em;
   padding: 2em;
 }
 .current form select, .current form button {
