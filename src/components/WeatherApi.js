@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
 
-function WeatherApi({tickets}) {
-    const history = useHistory();    
-    // const queryParams = new URLSearchParams(history.location.search);
-    // const index = queryParams.get("key");
-    // const appr_no = queryParams.get("appr")
+function WeatherApi() {
     const cordinates = {
         Aba: {longitude: 7.35582222222222, latitude: 5.09995555555555},
         Abeokuta: {longitude: 3.3908055555084, latitude: 7.10401944510485},
@@ -115,8 +110,8 @@ function WeatherApi({tickets}) {
             <form onSubmit={getWeather} >
                 <label className='disco_form_label'>
                     Select Station
-                    <select required onChange={e => setStation(e.target.value) } >
-                        <option selected disabled value="Select Station">Select Station</option>
+                    <select defaultValue={"Select Station"} required onChange={e => setStation(e.target.value) } >
+                        <option disabled value="Select Station">Select Station</option>
                         <option value="Aba">Aba</option>
                         <option value="Abeokuta">Abeokuta</option>
                         <option value="Ajah">Ajah</option>
