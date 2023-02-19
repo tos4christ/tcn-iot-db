@@ -132,21 +132,21 @@ function WeatherApi() {
            { !station_name ? '' : ( <div className='weather_display'>
             <h1> Station Name: {  station_name  }</h1>
             <label className='weather_label'>                    
-                <span> The main weather is {  weather_main  }  </span>
-                <span>  Weather Description: {  weather_description  } </span>
+                <span> Main weather: {  weather_main  }  </span>
+                <span> Weather Description: {  weather_description  } </span>
             </label>
             <label className='weather_label'>                    
-                <span>Current Temperature is {  Number(temp) - 273.15  } Celsius</span>
-                <span> Room Temperature feels like: {  Number(feels_like) - 273.15  } Celcius</span>
+                <span> Current Temperature: {  (Number(temp) - 273.15).toFixed(2)  } Celsius</span>
+                <span> Room Temperature feels like: {  (Number(feels_like) - 273.15).toFixed(2)  } Celcius</span>
             </label>
             <label className='weather_label'>                    
                 <span>Humidity: {  humidity  }</span>
                 <span>Pressure: {  pressure  }</span>
             </label>
             <label className='weather_label'>                    
-                <span> Current Wind Speed is {  wind_speed  }Km/H </span>
-                <span> @ Wind Degree {  wind_degree  } degrees</span>
-                <span> with Wind Gust @ {  wind_gust  }</span>
+                <span> Wind Speed: {  wind_speed  }Km/H </span>
+                <span> Wind Degree: {  wind_degree  } degrees</span>
+                <span> Wind Gust: {  wind_gust  }</span>
             </label>
             <label className='weather_label'>                    
                 Date: {  weather_date  } in epoch Time

@@ -9,13 +9,16 @@ body {
   margin: 1em 0 0 10em;
   padding: 1em;
 }
-.weather_label {
+.weather_display {
   margin: 1em 5em;
   background-color: antiquewhite;
 }
 .weather_label h1 {
   text-align: center;
   color: blueviolet;  
+}
+.weather_label {
+  width: 100%;
 }
 .weather_label span {
   margin: 1em;
