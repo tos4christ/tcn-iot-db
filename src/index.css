@@ -10,7 +10,7 @@ body {
   padding: 1em;
 }
 .weather_display {
-  margin: 1em 5em;
+  margin: 1em 1em 1em 3em;
   background-color: antiquewhite;
 }
 .weather_label h1 {
