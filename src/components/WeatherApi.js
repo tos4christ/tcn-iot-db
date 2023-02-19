@@ -109,7 +109,7 @@ function WeatherApi() {
         <div style={{display: current_display ? '' : 'none'}} className='row current'>
             <form onSubmit={getWeather} >
                 <label className='disco_form_label'>
-                    Select Station
+                    <span className='label-span'>Select Station</span>
                     <select defaultValue={"Select Station"} required onChange={e => setStation(e.target.value) } >
                         <option disabled value="Select Station">Select Station</option>
                         <option value="Aba">Aba</option>
@@ -129,27 +129,27 @@ function WeatherApi() {
   
         </div>
         <div className='row display'>
-           { !station_name ? '' : ( <div>
-            <h1> Station Name: { station_name}</h1>
-            <label className='disco_form_label'>                    
-                <span>The main weather is {weather_main}</span>
-                <span>Weather Description: {weather_description}</span>
+           { !station_name ? '' : ( <div className='weather_display'>
+            <h1> Station Name: {  station_name  }</h1>
+            <label className='weather_label'>                    
+                <span> The main weather is {  weather_main  }  </span>
+                <span>  Weather Description: {  weather_description  } </span>
             </label>
-            <label className='disco_form_label'>                    
-                <span>Current Temperature is {Number(temp) - 273.15} Celsius</span>
-                <span> Room Temperature feels like: {Number(feels_like) - 273.15} Celcius</span>
+            <label className='weather_label'>                    
+                <span>Current Temperature is {  Number(temp) - 273.15  } Celsius</span>
+                <span> Room Temperature feels like: {  Number(feels_like) - 273.15  } Celcius</span>
             </label>
-            <label className='disco_form_label'>                    
-                <span>Humidity: {humidity}</span>
-                <span>Pressure: {pressure}</span>
+            <label className='weather_label'>                    
+                <span>Humidity: {  humidity  }</span>
+                <span>Pressure: {  pressure  }</span>
             </label>
-            <label className='disco_form_label'>                    
-                <span> Current Wind Speed is {wind_speed}Km/H </span>
-                <span> @ Wind Degree {wind_degree} degrees</span>
-                <span> with Wind Gust @ {wind_gust}</span>
+            <label className='weather_label'>                    
+                <span> Current Wind Speed is {  wind_speed  }Km/H </span>
+                <span> @ Wind Degree {  wind_degree  } degrees</span>
+                <span> with Wind Gust @ {  wind_gust  }</span>
             </label>
-            <label className='disco_form_label'>                    
-                Date: {weather_date} in epoch Time
+            <label className='weather_label'>                    
+                Date: {  weather_date  } in epoch Time
             </label> 
             </div>)
             }
