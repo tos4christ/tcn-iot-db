@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import WeatherWidget from './Weather/WeatherWidget';
 
 function WeatherApi() {
     const cordinates = {
@@ -76,7 +77,7 @@ function WeatherApi() {
   }
  
   return (
-    <div className='container'>
+    <div className='container-fluid'>
         <div className='row dashboard'>
             <button onClick={() => {                
                 setCurrent(!current_display);
@@ -153,6 +154,9 @@ function WeatherApi() {
             </label> 
             </div>)
             }
+        </div>
+        <div className='row' style={{width: "165%"}}>
+            <WeatherWidget />
         </div>
     </div>
   );
