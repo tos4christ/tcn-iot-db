@@ -13,6 +13,20 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
  * HEADER AREA CSS
 **/
 
+/* Weather API */
+.weather_h3 {
+    font-style: oblique;
+    text-decoration: underline;
+}
+.weather_ul li {
+    padding: 10px;
+    font-family: serif;
+    text-transform:uppercase;
+}
+.weather_ul marquee {
+    margin-top: 10px;
+}
+
 
 .tem input, .report input {
     width: 8em;
