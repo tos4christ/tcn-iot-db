@@ -26,6 +26,28 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 .weather_ul marquee {
     margin-top: 10px;
 }
+.text_date {
+    font-size: small;
+}
+.weather_widget_row {
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    color: gray;
+    margin: 4px;
+}
+.weather_widget_row span {
+    flex-basis: content;
+    height: 50px;
+    padding: 5px;  
+    text-align: justify;
+    margin: 2px 8px;
+}
+
+
+
+
+
 
 
 .tem input, .report input {

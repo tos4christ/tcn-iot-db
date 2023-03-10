@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import WeatherWidget from './Weather/WeatherWidget';
+import WeatherWidget from './Weather/WeatherWidget_2';
 
 function WeatherApi() {
     const cordinates = {
@@ -24,17 +24,26 @@ function WeatherApi() {
     const [wind_degree, setWindDegree] = useState(null);
     const [wind_gust, setWindGust] = useState(null);
     const [weather_date, setWeatherDate] = useState(null);
+
+    const station_coordinates = [[1,2], [3,4]]
+    const openWeatherCall = new Promise((resolve, reject, url, station)=> {
+        fetch(url, done)
+            .then(res => res.json())
+            .then((res) => {
+                // update the state that corresponds to the name of the station
+
+            })
+            .finally(() => done)
+            .catch()
+    })
  
   useEffect(() => {
-        // if(Array.isArray(tickets) && tickets.length > 0) {
-        //     formData = tickets[index];
-        //     setComment(formData.comment);
-        //     setStation(formData.station);
-        //     setEquipment(formData.equipment);
-        //     setPriority(formData.priority);
-        //     setDisco(formData.disco);
-        //     setticketId(formData.ticket_id);
-        // }    
+    // Get the list of all the stations once and set it in the state
+
+    // set a timeout to call all the stations by iterating on their longitude
+
+
+          
     });
   function getWeather(e) {
     e.preventDefault();
