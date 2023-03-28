@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import logo from "../../assets/img/logo.JPG";
 import rlogo from "../../assets/img/responderLogo.JPG";
 
-const DashboardNavUser = ({ body }) => {
+const DashboardNavUser = ({ company, body }) => {
   const history = useHistory();
   const [toggle, setToggle] = useState(false);
   const route = history.location.pathname;
@@ -40,7 +40,7 @@ const DashboardNavUser = ({ body }) => {
             className="rounded-circle my-2 r-logo"
           />
           <div className="mx-auto" style={{ width: 190 }}>
-            <h5 className="text-dark font-weight-bold">EKEDC</h5>
+            <h5 className="text-dark font-weight-bold">{company}</h5>
           </div>
         </div>
         <div className="bg-light mt-4">

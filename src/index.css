@@ -20,7 +20,7 @@ code {
 .list-items, .ticket-header {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin: 0;
 }
 .tcn li {
@@ -42,15 +42,15 @@ code {
 }
 
 .ticket-header :nth-child(1) {
-  width: 12em;
+  width: 13em;
   border-right: 1px solid white;
 }
 .ticket-header :nth-child(2) {
-  width: 6em;
+  width: 7em;
   border-right: 1px solid white;
 }
 .ticket-header :nth-child(3) {
-  width: 6em;
+  width: 7em;
   border-left: 1px solid white;
 }
 

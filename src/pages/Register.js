@@ -9,6 +9,7 @@ const Register = () => {
   const history = useHistory();
   let [name, setName] = useState("");
   let [department, setDepartment] = useState("");
+  let [company, setCompany] = useState("");
   let [approval_level, setApprovalLevel] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
@@ -21,6 +22,9 @@ const Register = () => {
   }
   const set_department = (department) => {
     setDepartment(department);
+  }
+  const set_company = (company) => {
+    setCompany(company);
   }
   const set_approval_level = (level) => {
     setApprovalLevel(level);
@@ -48,6 +52,7 @@ const Register = () => {
       email,
       password,
       department,
+      company,
       approval_level,
     }
     fetch(url, {
@@ -84,6 +89,13 @@ const Register = () => {
               type="text"
               name={department}
               nameChange={ set_department }
+              icon="fa fa-user"
+            />
+            <Text
+              placeholder="Company"
+              type="text"
+              name={company}
+              nameChange={ set_company }
               icon="fa fa-user"
             />
             <Text
