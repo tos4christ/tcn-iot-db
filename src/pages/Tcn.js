@@ -1,0 +1,100 @@
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import DashboardNavUser from "../components/Header/DashboardNavTcn";
+import TcnForm from "../forms/TcnForm";
+
+const Disco = (props) => {
+    const history = useHistory();
+    const route = history.location.pathname;
+    const [tickets, setTickets] = useState([]);
+    const [listItemArray, setListItemArray] = useState([]);
+    const [ticketLength, setticketLength] = useState(0);
+    
+    const handleClick = (index) => {
+        console.log(index, "the index");
+    }
+    const handleStatus = (status) => {
+        console.log(status, " the status ");
+      }
+
+    function loadTickets() {
+    const url = `/tickets/getall`;
+    fetch(url, {
+    method: "GET",
+    mode: "cors",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    })
+    .then((res) => res.json())
+    .then((response) => {
+        const tick = response.data;
+        // Set the state of listItems to be displayed
+        setTickets(tick);
+        // Set the ticketLength
+        setticketLength(tick.length);  
+        function setList() {
+            if(tickets.length > 0 ) {
+                tickets.forEach(
+                    (item, index) => {
+                        if(item.status === "pending") {
+                            listItemArray.push(                        
+                                <li className="list-items" key={index}> 
+                                    <span> <a href="item-1">{item.station}--{item.equipment}</a></span> <span>{item.status}</span><span>{item.ticket_id} </span> <a href={`/tcn/review?key=${index}&appr=${1}`} className="text-dark">review</a>
+                                </li>
+                            )
+                        }                        
+                    }                
+                )            
+            }
+            setListItemArray(listItemArray);
+        }
+        setList();          
+    })
+    .catch((error) => console.error(error.message));
+    }
+    
+    if(true ) {
+        [].forEach(
+            (item, index) => {
+                //console.log(item, "this i ");
+                listItemArray.push(                        
+                    <li className="tcn text-dark border" key={index}> 
+                       <a href="#" onClick={() => handleClick(index)}> <span>{item.station}</span> <span> {item.equipment}</span> <span> {item.comment}</span> <span>  </span> </a>
+                    </li>
+                )
+            }                
+        )            
+    }
+    useEffect(() => {
+        loadTickets();
+        // connect to the database on startup to retrieve the files
+        
+    }, [ticketLength]);
+
+  const body = (
+    <div className="container-fluid  bg-white">
+          <h4 className='my-2'>List of Tickets</h4>
+      <div className="row" id="home">
+        {/* Form Section where tickets are populated and submitted */}
+        <div className="col-sm-7 p-3">
+        <ul className='my-4  text-dark'>
+            {listItemArray}
+        </ul>
+        </div>
+        {/* Stream section where new tickets are displayed with their current properties */}
+        <div className="col-sm-5 p-3">
+            <a href="#home">
+                <div className="border bg-info text-center py-4 shadow">
+                    <h2 className='my-4  text-light'>View Single Ticket</h2>
+                    { route === '/api/tickets/tcn/review' ? <TcnForm tickets={tickets} />: "" }                    
+                </div>
+            </a>
+        </div>
+      </div>
+    </div>
+  );
+  return <DashboardNavUser body={body} />;
+};
+
+export default Disco;

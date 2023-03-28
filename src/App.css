@@ -4,6 +4,44 @@ Version: 1.0
 Author: Tos4christ
 Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 */
+.App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 
 /**
  *** CSS Indexing ***
@@ -37,13 +75,117 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
     margin: 4px;
 }
 .weather_widget_row span {
-    flex-basis: content;
+    justify-content: center;
     height: 50px;
     padding: 5px;  
     text-align: justify;
-    margin: 2px 8px;
+    margin: 3px;
+}
+.weather_widget_row span:nth-of-type(1) {
+    width: 7em;
+}
+.weather_widget_row span:nth-of-type(2) {
+    width: 3em;
+}
+.weather_widget_row span:nth-of-type(3) {
+    width:3em;
+    text-align: right;
+}
+.weather_widget_row span:nth-of-type(4) {
+    width:5em;
+    text-align: center;
+}
+.weather_widget_row span:nth-of-type(5) {
+    width:6em;
+    text-align: center;
+    padding-right: 16px;
+}
+.weather_widget_row span:nth-of-type(6) {
+    width:4em;
+}
+.weather_widget_row span:nth-of-type(7) {
+    width:6em;
+    text-align: center;
+}
+.weather_widget_row span:nth-of-type(8) {
+    width:6em;
+    text-align: right;
+}
+.weather_widget_row span:nth-of-type(9) {
+    width:7em;
+    text-align: center;
+}
+.weather_widget_row span:nth-of-type(10) {
+    width:6em;
+    text-align: justify;
+}
+.weather_widget_row span:nth-of-type(11) {
+    width:3em;
 }
 
+
+.dashboard {
+    width: 165%;
+    padding: 1em;
+    text-align: center;
+}
+.dashboard button{
+    margin: 1em;
+    padding: 1em;
+  }
+  .weather_display {
+    margin: 2em 1em 1em 10em;
+    background-color: antiquewhite;
+  }
+  .weather_label h1 {
+    text-align: center;
+    color: blueviolet;  
+  }
+  .weather_label {
+    width: 100%;
+  }
+  .weather_label span {
+    margin: 1em;
+    color: blue;
+    border: 1px orange solid;
+  }
+  .current form {
+    margin: 1em 0 0 10em;
+    padding: 2em;
+    background-color: aqua;
+  }
+  .display {
+    padding: 2em;
+  }
+  .current form select, .current form button {
+    padding: .5em;
+    margin: .5em;
+    border: 1px solid white;
+    text-align: center;
+    font-weight: 500;
+  }
+  .label-span {
+    text-align: center;
+    font-weight: 500;
+  }
+
+/* MDB Weather CSS */
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #ffffff;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 236, 210, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 236, 210, 1))
+}   
+.carousel-indicators li {
+    background-color: #282828;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
 
 
 
@@ -362,13 +504,16 @@ table.ncc-counter-tg thead tr th:nth-of-type(2) {
 /*----------------------------
 ---------- NCC TABLE CSS ---------
 ----------------------------*/
+/* Change the width later and adjust the
+    signin, signup and home page
+*/
 body {
     line-height: 24px;
     font-size: 14px;
     color: #666666;
     font-family: "Raleway", sans-serif;
     font-weight: 400;
-    width: 63%;
+    
     overflow: scroll;
     }
 
@@ -539,7 +684,7 @@ background-image: url('/public/tcn-nas-background.jpeg');
 opacity: 1;
 background-repeat: repeat;
 background-attachment: fixed;
-width: 160%;
+
 height:300vh;
 /* overflow: scroll; */
 /* Add the blur effect */
@@ -887,3 +1032,37 @@ color: rgb(10, 10, 10);
 color: rgb(31, 20, 20);
 border-bottom: 1px solid #fff;
 }
+
+input[type="text"],
+input[type="submit"],
+button[type="submit"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="search"],
+input[type="password"],
+input[type="number"],
+textarea {
+  background: transparent;
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+input[type="submit"],
+button[type="submit"] {
+  width: auto;
+  color: #666;
+  padding: 4px 15px;
+}
+textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.text-yellow {
+  color: yellow;
+}
+.text-green {
+  color: #006600;
+}
+
