@@ -45,40 +45,42 @@ import get_stations from "./stations_adder";
      };
    }
    componentDidMount() {
-    socket.on("client_message_111", data => {
-      const { message } = data;
-      const parsedMessage = JSON.parse(message);
-      const station = parsedMessage.id;
-      const returnObject = {}
-      // console.log(parsedMessage, 'c1 message');
-      this.setState(prevState => {
-        prevState[station] = parsedMessage;
-        returnObject[station] = prevState[station]
-        return returnObject;
-      })
-    });
-    socket.on("client_message_222", data => {
-      const { message } = data;
-      const parsedMessage = JSON.parse(message);
-      const station = parsedMessage.id;
-      const returnObject = {}
-      // console.log(parsedMessage, 'c2 message');
-      this.setState(prevState => {
-        prevState[station] = parsedMessage;
-        returnObject[station] = prevState[station]
-        return returnObject;
-      })
-    });
-    socket.on("frequency000", data => {
-      const { message } = data;
-      const parsedMessage = JSON.parse(message);
-      const returnObject = {}
-      this.setState(prevState => {
-        prevState["frequency"] = parsedMessage;
-        returnObject["frequency"] = prevState["frequency"]
-        return returnObject;
-      })
-    });
+    if(this.props.history.location.pathname === "/nccnaspageone") {
+      socket.on("client_message_111", data => {
+        const { message } = data;
+        const parsedMessage = JSON.parse(message);
+        const station = parsedMessage.id;
+        const returnObject = {}
+        // console.log(parsedMessage, 'c1 message');
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station]
+          return returnObject;
+        })
+      });
+      socket.on("client_message_222", data => {
+        const { message } = data;
+        const parsedMessage = JSON.parse(message);
+        const station = parsedMessage.id;
+        const returnObject = {}
+        // console.log(parsedMessage, 'c2 message');
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station]
+          return returnObject;
+        })
+      });
+      socket.on("frequency000", data => {
+        const { message } = data;
+        const parsedMessage = JSON.parse(message);
+        const returnObject = {}
+        this.setState(prevState => {
+          prevState["frequency"] = parsedMessage;
+          returnObject["frequency"] = prevState["frequency"]
+          return returnObject;
+        })
+      });
+    }
    }
    checkConnection(mw, kv) {
     mw = Number(mw);

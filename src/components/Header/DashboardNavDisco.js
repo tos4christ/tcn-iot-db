@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import logo from "../../assets/img/logo.JPG";
 import rlogo from "../../assets/img/responderLogo.JPG";
 
-const DashboardNavUser = ({ company, body }) => {
+const DashboardNavUser = ({ company, department, userName, body }) => {
   const history = useHistory();
   const [toggle, setToggle] = useState(false);
   const route = history.location.pathname;
@@ -40,7 +40,7 @@ const DashboardNavUser = ({ company, body }) => {
             className="rounded-circle my-2 r-logo"
           />
           <div className="mx-auto" style={{ width: 190 }}>
-            <h5 className="text-dark font-weight-bold">{company}</h5>
+            <h5 className="text-dark font-weight-bold">{department}</h5>
           </div>
         </div>
         <div className="bg-light mt-4">
@@ -57,7 +57,7 @@ const DashboardNavUser = ({ company, body }) => {
             {" "}
             <span className="fa fa-car"></span> View Tickets
           </a>
-          <a href="/">
+          <a href="/api/tickets/login">
             {" "}
             <span className="fa fa-sign-out"> </span> Logout
           </a>
@@ -68,7 +68,7 @@ const DashboardNavUser = ({ company, body }) => {
       <div id="main" className="bg-light">
         <nav className="navbar navbar-expand-lg navbar-light bg-white shadow">
           <div className="text-secondary toggle">
-            <a href="#main" onClick={() => changeToggle()}>
+            <a href="#" onClick={() => changeToggle()}>
               <h1>
                 <span className="fa fa-bars"></span>
               </h1>
@@ -79,7 +79,8 @@ const DashboardNavUser = ({ company, body }) => {
             id="navbarSupportedContent"
             style={{ width: 200 }}
           >
-            <h3 className="">Users Dashboard</h3>
+            <h2 className="mr-auto d-flex">{  department } Users Dashboard</h2>
+             <h3 className="d-flex mr-5">  Welcome  {  userName }   </h3> 
           </div>
           <div>
             {/* former button area */}

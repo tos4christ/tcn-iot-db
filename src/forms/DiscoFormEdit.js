@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+import {  withRouter } from "react-router-dom";
 
 let formData;
-
 class Form extends React.Component {
     constructor(props) {
         super(props);
@@ -14,12 +13,13 @@ class Form extends React.Component {
             equipment: '',
             priority: '',
             disco: '',
-            ticketLength: null
+            tickets: this.props.tickets,
+            ticket_id: null
         }
     }
 
     componentDidMount() {
-        const index = this.props.match.params.key;
+        const index = this.props.location.search.replace('?', "").split("=")[1];
         if(Array.isArray(this.props.tickets) && this.props.tickets.length > 0) {
             formData = this.props.tickets[index];
             this.setState({comment: formData.comment});
@@ -27,15 +27,15 @@ class Form extends React.Component {
             this.setState({equipment: formData.equipment});
             this.setState({priority: formData.priority});
             this.setState({disco: formData.disco});
-            this.setState({ticketLength: formData.ticket_id});
+            this.setState({ticket_id: formData.id});
         }
     }
 
     updateTickets(e) {
-        const url = "/tickets/edit";
-        const { disco, station, equipment, comment, priority } = this.state;
+        const url = "https://tcnnas.org/tickets/edit";
+        const { disco, station, equipment, comment,ticket_id, priority } = this.state;
         const data = { 
-            disco, station, equipment, comment, ticket_id: this.state.ticketLength, priority
+            disco, station, equipment, comment, ticket_id, priority
         };
         fetch(url, {
         method: "POST",
@@ -48,7 +48,7 @@ class Form extends React.Component {
         .then((res) => res.json())
         .then((response) => {
             // How to reload automatically if history.push is not working
-            const url = "/api/tickets/disco";
+            const url = "/api/tickets/disco/tickets";
             this.props.history.push(url);
             window.location = url;
             window.location.href = url;
@@ -59,7 +59,6 @@ class Form extends React.Component {
             //window.open(url, "newWindow");
             //window.open(url, "newwin");
             window.location.reload(true);
-
         })
         .catch((error) => console.error(error.message));
     }
@@ -126,4 +125,4 @@ class Form extends React.Component {
 
 }
 
-export default Form;
+export default withRouter(Form);

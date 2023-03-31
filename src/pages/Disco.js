@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import DashboardNavUser from "../components/Header/DashboardNavDisco";
+import { withRouter, Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import DashboardNavDisco from "../components/Header/DashboardNavDisco";
 import DiscoFormEdit from "../forms/DiscoFormEdit";
 import DiscoFormNew from "../forms/DiscoFormNew";
 
@@ -21,11 +22,19 @@ class Disco extends React.Component {
             equipment: '',
             comment: '',
             priority: '',
-            department: 'EKEDC'
+            company: localStorage.getItem("company"),
+            token: localStorage.getItem("token"),
+            userName: localStorage.getItem("userName"),
+            department: localStorage.getItem("department"),
+            email: localStorage.getItem("email")
         }
     }
     componentDidMount() {
-        this.loadTickets();
+        if(this.props.history.location.pathname === "/api/tickets/disco/tickets" || 
+        this.props.history.location.pathname === "/api/tickets/disco") {
+            this.loadTickets();
+        }
+        
         // const route = this.props.history.location.pathname;
     }
     setList() {
@@ -34,13 +43,13 @@ class Disco extends React.Component {
                 (item, index) => {
                     listItemArray.push(                        
                         <li className="list-items" key={index}> 
-                            <span> <a href="item-1">{item.station}--{item.equipment}</a></span> <span>{item.status}</span><span>{item.id} </span> <a href={`/api/tickets/disco/edit?key=${index}`} className="text-dark">edit</a>
+                            <span> <a href="item-1">{item.station}--{item.equipment}</a></span> <span>{item.status}</span><span>{item.id} </span> <Link to={`/api/tickets/disco/edit?key=${index}`} className="text-dark">edit</Link>
                         </li>
                     )
                 }                
             )            
         }
-        this.setState({listItemArray: listItemArray});
+        this.setState({listItemArr: listItemArray});
     }    
     loadTickets() {
         const url = `https://tcnnas.org/tickets/get?disco=${this.state.department}`;
@@ -56,7 +65,7 @@ class Disco extends React.Component {
             const tick = response.data;
             // Set the state of listItems to be displayed
             this.setState({tickets: tick});
-            setList();          
+            this.setList();          
         })
         .catch((error) => console.error(error.message));
     }
@@ -64,7 +73,8 @@ class Disco extends React.Component {
         const url = "https://tcnnas.org/tickets/new";
         const options = { year: 'numeric', month: '2-digit', day: '2-digit' };   
         const date = new Date().toLocaleDateString("en-GB", options).split('/').reverse().join('-');
-        const {disco, station, equipment, comment, priority} = this.state;
+        const {department, station, equipment, comment, priority} = this.state;
+        const disco = department;
         const data = { 
             disco, station, equipment, comment, date, ticket_id: 1, priority
         };
@@ -78,7 +88,18 @@ class Disco extends React.Component {
         })
         .then((res) => res.json())
         .then((response) => {
-            this.props.history.push("/api/tickets/disco");
+            // console.log(response, "this is the response")
+            const url = "/api/tickets/disco";
+            this.props.history.push(url);
+            window.location = url;
+            window.location.href = url;
+            window.location.replace(url);
+            window.open(url);
+            window.open(url, "_self");
+            //window.open(url, "_blank");
+            //window.open(url, "newWindow");
+            //window.open(url, "newwin");
+            window.location.reload(true);
         })
         .catch((error) => console.error(error.message));
     }
@@ -99,16 +120,16 @@ class Disco extends React.Component {
         })
         .then((res) => res.json())
         .then((response) => {
-            history.push("/disco");
+            this.props.history.push("/disco");
         })
         .catch((error) => console.error(error.message));
     }
     getData(dat) {
         const {station, equipment, comment, priority} = dat;
-        this.setState({station});
-        this.setState({equipment});
-        this.setState({comment});
-        this.setState({priority});
+        this.setState({station: station});
+        this.setState({equipment: equipment});
+        this.setState({comment: comment});
+        this.setState({priority: priority});
         // push list items object from the getdata into an array of listItem here
         // First of all load any items from the database it shoudl be paginated to reduce the amount to display
         // The returned data is used to populate the list of items at start up
@@ -118,13 +139,15 @@ class Disco extends React.Component {
     }
 
     render() {
+        const route = this.props.history.location.pathname;
+        const { tickets } = this.state;
         const body = (
             <div className="container-fluid  bg-white">
               <div className="row" id="home">
                 {/* Form Section where tickets are populated and submitted */}
                 <div className="col-sm-7 p-3">
                     <a href="/api/tickets/disco/new">New Form</a>
-                    {route === '/api/tickets/disco/new' ? <DiscoFormNew getData={this.getData} submit={this.createTickets} /> : route === '/api/tickets/disco/edit' ? <DiscoFormEdit tickets={this.state.tickets} /> : ""}            
+                    {route === '/api/tickets/disco/new' ? <DiscoFormNew getData={this.getData} submit={this.createTickets} /> : route === '/api/tickets/disco/edit' ? <DiscoFormEdit tickets={tickets} /> : ""}            
                 </div>
                 {/* Stream section where new tickets are displayed with their current properties */}
                 <div className="col-sm-5 p-3">            
@@ -144,8 +167,8 @@ class Disco extends React.Component {
               </div>
             </div>
           );
-          return <DashboardNavUser company={this.state.department} body={body} />;
+          return <DashboardNavDisco company={this.state.company} department={this.state.department} userName={this.state.userName} body={body} />;
     }
 }
 
-export default Disco;
+export default withRouter(Disco);

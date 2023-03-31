@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import logo from "../../assets/img/logo.JPG";
 import rlogo from "../../assets/img/responderLogo.JPG";
 
-const DashboardNavUser = ({ body }) => {
+const DashboardNavUser = ({ body, company, department, userName }) => {
   const history = useHistory();
   const [toggle, setToggle] = useState(false);
   const route = history.location.pathname;
@@ -57,7 +57,7 @@ const DashboardNavUser = ({ body }) => {
             {" "}
             <span className="fa fa-car"></span> Declined Tickets 
           </a>
-          <a href="/">
+          <a href="/api/tickets/login">
             {" "}
             <span className="fa fa-sign-out"> </span> Logout
           </a>
@@ -79,7 +79,8 @@ const DashboardNavUser = ({ body }) => {
             id="navbarSupportedContent"
             style={{ width: 200 }}
           >
-            <h3 className="">Users Dashboard</h3>
+            <h3 className="px-3 d-flex mr-5">Users Dashboard</h3>
+            <div> <h4 className="px-3 d-flex mr-5">  Welcome  {  userName }   From { company } @ {  department }  </h4> </div>
           </div>
           <div>
             {/* former button area */}

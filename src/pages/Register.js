@@ -66,7 +66,7 @@ const Register = () => {
     .then( (res) => res.json())
     .then( (response) => {     
       // This would push to the signin page for the user to now login
-      history.push(`/login`);
+      history.push(`/api/tickets/login`);
     })
     .catch( e => console.log(e));
   }
@@ -130,7 +130,7 @@ const Register = () => {
             <Link
               question="Already Registered? "
               link="Login"
-              linkTo="/login"
+              linkTo="/api/tickets/login"
             />
             <Button text="Sign Up" />
           </form>          

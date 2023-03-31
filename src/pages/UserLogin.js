@@ -31,15 +31,32 @@ const UserLogin = () => {
     })
       .then((res) => res.json())
       .then((response) => {
+        // console.log(response, " the response from signin in");
         // Expected response
         // data.message,
-        //   data.token,
-        //   data.userName,
-        //   data.isLoggedIn
-        localStorage.setItem("userId", response.data.userName);
+        // data.token,
+        // data.userName,
+        // data.isLoggedIn
+        // data.company
+        // data.department
+        // data.email
+        // data.approval_level
+        localStorage.setItem("userName", response.data.userName);
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("isLoggedIn", response.data.isLoggedIn);
+        localStorage.setItem("department", response.data.department);
+        localStorage.setItem("approval_level", response.data.approval_level);
+        localStorage.setItem("company", response.data.company);
+        localStorage.setItem("email", response.data.email);
         //socket.emit("userSignin", { name: response.data.userName });
-        history.push("/user-dashboard");
+        // if the company is EKEDC then push to Disco route
+        // if the company is TCN then push to Tcn route with the approval level
+        if(response.data.company === "DISCO") {
+          history.push("/api/tickets/disco");
+        } else if(response.data.company === "TCN") {
+          history.push("/api/tickets/tcn");
+        }
+        
       })
       .catch((error) => console.error(error.message));
   };
@@ -67,7 +84,7 @@ const UserLogin = () => {
             <Link
               question="Not Registered? "
               link="Signup"
-              linkTo="/user-register"
+              linkTo="/api/tickets/register"
             />
             <Button id="" text={"Login"} onClick={() => "coming"} />
           </form>

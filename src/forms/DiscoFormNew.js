@@ -15,6 +15,7 @@ function New_Form({getData, submit}) {
         comment,
         priority
     }
+    //console.log(formInputs, "the form inputs");
     getData(formInputs);
   }
   const getRadio = (e) => {

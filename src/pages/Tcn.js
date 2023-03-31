@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import DashboardNavUser from "../components/Header/DashboardNavTcn";
+import DashboardNavTcn from "../components/Header/DashboardNavTcn";
 import TcnForm from "../forms/TcnForm";
 
 const Disco = (props) => {
@@ -9,14 +9,19 @@ const Disco = (props) => {
     const [tickets, setTickets] = useState([]);
     const [listItemArray, setListItemArray] = useState([]);
     const [ticketLength, setticketLength] = useState(0);
-    
+    const [token, setToken] = useState(localStorage.getItem("token"));
+    const [userName, setUserName] = useState(localStorage.getItem("userName"));
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn"));
+    const [department, setDepartment] = useState("department");
+    const [approval_level, setApprovalLevel] = useState("approval_level");
+    const [company, setCompany] = useState("company");
+    const [email, setEmail] = useState("email");
     const handleClick = (index) => {
         console.log(index, "the index");
     }
     const handleStatus = (status) => {
         console.log(status, " the status ");
-      }
-
+    }
     function loadTickets() {
     const url = `/tickets/getall`;
     fetch(url, {
@@ -53,7 +58,6 @@ const Disco = (props) => {
     })
     .catch((error) => console.error(error.message));
     }
-    
     if(true ) {
         [].forEach(
             (item, index) => {
@@ -67,6 +71,8 @@ const Disco = (props) => {
         )            
     }
     useEffect(() => {
+        // setToken(localStorage.getItem("token"));
+        // setUserName(localStorage.getItem("userName"))
         loadTickets();
         // connect to the database on startup to retrieve the files
         
@@ -94,7 +100,7 @@ const Disco = (props) => {
       </div>
     </div>
   );
-  return <DashboardNavUser body={body} />;
+  return <DashboardNavTcn company={company} department={department} userName={userName} body={body} />;
 };
 
 export default Disco;
