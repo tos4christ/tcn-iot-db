@@ -8,6 +8,8 @@ import socket from "../utility/socketIO";
 class WeatherWidget_cards extends React.Component {
     constructor(props) {
         super(props);
+        this.next = this.next.bind(this);
+        this.previous = this.previous.bind(this);
         this.state = {
             weather_data: this.props.data,
             data_in_use: [],
