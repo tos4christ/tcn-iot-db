@@ -103,7 +103,12 @@ class WeatherWidget_cards extends React.Component {
             const minute = "0" + newDate.getMinutes();  
             return hour + ':' + minute.substring(1);
         }
-        const stations = this.state.data_in_use;
+        let stations;
+        if(this.props.data === "generation") {
+            stations = this.state.current_weather_stations_generation;
+        } else if(this.props.data === "transmission") {
+            stations = this.state.current_weather_stations_transmission;
+        }        
         const display_1 = [];
         [0,1,2].forEach(index => {
             const station_weather_data = stations[index]?.current_weather_data ? stations[index].current_weather_data : null;
