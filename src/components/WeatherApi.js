@@ -103,7 +103,6 @@ class WeatherApi extends React.Component {
                         this.setState({rows_generation: false});
                         this.setState({cards_transmission: false});
                         this.setState({rows_transmission: false});
-                        this.setStationData('cards_generation');
                      }}>
                         <Link >Grid Display</Link>
                     </button>
@@ -112,7 +111,6 @@ class WeatherApi extends React.Component {
                         this.setState({rows_generation: !this.state.rows_generation});
                         this.setState({cards_transmission: false});
                         this.setState({rows_transmission: false});
-                        this.setStationData('rows_generation');
                      }}>
                         <Link >Row Display</Link>
                     </button>
@@ -124,7 +122,6 @@ class WeatherApi extends React.Component {
                         this.setState({rows_generation: false});
                         this.setState({cards_transmission: !this.state.cards_transmission});
                         this.setState({rows_transmission: false});
-                        this.setStationData('cards_transmission');
                     }}>
                         <Link  >Grid Display</Link>
                     </button>
@@ -133,7 +130,6 @@ class WeatherApi extends React.Component {
                         this.setState({rows_generation: false});
                         this.setState({cards_transmission: false});
                         this.setState({rows_transmission: !this.state.rows_transmission});
-                        this.setStationData('rows_transmission');
                      }}>
                         <Link >Row Display</Link>
                     </button>
@@ -185,20 +181,6 @@ class WeatherApi extends React.Component {
                  {this.state.rows_transmission ? < WeatherWidget_rows data={this.state.current_weather_stations_transmission} /> : ""} <br /> 
             </div>
         </div>
-        <Switch>
-            <Route exact path={`${this.props.history.location.pathname}/cards-transmission`}>
-                <WeatherWidget_cards data={this.state.stations} />
-            </Route>
-            <Route path={`${this.props.history.location.pathname}/rows-transmission`}>
-                <WeatherWidget_rows data={this.state.stations} />
-            </Route>
-            <Route path={`${this.props.history.location.pathname}/:cards-generation`}>
-                <WeatherWidget_cards data={this.state.stations} />
-            </Route>
-            <Route path={`${this.props.history.location.pathname}/:rows-generation`}>
-                <WeatherWidget_rows data={this.state.stations} />
-            </Route>
-        </Switch>
     </>
   };
 }
