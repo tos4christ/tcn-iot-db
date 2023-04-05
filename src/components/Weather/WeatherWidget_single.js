@@ -11,6 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function WeatherWidget_single() {
+  const data = localStorage.getItem("stations");
   return (
     <section className="vh-100" style={{ backgroundColor: "#C1CFEA" }}>
       <MDBContainer className="h-100">

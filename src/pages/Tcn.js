@@ -3,10 +3,59 @@ import { useHistory } from "react-router-dom";
 import DashboardNavTcn from "../components/Header/DashboardNavTcn";
 import TcnForm from "../forms/TcnForm";
 
+class Disco extends React.Component {
+    constructor(props) {
+        super(props);
+        this.loadTickets = this.loadTickets.bind(this);
+        this.state = {
+            tickets: [],
+        }
+    }
+    componentDidMount() {
+        const new_tickets = this.props.tickets;
+        this.setState({tickets: new_tickets})
+    }
+    loadTickets() {
+        const url = `/tickets/getall`;
+        fetch(url, {
+        method: "GET",
+        mode: "cors",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        })
+        .then((res) => res.json())
+        .then((response) => {
+            const tick = response.data;
+            // Set the state of listItems to be displayed
+            setTickets(tick);
+            // Set the ticketLength
+            setticketLength(tick.length);  
+            function setList() {
+                if(tickets.length > 0 ) {
+                    tickets.forEach(
+                        (item, index) => {
+                            if(item.status === "pending") {
+                                listItemArray.push(                        
+                                    <li className="list-items" key={index}> 
+                                        <span> <a href="item-1">{item.station}--{item.equipment}</a></span> <span>{item.status}</span><span>{item.ticket_id} </span> <a href={`/tcn/review?key=${index}&appr=${1}`} className="text-dark">review</a>
+                                    </li>
+                                )
+                            }                        
+                        }                
+                    )            
+                }
+                setListItemArray(listItemArray);
+            }
+            setList();          
+        })
+        .catch((error) => console.error(error.message));
+    }
+}
+
 const Disco = (props) => {
     const history = useHistory();
     const route = history.location.pathname;
-    const [tickets, setTickets] = useState([]);
     const [listItemArray, setListItemArray] = useState([]);
     const [ticketLength, setticketLength] = useState(0);
     const [token, setToken] = useState(localStorage.getItem("token"));
@@ -22,42 +71,6 @@ const Disco = (props) => {
     const handleStatus = (status) => {
         console.log(status, " the status ");
     }
-    function loadTickets() {
-    const url = `/tickets/getall`;
-    fetch(url, {
-    method: "GET",
-    mode: "cors",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    })
-    .then((res) => res.json())
-    .then((response) => {
-        const tick = response.data;
-        // Set the state of listItems to be displayed
-        setTickets(tick);
-        // Set the ticketLength
-        setticketLength(tick.length);  
-        function setList() {
-            if(tickets.length > 0 ) {
-                tickets.forEach(
-                    (item, index) => {
-                        if(item.status === "pending") {
-                            listItemArray.push(                        
-                                <li className="list-items" key={index}> 
-                                    <span> <a href="item-1">{item.station}--{item.equipment}</a></span> <span>{item.status}</span><span>{item.ticket_id} </span> <a href={`/tcn/review?key=${index}&appr=${1}`} className="text-dark">review</a>
-                                </li>
-                            )
-                        }                        
-                    }                
-                )            
-            }
-            setListItemArray(listItemArray);
-        }
-        setList();          
-    })
-    .catch((error) => console.error(error.message));
-    }
     if(true ) {
         [].forEach(
             (item, index) => {
@@ -71,8 +84,10 @@ const Disco = (props) => {
         )            
     }
     useEffect(() => {
-        // setToken(localStorage.getItem("token"));
-        // setUserName(localStorage.getItem("userName"))
+        if(this.props.history.location.pathname === "/api/tickets/tcn/tickets" || 
+        this.props.history.location.pathname === "/api/tickets/tcn") {
+            this.loadTickets();
+        }
         loadTickets();
         // connect to the database on startup to retrieve the files
         

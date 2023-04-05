@@ -125,10 +125,10 @@ class App extends React.Component {
           <Route exact path={`/nccnasfullpage`}>
               <FullPage />         
           </Route>
-          <Route exact path={`/api/nccweather`}>
+          <Route exact path={`/nccweather`}>
               <WeatherApi />         
           </Route>
-          <Route exact path={`/api/nccweather2`}>
+          <Route exact path={`/nccweather2`}>
               <WeatherApp />         
           </Route>
           <Route exact path="/api/tickets">
