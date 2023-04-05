@@ -46,7 +46,7 @@ class WeatherWidget_cards extends React.Component {
         const stations = this.props.data;
         const display_1 = [];
         [0,1,2].forEach(index => {
-            const station_weather_data = stations[index].current_weather_data;
+            const station_weather_data = stations[index].current_weather_data ? stations[index].current_weather_data : null;
             if(!station_weather_data) {
                 return;
             }
@@ -96,7 +96,7 @@ class WeatherWidget_cards extends React.Component {
         });
         const display_2 = [];
         [3,4,5].forEach(index => {
-            const station_weather_data = stations[index].current_weather_data;
+            const station_weather_data = stations[index].current_weather_data ? stations[index].current_weather_data : null;
             if(!station_weather_data) {
                 return;
             }
