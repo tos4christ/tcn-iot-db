@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch, useRouteMatch, Link, withRouter } from 'react-router-dom';
 import WeatherWidget_rows from './Weather/WeatherWidget_rows';
 import WeatherWidget_cards from './Weather/WeatherWidget_cards';
+import socket from "../utility/socketioConnection";
 
 class WeatherApi extends React.Component {
     constructor(props) {

@@ -64,6 +64,7 @@ class Tcn extends React.Component {
     }
 
     render() {
+        const route = this.props.history.location.pathname;
         const body = (
             <div className="container-fluid  bg-white">
                   <h4 className='my-2'>List of Tickets</h4>
