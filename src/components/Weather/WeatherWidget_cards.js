@@ -122,7 +122,7 @@ class WeatherWidget_cards extends React.Component {
             const icon_url = getIconUrl(station_weather_data.weather[0].icon);
             const temp = station_weather_data.main.temp;
             const feels_like = station_weather_data.main.feels_like;
-            const rain = station_weather_data.rain["1h"] ? station_weather_data.rain["1h"] : "";
+            const rain = station_weather_data.rain ? station_weather_data.rain["1h"] : "";
             const wind_speed = station_weather_data.wind.speed;
             const wind_degree = station_weather_data.wind.deg;
             const wind_gust = station_weather_data.wind.gust;
@@ -172,7 +172,7 @@ class WeatherWidget_cards extends React.Component {
             const icon_url = getIconUrl(station_weather_data.weather[0].icon);
             const temp = station_weather_data.main.temp;
             const feels_like = station_weather_data.main.feels_like;
-            const rain = station_weather_data.rain["1h"] ? station_weather_data.rain["1h"] : "";
+            const rain = station_weather_data.rain ? station_weather_data.rain["1h"] : "";
             const wind_speed = station_weather_data.wind.speed;
             const wind_degree = station_weather_data.wind.deg;
             const wind_gust = station_weather_data.wind.gust;
