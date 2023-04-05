@@ -175,8 +175,8 @@ class WeatherApi extends React.Component {
                 }
             </div> */}
             <div className='row' style={{width: "165%", marginLeft: "2em"}}>
-                {this.state.cards_generation ? <WeatherWidget_cards data="generation" /> : ""} <br /> 
-                {this.state.cards_transmission ? <WeatherWidget_cards data="transmission" /> : ""} <br /> 
+                {this.state.cards_generation ? <WeatherWidget_cards data="generation" datas={this.state.current_weather_stations_generation} /> : ""} <br /> 
+                {this.state.cards_transmission ? <WeatherWidget_cards data="transmission" datas={this.state.current_weather_stations_transmission} /> : ""} <br /> 
                 {this.state.rows_generation ? < WeatherWidget_rows data={this.state.current_weather_stations_generation} /> : ""} <br /> 
                  {this.state.rows_transmission ? < WeatherWidget_rows data={this.state.current_weather_stations_transmission} /> : ""} <br /> 
             </div>
