@@ -55,6 +55,8 @@ class WeatherApi extends React.Component {
     };
 
   render() {
+    console.log(this.state.weather_stations_generation, " the generation data");
+    console.log(this.state.weather_stations_transmission, " the transmission data");
     return <>
         <div className='container-fluid'>
             <div className='row dashboard'>
