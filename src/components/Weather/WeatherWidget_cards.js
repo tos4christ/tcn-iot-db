@@ -115,7 +115,7 @@ class WeatherWidget_cards extends React.Component {
             if(!station_weather_data) {
                 return;
             }
-            const station_name = station_weather_data.name;
+            const station_name = stations[index].name;
             const timer = getTime(station_weather_data.dt);
             const main = station_weather_data.weather[0].main;
             const description = station_weather_data.weather[0].description;
@@ -165,7 +165,7 @@ class WeatherWidget_cards extends React.Component {
             if(!station_weather_data) {
                 return;
             }
-            const station_name = station_weather_data.name;
+            const station_name = stations[index].name;
             const timer = getTime(station_weather_data.dt);
             const main = station_weather_data.weather[0].main;
             const description = station_weather_data.weather[0].description;
