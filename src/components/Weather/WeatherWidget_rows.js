@@ -9,11 +9,11 @@ import {
  } from '@fortawesome/free-solid-svg-icons'
  import socket from "../utility/socketIO";
 
-
-
 class WeatherWidget_rows extends React.Component {
     constructor(props) {
         super(props);
+        this.next = this.next.bind(this);
+        this.previous = this.previous.bind(this);
         this.state = {
             weather_data: this.props.data,
             data_in_use: [],
@@ -85,20 +85,27 @@ class WeatherWidget_rows extends React.Component {
         } 
     }
     next() {
-        const { start } = this.state;
-        const length = this.state.data_in_use.length;
-        if(start + 6 <= length) {
-            const display_data = this.state.data_in_use.slice(start, (start + 6))
-            this.setState({display_data, start: (start + 6)})
-        }        
+        const { start, stop } = this.state;
+        const length = this.props.data === "generation" ? this.state.current_weather_stations_generation.length : this.state.current_weather_stations_transmission.length
+        const remainder = length - stop;
+        if(remainder >= 20) {            
+            this.setState({start: stop, stop: (stop + 20)});
+        } else if(remainder < 20 && remainder > 0) {
+            this.setState({start: stop, stop: length});
+        } else if(remainder === 0 || remainder < 0) {
+            return;
+        }      
     }
     previous() {
-        const { start } = this.state;
-        const length = this.state.data_in_use.length;
-        if(start - 6 >= 0) {
-            const display_data = this.state.data_in_use.slice((start - 6), start)
-            this.setState({display_data, start: (start - 6)})
-        }        
+        const { start, stop } = this.state;
+        const remainder = start - 20;
+        if(remainder >= 20) {            
+            this.setState({start: (start - 20), stop: (stop - 20)});
+        } else if(remainder < 20 ) {
+            return;
+        } else if(remainder === 0) {
+            this.setState({start: 0, stop: 20});
+        }         
     }
 
     render() {
@@ -113,12 +120,16 @@ class WeatherWidget_rows extends React.Component {
         }
         let stations;
         if(this.props.data === "generation") {
-            stations = this.state.current_weather_stations_generation;
+            const sortedStations = this.state.current_weather_stations_generation.sort((a, b) => a.name - b.name);
+            stations = sortedStations.slice(this.state.start, this.state.stop);
         } else if(this.props.data === "transmission") {
-            stations = this.state.current_weather_stations_transmission;
-        }   
+            const sortedStations = this.state.current_weather_stations_transmission.sort((a, b) => a.name - b.name);
+            stations = sortedStations.slice(this.state.start, this.state.stop);
+        }  
         const display_1 = [];
-        [0,1,2].forEach(index => {
+        let todaysDate = new Date();
+        todaysDate = todaysDate.toLocaleDateString().substring(0, 5);
+        Array(20).fill(1).forEach(index => {
             const station_weather_data = stations[index]?.current_weather_data ? stations[index].current_weather_data : null;
             if(!station_weather_data) {
                 return;
@@ -130,15 +141,28 @@ class WeatherWidget_rows extends React.Component {
             const icon_url = getIconUrl(station_weather_data.weather[0].icon);
             const temp = station_weather_data.main.temp;
             const feels_like = station_weather_data.main.feels_like;
-            const rain = station_weather_data.rain ? station_weather_data.rain["1h"] : "";
+            const rain = station_weather_data.rain ? station_weather_data.rain["1h"] : station_weather_data.clouds ? station_weather_data.clouds.all : "";
             const wind_speed = station_weather_data.wind.speed;
             const wind_degree = station_weather_data.wind.deg;
             const wind_gust = station_weather_data.wind.gust;
             const humidity = station_weather_data.main.humidity;
+            const pressure = station_weather_data.main.pressure;
             display_1.push(
-                <>                   
-                             
-                </>
+                <li>
+                    <div className="weather_widget_row">
+                        <span>{station_name}</span>
+                        <span>{todaysDate}</span>
+                        <span><img src={icon_url} width="30px"></img></span>
+                        <span> {temp} °C</span>
+                        <span> {feels_like} °C</span>
+                        <span>{main}</span>
+                        <span> {humidity}%</span>
+                        <span> {wind_speed}kmph</span>
+                        <span>{wind_degree}°</span>
+                        <span>{wind_gust}kmph</span>
+                        <span>{pressure}</span>
+                    </div>
+                </li>
             )
         });
         return (
@@ -162,44 +186,13 @@ class WeatherWidget_rows extends React.Component {
                                         <span>Pressure</span>
                                     </div>
                                 </li>
-                                <li>
-                                    <div className="weather_widget_row">
-                                        <span>Ajah T.S</span>
-                                        <span className="text_date"><b>14</b><br/> <i>19/06</i></span>
-                                        <span><FontAwesomeIcon icon={faCloudShowersHeavy} /></span>
-                                        <span> 15 °C</span>
-                                        <span> 15 °C</span>
-                                        <span>Cloudy</span>
-                                        <span> 40%</span>
-                                        <span> 2 kmph</span>
-                                        <span>24 °C</span>
-                                        <span>1 kmph</span>
-                                        <span>Pressure</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="weather_widget_row">
-                                        <span>Abeokuta</span>
-                                        <span className="text_date"><b>14</b><br/> <i>19/06</i></span>
-                                        <span><FontAwesomeIcon icon={faCloudRain} /></span>
-                                        <span> 10 °C</span>
-                                        <span>11 °C</span>
-                                        <span>Rainfall</span>
-                                        <span>  10%</span>
-                                        <span>8 kmph</span>
-                                        <span>27 °C</span>
-                                        <span>5 kmph</span>
-                                        <span>Pressure</span>
-                                    </div>
-                                </li>
-                            </ul>
-                            
-                            
+                                {display_1}
+                            </ul>                            
+                        </div>                        
+                        <div>
+                            <button onClick={this.next}>Next</button>
+                            <button onClick={this.previous}>Previous</button>
                         </div>
-                        
-                        {/* <div>
-                            <FontAwesomeIcon icon={faWind} />
-                        </div> */}
                     </div>
                     <div className="col-3 border border-3">
                         <div>
