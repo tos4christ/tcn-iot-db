@@ -15,8 +15,6 @@ class WeatherWidget_rows extends React.Component {
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
         this.state = {
-            weather_data: this.props.data,
-            data_in_use: [],
             display_data: [],
             start: 0,
             stop: 20,
@@ -73,19 +71,10 @@ class WeatherWidget_rows extends React.Component {
                 return returnObject;
             })
             });
-          }
-        if(this.props.data === "generation") {
-            const display_data = this.state.current_weather_stations_generation.slice(this.state.start, (this.state.start + 6))
-            this.setState({display_data});
-            this.setState({data_in_use: this.state.current_weather_stations_generation})
-        } else if(this.props.data === "transmission") {
-            const display_data = this.state.current_weather_stations_transmission.slice(this.state.start, (this.state.start + 6))
-            this.setState({display_data})
-            this.setState({data_in_use: this.state.current_weather_stations_transmission})
         } 
     }
     next() {
-        const { start, stop } = this.state;
+        const { stop } = this.state;
         const length = this.props.data === "generation" ? this.state.current_weather_stations_generation.length : this.state.current_weather_stations_transmission.length
         const remainder = length - stop;
         if(remainder >= 20) {            
