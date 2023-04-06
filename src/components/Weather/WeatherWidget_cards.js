@@ -11,10 +11,9 @@ class WeatherWidget_cards extends React.Component {
         this.next = this.next.bind(this);
         this.previous = this.previous.bind(this);
         this.state = {
-            weather_data: this.props.data,
-            data_in_use: [],
             display_data: [],
             start: 0,
+            stop: 6,
             stations: [],
             current_weather_stations_generation: [],
             current_weather_stations_transmission: [],
@@ -80,20 +79,27 @@ class WeatherWidget_cards extends React.Component {
         }        
     }
     next() {
-        const { start } = this.state;
-        const length = this.state.data_in_use.length;
-        if(start + 6 <= length) {
-            const display_data = this.state.data_in_use.slice(start, (start + 6))
-            this.setState({display_data, start: (start + 6)})
-        }        
+        const { start, stop } = this.state;
+        const length = this.props.data === "generation" ? this.state.current_weather_stations_generation.length : this.state.current_weather_stations_transmission.length
+        const remainder = length - stop;
+        if(remainder >= 6) {            
+            this.setState({start: stop, stop: (stop + 6)});
+        } else if(remainder < 6 && remainder > 0) {
+            this.setState({start: stop, stop: length});
+        } else if(remainder === 0 || remainder < 0) {
+            return;
+        }
     }
     previous() {
-        const { start } = this.state;
-        const length = this.state.data_in_use.length;
-        if(start - 6 >= 0) {
-            const display_data = this.state.data_in_use.slice((start - 6), start)
-            this.setState({display_data, start: (start - 6)})
-        }        
+        const { start, stop } = this.state;
+        const remainder = start - 6;
+        if(remainder >= 6) {            
+            this.setState({start: (start - 6), stop: (stop - 6)});
+        } else if(remainder < 6 ) {
+            return;
+        } else if(remainder === 0) {
+            this.setState({start: 0, stop: 6});
+        }   
     }
     render() {
         function getIconUrl(icon_id)  {
@@ -107,9 +113,11 @@ class WeatherWidget_cards extends React.Component {
         }
         let stations;
         if(this.props.data === "generation") {
-            stations = this.state.current_weather_stations_generation;
+            const sortedStations = this.state.current_weather_stations_generation.sort((a, b) => a.name - b.name);
+            stations = sortedStations.slice(this.state.start, this.state.stop);
         } else if(this.props.data === "transmission") {
-            stations = this.state.current_weather_stations_transmission;
+            const sortedStations = this.state.current_weather_stations_transmission.sort((a, b) => a.name - b.name);
+            stations = sortedStations.slice(this.state.start, this.state.stop);
         }        
         const display_1 = [];
         [0,1,2].forEach(index => {
@@ -140,7 +148,8 @@ class WeatherWidget_cards extends React.Component {
                                 </div>
                                 <div className="d-flex flex-column text-center mt-5 mb-4">
                                 <h6 className="display-4 mb-0 font-weight-bold" style={{"color": "#1C2331"}}> {temp}°C </h6>
-                                <span className="small" style={{"color": "#868B94"}}>{main}</span>
+                                <span className="large" style={{"color": "#868B94"}}>{main}</span>
+                                <span className="small" style={{"color": "#868B94"}}>{description}</span>
                                 </div>
                                 <div className="d-flex align-items-center">
                                     <div className="flex-grow-1" style={{"fontSize": "1rem"}}>
@@ -190,7 +199,8 @@ class WeatherWidget_cards extends React.Component {
                                 </div>
                                 <div className="d-flex flex-column text-center mt-5 mb-4">
                                 <h6 className="display-4 mb-0 font-weight-bold" style={{"color": "#1C2331"}}> {temp}°C </h6>
-                                <span className="small" style={{"color": "#868B94"}}>{main}</span>
+                                <span className="large" style={{"color": "#868B94"}}>{main}</span>
+                                <span className="small" style={{"color": "#868B94"}}>{description}</span>
                                 </div>
                                 <div className="d-flex align-items-center">
                                     <div className="flex-grow-1" style={{"fontSize": "1rem"}}>

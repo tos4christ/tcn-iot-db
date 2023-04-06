@@ -88,11 +88,6 @@ class WeatherApi extends React.Component {
     };
 
   render() {
-    function getIconUrl(icon_id)  {
-        return `https://openweathermap.org/img/wn/${icon_id}@2x.png`
-    }
-    console.log(this.state.daily_weather_stations_generation, " the generation data daily");
-    console.log(this.state.daily_weather_stations_transmission, " the transmission data daily");
     return <>
         <div className='container-fluid'>
             <div className='row dashboard'>
@@ -177,8 +172,8 @@ class WeatherApi extends React.Component {
             <div className='row' style={{width: "165%", marginLeft: "2em"}}>
                 {this.state.cards_generation ? <WeatherWidget_cards data="generation" datas={this.state.current_weather_stations_generation} /> : ""} <br /> 
                 {this.state.cards_transmission ? <WeatherWidget_cards data="transmission" datas={this.state.current_weather_stations_transmission} /> : ""} <br /> 
-                {this.state.rows_generation ? < WeatherWidget_rows data={this.state.current_weather_stations_generation} /> : ""} <br /> 
-                 {this.state.rows_transmission ? < WeatherWidget_rows data={this.state.current_weather_stations_transmission} /> : ""} <br /> 
+                {this.state.rows_generation ? < WeatherWidget_rows data="generation" /> : ""} <br /> 
+                 {this.state.rows_transmission ? < WeatherWidget_rows data="transmission" /> : ""} <br /> 
             </div>
         </div>
     </>
