@@ -109,10 +109,10 @@ class WeatherWidget_rows extends React.Component {
         }
         let stations;
         if(this.props.data === "generation") {
-            const sortedStations = this.state.current_weather_stations_generation.sort((a, b) => a.name - b.name);
+            const sortedStations = this.state.current_weather_stations_generation.sort((a, b) => a.name[0] - b.name[0]);
             stations = sortedStations.slice(this.state.start, this.state.stop);
         } else if(this.props.data === "transmission") {
-            const sortedStations = this.state.current_weather_stations_transmission.sort((a, b) => a.name - b.name);
+            const sortedStations = this.state.current_weather_stations_transmission.sort((a, b) => a.name[0] - b.name[0]);
             stations = sortedStations.slice(this.state.start, this.state.stop);
         }  
         const display_1 = [];
