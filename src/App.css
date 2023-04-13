@@ -83,17 +83,21 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 }
 .weather_widget_row span:nth-of-type(1) {
     width: 7em;
+    font-weight: bolder;
 }
 .weather_widget_row span:nth-of-type(2) {
     width: 3em;
+    font-weight: bolder;
 }
 .weather_widget_row span:nth-of-type(3) {
     width:7em;
-    text-align: right;
+    text-align: center;
 }
 .weather_widget_row span:nth-of-type(4) {
     width:5em;
     text-align: center;
+    font-weight: bolder;
+    font-size: larger;
 }
 .weather_widget_row span:nth-of-type(5) {
     width:7em;
