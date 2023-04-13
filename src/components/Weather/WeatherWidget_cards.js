@@ -23,50 +23,50 @@ class WeatherWidget_cards extends React.Component {
         }
     }
     componentDidMount() {
-        if(this.props.history.location.pathname === "/nccweather") {
-            socket.on("client_message_weather_current", data => {
-              const { message } = data;
-              const parsedStation = JSON.parse(message);
-              const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
-              const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
-              const returnObject = {}
-              this.setState(prevState => {
-                prevState["current_weather_stations_generation"] = weather_stations_generation;
-                prevState["current_weather_stations_transmission"] = weather_stations_transmission;
-                returnObject["current_weather_stations_generation"] = prevState["current_weather_stations_generation"];
-                returnObject["current_weather_stations_transmission"] = prevState["current_weather_stations_transmission"]
-                return returnObject;
-              })
-            });
-            socket.on("client_message_weather_hourly3", data => {
-                const { message } = data;
-                const parsedStation = JSON.parse(message);
-                const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
-                const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
-                const returnObject = {}
-                this.setState(prevState => {
-                  prevState["hourly3_weather_stations_generation"] = weather_stations_generation;
-                  prevState["hourly3_weather_stations_transmission"] = weather_stations_transmission;
-                  returnObject["hourly3_weather_stations_generation"] = prevState["hourly3_weather_stations_generation"];
-                  returnObject["hourly3_weather_stations_transmission"] = prevState["hourly3_weather_stations_transmission"]
-                  return returnObject;
-                })
-            });
-            socket.on("client_message_weather_daily", data => {
-            const { message } = data;
-            const parsedStation = JSON.parse(message);
-            const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
-            const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
-            const returnObject = {}
-            this.setState(prevState => {
-                prevState["daily_weather_stations_generation"] = weather_stations_generation;
-                prevState["daily_weather_stations_transmission"] = weather_stations_transmission;
-                returnObject["daily_weather_stations_generation"] = prevState["daily_weather_stations_generation"];
-                returnObject["daily_weather_stations_transmission"] = prevState["daily_weather_stations_transmission"]
-                return returnObject;
-            })
-            });
-        }      
+        // if(this.props.history.location.pathname === "/nccweather") {
+        //     socket.on("client_message_weather_current", data => {
+        //       const { message } = data;
+        //       const parsedStation = JSON.parse(message);
+        //       const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
+        //       const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
+        //       const returnObject = {}
+        //       this.setState(prevState => {
+        //         prevState["current_weather_stations_generation"] = weather_stations_generation;
+        //         prevState["current_weather_stations_transmission"] = weather_stations_transmission;
+        //         returnObject["current_weather_stations_generation"] = prevState["current_weather_stations_generation"];
+        //         returnObject["current_weather_stations_transmission"] = prevState["current_weather_stations_transmission"]
+        //         return returnObject;
+        //       })
+        //     });
+        //     socket.on("client_message_weather_hourly3", data => {
+        //         const { message } = data;
+        //         const parsedStation = JSON.parse(message);
+        //         const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
+        //         const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
+        //         const returnObject = {}
+        //         this.setState(prevState => {
+        //           prevState["hourly3_weather_stations_generation"] = weather_stations_generation;
+        //           prevState["hourly3_weather_stations_transmission"] = weather_stations_transmission;
+        //           returnObject["hourly3_weather_stations_generation"] = prevState["hourly3_weather_stations_generation"];
+        //           returnObject["hourly3_weather_stations_transmission"] = prevState["hourly3_weather_stations_transmission"]
+        //           return returnObject;
+        //         })
+        //     });
+        //     socket.on("client_message_weather_daily", data => {
+        //     const { message } = data;
+        //     const parsedStation = JSON.parse(message);
+        //     const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
+        //     const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
+        //     const returnObject = {}
+        //     this.setState(prevState => {
+        //         prevState["daily_weather_stations_generation"] = weather_stations_generation;
+        //         prevState["daily_weather_stations_transmission"] = weather_stations_transmission;
+        //         returnObject["daily_weather_stations_generation"] = prevState["daily_weather_stations_generation"];
+        //         returnObject["daily_weather_stations_transmission"] = prevState["daily_weather_stations_transmission"]
+        //         return returnObject;
+        //     })
+        //     });
+        // }      
     }
     next() {
         const { stop } = this.state;
@@ -103,10 +103,11 @@ class WeatherWidget_cards extends React.Component {
         }
         let stations;
         if(this.props.data === "generation") {
-            const sortedStations = this.state.current_weather_stations_generation.sort((a, b) => a.name[0] - b.name[0]);
+            //const sortedStations = this.state.current_weather_stations_generation.sort((a, b) => a.name[0] - b.name[0]);
+            const sortedStations = this.props.datas.sort((a, b) => a.name[0] - b.name[0]);
             stations = sortedStations.slice(this.state.start, this.state.stop);
         } else if(this.props.data === "transmission") {
-            const sortedStations = this.state.current_weather_stations_transmission.sort((a, b) => a.name[0] - b.name[0]);
+            const sortedStations = this.props.datas.sort((a, b) => a.name[0] - b.name[0]);
             stations = sortedStations.slice(this.state.start, this.state.stop);
         }        
         const display_1 = [];
@@ -235,9 +236,7 @@ class WeatherWidget_cards extends React.Component {
                             </ul>
                         </div>
                     </div>
-                </div>
-                
-                
+                </div>                
             </section>
         )
     }
