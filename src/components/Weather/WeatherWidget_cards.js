@@ -99,7 +99,7 @@ class WeatherWidget_cards extends React.Component {
             const newDate = new Date(dt*1000);
             const hour = newDate.getHours();
             const minute =  newDate.getMinutes();  
-            return `${hour} + ':' + ${minute.toString().length == 1 ? "0" + minute : minute}`;
+            return `${hour}:${minute.toString().length == 1 ? "0" + minute : minute}`;
         }
         let stations;
         if(this.props.data === "generation") {
