@@ -70,7 +70,8 @@ class WeatherWidget_cards extends React.Component {
     }
     next() {
         const { stop } = this.state;
-        const length = this.props.data === "generation" ? this.state.current_weather_stations_generation.length : this.state.current_weather_stations_transmission.length
+        //const length = this.props.data === "generation" ? this.state.current_weather_stations_generation.length : this.state.current_weather_stations_transmission.length
+        const length = this.props.datas.length;
         const remainder = length - stop;
         if(remainder >= 6) {            
             this.setState({start: stop, stop: (stop + 6)});
