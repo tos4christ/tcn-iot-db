@@ -104,8 +104,8 @@ class WeatherWidget_rows extends React.Component {
         function getTime(dt) {
             const newDate = new Date(dt*1000);
             const hour = newDate.getHours();
-            const minute = "0" + newDate.getMinutes();  
-            return hour + ':' + minute.substring(1);
+            const minute = newDate.getMinutes();  
+            return `${hour} + ':' + ${minute.toString().length == 1 ? "0" + minute : minute}`;
         }
         let stations;
         if(this.props.data === "generation") {
