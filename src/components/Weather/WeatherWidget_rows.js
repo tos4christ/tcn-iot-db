@@ -142,10 +142,10 @@ class WeatherWidget_rows extends React.Component {
                     <div className="weather_widget_row">
                         <span>{station_name}</span>
                         <span>{todaysDate}</span>
-                        <span><img src={icon_url} width="60px" height={"40px"}></img></span>
-                        <span> {temp} °C</span>
-                        <span> {feels_like} °C</span>
+                        <span><img src={icon_url} width="60px" height="40px"></img></span>
+                        <span> {temp} °C</span>                        
                         <span>{main}</span>
+                        <span> {description}</span>
                         <span> {humidity}%</span>
                         <span> {wind_speed}kmph</span>
                         <span>{wind_degree}°</span>
@@ -166,9 +166,9 @@ class WeatherWidget_rows extends React.Component {
                                         <span>Station Name</span>
                                         <span>Date</span>
                                         <span>Icon</span>
-                                        <span><FontAwesomeIcon icon={faTemperature0} /> Temp</span>
-                                        <span><FontAwesomeIcon icon={faTemperature0} /> Feel</span>
-                                        <span>Desc</span>
+                                        <span><FontAwesomeIcon icon={faTemperature0} /> Temp</span>                                        
+                                        <span>Weather</span>
+                                        <span> Desc</span>
                                         <span><FontAwesomeIcon icon={faTint} /> Humidity</span>
                                         <span><FontAwesomeIcon icon={faWind} /> Speed</span>
                                         <span><FontAwesomeIcon icon={faWind} /> Degree</span>
