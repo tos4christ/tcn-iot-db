@@ -75,7 +75,8 @@ class WeatherWidget_rows extends React.Component {
     }
     next() {
         const { stop } = this.state;
-        const length = this.props.data === "generation" ? this.state.current_weather_stations_generation.length : this.state.current_weather_stations_transmission.length
+        // const length = this.props.data === "generation" ? this.state.current_weather_stations_generation.length : this.state.current_weather_stations_transmission.length
+        const length = this.props.datas.length;
         const remainder = length - stop;
         if(remainder >= 20) {            
             this.setState({start: stop, stop: (stop + 20)});
@@ -108,14 +109,16 @@ class WeatherWidget_rows extends React.Component {
             return `${hour}:${minute.toString().length == 1 ? "0" + minute : minute}`;
         }
         let stations;
-        if(this.props.data === "generation") {
-            // const sortedStations = this.state.current_weather_stations_generation.sort((a, b) => a.name[0] - b.name[0]);
-            const sortedStations = this.props.datas.sort((a, b) => a.name[0] - b.name[0]);
-            stations = sortedStations.slice(this.state.start, this.state.stop);
-        } else if(this.props.data === "transmission") {
-            const sortedStations = this.props.datas.sort((a, b) => a.name[0] - b.name[0]);
-            stations = sortedStations.slice(this.state.start, this.state.stop);
-        }  
+        const sortedStations = this.props.datas.sort((a, b) => a.name[0] - b.name[0]);
+        stations = sortedStations.slice(this.state.start, this.state.stop);
+        // if(this.props.data === "generation") {
+        //     // const sortedStations = this.state.current_weather_stations_generation.sort((a, b) => a.name[0] - b.name[0]);
+        //     const sortedStations = this.props.datas.sort((a, b) => a.name[0] - b.name[0]);
+        //     stations = sortedStations.slice(this.state.start, this.state.stop);
+        // } else if(this.props.data === "transmission") {
+        //     const sortedStations = this.props.datas.sort((a, b) => a.name[0] - b.name[0]);
+        //     stations = sortedStations.slice(this.state.start, this.state.stop);
+        // }  
         const display_1 = [];
         let todaysDate = new Date();
         todaysDate = todaysDate.toLocaleDateString().substring(0, 5);

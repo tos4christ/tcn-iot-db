@@ -103,14 +103,16 @@ class WeatherWidget_cards extends React.Component {
             return `${hour}:${minute.toString().length == 1 ? "0" + minute : minute}`;
         }
         let stations;
-        if(this.props.data === "generation") {
-            //const sortedStations = this.state.current_weather_stations_generation.sort((a, b) => a.name[0] - b.name[0]);
-            const sortedStations = this.props.datas.sort((a, b) => a.name[0] - b.name[0]);
-            stations = sortedStations.slice(this.state.start, this.state.stop);
-        } else if(this.props.data === "transmission") {
-            const sortedStations = this.props.datas.sort((a, b) => a.name[0] - b.name[0]);
-            stations = sortedStations.slice(this.state.start, this.state.stop);
-        }        
+        const sortedStations = this.props.datas.sort((a, b) => a.name[0] - b.name[0]);
+        stations = sortedStations.slice(this.state.start, this.state.stop);
+        // if(this.props.data === "generation") {
+        //     //const sortedStations = this.state.current_weather_stations_generation.sort((a, b) => a.name[0] - b.name[0]);
+        //     const sortedStations = this.props.datas.sort((a, b) => a.name[0] - b.name[0]);
+        //     stations = sortedStations.slice(this.state.start, this.state.stop);
+        // } else if(this.props.data === "transmission") {
+        //     const sortedStations = this.props.datas.sort((a, b) => a.name[0] - b.name[0]);
+        //     stations = sortedStations.slice(this.state.start, this.state.stop);
+        // }        
         const display_1 = [];
         [0,1,2].forEach(index => {
             const station_weather_data = stations[index]?.current_weather_data ? stations[index].current_weather_data : null;
