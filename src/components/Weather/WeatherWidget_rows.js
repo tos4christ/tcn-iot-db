@@ -105,7 +105,7 @@ class WeatherWidget_rows extends React.Component {
             const newDate = new Date(dt*1000);
             const hour = newDate.getHours();
             const minute = newDate.getMinutes();  
-            return `${hour} + ':' + ${minute.toString().length == 1 ? "0" + minute : minute}`;
+            return `${hour}:${minute.toString().length == 1 ? "0" + minute : minute}`;
         }
         let stations;
         if(this.props.data === "generation") {
@@ -142,7 +142,7 @@ class WeatherWidget_rows extends React.Component {
                     <div className="weather_widget_row">
                         <span>{station_name}</span>
                         <span>{todaysDate}</span>
-                        <span><img src={icon_url} width="30px"></img></span>
+                        <span><img src={icon_url} width="60px" height={"40px"}></img></span>
                         <span> {temp} °C</span>
                         <span> {feels_like} °C</span>
                         <span>{main}</span>
