@@ -151,7 +151,7 @@ class WeatherWidget_rows extends React.Component {
                         <span> {description}</span>
                         <span> {humidity}%</span>
                         <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                             <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li>Wind Speed | {wind_speed}kmph</li>
