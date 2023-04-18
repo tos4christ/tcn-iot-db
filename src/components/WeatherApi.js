@@ -3,6 +3,7 @@ import { Route, Switch, useRouteMatch, Link, withRouter } from 'react-router-dom
 import WeatherWidget_rows from './Weather/WeatherWidget_rows';
 import WeatherWidget_cards from './Weather/WeatherWidget_cards';
 import socket from "./utility/socketIO";
+import { EventHandler } from 'react';
 
 class WeatherApi extends React.Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class WeatherApi extends React.Component {
             cards_transmission: false,
             rows_transmission: false,
             stations: [],
+            stations_with_rainfall: [],
             current_weather_stations_generation: [],
             current_weather_stations_transmission: [],
             hourly3_weather_stations_generation: [],
@@ -54,7 +56,20 @@ class WeatherApi extends React.Component {
                 returnObject["current_weather_stations_generation"] = prevState["current_weather_stations_generation"];
                 returnObject["current_weather_stations_transmission"] = prevState["current_weather_stations_transmission"]
                 return returnObject;
+              });
+              // add stations with rainfall
+              let rain_stations = [];
+              const returnObject_2 = {}
+              parsedStation.forEach(station => {
+                if(station.rain) {
+                    rain_stations.push(station);
+                }
               })
+              this.setState(prevState => {
+                prevState["stations_with_rainfall"] = rain_stations;
+                returnObject_2["stations_with_rainfall"] = prevState["stations_with_rainfall"];
+                return returnObject_2;
+              });
             });
             socket.on("client_message_weather_hourly3", data => {
                 const { message } = data;

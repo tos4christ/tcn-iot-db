@@ -150,10 +150,16 @@ class WeatherWidget_rows extends React.Component {
                         <span>{main}</span>
                         <span> {description}</span>
                         <span> {humidity}%</span>
-                        <span> {wind_speed}kmph</span>
-                        <span>{wind_degree}°</span>
-                        <span>{wind_gust}kmph</span>
-                        <span>{pressure}</span>
+                        <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li>Wind Speed | {wind_speed}kmph</li>
+                                <li>Wind Degree | {wind_degree}°</li>
+                                <li>Wind Gust | {wind_gust}kmph</li>
+                                <li>Pressure | {pressure}</li>
+                            </ul>
+                        </div>                        
                     </div>
                 </li>
             )
@@ -173,10 +179,10 @@ class WeatherWidget_rows extends React.Component {
                                         <span>Weather</span>
                                         <span> Desc</span>
                                         <span><FontAwesomeIcon icon={faTint} /> Humidity</span>
-                                        <span><FontAwesomeIcon icon={faWind} /> Speed</span>
+                                        {/* <span><FontAwesomeIcon icon={faWind} /> Speed</span>
                                         <span><FontAwesomeIcon icon={faWind} /> Degree</span>
                                         <span><FontAwesomeIcon icon={faWind} /> Gust</span>
-                                        <span>Pressure</span>
+                                        <span>Pressure</span> */}
                                     </div>
                                 </li>
                                 {display_1}
