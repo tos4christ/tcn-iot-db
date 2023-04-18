@@ -141,7 +141,7 @@ class WeatherWidget_rows extends React.Component {
             const humidity = station_weather_data.main.humidity;
             const pressure = station_weather_data.main.pressure;
             display_1.push(
-                <li>
+                <li key={index}>
                     <div className="weather_widget_row">
                         <span>{station_name}</span>
                         <span>{todaysDate}</span>
