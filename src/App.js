@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import bootstrap from 'bootstrap'; // eslint-disable-line no-unused-vars
+//import bootstrap from 'bootstrap'; // eslint-disable-line no-unused-vars
 //import 'bootstrap/dist/js/bootstrap'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import "./components/css/icofont.css";

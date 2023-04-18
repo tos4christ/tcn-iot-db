@@ -151,13 +151,14 @@ class WeatherWidget_rows extends React.Component {
                         <span> {description}</span>
                         <span> {humidity}%</span>
                         <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-                                <li>Wind Speed | {wind_speed}kmph</li>
-                                <li>Wind Degree | {wind_degree}°</li>
-                                <li>Wind Gust | {wind_gust}kmph</li>
-                                <li>Pressure | {pressure}</li>
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu drops">
+                                <li>Wind Speed : - {wind_speed}kmph</li>
+                                <li>Wind Degree : - {wind_degree}°</li>
+                                <li>Wind Gust : - {wind_gust}kmph</li>
+                                <li>Pressure : - {pressure}</li>
                             </ul>
                         </div>                        
                     </div>
@@ -187,7 +188,8 @@ class WeatherWidget_rows extends React.Component {
                                 </li>
                                 {display_1}
                             </ul>                            
-                        </div>                        
+                        </div>  
+                                             
                         <div>
                             <button onClick={this.next}>Next</button>
                             <button onClick={this.previous}>Previous</button>
