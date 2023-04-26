@@ -62,7 +62,7 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 @media screen and (max-width: 768px) {
     .weather-container, .dashboard, .w-rows {
         width: 130%;
-        
+
     }
     .weather-alert, .icon-show {
         display: none;
@@ -595,7 +595,7 @@ body {
     /* width: 100%; */
 }
 
-@media screen and (min-height: 500px) {
+@media screen and (min-height: 768px) {
 .message {
 height: 50px;
 text-align: left;
@@ -623,7 +623,7 @@ border-radius: 10px;
 font-size:large;
 }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) {
 .App {
     width: 130%;
     height: 300vh;
