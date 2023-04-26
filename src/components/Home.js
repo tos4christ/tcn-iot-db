@@ -153,7 +153,7 @@ import get_stations from "./stations_adder";
     const totalGeneration = Number(riversipp_gs.mw) + Number(afam6_gs.mw) + Number(paras_gs.mw) + Number(geregugas_gs.mw) +
     Number(geregunipp_gs.mw) + Number(omotosogas_gs.mw) + Number(omotosonipp_gs.mw) + Number(sapelenipp_gs.mw) + Number(sapelesteam_gs.mw) +
     Number(omoku_gs.mw) + Number(odukpani_gs.mw) + Number(alaoji_gs.mw) + Number(azura_gs.mw) + Number(olorunsogonipp_gs.mw) + Number(ihovbor_gs.mw) +
-    Number(transamadi_gs.mw) + Number(ibom_gs.mw) + Number(olorunsogogas_gs.mw) + Number(gbarain_gs.mw) + Number(shiroro_gs.mw) + Number(afam4_gs.mw) +
+    Number(phMain_ts.mw) + Number(ibom_gs.mw) + Number(olorunsogogas_gs.mw) + Number(gbarain_gs.mw) + Number(shiroro_gs.mw) + Number(afam4_gs.mw) +
     Number(kainji_gs.mw) + Number(egbin_gs.mw) + Number(okpai_gs.mw) + Number(delta_gs.mw) + Number(jebba_gs.mw) + Number(dadinkowa_gs.mw);
     
     const totalTransmission = Number(ugwuaji_ts.mw) + Number(asaba_ts.mw) + Number(ekim_ts.mw) + Number(gwagwalada_ts.mw) + Number(lokoja_ts.mw) +
@@ -272,9 +272,9 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>10</td>
                   <td>TRANS-AMADI (GAS)</td>
-                  <td>{this.checkConnection(transamadi_gs.mw, transamadi_gs.kv)}</td>
-                  <td>{transamadi_gs.mw}</td>
-                  <td>{transamadi_gs.kv}</td>
+                  <td>{this.checkConnection(phMain_ts.mw, phMain_ts.kv)}</td>
+                  <td>{phMain_ts.mw}</td>
+                  <td>{phMain_ts.kv}</td>
                 </tr>
                 <tr>
                   <td>11</td>
