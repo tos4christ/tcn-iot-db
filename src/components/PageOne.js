@@ -109,6 +109,7 @@ import get_stations from "./stations_adder";
     const geregunipp_gs = stations_array['GEREGU NIPP (GAS)'];
     const azura_gs = stations_array['AZURA-EDO IPP (GAS)'];
     const transamadi_gs = stations_array['TRANS-AMADI (GAS)'];
+    const phMain_ts = stations_array['PORT-HARCOURT MAIN'];
     const ibom_gs = stations_array['IBOM POWER (GAS)'];
     const gbarain_gs = stations_array['GBARAIN NIPP (GAS)'];
     const dadinkowa_gs = stations_array['DADINKOWA G.S (HYDRO)'];
@@ -202,9 +203,9 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>10</td>
                   <td>TRANS-AMADI (GAS)</td>
-                  <td>{this.checkConnection(transamadi_gs.mw, transamadi_gs.kv)}</td>
-                  <td>{transamadi_gs.mw}</td>
-                  <td>{transamadi_gs.kv}</td>
+                  <td>{this.checkConnection(phMain_ts.mw, phMain_ts.kv)}</td>
+                  <td>{phMain_ts.mw}</td>
+                  <td>{phMain_ts.kv}</td>
                 </tr>
                 <tr>
                   <td>11</td>

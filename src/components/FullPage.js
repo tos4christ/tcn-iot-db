@@ -87,13 +87,11 @@ import get_stations from "./stations_adder";
     kv = Number(kv);
     const connected = <span className="text-success"> CN </span>
     const disconnected = <span className="text-danger"> NC </span>
-    if (mw === 0 && kv === 0) {
+    if (mw == null && kv == null) {
         return disconnected
-    } else if (mw !== 0 || kv !== 0) {
-        return connected
     } else {
-        return disconnected
-    }
+        return connected
+    } 
    }
   render() {
     const stations_array = get_stations(this.state);
@@ -119,6 +117,7 @@ import get_stations from "./stations_adder";
     const omotosonipp_gs = stations_array['OMOTOSHO NIPP (GAS)'];
     const geregunipp_gs = stations_array['GEREGU NIPP (GAS)'];
     const azura_gs = stations_array['AZURA-EDO IPP (GAS)'];
+    const phMain_ts = stations_array['PORT-HARCOURT MAIN'];
     const transamadi_gs = stations_array['TRANS-AMADI (GAS)'];
     const ibom_gs = stations_array['IBOM POWER (GAS)'];
     const gbarain_gs = stations_array['GBARAIN NIPP (GAS)'];
@@ -128,7 +127,7 @@ import get_stations from "./stations_adder";
     const totalGeneration = Number(riversipp_gs.mw) + Number(afam6_gs.mw) + Number(paras_gs.mw) + Number(geregugas_gs.mw) + 
     Number(geregunipp_gs.mw) + Number(omotosogas_gs.mw) + Number(omotosonipp_gs.mw) + Number(sapelenipp_gs.mw) + Number(sapelesteam_gs.mw) +
     Number(omoku_gs.mw) + Number(odukpani_gs.mw) + Number(alaoji_gs.mw) + Number(azura_gs.mw) + 
-    (Number(olorunsogonipp_gs.mw) <= -3 ? 0 : Number(olorunsogonipp_gs.mw)) + Number(ihovbor_gs.mw) + Number(transamadi_gs.mw) +
+    (Number(olorunsogonipp_gs.mw) <= -3 ? 0 : Number(olorunsogonipp_gs.mw)) + Number(ihovbor_gs.mw) + Number(phMain_ts.mw) +
     Number(ibom_gs.mw) + Number(olorunsogogas_gs.mw) + Number(gbarain_gs.mw) + Number(shiroro_gs.mw) + Number(afam4_gs.mw) + 
     Number(kainji_gs.mw) + Number(egbin_gs.mw) + Number(okpai_gs.mw) + Number(delta_gs.mw) + Number(jebba_gs.mw) + Number(dadinkowa_gs.mw);
         
@@ -215,9 +214,9 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>10</td>
                   <td>TRANS-AMADI (GAS)</td>
-                  <td>{this.checkConnection(transamadi_gs.mw, transamadi_gs.kv)}</td>
-                  <td>{transamadi_gs.mw}</td>
-                  <td>{transamadi_gs.kv}</td>
+                  <td>{this.checkConnection(phMain_ts.mw, phMain_ts.kv)}</td>
+                  <td>{phMain_ts.mw}</td>
+                  <td>{phMain_ts.kv}</td>
                 </tr>
                 <tr>
                   <td>11</td>
