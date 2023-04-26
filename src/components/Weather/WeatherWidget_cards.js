@@ -230,7 +230,7 @@ class WeatherWidget_cards extends React.Component {
                             <button onClick={this.previous}>Previous</button>
                         </div>
                     </div>
-                    <div className="col-3 border border-3">
+                    <div className="col-3 border border-3 weather-alert">
                         <div>
                             <h3 className="weather_h3 text-center">Weather Forecast</h3>
                             <ul className="weather_ul">

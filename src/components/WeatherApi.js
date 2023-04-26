@@ -106,7 +106,7 @@ class WeatherApi extends React.Component {
     return <>
         <div className='container-fluid'>
             <div className='row dashboard'>
-                <div className='col-md-8 col-lg-6 col-xl-4'>
+                <div className='col-xs-3 col-lg-5'>
                     <h2>Generation</h2>
                     <button name='cards_generation'  onClick={(e) => { 
                         this.setState({cards_generation: !this.state.cards_generation});
@@ -125,7 +125,7 @@ class WeatherApi extends React.Component {
                         <Link >Row Display</Link>
                     </button>
                 </div>
-                <div className='col-md-8 col-lg-6 col-xl-4'>
+                <div className='col-xs-3 col-lg-5'>
                     <h2>Transmission</h2>
                     <button onClick={() => {
                         this.setState({cards_generation: false});
@@ -144,7 +144,7 @@ class WeatherApi extends React.Component {
                         <Link >Row Display</Link>
                     </button>
                 </div>
-                <div className='col-md-8 col-lg-6 col-xl-4'>
+                <div className='col-xs-2 col-lg-2'>
                     <button  onClick={() => {  }}>
                         Download Historical Data
                     </button>
@@ -158,33 +158,8 @@ class WeatherApi extends React.Component {
             <div style={{display: this.historical_display ? '' : 'none'}} className='row historical'>
     
             </div>
-            {/* <div className='row display'>
-            { !this.state.station_name ? '' : ( <div className='weather_display'>
-                <h1> Station Name: {  this.state.station_name  }</h1>
-                <label className='weather_label'>                    
-                    <span> Main weather: {  this.state.weather_main  }  </span>
-                    <span> Weather Description: {  this.state.weather_description  } </span>
-                </label>
-                <label className='weather_label'>                    
-                    <span> Current Temperature: {  (Number(this.state.temp) - 273.15).toFixed(2)  } Celsius</span>
-                    <span> Room Temperature feels like: {  (Number(this.state.feels_like) - 273.15).toFixed(2)  } Celcius</span>
-                </label>
-                <label className='weather_label'>                    
-                    <span>Humidity: {  this.state.humidity  }</span>
-                    <span>Pressure: {  this.state.pressure  }</span>
-                </label>
-                <label className='weather_label'>                    
-                    <span> Wind Speed: {  this.state.wind_speed  }Km/H </span>
-                    <span> Wind Degree: {  this.state.wind_degree  } degrees</span>
-                    <span> Wind Gust: {  this.state.wind_gust  }</span>
-                </label>
-                <label className='weather_label'>                    
-                    Date: {  this.state.weather_date  } in epoch Time
-                </label> 
-                </div>)
-                }
-            </div> */}
-            <div className='row' style={{width: "130%", marginLeft: "2.7em"}}>
+    
+            <div className='row weather-container'>
                 {this.state.cards_generation ? <WeatherWidget_cards data="generation" datas={this.state.current_weather_stations_generation} /> : ""} <br /> 
                 {this.state.cards_transmission ? <WeatherWidget_cards data="transmission" datas={this.state.current_weather_stations_transmission} /> : ""} <br /> 
                 {this.state.rows_generation ? < WeatherWidget_rows data="generation" datas={this.state.current_weather_stations_generation} /> : ""} <br /> 

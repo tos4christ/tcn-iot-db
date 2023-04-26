@@ -4,6 +4,12 @@ Version: 1.0
 Author: Tos4christ
 Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 */
+
+/* General CSS RULES */
+.container-fluid {
+    height: max-content;
+} 
+
 .App {
     text-align: center;
   }
@@ -52,131 +58,181 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 **/
 
 /* Weather API */
-.weather_h3 {
-    font-style: oblique;
-    text-decoration: underline;
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-width: 768px) {
+    .weather-container, .dashboard, .w-rows {
+        width: 130%;
+        
+    }
+    .weather-alert, .icon-show {
+        display: none;
+    }
+    .dashboard {
+        padding-top: 1em;
+        text-align: center;
+    }
+    .dashboard button{
+        margin: 0.5em;
+        padding: 0.4em;
+    }
+    .weather_h3 {
+        font-style: oblique;
+        text-decoration: underline;
+    }
+    .weather_ul li {
+        padding: 10px;
+        font-family: serif;
+        text-transform:uppercase;
+    }
+    .weather_ul marquee {
+        margin-top: 10px;
+    }
+    .weather_widget_row {
+        display: flex;
+        flex-direction: row;
+        background-color: #fff;
+        color: gray;
+        margin: 4px;
+    }
+    .weather_widget_row span {
+        justify-content: center;
+        height: 50px;
+        padding: 5px;  
+        text-align: justify;
+        margin: 3px;
+    }
+    .drops li {
+        color:rgb(10, 10, 10);
+        padding: 4px;
+        width: max-content;
+    }
+    .weather_widget_row span:nth-of-type(1) {
+        width: 10em;
+        font-weight: bolder;
+    }
+    .weather_widget_row span:nth-of-type(2) {
+        width: 5em;
+        font-weight: bolder;
+    }
+    .weather_widget_row span:nth-of-type(3) {
+        width:7em;
+        text-align: center;
+    }
+    .weather_widget_row span:nth-of-type(4) {
+        width:5em;
+        text-align: center;
+        font-weight: bolder;
+        font-size: larger;
+    }
+    .weather_widget_row span:nth-of-type(5) {
+        width:7em;
+        text-align: center;
+        padding-right: 16px;
+    }
+    .weather_widget_row span:nth-of-type(6) {
+        width:4em;
+    }
+    .weather_widget_row span:nth-of-type(7) {
+        width:6em;
+        text-align: center;
+    }
 }
-.weather_ul li {
-    padding: 10px;
-    font-family: serif;
-    text-transform:uppercase;
-}
-.weather_ul marquee {
-    margin-top: 10px;
-}
-.text_date {
-    font-size: small;
-}
-.weather_widget_row {
-    display: flex;
-    flex-direction: row;
-    background-color: #fff;
-    color: gray;
-    margin: 4px;
-}
-.weather_widget_row span {
-    justify-content: center;
-    height: 50px;
-    padding: 5px;  
-    text-align: justify;
-    margin: 3px;
-}
-.drops li {
-    color:rgb(10, 10, 10);
-    padding: 4px;
-    width: max-content;
-}
-.weather_widget_row span:nth-of-type(1) {
-    width: 10em;
-    font-weight: bolder;
-}
-.weather_widget_row span:nth-of-type(2) {
-    width: 5em;
-    font-weight: bolder;
-}
-.weather_widget_row span:nth-of-type(3) {
-    width:7em;
-    text-align: center;
-}
-.weather_widget_row span:nth-of-type(4) {
-    width:5em;
-    text-align: center;
-    font-weight: bolder;
-    font-size: larger;
-}
-.weather_widget_row span:nth-of-type(5) {
-    width:7em;
-    text-align: center;
-    padding-right: 16px;
-}
-.weather_widget_row span:nth-of-type(6) {
-    width:4em;
-}
-.weather_widget_row span:nth-of-type(7) {
-    width:6em;
-    text-align: center;
-}
-/* .weather_widget_row span:nth-of-type(8) {
-    width:6em;
-    text-align: right;
-}
-.weather_widget_row span:nth-of-type(9) {
-    width:7em;
-    text-align: center;
-}
-.weather_widget_row span:nth-of-type(10) {
-    width:6em;
-    text-align: justify;
-}
-.weather_widget_row span:nth-of-type(11) {
-    width:3em;
-} */
 
-
-.dashboard {
-    width: 100%;
-    padding: 1em;
-    text-align: center;
+/* On bigger screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (min-width: 769px) {
+    .weather-container, .dashboard, .w-rows {
+        width: 100%;
+    }
+    .dashboard {
+        padding: 1em;
+        text-align: center;
+    }
+    .dashboard button{
+        margin: 1em;
+        padding: 1em;
+    }
+    .weather_h3 {
+        font-style: oblique;
+        text-decoration: underline;
+    }
+    .weather_ul li {
+        padding: 10px;
+        font-family: serif;
+        text-transform:uppercase;
+    }
+    .weather_ul marquee {
+        margin-top: 10px;
+    }
+    .weather_widget_row {
+        display: flex;
+        flex-direction: row;
+        background-color: #fff;
+        color: gray;
+        margin: 4px;
+    }
+    .weather_widget_row span {
+        justify-content: center;
+        height: 50px;
+        padding: 5px;  
+        text-align: justify;
+        margin: 3px;
+    }
+    .drops li {
+        color:rgb(10, 10, 10);
+        padding: 4px;
+        width: max-content;
+    }
+    .weather_widget_row span:nth-of-type(1) {
+        width: 10em;
+        font-weight: bolder;
+    }
+    .weather_widget_row span:nth-of-type(2) {
+        width: 5em;
+        font-weight: bolder;
+    }
+    .weather_widget_row span:nth-of-type(3) {
+        width:7em;
+        text-align: center;
+    }
+    .weather_widget_row span:nth-of-type(4) {
+        width:5em;
+        text-align: center;
+        font-weight: bolder;
+        font-size: larger;
+    }
+    .weather_widget_row span:nth-of-type(5) {
+        width:7em;
+        text-align: center;
+        padding-right: 16px;
+    }
+    .weather_widget_row span:nth-of-type(6) {
+        width:4em;
+    }
+    .weather_widget_row span:nth-of-type(7) {
+        width:6em;
+        text-align: center;
+    }
 }
-.dashboard button{
-    margin: 1em;
-    padding: 1em;
-  }
-  .weather_display {
-    margin: 2em 1em 1em 10em;
-    background-color: antiquewhite;
-  }
-  .weather_label h1 {
-    text-align: center;
-    color: blueviolet;  
-  }
-  .weather_label {
-    width: 100%;
-  }
-  .weather_label span {
-    margin: 1em;
-    color: blue;
-    border: 1px orange solid;
-  }
-  .current form {
-    margin: 1em 0 0 10em;
-    padding: 2em;
-    background-color: aqua;
-  }
-  .display {
-    padding: 2em;
-  }
-  .current form select, .current form button {
-    padding: .5em;
-    margin: .5em;
-    border: 1px solid white;
-    text-align: center;
-    font-weight: 500;
-  }
-  .label-span {
-    text-align: center;
-    font-weight: 500;
-  }
+
+.current form {
+margin: 1em 0 0 10em;
+padding: 2em;
+background-color: aqua;
+}
+.display {
+padding: 2em;
+}
+.current form select, .current form button {
+padding: .5em;
+margin: .5em;
+border: 1px solid white;
+text-align: center;
+font-weight: 500;
+}
+.label-span {
+text-align: center;
+font-weight: 500;
+}
 
 /* MDB Weather CSS */
 .gradient-custom {
@@ -196,7 +252,9 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
     border-radius: 50%;
 }
 
-
+.text_date {
+    font-size: small;
+}
 
 
 
@@ -564,29 +622,6 @@ width: 50%;
 border-radius: 10px;
 font-size:large;
 }
-/* .App {
-    width: 160%;
-    height: 300vh;
-    overflow: scroll;
-} */
-/* .navbar-header {
-    width: 10%;
-    padding: 0 0 4% 3%;
-} */
-/* .ul-links {
-    width: 60%;
-    margin: 0 0 0 10%;
-    padding-left: 10%;
-} */
-/* .right-nav {
-    width: 15%;
-    margin-left: 5%;
-    padding: 0;
-}
-.header {
-    padding-top: 1em;
-    padding-bottom: 0;    
-} */
 }
 @media screen and (max-width: 500px) {
 .App {
@@ -848,9 +883,6 @@ float: right;
 .nav-bar li {
     padding: 0 0 0 10px;
 }
-.container-fluid {
-height: max-content;
-} 
 .item-div {
     margin-top: 5%;
     margin-left: 20%;

@@ -167,8 +167,8 @@ class WeatherWidget_rows extends React.Component {
         });
         return (
             <section className="container-fluid" style={{"backgroundColor": "#4B515D"}}>
-                <div className="row">
-                    <div className="col-9 py-3" style={{"backgroundColor": "#4B515D"}}>
+                <div className="row w-rows">
+                    <div className="col-lg-9 col-xs-12 py-3" style={{"backgroundColor": "#4B515D"}}>
                         <div className="row d-flex py-3 justify-content-center align-items-center">
                             <ul>
                                 <li>
@@ -176,10 +176,10 @@ class WeatherWidget_rows extends React.Component {
                                         <span>Station Name</span>
                                         <span>Date</span>
                                         <span>Icon</span>
-                                        <span><FontAwesomeIcon icon={faTemperature0} /> Temp</span>                                        
+                                        <span><FontAwesomeIcon className="icon-show" icon={faTemperature0} /> Temp</span>                                        
                                         <span>Weather</span>
                                         <span> Desc</span>
-                                        <span><FontAwesomeIcon icon={faTint} /> Humidity</span>
+                                        <span><FontAwesomeIcon className="icon-show" icon={faTint} /> Humidity</span>
                                         {/* <span><FontAwesomeIcon icon={faWind} /> Speed</span>
                                         <span><FontAwesomeIcon icon={faWind} /> Degree</span>
                                         <span><FontAwesomeIcon icon={faWind} /> Gust</span>
@@ -194,7 +194,7 @@ class WeatherWidget_rows extends React.Component {
                             <button onClick={this.previous}>Previous</button>
                         </div>
                     </div>
-                    <div className="col-3 border border-3">
+                    <div className="col-lg-3 col-xs-0 border border-3 weather-alert">
                         <div>
                             <h3 className="weather_h3 text-center">Weather Forecast</h3>
                             <ul className="weather_ul">
