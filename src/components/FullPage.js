@@ -87,11 +87,13 @@ import get_stations from "./stations_adder";
     kv = Number(kv);
     const connected = <span className="text-success"> CN </span>
     const disconnected = <span className="text-danger"> NC </span>
-    if (mw == null && kv == null) {
+    if (mw === 0 && kv === 0) {
         return disconnected
-    } else {
+    } else if (mw !== 0 || kv !== 0) {
         return connected
-    } 
+    } else {
+        return disconnected
+    }
    }
   render() {
     const stations_array = get_stations(this.state);
