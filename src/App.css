@@ -146,6 +146,12 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 
 /* On bigger screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (min-width: 769px) {
+    .item-divs {
+        margin: 1em;
+        padding: 1em;
+        background-color:#232323;
+        width: 100%;
+    }
     .weather-container, .dashboard, .w-rows {
         width: 100%;
     }

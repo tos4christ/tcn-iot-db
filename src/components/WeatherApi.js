@@ -62,7 +62,7 @@ class WeatherApi extends React.Component {
               let rain_stations = [];
               const returnObject_2 = {}
               parsedStation.forEach(station => {
-                if(station.weather.main === "Rain") {
+                if(station.current_weather_data.weather.main === "Rain") {
                     rain_stations.push(station);
                 }
               })
