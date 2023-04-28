@@ -215,6 +215,13 @@ class WeatherWidget_cards extends React.Component {
                 </>
             )
         })
+        const display_rain = [];
+        const { rain_station } = this.props;
+        if(rain_station !== null) {
+            rain_station.forEach(station => {
+                
+            })
+        }
         return (
             <section className="container-fluid" style={{"background-color": "#4B515D"}}>
                 <div className="row">

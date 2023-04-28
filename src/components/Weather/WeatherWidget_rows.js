@@ -165,6 +165,17 @@ class WeatherWidget_rows extends React.Component {
                 </li>
             )
         });
+        const display_rain = [];
+        const { rain_station } = this.props;
+        display_rain.push(<li><span className="px-2">Station</span> | <span className="px-2">Description</span></li>)
+        if(rain_station !== null & rain_station.length > 0) {
+            rain_station.forEach(station => {
+                const station_name = station.name;
+                const main = station.weather[0].main;
+                const description = station.weather[0].description;
+                display_rain.push(<li><span className="px-2">{station_name}</span> | <span className="px-2">{description}</span></li>)
+            })
+        }
         return (
             <section className="container-fluid" style={{"backgroundColor": "#4B515D"}}>
                 <div className="row w-rows">
@@ -196,11 +207,11 @@ class WeatherWidget_rows extends React.Component {
                     </div>
                     <div className="col-lg-3 col-xs-0 border border-3 weather-alert">
                         <div>
-                            <h3 className="weather_h3 text-center">Weather Forecast</h3>
+                            <h3 className="weather_h3 text-center">Stations with Rainfall</h3>
                             <ul className="weather_ul">
-                                <li><marquee width="100%" height="30" direction="left" scrollamount="4" scrolldelay="10">EXPECT LIGHT SHOWERS AT ODUKPANI BETWEEN 1200-1400HRS</marquee></li>
-                                <li><marquee width="100%" height="30" direction="left" scrollamount="4"> Clear Skies at Okpai all day </marquee></li>
-                            </ul>
+                                
+                                {display_rain}                            
+                                </ul>
                         </div>
                     </div>
                 </div>

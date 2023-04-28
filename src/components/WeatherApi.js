@@ -3,7 +3,6 @@ import { Route, Switch, useRouteMatch, Link, withRouter } from 'react-router-dom
 import WeatherWidget_rows from './Weather/WeatherWidget_rows';
 import WeatherWidget_cards from './Weather/WeatherWidget_cards';
 import socket from "./utility/socketIO";
-import { EventHandler } from 'react';
 
 class WeatherApi extends React.Component {
     constructor(props) {
@@ -160,10 +159,10 @@ class WeatherApi extends React.Component {
             </div>
     
             <div className='row weather-container'>
-                {this.state.cards_generation ? <WeatherWidget_cards data="generation" datas={this.state.current_weather_stations_generation} /> : ""} <br /> 
-                {this.state.cards_transmission ? <WeatherWidget_cards data="transmission" datas={this.state.current_weather_stations_transmission} /> : ""} <br /> 
-                {this.state.rows_generation ? < WeatherWidget_rows data="generation" datas={this.state.current_weather_stations_generation} /> : ""} <br /> 
-                 {this.state.rows_transmission ? < WeatherWidget_rows data="transmission" datas={this.state.current_weather_stations_transmission} /> : ""} <br /> 
+                {this.state.cards_generation ? <WeatherWidget_cards rain_station={this.state.stations_with_rainfall} data="generation" datas={this.state.current_weather_stations_generation} /> : ""} <br /> 
+                {this.state.cards_transmission ? <WeatherWidget_cards rain_station={this.state.stations_with_rainfall} data="transmission" datas={this.state.current_weather_stations_transmission} /> : ""} <br /> 
+                {this.state.rows_generation ? < WeatherWidget_rows rain_station={this.state.stations_with_rainfall} data="generation" datas={this.state.current_weather_stations_generation} /> : ""} <br /> 
+                 {this.state.rows_transmission ? < WeatherWidget_rows rain_station={this.state.stations_with_rainfall} data="transmission" datas={this.state.current_weather_stations_transmission} /> : ""} <br /> 
             </div>
         </div>
     </>
