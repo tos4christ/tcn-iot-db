@@ -221,7 +221,7 @@ class WeatherWidget_cards extends React.Component {
         if(rain_station !== null & rain_station.length > 0) {
             rain_station.forEach(station => {
                 const station_data = station.current_weather_data;
-                const station_name = station_data.name;
+                const station_name = station.name;
                 const main = station_data.weather[0].main;
                 const description = station_data.weather[0].description;
                 display_rain.push(<li><span className="px-2">{station_name}</span> | <span className="px-2">{description}</span></li>)
