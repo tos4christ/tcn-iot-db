@@ -167,12 +167,13 @@ class WeatherWidget_rows extends React.Component {
         });
         const display_rain = [];
         const { rain_station } = this.props;
-        display_rain.push(<li><span className="px-2">Station</span> | <span className="px-2">Description</span></li>)
+        display_rain.push(<li><span className="px-2">Station</span> | <span className="px-2">Description</span></li>)        
         if(rain_station !== null & rain_station.length > 0) {
             rain_station.forEach(station => {
-                const station_name = station.name;
-                const main = station.weather[0].main;
-                const description = station.weather[0].description;
+                const station_data = station.current_weather_data;
+                const station_name = station_data.name;
+                const main = station_data.weather[0].main;
+                const description = station_data.weather[0].description;
                 display_rain.push(<li><span className="px-2">{station_name}</span> | <span className="px-2">{description}</span></li>)
             })
         }
@@ -208,10 +209,9 @@ class WeatherWidget_rows extends React.Component {
                     <div className="col-lg-3 col-xs-0 border border-3 weather-alert">
                         <div>
                             <h3 className="weather_h3 text-center">Stations with Rainfall</h3>
-                            <ul className="weather_ul">
-                                
+                            <ul className="weather_ul">                                
                                 {display_rain}                            
-                                </ul>
+                            </ul>
                         </div>
                     </div>
                 </div>

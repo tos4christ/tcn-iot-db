@@ -217,9 +217,14 @@ class WeatherWidget_cards extends React.Component {
         })
         const display_rain = [];
         const { rain_station } = this.props;
-        if(rain_station !== null) {
+        display_rain.push(<li><span className="px-2">Station</span> | <span className="px-2">Description</span></li>)        
+        if(rain_station !== null & rain_station.length > 0) {
             rain_station.forEach(station => {
-                
+                const station_data = station.current_weather_data;
+                const station_name = station_data.name;
+                const main = station_data.weather[0].main;
+                const description = station_data.weather[0].description;
+                display_rain.push(<li><span className="px-2">{station_name}</span> | <span className="px-2">{description}</span></li>)
             })
         }
         return (
@@ -237,12 +242,11 @@ class WeatherWidget_cards extends React.Component {
                             <button onClick={this.previous}>Previous</button>
                         </div>
                     </div>
-                    <div className="col-3 border border-3 weather-alert">
+                    <div className="col-lg-3 col-xs-0 border border-3 weather-alert">
                         <div>
-                            <h3 className="weather_h3 text-center">Weather Forecast</h3>
-                            <ul className="weather_ul">
-                                <li><marquee width="100%" height="30" direction="left" scrollamount="4" scrolldelay="10">EXPECT LIGHT SHOWERS AT ODUKPANI BETWEEN 1200-1400HRS</marquee></li>
-                                <li><marquee width="100%" height="30" direction="left" scrollamount="4"> Clear Skies at Okpai all day </marquee></li>
+                            <h3 className="weather_h3 text-center">Stations with Rainfall</h3>
+                            <ul className="weather_ul">                                
+                                {display_rain}                            
                             </ul>
                         </div>
                     </div>
