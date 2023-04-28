@@ -60,6 +60,12 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 /* Weather API */
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-width: 768px) {
+    .item-divs {
+        margin: 0;
+        padding: 0;
+        background-color:#232323;
+        width: 130%;
+    }
     .weather-container, .dashboard, .w-rows {
         width: 130%;
 

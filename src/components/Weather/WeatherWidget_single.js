@@ -19,7 +19,7 @@ class SingleWeatherWidget extends React.Component {
     // Hit the api for the hourly and daily forecast of the single
     // station in the query property which contains the name and lon/lat
     // of the station
-    
+
   }
 
   render() {
@@ -42,7 +42,7 @@ class SingleWeatherWidget extends React.Component {
                       <h2 className="display-2">
                         <strong>23°C</strong>
                       </h2>
-                      <p className="text-muted mb-0">Coimbra, Portugal</p>
+                      <p className="text-muted mb-0">Katampe T.S</p>
                     </div>
                     <div>
                       <img

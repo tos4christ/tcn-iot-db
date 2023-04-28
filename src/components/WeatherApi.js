@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Route, Switch, useRouteMatch, Link, withRouter } from 'react-router-dom';
 import WeatherWidget_rows from './Weather/WeatherWidget_rows';
 import WeatherWidget_cards from './Weather/WeatherWidget_cards';
+import TemWeather from './Weather/TemWeather';
 import socket from "./utility/socketIO";
 
 class WeatherApi extends React.Component {
@@ -12,6 +13,7 @@ class WeatherApi extends React.Component {
             rows_generation: false,
             cards_transmission: false,
             rows_transmission: false,
+            station_forecast: false,
             stations: [],
             stations_with_rainfall: [],
             current_weather_stations_generation: [],
@@ -60,7 +62,7 @@ class WeatherApi extends React.Component {
               let rain_stations = [];
               const returnObject_2 = {}
               parsedStation.forEach(station => {
-                if(station.rain) {
+                if(station.weather.main === "Rain") {
                     rain_stations.push(station);
                 }
               })
@@ -112,6 +114,7 @@ class WeatherApi extends React.Component {
                         this.setState({rows_generation: false});
                         this.setState({cards_transmission: false});
                         this.setState({rows_transmission: false});
+                        this.setState({station_forecast: false});
                      }}>
                         <Link >Grid Display</Link>
                     </button>
@@ -120,6 +123,7 @@ class WeatherApi extends React.Component {
                         this.setState({rows_generation: !this.state.rows_generation});
                         this.setState({cards_transmission: false});
                         this.setState({rows_transmission: false});
+                        this.setState({station_forecast: false});
                      }}>
                         <Link >Row Display</Link>
                     </button>
@@ -131,6 +135,7 @@ class WeatherApi extends React.Component {
                         this.setState({rows_generation: false});
                         this.setState({cards_transmission: !this.state.cards_transmission});
                         this.setState({rows_transmission: false});
+                        this.setState({station_forecast: false});
                     }}>
                         <Link  >Grid Display</Link>
                     </button>
@@ -139,13 +144,20 @@ class WeatherApi extends React.Component {
                         this.setState({rows_generation: false});
                         this.setState({cards_transmission: false});
                         this.setState({rows_transmission: !this.state.rows_transmission});
+                        this.setState({station_forecast: false});
                      }}>
                         <Link >Row Display</Link>
                     </button>
                 </div>
                 <div className='col-xs-2 col-lg-2'>
-                    <button  onClick={() => {  }}>
-                        Download Historical Data
+                    <button  onClick={(e) => { 
+                        this.setState({cards_generation: false});
+                        this.setState({rows_generation: false});
+                        this.setState({cards_transmission: false});
+                        this.setState({rows_transmission: false});
+                        this.setState({station_forecast: !this.state.station_forecast});
+                     }}>
+                        Station's Weather Forecast
                     </button>
                 </div>            
             </div>
@@ -162,7 +174,8 @@ class WeatherApi extends React.Component {
                 {this.state.cards_generation ? <WeatherWidget_cards rain_station={this.state.stations_with_rainfall} data="generation" datas={this.state.current_weather_stations_generation} /> : ""} <br /> 
                 {this.state.cards_transmission ? <WeatherWidget_cards rain_station={this.state.stations_with_rainfall} data="transmission" datas={this.state.current_weather_stations_transmission} /> : ""} <br /> 
                 {this.state.rows_generation ? < WeatherWidget_rows rain_station={this.state.stations_with_rainfall} data="generation" datas={this.state.current_weather_stations_generation} /> : ""} <br /> 
-                 {this.state.rows_transmission ? < WeatherWidget_rows rain_station={this.state.stations_with_rainfall} data="transmission" datas={this.state.current_weather_stations_transmission} /> : ""} <br /> 
+                {this.state.rows_transmission ? < WeatherWidget_rows rain_station={this.state.stations_with_rainfall} data="transmission" datas={this.state.current_weather_stations_transmission} /> : ""} <br /> 
+                {this.state.station_forecast ? < TemWeather /> : ""} <br /> 
             </div>
         </div>
     </>
