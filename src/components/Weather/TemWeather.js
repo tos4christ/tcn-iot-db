@@ -9,6 +9,7 @@ class TemWeather extends React.Component {
         super(props);
         this.getStationList = this.getStationList.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.setStation = this.setStation.bind(this);
         this.state = {
             loading: false,
             stations: [],
@@ -45,6 +46,9 @@ class TemWeather extends React.Component {
         e.preventDefault();
         return;
     }
+    setStation() {
+        this.setState({station: this.station});
+    }
     render() {
         const { loading } = this.state;
         return <>
@@ -64,7 +68,7 @@ class TemWeather extends React.Component {
                         <label> 
                         Select Station
                         </label>
-                        <select onChange={this.setState({station: this.station})} ref={node => this.station = node} >
+                        <select onChange={this.setStation} ref={node => this.station = node} >
                             <option disabled>Select a Station</option>
                             { this.state.stations.map( (station, index) => <option value={station.name} key={index}>{station.name}</option>)}
                         </select>
