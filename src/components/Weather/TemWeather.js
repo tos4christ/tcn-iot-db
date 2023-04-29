@@ -34,7 +34,7 @@ class TemWeather extends React.Component {
             // and used to populate the select options
             console.log(resp, " the stations ");
             this.setState(prevState => {
-                prevState.stations = resp;
+                prevState.stations = resp.stations;
                 return {stations: prevState.stations};
             })
         })
