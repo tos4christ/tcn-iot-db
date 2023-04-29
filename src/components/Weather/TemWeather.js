@@ -7,45 +7,18 @@ class TemWeather extends React.Component {
 
     constructor(props) {
         super(props);
+        this.getStationList = this.getStationList.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             loading: false,
-            cards_generation: false,
-            rows_generation: false,
-            cards_transmission: false,
-            rows_transmission: false,
             stations: [],
-            stations_with_rainfall: [],
-            current_weather_stations_generation: [],
-            current_weather_stations_transmission: [],
-            hourly3_weather_stations_generation: [],
-            hourly3_weather_stations_transmission: [],
-            daily_weather_stations_generation: [],
-            daily_weather_stations_transmission: [],
-            station: [],
-            stations_promise_array: [],
-            current_display: false,
-            forecast_display: false,
-            historical_display: false,
-            lon: 0,
-            lat: 0,
-            station_name: null,
-            weather_main: null,
-            weather_description: null,
-            temp: null,
-            feels_like: null,
-            humidity: null,
-            pressure: null,
-            wind_speed: null,
-            wind_degree: null,
-            wind_gust: null,
-            weather_date: null,
-            data: null
+            station: ""
         }
     }
     componentDidMount() {
         // On load, query for the list of stations or use the one inside the parent component
+        this.getStationList();
     };
-
     getStationList() {
         const url = 'https://tcnnas.org/api/weather/getallstations';          
         fetch(url, {
@@ -59,12 +32,19 @@ class TemWeather extends React.Component {
             // returns the list of stations which will be added to the state
             // and used to populate the select options
             console.log(resp, " the stations ");
-            
+            this.setState(prevState => {
+                prevState.stations = resp;
+                return {stations: prevState.stations};
+            })
         })
         .catch(e => {
             console.error(e);
         })
-      }
+    }
+    handleSubmit(e) {
+        e.preventDefault();
+        return;
+    }
     render() {
         const { loading } = this.state;
         return <>
@@ -84,11 +64,10 @@ class TemWeather extends React.Component {
                         <label> 
                         Select Station
                         </label>
-                        <select onChange={this.setEquipment} ref={node => this.equipmentOption = node} >
-                        <option disabled>Select a Station</option>
-                        { this.state.stations.map( (station, index) => <option value={station.name} key={index}>{station.name}</option>)}
+                        <select onChange={this.setState({station: this.station})} ref={node => this.station = node} >
+                            <option disabled>Select a Station</option>
+                            { this.state.stations.map( (station, index) => <option value={station.name} key={index}>{station.name}</option>)}
                         </select>
-
                         <button className="submit-button" onClick={this.handleSubmit}> Submit </button>
                     </div>
                     
