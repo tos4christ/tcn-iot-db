@@ -36,7 +36,7 @@ class TemWeather extends React.Component {
             console.log(resp, " the stations ");
             this.setState(prevState => {
                 prevState.stations = resp.stations;
-                return {stations: prevState.stations};
+                return {stations: prevState.stations, station: resp.stations[0]};
             })
         })
         .catch(e => {
