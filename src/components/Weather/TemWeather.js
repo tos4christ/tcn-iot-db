@@ -51,9 +51,9 @@ class TemWeather extends React.Component {
         return;
     }
     setStation() {
-        const selectedStation = this.station.options[this.station.selectedIndex].value;
-        console.log( selectedStation, " new station");
+        const selectedStation = this.station.options[this.station.selectedIndex].value;        
         const theStation = this.state.stations.filter(station => station.name === selectedStation);
+        console.log( theStation, " the station");
         this.setState({station: theStation});
     }
     searchStation() {
@@ -79,8 +79,8 @@ class TemWeather extends React.Component {
                         Select Station
                         </label>
                         <select onChange={this.setStation} ref={node => this.station = node} >
-                            <option disabled>Select a Station</option>
-                            { this.state.stations.map( (station, index) => <option value={station.name} key={index}>{station.name}</option>)}
+                            <option disabled key={0}>Select a Station</option>
+                            { this.state.stations.map( (station, index) => <option value={station.name} key={index+1}>{station.name}</option>)}
                         </select>
                         <button className="submit-button" onClick={this.handleSubmit}> Submit </button>
                     </div>
