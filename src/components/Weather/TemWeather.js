@@ -10,10 +10,11 @@ class TemWeather extends React.Component {
         this.getStationList = this.getStationList.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.setStation = this.setStation.bind(this);
+        this.searchStation = this.searchStation.bind(this);
         this.state = {
             loading: false,
             stations: [],
-            station: ""
+            station: {}
         }
     }
     componentDidMount() {
@@ -44,10 +45,18 @@ class TemWeather extends React.Component {
     }
     handleSubmit(e) {
         e.preventDefault();
+        // use the coordinates of selected station to query the weather API
+        const {station: selectedStation} = this.state;
+        // hit the tcnnas backend with the api request
         return;
     }
     setStation() {
-        this.setState({station: this.station});
+        console.log(this.station, " new station");
+        const theStation = this.state.stations.filter(station => station.name === this.station);
+        this.setState({station: theStation});
+    }
+    searchStation() {
+        return;
     }
     render() {
         const { loading } = this.state;
@@ -61,7 +70,7 @@ class TemWeather extends React.Component {
                         <label> 
                             Search Station 
                         </label>
-                        <input type={"text"} style={{width: "50%"}}></input>
+                        <input type={"text"} style={{width: "50%"}} onChange={this.searchStation}></input>
                     </div>
                     {/* Select Equipment */}
                     <div className="options">
