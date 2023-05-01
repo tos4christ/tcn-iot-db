@@ -85,8 +85,13 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
         font-style: oblique;
         text-decoration: underline;
     }
+    .weather_ul {
+        padding: 0;
+        margin: 0;
+    }
     .weather_ul li {
         padding: 0;
+        margin: 0;
         font-family: serif;
         text-transform:uppercase;
         font-size: smaller;
@@ -168,6 +173,10 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
     .weather_h3 {
         font-style: oblique;
         text-decoration: underline;
+    }
+    .weather_ul {
+        padding: 0;
+        margin: 0;
     }
     .weather_ul li {
         padding: 0;
