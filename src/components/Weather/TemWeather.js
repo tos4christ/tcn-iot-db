@@ -76,7 +76,7 @@ class TemWeather extends React.Component {
         const selectedStation = this.station.options[this.station.selectedIndex].value;        
         const theStation = this.state.stations.filter(station => station.name === selectedStation);
         console.log( theStation, " the station");
-        this.setState({station: theStation});
+        this.setState({station: theStation[0]});
     }
     searchStation() {
         return;
