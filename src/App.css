@@ -86,12 +86,10 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
         text-decoration: underline;
     }
     .weather_ul li {
-        padding: 10px;
+        padding: 0;
         font-family: serif;
         text-transform:uppercase;
-    }
-    .weather_ul marquee {
-        margin-top: 10px;
+        font-size: smaller;
     }
     .weather_widget_row {
         display: flex;
@@ -152,6 +150,10 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
         background-color:#232323;
         width: 100%;
     }
+    .weather-alert {
+        padding: none;
+        margin: none;
+    }
     .weather-container, .dashboard, .w-rows {
         width: 100%;
     }
@@ -168,12 +170,10 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
         text-decoration: underline;
     }
     .weather_ul li {
-        padding: 10px;
+        padding: 0;
         font-family: serif;
         text-transform:uppercase;
-    }
-    .weather_ul marquee {
-        margin-top: 10px;
+        font-size: small;
     }
     .weather_widget_row {
         display: flex;

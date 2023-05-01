@@ -105,8 +105,8 @@ class TemWeather extends React.Component {
                         </select>
                         <button className="submit-button" onClick={this.handleSubmit}> Submit </button>
                     </div>
-                    
-                    
+                    <section> <i></i></section> <br/>
+                    <div> <span></span></div>
                     </div>
                     <div className="table-div">
                     {loading ? 
