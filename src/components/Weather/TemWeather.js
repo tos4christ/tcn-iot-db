@@ -14,7 +14,11 @@ class TemWeather extends React.Component {
         this.state = {
             loading: false,
             stations: [],
-            station: {}
+            station: {},
+            showWeatherData: false,
+            current_weather: [],
+            hourly_weather: [],
+            daily_weather: []
         }
     }
     componentDidMount() {
@@ -46,9 +50,27 @@ class TemWeather extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         // use the coordinates of selected station to query the weather API
-        const {station: selectedStation} = this.state;
+        const { station } = this.state;
         // hit the tcnnas backend with the api request
+        const url = "https://tcnnas.org/api/weather/getweather";
+        const data = {lon: station.long, lat: station.lat};
+        console.log(station, " the station data");
         return;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+            //  Authorization: `Bearer ${token}`,
+            //   credentials: 'include'
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          })
+          .then(response => response.json())
+          .then( resp => {
+            // set the state of the variables that would show the component
+            // and also populate the view for the forecast
+            
+          });
     }
     setStation() {
         const selectedStation = this.station.options[this.station.selectedIndex].value;        
