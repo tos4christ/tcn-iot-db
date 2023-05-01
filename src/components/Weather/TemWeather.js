@@ -54,8 +54,6 @@ class TemWeather extends React.Component {
         // hit the tcnnas backend with the api request
         const url = "https://tcnnas.org/api/weather/getweather";
         const data = {lon: station.long, lat: station.lat};
-        console.log(station, " the station data");
-        return;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -69,7 +67,8 @@ class TemWeather extends React.Component {
           .then( resp => {
             // set the state of the variables that would show the component
             // and also populate the view for the forecast
-            
+            console.log(resp, " the response from the search");
+            return;
           });
     }
     setStation() {
