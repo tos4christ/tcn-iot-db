@@ -103,7 +103,7 @@ class WeatherWidget_cards extends React.Component {
             return `${hour}:${minute.toString().length == 1 ? "0" + minute : minute}`;
         }
         let stations;
-        const sortedStations = this.props.datas.sort((a, b) => a.id - b.id);
+        const sortedStations = this.props.datas.sort((a, b) => a.name < b.name ? -1 : 1);
         stations = sortedStations.slice(this.state.start, this.state.stop);
 
         // if(this.props.data === "generation") {
