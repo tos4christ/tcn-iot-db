@@ -116,7 +116,7 @@ class WeatherApi extends React.Component {
                         this.setState({rows_transmission: false});
                         this.setState({station_forecast: false});
                      }}>
-                        <Link to={"#"}>Grid Display</Link>
+                        <Link >Grid Display</Link>
                     </button>
                     <button name='rows_generation'  onClick={(e) => { 
                         this.setState({cards_generation: false});
@@ -125,7 +125,7 @@ class WeatherApi extends React.Component {
                         this.setState({rows_transmission: false});
                         this.setState({station_forecast: false});
                      }}>
-                        <Link to={"#"}>Row Display</Link>
+                        <Link >Row Display</Link>
                     </button>
                 </div>
                 <div className='col-xs-3 col-lg-5'>
@@ -137,7 +137,7 @@ class WeatherApi extends React.Component {
                         this.setState({rows_transmission: false});
                         this.setState({station_forecast: false});
                     }}>
-                        <Link  to={"#"}>Grid Display</Link>
+                        <Link >Grid Display</Link>
                     </button>
                     <button  onClick={() => { 
                         this.setState({cards_generation: false});
@@ -146,7 +146,7 @@ class WeatherApi extends React.Component {
                         this.setState({rows_transmission: !this.state.rows_transmission});
                         this.setState({station_forecast: false});
                      }}>
-                        <Link to={"#"}>Row Display</Link>
+                        <Link >Row Display</Link>
                     </button>
                 </div>
                 <div className='col-xs-2 col-lg-2'>
