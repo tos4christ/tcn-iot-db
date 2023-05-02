@@ -111,10 +111,8 @@ class TemWeather extends React.Component {
                         </select>
                         <button className="submit-button" onClick={this.handleSubmit}> Submit </button>
                     </div>
-                    <section> <i></i></section> <br/>
-                    <div> <span></span></div>
                     </div>
-                    <div className="table-div">
+                    <div >
                     {loading ? 
                         <Button className="spinner" variant="primary" disabled>
                         <Spinner
@@ -125,7 +123,7 @@ class TemWeather extends React.Component {
                         aria-hidden="true"
                         />
                         Loading... Please wait
-                    </Button>
+                        </Button>
                         : 
                         <WeatherWidget_single weatherData={this.state.weatherData} station_name={this.state.station.name} />
                     }         
