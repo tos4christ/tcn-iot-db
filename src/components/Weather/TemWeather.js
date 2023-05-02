@@ -72,7 +72,7 @@ class TemWeather extends React.Component {
             console.log(resp, " the response from the search");
             this.setState(prevState => {
                 prevState.weatherData = resp.data;
-                return {weatherData: prevState.weatherData, loading: false}
+                return {weatherData: prevState.weatherData, loading: false, showWeatherData: true}
               });
           });
         })
@@ -125,7 +125,9 @@ class TemWeather extends React.Component {
                         Loading... Please wait
                         </Button>
                         : 
+                        this.state.showWeatherData? 
                         <WeatherWidget_single weatherData={this.state.weatherData} station_name={this.state.station.name} />
+                        : ""
                     }         
                     </div>
                 </div>
