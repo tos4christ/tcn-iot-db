@@ -23,7 +23,19 @@ class SingleWeatherWidget extends React.Component {
   }
 
   render() {
-
+    function getIconUrl(icon_id)  {
+      return `https://openweathermap.org/img/wn/${icon_id}@2x.png`
+    }
+    function getDay(epoch) {
+      const dated = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+      const day = new Date(epoch*1000).getDay();
+      return dated[day];
+    }
+    const { weatherData } = this.props;
+    const {current: currentWeather, daily: dailyForecast, hourly: hourlyForecast} = weatherData;
+    const {list: hourly_list} = hourlyForecast;
+    const {list: daily_list} = dailyForecast;
+    //const current_icon_url = getIconUrl(currentWeather.weather[0].icon);
     return (
       <section className="vh-100" style={{ backgroundColor: "#C1CFEA" }}>
         <MDBContainer className="h-100">
@@ -40,14 +52,14 @@ class SingleWeatherWidget extends React.Component {
                   <div className="d-flex justify-content-between pb-2">
                     <div>
                       <h2 className="display-2">
-                        <strong>23°C</strong>
+                        <strong>{currentWeather.main.temp}°C</strong>
                       </h2>
-                      <p className="text-muted mb-0">Katampe T.S</p>
+                      <p className="text-muted mb-0" style={{fontSize: "50px"}}>{this.props.station_name}</p>
                     </div>
                     <div>
                       <img
-                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/ilu3.webp"
-                        width="150px"
+                        src={getIconUrl(currentWeather.weather[0].icon)}
+                        width="140px"
                       />
                     </div>
                   </div>
@@ -59,17 +71,13 @@ class SingleWeatherWidget extends React.Component {
                   <div className="d-flex justify-content-around text-center pb-3 pt-2">
                     <div className="flex-column">
                       <p className="small">
-                        <strong>21°C</strong>
+                        <strong>{hourly_list[0].main.temp}°C</strong>
                       </p>
-                      <MDBIcon
-                        fas
-                        icon="sun"
-                        size="2x"
-                        className="mb-3"
-                        style={{ color: "#ddd" }}
-                      />
+                      
+                      <img src={getIconUrl(hourly_list[0].weather[0].icon)}>
+                      </img>
                       <p className="mb-0">
-                        <strong>12:00</strong>
+                        <strong>{hourly_list[0].dt_txt.split(" ")[1]}</strong>
                       </p>
                       <p
                         className="mb-0 text-muted"
@@ -80,17 +88,12 @@ class SingleWeatherWidget extends React.Component {
                     </div>
                     <div className="flex-column">
                       <p className="small">
-                        <strong>2°C</strong>
+                        <strong>{hourly_list[1].main.temp}°C</strong>
                       </p>
-                      <MDBIcon
-                        fas
-                        icon="sun"
-                        size="2x"
-                        className="mb-3"
-                        style={{ color: "#ddd" }}
-                      />
+                      <img src={getIconUrl(hourly_list[1].weather[0].icon)}>
+                      </img>
                       <p className="mb-0">
-                        <strong>1:00</strong>
+                        <strong>{hourly_list[1].dt_txt.split(" ")[1]}</strong>
                       </p>
                       <p
                         className="mb-0 text-muted"
@@ -101,17 +104,12 @@ class SingleWeatherWidget extends React.Component {
                     </div>
                     <div className="flex-column">
                       <p className="small">
-                        <strong>20°C</strong>
+                        <strong>{hourly_list[2].main.temp}°C</strong>
                       </p>
-                      <MDBIcon
-                        fas
-                        icon="cloud"
-                        size="2x"
-                        className="mb-3"
-                        style={{ color: "#ddd" }}
-                      />
+                      <img src={getIconUrl(hourly_list[2].weather[0].icon)}>
+                      </img>
                       <p className="mb-0">
-                        <strong>2:00</strong>
+                        <strong>{hourly_list[2].dt_txt.split(" ")[1]}</strong>
                       </p>
                       <p
                         className="mb-0 text-muted"
@@ -122,17 +120,12 @@ class SingleWeatherWidget extends React.Component {
                     </div>
                     <div className="flex-column">
                       <p className="small">
-                        <strong>19°C</strong>
+                        <strong>{hourly_list[3].main.temp}°C</strong>
                       </p>
-                      <MDBIcon
-                        fas
-                        icon="cloud"
-                        size="2x"
-                        className="mb-3"
-                        style={{ color: "#ddd" }}
-                      />
+                      <img src={getIconUrl(hourly_list[3].weather[0].icon)}>
+                      </img>
                       <p className="mb-0">
-                        <strong>3:00</strong>
+                        <strong>{hourly_list[3].dt_txt.split(" ")[1]}</strong>
                       </p>
                       <p
                         className="mb-0 text-muted"
@@ -143,17 +136,12 @@ class SingleWeatherWidget extends React.Component {
                     </div>
                     <div className="flex-column">
                       <p className="small">
-                        <strong>18°C</strong>
+                        <strong>{hourly_list[4].main.temp}°C</strong>
                       </p>
-                      <MDBIcon
-                        fas
-                        icon="cloud-showers-heavy"
-                        size="2x"
-                        className="mb-3"
-                        style={{ color: "#ddd" }}
-                      />
+                      <img src={getIconUrl(hourly_list[4].weather[0].icon)}>
+                      </img>
                       <p className="mb-0">
-                        <strong>4:00</strong>
+                        <strong>{hourly_list[4].dt_txt.split(" ")[1]}</strong>
                       </p>
                       <p
                         className="mb-0 text-muted"
@@ -171,79 +159,55 @@ class SingleWeatherWidget extends React.Component {
                   <div className="d-flex justify-content-around text-center pb-3 pt-2">
                     <div className="flex-column">
                       <p className="small">
-                        <strong>21°C</strong>
+                        <strong>{((daily_list[0].temp.max + daily_list[0].temp.min)/2).toFixed(2)}°C</strong>
                       </p>
-                      <MDBIcon
-                        fas
-                        icon="sun"
-                        size="2x"
-                        className="mb-3"
-                        style={{ color: "#ddd" }}
-                      />
+                      <img src={getIconUrl(daily_list[0].weather[0].icon)}>
+                      </img>
                       <p className="mb-0">
-                        <strong>Mon</strong>
+                        <strong>{getDay(daily_list[0].dt)}</strong>
                       </p>
                     </div>
                     <div className="flex-column">
                       <p className="small">
-                        <strong>20°C</strong>
+                        <strong>{((daily_list[1].temp.max + daily_list[1].temp.min)/2).toFixed(2)}°C</strong>
                       </p>
-                      <MDBIcon
-                        fas
-                        icon="sun"
-                        size="2x"
-                        className="mb-3"
-                        style={{ color: "#ddd" }}
-                      />
+                      <img src={getIconUrl(daily_list[1].weather[0].icon)}>
+                      </img>
                       <p className="mb-0">
-                        <strong>Tue</strong>
+                        <strong>{getDay(daily_list[1].dt)}</strong>
                       </p>
                     </div>
                     <div className="flex-column">
                       <p className="small">
-                        <strong>16°C</strong>
+                        <strong>{((daily_list[2].temp.max + daily_list[2].temp.min)/2).toFixed(2)}°C</strong>
                       </p>
-                      <MDBIcon
-                        fas
-                        icon="cloud"
-                        size="2x"
-                        className="mb-3"
-                        style={{ color: "#ddd" }}
-                      />
+                      <img src={getIconUrl(daily_list[2].weather[0].icon)}>
+                      </img>
                       <p className="mb-0">
-                        <strong>Wed</strong>
+                        <strong>{getDay(daily_list[2].dt)}</strong>
                       </p>
                     </div>
                     <div className="flex-column">
                       <p className="small">
-                        <strong>17°C</strong>
+                        <strong>{((daily_list[3].temp.max + daily_list[3].temp.min)/2).toFixed(2)}°C</strong>
                       </p>
-                      <MDBIcon
-                        fas
-                        icon="cloud"
-                        size="2x"
-                        className="mb-3"
-                        style={{ color: "#ddd" }}
-                      />
+                      <img src={getIconUrl(daily_list[3].weather[0].icon)}>
+                      </img>
                       <p className="mb-0">
-                        <strong>Thu</strong>
+                        <strong>{getDay(daily_list[3].dt)}</strong>
                       </p>
                     </div>
                     <div className="flex-column">
                       <p className="small">
-                        <strong>18°C</strong>
+                        <strong>{((daily_list[4].temp.max + daily_list[4].temp.min)/2).toFixed(2)}°C</strong>
                       </p>
-                      <MDBIcon
-                        fas
-                        icon="cloud-showers-heavy"
-                        size="2x"
-                        className="mb-3"
-                        style={{ color: "#ddd" }}
-                      />
+                      <img src={getIconUrl(daily_list[4].weather[0].icon)}>
+                      </img>
                       <p className="mb-0">
-                        <strong>Fri</strong>
+                        <strong>{getDay(daily_list[4].dt)}</strong>
                       </p>
                     </div>
+                    
                   </div>
                 </MDBCardBody>
               </MDBCard>
