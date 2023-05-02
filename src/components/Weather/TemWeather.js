@@ -127,7 +127,7 @@ class TemWeather extends React.Component {
                         Loading... Please wait
                     </Button>
                         : 
-                        <TemWeather weatherData={this.state.weatherData} station_name={this.state.station.name} />
+                        <WeatherWidget_single weatherData={this.state.weatherData} station_name={this.state.station.name} />
                     }         
                     </div>
                 </div>
