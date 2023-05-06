@@ -137,9 +137,9 @@ const get_stations =  function(state_data) {
         'UGWUAJI' : {mw: Number(
             (ugwuaji_u1a[0]?.td ?ugwuaji_u1a[0].td.mw:0) + (ugwuaji_u2a[0]?.td ?ugwuaji_u2a[0].td.mw:0)
             ).toFixed(2), kv: ugwuaji_u1a[0]?.td ?ugwuaji_u1a[0].td.V:0},
-        'ASABA' : {mw: Number(
+        'ASABA' : {mw: (-1 * Number(
             (asaba_b3d[0]?.td ?asaba_b3d[0].td.mw:0) + (asaba_d3t[0]?.td ?asaba_d3t[0].td.mw:0)
-            ).toFixed(2), kv: (asaba_b3d[0]?.td ?asaba_b3d[0].td.V:0)},
+            ).toFixed(2)), kv: (asaba_b3d[0]?.td ?asaba_b3d[0].td.V:0)},
         'SHIRORO (HYDRO)' : {mw: Number(
             (shiroroPs_411g1[0]?.gd ?shiroroPs_411g1[0].gd.mw:0) + (shiroroPs_411g2[0]?.gd ?shiroroPs_411g2[0].gd.mw:0) + 
             (shiroroPs_411g3[0]?.gd ?shiroroPs_411g3[0].gd.mw:0) + (shiroroPs_411g4[0]?.gd ?shiroroPs_411g4[0].gd.mw:0)  
@@ -157,9 +157,9 @@ const get_stations =  function(state_data) {
             (egbinPs_st3[0]?.gd ?egbinPs_st3[0].gd.mw:0) + (egbinPs_st4[0]?.gd ?egbinPs_st4[0].gd.mw:0) + 
             (egbinPs_st5[0]?.gd ?egbinPs_st5[0].gd.mw:0) + (egbinPs_st6[0]?.gd ?egbinPs_st6[0].gd.mw:0)
                 ).toFixed(2), kv: (egbinPs_st1[0]?.gd ?egbinPs_st1[0].gd.V:0)},
-        'OKPAI (GAS/STEAM)' : {mw: Number(
+        'OKPAI (GAS/STEAM)' : {mw: (-1 * Number(
             (okpaiGs_k1t[0]?.td ?okpaiGs_k1t[0].td.mw:0) + (okpaiGs_k2t[0]?.td ?okpaiGs_k2t[0].td.mw:0)
-            ).toFixed(2), kv: (okpaiGs_k1t[0]?.td ?okpaiGs_k1t[0].td.V:0)},
+            ).toFixed(2)), kv: (okpaiGs_k1t[0]?.td ?okpaiGs_k1t[0].td.V:0)},
         'DELTA (GAS)' : {mw: Number(
             Math.abs(delta2_tr3[0]?.gd ?delta2_tr3[0].gd.mw:0) + Math.abs(delta2_tr4[0]?.gd ?delta2_tr4[0].gd.mw:0) + 
             Math.abs(delta3_tr5[0]?.gd ?delta3_tr5[0].gd.mw:0) + Math.abs(delta3_tr6[0]?.gd ?delta3_tr6[0].gd.mw:0) + 
