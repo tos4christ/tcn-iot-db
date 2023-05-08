@@ -108,6 +108,15 @@ import get_stations from "./stations_adder";
         return disconnected
     }
    }
+   checkConnection2(time) {
+    const connected = <span className="text-success"> CN </span>
+    const disconnected = <span className="text-danger"> NC </span>
+    if (time.length === 0 || time === undefined || time === null) {
+        return disconnected
+    } else if (time.length > 0) {
+        return connected
+    }
+   }
   render() {
     const { isLoggedIn } = this.props;
     if (!isLoggedIn) {
@@ -287,7 +296,7 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>12</td>
                   <td>GBARAIN NIPP (GAS)</td>
-                  <td>{this.checkConnection(gbarain_gs.mw, gbarain_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.gbarain.t)}</td>
                   <td>{gbarain_gs.mw}</td>
                   <td>{gbarain_gs.kv}</td>
                 </tr>
