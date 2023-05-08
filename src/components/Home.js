@@ -111,7 +111,10 @@ import get_stations from "./stations_adder";
    checkConnection2(time) {
     const connected = <span className="text-success"> CN </span>
     const disconnected = <span className="text-danger"> NC </span>
-    if (time.length === 0 || time === undefined || time === null) {
+    if (time === undefined || time === null) {
+      return disconnected
+    }
+    if (time.length === 0) {
         return disconnected
     } else if (time.length > 0) {
         return connected
