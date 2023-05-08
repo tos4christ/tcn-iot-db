@@ -149,6 +149,7 @@ import get_stations from "./stations_adder";
     const phMain_ts = stations_array['PORT-HARCOURT MAIN'];
     const lokoja_ts = stations_array['LOKOJA TS'];
     const eket_ts = stations_array['EKET'];
+    console.log(gbarain_gs, " the gbarain gs");
 
     const totalGeneration = Number(riversipp_gs.mw) + Number(afam6_gs.mw) + Number(paras_gs.mw) + Number(geregugas_gs.mw) +
     Number(geregunipp_gs.mw) + Number(omotosogas_gs.mw) + Number(omotosonipp_gs.mw) + Number(sapelenipp_gs.mw) + Number(sapelesteam_gs.mw) +
