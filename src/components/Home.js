@@ -45,6 +45,7 @@ import get_stations from "./stations_adder";
       lokojaTs: {},
       ugwuaji: {},
       gwagwalada: {},
+      zungeru: {},
       message: "",
       received: [],
       connected: false,
@@ -127,6 +128,7 @@ import get_stations from "./stations_adder";
     }
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
+    const zungeru_gs = stations_array['ZUNGERU'];
     const ihovbor_gs = stations_array['IHOVBOR NIPP (GAS)'];
     const omoku_gs = stations_array['OMOKU (GAS)'];
     const riversipp_gs = stations_array['RIVERS IPP (GAS)'];
@@ -162,7 +164,7 @@ import get_stations from "./stations_adder";
     const lokoja_ts = stations_array['LOKOJA TS'];
     const eket_ts = stations_array['EKET'];
 
-    const totalGeneration = Number(riversipp_gs.mw) + Number(afam6_gs.mw) + Number(paras_gs.mw) + Number(geregugas_gs.mw) +
+    const totalGeneration = Number(riversipp_gs.mw) + Number(afam6_gs.mw) + Number(paras_gs.mw) + Number(geregugas_gs.mw) + Number(zungeru_gs.mw) +
     Number(geregunipp_gs.mw) + Number(omotosogas_gs.mw) + Number(omotosonipp_gs.mw) + Number(sapelenipp_gs.mw) + Number(sapelesteam_gs.mw) +
     Number(omoku_gs.mw) + Number(odukpani_gs.mw) + Number(alaoji_gs.mw) + Number(azura_gs.mw) + Number(olorunsogonipp_gs.mw) + Number(ihovbor_gs.mw) +
     Number(phMain_ts.mw) + Number(ibom_gs.mw) + Number(olorunsogogas_gs.mw) + Number(gbarain_gs.mw) + Number(shiroro_gs.mw) + Number(afam4_gs.mw) +
@@ -221,21 +223,21 @@ import get_stations from "./stations_adder";
               <tr>
                   <td>1</td>
                   <td>RIVERS IPP (GAS)</td>
-                  <td>{this.checkConnection(riversipp_gs.mw, riversipp_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.riversIppPs.t)}</td>
                   <td>{riversipp_gs.mw}</td>
                   <td>{riversipp_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>2</td>
                   <td>AFAM VI (GAS/STEAM)</td>
-                  <td>{this.checkConnection(afam6_gs.mw, afam6_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.afamViTs.t)}</td>
                   <td>{afam6_gs.mw}</td>
                   <td>{afam6_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>3</td>
                   <td>GEREGU (GAS)</td>
-                  <td>{this.checkConnection(geregugas_gs.mw, geregugas_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.gereguPs.t)}</td>
                   <td>{geregugas_gs.mw}</td>
                   <td>{geregugas_gs.kv}</td>
                 </tr>
@@ -249,7 +251,7 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>5</td>
                   <td>OMOTOSHO NIPP (GAS)</td>
-                  <td>{this.checkConnection(omotosonipp_gs.mw, omotosonipp_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.omotoshoNippPs.t)}</td>
                   <td>{omotosonipp_gs.mw}</td>
                   <td>{omotosonipp_gs.kv}</td>
                 </tr>
@@ -263,35 +265,35 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>7</td>
                   <td>SAPELE NIPP (GAS)</td>
-                  <td>{this.checkConnection(sapelenipp_gs.mw, sapelenipp_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.sapeleNippPs.t)}</td>
                   <td>{sapelenipp_gs.mw}</td>
                   <td>{sapelenipp_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>8</td>
                   <td>OMOKU (GAS)</td>
-                  <td>{this.checkConnection(omoku_gs.mw, omoku_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.omokuPs1.t)}</td>
                   <td>{omoku_gs.mw}</td>
                   <td>{omoku_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>9</td>
                   <td>AZURA-EDO IPP (GAS)</td>
-                  <td>{this.checkConnection(azura_gs.mw, azura_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.ihovborNippPs.t)}</td>
                   <td>{azura_gs.mw}</td>
                   <td>{azura_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>10</td>
                   <td>TRANS-AMADI (GAS)</td>
-                  <td>{this.checkConnection(phMain_ts.mw, phMain_ts.kv)}</td>
+                  <td>{this.checkConnection2(this.state.phMain.t)}</td>
                   <td>{phMain_ts.mw}</td>
                   <td>{phMain_ts.kv}</td>
                 </tr>
                 <tr>
                   <td>11</td>
                   <td>GEREGU NIPP (GAS)</td>
-                  <td>{this.checkConnection(geregunipp_gs.mw, geregunipp_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.gereguPs.t)}</td>
                   <td>{geregunipp_gs.mw}</td>
                   <td>{geregunipp_gs.kv}</td>
                 </tr>
@@ -305,14 +307,14 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>13</td>
                   <td>DADINKOWA G.S (HYDRO)</td>
-                  <td>{this.checkConnection(dadinkowa_gs.mw, dadinkowa_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.dadinKowaGs.t)}</td>
                   <td>{dadinkowa_gs.mw}</td>
                   <td>{dadinkowa_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>14</td>
                   <td>PARAS ENERGY (GAS)</td>
-                  <td>{this.checkConnection(paras_gs.mw, paras_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.parasEnergyPs.t)}</td>
                   <td>{paras_gs.mw}</td>
                   <td>{paras_gs.kv}</td>
                 </tr>
@@ -326,7 +328,7 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>16</td>
                   <td>JEBBA (HYDRO)</td>
-                  <td>{this.checkConnection(jebba_gs.mw, jebba_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.jebbaTs.t)}</td>
                   <td>{jebba_gs.mw}</td>
                   <td>{jebba_gs.kv}</td>
                 </tr>
@@ -347,35 +349,35 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>19</td>
                   <td>SAPELE (STEAM)</td>
-                  <td>{this.checkConnection(sapelesteam_gs.mw, sapelesteam_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.sapeleNippPs.t)}</td>
                   <td>{sapelesteam_gs.mw}</td>
                   <td>{sapelesteam_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>20</td>
                   <td>ODUKPANI NIPP (GAS)</td>
-                  <td>{this.checkConnection(odukpani_gs.mw, odukpani_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.odukpaniNippPs.t)}</td>
                   <td>{odukpani_gs.mw}</td>
                   <td>{odukpani_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>21</td>
                   <td>ALAOJI NIPP (GAS)</td>
-                  <td>{this.checkConnection(alaoji_gs.mw, alaoji_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.alaoji.t)}</td>
                   <td>{alaoji_gs.mw}</td>
                   <td>{alaoji_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>22</td>
                   <td>IHOVBOR NIPP (GAS)</td>
-                  <td>{this.checkConnection(ihovbor_gs.mw, ihovbor_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.ihovborNippPs.t)}</td>
                   <td>{ihovbor_gs.mw}</td>
                   <td>{ihovbor_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>23</td>
                   <td>SHIRORO (HYDRO)</td>
-                  <td>{this.checkConnection(shiroro_gs.mw, shiroro_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.shiroroPs.t)}</td>
                   <td>{shiroro_gs.mw}</td>
                   <td>{shiroro_gs.kv}</td>
                 </tr>
@@ -389,23 +391,30 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>25</td>
                   <td>KAINJI (HYDRO)</td>
-                  <td>{this.checkConnection(kainji_gs.mw, kainji_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.kainjiTs.t)}</td>
                   <td>{kainji_gs.mw}</td>
                   <td>{kainji_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>26</td>
                   <td>EGBIN (STEAM)</td>
-                  <td>{this.checkConnection(egbin_gs.mw, egbin_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.egbinPs.t)}</td>
                   <td>{egbin_gs.mw}</td>
                   <td>{egbin_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>27</td>
                   <td>OKPAI (GAS/STEAM)</td>
-                  <td>{this.checkConnection(okpai_gs.mw, okpai_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.okpaiGs.t)}</td>
                   <td>{okpai_gs.mw}</td>
                   <td>{okpai_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>28</td>
+                  <td>ZUNGERU G.S</td>
+                  <td>{this.checkConnection2(this.state.zungeru.t)}</td>
+                  <td>{zungeru_gs.mw}</td>
+                  <td>{zungeru_gs.kv}</td>
                 </tr>
                 <tr></tr>
                 <tr >
@@ -433,56 +442,56 @@ import get_stations from "./stations_adder";
                   <tr>
                     <td>101</td>
                     <td>IKOT EKPENE TS</td>
-                    <td>{this.checkConnection(ikotekpene_ts.mw, ikotekpene_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.ikotEkpene.t)}</td>
                     <td>{ikotekpene_ts.mw}</td>
                     <td>{ikotekpene_ts.kv}</td>
                   </tr>
                   <tr>
                     <td>102</td>
                     <td>GWAGWALADA TS</td>
-                    <td>{this.checkConnection(gwagwalada_ts.mw, gwagwalada_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.gwagwalada.t)}</td>
                     <td>{gwagwalada_ts.mw}</td>
                     <td>{gwagwalada_ts.kv}</td>
                   </tr>
                   <tr>
                     <td>103</td>
                     <td>LOKOJA TS</td>
-                    <td>{this.checkConnection(lokoja_ts.mw, lokoja_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.lokojaTs.t)}</td>
                     <td>{lokoja_ts.mw}</td>
                     <td>{lokoja_ts.kv}</td>
                   </tr>
                   <tr>
                     <td>104</td>
                     <td>ASABA TS</td>
-                    <td>{this.checkConnection(asaba_ts.mw, asaba_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.asaba.t)}</td>
                     <td>{asaba_ts.mw}</td>
                     <td>{asaba_ts.kv}</td>
                   </tr>
                   <tr>
                     <td>105</td>
                     <td>UGWAJI TS</td>
-                    <td>{this.checkConnection(ugwuaji_ts.mw, ugwuaji_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.ugwuaji.t)}</td>
                     <td>{ugwuaji_ts.mw}</td>
                     <td>{ugwuaji_ts.kv}</td>
                   </tr>
                   <tr>
                     <td>107</td>
                     <td>EKIM TS</td>
-                    <td>{this.checkConnection(ekim_ts.mw, ekim_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.ekim.t)}</td>
                     <td>{ekim_ts.mw}</td>
                     <td>{ekim_ts.kv}</td>
                   </tr>
                   <tr>
                     <td>108</td>
                     <td>PORTHARCOURT MAIN TS</td>
-                    <td>{this.checkConnection(phMain_ts.mw, phMain_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.phMain.t)}</td>
                     <td>{phMain_ts.mw}</td>
                     <td>{phMain_ts.kv}</td>
                   </tr>
                   <tr>
                     <td>109</td>
                     <td>EKET TS</td>
-                    <td>{this.checkConnection(eket_ts.mw, eket_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.eket.t)}</td>
                     <td>{eket_ts.mw}</td>
                     <td>{eket_ts.kv}</td>
                   </tr>              

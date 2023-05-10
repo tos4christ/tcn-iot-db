@@ -152,21 +152,21 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>1</td>
                   <td>RIVERS IPP (GAS)</td>
-                  <td>{this.checkConnection(riversipp_gs.mw, riversipp_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.riversIppPs.t)}</td>
                   <td>{riversipp_gs.mw}</td>
                   <td>{riversipp_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>2</td>
                   <td>AFAM VI (GAS/STEAM)</td>
-                  <td>{this.checkConnection(afam6_gs.mw, afam6_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.afamViTs.t)}</td>
                   <td>{afam6_gs.mw}</td>
                   <td>{afam6_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>3</td>
                   <td>GEREGU (GAS)</td>
-                  <td>{this.checkConnection(geregugas_gs.mw, geregugas_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.gereguPs.t)}</td>
                   <td>{geregugas_gs.mw}</td>
                   <td>{geregugas_gs.kv}</td>
                 </tr>
@@ -180,7 +180,7 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>5</td>
                   <td>OMOTOSHO NIPP (GAS)</td>
-                  <td>{this.checkConnection(omotosonipp_gs.mw, omotosonipp_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.omotoshoNippPs.t)}</td>
                   <td>{omotosonipp_gs.mw}</td>
                   <td>{omotosonipp_gs.kv}</td>
                 </tr>
@@ -194,35 +194,35 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>7</td>
                   <td>SAPELE NIPP (GAS)</td>
-                  <td>{this.checkConnection(sapelenipp_gs.mw, sapelenipp_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.sapeleNippPs.t)}</td>
                   <td>{sapelenipp_gs.mw}</td>
                   <td>{sapelenipp_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>8</td>
                   <td>OMOKU (GAS)</td>
-                  <td>{this.checkConnection(omoku_gs.mw, omoku_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.omokuPs1.t)}</td>
                   <td>{omoku_gs.mw}</td>
                   <td>{omoku_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>9</td>
                   <td>AZURA-EDO IPP (GAS)</td>
-                  <td>{this.checkConnection(azura_gs.mw, azura_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.ihovborNippPs.t)}</td>
                   <td>{azura_gs.mw}</td>
                   <td>{azura_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>10</td>
                   <td>TRANS-AMADI (GAS)</td>
-                  <td>{this.checkConnection(phMain_ts.mw, phMain_ts.kv)}</td>
+                  <td>{this.checkConnection2(this.state.phMain.t)}</td>
                   <td>{phMain_ts.mw}</td>
                   <td>{phMain_ts.kv}</td>
                 </tr>
                 <tr>
                   <td>11</td>
                   <td>GEREGU NIPP (GAS)</td>
-                  <td>{this.checkConnection(geregunipp_gs.mw, geregunipp_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.gereguPs.t)}</td>
                   <td>{geregunipp_gs.mw}</td>
                   <td>{geregunipp_gs.kv}</td>
                 </tr>
@@ -236,14 +236,14 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>13</td>
                   <td>DADINKOWA G.S (HYDRO)</td>
-                  <td>{this.checkConnection(dadinkowa_gs.mw, dadinkowa_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.dadinKowaGs.t)}</td>
                   <td>{dadinkowa_gs.mw}</td>
                   <td>{dadinkowa_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>14</td>
                   <td>PARAS ENERGY (GAS)</td>
-                  <td>{this.checkConnection(paras_gs.mw, paras_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.parasEnergyPs.t)}</td>
                   <td>{paras_gs.mw}</td>
                   <td>{paras_gs.kv}</td>
                 </tr>

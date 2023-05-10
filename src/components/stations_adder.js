@@ -108,6 +108,8 @@ const get_stations =  function(state_data) {
     const asaba_d3t = state_data.asaba.lines ? state_data.asaba.lines.filter(line => line.id === "d3t") : [{mw: null, V: null}];
     const ugwuaji_u1a = state_data.gbarain.lines ? state_data.gbarain.lines.filter(line => line.id === "u1a") : [{mw: null, V: null}];
     const ugwuaji_u2a = state_data.gbarain.lines ? state_data.gbarain.lines.filter(line => line.id === "u2a") : [{mw: null, V: null}];    
+    const zungeru_z1ssX = state_data.zungeru.lines ? state_data.zungeru.lines.filter(line => line.id === "z1ssX") : [{mw: null, V: null}];    
+    const zungeru_z2ssX = state_data.zungeru.lines ? state_data.zungeru.lines.filter(line => line.id === "z2ssX") : [{mw: null, V: null}];    
 
     // console.log(omotosho2_tr3, omotosho2_tr4, 'the omotoshos');
     // const multiplier = 3/10;
@@ -115,6 +117,9 @@ const get_stations =  function(state_data) {
         'EKET': {mw: Number(
             Math.abs((eket_e21m[0]?.td ? eket_e21m[0].td.mw : 0) + (eket_e22m[0]?.td ? eket_e22m[0].td.mw : 0))
         ).toFixed(2), kv: (eket_e21m[0]?.td ? eket_e21m[0].td.V : eket_e22m[0]?.td ? eket_e22m[0].td.V : 0)},
+        'ZUNGERU': {mw: Number(
+            Math.abs((zungeru_z1ssX[0]?.td ? zungeru_z1ssX[0].td.mw : 0) + (zungeru_z2ssX[0]?.td ? zungeru_z2ssX[0].td.mw : 0))
+        ).toFixed(2), kv: (zungeru_z1ssX[0]?.td ? zungeru_z1ssX[0].td.V : zungeru_z2ssX[0]?.td ? zungeru_z2ssX[0].td.V : 0)},
         'PORT-HARCOURT MAIN' : {mw: Number(
             Math.abs(phMain_m21p[0]?.td ? phMain_m21p[0].td.mw : 0)
             ).toFixed(2), kv: (phMain_m21p[0]?.td ? phMain_m21p[0].td.V : 0)},
