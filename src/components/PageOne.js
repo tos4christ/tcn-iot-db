@@ -24,6 +24,7 @@ import get_stations from "./stations_adder";
       sapeleNippPs: {},
       omotoshoNippPs: {},
       odukpaniGs: {},
+      odukpaniNippPs: {},
       ekim: {},
       gereguPs: {},
       ikotEkpene: {},

@@ -24,6 +24,7 @@ import get_stations from "./stations_adder";
       sapeleNippPs: {},
       omotoshoNippPs: {},
       odukpaniGs: {},
+      odukpaniNippPs: {},
       ekim: {},
       gereguPs: {},
       ikotEkpene: {},
@@ -300,7 +301,7 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>20</td>
                   <td>ODUKPANI NIPP (GAS)</td>
-                  <td>{this.checkConnection2(this.state.odukpaniGs.t)}</td>
+                  <td>{this.checkConnection2(this.state.odukpaniNippPs.t)}</td>
                   <td>{odukpani_gs.mw}</td>
                   <td>{odukpani_gs.kv}</td>
                 </tr>
