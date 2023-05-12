@@ -43,6 +43,7 @@ import get_stations from "./stations_adder";
       ugwuaji: {},
       gwagwalada: {},
       zungeru: {},
+      taopex: {},
       connected: false,
      };
    }
