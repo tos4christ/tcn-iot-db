@@ -1,96 +1,1131 @@
-.App {  
-    background-image: url('/public/tcn-nas-background.jpeg');
-    opacity: 1;
-    background-repeat: repeat-x;
-    background-attachment: fixed;
-    width: 100%;
-    height:200vh;
-    overflow: scroll;
-    /* Add the blur effect */
+/*
+Theme Name: Sentinel
+Version: 1.0
+Author: Tos4christ
+Description: Responsive HTML5 / CSS3 One-page Landing App Template.
+*/
+
+/* General CSS RULES */
+.container-fluid {
+    height: max-content;
+} 
+
+.App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+/**
+ *** CSS Indexing ***
+ * THEME DEFAULT CSS
+ * TABLE CSS
+ * NCC TABLE CSS 
+ * HEADER AREA CSS
+**/
+
+/* Weather API */
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-width: 768px) {
+    .item-divs {
+        margin: 0;
+        padding: 0;
+        background-color:#232323;
+        width: 130%;
+    }
+    .weather-container, .dashboard, .w-rows {
+        width: 130%;
+
+    }
+    .weather-alert, .icon-show {
+        display: none;
+    }
+    .dashboard {
+        padding-top: 1em;
+        text-align: center;
+    }
+    .dashboard button{
+        margin: 0.5em;
+        padding: 0.4em;
+    }
+    .weather_h3 {
+        font-style: oblique;
+        text-decoration: underline;
+    }
+    .weather_ul {
+        padding: 0;
+        margin: 0;
+    }
+    .weather_ul li {
+        padding: 0;
+        margin: 0;
+        font-family: serif;
+        text-transform:uppercase;
+        font-size: smaller;
+    }
+    .weather_widget_row {
+        display: flex;
+        flex-direction: row;
+        background-color: #fff;
+        color: gray;
+        margin: 4px;
+    }
+    .weather_widget_row span {
+        justify-content: center;
+        height: 50px;
+        padding: 5px;  
+        text-align: justify;
+        margin: 3px;
+    }
+    .drops li {
+        color:rgb(10, 10, 10);
+        padding: 4px;
+        width: max-content;
+    }
+    .weather_widget_row span:nth-of-type(1) {
+        width: 10em;
+        font-weight: bolder;
+    }
+    .weather_widget_row span:nth-of-type(2) {
+        width: 5em;
+        font-weight: bolder;
+    }
+    .weather_widget_row span:nth-of-type(3) {
+        width:7em;
+        text-align: center;
+    }
+    .weather_widget_row span:nth-of-type(4) {
+        width:5em;
+        text-align: center;
+        font-weight: bolder;
+        font-size: larger;
+    }
+    .weather_widget_row span:nth-of-type(5) {
+        width:7em;
+        text-align: center;
+        padding-right: 16px;
+    }
+    .weather_widget_row span:nth-of-type(6) {
+        width:4em;
+    }
+    .weather_widget_row span:nth-of-type(7) {
+        width:6em;
+        text-align: center;
+    }
 }
-.hidden {
-  display: 'none';
+
+/* On bigger screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (min-width: 769px) {
+    .item-divs {
+        margin: 1em;
+        padding: 1em;
+        background-color:#232323;
+        width: 100%;
+    }
+    .weather-alert {
+        padding: none;
+        margin: none;
+    }
+    .weather-container, .dashboard, .w-rows {
+        width: 100%;
+    }
+    .dashboard {
+        padding: 1em;
+        text-align: center;
+    }
+    .dashboard button{
+        margin: 1em;
+        padding: 1em;
+    }
+    .weather_h3 {
+        font-style: oblique;
+        text-decoration: underline;
+    }
+    .weather_ul {
+        padding: 0;
+        margin: 0;
+    }
+    .weather_ul li {
+        padding: 0;
+        font-family: serif;
+        text-transform:uppercase;
+        font-size: small;
+    }
+    .weather_widget_row {
+        display: flex;
+        flex-direction: row;
+        background-color: #fff;
+        color: gray;
+        margin: 4px;
+    }
+    .weather_widget_row span {
+        justify-content: center;
+        height: 50px;
+        padding: 5px;  
+        text-align: justify;
+        margin: 3px;
+    }
+    .drops li {
+        color:rgb(10, 10, 10);
+        padding: 4px;
+        width: max-content;
+    }
+    .weather_widget_row span:nth-of-type(1) {
+        width: 10em;
+        font-weight: bolder;
+    }
+    .weather_widget_row span:nth-of-type(2) {
+        width: 5em;
+        font-weight: bolder;
+    }
+    .weather_widget_row span:nth-of-type(3) {
+        width:7em;
+        text-align: center;
+        background-color: lightskyblue;
+    }
+    .weather_widget_row span:nth-of-type(4) {
+        width:5em;
+        text-align: center;
+        font-weight: bolder;
+        font-size: larger;
+    }
+    .weather_widget_row span:nth-of-type(5) {
+        width:7em;
+        text-align: center;
+        padding-right: 16px;
+    }
+    .weather_widget_row span:nth-of-type(6) {
+        width:4em;
+    }
+    .weather_widget_row span:nth-of-type(7) {
+        width:6em;
+        text-align: center;
+    }
+}
+
+.current form {
+margin: 1em 0 0 10em;
+padding: 2em;
+background-color: aqua;
+}
+.display {
+padding: 2em;
+}
+.current form select, .current form button {
+padding: .5em;
+margin: .5em;
+border: 1px solid white;
+text-align: center;
+font-weight: 500;
+}
+.label-span {
+text-align: center;
+font-weight: 500;
+}
+
+/* MDB Weather CSS */
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #ffffff;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 236, 210, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 236, 210, 1))
+}   
+.carousel-indicators li {
+    background-color: #282828;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+
+.text_date {
+    font-size: small;
+}
+
+
+
+
+.tem input, .report input {
+    width: 8em;
+}
+.tem, .report {
+    margin: 3em 0 3em 12em
+}
+button.tem {
+    margin: 2em 0 2em 20em
+}
+div.line {
+    border-top:rgb(115, 231, 240) solid 4px
+}
+
+
+/*----------------------------------
+--------- THEME DEFAULT CSS --------
+----------------------------------*/
+
+
+/*----------------------------
+---------- TABLE CSS ---------
+----------------------------*/
+.display-div {
+    flex-grow: 3;
+    margin: 0;
+    padding: 0;
+    background-color:#232323;
+    opacity: 0.7;
+}
+.display-div table {
+    margin: 1em 4em;
+    width: 100%;
+    padding: 0;
+}
+.display-div h2 {
+    margin: 10px;
+    text-align: center;
+}
+thead, tbody {
+    display: block;
+    width: 100%;
+}
+tr {
+    display: flex;
+    width: 100%;
+}
+td, th {
+    display: inline;
+    flex-wrap: nowrap;
+    text-align: justify;
+}
+table.tg thead tr th:nth-of-type(1), table.tg tbody tr td:nth-of-type(1) {
+    width: 4em;
+    font-size: large;
+}
+table.tg thead tr th:nth-of-type(2), table.tg tbody tr td:nth-of-type(2) {
+    width: 14em;
+    font-size: large;
+}
+table.tg thead tr th:nth-of-type(3), table.tg tbody tr td:nth-of-type(3) {
+    width: 5em;
+    font-size: large;
+}
+table.tg thead tr th:nth-of-type(4), table.tg tbody tr td:nth-of-type(4) {
+    width: 8em;
+    font-size: large;
+}
+table.tg thead tr th:nth-of-type(5), table.tg tbody tr td:nth-of-type(5) {
+    width: 8em;
+    font-size: large;
+}
+.text-white {
+    color: aliceblue;
+    padding: 0 0 5px 0;
+    margin: 0 0 5px 0;
 }
 .menu {
-  margin: 0;
-}
-.spinner {
-  color: pink;
-  padding: 1em;
-  font-size: 16px;
-  margin-left: 15em;
-}
-.item-div {
-  margin-top: 5%;
-  margin-left: 20%;
-}
-
-/* Home CSS */
-.message {
-  height: 50px;
-  text-align: left;
-  font-size: 25px;
-  color: aliceblue;
-  width: 70%;
-  padding-left: 4em;
+    margin: 0;
 }
 .menu-list {
-  display: flex;
-  flex-direction: row;
-  margin: 0;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+.counter-div {
+    flex-grow: 10;
+}
+.tg  {
+    border-collapse:collapse;border-spacing:0;
+}
+.tg td, .tg th{
+    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:0px 0px;word-break:normal; color: aliceblue;text-align: center;
+}
+.tg .tg-zb4j{
+    background-color:#329a9d;
+    font-family:"Courier New", Courier, monospace !important;;
+    padding: 5px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+
+/*----------------------------
+---------- HISTORY TABLE CSS ---------
+----------------------------*/
+.history-tg .history-tg-zb4j{
+    background-color:#329a9d;
+    font-family:"Courier New", Courier, monospace !important;;
+    padding: 5px;
+    word-wrap: break-word;
+    text-align: center;
+}
+.history-tg  {
+    border-collapse:collapse;border-spacing:0;
+}
+.history-tg td, .history-tg th{
+    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:0px 0px;word-break:normal; color: aliceblue;text-align: center;
+}
+div.tbale-div {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+table.history-tg thead tr th:nth-of-type(1), table.history-tg tbody tr td:nth-of-type(1) {
+    width: 12em;
+    /* padding: 1em;
+    font-size: 16px; */
+}
+table.history-tg thead tr th:nth-of-type(2), table.history-tg tbody tr td:nth-of-type(2) {
+    width: 8em;    
+}
+table.history-tg thead tr th:nth-of-type(3), table.history-tg tbody tr td:nth-of-type(3) {
+    width: 8em;
+}
+table.history-tg thead tr th:nth-of-type(4), table.history-tg tbody tr td:nth-of-type(4) {
+    width: 8em;
+}
+table.history-tg thead tr th:nth-of-type(5), table.history-tg tbody tr td:nth-of-type(5) {
+    width: 8em;
+}
+table.history-tg thead tr th:nth-of-type(6), table.history-tg tbody tr td:nth-of-type(6) {
+    width: 8em;
+}
+table.history-tg thead tr th:nth-of-type(7), table.history-tg tbody tr td:nth-of-type(7) {
+    width: 8em;
+}
+table.history-tg thead tr th:nth-of-type(8), table.history-tg tbody tr td:nth-of-type(8) {
+    width: 8em;
+}
+
+/*----------------------------
+---------- NCC TABLE CSS ---------
+----------------------------*/
+.ncc-menu {
+    margin: 0;
+}
+.ncc-menu-list {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+.ncc-counter-div {
+    flex-grow: 1;
+    margin-top: 38em;
+}
+.ncc-counter-div-2 {
+    flex-grow: 1;
+    margin-top: 31.5em;
+}
+.ncc-display-div {
+    flex-grow: 3;
+    margin: 1em 0 2em 15em;
+    padding: 0;
+}
+.ncc-display-div table {
+    margin: 1em 1em 1em 1em;
+    width: 100%;
+    padding: 0;
+}
+.ncc-display-div h2 {
+    margin: 10px;
+    text-align: center;
+}
+
+thead, tbody {
+    display: block;
+    width: 100%;
+}
+tr {
+    display: flex;
+    width: 100%;
+}
+td, th {
+    display: inline;
+    flex-wrap: nowrap;
+    text-align: justify;
+}
+table.ncc-tg thead tr th:nth-of-type(1), table.ncc-tg tbody tr td:nth-of-type(1) {
+    width: 4em;
+    font-size: 25px;
+    background-color:rgb(204, 199, 199);
+}
+table.ncc-tg thead tr th:nth-of-type(2), table.ncc-tg tbody tr td:nth-of-type(2) {
+    width: 14em;
+    font-size: 25px;
+    background-color:rgb(204, 199, 199);
+}
+table.ncc-tg thead tr th:nth-of-type(3), table.ncc-tg tbody tr td:nth-of-type(3) {
+    width: 5em;
+    font-size: 25px;
+    background-color:rgb(204, 199, 199);
+}
+table.ncc-tg thead tr th:nth-of-type(4), table.ncc-tg tbody tr td:nth-of-type(4) {
+    width: 8em;
+    font-size: 25px;
+    background-color:rgb(204, 199, 199);
+    text-align: center;
+}
+table.ncc-tg thead tr th:nth-of-type(5), table.ncc-tg tbody tr td:nth-of-type(5) {
+    width: 8em;
+    font-size: 25px;
+    background-color:rgb(204, 199, 199);
+}
+table.ncc-tg tbody tr td:nth-of-type(1) {
+    color: blue;
+}
+table.ncc-tg tbody tr td:nth-of-type(2), table.ncc-tg tbody tr td:nth-of-type(3), table.ncc-tg tbody tr td:nth-of-type(4) {
+    font-weight: 600;
+}
+table.ncc-tg tbody tr td:nth-of-type(5) {
+    color: red;
+}
+.ncc-text-white {
+    color: aliceblue;
+    padding: 0 0 5px 0;
+    margin: 0 0 5px 0;
+}
+.ncc-tg th{
+    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:0px 0px;word-break:normal; color: blue;text-align: start;
+}
+.ncc-tg td {
+    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:0px 0px;word-break:normal;text-align: start;
+}
+.ncc-tg .ncc-tg-zb4j{
+    font-family:"Courier New", Courier, monospace !important;;
+    padding: 5px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.ncc-counter-tg th{
+    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:0px 0px;word-break:normal; color: blue;text-align: start;
+}
+.ncc-counter-tg td {
+    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:0px 0px;word-break:normal;text-align: center;
+}
+.ncc-counter-tg .ncc-counter-tg-zb4j{
+    font-family:"Courier New", Courier, monospace !important;;
+    padding: 5px;
+    word-wrap: break-word;
+    text-align: start;
+}
+
+table.ncc-counter-tg tbody tr td:nth-of-type(1) {
+    width: 4em;
+    font-size: large;
+    background-color:rgb(204, 199, 199);
+}
+table.ncc-counter-tg tbody tr td:nth-of-type(2) {
+    width: 8em;
+    font-size: large;
+    background-color:rgb(204, 199, 199);
+    color: black;
+    font-weight: 600;
+}
+table.ncc-counter-tg tbody tr:nth-child(1) td:nth-child(1) {    
+    font-size: large;
+    color: green;
+}
+table.ncc-counter-tg tbody tr:nth-child(2) td:nth-child(1), table.ncc-counter-tg tbody tr:nth-child(3) td:nth-child(1) {    
+    font-size: large;
+    color: red;
+}
+table.ncc-counter-tg tbody tr:nth-child(2) td:nth-child(2) {    
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+table.ncc-counter-tg thead tr th:nth-of-type(1) {
+ width: 0;
+ margin: 0;
+ padding: 0;
+ border: none;
+}
+table.ncc-counter-tg thead tr th:nth-of-type(2) {
+    width: 100%;
+    color: black;
+    font-size: large;
+    text-align: start;
+    padding: 0.4em 1em;
+}
+
+
+/*----------------------------
+---------- NCC TABLE CSS ---------
+----------------------------*/
+/* Change the width later and adjust the
+    signin, signup and home page
+*/
+body {
+    line-height: 24px;
+    font-size: 14px;
+    color: #666666;
+    font-family: "Raleway", sans-serif;
+    font-weight: 400;
+    
+    overflow: scroll;
+    }
+
+
+/*--------------------------------------
+--------- SIGNIN AND SIGNUP CSS START ---------
+---------------------------------------*/
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    /* flex-grow: 2; */
+    /* width: 100%; */
+}
+
+@media screen and (min-width: 769px) {
+.message {
+height: 50px;
+text-align: left;
+font-size: 25px;
+color: aliceblue;
+width: 70%;
+padding-left: 4em;
+margin-left: 10em;
+margin-top: 1em;
 }
 .ul-menu {
-  flex-grow: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0;
-}
-.display-div {
-  flex-grow: 4;
-  margin-top: 0;
-  padding-top: 0;
+flex-grow: 10;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0;
 }
 .ul-menu li {
-  display: block;
-  padding: 5px;
-  background-color: aqua;
-  margin: 10px;
-  width: 50%;
-  border-radius: 10px;
-  font-size:large;
+display: block;
+padding: 5px;
+background-color: aqua;
+margin: 10px;
+width: 50%;
+border-radius: 10px;
+font-size:large;
+}
+}
+@media screen and (max-width: 768px) {
+.App {
+    width: 130%;
+    height: 300vh;
+    overflow: scroll;
+} 
+.nav-containers {
+    display: flex;
+    flex-direction: row;
+    background-color: #666;
+    overflow: visible;
+}
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+.navbar-body {
+    flex-grow: 5;
+    margin: 0;
+    padding: 0;
+}
+.navbar-header {
+    flex-grow: 2;
+}
+.nav-link {
+    padding: 0;
+    margin: 0;
+}
+.nav-item {
+    padding: 0;
+    margin: 0;
+}
+.navbar-header {
+    padding: 0;
+    flex-grow: 2;
+    margin: 0;
+}
+.nav-container li:nth-of-type(6) {
+    width: 6em;
+    float: right;
+    padding: 0;
+}
+.message {
+    width: max-content;
+    text-align: end;
+    margin-left: 40px; 
+}
+.text-white {
+    width: max-content;
+    color: aliceblue;
+    padding: 0 0 5px 20px;
+    margin: 0 0 5px 20px;
+    }
+.menu-list {
+    display: flex;
+    flex-direction: row;
+}
+.ul-menu {    
+    flex-grow: 10;    
+    align-items: center;
+    padding: 0;
+    width: 120%;
+    margin: 20px;
+    }
+.ul-menu li {
+    display: block;
+    padding: 5px;
+    background-color: aqua;
+    margin: 10px;
+    width: 100%;
+    border-radius: 10px;
+    font-size:large;
+}
+.ul-menu li a {
+    padding: 0;
+    margin: 0;
+    width: 120%;
+}
+.display-div {
+flex-grow: 4;
+margin: 0;
+padding: 0;
+background-color:#232323;
+}
+.display-div table {
+    margin: 0;
+}
+.display-div h2 {
+    margin: 10px;
+    text-align: center;
+}
+.counter-div {
+    flex-grow: 2;
+}
 }
 
-/* History CSS */
+.App {  
+background-image: url('/public/tcn-nas-background.jpeg');
+opacity: 1;
+background-repeat: repeat;
+background-attachment: fixed;
+
+height:300vh;
+/* overflow: scroll; */
+/* Add the blur effect */
+}
+.responders-bg {
+/* background-color: #fff; */
+background: url("../public/tcn-nas-background.jpeg");
+margin: 8em 00 10em;
+width: 100vh;
+display: contents;
+}
+.shadow {
+box-shadow: 0 0 5px #ccc;
+}
+.login-bg {
+background: url("./components/img/login-head.JPG");
+height: 250px;
+background-size: contain;
+background-repeat: no-repeat;
+}
+.lower-btn {
+padding-left: 30%;
+margin: 1em;
+}
 .history-text {
-  color: white;
-  text-align: left;
-  margin-left: 4em;
-  margin-bottom: 1em;
-}
-.input-text {
-  color: black;
-  text-align: center;
-}
-.block-display {
-  display: block;
+color: white;
+text-align: left;
+margin-left: 4em;
+margin-bottom: 1em;
 }
 .options label  {
-  width: 10em;
-  margin-left: 1em;
-  color: white;
+width: 10em;
+margin-left: 1em;
+color: white;
 }
 .options select, .options input[type="datetime-local"] {
-  width: 20%;
-  height: 5vh;
+width: 20%;
+height: 5vh;
 }
 .submit-button {
-  margin-left: 14em;
-  margin-top: 1em;
-  margin-bottom: 1em;
+margin-left: 14em;
+margin-top: 1em;
+margin-bottom: 1em;
+}
+.display-table {
+display: table;
+height: 100%;
+width: 100%;
+}
+.spinner {
+color: pink;
+padding: 1em;
+font-size: 16px;
+margin-left: 15em;
+}
+.login-text {
+font-weight: 700;
+font-size: larger;
+text-decoration: none;
+padding: 1em 0;
+
+}
+.input-text {
+color: black;
+text-align: center;
+}
+.nav-containers {
+    display: flex;
+    flex-direction: row;
+    background-color: lightblue;
+    overflow: visible;
+    /* border: #0074da solid 2px; */
+    padding: 0;
+}
+.nav-container li:nth-of-type(5) {
+    flex-grow: 5;
+    float: right;
+    padding: 0;
+}
+.nav-container li:nth-of-type(2), .nav-container li:nth-of-type(3) {
+    border-right: solid blue 2px;
+}
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    background-color: lightblue;
+    margin: 0em 3em 0.2em -1em;
+    padding: 0;
+}
+.navbar-body {
+    flex-grow: 7;
+    margin-left: 4em;
+    padding: 0;
+}
+.nav-link {
+    padding: 0;
+    margin: 0 20px 0 0 ;
+    color: red;
+    text-align: justify;
+}
+a.nav-link, .nav-item, a {
+    color: red;
+    font-weight: 1000;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.nav-item {
+    padding: 0;
+    margin: 30px 20px 10px 20px;
+}
+.navbar-header {
+padding: 0 0 0px 0;
+height: 5em;
+flex-grow: 3;
+}
+.navbar-toggle {
+margin-top: 20px;
+}
+.homelogo {
+width: 5rem;
+height: 4rem;
+margin: 10px;
+padding: 0;
+}
+.homelogin {
+width: 3rem;
+height: 35px;
+margin: 0;
+padding: 0;
+}
+.ul-links {
+/* width: 35rem; */
+display: flex;
+width: 100%;
+flex-direction: column;
+justify-content: space-between ;
+}
+.ul-links li {
+margin: 0 20px;
+}
+.ul-links li:nth-of-type(1) {
+flex-grow: 3;
+float: right;
+}
+.ul-links li:nth-of-type(5) {
+flex-grow: 7;
+float: right;
+}    
+.nav-bar {
+    font-size: medium;
+    margin-left: 20rem;
+}
+.nav-bar li {
+    padding: 0 0 0 10px;
+}
+.item-div {
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
+    background-color:#232323;
+}
+.disabled {
+pointer-events: none;
+opacity: .65;
+}
+.enabled {
+pointer-events: visible;
+margin-right: 20px;
+}
+.update_password {
+    margin: 2em;
+}
+.update_password h2 {
+    margin: 1em;
+    color: #0074da;
+    text-align: justify;
+    width: 100%;
 }
 
-body {
-  width: 63%;
-  overflow: scroll;
+
+/* ------------------------
+--------- Elements --------
+------------------------ */
+
+nav {
+    display: flex;
+    flex-direction: row;
+} 
+input {
+    margin: 0;
+    padding: 0 10px;
+    height: 30px;
+    width: 10%;
 }
+input {
+    padding: 0;
+    margin: 0;
+}
+li {
+    list-style: none;
+    margin-left: 0;
+    color: aliceblue;
+}
+input[type="text"],
+input[type="submit"],
+button[type="submit"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="search"],
+input[type="password"],
+input[type="number"],
+textarea {
+  background: transparent;
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+input[type="submit"],
+button[type="submit"] {
+  width: auto;
+  color: #666;
+  padding: 4px 15px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0px;
+}
+h1 {
+  font-size: 48px;
+}
+h2 {
+  font-size: 30px;
+  color: #232323;
+}
+h4 {
+  font-size: 18px;
+  color: #232323;
+}
+h6 {
+  font-size: 14px;
+  color: #232323;
+}
+h5 {
+  color: #232323;
+}
+a {
+  transition: 0.6s;
+}
+a,
+a:hover {
+  color: #666666;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+a,
+a:hover,
+a:focus,
+a:active,
+button:focus {
+  text-decoration: none;
+  border: none;
+  outline: 0;
+}
+ul {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+ol {
+margin-bottom: 0;
+}
+select:focus,
+select:active {
+box-shadow: none;
+border: 0;
+outline: 0;
+}
+input:focus,
+textarea:focus,
+select:focus,
+button:focus {
+outline: none;
+}
+button {
+cursor: pointer;
+}
+textarea {
+height: 120px;
+}  
+input[type="select"] {
+width: 50%;
+}
+
+
+  /*---------------------------
+-------- Footer Area --------
+---------------------------*/
+.copyright-area {
+text-align: center;
+}
+.copyright-area ul li {
+display: inline-block;
+}
+.copyright-area ul li a {
+width: 35px;
+height: 35px;
+color: #0074da;
+background: rgb(115, 231, 240);
+display: inline-block;
+line-height: 35px;
+font-size: 16px;
+border-radius: 100%;
+margin: 0 5px;
+}
+.copyright-area ul li a:hover {
+background: #0074da;
+color: rgb(14, 13, 13);
+}
+.copyright-area ul {
+margin-bottom: 30px;
+}
+.copyright-area p {
+color: rgb(10, 10, 10);
+}
+.copyright-area p a {
+color: rgb(31, 20, 20);
+border-bottom: 1px solid #fff;
+}
+
+input[type="text"],
+input[type="submit"],
+button[type="submit"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="search"],
+input[type="password"],
+input[type="number"],
+textarea {
+  background: transparent;
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+input[type="submit"],
+button[type="submit"] {
+  width: auto;
+  color: #666;
+  padding: 4px 15px;
+}
+textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.text-yellow {
+  color: yellow;
+}
+.text-green {
+  color: #006600;
+}
+

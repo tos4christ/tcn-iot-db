@@ -109,7 +109,7 @@ import { Spinner, Button } from "react-bootstrap";
     if (!isLoggedIn) {
       return <Redirect to={'/'}/>
     }
-    const { loading, tableRows } = this.state;
+    const { loading } = this.state;
     // get the stations from the keys of the object
     const stationer = Object.keys(stations);
     // population the stations inside the options element for the select element's use

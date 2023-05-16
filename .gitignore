@@ -9,6 +9,8 @@
 build
 /build
 
+src/weather_response.json
+
 # testing
 /coverage
 

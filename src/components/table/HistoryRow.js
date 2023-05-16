@@ -18,14 +18,14 @@ class Row extends React.Component {
         const time = data.hour + ':' + data.minute + ':' + data.seconds;        
         return (
             <tr>
-                <td className="tg-zb4j">{data.station}</td>
-                <td className="tg-zb4j">{data.line_name}</td>
-                <td className="tg-zb4j">{tempDate.join('-')}</td>
-                <td className="tg-zb4j">{time}</td>
-                <td className="tg-zb4j">{data.mw}</td>
-                <td className="tg-zb4j">{data.amp}</td>
-                <td className="tg-zb4j">{data.kv}</td>
-                <td className="tg-zb4j">{data.mvar}</td>
+                <td className="history-tg-zb4j">{data.station}</td>
+                <td className="history-tg-zb4j">{data.line_name}</td>
+                <td className="history-tg-zb4j">{tempDate.join('-')}</td>
+                <td className="history-tg-zb4j">{time}</td>
+                <td className="history-tg-zb4j">{data.mw}</td>
+                <td className="history-tg-zb4j">{data.amp}</td>
+                <td className="history-tg-zb4j">{data.kv}</td>
+                <td className="history-tg-zb4j">{data.mvar}</td>
             </tr>
         )
     }

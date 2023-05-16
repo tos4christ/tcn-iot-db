@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders footer component 1`] = `
+<div
+  className="copyright-area"
+  style={
+    Object {
+      "marginBottom": "-50px",
+      "marginTop": "90px",
+    }
+  }
+>
+  <p>
+    Copyright ©
+    2020
+     | This web app is made with
+     
+    <i
+      aria-hidden="true"
+      className="fa fa-heart-o"
+    />
+     by Team-003
+  </p>
+</div>
+`;
