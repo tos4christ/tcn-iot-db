@@ -1,12 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import './components/css/Header.css';
-import './components/css/table.css';
-import './components/css/style.css';
-import './components/css/login.css';
-import bootstrap from 'bootstrap'; // eslint-disable-line no-unused-vars
-import 'bootstrap/dist/js/bootstrap'
+//import bootstrap from 'bootstrap'; // eslint-disable-line no-unused-vars
+//import 'bootstrap/dist/js/bootstrap'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import "./components/css/icofont.css";
 import "./components/css/font-awesome.min.css";
@@ -19,13 +15,29 @@ import History from './components/History';
 import Profile from './components/Profile';
 import Uptime from './components/Uptime';
 import Average from './components/Average';
-import Footer from './components/Footer';
-// import 'bootstrap/dist/css/bootstrap.min.css'
-// import Protected from './components/Protected';
+import PageOne from './components/PageOne';
+import PageTwo from './components/PageTwo';
+import FullPage from './components/FullPage';
+import UpdatePassword from './components/Users/UpdatePassword';
+import Tem from './components/TemDownload';
+import Collapse from './components/CollapseDownload';
+// import Footer from './components/Footer';
+import WeatherApi from './components/WeatherApi';
+import WeatherApp from './components/Weather/WeatherWidget_single';
+import Index from "./pages/Index";
+import Register from "./pages/Register";
+import DashboardHome from "./pages/DashboardHome";
+import Disco from "./pages/Disco";
+import TCN from "./pages/Tcn";
+import UserLogin from "./pages/UserLogin";
+
 
 class App extends React.Component {
   setUserDetails() {
 
+  }
+  componentDidMount() {
+    localStorage.setItem("isLoggedIn", true);
   }
   render() {
     return (
@@ -37,7 +49,7 @@ class App extends React.Component {
               <SignIn />
             </div>
           </Route>
-          <Route exact path={'/signin'}>
+          <Route  exact path={'/signin'}>
             <div className='App'>              
               <Header />
               <SignIn />
@@ -47,6 +59,12 @@ class App extends React.Component {
             <div className='App'>              
               <Header />
               <SignUp />
+            </div>
+          </Route>
+          <Route exact path={'/updatepassword'}>
+            <div className='App'>              
+              <Header />
+              <UpdatePassword />
             </div>
           </Route>
           {/* This is the protected path after successful login */}
@@ -85,6 +103,51 @@ class App extends React.Component {
               <Header />
               <Average isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>            
+          </Route>
+          <Route exact path={`/tem`}>
+            <div className='App'>
+              <Header />
+              <Tem isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>            
+          </Route>
+          <Route exact path={`/collapse`}>
+            <div className='App'>
+              <Header />
+              <Collapse isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>            
+          </Route>
+          <Route exact path={`/nccnaspageone`}>
+              <PageOne />           
+          </Route>
+          <Route exact path={`/nccnaspagetwo`}>
+              <PageTwo />         
+          </Route>
+          <Route exact path={`/nccnasfullpage`}>
+              <FullPage />         
+          </Route>
+          <Route exact path={`/nccweather`}>
+              <WeatherApi />         
+          </Route>
+          <Route exact path={`/nccweather2`}>
+              <WeatherApp />         
+          </Route>
+          <Route exact path="/api/tickets">
+            <Index />
+          </Route>
+          <Route path="/api/tickets/login">
+            <UserLogin />
+          </Route>
+          <Route path="/api/tickets/register">
+            <Register />
+          </Route>
+          <Route path="/api/tickets/dashboard">
+            <DashboardHome />
+          </Route>
+          <Route path="/api/tickets/disco">
+            <Disco />
+          </Route>
+          <Route path="/api/tickets/tcn">
+            <TCN />
           </Route>
         </Switch>
         {/* <Footer /> */}

@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import "./assets/css/bootstrap.min.css";
+import "./assets/css/slicknav.min.css";
+import "./assets/css/icofont.css";
+import "./assets/css/font-awesome.min.css";
+import "./assets/css/style.css";
+import "./assets/css/responsive.css";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

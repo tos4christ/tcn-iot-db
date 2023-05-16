@@ -1,9 +1,6 @@
 import React from 'react';
 
 class Row extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         const { data } = this.props;
         const date = data.date.split('T')[0];

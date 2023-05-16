@@ -2,6 +2,7 @@ const get_stations =  function(state_data) {
     if (!state_data) {
         return;
     }
+    // console.log(state_data, 'the station data')
     const ekim_ek1m = state_data.ekim.lines ? state_data.ekim.lines.filter(line => line.id === "ek1m") : [{mw: null, V: null}];
     const eket_e21m = state_data.eket.lines ? state_data.eket.lines.filter(line => line.id === "e21m") : [{mw: null, V: null}];
     const eket_e22m = state_data.eket.lines ? state_data.eket.lines.filter(line => line.id === "e22m") : [{mw: null, V: null}];
@@ -21,6 +22,11 @@ const get_stations =  function(state_data) {
     const shiroroPs_411g4 = state_data.shiroroPs.units ? state_data.shiroroPs.units.filter(line => line.id === "411g4") : [{mw: null, V: null}];
     const afamIv_vPs_gt17 = state_data.afamIv_vPs.units ? state_data.afamIv_vPs.units.filter(line => line.id === "gt17") : [{mw: null, V: null}];
     const afamIv_vPs_gt18 = state_data.afamIv_vPs.units ? state_data.afamIv_vPs.units.filter(line => line.id === "gt18") : [{mw: null, V: null}];
+    // New topic added
+    const afamVPs_gt20 = state_data.afamVPs ? (state_data.afamVPs?.units ? state_data.afamVPs.units.filter(line => line.id === "gt20") : [{mw: null, V: null}]) : [{}];
+    const transamadiGs_m21p = state_data.transamadiGs ? (state_data.transamadiGs.lines ? state_data.transamadiGs.lines.filter(line => line.id === "m21p") : [{mw: null, V: null}]) : [{}];
+    const transamadiGs_m22p = state_data.transamadiGs ? (state_data.transamadiGs.lines ? state_data.transamadiGs.lines.filter(line => line.id === "m22p") : [{mw: null, V: null}]) : [{}];
+
     const omotosho1_tr1 = state_data.omotosho1.lines ? state_data.omotosho1.lines.filter(line => line.id === "tr1") : [{mw: null, V: null}];
     const omotosho1_tr2 = state_data.omotosho1.lines ? state_data.omotosho1.lines.filter(line => line.id === "tr2") : [{mw: null, V: null}];
     const omotosho2_tr3 = state_data.omotosho2.lines ? state_data.omotosho2.lines.filter(line => line.id === "tr3") : [{mw: null, V: null}];
@@ -36,8 +42,16 @@ const get_stations =  function(state_data) {
     const afamViTs_ada200 = state_data.afamViTs.lines ? state_data.afamViTs.lines.filter(line => line.id === "ada200") : [{mw: null, V: null}];
     const afamViTs_adb200 = state_data.afamViTs.lines ? state_data.afamViTs.lines.filter(line => line.id === "adb200") : [{mw: null, V: null}];
     const phMain_m21p = state_data.phMain.lines ? state_data.phMain.lines.filter(line => line.id === "m21p") : [{mw: null, V: null}];
-    const odukpaniGs_d1b = state_data.odukpaniGs.lines ? state_data.odukpaniGs.lines.filter(line => line.id === "d1b") : [{mw: null, V: null}];
-    const odukpaniGs_d2b = state_data.odukpaniGs.lines ? state_data.odukpaniGs.lines.filter(line => line.id === "d2b") : [{mw: null, V: null}];
+    // Old topics removed
+    // const odukpaniGs_d1b = state_data.odukpaniGs.lines ? state_data.odukpaniGs.lines.filter(line => line.id === "d1b") : [{mw: null, V: null}];
+    // const odukpaniGs_d2b = state_data.odukpaniGs.lines ? state_data.odukpaniGs.lines.filter(line => line.id === "d2b") : [{mw: null, V: null}];
+    // New topics added
+    const odukpaniNippPs_gt1 = state_data.odukpaniNippPs? (state_data.odukpaniNippPs.units ? state_data.odukpaniNippPs.units.filter(line => line.id === "gt1") : [{mw: null, V: null}]) : [{}];
+    const odukpaniNippPs_gt2 = state_data.odukpaniNippPs? (state_data.odukpaniNippPs.units ? state_data.odukpaniNippPs.units.filter(line => line.id === "gt2") : [{mw: null, V: null}]) : [{}];
+    const odukpaniNippPs_gt3 = state_data.odukpaniNippPs? (state_data.odukpaniNippPs.units ? state_data.odukpaniNippPs.units.filter(line => line.id === "gt3") : [{mw: null, V: null}]) : [{}];
+    const odukpaniNippPs_gt4 = state_data.odukpaniNippPs? (state_data.odukpaniNippPs.units ? state_data.odukpaniNippPs.units.filter(line => line.id === "gt4") : [{mw: null, V: null}]) : [{}];
+    const odukpaniNippPs_gt5 = state_data.odukpaniNippPs? (state_data.odukpaniNippPs.units ? state_data.odukpaniNippPs.units.filter(line => line.id === "gt5") : [{mw: null, V: null}]) : [{}];
+
     const omotoshoNippPs_tr1 = state_data.omotoshoNippPs.units ? state_data.omotoshoNippPs.units.filter(line => line.id === "tr1") : [{mw: null, V: null}];
     const omotoshoNippPs_tr2 = state_data.omotoshoNippPs.units ? state_data.omotoshoNippPs.units.filter(line => line.id === "tr2") : [{mw: null, V: null}];
     const omotoshoNippPs_tr3 = state_data.omotoshoNippPs.units ? state_data.omotoshoNippPs.units.filter(line => line.id === "tr3") : [{mw: null, V: null}];
@@ -94,11 +108,24 @@ const get_stations =  function(state_data) {
     const asaba_d3t = state_data.asaba.lines ? state_data.asaba.lines.filter(line => line.id === "d3t") : [{mw: null, V: null}];
     const ugwuaji_u1a = state_data.gbarain.lines ? state_data.gbarain.lines.filter(line => line.id === "u1a") : [{mw: null, V: null}];
     const ugwuaji_u2a = state_data.gbarain.lines ? state_data.gbarain.lines.filter(line => line.id === "u2a") : [{mw: null, V: null}];    
+    const zungeru_z1ssX = state_data.zungeru.lines ? state_data.zungeru.lines.filter(line => line.id === "z1ssX") : [{mw: null, V: null}];    
+    const zungeru_z2ssX = state_data.zungeru.lines ? state_data.zungeru.lines.filter(line => line.id === "z2ssX") : [{mw: null, V: null}];
+    //Taopex
+    const taopex = state_data.taopex.lines ? state_data.taopex.lines.filter(line => line.id === "line1") : [{mw: null, V: null}];    
+    
 
+    // console.log(omotosho2_tr3, omotosho2_tr4, 'the omotoshos');
+    // const multiplier = 3/10;
     return { 
+        'TAOPEX': {mw: Number(
+            Math.abs(taopex[0]?.td ? taopex[0].td.mw : 0)
+        ).toFixed(2), kv: (taopex[0]?.td ? taopex[0].td.V : 0)},
         'EKET': {mw: Number(
             Math.abs((eket_e21m[0]?.td ? eket_e21m[0].td.mw : 0) + (eket_e22m[0]?.td ? eket_e22m[0].td.mw : 0))
         ).toFixed(2), kv: (eket_e21m[0]?.td ? eket_e21m[0].td.V : eket_e22m[0]?.td ? eket_e22m[0].td.V : 0)},
+        'ZUNGERU': {mw: Number(
+            Math.abs((zungeru_z1ssX[0]?.td ? zungeru_z1ssX[0].td.mw : 0) + (zungeru_z2ssX[0]?.td ? zungeru_z2ssX[0].td.mw : 0))
+        ).toFixed(2), kv: (zungeru_z1ssX[0]?.td ? zungeru_z1ssX[0].td.V : zungeru_z2ssX[0]?.td ? zungeru_z2ssX[0].td.V : 0)},
         'PORT-HARCOURT MAIN' : {mw: Number(
             Math.abs(phMain_m21p[0]?.td ? phMain_m21p[0].td.mw : 0)
             ).toFixed(2), kv: (phMain_m21p[0]?.td ? phMain_m21p[0].td.V : 0)},
@@ -121,32 +148,33 @@ const get_stations =  function(state_data) {
         'UGWUAJI' : {mw: Number(
             (ugwuaji_u1a[0]?.td ?ugwuaji_u1a[0].td.mw:0) + (ugwuaji_u2a[0]?.td ?ugwuaji_u2a[0].td.mw:0)
             ).toFixed(2), kv: ugwuaji_u1a[0]?.td ?ugwuaji_u1a[0].td.V:0},
-        'ASABA' : {mw: Number(
+        'ASABA' : {mw: (-1 * Number(
             (asaba_b3d[0]?.td ?asaba_b3d[0].td.mw:0) + (asaba_d3t[0]?.td ?asaba_d3t[0].td.mw:0)
-            ).toFixed(2), kv: (asaba_b3d[0]?.td ?asaba_b3d[0].td.V:0)},
+            ).toFixed(2)), kv: (asaba_b3d[0]?.td ?asaba_b3d[0].td.V:0)},
         'SHIRORO (HYDRO)' : {mw: Number(
             (shiroroPs_411g1[0]?.gd ?shiroroPs_411g1[0].gd.mw:0) + (shiroroPs_411g2[0]?.gd ?shiroroPs_411g2[0].gd.mw:0) + 
             (shiroroPs_411g3[0]?.gd ?shiroroPs_411g3[0].gd.mw:0) + (shiroroPs_411g4[0]?.gd ?shiroroPs_411g4[0].gd.mw:0)  
                 ).toFixed(2), kv: (shiroroPs_411g1[0]?.gd ?shiroroPs_411g1[0].gd.V:0)},
         'AFAM IV & V (GAS)' : {mw: Number(
-            (afamIv_vPs_gt17[0]?.td ?afamIv_vPs_gt17[0].td.mw:0) + (afamIv_vPs_gt18[0]?.td ?afamIv_vPs_gt18[0].td.mw:0)
-            ).toFixed(2), kv: (afamIv_vPs_gt17[0]?.td ?afamIv_vPs_gt17[0].td.V:0)},
+            (afamIv_vPs_gt17[0]?.td ?afamIv_vPs_gt17[0].td.mw:0) + (afamIv_vPs_gt18[0]?.td ?afamIv_vPs_gt18[0].td.mw:0) +
+            (afamVPs_gt20[0]?.gd ? Math.abs(afamVPs_gt20[0].gd.mw) : 0)
+            ).toFixed(2), kv: (afamVPs_gt20[0]?.gd ?afamVPs_gt20[0].gd.V:0)},
         'KAINJI (HYDRO)' : {mw: Number(
             (kainjiTs_k1f[0]?.td ?kainjiTs_k1f[0].td.mw:0) + (kainjiTs_k1j[0]?.td ?kainjiTs_k1j[0].td.mw:0) + 
             (kainjiTs_k2j[0]?.td ?kainjiTs_k2j[0].td.mw:0) + (kainjiTs_k3r[0]?.td ?kainjiTs_k3r[0].td.mw:0)
-                ).toFixed(2), kv: (kainjiTs_k1f[0]?.td ?kainjiTs_k1f[0].td.V:0)},
+                ).toFixed(2), kv: (kainjiTs_k2j[0]?.td ?kainjiTs_k2j[0].td.V:0)},
         'EGBIN (STEAM)' : {mw: Number(
             (egbinPs_st1[0]?.gd ?egbinPs_st1[0].gd.mw:0) + (egbinPs_st2[0]?.gd ?egbinPs_st2[0].gd.mw:0) + 
             (egbinPs_st3[0]?.gd ?egbinPs_st3[0].gd.mw:0) + (egbinPs_st4[0]?.gd ?egbinPs_st4[0].gd.mw:0) + 
             (egbinPs_st5[0]?.gd ?egbinPs_st5[0].gd.mw:0) + (egbinPs_st6[0]?.gd ?egbinPs_st6[0].gd.mw:0)
                 ).toFixed(2), kv: (egbinPs_st1[0]?.gd ?egbinPs_st1[0].gd.V:0)},
-        'OKPAI (GAS/STEAM)' : {mw: Number(
+        'OKPAI (GAS/STEAM)' : {mw: (-1 * Number(
             (okpaiGs_k1t[0]?.td ?okpaiGs_k1t[0].td.mw:0) + (okpaiGs_k2t[0]?.td ?okpaiGs_k2t[0].td.mw:0)
-            ).toFixed(2), kv: (okpaiGs_k1t[0]?.td ?okpaiGs_k1t[0].td.V:0)},
+            ).toFixed(2)), kv: (okpaiGs_k1t[0]?.td ?okpaiGs_k1t[0].td.V:0)},
         'DELTA (GAS)' : {mw: Number(
-            (delta2_tr3[0]?.gd ?delta2_tr3[0].gd.mw:0) + (delta2_tr4[0]?.gd ?delta2_tr4[0].gd.mw:0) + 
-            (delta3_tr5[0]?.gd ?delta3_tr5[0].gd.mw:0) + (delta3_tr6[0]?.gd ?delta3_tr6[0].gd.mw:0) + 
-            (deltaGs_g3b[0]?.td ?deltaGs_g3b[0].td.mw:0) + (deltaGs_s4g[0]?.td ?deltaGs_s4g[0].td.mw:0)   
+            Math.abs(delta2_tr3[0]?.gd ?delta2_tr3[0].gd.mw:0) + Math.abs(delta2_tr4[0]?.gd ?delta2_tr4[0].gd.mw:0) + 
+            Math.abs(delta3_tr5[0]?.gd ?delta3_tr5[0].gd.mw:0) + Math.abs(delta3_tr6[0]?.gd ?delta3_tr6[0].gd.mw:0) + 
+            Math.abs(deltaGs_g3b[0]?.td ?deltaGs_g3b[0].td.mw:0) + Math.abs(deltaGs_s4g[0]?.td ?deltaGs_s4g[0].td.mw:0)   
                 ).toFixed(2), kv: (deltaGs_g3b[0]?.td ?deltaGs_g3b[0].td.V:0)},
         'JEBBA (HYDRO)' : {mw: Number(
             (jebbaTs_b8j[0]?.td ?jebbaTs_b8j[0].td.mw:0) + (jebbaTs_b9j[0]?.td ?jebbaTs_b9j[0].td.mw:0)
@@ -155,7 +183,7 @@ const get_stations =  function(state_data) {
             (afamViTs_ada200[0]?.td ?afamViTs_ada200[0].td.mw:0) + (afamViTs_adb200[0]?.td ?afamViTs_adb200[0].td.mw:0)
             ).toFixed(2), kv: (afamViTs_ada200[0]?.td ?afamViTs_ada200[0].td.V:0)},
         'ALAOJI NIPP (GAS)' : {mw: Number(
-            (alaoji_l7a[0]?.td ?alaoji_l7a[0].td.mw:0) + (alaoji_l8a[0]?.td ?alaoji_l8a[0].td.mw:0)
+            Math.abs(alaoji_l7a[0]?.td ?alaoji_l7a[0].td.mw:0) + Math.abs(alaoji_l8a[0]?.td ?alaoji_l8a[0].td.mw:0)
             ).toFixed(2), kv: (alaoji_l7a[0]?.td ?alaoji_l7a[0].td.V:0)},
         'SAPELE (STEAM)' : {mw: Number(
             Math.abs((sapeleNippPs_st1[0]?.gd ?sapeleNippPs_st1[0].gd.mw:0) + (sapeleNippPs_st3[0]?.gd ?sapeleNippPs_st3[0].gd.mw:0))
@@ -165,16 +193,17 @@ const get_stations =  function(state_data) {
             (sapeleNippPs_gt3[0]?.gd ?sapeleNippPs_gt3[0].gd.mw:0) + (sapeleNippPs_gt4[0]?.gd ?sapeleNippPs_gt4[0].gd.mw:0))
                 ).toFixed(2), kv: (sapeleNippPs_gt1[0]?.gd ?sapeleNippPs_gt1[0].gd.V:0)},
         'ODUKPANI NIPP (GAS)' : {mw: Number(
-            Math.abs((odukpaniGs_d1b[0]?.td ?odukpaniGs_d1b[0].td.mw:0) + (odukpaniGs_d2b[0]?.td ?odukpaniGs_d2b[0].td.mw:0) + 
-            (ikotEkpene_d1k[0]?.td ?ikotEkpene_d1k[0].td.mw:0) + (ikotEkpene_d2k[0]?.td ?ikotEkpene_d2k[0].td.mw:0))
-                ).toFixed(2), kv: (odukpaniGs_d1b[0]?.td ?odukpaniGs_d1b[0].td.V:0)},
+            Math.abs(odukpaniNippPs_gt1[0]?.gd ?odukpaniNippPs_gt1[0].gd.mw:0) + Math.abs(odukpaniNippPs_gt2[0]?.gd ?odukpaniNippPs_gt2[0].gd.mw:0) + 
+            Math.abs(odukpaniNippPs_gt3[0]?.gd ?odukpaniNippPs_gt3[0].gd.mw:0) + Math.abs(odukpaniNippPs_gt4[0]?.gd ?odukpaniNippPs_gt4[0].gd.mw:0) +
+            Math.abs(odukpaniNippPs_gt5[0]?.gd ?odukpaniNippPs_gt5[0].gd.mw:0)
+                ).toFixed(2), kv: (odukpaniNippPs_gt1[0]?.gd ?odukpaniNippPs_gt1[0].gd.V:0)},
         'OMOTOSHO (GAS)' : {mw: Number(
-            (omotosho1_tr1[0]?.gd ?omotosho1_tr1[0].gd.mw:0) + (omotosho1_tr2[0]?.gd ?omotosho1_tr2[0].gd.mw:0) + 
-            (omotosho2_tr3[0]?.gd ?omotosho2_tr3[0].gd.mw:0) + (omotosho2_tr4[0]?.gd ?omotosho2_tr4[0].gd.mw:0)
+            Math.abs(omotosho1_tr1[0]?.gd ?omotosho1_tr1[0].gd.mw:0) + Math.abs(omotosho1_tr2[0]?.gd ?omotosho1_tr2[0].gd.mw:0) + 
+            Math.abs(omotosho2_tr3[0]?.gd ?omotosho2_tr3[0].gd.mw:0) + Math.abs(omotosho2_tr4[0]?.gd ?omotosho2_tr4[0].gd.mw:0)
                 ).toFixed(2), kv: (omotosho1_tr1[0]?.gd ?omotosho1_tr1[0].gd.V:0)},
         'GEREGU (GAS)' : {mw: Number(
-            (gereguPs_gt11[0]?.gd ?gereguPs_gt11[0].gd.mw:0) + (gereguPs_gt12[0]?.gd ?gereguPs_gt12[0].gd.mw:0) + 
-            (gereguPs_gt13[0]?.gd ?gereguPs_gt13[0].gd.mw:0)
+            Math.abs(gereguPs_gt11[0]?.gd ?gereguPs_gt11[0].gd.mw:0) + Math.abs(gereguPs_gt12[0]?.gd ?gereguPs_gt12[0].gd.mw:0) + 
+            Math.abs(gereguPs_gt13[0]?.gd ?gereguPs_gt13[0].gd.mw:0)
                 ).toFixed(2), kv: (gereguPs_gt11[0]?.gd ?gereguPs_gt11[0].gd.V:0)},
         'RIVERS IPP (GAS)' : {mw: Number(
             Math.abs(riversIppPs_gt1[0]?.gd ?riversIppPs_gt1[0].gd.mw:0)
@@ -186,20 +215,20 @@ const get_stations =  function(state_data) {
             Math.abs((ihovborNippPs_gt1[0]?.gd ?ihovborNippPs_gt1[0].gd.mw:0) + (ihovborNippPs_gt2[0]?.gd ?ihovborNippPs_gt2[0].gd.mw:0) + 
             (ihovborNippPs_gt3[0]?.gd ?ihovborNippPs_gt3[0].gd.mw:0) + (ihovborNippPs_gt4[0]?.gd ?ihovborNippPs_gt4[0].gd.mw:0))
                 ).toFixed(2), kv: (ihovborNippPs_gt1[0]?.gd ?ihovborNippPs_gt1[0].gd.V:0)},
-        'OLORUNSOGO NIPP' : {mw: Number(
-            ((olorunsogoPhase1Gs_r1w[0]?.td ?olorunsogoPhase1Gs_r1w[0].td.mw:0) + (olorunsogoPhase1Gs_r2a[0]?.td ?olorunsogoPhase1Gs_r2a[0].td.mw:0)) - 
+        'OLORUNSOGO NIPP' : {mw: !state_data.olorunsogoPhase1Gs.lines ? 0  : Number(
+            ((olorunsogoPhase1Gs_r1w[0]?.td ? olorunsogoPhase1Gs_r1w[0].td.mw :0) + (olorunsogoPhase1Gs_r2a[0]?.td ?olorunsogoPhase1Gs_r2a[0].td.mw:0)) - 
             ((olorunsogo1_tr1[0]?.gd ?olorunsogo1_tr1[0].gd.mw:0) + (olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.mw:0) + 
             (olorunsogoPhase1Gs_tr3[0]?.gd ?olorunsogoPhase1Gs_tr3[0].gd.mw:0) + (olorunsogoPhase1Gs_tr4[0]?.gd ?olorunsogoPhase1Gs_tr4[0].gd.mw:0))
-                ).toFixed(2), kv: (olorunsogoPhase1Gs_r1w[0]?.td ?olorunsogoPhase1Gs_r1w[0].td.V:0)},
+                ).toFixed(2), kv: (olorunsogoPhase1Gs_r2a[0]?.td ?olorunsogoPhase1Gs_r2a[0].td.V:0)},
         'PARAS ENERGY (GAS)' : {mw: Number(
             (parasEnergyPs_132cb[0]?.gd ?parasEnergyPs_132cb[0].gd.mw:0)
             ).toFixed(2), kv: (parasEnergyPs_132cb[0]?.gd ?parasEnergyPs_132cb[0].gd.V:0)},
         'OMOTOSHO NIPP (GAS)' : {mw: Number(
-            Math.abs((omotoshoNippPs_tr1[0]?.gd ?omotoshoNippPs_tr1[0].gd.mw:0) + (omotoshoNippPs_tr2[0]?.gd ?omotoshoNippPs_tr2[0].gd.mw:0) + 
-            (omotoshoNippPs_tr3[0]?.gd ?omotoshoNippPs_tr3[0].gd.mw:0) + (omotoshoNippPs_tr4[0]?.gd ?omotoshoNippPs_tr4[0].gd.mw:0))
+            Math.abs(Math.abs(omotoshoNippPs_tr1[0]?.gd ?omotoshoNippPs_tr1[0].gd.mw:0) + Math.abs(omotoshoNippPs_tr2[0]?.gd ?omotoshoNippPs_tr2[0].gd.mw:0) + 
+            Math.abs(omotoshoNippPs_tr3[0]?.gd ?omotoshoNippPs_tr3[0].gd.mw:0) + Math.abs(omotoshoNippPs_tr4[0]?.gd ?omotoshoNippPs_tr4[0].gd.mw:0))
                 ).toFixed(2), kv: (omotoshoNippPs_tr1[0]?.gd ?omotoshoNippPs_tr1[0].gd.V:0)},
         'GEREGU NIPP (GAS)' : {mw: Number(
-            -((gereguPs_r1j[0]?.gd ?gereguPs_r1j[0].gd.mw:0) + (gereguPs_r1j[0]?.gd ?gereguPs_r1j[0].gd.mw:0)) - 
+            -((gereguPs_r1j[0]?.gd ?gereguPs_r1j[0].gd.mw:0) + (gereguPs_r2j[0]?.gd ?gereguPs_r2j[0].gd.mw:0)) - 
             ((gereguPs_gt11[0]?.gd ?gereguPs_gt11[0].gd.mw:0) + (gereguPs_gt12[0]?.gd ?gereguPs_gt12[0].gd.mw:0) +
             (gereguPs_gt13[0]?.gd ?gereguPs_gt13[0].gd.mw:0))
                 ).toFixed(2), kv: (gereguPs_r2j[0]?.gd ?gereguPs_r2j[0].gd.V:0)},
@@ -207,8 +236,8 @@ const get_stations =  function(state_data) {
             -((ihovborNippPs_ohl1[0]?.gd ?ihovborNippPs_ohl1[0].gd.mw:0) + (ihovborNippPs_ohl2[0]?.gd ?ihovborNippPs_ohl2[0].gd.mw:0))
         ).toFixed(2), kv: (ihovborNippPs_ohl1[0]?.gd ?ihovborNippPs_ohl1[0].gd.V:0)},
         'TRANS-AMADI (GAS)' : {mw: Number(
-            Math.abs(phMain_m21p[0]?.td ?phMain_m21p[0].td.mw:0)
-            ).toFixed(2), kv: phMain_m21p[0]?.td ?phMain_m21p[0].td.V:0},
+            (transamadiGs_m21p[0]?.td ?transamadiGs_m21p[0].td.mw:0) + (transamadiGs_m22p[0]?.td ?transamadiGs_m22p[0].td.mw:0)
+            ).toFixed(2), kv: (transamadiGs_m21p[0]?.td ?transamadiGs_m21p[0].td.V:0)},
         'IBOM POWER (GAS)' : {mw: Number(
             -((eket_e21m[0]?.td ?eket_e21m[0].td.mw:0) + (eket_e22m[0]?.td ?eket_e22m[0].td.mw:0)) - (ekim_ek1m[0]?.td ?ekim_ek1m[0].td.mw:0)
         ).toFixed(2), kv: (eket_e21m[0]?.td ?eket_e21m[0].td.V:0)},
@@ -216,9 +245,9 @@ const get_stations =  function(state_data) {
             (gbarain_st1[0]?.gd ?gbarain_st1[0].gd.mw:0) + (gbarain_st2[0]?.gd ?gbarain_st2[0].gd.mw:0)
             ).toFixed(2), kv: (gbarain_st1[0]?.gd ?gbarain_st1[0].gd.V:0)},
         'OLORUNSOGO (GAS)' : {mw: Number(
-            (olorunsogo1_tr1[0]?.gd ?olorunsogo1_tr1[0].gd.mw:0) + (olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.mw:0) + 
-            (olorunsogoPhase1Gs_tr3[0]?.gd ?olorunsogoPhase1Gs_tr3[0].gd.mw:0) + (olorunsogoPhase1Gs_tr4[0]?.gd ?olorunsogoPhase1Gs_tr4[0].gd.mw:0)
-                ).toFixed(2), kv: (olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.V:0)},
+            Math.abs(olorunsogo1_tr1[0]?.gd ?olorunsogo1_tr1[0].gd.mw:0) + Math.abs(olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.mw:0) + 
+            Math.abs(olorunsogoPhase1Gs_tr3[0]?.gd ?olorunsogoPhase1Gs_tr3[0].gd.mw:0) + Math.abs(olorunsogoPhase1Gs_tr4[0]?.gd ?olorunsogoPhase1Gs_tr4[0].gd.mw:0)
+                ).toFixed(2), kv: (olorunsogoPhase1Gs_tr4[0]?.gd ?olorunsogoPhase1Gs_tr4[0].gd.V:0)},
         'DADINKOWA G.S (HYDRO)' : {mw: Number(
             (dadinKowaGs_w21b[0]?.td ?dadinKowaGs_w21b[0].td.mw:0) + (dadinKowaGs_w23e[0]?.td ?dadinKowaGs_w23e[0].td.mw:0)
             ).toFixed(2), kv: dadinKowaGs_w21b[0]?.td ?dadinKowaGs_w21b[0].td.V:0},
