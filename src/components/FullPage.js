@@ -43,6 +43,7 @@ import get_stations from "./stations_adder";
       ugwuaji: {},
       gwagwalada: {},
       zungeru: {},
+      taopex: {},
       connected: false,
      };
    }
@@ -140,10 +141,11 @@ import get_stations from "./stations_adder";
     const olorunsogogas_gs = stations_array['OLORUNSOGO (GAS)'];
     const dadinkowa_gs = stations_array['DADINKOWA G.S (HYDRO)'];
     const zungeru_gs = stations_array['ZUNGERU'];
+    const taopex_gs = stations_array['TAOPEX'];
 
     const totalGeneration = Number(riversipp_gs.mw) + Number(afam6_gs.mw) + Number(paras_gs.mw) + Number(geregugas_gs.mw) + 
     Number(geregunipp_gs.mw) + Number(omotosogas_gs.mw) + Number(omotosonipp_gs.mw) + Number(sapelenipp_gs.mw) + Number(sapelesteam_gs.mw) +
-    Number(omoku_gs.mw) + Number(odukpani_gs.mw) + Number(alaoji_gs.mw) + Number(azura_gs.mw) + Number(zungeru_gs.mw) +
+    Number(omoku_gs.mw) + Number(odukpani_gs.mw) + Number(alaoji_gs.mw) + Number(azura_gs.mw) + Number(zungeru_gs.mw) + Number(taopex_gs.mw) +
     (Number(olorunsogonipp_gs.mw) <= -3 ? 0 : Number(olorunsogonipp_gs.mw)) + Number(ihovbor_gs.mw) + Number(phMain_ts.mw) +
     Number(ibom_gs.mw) + Number(olorunsogogas_gs.mw) + Number(gbarain_gs.mw) + Number(shiroro_gs.mw) + Number(afam4_gs.mw) + 
     Number(kainji_gs.mw) + Number(egbin_gs.mw) + Number(okpai_gs.mw) + Number(delta_gs.mw) + Number(jebba_gs.mw) + Number(dadinkowa_gs.mw);
@@ -360,6 +362,13 @@ import get_stations from "./stations_adder";
                   <td>{this.checkConnection2(this.state.zungeru.t)}</td>
                   <td>{zungeru_gs.mw}</td>
                   <td>{zungeru_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>29</td>
+                  <td>TAOPEX G.S</td>
+                  <td>{this.checkConnection2(this.state.taopex.t)}</td>
+                  <td>{taopex_gs.mw}</td>
+                  <td>{taopex_gs.kv}</td>
                 </tr>
                 <tr></tr>
                 <tr>

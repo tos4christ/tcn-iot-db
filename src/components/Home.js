@@ -46,6 +46,7 @@ import get_stations from "./stations_adder";
       ugwuaji: {},
       gwagwalada: {},
       zungeru: {},
+      taopex: {},
       message: "",
       received: [],
       connected: false,
@@ -129,6 +130,7 @@ import get_stations from "./stations_adder";
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
     const zungeru_gs = stations_array['ZUNGERU'];
+    const taopex_gs = stations_array['TAOPEX'];
     const ihovbor_gs = stations_array['IHOVBOR NIPP (GAS)'];
     const omoku_gs = stations_array['OMOKU (GAS)'];
     const riversipp_gs = stations_array['RIVERS IPP (GAS)'];
@@ -168,7 +170,8 @@ import get_stations from "./stations_adder";
     Number(geregunipp_gs.mw) + Number(omotosogas_gs.mw) + Number(omotosonipp_gs.mw) + Number(sapelenipp_gs.mw) + Number(sapelesteam_gs.mw) +
     Number(omoku_gs.mw) + Number(odukpani_gs.mw) + Number(alaoji_gs.mw) + Number(azura_gs.mw) + Number(olorunsogonipp_gs.mw) + Number(ihovbor_gs.mw) +
     Number(phMain_ts.mw) + Number(ibom_gs.mw) + Number(olorunsogogas_gs.mw) + Number(gbarain_gs.mw) + Number(shiroro_gs.mw) + Number(afam4_gs.mw) +
-    Number(kainji_gs.mw) + Number(egbin_gs.mw) + Number(okpai_gs.mw) + Number(delta_gs.mw) + Number(jebba_gs.mw) + Number(dadinkowa_gs.mw);
+    Number(kainji_gs.mw) + Number(egbin_gs.mw) + Number(okpai_gs.mw) + Number(delta_gs.mw) + Number(jebba_gs.mw) + Number(dadinkowa_gs.mw)
+     + Number(taopex_gs.mw);
     
     const totalTransmission = Number(ugwuaji_ts.mw) + Number(asaba_ts.mw) + Number(ekim_ts.mw) + Number(gwagwalada_ts.mw) + Number(lokoja_ts.mw) +
     Number(phMain_ts.mw) + Number(ikotekpene_ts.mw) + Number(eket_ts.mw);
@@ -415,6 +418,13 @@ import get_stations from "./stations_adder";
                   <td>{this.checkConnection2(this.state.zungeru.t)}</td>
                   <td>{zungeru_gs.mw}</td>
                   <td>{zungeru_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>29</td>
+                  <td>TAOPEX G.S</td>
+                  <td>{this.checkConnection2(this.state.taopex.t)}</td>
+                  <td>{taopex_gs.mw}</td>
+                  <td>{taopex_gs.kv}</td>
                 </tr>
                 <tr></tr>
                 <tr >
