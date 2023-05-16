@@ -187,7 +187,7 @@ class WeatherWidget_rows extends React.Component {
                                     <div className="weather_widget_row">
                                         <span>Station Name</span>
                                         <span>Date</span>
-                                        <span>Icon</span>
+                                        <span style={{backgroundColor: "white"}}>Icon</span>
                                         <span><FontAwesomeIcon className="icon-show" icon={faTemperature0} /> Temp</span>                                        
                                         <span>Weather</span>
                                         <span> Desc</span>

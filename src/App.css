@@ -214,6 +214,7 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
     .weather_widget_row span:nth-of-type(3) {
         width:7em;
         text-align: center;
+        background-color: lightskyblue;
     }
     .weather_widget_row span:nth-of-type(4) {
         width:5em;

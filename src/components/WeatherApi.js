@@ -61,16 +61,34 @@ class WeatherApi extends React.Component {
               // add stations with rainfall
               let rain_stations = [];
               const returnObject_2 = {}
-              parsedStation.forEach(station => {
-                if(station.current_weather_data.rain) {
-                    rain_stations.push(station);
+              // get the current rain stations saved in state
+              const { stations_with_rainfall } = this.state;
+              // get the current stations with rain from the API
+              const rainy_stations = parsedStation.filter( station => station.current_weather_data.rain !== null );
+              if(rainy_stations.length > 0) {
+                // Logic to alert on new rainfall stations
+                if(stations_with_rainfall.length === 0) {
+                  // Run alert on the new rain stations
+                  rainy_stations.forEach( station => {
+                    alert(`${station.name} has rain falling`);
+                  })
                 }
-              })
-              this.setState(prevState => {
-                prevState["stations_with_rainfall"] = rain_stations;
-                returnObject_2["stations_with_rainfall"] = prevState["stations_with_rainfall"];
-                return returnObject_2;
-              });
+                if(rainy_stations.length > stations_with_rainfall.length) {
+                  // filter out the new rain stations from the API
+                  
+
+                  // Alert the user of the new stations with rain fall
+
+                }
+                rainy_stations.forEach(station => {
+                    rain_stations.push(station);
+                })
+                this.setState(prevState => {
+                  prevState["stations_with_rainfall"] = rain_stations;
+                  returnObject_2["stations_with_rainfall"] = prevState["stations_with_rainfall"];
+                  return returnObject_2;
+                });
+              }
             });
             socket.on("client_message_weather_hourly3", data => {
                 const { message } = data;
