@@ -24,6 +24,7 @@ import get_stations from "./stations_adder";
       sapeleNippPs: {},
       omotoshoNippPs: {},
       odukpaniGs: {},
+      odukpaniNippPs: {},
       ekim: {},
       gereguPs: {},
       ikotEkpene: {},
@@ -41,44 +42,48 @@ import get_stations from "./stations_adder";
       lokojaTs: {},
       ugwuaji: {},
       gwagwalada: {},
+      zungeru: {},
+      taopex: {},
       connected: false,
      };
    }
    componentDidMount() {
-    socket.on("client_message_111", data => {
-      const { message } = data;
-      const parsedMessage = JSON.parse(message);
-      const station = parsedMessage.id;
-      const returnObject = {}
-      // console.log(parsedMessage, 'c1 message');
-      this.setState(prevState => {
-        prevState[station] = parsedMessage;
-        returnObject[station] = prevState[station]
-        return returnObject;
-      })
-    });
-    socket.on("client_message_222", data => {
-      const { message } = data;
-      const parsedMessage = JSON.parse(message);
-      const station = parsedMessage.id;
-      const returnObject = {}
-      // console.log(parsedMessage, 'c2 message');
-      this.setState(prevState => {
-        prevState[station] = parsedMessage;
-        returnObject[station] = prevState[station]
-        return returnObject;
-      })
-    });
-    socket.on("frequency000", data => {
-      const { message } = data;
-      const parsedMessage = JSON.parse(message);
-      const returnObject = {}
-      this.setState(prevState => {
-        prevState["frequency"] = parsedMessage;
-        returnObject["frequency"] = prevState["frequency"]
-        return returnObject;
-      })
-    });
+    if(this.props.history.location.pathname === "/nccnaspagetwo") {
+      socket.on("client_message_111", data => {
+        const { message } = data;
+        const parsedMessage = JSON.parse(message);
+        const station = parsedMessage.id;
+        const returnObject = {}
+        // console.log(parsedMessage, 'c1 message');
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station]
+          return returnObject;
+        })
+      });
+      socket.on("client_message_222", data => {
+        const { message } = data;
+        const parsedMessage = JSON.parse(message);
+        const station = parsedMessage.id;
+        const returnObject = {}
+        // console.log(parsedMessage, 'c2 message');
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station]
+          return returnObject;
+        })
+      });
+      socket.on("frequency000", data => {
+        const { message } = data;
+        const parsedMessage = JSON.parse(message);
+        const returnObject = {}
+        this.setState(prevState => {
+          prevState["frequency"] = parsedMessage;
+          returnObject["frequency"] = prevState["frequency"]
+          return returnObject;
+        })
+      });
+    }
    }
    checkConnection(mw, kv) {
     mw = Number(mw);
@@ -91,6 +96,18 @@ import get_stations from "./stations_adder";
         return connected
     } else {
         return disconnected
+    }
+   }
+   checkConnection2(time) {
+    const connected = <span className="text-success"> CN </span>
+    const disconnected = <span className="text-danger"> NC </span>
+    if (time === undefined || time === null) {
+      return disconnected
+    }
+    if (time.length === 0) {
+        return disconnected
+    } else if (time.length > 0) {
+        return connected
     }
    }
   render() {
@@ -118,18 +135,21 @@ import get_stations from "./stations_adder";
     const geregunipp_gs = stations_array['GEREGU NIPP (GAS)'];
     const azura_gs = stations_array['AZURA-EDO IPP (GAS)'];
     const transamadi_gs = stations_array['TRANS-AMADI (GAS)'];
+    const phMain_ts = stations_array['PORT-HARCOURT MAIN'];
     const ibom_gs = stations_array['IBOM POWER (GAS)'];
     const gbarain_gs = stations_array['GBARAIN NIPP (GAS)'];
     const olorunsogogas_gs = stations_array['OLORUNSOGO (GAS)'];
     const dadinkowa_gs = stations_array['DADINKOWA G.S (HYDRO)'];
+    const zungeru_gs = stations_array['ZUNGERU'];
+    const taopex_gs = stations_array['TAOPEX'];
 
     const totalGeneration = Number(riversipp_gs.mw) + Number(afam6_gs.mw) + Number(paras_gs.mw) + Number(geregugas_gs.mw) +
     Number(geregunipp_gs.mw) + Number(omotosogas_gs.mw) + Number(omotosonipp_gs.mw) + Number(sapelenipp_gs.mw) + Number(sapelesteam_gs.mw) +
-    Number(omoku_gs.mw) + Number(odukpani_gs.mw) + Number(alaoji_gs.mw) + Number(azura_gs.mw) + 
+    Number(omoku_gs.mw) + Number(odukpani_gs.mw) + Number(alaoji_gs.mw) + Number(azura_gs.mw) + Number(taopex_gs.mw) +
     (Number(olorunsogonipp_gs.mw) <= -3 ? 0 : Number(olorunsogonipp_gs.mw)) + Number(ihovbor_gs.mw) +
-    Number(transamadi_gs.mw) + Number(ibom_gs.mw) + Number(olorunsogogas_gs.mw) + Number(gbarain_gs.mw) + Number(shiroro_gs.mw) +
+    Number(phMain_ts.mw) + Number(ibom_gs.mw) + Number(olorunsogogas_gs.mw) + Number(gbarain_gs.mw) + Number(shiroro_gs.mw) +
      Number(afam4_gs.mw) + Number(kainji_gs.mw) + Number(egbin_gs.mw) + Number(okpai_gs.mw) + Number(delta_gs.mw) +
-      Number(jebba_gs.mw) + Number(dadinkowa_gs.mw);
+      Number(jebba_gs.mw) + Number(dadinkowa_gs.mw) + Number(zungeru_gs.mw);
             
     return (
       <>
@@ -151,7 +171,7 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>16</td>
                   <td>JEBBA (HYDRO)</td>
-                  <td>{this.checkConnection(jebba_gs.mw, jebba_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.jebbaTs.t)}</td>
                   <td>{jebba_gs.mw}</td>
                   <td>{jebba_gs.kv}</td>
                 </tr>
@@ -172,35 +192,35 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>19</td>
                   <td>SAPELE (STEAM)</td>
-                  <td>{this.checkConnection(sapelesteam_gs.mw, sapelesteam_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.sapeleNippPs.t)}</td>
                   <td>{sapelesteam_gs.mw}</td>
                   <td>{sapelesteam_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>20</td>
                   <td>ODUKPANI NIPP (GAS)</td>
-                  <td>{this.checkConnection(odukpani_gs.mw, odukpani_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.odukpaniNippPs.t)}</td>
                   <td>{odukpani_gs.mw}</td>
                   <td>{odukpani_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>21</td>
                   <td>ALAOJI NIPP (GAS)</td>
-                  <td>{this.checkConnection(alaoji_gs.mw, alaoji_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.alaoji.t)}</td>
                   <td>{alaoji_gs.mw}</td>
                   <td>{alaoji_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>22</td>
                   <td>IHOVBOR NIPP (GAS)</td>
-                  <td>{this.checkConnection(ihovbor_gs.mw, ihovbor_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.ihovborNippPs.t)}</td>
                   <td>{ihovbor_gs.mw}</td>
                   <td>{ihovbor_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>23</td>
                   <td>SHIRORO (HYDRO)</td>
-                  <td>{this.checkConnection(shiroro_gs.mw, shiroro_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.shiroroPs.t)}</td>
                   <td>{shiroro_gs.mw}</td>
                   <td>{shiroro_gs.kv}</td>
                 </tr>
@@ -214,23 +234,37 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>25</td>
                   <td>KAINJI (HYDRO)</td>
-                  <td>{this.checkConnection(kainji_gs.mw, kainji_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.kainjiTs.t)}</td>
                   <td>{kainji_gs.mw}</td>
                   <td>{kainji_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>26</td>
                   <td>EGBIN (STEAM)</td>
-                  <td>{this.checkConnection(egbin_gs.mw, egbin_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.egbinPs.t)}</td>
                   <td>{egbin_gs.mw}</td>
                   <td>{egbin_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>27</td>
                   <td>OKPAI (GAS/STEAM)</td>
-                  <td>{this.checkConnection(okpai_gs.mw, okpai_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.okpaiGs.t)}</td>
                   <td>{okpai_gs.mw}</td>
                   <td>{okpai_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>28</td>
+                  <td>ZUNGERU G.S</td>
+                  <td>{this.checkConnection2(this.state.zungeru.t)}</td>
+                  <td>{zungeru_gs.mw}</td>
+                  <td>{zungeru_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>29</td>
+                  <td>TAOPEX G.S</td>
+                  <td>{this.checkConnection2(this.state.taopex.t)}</td>
+                  <td>{taopex_gs.mw}</td>
+                  <td>{taopex_gs.kv}</td>
                 </tr>
                 <tr></tr>
                 <tr>

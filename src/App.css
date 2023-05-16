@@ -5,6 +5,50 @@ Author: Tos4christ
 Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 */
 
+/* General CSS RULES */
+.container-fluid {
+    height: max-content;
+} 
+
+.App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
 /**
  *** CSS Indexing ***
  * THEME DEFAULT CSS
@@ -12,6 +56,229 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
  * NCC TABLE CSS 
  * HEADER AREA CSS
 **/
+
+/* Weather API */
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-width: 768px) {
+    .item-divs {
+        margin: 0;
+        padding: 0;
+        background-color:#232323;
+        width: 130%;
+    }
+    .weather-container, .dashboard, .w-rows {
+        width: 130%;
+
+    }
+    .weather-alert, .icon-show {
+        display: none;
+    }
+    .dashboard {
+        padding-top: 1em;
+        text-align: center;
+    }
+    .dashboard button{
+        margin: 0.5em;
+        padding: 0.4em;
+    }
+    .weather_h3 {
+        font-style: oblique;
+        text-decoration: underline;
+    }
+    .weather_ul {
+        padding: 0;
+        margin: 0;
+    }
+    .weather_ul li {
+        padding: 0;
+        margin: 0;
+        font-family: serif;
+        text-transform:uppercase;
+        font-size: smaller;
+    }
+    .weather_widget_row {
+        display: flex;
+        flex-direction: row;
+        background-color: #fff;
+        color: gray;
+        margin: 4px;
+    }
+    .weather_widget_row span {
+        justify-content: center;
+        height: 50px;
+        padding: 5px;  
+        text-align: justify;
+        margin: 3px;
+    }
+    .drops li {
+        color:rgb(10, 10, 10);
+        padding: 4px;
+        width: max-content;
+    }
+    .weather_widget_row span:nth-of-type(1) {
+        width: 10em;
+        font-weight: bolder;
+    }
+    .weather_widget_row span:nth-of-type(2) {
+        width: 5em;
+        font-weight: bolder;
+    }
+    .weather_widget_row span:nth-of-type(3) {
+        width:7em;
+        text-align: center;
+    }
+    .weather_widget_row span:nth-of-type(4) {
+        width:5em;
+        text-align: center;
+        font-weight: bolder;
+        font-size: larger;
+    }
+    .weather_widget_row span:nth-of-type(5) {
+        width:7em;
+        text-align: center;
+        padding-right: 16px;
+    }
+    .weather_widget_row span:nth-of-type(6) {
+        width:4em;
+    }
+    .weather_widget_row span:nth-of-type(7) {
+        width:6em;
+        text-align: center;
+    }
+}
+
+/* On bigger screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (min-width: 769px) {
+    .item-divs {
+        margin: 1em;
+        padding: 1em;
+        background-color:#232323;
+        width: 100%;
+    }
+    .weather-alert {
+        padding: none;
+        margin: none;
+    }
+    .weather-container, .dashboard, .w-rows {
+        width: 100%;
+    }
+    .dashboard {
+        padding: 1em;
+        text-align: center;
+    }
+    .dashboard button{
+        margin: 1em;
+        padding: 1em;
+    }
+    .weather_h3 {
+        font-style: oblique;
+        text-decoration: underline;
+    }
+    .weather_ul {
+        padding: 0;
+        margin: 0;
+    }
+    .weather_ul li {
+        padding: 0;
+        font-family: serif;
+        text-transform:uppercase;
+        font-size: small;
+    }
+    .weather_widget_row {
+        display: flex;
+        flex-direction: row;
+        background-color: #fff;
+        color: gray;
+        margin: 4px;
+    }
+    .weather_widget_row span {
+        justify-content: center;
+        height: 50px;
+        padding: 5px;  
+        text-align: justify;
+        margin: 3px;
+    }
+    .drops li {
+        color:rgb(10, 10, 10);
+        padding: 4px;
+        width: max-content;
+    }
+    .weather_widget_row span:nth-of-type(1) {
+        width: 10em;
+        font-weight: bolder;
+    }
+    .weather_widget_row span:nth-of-type(2) {
+        width: 5em;
+        font-weight: bolder;
+    }
+    .weather_widget_row span:nth-of-type(3) {
+        width:7em;
+        text-align: center;
+        background-color: lightskyblue;
+    }
+    .weather_widget_row span:nth-of-type(4) {
+        width:5em;
+        text-align: center;
+        font-weight: bolder;
+        font-size: larger;
+    }
+    .weather_widget_row span:nth-of-type(5) {
+        width:7em;
+        text-align: center;
+        padding-right: 16px;
+    }
+    .weather_widget_row span:nth-of-type(6) {
+        width:4em;
+    }
+    .weather_widget_row span:nth-of-type(7) {
+        width:6em;
+        text-align: center;
+    }
+}
+
+.current form {
+margin: 1em 0 0 10em;
+padding: 2em;
+background-color: aqua;
+}
+.display {
+padding: 2em;
+}
+.current form select, .current form button {
+padding: .5em;
+margin: .5em;
+border: 1px solid white;
+text-align: center;
+font-weight: 500;
+}
+.label-span {
+text-align: center;
+font-weight: 500;
+}
+
+/* MDB Weather CSS */
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #ffffff;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 236, 210, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 236, 210, 1))
+}   
+.carousel-indicators li {
+    background-color: #282828;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+
+.text_date {
+    font-size: small;
+}
+
+
 
 
 .tem input, .report input {
@@ -326,13 +593,16 @@ table.ncc-counter-tg thead tr th:nth-of-type(2) {
 /*----------------------------
 ---------- NCC TABLE CSS ---------
 ----------------------------*/
+/* Change the width later and adjust the
+    signin, signup and home page
+*/
 body {
     line-height: 24px;
     font-size: 14px;
     color: #666666;
     font-family: "Raleway", sans-serif;
     font-weight: 400;
-    width: 63%;
+    
     overflow: scroll;
     }
 
@@ -347,7 +617,7 @@ body {
     /* width: 100%; */
 }
 
-@media screen and (min-height: 500px) {
+@media screen and (min-width: 769px) {
 .message {
 height: 50px;
 text-align: left;
@@ -374,31 +644,8 @@ width: 50%;
 border-radius: 10px;
 font-size:large;
 }
-/* .App {
-    width: 160%;
-    height: 300vh;
-    overflow: scroll;
-} */
-/* .navbar-header {
-    width: 10%;
-    padding: 0 0 4% 3%;
-} */
-/* .ul-links {
-    width: 60%;
-    margin: 0 0 0 10%;
-    padding-left: 10%;
-} */
-/* .right-nav {
-    width: 15%;
-    margin-left: 5%;
-    padding: 0;
 }
-.header {
-    padding-top: 1em;
-    padding-bottom: 0;    
-} */
-}
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) {
 .App {
     width: 130%;
     height: 300vh;
@@ -503,7 +750,7 @@ background-image: url('/public/tcn-nas-background.jpeg');
 opacity: 1;
 background-repeat: repeat;
 background-attachment: fixed;
-width: 160%;
+
 height:300vh;
 /* overflow: scroll; */
 /* Add the blur effect */
@@ -658,9 +905,6 @@ float: right;
 .nav-bar li {
     padding: 0 0 0 10px;
 }
-.container-fluid {
-height: max-content;
-} 
 .item-div {
     margin-top: 5%;
     margin-left: 20%;
@@ -851,3 +1095,37 @@ color: rgb(10, 10, 10);
 color: rgb(31, 20, 20);
 border-bottom: 1px solid #fff;
 }
+
+input[type="text"],
+input[type="submit"],
+button[type="submit"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="search"],
+input[type="password"],
+input[type="number"],
+textarea {
+  background: transparent;
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+input[type="submit"],
+button[type="submit"] {
+  width: auto;
+  color: #666;
+  padding: 4px 15px;
+}
+textarea:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.text-yellow {
+  color: yellow;
+}
+.text-green {
+  color: #006600;
+}
+
