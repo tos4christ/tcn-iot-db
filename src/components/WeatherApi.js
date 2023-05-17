@@ -64,7 +64,8 @@ class WeatherApi extends React.Component {
               // get the current rain stations saved in state
               const { stations_with_rainfall } = this.state;
               // get the current stations with rain from the API
-              const rainy_stations = parsedStation.filter( station => station.current_weather_data.rain !== null );
+              const rainy_stations = parsedStation.filter( station => station.current_weather_data.weather[0].main == "Rain" );
+              
               if(rainy_stations.length > 0) {
                 // Logic to alert on new rainfall stations
                 if(stations_with_rainfall.length === 0) {
