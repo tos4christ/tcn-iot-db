@@ -70,8 +70,10 @@ class WeatherApi extends React.Component {
                 // Logic to alert on new rainfall stations
                 if(stations_with_rainfall.length === 0) {
                   // Run alert on the new rain stations
-                  rainy_stations.forEach( station => {
-                    alert(`${station.name} has rain falling`);
+                  rainy_stations.forEach( (station, index) => {
+                    if (index === rain_stations.length -1) {
+                      alert(`${station.name} has rain falling`);
+                    }                    
                   })
                 }
                 if(rainy_stations.length > stations_with_rainfall.length) {
