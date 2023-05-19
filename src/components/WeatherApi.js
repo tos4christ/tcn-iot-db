@@ -180,6 +180,9 @@ class WeatherApi extends React.Component {
                      }}>
                         Station's Weather Forecast
                     </button>
+                    <button>
+                      Get Historical Data
+                    </button>
                 </div>            
             </div>
             {/* Logic to be used for switching form based search of weather data */}
