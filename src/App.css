@@ -167,7 +167,7 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
         text-align: center;
     }
     .dashboard button{
-        margin: 1em;
+        margin-top: 1em;
         padding: 1em;
     }
     .weather_h3 {
