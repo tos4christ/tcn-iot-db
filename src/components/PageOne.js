@@ -110,6 +110,15 @@ import get_stations from "./stations_adder";
         return connected
     }
    }
+   checkConnection3(t1, t2) {
+    const connected = <span className="text-success"> CN </span>
+    const disconnected = <span className="text-danger"> NC </span>
+    if (t1.length > 0 && t2.length > 0) {
+        return connected
+    } else {
+      return disconnected;
+    }
+   }
   render() {
     const stations_array = get_stations(this.state);
     const omoku_gs = stations_array['OMOKU (GAS)'];
@@ -253,7 +262,7 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>15</td>
                   <td>IBOM POWER (GAS)</td>
-                  <td>{this.checkConnection(ibom_gs.mw, ibom_gs.kv)}</td>
+                  <td>{this.checkConnection3(this.state.eket.t, this.state.ekim.t)}</td>
                   <td>{ibom_gs.mw}</td>
                   <td>{ibom_gs.kv}</td>
                 </tr>

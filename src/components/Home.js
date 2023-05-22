@@ -122,6 +122,15 @@ import get_stations from "./stations_adder";
         return connected
     }
    }
+   checkConnection3(t1, t2) {
+    const connected = <span className="text-success"> CN </span>
+    const disconnected = <span className="text-danger"> NC </span>
+    if (t1.length > 0 && t2.length > 0) {
+        return connected
+    } else {
+      return disconnected;
+    }
+   }
   render() {
     const { isLoggedIn } = this.props;
     if (!isLoggedIn) {
@@ -324,7 +333,7 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>15</td>
                   <td>IBOM POWER (GAS)</td>
-                  <td>{this.checkConnection(ibom_gs.mw, ibom_gs.kv)}</td>
+                  <td>{this.checkConnection3(this.state.eket.t, this.state.ekim.t)}</td>
                   <td>{ibom_gs.mw}</td>
                   <td>{ibom_gs.kv}</td>
                 </tr>
@@ -338,7 +347,7 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>17</td>
                   <td>OLORUNSOGO (GAS)</td>
-                  <td>{this.checkConnection(olorunsogogas_gs.mw, olorunsogogas_gs.kv )}</td>
+                  <td>{this.checkConnection3(this.state.olorunsogo1.t, this.state.olorunsogoPhase1Gs.t)}</td>
                   <td>{olorunsogogas_gs.mw}</td>
                   <td>{olorunsogogas_gs.kv}</td>
                 </tr>
