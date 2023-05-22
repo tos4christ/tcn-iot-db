@@ -116,7 +116,7 @@ import get_stations from "./stations_adder";
     if (t1 === undefined || t1 === null || t2 === undefined || t2 === null) {
       return disconnected
     }
-    if (t1.length > 0 && t2.length > 0) {
+    if (t1.length > 0 || t2.length > 0) {
         return connected
     } else {
       return disconnected;
