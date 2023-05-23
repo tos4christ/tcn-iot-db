@@ -68,14 +68,14 @@ class WeatherApi extends React.Component {
               const rainy_stations = unsorted_rainy_stations.sort((a, b) => a.name < b.name ? -1 : 1);
               if(rainy_stations.length > 0) {
                 // Logic to alert on new rainfall stations
-                if(stations_with_rainfall.length === 0) {
-                  // Run alert on the new rain stations
-                  rainy_stations.forEach( (station, index) => {
-                    if (index === rainy_stations.length -1) {
-                      alert(`${station.name} has rain falling`);
-                    }                    
-                  })
-                }
+                // if(stations_with_rainfall.length === 0) {
+                //   // Run alert on the new rain stations
+                //   rainy_stations.forEach( (station, index) => {
+                //     if (index === rainy_stations.length -1) {
+                //       alert(`${station.name} has rain falling`);
+                //     }                    
+                //   })
+                // }
                 if(rainy_stations.length > stations_with_rainfall.length) {
                   // filter out the new rain stations from the API
                   const filteredStations = rainy_stations.filter( item => !stations_with_rainfall.includes(item));
