@@ -184,6 +184,9 @@ class WeatherApi extends React.Component {
                      }}>
                         Station's Weather Forecast
                     </button>
+                    <p className="btn btn-success" onClick={() => alert.pause()}>
+                      Accept Alarms
+                    </p>
                     <button>
                       Get Historical Data
                     </button>
