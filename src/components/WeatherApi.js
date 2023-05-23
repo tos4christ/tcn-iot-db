@@ -6,6 +6,8 @@ import TemWeather from './Weather/TemWeather';
 import emergencyAlert from "../assets/audio/emergency_alert.mp3";
 import socket from "./utility/socketIO";
 
+const audio = new Audio(emergencyAlert);
+
 class WeatherApi extends React.Component {
     constructor(props) {
         super(props);
@@ -45,7 +47,6 @@ class WeatherApi extends React.Component {
         }
     }
     componentDidMount() {
-        const alert = new Audio(emergencyAlert);
         if(this.props.history.location.pathname === "/nccweather") {
             socket.on("client_message_weather_current", data => {
               const { message } = data;
@@ -85,7 +86,7 @@ class WeatherApi extends React.Component {
                     // Alert the user of the new stations with rain fall                    
                     alert(`Rainfall Started at ${station.name}`);                    
                   })
-                  alert.play();
+                  audio.play();
                 }
                 rainy_stations.forEach(station => {
                     rain_stations.push(station);
@@ -184,7 +185,7 @@ class WeatherApi extends React.Component {
                      }}>
                         Station's Weather Forecast
                     </button>
-                    <p className="btn btn-success" onClick={() => alert.pause()}>
+                    <p className="btn btn-success" onClick={() => audio.pause()}>
                       Accept Alarms
                     </p>
                     <button>
