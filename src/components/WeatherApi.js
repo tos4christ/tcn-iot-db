@@ -3,6 +3,7 @@ import { Route, Switch, useRouteMatch, Link, withRouter } from 'react-router-dom
 import WeatherWidget_rows from './Weather/WeatherWidget_rows';
 import WeatherWidget_cards from './Weather/WeatherWidget_cards';
 import TemWeather from './Weather/TemWeather';
+import emergencyAlert from "../assets/audio/emergency_alert.mp3";
 import socket from "./utility/socketIO";
 
 class WeatherApi extends React.Component {
@@ -44,6 +45,7 @@ class WeatherApi extends React.Component {
         }
     }
     componentDidMount() {
+        const alert = new Audio(emergencyAlert);
         if(this.props.history.location.pathname === "/nccweather") {
             socket.on("client_message_weather_current", data => {
               const { message } = data;
@@ -81,6 +83,7 @@ class WeatherApi extends React.Component {
                   const filteredStations = rainy_stations.filter( item => !stations_with_rainfall.includes(item));
                   filteredStations.forEach(station => {
                     // Alert the user of the new stations with rain fall
+                    alert.play();
                     alert(`Rainfall Started at ${station.name}`);
                   })
                 }
