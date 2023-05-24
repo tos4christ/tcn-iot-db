@@ -55,31 +55,15 @@ class WeatherApi extends React.Component {
               const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
               const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
               const returnObject = {}
-              this.setState(prevState => {
-                prevState["current_weather_stations_generation"] = weather_stations_generation;
-                prevState["current_weather_stations_transmission"] = weather_stations_transmission;
-                returnObject["current_weather_stations_generation"] = prevState["current_weather_stations_generation"];
-                returnObject["current_weather_stations_transmission"] = prevState["current_weather_stations_transmission"]
-                return returnObject;
-              });
-              // add stations with rainfall
-              let rain_stations = [];
               const returnObject_2 = {}
+              // add stations with rainfall
+              let rain_stations = [];              
               // get the current rain stations saved in state
               const { stations_with_rainfall } = this.state;
               // get the current stations with rain from the API
               const unsorted_rainy_stations = parsedStation.filter( station => station.current_weather_data.weather[0].main == "Rain" );
               const rainy_stations = unsorted_rainy_stations.sort((a, b) => a.name < b.name ? -1 : 1);
               if(rainy_stations.length > 0) {
-                // Logic to alert on new rainfall stations
-                // if(stations_with_rainfall.length === 0) {
-                //   // Run alert on the new rain stations
-                //   rainy_stations.forEach( (station, index) => {
-                //     if (index === rainy_stations.length -1) {
-                //       alert(`${station.name} has rain falling`);
-                //     }                    
-                //   })
-                // }
                 if(rainy_stations.length > stations_with_rainfall.length && stations_with_rainfall.length > 0) {
                   // filter out the new rain stations from the API
                   const filteredStations = rainy_stations.filter( item => !stations_with_rainfall.includes(item));
@@ -98,7 +82,15 @@ class WeatherApi extends React.Component {
                   return returnObject_2;
                 });
               }
+              this.setState(prevState => {
+                prevState["current_weather_stations_generation"] = weather_stations_generation;
+                prevState["current_weather_stations_transmission"] = weather_stations_transmission;
+                returnObject["current_weather_stations_generation"] = prevState["current_weather_stations_generation"];
+                returnObject["current_weather_stations_transmission"] = prevState["current_weather_stations_transmission"]
+                return returnObject;
+              });
             });
+            
             // socket.on("client_message_weather_hourly3", data => {
             //     const { message } = data;
             //     const parsedStation = JSON.parse(message);
