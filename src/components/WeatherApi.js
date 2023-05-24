@@ -81,9 +81,9 @@ class WeatherApi extends React.Component {
                         response = false;
                       } else if( station.name !== item.name ) {
                         response = true;
-                      } 
-                      return response;
-                    })
+                      }
+                    });
+                    return response;
                   });
                   filteredStations.forEach(station => {
                     // Alert the user of the new stations with rain fall  
