@@ -55,9 +55,16 @@ class WeatherApi extends React.Component {
               const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
               const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
               const returnObject = {}
-              const returnObject_2 = {}
+              this.setState(prevState => {
+                prevState["current_weather_stations_generation"] = weather_stations_generation;
+                prevState["current_weather_stations_transmission"] = weather_stations_transmission;
+                returnObject["current_weather_stations_generation"] = prevState["current_weather_stations_generation"];
+                returnObject["current_weather_stations_transmission"] = prevState["current_weather_stations_transmission"]
+                return returnObject;
+              });
               // add stations with rainfall
-              let rain_stations = [];              
+              let rain_stations = [];
+              const returnObject_2 = {}
               // get the current rain stations saved in state
               const { stations_with_rainfall } = this.state;
               // get the current stations with rain from the API
@@ -69,9 +76,9 @@ class WeatherApi extends React.Component {
                   const filteredStations = rainy_stations.filter( item => !stations_with_rainfall.includes(item));
                   filteredStations.forEach(station => {
                     // Alert the user of the new stations with rain fall                    
-                    alert(`Rainfall Started at ${station.name}`);                    
+                    return alert(`Rainfall Started at ${station.name}`);
                   })
-                  audio.play();
+                  audio.play(true);
                 }
                 rainy_stations.forEach(station => {
                     rain_stations.push(station);
@@ -82,13 +89,6 @@ class WeatherApi extends React.Component {
                   return returnObject_2;
                 });
               }
-              this.setState(prevState => {
-                prevState["current_weather_stations_generation"] = weather_stations_generation;
-                prevState["current_weather_stations_transmission"] = weather_stations_transmission;
-                returnObject["current_weather_stations_generation"] = prevState["current_weather_stations_generation"];
-                returnObject["current_weather_stations_transmission"] = prevState["current_weather_stations_transmission"]
-                return returnObject;
-              });
             });
             
             // socket.on("client_message_weather_hourly3", data => {
