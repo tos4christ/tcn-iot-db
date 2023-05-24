@@ -99,34 +99,34 @@ class WeatherApi extends React.Component {
                 });
               }
             });
-            socket.on("client_message_weather_hourly3", data => {
-                const { message } = data;
-                const parsedStation = JSON.parse(message);
-                const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
-                const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
-                const returnObject = {}
-                this.setState(prevState => {
-                  prevState["hourly3_weather_stations_generation"] = weather_stations_generation;
-                  prevState["hourly3_weather_stations_transmission"] = weather_stations_transmission;
-                  returnObject["hourly3_weather_stations_generation"] = prevState["hourly3_weather_stations_generation"];
-                  returnObject["hourly3_weather_stations_transmission"] = prevState["hourly3_weather_stations_transmission"]
-                  return returnObject;
-                })
-            });
-            socket.on("client_message_weather_daily", data => {
-              const { message } = data;
-              const parsedStation = JSON.parse(message);
-              const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
-              const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
-              const returnObject = {}
-              this.setState(prevState => {
-                prevState["daily_weather_stations_generation"] = weather_stations_generation;
-                prevState["daily_weather_stations_transmission"] = weather_stations_transmission;
-                returnObject["daily_weather_stations_generation"] = prevState["daily_weather_stations_generation"];
-                returnObject["daily_weather_stations_transmission"] = prevState["daily_weather_stations_transmission"]
-                return returnObject;
-              })
-            });
+            // socket.on("client_message_weather_hourly3", data => {
+            //     const { message } = data;
+            //     const parsedStation = JSON.parse(message);
+            //     const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
+            //     const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
+            //     const returnObject = {}
+            //     this.setState(prevState => {
+            //       prevState["hourly3_weather_stations_generation"] = weather_stations_generation;
+            //       prevState["hourly3_weather_stations_transmission"] = weather_stations_transmission;
+            //       returnObject["hourly3_weather_stations_generation"] = prevState["hourly3_weather_stations_generation"];
+            //       returnObject["hourly3_weather_stations_transmission"] = prevState["hourly3_weather_stations_transmission"]
+            //       return returnObject;
+            //     })
+            // });
+            // socket.on("client_message_weather_daily", data => {
+            //   const { message } = data;
+            //   const parsedStation = JSON.parse(message);
+            //   const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
+            //   const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
+            //   const returnObject = {}
+            //   this.setState(prevState => {
+            //     prevState["daily_weather_stations_generation"] = weather_stations_generation;
+            //     prevState["daily_weather_stations_transmission"] = weather_stations_transmission;
+            //     returnObject["daily_weather_stations_generation"] = prevState["daily_weather_stations_generation"];
+            //     returnObject["daily_weather_stations_transmission"] = prevState["daily_weather_stations_transmission"]
+            //     return returnObject;
+            //   })
+            // });
          // }
     };
 
