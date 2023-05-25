@@ -185,15 +185,44 @@ import get_stations from "./stations_adder";
     const lokoja_ts = stations_array['LOKOJA TS'];
     const eket_ts = stations_array['EKET'];
 
-    const totalGeneration = Number(riversipp_gs.mw) + Number(afam6_gs.mw) + Number(paras_gs.mw) + Number(geregugas_gs.mw) + Number(zungeru_gs.mw) +
-    Number(geregunipp_gs.mw) + Number(omotosogas_gs.mw) + Number(omotosonipp_gs.mw) + Number(sapelenipp_gs.mw) + Number(sapelesteam_gs.mw) +
-    Number(omoku_gs.mw) + Number(odukpani_gs.mw) + Number(alaoji_gs.mw) + Number(azura_gs.mw) + Number(olorunsogonipp_gs.mw) + Number(ihovbor_gs.mw) +
-    Number(phMain_ts.mw) + Number(ibom_gs.mw) + Number(olorunsogogas_gs.mw) + Number(gbarain_gs.mw) + Number(shiroro_gs.mw) + Number(afam4_gs.mw) +
-    Number(kainji_gs.mw) + Number(egbin_gs.mw) + Number(okpai_gs.mw) + Number(delta_gs.mw) + Number(jebba_gs.mw) + Number(dadinkowa_gs.mw)
-     + Number(taopex_gs.mw);
+    const totalGeneration = Number(riversipp_gs.mw) < 0 ? 0 : Number(riversipp_gs.mw)+ 
+    Number(afam6_gs.mw) < 0 ? 0 : Number(afam6_gs.mw)+ 
+    Number(paras_gs.mw) < 0 ? 0 : Number(paras_gs.mw)+ 
+    Number(geregugas_gs.mw) < 0 ? 0 : Number(geregugas_gs.mw)+ 
+    Number(zungeru_gs.mw) < 0 ? 0 : Number(zungeru_gs.mw)+
+    Number(geregunipp_gs.mw) < 0 ? 0 : Number(geregunipp_gs.mw)+ 
+    Number(omotosogas_gs.mw) < 0 ? 0 : Number(omotosogas_gs.mw)+ 
+    Number(omotosonipp_gs.mw) < 0 ? 0 : Number(omotosonipp_gs.mw)+ 
+    Number(sapelenipp_gs.mw) < 0 ? 0 : Number(sapelenipp_gs.mw)+ 
+    Number(sapelesteam_gs.mw) < 0 ? 0 : Number(sapelesteam_gs.mw)+
+    Number(omoku_gs.mw) < 0 ? 0 : Number(omoku_gs.mw)+ 
+    Number(odukpani_gs.mw) < 0 ? 0 : Number(odukpani_gs.mw)+ 
+    Number(alaoji_gs.mw) < 0 ? 0 : Number(alaoji_gs.mw)+ 
+    Number(azura_gs.mw) < 0 ? 0 : Number(azura_gs.mw)+ 
+    Number(olorunsogonipp_gs.mw) < 0 ? 0 : Number(olorunsogonipp_gs.mw)+ 
+    Number(ihovbor_gs.mw) < 0 ? 0 : Number(ihovbor_gs.mw)+
+    Number(phMain_ts.mw) < 0 ? 0 : Number(phMain_ts.mw)+ 
+    Number(ibom_gs.mw) < 0 ? 0 : Number(ibom_gs.mw)+ 
+    Number(olorunsogogas_gs.mw) < 0 ? 0 : Number(olorunsogogas_gs.mw)+ 
+    Number(gbarain_gs.mw) < 0 ? 0 : Number(gbarain_gs.mw)+ 
+    Number(shiroro_gs.mw) < 0 ? 0 : Number(shiroro_gs.mw)+ 
+    Number(afam4_gs.mw) < 0 ? 0 : Number(afam4_gs.mw)+
+    Number(kainji_gs.mw) < 0 ? 0 : Number(kainji_gs.mw)+ 
+    Number(egbin_gs.mw) < 0 ? 0 : Number(egbin_gs.mw)+ 
+    Number(okpai_gs.mw) < 0 ? 0 : Number(okpai_gs.mw)+ 
+    Number(delta_gs.mw) < 0 ? 0 : Number(delta_gs.mw)+ 
+    Number(jebba_gs.mw) < 0 ? 0 : Number(jebba_gs.mw)+ 
+    Number(dadinkowa_gs.mw) < 0 ? 0 : Number(dadinkowa_gs.mw)+
+    Number(taopex_gs.mw) < 0 ? 0 : Number(taopex_gs.mw);
     
-    const totalTransmission = Number(ugwuaji_ts.mw) + Number(asaba_ts.mw) + Number(ekim_ts.mw) + Number(gwagwalada_ts.mw) + Number(lokoja_ts.mw) +
-    Number(phMain_ts.mw) + Number(ikotekpene_ts.mw) + Number(eket_ts.mw);
+    const totalTransmission = Number(ugwuaji_ts.mw) < 0 ? 0 : Number(ugwuaji_ts.mw)+ 
+    Number(asaba_ts.mw) < 0 ? 0 : Number(asaba_ts.mw)+ 
+    Number(ekim_ts.mw) < 0 ? 0 : Number(ekim_ts.mw)+ 
+    Number(gwagwalada_ts.mw) < 0 ? 0 : Number(gwagwalada_ts.mw)+ 
+    Number(lokoja_ts.mw) < 0 ? 0 : Number(lokoja_ts.mw)+
+    Number(phMain_ts.mw) < 0 ? 0 : Number(phMain_ts.mw)+ 
+    Number(ikotekpene_ts.mw) < 0 ? 0 : Number(ikotekpene_ts.mw)+ 
+    Number(eket_ts.mw) < 0 ? 0 : Number(eket_ts.mw);
         
     return (
       <>
