@@ -74,18 +74,19 @@ class WeatherApi extends React.Component {
 
                 if(rainy_stations.length > stations_with_rainfall.length && stations_with_rainfall.length > 0) {
                   // filter out the new rain stations from the API
+                  let response = [];
                   const filteredStations = rainy_stations.filter( item => {
-                    let response;
+                    
                     stations_with_rainfall.forEach(station => {
                       if( station.name === item.name ) {
                         response = false;
                       } else if( station.name !== item.name ) {
-                        response = true;
+                        response.push(station)
                       }
                     });
                     return response;
                   });
-                  filteredStations.forEach(station => {
+                  response.forEach(station => {
                     // Alert the user of the new stations with rain fall  
                     audio.play(true);                  
                     alert(`Rainfall Started at ${station.name}`);                    
