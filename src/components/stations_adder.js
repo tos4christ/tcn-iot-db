@@ -124,7 +124,7 @@ const get_stations =  function(state_data) {
             Math.abs((eket_e21m[0]?.td ? eket_e21m[0].td.mw : 0) + (eket_e22m[0]?.td ? eket_e22m[0].td.mw : 0))
         ).toFixed(2), kv: (eket_e21m[0]?.td ? eket_e21m[0].td.V : eket_e22m[0]?.td ? eket_e22m[0].td.V : 0)},
         'ZUNGERU': {mw: Number(
-            Math.abs((zungeru_z1ssX[0]?.td ? zungeru_z1ssX[0].td.mw : 0) + (zungeru_z2ssX[0]?.td ? zungeru_z2ssX[0].td.mw : 0))
+            Math.abs((zungeru_z1ssX[0]?.td ? (zungeru_z1ssX[0].td.V * zungeru_z1ssX[0].td.A * 1.69736 ) : 0) + (zungeru_z2ssX[0]?.td ? (zungeru_z2ssX[0].td.V * zungeru_z2ssX[0].td.A * 1.69736) : 0))
         ).toFixed(2), kv: (zungeru_z1ssX[0]?.td ? zungeru_z1ssX[0].td.V : zungeru_z2ssX[0]?.td ? zungeru_z2ssX[0].td.V : 0)},
         'PORT-HARCOURT MAIN' : {mw: Number(
             Math.abs(phMain_m21p[0]?.td ? phMain_m21p[0].td.mw : 0)
