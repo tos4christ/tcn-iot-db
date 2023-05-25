@@ -148,7 +148,7 @@ class WeatherApi extends React.Component {
                         this.setState({rows_transmission: false});
                         this.setState({station_forecast: false});
                      }}>
-                        <Link >Grid Display</Link>
+                        <Link >Block Display</Link>
                     </button>
                     <button name='rows_generation'  onClick={(e) => { 
                         this.setState({cards_generation: false});
@@ -169,7 +169,7 @@ class WeatherApi extends React.Component {
                         this.setState({rows_transmission: false});
                         this.setState({station_forecast: false});
                     }}>
-                        <Link >Grid Display</Link>
+                        <Link >Block Display</Link>
                     </button>
                     <button  onClick={() => { 
                         this.setState({cards_generation: false});
