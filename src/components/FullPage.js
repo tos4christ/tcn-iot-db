@@ -2,7 +2,6 @@ import React from "react";
 import { withRouter } from 'react-router-dom';
 import socket from "./utility/socketIO";
 import get_stations from "./stations_adder";
-import DateTime from "./DateTime";
 
  class FullPage extends React.Component {
    constructor(props) {
@@ -198,7 +197,7 @@ import DateTime from "./DateTime";
       <div className="ncc-menu">
         <div className="ncc-menu-list">
           <div className="ncc-display-div">
-            <h2><DateTime /></h2>
+            
             <h2 className="text-danger">IoT POWER STATIONS TABLE  -- Frequency:  { this.state.frequency }Hz</h2>
             <table className="ncc-tg">
               <thead>
