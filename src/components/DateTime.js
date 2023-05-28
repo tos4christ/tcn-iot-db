@@ -6,9 +6,9 @@ const dateStyle = {
  }
 
 const DateTime = () => {
-    var [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(new Date());
     useEffect(() => {
-        var timer = setInterval(() => setDate(new Date()), 1000);
+        setInterval(() => setDate(new Date()), 1000);
     });
     console.log(date.toDateString(), "the other ", date.toLocaleTimeString())
     return(
