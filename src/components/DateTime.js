@@ -10,7 +10,7 @@ const DateTime = () => {
     useEffect(() => {
         var timer = setInterval(() => setDate(new Date()), 1000);
     });
-
+    console.log(date.toDateString(), "the other ", date.toLocaleTimeString())
     return(
         <div style={dateStyle}>
             <p>{date.toDateString()} --- {date.toLocaleTimeString()}</p>
