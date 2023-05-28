@@ -5,16 +5,23 @@ const dateStyle = {
     fontWeight: "bold"
  }
 
-const DateTime = () => {
-    const [date, setDate] = useState(new Date());
-    useEffect(() => {
-        setInterval(() => setDate(new Date()), 1000);
-    });
-    return(
-        <div style={dateStyle}>
-            <p>{date.toDateString()} --- {date.toLocaleTimeString()}</p>
-        </div>
-    )
+class DateTime extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: new Date()
+        }
+    }
+    componentDidMount() {
+        setInterval(() => this.setState({date: new Date()}), 1000);
+    }
+    render() {
+        return(
+            <div style={dateStyle}>
+                <p>{this.state.date.toDateString()} --- {this.state.date.toLocaleTimeString()}</p>
+            </div>
+        )
+    }
 }
 
 export default DateTime;
