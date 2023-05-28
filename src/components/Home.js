@@ -2,6 +2,8 @@ import React from "react";
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import socket from "./utility/socketIO";
 import get_stations from "./stations_adder";
+import DateTime from "./DateTime";
+
 // import { Spinner, Button, Table } from "react-bootstrap";
 
  class Home extends React.Component {
@@ -258,7 +260,8 @@ import get_stations from "./stations_adder";
             </li>
           </ul>
           <div className="display-div">
-            <h1 className="text-danger"> Frequency:  { this.state.frequency } Hz</h1>
+            <h2 className="pb-0 mb-0"> <DateTime /></h2>
+            <h1 className="text-danger pt-0 mt-0"> Frequency:  { this.state.frequency } Hz</h1>
             <h2 className="text-danger">IoT POWER STATIONS TABLE</h2>
             <table className="tg">
               <thead>
