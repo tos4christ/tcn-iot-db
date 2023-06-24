@@ -99,17 +99,38 @@ import DateTime from "./DateTime";
       return {display : prevState.display}
     })
    }
-   checkConnection(mw, kv) {
-    mw = Number(mw);
-    kv = Number(kv);
+   checkConnection(mw, kv, time) {
     const connected = <span className="text-success"> CN </span>
     const disconnected = <span className="text-danger"> NC </span>
-    if (mw === 0 && kv === 0) {
+    try {
+      mw = Number(mw);
+      kv = Number(kv);
+      // Get current epoch time
+      const time_now = (new Date()).getTime();
+      // Convert the time input to epoch time
+      var options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+      const date = new Date().toLocaleDateString("en-GB", options).split('/').reverse().join('-');
+      const timeTemp = time.split(':');
+      const hour = timeTemp[0];
+      const minute = timeTemp[1]
+      const seconds = timeTemp[2]
+      const dateTemp = date.split('-');
+      const state_time = new Date(Number(dateTemp[0]), Number(dateTemp[1]-1), Number(dateTemp[2]), Number(hour), Number(minute), Number(seconds));    
+      // if 5 minutes have passed without the time changing from the current time then return disconnected
+      // 5 minutes equals to 300,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff = (time_now - state_time) > 300000;
+      const second_check = mw === 0 && kv === 0;
+      if ( time_diff || second_check) {
         return disconnected
-    } else if (mw !== 0 || kv !== 0) {
-        return connected
-    } else {
-        return disconnected
+      }  else if (mw !== 0 || kv !== 0) {
+          return connected
+      } else {
+          return disconnected
+      }
+    } catch(e) {
+      console.log(e);
+      return disconnected;
     }
    }
    checkConnection2(time) {
@@ -118,10 +139,30 @@ import DateTime from "./DateTime";
     if (time === undefined || time === null) {
       return disconnected
     }
-    if (time.length === 0) {
-        return disconnected
-    } else if (time.length > 0) {
-        return connected
+    try {
+      // Get current epoch time
+      const time_now = (new Date()).getTime();
+      // Convert the time input to epoch time
+      var options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+      const date = new Date().toLocaleDateString("en-GB", options).split('/').reverse().join('-');
+      const timeTemp = time.split(':');
+      const hour = timeTemp[0];
+      const minute = timeTemp[1]
+      const seconds = timeTemp[2]
+      const dateTemp = date.split('-');
+      const state_time = new Date(Number(dateTemp[0]), Number(dateTemp[1]-1), Number(dateTemp[2]), Number(hour), Number(minute), Number(seconds));    
+      // if 5 minutes have passed without the time changing from the current time then return disconnected
+      // 5 minutes equals to 300,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff = (time_now - state_time) > 300000;
+      if (time.length === 0 || time_diff ) {
+          return disconnected
+      } else if (time.length > 0) {
+          return connected
+      }
+    } catch(e) {
+      console.log(e);
+      return disconnected;
     }
    }
    checkConnection3(t1, t2) {
@@ -133,7 +174,26 @@ import DateTime from "./DateTime";
     try {
       t1 = t1 ? t1 : '';
       t2 = t2 ? t2 : '';
-      if (t1.length > 0 || t2.length > 0) {
+
+      const time = t1 ? t1 : t2;
+      // Get current epoch time
+      const time_now = (new Date()).getTime();
+      // Convert the time input to epoch time
+      var options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+      const date = new Date().toLocaleDateString("en-GB", options).split('/').reverse().join('-');
+      const timeTemp = time.split(':');
+      const hour = timeTemp[0];
+      const minute = timeTemp[1]
+      const seconds = timeTemp[2]
+      const dateTemp = date.split('-');
+      const state_time = new Date(Number(dateTemp[0]), Number(dateTemp[1]-1), Number(dateTemp[2]), Number(hour), Number(minute), Number(seconds));    
+      // if 5 minutes have passed without the time changing from the current time then return disconnected
+      // 5 minutes equals to 300,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff = (time_now - state_time) > 300000;
+      if ( time_diff ) {
+        return disconnected
+      } else if (t1.length > 0 || t2.length > 0) {
           return connected
       } else {
         return disconnected;
@@ -298,7 +358,7 @@ import DateTime from "./DateTime";
                 <tr>
                   <td>4</td>
                   <td>OMOTOSHO (GAS)</td>
-                  <td>{this.checkConnection(omotosogas_gs.mw, omotosogas_gs.kv)}</td>
+                  <td>{this.checkConnection(omotosogas_gs.mw, omotosogas_gs.kv, this.state.omotosho1.t)}</td>
                   <td>{omotosogas_gs.mw}</td>
                   <td>{omotosogas_gs.kv}</td>
                 </tr>
@@ -312,7 +372,7 @@ import DateTime from "./DateTime";
                 <tr>
                   <td>6</td>
                   <td>DELTA (GAS)</td>
-                  <td>{this.checkConnection(delta_gs.mw, delta_gs.kv)}</td>
+                  <td>{this.checkConnection(delta_gs.mw, delta_gs.kv, this.state.deltaGs.t)}</td>
                   <td>{delta_gs.mw}</td>
                   <td>{delta_gs.kv}</td>
                 </tr>
@@ -396,7 +456,7 @@ import DateTime from "./DateTime";
                 <tr>
                   <td>18</td>
                   <td>OLORUNSOGO NIPP</td>
-                  <td>{this.checkConnection(olorunsogonipp_gs.mw, olorunsogonipp_gs.kv)}</td>
+                  <td>{this.checkConnection(olorunsogonipp_gs.mw, olorunsogonipp_gs.kv, this.state.olorunsogoPhase1Gs.t)}</td>
                   <td>{Number(olorunsogonipp_gs.mw) <= -3 ? 0 : Number(olorunsogonipp_gs.mw)}</td>
                   <td>{olorunsogonipp_gs.kv}</td>
                 </tr>
@@ -438,7 +498,7 @@ import DateTime from "./DateTime";
                 <tr>
                   <td>24</td>
                   <td>{'AFAM IV & V (GAS)'}</td>
-                  <td>{this.checkConnection(afam4_gs.mw, afam4_gs.kv)}</td>
+                  <td>{this.checkConnection(afam4_gs.mw, afam4_gs.kv, this.state.afamIv_vPs.t)}</td>
                   <td>{afam4_gs.mw}</td>
                   <td>{afam4_gs.kv}</td>
                 </tr>
