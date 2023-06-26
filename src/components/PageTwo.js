@@ -44,6 +44,7 @@ import get_stations from "./stations_adder";
       gwagwalada: {},
       zungeru: {},
       taopex: {},
+      afamVPs: {},
       connected: false,
      };
    }
@@ -85,18 +86,19 @@ import get_stations from "./stations_adder";
       });
     }
    }
-   checkConnection(mw, kv) {
-    mw = Number(mw);
-    kv = Number(kv);
-    const connected = <span className="text-success"> CN </span>
-    const disconnected = <span className="text-danger"> NC </span>
-    if (mw === 0 && kv === 0) {
-        return disconnected
-    } else if (mw !== 0 || kv !== 0) {
-        return connected
-    } else {
-        return disconnected
+   getEpoch(time) {
+    if(!time || time == undefined || time == null) {
+      return 0;
     }
+    // Convert the time input to epoch time
+    var options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const date = new Date().toLocaleDateString("en-GB", options).split('/').reverse().join('-');
+    const timeTemp = time.split(':');
+    const hour = timeTemp[0];
+    const minute = timeTemp[1]
+    const seconds = timeTemp[2]
+    const dateTemp = date.split('-');
+    return new Date(Number(dateTemp[0]), Number(dateTemp[1]-1), Number(dateTemp[2]), Number(hour), Number(minute), Number(seconds)); 
    }
    checkConnection2(time) {
     const connected = <span className="text-success"> CN </span>
@@ -104,11 +106,80 @@ import get_stations from "./stations_adder";
     if (time === undefined || time === null) {
       return disconnected
     }
-    if (time.length === 0) {
-        return disconnected
-    } else if (time.length > 0) {
-        return connected
+    try {
+      // Get current epoch time
+      const time_now = (new Date()).getTime();     
+      // if 5 minutes have passed without the time changing from the current time then return disconnected
+      // 5 minutes equals to 300,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff = (time_now - this.getEpoch(time)) > 300000;
+      if (time.length === 0 || time_diff ) {
+          return disconnected
+      } else if (time.length > 0) {
+          return connected
+      }
+    } catch(e) {
+      console.log(e);
+      return disconnected;
     }
+   }
+   checkConnection3(t1, t2) {
+    const connected = <span className="text-success"> CN </span>
+    const disconnected = <span className="text-danger"> NC </span>
+    if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null)) {
+      return disconnected
+    }
+    try {
+      t1 = t1 ? t1 : '';
+      t2 = t2 ? t2 : '';
+      // Get current epoch time
+      const time_now = (new Date()).getTime();
+      // if 5 minutes have passed without the time changing from the current time then return disconnected
+      // 5 minutes equals to 300,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff_1 = (time_now - this.getEpoch(t1)) > 300000;
+      const time_diff_2 = (time_now - this.getEpoch(t2)) > 300000;
+      if ( time_diff_1 || time_diff_2 ) {
+        return disconnected
+      } else if (t1.length > 0 && t2.length > 0) {
+          return connected
+      } else {
+        return disconnected;
+      }
+    } catch(e) {
+      console.log(e);
+      return disconnected;
+    }    
+   }
+   checkConnection4(t1, t2, t3) {
+    const connected = <span className="text-success"> CN </span>
+    const disconnected = <span className="text-danger"> NC </span>
+    if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null) && (t3 === undefined || t3 === null)) {
+      return disconnected
+    }
+    try {
+      t1 = t1 ? t1 : '';
+      t2 = t2 ? t2 : '';
+      t3 = t3 ? t3 : '';
+      // Get current epoch time
+      const time_now = (new Date()).getTime();  
+      // if 5 minutes have passed without the time changing from the current time then return disconnected
+      // 5 minutes equals to 300,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff_1 = (time_now - this.getEpoch(t1)) > 300000;
+      const time_diff_2 = (time_now - this.getEpoch(t2)) > 300000;
+      const time_diff_3 = (time_now - this.getEpoch(t3)) > 300000;
+      if ( time_diff_1 || time_diff_2 || time_diff_3 ) {
+        return disconnected
+      } else if (t1.length > 0 && t2.length > 0 && t3.length > 0) {
+          return connected
+      } else {
+        return disconnected;
+      }
+    } catch(e) {
+      console.log(e);
+      return disconnected;
+    }    
    }
   render() {
     const stations_array = get_stations(this.state);
@@ -143,13 +214,35 @@ import get_stations from "./stations_adder";
     const zungeru_gs = stations_array['ZUNGERU'];
     const taopex_gs = stations_array['TAOPEX'];
 
-    const totalGeneration = Number(riversipp_gs.mw) + Number(afam6_gs.mw) + Number(paras_gs.mw) + Number(geregugas_gs.mw) +
-    Number(geregunipp_gs.mw) + Number(omotosogas_gs.mw) + Number(omotosonipp_gs.mw) + Number(sapelenipp_gs.mw) + Number(sapelesteam_gs.mw) +
-    Number(omoku_gs.mw) + Number(odukpani_gs.mw) + Number(alaoji_gs.mw) + Number(azura_gs.mw) + Number(taopex_gs.mw) +
-    (Number(olorunsogonipp_gs.mw) <= -3 ? 0 : Number(olorunsogonipp_gs.mw)) + Number(ihovbor_gs.mw) +
-    Number(phMain_ts.mw) + Number(ibom_gs.mw) + Number(olorunsogogas_gs.mw) + Number(gbarain_gs.mw) + Number(shiroro_gs.mw) +
-     Number(afam4_gs.mw) + Number(kainji_gs.mw) + Number(egbin_gs.mw) + Number(okpai_gs.mw) + Number(delta_gs.mw) +
-      Number(jebba_gs.mw) + Number(dadinkowa_gs.mw) + Number(zungeru_gs.mw);
+    const totalGeneration = (Number(riversipp_gs.mw) < 0 ? 0 : Number(riversipp_gs.mw)) +
+    (Number(afam6_gs.mw) < 0 ? 0 : Number(afam6_gs.mw)) +
+    (Number(paras_gs.mw) < 0 ? 0 : Number(paras_gs.mw)) +
+    (Number(geregugas_gs.mw) < 0 ? 0 : Number(geregugas_gs.mw)) +
+    (Number(geregunipp_gs.mw) < 0 ? 0 : Number(geregunipp_gs.mw))+ 
+    (Number(omotosogas_gs.mw) < 0 ? 0 : Number(omotosogas_gs.mw))+ 
+    (Number(omotosonipp_gs.mw) < 0 ? 0 : Number(omotosonipp_gs.mw))+ 
+    (Number(sapelenipp_gs.mw) < 0 ? 0 : Number(sapelenipp_gs.mw))+ 
+    (Number(sapelesteam_gs.mw) < 0 ? 0 : Number(sapelesteam_gs.mw))+
+    (Number(omoku_gs.mw) < 0 ? 0 : Number(omoku_gs.mw))+ 
+    (Number(odukpani_gs.mw) < 0 ? 0 : Number(odukpani_gs.mw))+ 
+    (Number(alaoji_gs.mw) < 0 ? 0 : Number(alaoji_gs.mw))+ 
+    (Number(azura_gs.mw) < 0 ? 0 : Number(azura_gs.mw))+ 
+    (Number(taopex_gs.mw) < 0 ? 0 : Number(taopex_gs.mw))+
+    (Number(olorunsogonipp_gs.mw) < 0 ? 0 : Number(olorunsogonipp_gs.mw)) + 
+    (Number(ihovbor_gs.mw) < 0 ? 0 : Number(ihovbor_gs.mw))+
+    (Number(phMain_ts.mw) < 0 ? 0 : Number(phMain_ts.mw))+ 
+    (Number(ibom_gs.mw) < 0 ? 0 : Number(ibom_gs.mw))+ 
+    (Number(olorunsogogas_gs.mw) < 0 ? 0 : Number(olorunsogogas_gs.mw))+ 
+    (Number(gbarain_gs.mw) < 0 ? 0 : Number(gbarain_gs.mw))+ 
+    (Number(shiroro_gs.mw) < 0 ? 0 : Number(shiroro_gs.mw))+
+    (Number(afam4_gs.mw) < 0 ? 0 : Number(afam4_gs.mw))+ 
+    (Number(kainji_gs.mw) < 0 ? 0 : Number(kainji_gs.mw))+ 
+    (Number(egbin_gs.mw) < 0 ? 0 : Number(egbin_gs.mw))+ 
+    (Number(okpai_gs.mw) < 0 ? 0 : Number(okpai_gs.mw))+ 
+    (Number(delta_gs.mw) < 0 ? 0 : Number(delta_gs.mw))+
+    (Number(jebba_gs.mw) < 0 ? 0 : Number(jebba_gs.mw))+ 
+    (Number(dadinkowa_gs.mw) < 0 ? 0 : Number(dadinkowa_gs.mw))+ 
+    (Number(zungeru_gs.mw) < 0 ? 0 : Number(zungeru_gs.mw));
             
     return (
       <>
@@ -178,14 +271,14 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>17</td>
                   <td>OLORUNSOGO (GAS)</td>
-                  <td>{this.checkConnection(olorunsogogas_gs.mw, olorunsogogas_gs.kv )}</td>
+                  <td>{this.checkConnection3(this.state.olorunsogo1.t, this.state.olorunsogoPhase1Gs.t)}</td>
                   <td>{olorunsogogas_gs.mw}</td>
                   <td>{olorunsogogas_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>18</td>
                   <td>OLORUNSOGO NIPP</td>
-                  <td>{this.checkConnection(olorunsogonipp_gs.mw, olorunsogonipp_gs.kv)}</td>
+                  <td>{this.checkConnection3(this.state.olorunsogo1.t, this.state.olorunsogoPhase1Gs.t)}</td>
                   <td>{Number(olorunsogonipp_gs.mw) <= -3 ? 0 : Number(olorunsogonipp_gs.mw)}</td>
                   <td>{olorunsogonipp_gs.kv}</td>
                 </tr>
@@ -227,7 +320,7 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>24</td>
                   <td>{'AFAM IV & V (GAS)'}</td>
-                  <td>{this.checkConnection(afam4_gs.mw, afam4_gs.kv)}</td>
+                  <td>{this.checkConnection3(this.state.afamVPs.t, this.state.afamIv_vPs.t)}</td>
                   <td>{afam4_gs.mw}</td>
                   <td>{afam4_gs.kv}</td>
                 </tr>

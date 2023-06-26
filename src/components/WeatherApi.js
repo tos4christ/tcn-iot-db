@@ -3,7 +3,10 @@ import { Route, Switch, useRouteMatch, Link, withRouter } from 'react-router-dom
 import WeatherWidget_rows from './Weather/WeatherWidget_rows';
 import WeatherWidget_cards from './Weather/WeatherWidget_cards';
 import TemWeather from './Weather/TemWeather';
+import emergencyAlert from "../assets/audio/emergency_alert.mp3";
 import socket from "./utility/socketIO";
+
+const audio = new Audio(emergencyAlert);
 
 class WeatherApi extends React.Component {
     constructor(props) {
@@ -44,7 +47,8 @@ class WeatherApi extends React.Component {
         }
     }
     componentDidMount() {
-        if(this.props.history.location.pathname === "/nccweather") {
+      // console.log(this.props.history.location.pathname, " the pathname check");
+      //   if(this.props.history.location.pathname === "/nccweather") {
             socket.on("client_message_weather_current", data => {
               const { message } = data;
               const parsedStation = JSON.parse(message);
@@ -64,25 +68,31 @@ class WeatherApi extends React.Component {
               // get the current rain stations saved in state
               const { stations_with_rainfall } = this.state;
               // get the current stations with rain from the API
-              const rainy_stations = parsedStation.filter( station => station.current_weather_data.rain !== null );
+              const unsorted_rainy_stations = parsedStation.filter( station => station.current_weather_data.weather[0].main == "Rain" );
+              const rainy_stations = unsorted_rainy_stations.sort((a, b) => a.name < b.name ? -1 : 1);
               if(rainy_stations.length > 0) {
-                // Logic to alert on new rainfall stations
-                if(stations_with_rainfall.length === 0) {
-                  // Run alert on the new rain stations
-                  rainy_stations.forEach( station => {
-                    alert(`${station.name} has rain falling`);
-                  })
-                }
-                if(rainy_stations.length > stations_with_rainfall.length) {
+
+                if(rainy_stations.length > stations_with_rainfall.length && stations_with_rainfall.length > 0) {
                   // filter out the new rain stations from the API
-                  
-
-                  // Alert the user of the new stations with rain fall
-
+                  const filteredStations = rainy_stations.filter( item => {                    
+                    const filterStation =  stations_with_rainfall.filter( station => station.name === item.name );
+                    if (filterStation.length > 0) {
+                      return false
+                    } else {
+                      return true
+                    }
+                  });
+                  filteredStations.forEach(station => {
+                    // Alert the user of the new stations with rain fall  
+                    audio.play(true);                  
+                    alert(`Rainfall Started at ${station.name}`);                    
+                  });                  
                 }
+
                 rainy_stations.forEach(station => {
                     rain_stations.push(station);
                 })
+
                 this.setState(prevState => {
                   prevState["stations_with_rainfall"] = rain_stations;
                   returnObject_2["stations_with_rainfall"] = prevState["stations_with_rainfall"];
@@ -90,35 +100,36 @@ class WeatherApi extends React.Component {
                 });
               }
             });
-            socket.on("client_message_weather_hourly3", data => {
-                const { message } = data;
-                const parsedStation = JSON.parse(message);
-                const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
-                const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
-                const returnObject = {}
-                this.setState(prevState => {
-                  prevState["hourly3_weather_stations_generation"] = weather_stations_generation;
-                  prevState["hourly3_weather_stations_transmission"] = weather_stations_transmission;
-                  returnObject["hourly3_weather_stations_generation"] = prevState["hourly3_weather_stations_generation"];
-                  returnObject["hourly3_weather_stations_transmission"] = prevState["hourly3_weather_stations_transmission"]
-                  return returnObject;
-                })
-              });
-              socket.on("client_message_weather_daily", data => {
-                const { message } = data;
-                const parsedStation = JSON.parse(message);
-                const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
-                const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
-                const returnObject = {}
-                this.setState(prevState => {
-                  prevState["daily_weather_stations_generation"] = weather_stations_generation;
-                  prevState["daily_weather_stations_transmission"] = weather_stations_transmission;
-                  returnObject["daily_weather_stations_generation"] = prevState["daily_weather_stations_generation"];
-                  returnObject["daily_weather_stations_transmission"] = prevState["daily_weather_stations_transmission"]
-                  return returnObject;
-                })
-              });
-          }
+            
+            // socket.on("client_message_weather_hourly3", data => {
+            //     const { message } = data;
+            //     const parsedStation = JSON.parse(message);
+            //     const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
+            //     const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
+            //     const returnObject = {}
+            //     this.setState(prevState => {
+            //       prevState["hourly3_weather_stations_generation"] = weather_stations_generation;
+            //       prevState["hourly3_weather_stations_transmission"] = weather_stations_transmission;
+            //       returnObject["hourly3_weather_stations_generation"] = prevState["hourly3_weather_stations_generation"];
+            //       returnObject["hourly3_weather_stations_transmission"] = prevState["hourly3_weather_stations_transmission"]
+            //       return returnObject;
+            //     })
+            // });
+            // socket.on("client_message_weather_daily", data => {
+            //   const { message } = data;
+            //   const parsedStation = JSON.parse(message);
+            //   const weather_stations_generation = parsedStation.filter(station => station.type === 'GENERATION');
+            //   const weather_stations_transmission = parsedStation.filter(station => station.type === 'TRANSMISSION');
+            //   const returnObject = {}
+            //   this.setState(prevState => {
+            //     prevState["daily_weather_stations_generation"] = weather_stations_generation;
+            //     prevState["daily_weather_stations_transmission"] = weather_stations_transmission;
+            //     returnObject["daily_weather_stations_generation"] = prevState["daily_weather_stations_generation"];
+            //     returnObject["daily_weather_stations_transmission"] = prevState["daily_weather_stations_transmission"]
+            //     return returnObject;
+            //   })
+            // });
+         // }
     };
 
   render() {
@@ -134,7 +145,7 @@ class WeatherApi extends React.Component {
                         this.setState({rows_transmission: false});
                         this.setState({station_forecast: false});
                      }}>
-                        <Link >Grid Display</Link>
+                        <Link >Block Display</Link>
                     </button>
                     <button name='rows_generation'  onClick={(e) => { 
                         this.setState({cards_generation: false});
@@ -155,7 +166,7 @@ class WeatherApi extends React.Component {
                         this.setState({rows_transmission: false});
                         this.setState({station_forecast: false});
                     }}>
-                        <Link >Grid Display</Link>
+                        <Link >Block Display</Link>
                     </button>
                     <button  onClick={() => { 
                         this.setState({cards_generation: false});
@@ -176,6 +187,12 @@ class WeatherApi extends React.Component {
                         this.setState({station_forecast: !this.state.station_forecast});
                      }}>
                         Station's Weather Forecast
+                    </button>
+                    <p className="btn btn-success" onClick={() => audio.pause()}>
+                      Accept Alarms
+                    </p>
+                    <button>
+                      Get Historical Data
                     </button>
                 </div>            
             </div>
