@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import bootstrap from 'bootstrap'; // eslint-disable-line no-unused-vars
-import 'bootstrap/dist/js/bootstrap'
+//import bootstrap from 'bootstrap'; // eslint-disable-line no-unused-vars
+//import 'bootstrap/dist/js/bootstrap'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import "./components/css/icofont.css";
 import "./components/css/font-awesome.min.css";
@@ -22,6 +22,15 @@ import UpdatePassword from './components/Users/UpdatePassword';
 import Tem from './components/TemDownload';
 import Collapse from './components/CollapseDownload';
 // import Footer from './components/Footer';
+import WeatherApi from './components/WeatherApi';
+import WeatherApp from './components/Weather/WeatherWidget_single';
+import Index from "./pages/Index";
+import Register from "./pages/Register";
+import DashboardHome from "./pages/DashboardHome";
+import Disco from "./pages/Disco";
+import TCN from "./pages/Tcn";
+import UserLogin from "./pages/UserLogin";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -29,9 +38,9 @@ class App extends React.Component {
   }
 
   }
-  // componentDidMount() {
-  //   localStorage.setItem("isLoggedIn", true);
-  // }
+  componentDidMount() {
+    localStorage.setItem("isLoggedIn", true);
+  }
   render() {
     return (
       <Router>
@@ -117,6 +126,30 @@ class App extends React.Component {
           </Route>
           <Route exact path={`/nccnasfullpage`}>
               <FullPage />         
+          </Route>
+          <Route exact path={`/nccweather`}>
+              <WeatherApi />         
+          </Route>
+          <Route exact path={`/nccweather2`}>
+              <WeatherApp />         
+          </Route>
+          <Route exact path="/api/tickets">
+            <Index />
+          </Route>
+          <Route path="/api/tickets/login">
+            <UserLogin />
+          </Route>
+          <Route path="/api/tickets/register">
+            <Register />
+          </Route>
+          <Route path="/api/tickets/dashboard">
+            <DashboardHome />
+          </Route>
+          <Route path="/api/tickets/disco">
+            <Disco />
+          </Route>
+          <Route path="/api/tickets/tcn">
+            <TCN />
           </Route>
         </Switch>
         {/* <Footer /> */}

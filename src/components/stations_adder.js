@@ -108,13 +108,24 @@ const get_stations =  function(state_data) {
     const asaba_d3t = state_data.asaba.lines ? state_data.asaba.lines.filter(line => line.id === "d3t") : [{mw: null, V: null}];
     const ugwuaji_u1a = state_data.gbarain.lines ? state_data.gbarain.lines.filter(line => line.id === "u1a") : [{mw: null, V: null}];
     const ugwuaji_u2a = state_data.gbarain.lines ? state_data.gbarain.lines.filter(line => line.id === "u2a") : [{mw: null, V: null}];    
+    const zungeru_z1ssX = state_data.zungeru.lines ? state_data.zungeru.lines.filter(line => line.id === "z1ssX") : [{mw: null, V: null}];    
+    const zungeru_z2ssX = state_data.zungeru.lines ? state_data.zungeru.lines.filter(line => line.id === "z2ssX") : [{mw: null, V: null}];
+    //Taopex
+    const taopex = state_data.taopex.lines ? state_data.taopex.lines.filter(line => line.id === "line1") : [{mw: null, V: null}];    
+    
 
     // console.log(omotosho2_tr3, omotosho2_tr4, 'the omotoshos');
     // const multiplier = 3/10;
     return { 
+        'TAOPEX': {mw: Number(
+            Math.abs(taopex[0]?.td ? taopex[0].td.mw : 0)
+        ).toFixed(2), kv: (taopex[0]?.td ? taopex[0].td.V : 0)},
         'EKET': {mw: Number(
             Math.abs((eket_e21m[0]?.td ? eket_e21m[0].td.mw : 0) + (eket_e22m[0]?.td ? eket_e22m[0].td.mw : 0))
         ).toFixed(2), kv: (eket_e21m[0]?.td ? eket_e21m[0].td.V : eket_e22m[0]?.td ? eket_e22m[0].td.V : 0)},
+        'ZUNGERU': {mw: Number(
+            Math.abs((zungeru_z1ssX[0]?.td ? (zungeru_z1ssX[0].td.mw < 7 ? 0 : (zungeru_z1ssX[0].td.V * zungeru_z1ssX[0].td.A * 1.714 )) : 0) + (zungeru_z2ssX[0]?.td ? ( zungeru_z2ssX[0].td.mw < 7 ? 0 : (zungeru_z2ssX[0].td.V * zungeru_z2ssX[0].td.A * 1.714)) : 0))/ 1000
+        ).toFixed(2), kv: (zungeru_z1ssX[0]?.td ? zungeru_z1ssX[0].td.V : zungeru_z2ssX[0]?.td ? zungeru_z2ssX[0].td.V : 0)},
         'PORT-HARCOURT MAIN' : {mw: Number(
             Math.abs(phMain_m21p[0]?.td ? phMain_m21p[0].td.mw : 0)
             ).toFixed(2), kv: (phMain_m21p[0]?.td ? phMain_m21p[0].td.V : 0)},
@@ -137,9 +148,9 @@ const get_stations =  function(state_data) {
         'UGWUAJI' : {mw: Number(
             (ugwuaji_u1a[0]?.td ?ugwuaji_u1a[0].td.mw:0) + (ugwuaji_u2a[0]?.td ?ugwuaji_u2a[0].td.mw:0)
             ).toFixed(2), kv: ugwuaji_u1a[0]?.td ?ugwuaji_u1a[0].td.V:0},
-        'ASABA' : {mw: Number(
+        'ASABA' : {mw: (-1 * Number(
             (asaba_b3d[0]?.td ?asaba_b3d[0].td.mw:0) + (asaba_d3t[0]?.td ?asaba_d3t[0].td.mw:0)
-            ).toFixed(2), kv: (asaba_b3d[0]?.td ?asaba_b3d[0].td.V:0)},
+            ).toFixed(2)), kv: (asaba_b3d[0]?.td ?asaba_b3d[0].td.V:0)},
         'SHIRORO (HYDRO)' : {mw: Number(
             (shiroroPs_411g1[0]?.gd ?shiroroPs_411g1[0].gd.mw:0) + (shiroroPs_411g2[0]?.gd ?shiroroPs_411g2[0].gd.mw:0) + 
             (shiroroPs_411g3[0]?.gd ?shiroroPs_411g3[0].gd.mw:0) + (shiroroPs_411g4[0]?.gd ?shiroroPs_411g4[0].gd.mw:0)  
@@ -157,9 +168,9 @@ const get_stations =  function(state_data) {
             (egbinPs_st3[0]?.gd ?egbinPs_st3[0].gd.mw:0) + (egbinPs_st4[0]?.gd ?egbinPs_st4[0].gd.mw:0) + 
             (egbinPs_st5[0]?.gd ?egbinPs_st5[0].gd.mw:0) + (egbinPs_st6[0]?.gd ?egbinPs_st6[0].gd.mw:0)
                 ).toFixed(2), kv: (egbinPs_st1[0]?.gd ?egbinPs_st1[0].gd.V:0)},
-        'OKPAI (GAS/STEAM)' : {mw: Number(
+        'OKPAI (GAS/STEAM)' : {mw: (-1 * Number(
             (okpaiGs_k1t[0]?.td ?okpaiGs_k1t[0].td.mw:0) + (okpaiGs_k2t[0]?.td ?okpaiGs_k2t[0].td.mw:0)
-            ).toFixed(2), kv: (okpaiGs_k1t[0]?.td ?okpaiGs_k1t[0].td.V:0)},
+            ).toFixed(2)), kv: (okpaiGs_k1t[0]?.td ?okpaiGs_k1t[0].td.V:0)},
         'DELTA (GAS)' : {mw: Number(
             Math.abs(delta2_tr3[0]?.gd ?delta2_tr3[0].gd.mw:0) + Math.abs(delta2_tr4[0]?.gd ?delta2_tr4[0].gd.mw:0) + 
             Math.abs(delta3_tr5[0]?.gd ?delta3_tr5[0].gd.mw:0) + Math.abs(delta3_tr6[0]?.gd ?delta3_tr6[0].gd.mw:0) + 
@@ -205,7 +216,7 @@ const get_stations =  function(state_data) {
             (ihovborNippPs_gt3[0]?.gd ?ihovborNippPs_gt3[0].gd.mw:0) + (ihovborNippPs_gt4[0]?.gd ?ihovborNippPs_gt4[0].gd.mw:0))
                 ).toFixed(2), kv: (ihovborNippPs_gt1[0]?.gd ?ihovborNippPs_gt1[0].gd.V:0)},
         'OLORUNSOGO NIPP' : {mw: !state_data.olorunsogoPhase1Gs.lines ? 0  : Number(
-            ((olorunsogoPhase1Gs_r1w[0]?.td ? (olorunsogoPhase1Gs_r1w[0].td.mw * 1.62344817):0) + (olorunsogoPhase1Gs_r2a[0]?.td ?olorunsogoPhase1Gs_r2a[0].td.mw:0)) - 
+            ((olorunsogoPhase1Gs_r1w[0]?.td ? olorunsogoPhase1Gs_r1w[0].td.mw :0) + (olorunsogoPhase1Gs_r2a[0]?.td ?olorunsogoPhase1Gs_r2a[0].td.mw:0)) - 
             ((olorunsogo1_tr1[0]?.gd ?olorunsogo1_tr1[0].gd.mw:0) + (olorunsogo1_tr2[0]?.gd ?olorunsogo1_tr2[0].gd.mw:0) + 
             (olorunsogoPhase1Gs_tr3[0]?.gd ?olorunsogoPhase1Gs_tr3[0].gd.mw:0) + (olorunsogoPhase1Gs_tr4[0]?.gd ?olorunsogoPhase1Gs_tr4[0].gd.mw:0))
                 ).toFixed(2), kv: (olorunsogoPhase1Gs_r2a[0]?.td ?olorunsogoPhase1Gs_r2a[0].td.V:0)},

@@ -2,6 +2,8 @@ import React from "react";
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import socket from "./utility/socketIO";
 import get_stations from "./stations_adder";
+import DateTime from "./DateTime";
+
 // import { Spinner, Button, Table } from "react-bootstrap";
 
  class Home extends React.Component {
@@ -45,6 +47,8 @@ import get_stations from "./stations_adder";
       lokojaTs: {},
       ugwuaji: {},
       gwagwalada: {},
+      zungeru: {},
+      taopex: {},
       message: "",
       received: [],
       connected: false,
@@ -52,40 +56,42 @@ import get_stations from "./stations_adder";
      };
    }
    componentDidMount() {
-    socket.on("client_message_111", data => {
-      const { message } = data;
-      const parsedMessage = JSON.parse(message);
-      const station = parsedMessage.id;
-      const returnObject = {}
-      // console.log(parsedMessage, 'c1 message');
-      this.setState(prevState => {
-        prevState[station] = parsedMessage;
-        returnObject[station] = prevState[station]
-        return returnObject;
-      })
-    });
-    socket.on("client_message_222", data => {
-      const { message } = data;
-      const parsedMessage = JSON.parse(message);
-      const station = parsedMessage.id;
-      const returnObject = {}
-      // console.log(parsedMessage, 'c2 message');
-      this.setState(prevState => {
-        prevState[station] = parsedMessage;
-        returnObject[station] = prevState[station]
-        return returnObject;
-      })
-    });
-    socket.on("frequency000", data => {
-      const { message } = data;
-      const parsedMessage = JSON.parse(message);
-      const returnObject = {}
-      this.setState(prevState => {
-        prevState["frequency"] = parsedMessage;
-        returnObject["frequency"] = prevState["frequency"]
-        return returnObject;
-      })
-    });
+    if(this.props.history.location.pathname === "/home") {
+      socket.on("client_message_111", data => {
+        const { message } = data;
+        const parsedMessage = JSON.parse(message);
+        const station = parsedMessage.id;
+        const returnObject = {}
+        // console.log(parsedMessage, 'c1 message');
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station]
+          return returnObject;
+        })
+      });
+      socket.on("client_message_222", data => {
+        const { message } = data;
+        const parsedMessage = JSON.parse(message);
+        const station = parsedMessage.id;
+        const returnObject = {}
+        // console.log(parsedMessage, 'c2 message');
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station]
+          return returnObject;
+        })
+      });
+      socket.on("frequency000", data => {
+        const { message } = data;
+        const parsedMessage = JSON.parse(message);
+        const returnObject = {}
+        this.setState(prevState => {
+          prevState["frequency"] = parsedMessage;
+          returnObject["frequency"] = prevState["frequency"]
+          return returnObject;
+        })
+      });
+    }    
    }
    toggleDisplay(e) {
     this.setState(prevState => {
@@ -93,18 +99,100 @@ import get_stations from "./stations_adder";
       return {display : prevState.display}
     })
    }
-   checkConnection(mw, kv) {
-    mw = Number(mw);
-    kv = Number(kv);
+   getEpoch(time) {
+    if(!time || time == undefined || time == null) {
+      return 0;
+    }
+    // Convert the time input to epoch time
+    var options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const date = new Date().toLocaleDateString("en-GB", options).split('/').reverse().join('-');
+    const timeTemp = time.split(':');
+    const hour = timeTemp[0];
+    const minute = timeTemp[1]
+    const seconds = timeTemp[2]
+    const dateTemp = date.split('-');
+    return new Date(Number(dateTemp[0]), Number(dateTemp[1]-1), Number(dateTemp[2]), Number(hour), Number(minute), Number(seconds)); 
+   }
+   checkConnection2(time) {
     const connected = <span className="text-success"> CN </span>
     const disconnected = <span className="text-danger"> NC </span>
-    if (mw === 0 && kv === 0) {
-        return disconnected
-    } else if (mw !== 0 || kv !== 0) {
-        return connected
-    } else {
-        return disconnected
+    if (time === undefined || time === null) {
+      return disconnected
     }
+    try {
+      // Get current epoch time
+      const time_now = (new Date()).getTime();     
+      // if 5 minutes have passed without the time changing from the current time then return disconnected
+      // 5 minutes equals to 300,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff = (time_now - this.getEpoch(time)) > 300000;
+      if (time.length === 0 || time_diff ) {
+          return disconnected
+      } else if (time.length > 0) {
+          return connected
+      }
+    } catch(e) {
+      console.log(e);
+      return disconnected;
+    }
+   }
+   checkConnection3(t1, t2) {
+    const connected = <span className="text-success"> CN </span>
+    const disconnected = <span className="text-danger"> NC </span>
+    if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null)) {
+      return disconnected
+    }
+    try {
+      t1 = t1 ? t1 : '';
+      t2 = t2 ? t2 : '';
+      // Get current epoch time
+      const time_now = (new Date()).getTime();
+      // if 5 minutes have passed without the time changing from the current time then return disconnected
+      // 5 minutes equals to 300,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff_1 = (time_now - this.getEpoch(t1)) > 300000;
+      const time_diff_2 = (time_now - this.getEpoch(t2)) > 300000;
+      if ( time_diff_1 || time_diff_2 ) {
+        return disconnected
+      } else if (t1.length > 0 && t2.length > 0) {
+          return connected
+      } else {
+        return disconnected;
+      }
+    } catch(e) {
+      console.log(e);
+      return disconnected;
+    }    
+   }
+   checkConnection4(t1, t2, t3) {
+    const connected = <span className="text-success"> CN </span>
+    const disconnected = <span className="text-danger"> NC </span>
+    if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null) && (t3 === undefined || t3 === null)) {
+      return disconnected
+    }
+    try {
+      t1 = t1 ? t1 : '';
+      t2 = t2 ? t2 : '';
+      t3 = t3 ? t3 : '';
+      // Get current epoch time
+      const time_now = (new Date()).getTime();  
+      // if 5 minutes have passed without the time changing from the current time then return disconnected
+      // 5 minutes equals to 300,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff_1 = (time_now - this.getEpoch(t1)) > 300000;
+      const time_diff_2 = (time_now - this.getEpoch(t2)) > 300000;
+      const time_diff_3 = (time_now - this.getEpoch(t3)) > 300000;
+      if ( time_diff_1 || time_diff_2 || time_diff_3 ) {
+        return disconnected
+      } else if (t1.length > 0 && t2.length > 0 && t3.length > 0) {
+          return connected
+      } else {
+        return disconnected;
+      }
+    } catch(e) {
+      console.log(e);
+      return disconnected;
+    }    
    }
   render() {
     const { isLoggedIn } = this.props;
@@ -113,6 +201,8 @@ import get_stations from "./stations_adder";
     }
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
+    const zungeru_gs = stations_array['ZUNGERU'];
+    const taopex_gs = stations_array['TAOPEX'];
     const ihovbor_gs = stations_array['IHOVBOR NIPP (GAS)'];
     const omoku_gs = stations_array['OMOKU (GAS)'];
     const riversipp_gs = stations_array['RIVERS IPP (GAS)'];
@@ -148,14 +238,44 @@ import get_stations from "./stations_adder";
     const lokoja_ts = stations_array['LOKOJA TS'];
     const eket_ts = stations_array['EKET'];
 
-    const totalGeneration = Number(riversipp_gs.mw) + Number(afam6_gs.mw) + Number(paras_gs.mw) + Number(geregugas_gs.mw) +
-    Number(geregunipp_gs.mw) + Number(omotosogas_gs.mw) + Number(omotosonipp_gs.mw) + Number(sapelenipp_gs.mw) + Number(sapelesteam_gs.mw) +
-    Number(omoku_gs.mw) + Number(odukpani_gs.mw) + Number(alaoji_gs.mw) + Number(azura_gs.mw) + Number(olorunsogonipp_gs.mw) + Number(ihovbor_gs.mw) +
-    Number(transamadi_gs.mw) + Number(ibom_gs.mw) + Number(olorunsogogas_gs.mw) + Number(gbarain_gs.mw) + Number(shiroro_gs.mw) + Number(afam4_gs.mw) +
-    Number(kainji_gs.mw) + Number(egbin_gs.mw) + Number(okpai_gs.mw) + Number(delta_gs.mw) + Number(jebba_gs.mw) + Number(dadinkowa_gs.mw);
+    const totalGeneration = (Number(riversipp_gs.mw) < 0 ? 0 : Number(riversipp_gs.mw))+ 
+    (Number(afam6_gs.mw) < 0 ? 0 : Number(afam6_gs.mw))+ 
+    (Number(paras_gs.mw) < 0 ? 0 : Number(paras_gs.mw))+ 
+    (Number(geregugas_gs.mw) < 0 ? 0 : Number(geregugas_gs.mw))+ 
+    (Number(zungeru_gs.mw) < 0 ? 0 : Number(zungeru_gs.mw))+
+    (Number(geregunipp_gs.mw) < 0 ? 0 : Number(geregunipp_gs.mw))+ 
+    (Number(omotosogas_gs.mw) < 0 ? 0 : Number(omotosogas_gs.mw))+ 
+    (Number(omotosonipp_gs.mw) < 0 ? 0 : Number(omotosonipp_gs.mw))+ 
+    (Number(sapelenipp_gs.mw) < 0 ? 0 : Number(sapelenipp_gs.mw))+ 
+    (Number(sapelesteam_gs.mw) < 0 ? 0 : Number(sapelesteam_gs.mw))+
+    (Number(omoku_gs.mw) < 0 ? 0 : Number(omoku_gs.mw))+ 
+    (Number(odukpani_gs.mw) < 0 ? 0 : Number(odukpani_gs.mw))+ 
+    (Number(alaoji_gs.mw) < 0 ? 0 : Number(alaoji_gs.mw))+ 
+    (Number(azura_gs.mw) < 0 ? 0 : Number(azura_gs.mw))+ 
+    (Number(olorunsogonipp_gs.mw) < 0 ? 0 : Number(olorunsogonipp_gs.mw))+ 
+    (Number(ihovbor_gs.mw) < 0 ? 0 : Number(ihovbor_gs.mw))+
+    (Number(phMain_ts.mw) < 0 ? 0 : Number(phMain_ts.mw))+ 
+    (Number(ibom_gs.mw) < 0 ? 0 : Number(ibom_gs.mw))+ 
+    (Number(olorunsogogas_gs.mw) < 0 ? 0 : Number(olorunsogogas_gs.mw))+ 
+    (Number(gbarain_gs.mw) < 0 ? 0 : Number(gbarain_gs.mw))+ 
+    (Number(shiroro_gs.mw) < 0 ? 0 : Number(shiroro_gs.mw))+ 
+    (Number(afam4_gs.mw) < 0 ? 0 : Number(afam4_gs.mw))+
+    (Number(kainji_gs.mw) < 0 ? 0 : Number(kainji_gs.mw))+ 
+    (Number(egbin_gs.mw) < 0 ? 0 : Number(egbin_gs.mw))+ 
+    (Number(okpai_gs.mw) < 0 ? 0 : Number(okpai_gs.mw))+ 
+    (Number(delta_gs.mw) < 0 ? 0 : Number(delta_gs.mw))+ 
+    (Number(jebba_gs.mw) < 0 ? 0 : Number(jebba_gs.mw))+ 
+    (Number(dadinkowa_gs.mw) < 0 ? 0 : Number(dadinkowa_gs.mw))+
+    (Number(taopex_gs.mw) < 0 ? 0 : Number(taopex_gs.mw));
     
-    const totalTransmission = Number(ugwuaji_ts.mw) + Number(asaba_ts.mw) + Number(ekim_ts.mw) + Number(gwagwalada_ts.mw) + Number(lokoja_ts.mw) +
-    Number(phMain_ts.mw) + Number(ikotekpene_ts.mw) + Number(eket_ts.mw);
+    const totalTransmission = (Number(ugwuaji_ts.mw) < 0 ? 0 : Number(ugwuaji_ts.mw))+ 
+    (Number(asaba_ts.mw) < 0 ? 0 : Number(asaba_ts.mw))+ 
+    (Number(ekim_ts.mw) < 0 ? 0 : Number(ekim_ts.mw))+ 
+    (Number(gwagwalada_ts.mw) < 0 ? 0 : Number(gwagwalada_ts.mw))+ 
+    (Number(lokoja_ts.mw) < 0 ? 0 : Number(lokoja_ts.mw))+
+    (Number(phMain_ts.mw) < 0 ? 0 : Number(phMain_ts.mw))+ 
+    (Number(ikotekpene_ts.mw) < 0 ? 0 : Number(ikotekpene_ts.mw))+ 
+    (Number(eket_ts.mw) < 0 ? 0 : Number(eket_ts.mw));
         
     return (
       <>
@@ -191,7 +311,8 @@ import get_stations from "./stations_adder";
             </li>
           </ul>
           <div className="display-div">
-            <h1 className="text-danger"> Frequency:  { this.state.frequency }</h1>
+            <h2 className="pb-0 mb-0"> <DateTime /></h2>
+            <h1 className="text-danger pt-0 mt-0"> Frequency:  { this.state.frequency } Hz</h1>
             <h2 className="text-danger">IoT POWER STATIONS TABLE</h2>
             <table className="tg">
               <thead>
@@ -207,191 +328,205 @@ import get_stations from "./stations_adder";
               <tr>
                   <td>1</td>
                   <td>RIVERS IPP (GAS)</td>
-                  <td>{this.checkConnection(riversipp_gs.mw, riversipp_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.riversIppPs.t)}</td>
                   <td>{riversipp_gs.mw}</td>
                   <td>{riversipp_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>2</td>
                   <td>AFAM VI (GAS/STEAM)</td>
-                  <td>{this.checkConnection(afam6_gs.mw, afam6_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.afamViTs.t)}</td>
                   <td>{afam6_gs.mw}</td>
                   <td>{afam6_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>3</td>
                   <td>GEREGU (GAS)</td>
-                  <td>{this.checkConnection(geregugas_gs.mw, geregugas_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.gereguPs.t)}</td>
                   <td>{geregugas_gs.mw}</td>
                   <td>{geregugas_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>4</td>
                   <td>OMOTOSHO (GAS)</td>
-                  <td>{this.checkConnection(omotosogas_gs.mw, omotosogas_gs.kv)}</td>
+                  <td>{this.checkConnection3(this.state.omotosho2.t, this.state.omotosho1.t)}</td>
                   <td>{omotosogas_gs.mw}</td>
                   <td>{omotosogas_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>5</td>
                   <td>OMOTOSHO NIPP (GAS)</td>
-                  <td>{this.checkConnection(omotosonipp_gs.mw, omotosonipp_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.omotoshoNippPs.t)}</td>
                   <td>{omotosonipp_gs.mw}</td>
                   <td>{omotosonipp_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>6</td>
                   <td>DELTA (GAS)</td>
-                  <td>{this.checkConnection(delta_gs.mw, delta_gs.kv)}</td>
+                  <td>{this.checkConnection4(this.state.delta2.t, this.state.delta3.t, this.state.deltaGs.t)}</td>
                   <td>{delta_gs.mw}</td>
                   <td>{delta_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>7</td>
                   <td>SAPELE NIPP (GAS)</td>
-                  <td>{this.checkConnection(sapelenipp_gs.mw, sapelenipp_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.sapeleNippPs.t)}</td>
                   <td>{sapelenipp_gs.mw}</td>
                   <td>{sapelenipp_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>8</td>
                   <td>OMOKU (GAS)</td>
-                  <td>{this.checkConnection(omoku_gs.mw, omoku_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.omokuPs1.t)}</td>
                   <td>{omoku_gs.mw}</td>
                   <td>{omoku_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>9</td>
                   <td>AZURA-EDO IPP (GAS)</td>
-                  <td>{this.checkConnection(azura_gs.mw, azura_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.ihovborNippPs.t)}</td>
                   <td>{azura_gs.mw}</td>
                   <td>{azura_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>10</td>
                   <td>TRANS-AMADI (GAS)</td>
-                  <td>{this.checkConnection(transamadi_gs.mw, transamadi_gs.kv)}</td>
-                  <td>{transamadi_gs.mw}</td>
-                  <td>{transamadi_gs.kv}</td>
+                  <td>{this.checkConnection2(this.state.phMain.t)}</td>
+                  <td>{phMain_ts.mw}</td>
+                  <td>{phMain_ts.kv}</td>
                 </tr>
                 <tr>
                   <td>11</td>
                   <td>GEREGU NIPP (GAS)</td>
-                  <td>{this.checkConnection(geregunipp_gs.mw, geregunipp_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.gereguPs.t)}</td>
                   <td>{geregunipp_gs.mw}</td>
                   <td>{geregunipp_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>12</td>
                   <td>GBARAIN NIPP (GAS)</td>
-                  <td>{this.checkConnection(gbarain_gs.mw, gbarain_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.gbarain.t)}</td>
                   <td>{gbarain_gs.mw}</td>
                   <td>{gbarain_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>13</td>
                   <td>DADINKOWA G.S (HYDRO)</td>
-                  <td>{this.checkConnection(dadinkowa_gs.mw, dadinkowa_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.dadinKowaGs.t)}</td>
                   <td>{dadinkowa_gs.mw}</td>
                   <td>{dadinkowa_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>14</td>
                   <td>PARAS ENERGY (GAS)</td>
-                  <td>{this.checkConnection(paras_gs.mw, paras_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.parasEnergyPs.t)}</td>
                   <td>{paras_gs.mw}</td>
                   <td>{paras_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>15</td>
                   <td>IBOM POWER (GAS)</td>
-                  <td>{this.checkConnection(ibom_gs.mw, ibom_gs.kv)}</td>
+                  <td>{this.checkConnection3(this.state.eket.t, this.state.ekim.t)}</td>
                   <td>{ibom_gs.mw}</td>
                   <td>{ibom_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>16</td>
                   <td>JEBBA (HYDRO)</td>
-                  <td>{this.checkConnection(jebba_gs.mw, jebba_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.jebbaTs.t)}</td>
                   <td>{jebba_gs.mw}</td>
                   <td>{jebba_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>17</td>
                   <td>OLORUNSOGO (GAS)</td>
-                  <td>{this.checkConnection(olorunsogogas_gs.mw, olorunsogogas_gs.kv )}</td>
+                  <td>{this.checkConnection3(this.state.olorunsogo1.t, this.state.olorunsogoPhase1Gs.t)}</td>
                   <td>{olorunsogogas_gs.mw}</td>
                   <td>{olorunsogogas_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>18</td>
                   <td>OLORUNSOGO NIPP</td>
-                  <td>{this.checkConnection(olorunsogonipp_gs.mw, olorunsogonipp_gs.kv)}</td>
+                  <td>{this.checkConnection3(this.state.olorunsogo1.t, this.state.olorunsogoPhase1Gs.t)}</td>
                   <td>{Number(olorunsogonipp_gs.mw) <= -3 ? 0 : Number(olorunsogonipp_gs.mw)}</td>
                   <td>{olorunsogonipp_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>19</td>
                   <td>SAPELE (STEAM)</td>
-                  <td>{this.checkConnection(sapelesteam_gs.mw, sapelesteam_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.sapeleNippPs.t)}</td>
                   <td>{sapelesteam_gs.mw}</td>
                   <td>{sapelesteam_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>20</td>
                   <td>ODUKPANI NIPP (GAS)</td>
-                  <td>{this.checkConnection(odukpani_gs.mw, odukpani_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.odukpaniNippPs.t)}</td>
                   <td>{odukpani_gs.mw}</td>
                   <td>{odukpani_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>21</td>
                   <td>ALAOJI NIPP (GAS)</td>
-                  <td>{this.checkConnection(alaoji_gs.mw, alaoji_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.alaoji.t)}</td>
                   <td>{alaoji_gs.mw}</td>
                   <td>{alaoji_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>22</td>
                   <td>IHOVBOR NIPP (GAS)</td>
-                  <td>{this.checkConnection(ihovbor_gs.mw, ihovbor_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.ihovborNippPs.t)}</td>
                   <td>{ihovbor_gs.mw}</td>
                   <td>{ihovbor_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>23</td>
                   <td>SHIRORO (HYDRO)</td>
-                  <td>{this.checkConnection(shiroro_gs.mw, shiroro_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.shiroroPs.t)}</td>
                   <td>{shiroro_gs.mw}</td>
                   <td>{shiroro_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>24</td>
                   <td>{'AFAM IV & V (GAS)'}</td>
-                  <td>{this.checkConnection(afam4_gs.mw, afam4_gs.kv)}</td>
+                  <td>{this.checkConnection3(this.state.afamVPs.t, this.state.afamIv_vPs.t)}</td>
                   <td>{afam4_gs.mw}</td>
                   <td>{afam4_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>25</td>
                   <td>KAINJI (HYDRO)</td>
-                  <td>{this.checkConnection(kainji_gs.mw, kainji_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.kainjiTs.t)}</td>
                   <td>{kainji_gs.mw}</td>
                   <td>{kainji_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>26</td>
                   <td>EGBIN (STEAM)</td>
-                  <td>{this.checkConnection(egbin_gs.mw, egbin_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.egbinPs.t)}</td>
                   <td>{egbin_gs.mw}</td>
                   <td>{egbin_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>27</td>
                   <td>OKPAI (GAS/STEAM)</td>
-                  <td>{this.checkConnection(okpai_gs.mw, okpai_gs.kv)}</td>
+                  <td>{this.checkConnection2(this.state.okpaiGs.t)}</td>
                   <td>{okpai_gs.mw}</td>
                   <td>{okpai_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>28</td>
+                  <td>ZUNGERU G.S</td>
+                  <td>{this.checkConnection2(this.state.zungeru.t)}</td>
+                  <td>{zungeru_gs.mw}</td>
+                  <td>{zungeru_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>29</td>
+                  <td>TAOPEX G.S</td>
+                  <td>{this.checkConnection2(this.state.taopex.t)}</td>
+                  <td>{taopex_gs.mw}</td>
+                  <td>{taopex_gs.kv}</td>
                 </tr>
                 <tr></tr>
                 <tr >
@@ -419,56 +554,56 @@ import get_stations from "./stations_adder";
                   <tr>
                     <td>101</td>
                     <td>IKOT EKPENE TS</td>
-                    <td>{this.checkConnection(ikotekpene_ts.mw, ikotekpene_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.ikotEkpene.t)}</td>
                     <td>{ikotekpene_ts.mw}</td>
                     <td>{ikotekpene_ts.kv}</td>
                   </tr>
                   <tr>
                     <td>102</td>
                     <td>GWAGWALADA TS</td>
-                    <td>{this.checkConnection(gwagwalada_ts.mw, gwagwalada_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.gwagwalada.t)}</td>
                     <td>{gwagwalada_ts.mw}</td>
                     <td>{gwagwalada_ts.kv}</td>
                   </tr>
                   <tr>
                     <td>103</td>
                     <td>LOKOJA TS</td>
-                    <td>{this.checkConnection(lokoja_ts.mw, lokoja_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.lokojaTs.t)}</td>
                     <td>{lokoja_ts.mw}</td>
                     <td>{lokoja_ts.kv}</td>
                   </tr>
                   <tr>
                     <td>104</td>
                     <td>ASABA TS</td>
-                    <td>{this.checkConnection(asaba_ts.mw, asaba_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.asaba.t)}</td>
                     <td>{asaba_ts.mw}</td>
                     <td>{asaba_ts.kv}</td>
                   </tr>
                   <tr>
                     <td>105</td>
                     <td>UGWAJI TS</td>
-                    <td>{this.checkConnection(ugwuaji_ts.mw, ugwuaji_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.ugwuaji.t)}</td>
                     <td>{ugwuaji_ts.mw}</td>
                     <td>{ugwuaji_ts.kv}</td>
                   </tr>
                   <tr>
                     <td>107</td>
                     <td>EKIM TS</td>
-                    <td>{this.checkConnection(ekim_ts.mw, ekim_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.ekim.t)}</td>
                     <td>{ekim_ts.mw}</td>
                     <td>{ekim_ts.kv}</td>
                   </tr>
                   <tr>
                     <td>108</td>
                     <td>PORTHARCOURT MAIN TS</td>
-                    <td>{this.checkConnection(phMain_ts.mw, phMain_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.phMain.t)}</td>
                     <td>{phMain_ts.mw}</td>
                     <td>{phMain_ts.kv}</td>
                   </tr>
                   <tr>
                     <td>109</td>
                     <td>EKET TS</td>
-                    <td>{this.checkConnection(eket_ts.mw, eket_ts.kv)}</td>
+                    <td>{this.checkConnection2(this.state.eket.t)}</td>
                     <td>{eket_ts.mw}</td>
                     <td>{eket_ts.kv}</td>
                   </tr>              
