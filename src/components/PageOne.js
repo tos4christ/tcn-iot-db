@@ -324,7 +324,7 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>15</td>
                   <td>IBOM POWER (GAS)</td>
-                  <td>{this.checkConnection3(this.state.eket.t, this.state.ekim.t)}</td>
+                  <td>{this.checkConnection2(this.state.eket.t)}</td>
                   <td>{ibom_gs.mw}</td>
                   <td>{ibom_gs.kv}</td>
                 </tr>

@@ -175,7 +175,8 @@ const get_stations =  function(state_data) {
             Math.abs(delta2_tr3[0]?.gd ?delta2_tr3[0].gd.mw:0) + Math.abs(delta2_tr4[0]?.gd ?delta2_tr4[0].gd.mw:0) + 
             Math.abs(delta3_tr5[0]?.gd ?delta3_tr5[0].gd.mw:0) + Math.abs(delta3_tr6[0]?.gd ?delta3_tr6[0].gd.mw:0) +
             //modified this code below 
-            Math.abs(deltaGs_g3b[0]?.td ? (deltaGs_g3b[0].td.mw < 0? 0:deltaGs_g3b[0].td.mw):0) + Math.abs(deltaGs_s4g[0]?.td ? (deltaGs_s4g[0].td.mw < 0 ? 0:deltaGs_s4g[0].td.mw):0)   
+            Math.abs(
+                  deltaGs_g3b[0]?.td ? (deltaGs_g3b[0].td.mw < 0 ? 0 : deltaGs_g3b[0].td.mw) : 0) + Math.abs(deltaGs_s4g[0]?.td ? (deltaGs_s4g[0].td.mw < 0 ? 0:deltaGs_s4g[0].td.mw):0)   
                 ).toFixed(2), kv: (deltaGs_g3b[0]?.td ?deltaGs_g3b[0].td.V:0)},
         'JEBBA (HYDRO)' : {mw: Number(
             (jebbaTs_b8j[0]?.td ?jebbaTs_b8j[0].td.mw:0) + (jebbaTs_b9j[0]?.td ?jebbaTs_b9j[0].td.mw:0)
