@@ -105,7 +105,7 @@ import get_stations from "./stations_adder";
    checkConnection2(server_time) {
     const connected = <span className="text-success"> CN </span>
     const disconnected = <span className="text-danger"> NC </span>
-    if (time === undefined || time === null) {
+    if (server_time === undefined || server_time === null) {
       return disconnected
     }
     try {
@@ -115,9 +115,9 @@ import get_stations from "./stations_adder";
       // 30 seconds equals to 30,000 milliseconds
       // if the time difference is greater than time_diff then return disconnected
       const time_diff = (time_now - server_time) > 30000;
-      if (time.length === 0 || time_diff ) {
+      if (server_time.length === 0 || time_diff ) {
           return disconnected
-      } else if (time.length > 0) {
+      } else if (server_time.length > 0) {
           return connected
       }
     } catch(e) {
