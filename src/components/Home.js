@@ -130,7 +130,7 @@ import DateTime from "./DateTime";
       const time_diff = (time_now - server_time) > 30000;
       if (server_time.length === 0 || time_diff ) {
           return disconnected
-      } else if (server_time.length > 0) {
+      } else if (!isNaN(server_time)) {
           return connected
       }
     } catch(e) {
@@ -156,11 +156,9 @@ import DateTime from "./DateTime";
       const time_diff_2 = (time_now - t1) > 30000;
       if ( time_diff_1 || time_diff_2 ) {
         return disconnected
-      } else if (t1.length > 0 && t2.length > 0) {
+      } else if (!isNaN(t1) && !isNaN(t2)) {
           return connected
-      } else {
-        return disconnected;
-      }
+      } 
     } catch(e) {
       console.log(e);
       return disconnected;
@@ -186,10 +184,8 @@ import DateTime from "./DateTime";
       const time_diff_3 = (time_now - t3) > 30000;
       if ( time_diff_1 || time_diff_2 || time_diff_3 ) {
         return disconnected
-      } else if (t1.length > 0 && t2.length > 0 && t3.length > 0) {
+      } else if (!isNaN(t1) && !isNaN(t2) && !isNaN(t3)) {
           return connected
-      } else {
-        return disconnected;
       }
     } catch(e) {
       console.log(e);
