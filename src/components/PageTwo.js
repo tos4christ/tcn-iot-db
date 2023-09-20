@@ -53,6 +53,7 @@ import get_stations from "./stations_adder";
       socket.on("client_message_111", data => {
         const { message } = data;
         const parsedMessage = JSON.parse(message);
+        parsedMessage.server_time = (new Date).getTime();
         const station = parsedMessage.id;
         const returnObject = {}
         // console.log(parsedMessage, 'c1 message');
@@ -65,6 +66,7 @@ import get_stations from "./stations_adder";
       socket.on("client_message_222", data => {
         const { message } = data;
         const parsedMessage = JSON.parse(message);
+        parsedMessage.server_time = (new Date).getTime();
         const station = parsedMessage.id;
         const returnObject = {}
         // console.log(parsedMessage, 'c2 message');
@@ -100,7 +102,7 @@ import get_stations from "./stations_adder";
     const dateTemp = date.split('-');
     return new Date(Number(dateTemp[0]), Number(dateTemp[1]-1), Number(dateTemp[2]), Number(hour), Number(minute), Number(seconds)); 
    }
-   checkConnection2(time) {
+   checkConnection2(server_time) {
     const connected = <span className="text-success"> CN </span>
     const disconnected = <span className="text-danger"> NC </span>
     if (time === undefined || time === null) {
@@ -108,11 +110,11 @@ import get_stations from "./stations_adder";
     }
     try {
       // Get current epoch time
-      const time_now = (new Date()).getTime();     
-      // if 5 minutes have passed without the time changing from the current time then return disconnected
-      // 5 minutes equals to 300,000 milliseconds
+      const time_now = (new Date).getTime();     
+      // if 30 seconds have passed without the time changing from the current time then return disconnected
+      // 30 seconds equals to 30,000 milliseconds
       // if the time difference is greater than time_diff then return disconnected
-      const time_diff = (time_now - this.getEpoch(time)) > 300000;
+      const time_diff = (time_now - server_time) > 30000;
       if (time.length === 0 || time_diff ) {
           return disconnected
       } else if (time.length > 0) {
@@ -133,12 +135,12 @@ import get_stations from "./stations_adder";
       t1 = t1 ? t1 : '';
       t2 = t2 ? t2 : '';
       // Get current epoch time
-      const time_now = (new Date()).getTime();
-      // if 5 minutes have passed without the time changing from the current time then return disconnected
-      // 5 minutes equals to 300,000 milliseconds
+      const time_now = (new Date).getTime();
+      // if 30 seconds have passed without the time changing from the current time then return disconnected
+      // 30 seconds equals to 30,000 milliseconds
       // if the time difference is greater than time_diff then return disconnected
-      const time_diff_1 = (time_now - this.getEpoch(t1)) > 300000;
-      const time_diff_2 = (time_now - this.getEpoch(t2)) > 300000;
+      const time_diff_1 = (time_now - t1) > 30000;
+      const time_diff_2 = (time_now - t1) > 30000;
       if ( time_diff_1 || time_diff_2 ) {
         return disconnected
       } else if (t1.length > 0 && t2.length > 0) {
@@ -162,13 +164,13 @@ import get_stations from "./stations_adder";
       t2 = t2 ? t2 : '';
       t3 = t3 ? t3 : '';
       // Get current epoch time
-      const time_now = (new Date()).getTime();  
-      // if 5 minutes have passed without the time changing from the current time then return disconnected
-      // 5 minutes equals to 300,000 milliseconds
+      const time_now = (new Date).getTime();  
+      // if 30 seconds have passed without the time changing from the current time then return disconnected
+      // 30 seconds equals to 30,000 milliseconds
       // if the time difference is greater than time_diff then return disconnected
-      const time_diff_1 = (time_now - this.getEpoch(t1)) > 300000;
-      const time_diff_2 = (time_now - this.getEpoch(t2)) > 300000;
-      const time_diff_3 = (time_now - this.getEpoch(t3)) > 300000;
+      const time_diff_1 = (time_now - t1) > 30000;
+      const time_diff_2 = (time_now - t2) > 30000;
+      const time_diff_3 = (time_now - t3) > 30000;
       if ( time_diff_1 || time_diff_2 || time_diff_3 ) {
         return disconnected
       } else if (t1.length > 0 && t2.length > 0 && t3.length > 0) {
@@ -264,98 +266,98 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>16</td>
                   <td>JEBBA (HYDRO)</td>
-                  <td>{this.checkConnection2(this.state.jebbaTs.t)}</td>
+                  <td>{this.checkConnection2(this.state.jebbaTs.server_time)}</td>
                   <td>{jebba_gs.mw}</td>
                   <td>{jebba_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>17</td>
                   <td>OLORUNSOGO (GAS)</td>
-                  <td>{this.checkConnection3(this.state.olorunsogo1.t, this.state.olorunsogoPhase1Gs.t)}</td>
+                  <td>{this.checkConnection3(this.state.olorunsogo1.server_time, this.state.olorunsogoPhase1Gs.server_time)}</td>
                   <td>{olorunsogogas_gs.mw}</td>
                   <td>{olorunsogogas_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>18</td>
                   <td>OLORUNSOGO NIPP</td>
-                  <td>{this.checkConnection3(this.state.olorunsogo1.t, this.state.olorunsogoPhase1Gs.t)}</td>
+                  <td>{this.checkConnection3(this.state.olorunsogo1.server_time, this.state.olorunsogoPhase1Gs.server_time)}</td>
                   <td>{Number(olorunsogonipp_gs.mw) <= -3 ? 0 : Number(olorunsogonipp_gs.mw)}</td>
                   <td>{olorunsogonipp_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>19</td>
                   <td>SAPELE (STEAM)</td>
-                  <td>{this.checkConnection2(this.state.sapeleNippPs.t)}</td>
+                  <td>{this.checkConnection2(this.state.sapeleNippPs.server_time)}</td>
                   <td>{sapelesteam_gs.mw}</td>
                   <td>{sapelesteam_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>20</td>
                   <td>ODUKPANI NIPP (GAS)</td>
-                  <td>{this.checkConnection2(this.state.odukpaniNippPs.t)}</td>
+                  <td>{this.checkConnection2(this.state.odukpaniNippPs.server_time)}</td>
                   <td>{odukpani_gs.mw}</td>
                   <td>{odukpani_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>21</td>
                   <td>ALAOJI NIPP (GAS)</td>
-                  <td>{this.checkConnection2(this.state.alaoji.t)}</td>
+                  <td>{this.checkConnection2(this.state.alaoji.server_time)}</td>
                   <td>{alaoji_gs.mw}</td>
                   <td>{alaoji_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>22</td>
                   <td>IHOVBOR NIPP (GAS)</td>
-                  <td>{this.checkConnection2(this.state.ihovborNippPs.t)}</td>
+                  <td>{this.checkConnection2(this.state.ihovborNippPs.server_time)}</td>
                   <td>{ihovbor_gs.mw}</td>
                   <td>{ihovbor_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>23</td>
                   <td>SHIRORO (HYDRO)</td>
-                  <td>{this.checkConnection2(this.state.shiroroPs.t)}</td>
+                  <td>{this.checkConnection2(this.state.shiroroPs.server_time)}</td>
                   <td>{shiroro_gs.mw}</td>
                   <td>{shiroro_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>24</td>
                   <td>{'AFAM IV & V (GAS)'}</td>
-                  <td>{this.checkConnection3(this.state.afamVPs.t, this.state.afamIv_vPs.t)}</td>
+                  <td>{this.checkConnection3(this.state.afamVPs.server_time, this.state.afamIv_vPs.server_time)}</td>
                   <td>{afam4_gs.mw}</td>
                   <td>{afam4_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>25</td>
                   <td>KAINJI (HYDRO)</td>
-                  <td>{this.checkConnection2(this.state.kainjiTs.t)}</td>
+                  <td>{this.checkConnection2(this.state.kainjiTs.server_time)}</td>
                   <td>{kainji_gs.mw}</td>
                   <td>{kainji_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>26</td>
                   <td>EGBIN (STEAM)</td>
-                  <td>{this.checkConnection2(this.state.egbinPs.t)}</td>
+                  <td>{this.checkConnection2(this.state.egbinPs.server_time)}</td>
                   <td>{egbin_gs.mw}</td>
                   <td>{egbin_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>27</td>
                   <td>OKPAI (GAS/STEAM)</td>
-                  <td>{this.checkConnection2(this.state.okpaiGs.t)}</td>
+                  <td>{this.checkConnection2(this.state.okpaiGs.server_time)}</td>
                   <td>{okpai_gs.mw}</td>
                   <td>{okpai_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>28</td>
                   <td>ZUNGERU G.S</td>
-                  <td>{this.checkConnection2(this.state.zungeru.t)}</td>
+                  <td>{this.checkConnection2(this.state.zungeru.server_time)}</td>
                   <td>{zungeru_gs.mw}</td>
                   <td>{zungeru_gs.kv}</td>
                 </tr>
                 <tr>
                   <td>29</td>
                   <td>TAOPEX G.S</td>
-                  <td>{this.checkConnection2(this.state.taopex.t)}</td>
+                  <td>{this.checkConnection2(this.state.taopex.server_time)}</td>
                   <td>{taopex_gs.mw}</td>
                   <td>{taopex_gs.kv}</td>
                 </tr>
