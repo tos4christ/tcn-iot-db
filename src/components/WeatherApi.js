@@ -84,11 +84,11 @@ class WeatherApi extends React.Component {
                       return true
                     }
                   });
-                  filteredStations.forEach(station => {
-                    // Alert the user of the new stations with rain fall  
-                    audio.play(true);                  
-                    alert(`Rainfall Started at ${station.name}`);                    
-                  });                  
+                  // filteredStations.forEach(station => {
+                  //   // Alert the user of the new stations with rain fall  
+                  //   audio.play(true);                  
+                  //   alert(`Rainfall Started at ${station.name}`);                    
+                  // });                  
                 }
 
                 rainy_stations.forEach(station => {
