@@ -218,7 +218,7 @@ class WeatherWidget_rows extends React.Component {
         return `${hour}:${minute.toString().length == 1 ? "0" + minute : minute}`;
     }
     render() {
-        console.log(this.props.datas, " check the datas data");
+        // console.log(this.props.datas, " check the datas data");
         // Raining stations to display
         const display_rain = [];
         const { rain_station } = this.props;
