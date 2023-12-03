@@ -1,0 +1,74 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Forecast Card Styles */
+  .forecast-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 15px;
+    animation: fadeIn 1s ease-in-out; /* Example animation, you can customize this */
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Location and Date Styles */
+  .location {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .date {
+    font-size: 18px;
+    color: #666;
+  }
+  
+  /* High/Low Temperature Styles */
+  .temperatures {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .high-temp {
+    font-size: 28px;
+    color: #e74c3c; /* Red for high temperature */
+  }
+  
+  .low-temp {
+    font-size: 28px;
+    color: #3498db; /* Blue for low temperature */
+  }
+  
+  /* Additional Weather Details Styles (e.g., description, humidity, wind) */
+  .weather-details {
+    margin-top: 15px;
+  }
+  
+  .weather-details p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #777;
+  }
+  
+  /* Example Usage: Apply the 'forecast-card' class to the container */
+  

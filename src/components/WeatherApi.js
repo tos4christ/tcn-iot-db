@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Switch, useRouteMatch, Link, withRouter } from 'react-router-dom';
-import WeatherWidget_rows from './Weather/WeatherWidget_rows';
+//import WeatherWidget_rows from './Weather/WeatherWidget_rows';
+import WeatherWidget_rows_ncc from './Weather/WeatherWidget_rows_ncc';
 import WeatherWidget_cards from './Weather/WeatherWidget_cards';
 import TemWeather from './Weather/TemWeather';
 import emergencyAlert from "../assets/audio/emergency_alert.mp3";
 import socket from "./utility/socketIO";
+import "../assets/css/cnn_2.css";
 
 const audio = new Audio(emergencyAlert);
 
@@ -133,6 +135,163 @@ class WeatherApi extends React.Component {
     };
 
   render() {
+    const fake_datas = [
+       {
+        name: 'ABA TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 10, humidity: 7},
+          weather: [{icon: '10d', main: 'Rainy', description: 'Light rain'}]
+        }
+      },
+       {
+        name: 'LEKKI TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 30, humidity: 20},
+          weather: [{icon: '10n', main: 'Stormy', description: 'Light storm'}]
+        }
+      },
+      {
+        name: 'MANILLA TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 36, humidity: 40},
+          weather: [{icon: '10n', main: 'Windy', description: 'Light wind'}]
+        }
+      },
+      {
+        name: 'OSOGBO TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 10, humidity: 10},
+          weather: [{icon: '10d', main: 'Rainy', description: 'Heavy rain'}]
+        }
+      },
+      {
+        name: 'OTTA TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 50, humidity: 50},
+          weather: [{icon: '10d', main: 'Sunny', description: 'Sunny'}]
+        }
+      },
+      {
+        name: 'SAGAMU TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 30, humidity: 20},
+          weather: [{icon: '10n', main: 'Sunny', description: 'Light clouds'}]
+        }
+      },
+      {
+        name: 'AKUTE TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 20, humidity: 15},
+          weather: [{icon: '10d', main: 'Rainy', description: 'Moderate rain'}]
+        }
+      },
+      {
+        name: 'IKEJA TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 30, humidity: 20},
+          weather: [{icon: '10d', main: 'Rainy', description: 'Light rain'}]
+        }
+      },
+      {
+        name: 'IKOYI TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 37, humidity: 29},
+          weather: [{icon: '10n', main: 'Humid', description: 'Light clouds'}]
+        }
+      },
+      {
+        name: 'ALAGBON TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 30, humidity: 20},
+          weather: [{icon: '10d', main: 'Rainy', description: 'Light rain'}]
+        }
+      }
+      ,
+      {
+        name: 'MANILLA TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 36, humidity: 40},
+          weather: [{icon: '10n', main: 'Windy', description: 'Light wind'}]
+        }
+      },
+      {
+        name: 'OSOGBO TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 10, humidity: 10},
+          weather: [{icon: '10d', main: 'Rainy', description: 'Heavy rain'}]
+        }
+      },
+      {
+        name: 'IKEJA TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 30, humidity: 20},
+          weather: [{icon: '10d', main: 'Rainy', description: 'Light rain'}]
+        }
+      },
+      {
+        name: 'IKOYI TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 37, humidity: 29},
+          weather: [{icon: '10n', main: 'Humid', description: 'Light clouds'}]
+        }
+      },
+      ,
+      {
+        name: 'IKEJA TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 30, humidity: 20},
+          weather: [{icon: '10d', main: 'Rainy', description: 'Light rain'}]
+        }
+      },
+      {
+        name: 'IKOYI TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 37, humidity: 29},
+          weather: [{icon: '10n', main: 'Humid', description: 'Light clouds'}]
+        }
+      },
+      {
+        name: 'SAGAMU TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 30, humidity: 20},
+          weather: [{icon: '10n', main: 'Sunny', description: 'Light clouds'}]
+        }
+      },
+      {
+        name: 'AKUTE TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 20, humidity: 15},
+          weather: [{icon: '10d', main: 'Rainy', description: 'Moderate rain'}]
+        }
+      },
+      {
+        name: 'IKEJA TS',
+        current_weather_data : {
+          dt: 10293039399333,
+          main: { temp: 30, humidity: 20},
+          weather: [{icon: '10d', main: 'Rainy', description: 'Light rain'}]
+        }
+      },
+    ]
+    
     return <>
         <div className='container-fluid'>
             <div className='row dashboard'>
@@ -179,20 +338,20 @@ class WeatherApi extends React.Component {
                     </button>
                 </div>
                 <div className='col-xs-2 col-lg-2'>
-                    <button  onClick={(e) => { 
+                    <button  className='trim' onClick={(e) => { 
                         this.setState({cards_generation: false});
                         this.setState({rows_generation: false});
                         this.setState({cards_transmission: false});
                         this.setState({rows_transmission: false});
                         this.setState({station_forecast: !this.state.station_forecast});
                      }}>
-                        Station's Weather Forecast
+                        Weather Forecast
                     </button>
                     <p className="btn btn-success" onClick={() => audio.pause()}>
                       Accept Alarms
                     </p>
-                    <button>
-                      Get Historical Data
+                    <button className='trim'>
+                      Historical Data
                     </button>
                 </div>            
             </div>
@@ -208,8 +367,8 @@ class WeatherApi extends React.Component {
             <div className='row weather-container'>
                 {this.state.cards_generation ? <WeatherWidget_cards rain_station={this.state.stations_with_rainfall} data="generation" datas={this.state.current_weather_stations_generation} /> : ""} <br /> 
                 {this.state.cards_transmission ? <WeatherWidget_cards rain_station={this.state.stations_with_rainfall} data="transmission" datas={this.state.current_weather_stations_transmission} /> : ""} <br /> 
-                {this.state.rows_generation ? < WeatherWidget_rows rain_station={this.state.stations_with_rainfall} data="generation" datas={this.state.current_weather_stations_generation} /> : ""} <br /> 
-                {this.state.rows_transmission ? < WeatherWidget_rows rain_station={this.state.stations_with_rainfall} data="transmission" datas={this.state.current_weather_stations_transmission} /> : ""} <br /> 
+                {this.state.rows_generation ? < WeatherWidget_rows_ncc rain_station={this.state.stations_with_rainfall} data="generation" datas={this.state.current_weather_stations_generation} /> : ""} <br /> 
+                {this.state.rows_transmission ? < WeatherWidget_rows_ncc rain_station={this.state.stations_with_rainfall} data="transmission" datas={this.state.current_weather_stations_transmission} /> : ""} <br /> 
                 {this.state.station_forecast ? < TemWeather /> : ""} <br /> 
             </div>
         </div>

@@ -3,10 +3,13 @@ import { withRouter } from 'react-router-dom';
 import socket from "./utility/socketIO";
 import get_stations from "./stations_adder";
 import DateTime from "./DateTime";
+import Modal from "./Modal";
 
  class FullPage extends React.Component {
    constructor(props) {
      super(props);
+     this.setModalFalse = this.setModalFalse.bind(this);
+     this.setModalTrue = this.setModalTrue.bind(this);
      this.state = { 
       frequency: "",
       afamIv_vPs: {},
@@ -47,6 +50,8 @@ import DateTime from "./DateTime";
       taopex: {},
       afamVPs: {},
       connected: false,
+      ModalState: false,
+      modal_data: "TAOPEX"
      };
    }
    componentDidMount() {
@@ -180,6 +185,18 @@ import DateTime from "./DateTime";
       return disconnected;
     }    
    }
+   onClickDisplay(e) {
+    e.preventDefault();
+
+   }
+   setModalTrue(e, station_name) {
+    // e.preventDefault();
+    console.log(e.target.innerHTML, station_name);
+    return this.setState({ModalState: true, modal_data: station_name});
+   }
+   setModalFalse() {
+    this.setState({ModalState: false});
+   }
   render() {
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
@@ -261,7 +278,7 @@ import DateTime from "./DateTime";
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr  onClick={(e) => { this.setModalTrue(e, 'RIVERS IPP (GAS)'); }}>
                   <td>1</td>
                   <td>RIVERS IPP (GAS)</td>
                   <td>{this.checkConnection2(this.state.riversIppPs.server_time)}</td>
@@ -457,7 +474,7 @@ import DateTime from "./DateTime";
                   <td>{zungeru_gs.mw}</td>
                   <td>{zungeru_gs.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, 'TAOPEX'); }}>
                   <td>29</td>
                   <td>TAOPEX G.S</td>
                   <td>{this.checkConnection2(this.state.taopex.server_time)}</td>
@@ -500,7 +517,8 @@ import DateTime from "./DateTime";
                 </table> 
           </div>
         </div>
-      </div>
+        {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
+      </div>      
     </>
     )         
   }

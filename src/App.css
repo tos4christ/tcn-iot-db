@@ -5,6 +5,11 @@ Author: Tos4christ
 Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 */
 
+/* 
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+ */
+
+
 /* General CSS RULES */
 .container-fluid {
     height: max-content;
@@ -12,12 +17,34 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 
 .App {
     text-align: center;
-  }
+}
   
-  .App-logo {
+.App-logo {
     height: 40vmin;
     pointer-events: none;
+}
+
+/* This is the Modal container and div settings */
+.ncc-menu {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Nunito", sans-serif;
   }
+
+.ncc-menu .openModalBtn {
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 6px;
+    background-color: cornflowerblue;
+    color: white;
+    cursor: pointer;
+  }
+
+  /* The Modal settings ends here */
   
   @media (prefers-reduced-motion: no-preference) {
     .App-logo {
@@ -84,17 +111,6 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
     .weather_h3 {
         font-style: oblique;
         text-decoration: underline;
-    }
-    .weather_ul {
-        padding: 0;
-        margin: 0;
-    }
-    .weather_ul li {
-        padding: 0;
-        margin: 0;
-        font-family: serif;
-        text-transform:uppercase;
-        font-size: smaller;
     }
     .weather_widget_row {
         display: flex;
@@ -166,9 +182,15 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
         padding: 1em;
         text-align: center;
     }
+    .trim {
+        text-wrap: nowrap;
+    }
     .dashboard button{
-        margin: 1em;
-        padding: 1em;
+        margin: 0.5em;
+        padding: 0.5em;
+    }
+    .dashboard h2 {
+        color: white;
     }
     .weather_h3 {
         font-style: oblique;
@@ -179,10 +201,26 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
         margin: 0;
     }
     .weather_ul li {
+        display: flex;
         padding: 0;
         font-family: serif;
         text-transform:uppercase;
-        font-size: small;
+    }
+    .first-li {
+        flex-grow: 1;
+        padding: 0;
+        font-family: serif;
+        text-transform:uppercase;
+        font-size: large;
+        width: 2em;
+    }
+    .second-li {
+        flex-grow: 2;
+        padding: 0;
+        font-family: serif;
+        text-transform:uppercase;
+        font-size: large;
+        width: 4em;
     }
     .weather_widget_row {
         display: flex;
@@ -235,6 +273,9 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
         text-align: center;
     }
 }
+
+/* Weather Styling */
+
 
 .current form {
 margin: 1em 0 0 10em;
