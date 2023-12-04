@@ -207,7 +207,7 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
         text-transform:uppercase;
     }
     .first-li {
-        flex-grow: 2;
+        flex-grow: 3;
         padding: 0;
         font-family: serif;
         text-transform:uppercase;
