@@ -691,6 +691,7 @@ font-size:large;
     width: 130%;
     height: 300vh;
     overflow: scroll;
+    background-image: url('/public/tcn-nas-background.jpeg');
 } 
 .nav-containers {
     display: flex;
