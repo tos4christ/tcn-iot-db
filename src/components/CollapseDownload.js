@@ -1,6 +1,7 @@
 import React from "react";
 import {Redirect} from 'react-router-dom';
 import { Spinner, Button } from "react-bootstrap";
+import timeConverter from "../utility/timeConverter";
 
  class Collapse extends React.Component {
   constructor(props) {
@@ -25,6 +26,11 @@ import { Spinner, Button } from "react-bootstrap";
     const endDate = this.state.endDate[0];
     const startTime = this.state.startDate[1];
     const endTime = this.state.endDate[1];
+    const time_diff = timeConverter(startDate, endDate, startTime, endTime);
+    console.log('the time difference   ', (time_diff.start - time_diff.end) );
+    if((time_diff.start - time_diff.end) > 7200000) {
+      return;
+    }
     const token = localStorage.getItem("token");
     // verify that the startDate is lower than the endDate
     // This is already handled at the backend by replacing the lower to be the start

@@ -49,7 +49,6 @@ class WeatherApi extends React.Component {
         }
     }
     componentDidMount() {
-      // console.log(this.props.history.location.pathname, " the pathname check");
       //   if(this.props.history.location.pathname === "/nccweather") {
             socket.on("client_message_weather_current", data => {
               const { message } = data;
