@@ -43,6 +43,7 @@ import timeConverter from "../utility/timeConverter";
         startTime,
         endTime
       };
+      return;
       // add a spinner method while request is loading
       this.setState({loading: true}, () => {
         fetch(url, {
