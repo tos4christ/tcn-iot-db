@@ -1,4 +1,4 @@
-module.exports = (startDate, endDate, startTime, endTime) => {
+const timeConverter = (startDate, endDate, startTime, endTime) => {
     // add one hour to the time hour to account for daylight savings
     const startHour = startTime.split(':')[0];
     const startMinute = startTime.split(':')[1];
@@ -22,3 +22,5 @@ module.exports = (startDate, endDate, startTime, endTime) => {
     }
     return {start, end};
 }
+
+export default timeConverter;
