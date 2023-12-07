@@ -26,24 +26,22 @@ import timeConverter from "../utility/timeConverter";
     const endDate = this.state.endDate[0];
     const startTime = this.state.startDate[1];
     const endTime = this.state.endDate[1];
-    const time_diff = timeConverter(startDate, endDate, startTime, endTime);
-    console.log('the time difference   ', (time_diff.start - time_diff.end) );
-    if((time_diff.start - time_diff.end) > 7200000) {
-      return;
-    }
+    const time_diff = timeConverter(startDate, endDate, startTime, endTime);    
     const token = localStorage.getItem("token");
     // verify that the startDate is lower than the endDate
     // This is already handled at the backend by replacing the lower to be the start
     const getCollapse = startDate && endDate && startTime && endTime;
     if(getCollapse) {
       const url = '/lines/collapse';
-      const data = {
+      let data = {
         startDate,
         endDate,
         startTime,
         endTime
       };
-      return;
+      if((time_diff.end - time_diff.start) > 7200000) {
+        return;
+      }
       // add a spinner method while request is loading
       this.setState({loading: true}, () => {
         fetch(url, {
