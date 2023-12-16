@@ -1,7 +1,8 @@
-body {
+.main-weather-div {
     /* background-image: url("./black-rain-abstract-dark-power.jpg"); */
     background-image: url("../img/weather-test.jpg");
     background-color: transparent;
+    height: 170vh;
   }
 
   .weather-container {

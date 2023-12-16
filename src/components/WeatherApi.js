@@ -292,7 +292,7 @@ class WeatherApi extends React.Component {
     ]
     
     return <>
-        <div className='container-fluid'>
+        <div className='main-weather-div container-fluid'>
             <div className='row dashboard'>
                 <div className='col-xs-3 col-lg-5'>
                     <h2>Generation</h2>
