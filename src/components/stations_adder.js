@@ -185,7 +185,7 @@ const get_stations =  function(state_data) {
             (afamViTs_ada200[0]?.td ?afamViTs_ada200[0].td.mw:0) + (afamViTs_adb200[0]?.td ?afamViTs_adb200[0].td.mw:0)
             ).toFixed(2), kv: (afamViTs_ada200[0]?.td ?afamViTs_ada200[0].td.V:0)},
         'ALAOJI NIPP (GAS)' : {mw: Number(
-            Math.abs(alaoji_l7a[0]?.td ?alaoji_l7a[0].td.mw:0) + Math.abs(alaoji_l8a[0]?.td ?alaoji_l8a[0].td.mw:0)
+            (alaoji_l7a[0]?.td ?alaoji_l7a[0].td.mw:0) + (alaoji_l8a[0]?.td ?alaoji_l8a[0].td.mw:0)
             ).toFixed(2), kv: (alaoji_l7a[0]?.td ?alaoji_l7a[0].td.V:0)},
         'SAPELE (STEAM)' : {mw: Number(
             Math.abs((sapeleNippPs_st1[0]?.gd ?sapeleNippPs_st1[0].gd.mw:0) + (sapeleNippPs_st3[0]?.gd ?sapeleNippPs_st3[0].gd.mw:0))
