@@ -259,7 +259,7 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>6</td>
                   <td>DELTA (GAS)</td>
-                  <td>{this.checkConnection4(this.state.delta2.server_time, this.state.delta3.server_time, this.state.deltaGs.server_time)}</td>
+                  <td>{this.checkConnection3(this.state.delta3.server_time, this.state.deltaGs.server_time)}</td>
                   <td>{delta_gs.mw}</td>
                   <td>{delta_gs.kv}</td>
                 </tr>
