@@ -73,22 +73,22 @@ class WeatherApi extends React.Component {
               const rainy_stations = unsorted_rainy_stations.sort((a, b) => a.name < b.name ? -1 : 1);
               if(rainy_stations.length > 0) {
 
-                if(rainy_stations.length > stations_with_rainfall.length && stations_with_rainfall.length > 0) {
-                  // filter out the new rain stations from the API
-                  const filteredStations = rainy_stations.filter( item => {                    
-                    const filterStation =  stations_with_rainfall.filter( station => station.name === item.name );
-                    if (filterStation.length > 0) {
-                      return false
-                    } else {
-                      return true
-                    }
-                  });
-                  // filteredStations.forEach(station => {
-                  //   // Alert the user of the new stations with rain fall  
-                  //   audio.play(true);                  
-                  //   alert(`Rainfall Started at ${station.name}`);                    
-                  // });                  
-                }
+                // if(rainy_stations.length > stations_with_rainfall.length && stations_with_rainfall.length > 0) {
+                //   // filter out the new rain stations from the API
+                //   const filteredStations = rainy_stations.filter( item => {                    
+                //     const filterStation =  stations_with_rainfall.filter( station => station.name === item.name );
+                //     if (filterStation.length > 0) {
+                //       return false
+                //     } else {
+                //       return true
+                //     }
+                //   });
+                //   // filteredStations.forEach(station => {
+                //   //   // Alert the user of the new stations with rain fall  
+                //   //   audio.play(true);                  
+                //   //   alert(`Rainfall Started at ${station.name}`);                    
+                //   // });                  
+                // }
 
                 rainy_stations.forEach(station => {
                     rain_stations.push(station);
@@ -96,6 +96,12 @@ class WeatherApi extends React.Component {
 
                 this.setState(prevState => {
                   prevState["stations_with_rainfall"] = rain_stations;
+                  returnObject_2["stations_with_rainfall"] = prevState["stations_with_rainfall"];
+                  return returnObject_2;
+                });
+              } else if(rainy_stations.length <= 0) {
+                this.setState(prevState => {
+                  prevState["stations_with_rainfall"] = [];
                   returnObject_2["stations_with_rainfall"] = prevState["stations_with_rainfall"];
                   return returnObject_2;
                 });
