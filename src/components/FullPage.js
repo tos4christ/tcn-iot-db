@@ -146,7 +146,7 @@ import Modal from "./Modal";
       // 30 seconds equals to 30,000 milliseconds
       // if the time difference is greater than time_diff then return disconnected
       const time_diff_1 = (time_now - t1) > 30000;
-      const time_diff_2 = (time_now - t1) > 30000;
+      const time_diff_2 = (time_now - t2) > 30000;
       if ( time_diff_1 || time_diff_2 ) {
         return disconnected
       } else if (!isNaN(t1) && !isNaN(t2)) {
