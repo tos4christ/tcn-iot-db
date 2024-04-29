@@ -179,6 +179,32 @@ import get_stations from "./stations_adder";
       return disconnected;
     }    
    }
+   checkConnection3_b(t1, t2) {
+    const connected = <span className="text-success"> CN </span>
+    const disconnected = <span className="text-danger"> NC </span>
+    if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null)) {
+      return disconnected
+    }
+    try {
+      t1 = t1 ? t1 : '';
+      t2 = t2 ? t2 : '';
+      // Get current epoch time
+      const time_now = (new Date).getTime();
+      // if 30 seconds have passed without the time changing from the current time then return disconnected
+      // 30 seconds equals to 30,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff_1 = (time_now - t1) > 30000;
+      const time_diff_2 = (time_now - t2) > 30000;
+      if ( time_diff_1 && time_diff_2 ) {
+        return disconnected
+      } else if (!isNaN(t1) || !isNaN(t2)) {
+          return connected
+      } 
+    } catch(e) {
+      console.log(e);
+      return disconnected;
+    }    
+   }
   render() {
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
@@ -318,7 +344,7 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>24</td>
                   <td>{'AFAM IV & V (GAS)'}</td>
-                  <td>{this.checkConnection3(this.state.afamVPs.server_time, this.state.afamIv_vPs.server_time)}</td>
+                  <td>{this.checkConnection3_b(this.state.afamVPs.server_time, this.state.afamIv_vPs.server_time)}</td>
                   <td>{afam4_gs.mw}</td>
                   <td>{afam4_gs.kv}</td>
                 </tr>
