@@ -122,7 +122,7 @@ class WeatherWidget_rows extends React.Component {
         const display_1 = [];
         let todaysDate = new Date();
         todaysDate = todaysDate.toLocaleDateString().substring(0, 5);
-        Array(20).fill(1).forEach((item, index) => {
+        Array(2).fill(1).forEach((item, index) => {
             const station_weather_data = stations[index]?.current_weather_data ? stations[index].current_weather_data : null;
             if(!station_weather_data) {
                 return;
@@ -150,11 +150,11 @@ class WeatherWidget_rows extends React.Component {
                         <span>{main}</span>
                         <span> {description}</span>
                         <span> {humidity}%</span>
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                <span class="caret"></span>
+                        <div className="dropdown">
+                            <button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                <span className="caret"></span>
                             </button>
-                            <ul class="dropdown-menu drops">
+                            <ul className="dropdown-menu drops">
                                 <li>Wind Speed : - {wind_speed}kmph</li>
                                 <li>Wind Degree : - {wind_degree}°</li>
                                 <li>Wind Gust : - {wind_gust}kmph</li>
@@ -183,7 +183,7 @@ class WeatherWidget_rows extends React.Component {
                     <div className="col-lg-9 col-xs-12 py-3" style={{"backgroundColor": "#4B515D"}}>
                         <div className="row d-flex py-3 justify-content-center align-items-center">
                             <ul>
-                                <li>
+                                <li key={6}>
                                     <div className="weather_widget_row">
                                         <span>Station Name</span>
                                         <span>Date</span>
@@ -198,7 +198,32 @@ class WeatherWidget_rows extends React.Component {
                                         <span>Pressure</span> */}
                                     </div>
                                 </li>
-                                {display_1}
+                               
+                                {/* Dummy list to replicate live data */}
+                                {
+                                    <li key={7}>
+                                    <div className="weather_widget_row">
+                                        <span>{'RIVERS IPP'}</span>
+                                        <span>{'20-11-2023'}</span>
+                                        <span><img src={`https://openweathermap.org/img/wn/10n@2x.png`} width="60px" height="40px"></img></span>
+                                        <span> {35} °C</span>                        
+                                        <span>{'Rain'}</span>
+                                        <span> {'Light Rain'}</span>
+                                        <span> {20}%</span>
+                                        <div className="dropdown">
+                                            <button className="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                                <span className="caret"></span>
+                                            </button>
+                                            <ul className="dropdown-menu drops">
+                                                <li>Wind Speed : - {25}kmph</li>
+                                                <li>Wind Degree : - {16}°</li>
+                                                <li>Wind Gust : - {11}kmph</li>
+                                                <li>Pressure : - {11.4}</li>
+                                            </ul>
+                                        </div>                        
+                                    </div>
+                                </li>
+                                }
                             </ul>                            
                         </div>                
                         <div>
@@ -210,7 +235,7 @@ class WeatherWidget_rows extends React.Component {
                         <div>
                             <h3 className="weather_h3 text-center">Stations with Rainfall</h3>
                             <ul className="weather_ul">                                
-                                {display_rain}                            
+                                {/* {display_rain}                             */}
                             </ul>
                         </div>
                     </div>
