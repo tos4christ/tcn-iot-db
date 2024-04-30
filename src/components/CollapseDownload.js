@@ -1,6 +1,7 @@
 import React from "react";
 import {Redirect} from 'react-router-dom';
 import { Spinner, Button } from "react-bootstrap";
+import timeConverter from "../utility/timeConverter";
 
  class Collapse extends React.Component {
   constructor(props) {
@@ -25,18 +26,22 @@ import { Spinner, Button } from "react-bootstrap";
     const endDate = this.state.endDate[0];
     const startTime = this.state.startDate[1];
     const endTime = this.state.endDate[1];
+    const time_diff = timeConverter(startDate, endDate, startTime, endTime);    
     const token = localStorage.getItem("token");
     // verify that the startDate is lower than the endDate
     // This is already handled at the backend by replacing the lower to be the start
     const getCollapse = startDate && endDate && startTime && endTime;
     if(getCollapse) {
       const url = '/lines/collapse';
-      const data = {
+      let data = {
         startDate,
         endDate,
         startTime,
         endTime
       };
+      if((time_diff.end - time_diff.start) > 7200000) {
+        return;
+      }
       // add a spinner method while request is loading
       this.setState({loading: true}, () => {
         fetch(url, {

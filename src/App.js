@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+import './assets/css/Modal.css'
 //import bootstrap from 'bootstrap'; // eslint-disable-line no-unused-vars
 //import 'bootstrap/dist/js/bootstrap'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
@@ -119,13 +120,19 @@ class App extends React.Component {
             </div>            
           </Route>
           <Route exact path={`/nccnaspageone`}>
-              <PageOne />           
+            <div className='App'>
+              <PageOne />
+            </div>                         
           </Route>
-          <Route exact path={`/nccnaspagetwo`}>
-              <PageTwo />         
+          <Route exact path={`/nccnaspagetwo`}>              
+            <div className='App'>
+              <PageTwo />
+            </div>
           </Route>
-          <Route exact path={`/nccnasfullpage`}>
-              <FullPage />         
+          <Route exact path={`/nccnasfullpage`}>              
+            <div className='App'>
+              <FullPage />
+            </div>
           </Route>
           <Route exact path={`/nccweather`}>
               <WeatherApi />         
