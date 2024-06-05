@@ -62,7 +62,7 @@ import DateTime from "./DateTime";
       socket.on("client_message_111", data => {
         const { message } = data;
         const parsedMessage = JSON.parse(message);
-        parsedMessage.server_time = (new Date).getTime();
+        parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.id;
         const returnObject = {}
         // console.log(parsedMessage, 'c1 message');
@@ -75,7 +75,7 @@ import DateTime from "./DateTime";
       socket.on("client_message_222", data => {
         const { message } = data;
         const parsedMessage = JSON.parse(message);
-        parsedMessage.server_time = (new Date).getTime();
+        parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.id;
         const returnObject = {}
         // console.log(parsedMessage, 'c2 message');
@@ -104,7 +104,7 @@ import DateTime from "./DateTime";
     })
    }
    getEpoch(time) {
-    if(!time || time == undefined || time == null) {
+    if(!time || time === undefined || time === null) {
       return 0;
     }
     // Convert the time input to epoch time
@@ -125,7 +125,7 @@ import DateTime from "./DateTime";
     }
     try {
       // Get current epoch time
-      const time_now = (new Date).getTime();     
+      const time_now = (new Date()).getTime();     
       // if 30 seconds have passed without the time changing from the current time then return disconnected
       // 30 seconds equals to 30,000 milliseconds
       // if the time difference is greater than time_diff then return disconnected
@@ -150,7 +150,7 @@ import DateTime from "./DateTime";
       t1 = t1 ? t1 : '';
       t2 = t2 ? t2 : '';
       // Get current epoch time
-      const time_now = (new Date).getTime();
+      const time_now = (new Date()).getTime();
       // if 30 seconds have passed without the time changing from the current time then return disconnected
       // 30 seconds equals to 30,000 milliseconds
       // if the time difference is greater than time_diff then return disconnected
@@ -177,7 +177,7 @@ import DateTime from "./DateTime";
       t2 = t2 ? t2 : '';
       t3 = t3 ? t3 : '';
       // Get current epoch time
-      const time_now = (new Date).getTime();  
+      const time_now = (new Date()).getTime();  
       // if 30 seconds have passed without the time changing from the current time then return disconnected
       // 30 seconds equals to 30,000 milliseconds
       // if the time difference is greater than time_diff then return disconnected
@@ -204,7 +204,7 @@ import DateTime from "./DateTime";
       t1 = t1 ? t1 : '';
       t2 = t2 ? t2 : '';
       // Get current epoch time
-      const time_now = (new Date).getTime();
+      const time_now = (new Date()).getTime();
       // if 30 seconds have passed without the time changing from the current time then return disconnected
       // 30 seconds equals to 30,000 milliseconds
       // if the time difference is greater than time_diff then return disconnected
@@ -250,7 +250,7 @@ import DateTime from "./DateTime";
     const omotosonipp_gs = stations_array['OMOTOSHO NIPP (GAS)'];
     const geregunipp_gs = stations_array['GEREGU NIPP (GAS)'];
     const azura_gs = stations_array['AZURA-EDO IPP (GAS)'];
-    const transamadi_gs = stations_array['TRANS-AMADI (GAS)'];
+    //const transamadi_gs = stations_array['TRANS-AMADI (GAS)'];
     const ibom_gs = stations_array['IBOM POWER (GAS)'];
     const gbarain_gs = stations_array['GBARAIN NIPP (GAS)'];
     const olorunsogogas_gs = stations_array['OLORUNSOGO (GAS)'];

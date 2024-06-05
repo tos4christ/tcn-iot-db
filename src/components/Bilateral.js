@@ -58,7 +58,7 @@ import DateTime from "./DateTime";
       socket.on("client_message_111", data => {
         const { message } = data;
         const parsedMessage = JSON.parse(message);
-        parsedMessage.server_time = (new Date).getTime();
+        parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.id;
         const returnObject = {}
         // console.log(parsedMessage, 'c1 message');
@@ -71,7 +71,7 @@ import DateTime from "./DateTime";
       socket.on("client_message_222", data => {
         const { message } = data;
         const parsedMessage = JSON.parse(message);
-        parsedMessage.server_time = (new Date).getTime();
+        parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.id;
         const returnObject = {}
         // console.log(parsedMessage, 'c2 message');
@@ -105,7 +105,7 @@ import DateTime from "./DateTime";
     }
     try {
       // Get current epoch time
-      const time_now = (new Date).getTime();     
+      const time_now = (new Date()).getTime();     
       // if 30 seconds have passed without the time changing from the current time then return disconnected
       // 30 seconds equals to 30,000 milliseconds
       // if the time difference is greater than time_diff then return disconnected
@@ -130,7 +130,7 @@ import DateTime from "./DateTime";
       t1 = t1 ? t1 : '';
       t2 = t2 ? t2 : '';
       // Get current epoch time
-      const time_now = (new Date).getTime();
+      const time_now = (new Date()).getTime();
       // if 30 seconds have passed without the time changing from the current time then return disconnected
       // 30 seconds equals to 30,000 milliseconds
       // if the time difference is greater than time_diff then return disconnected
@@ -157,7 +157,7 @@ import DateTime from "./DateTime";
       t2 = t2 ? t2 : '';
       t3 = t3 ? t3 : '';
       // Get current epoch time
-      const time_now = (new Date).getTime();  
+      const time_now = (new Date()).getTime();  
       // if 30 seconds have passed without the time changing from the current time then return disconnected
       // 30 seconds equals to 30,000 milliseconds
       // if the time difference is greater than time_diff then return disconnected
@@ -184,7 +184,7 @@ import DateTime from "./DateTime";
       t1 = t1 ? t1 : '';
       t2 = t2 ? t2 : '';
       // Get current epoch time
-      const time_now = (new Date).getTime();
+      const time_now = (new Date()).getTime();
       // if 30 seconds have passed without the time changing from the current time then return disconnected
       // 30 seconds equals to 30,000 milliseconds
       // if the time difference is greater than time_diff then return disconnected
