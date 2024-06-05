@@ -3,9 +3,9 @@ const get_stations =  function(state_data) {
         return;
     }
     // console.log(state_data, 'the station data')
-    const monarch_ml1 = state_data.monarch.lines ? state_data.monarch.lines.filter(line => line.id === "sl1") : [{mw: null, V: null}];
-    const larfarge_ll1 = state_data.larfarge.lines ? state_data.larfarge.lines.filter(line => line.id === "sl1") : [{mw: null, V: null}];
-    const topSteel_tsl1 = state_data.topSteel.lines ? state_data.topSteel.lines.filter(line => line.id === "sl1") : [{mw: null, V: null}];
+    const monarch_ml1 = state_data.monarch.lines ? state_data.monarch.lines.filter(line => line.id === "ml1") : [{mw: null, V: null}];
+    const larfarge_ll1 = state_data.larfarge.lines ? state_data.larfarge.lines.filter(line => line.id === "ll1") : [{mw: null, V: null}];
+    const topSteel_tsl1 = state_data.topSteel.lines ? state_data.topSteel.lines.filter(line => line.id === "tsl1") : [{mw: null, V: null}];
     const sunflag_sl1 = state_data.sunflag.lines ? state_data.sunflag.lines.filter(line => line.id === "sl1") : [{mw: null, V: null}];
     const sagamu_d23s = state_data.sagamu.lines ? state_data.sagamu.lines.filter(line => line.id === "d23s") : [{mw: null, V: null}];
     const sagamu_d24s = state_data.sagamu.lines ? state_data.sagamu.lines.filter(line => line.id === "d24s") : [{mw: null, V: null}];

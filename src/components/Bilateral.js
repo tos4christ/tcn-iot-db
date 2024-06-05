@@ -234,16 +234,16 @@ import DateTime from "./DateTime";
                 <tr>
                   <td>1</td>
                   <td>PHONIX STEEL MILLS INDUSTRIES LTD (IBEDC) 132KV</td>
-                  <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
-                  <td>{sunflag.mw}</td>
-                  <td>{sunflag.kv}</td>
+                  <td>{this.checkConnection2(null)}</td>
+                  <td>{N/A}</td>
+                  <td>{N/A}</td>
                 </tr>
                 <tr>
                   <td>2</td>
                   <td>AFRICAN FOUNDARIES LTD (IBEDC) 132KV</td>
-                  <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
-                  <td>{sunflag.mw}</td>
-                  <td>{sunflag.kv}</td>
+                  <td>{this.checkConnection2(null)}</td>
+                  <td>{N/A}</td>
+                  <td>{N/A}</td>
                 </tr>
                 <tr>
                   <td>3</td>
@@ -255,23 +255,23 @@ import DateTime from "./DateTime";
                 <tr>
                   <td>4</td>
                   <td>REAL INFRASTRUCTURE NIGERIA LTD (IBEDC)</td>
-                  <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
-                  <td>{sunflag.mw}</td>
-                  <td>{sunflag.kv}</td>
+                  <td>{this.checkConnection2(null)}</td>
+                  <td>{N/A}</td>
+                  <td>{N/A}</td>
                 </tr>
                 <tr>
                   <td>5</td>
                   <td>SAGAMU STEEL</td>
-                  <td>{this.checkConnection2(this.state.sagamu.server_time)}</td>
-                  <td>{sagamu.mw}</td>
-                  <td>{sagamu.kv}</td>
+                  <td>{this.checkConnection2(null)}</td>
+                  <td>{N/A}</td>
+                  <td>{N/A}</td>
                 </tr>
                 <tr>
                   <td>6</td>
                   <td>KAM STEEL SAGAMU (IBEDC) 132KV</td>
-                  <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
-                  <td>{sunflag.mw}</td>
-                  <td>{sunflag.kv}</td>
+                  <td>{this.checkConnection2(null)}</td>
+                  <td>{N/A}</td>
+                  <td>{N/A}</td>
                 </tr>
                 <tr>
                   <td>7</td>
@@ -297,30 +297,30 @@ import DateTime from "./DateTime";
                 <tr>
                   <td>10</td>
                   <td>PULKIT ALLOY AND STEEL LTD 132KV</td>
-                  <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
-                  <td>{sunflag.mw}</td>
-                  <td>{sunflag.kv}</td>
+                  <td>{this.checkConnection2(null)}</td>
+                  <td>{N/A}</td>
+                  <td>{N/A}</td>
                 </tr>
                 <tr>
                   <td>11</td>
                   <td>STAR PIPE PRODUCT LTD 132KV</td>
-                  <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
-                  <td>{sunflag.mw}</td>
-                  <td>{sunflag.kv}</td>
+                  <td>{this.checkConnection2(null)}</td>
+                  <td>{N/A}</td>
+                  <td>{N/A}</td>
                 </tr>
                 <tr>
                   <td>12</td>
                   <td>ODOGUNNYAN 132KV TS</td>
-                  <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
-                  <td>{sunflag.mw}</td>
-                  <td>{sunflag.kv}</td>
+                  <td>{this.checkConnection2(null)}</td>
+                  <td>{N/A}</td>
+                  <td>{N/A}</td>
                 </tr>
                 <tr>
                   <td>13</td>
                   <td>IKORODU 132KV TS</td>
-                  <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
-                  <td>{sunflag.mw}</td>
-                  <td>{sunflag.kv}</td>
+                  <td>{this.checkConnection2(null)}</td>
+                  <td>{N/A}</td>
+                  <td>{N/A}</td>
                 </tr>                                
                 <tr>
                   <td>29</td>
