@@ -12,6 +12,8 @@ import DateTime from "./DateTime";
      this.toggleDisplay = this.toggleDisplay.bind(this);
      this.state = { 
       frequency: "",
+      sagamu: {},
+      sunflag: {},
       afamIv_vPs: {},
       afamVPs: {},
       transamadiGs: {},

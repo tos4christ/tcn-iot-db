@@ -8,6 +8,8 @@ import get_stations from "./stations_adder";
      super(props);
      this.state = { 
       frequency: "",
+      sagamu: {},
+      sunflag: {},
       afamIv_vPs: {},
       shiroroPs: {},
       egbinPs: {},

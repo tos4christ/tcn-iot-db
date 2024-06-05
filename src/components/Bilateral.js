@@ -3,17 +3,18 @@ import { withRouter } from 'react-router-dom';
 import socket from "./utility/socketIO";
 import get_stations from "./stations_adder";
 import DateTime from "./DateTime";
-import Modal from "./Modal";
 
  class Bilateral extends React.Component {
    constructor(props) {
      super(props);
-     this.setModalFalse = this.setModalFalse.bind(this);
-     this.setModalTrue = this.setModalTrue.bind(this);
      this.state = { 
-      frequency: "",
       sagamu: {},
       sunflag: {},
+      topSteel: {},
+      monarch: {},
+      larfarge: {},
+      afamIv_vPs: {},
+      shiroroPs: {},
       egbinPs: {},
       kainjiTs: {},
       jebbaTs: {},
@@ -26,8 +27,30 @@ import Modal from "./Modal";
       afamViTs: {},
       alaoji: {},
       sapeleNippPs: {},
+      omotoshoNippPs: {},
+      odukpaniGs: {},
+      odukpaniNippPs: {},
+      ekim: {},
+      gereguPs: {},
+      ikotEkpene: {},
+      riversIppPs: {},
+      omokuPs1: {},
+      ihovborNippPs: {},
+      olorunsogo1: {},
+      delta2: {},
+      delta3: {},
+      parasEnergyPs: {},
+      olorunsogoPhase1Gs: {},
+      gbarain: {},
+      dadinKowaGs: {},
+      asaba: {},
+      lokojaTs: {},
+      ugwuaji: {},
+      gwagwalada: {},
+      zungeru: {},
+      taopex: {},
+      afamVPs: {},
       connected: false,
-      ModalState: false
      };
    }
    componentDidMount() {
@@ -58,20 +81,10 @@ import Modal from "./Modal";
           return returnObject;
         })
       });
-      socket.on("frequency000", data => {
-        const { message } = data;
-        const parsedMessage = JSON.parse(message);
-        const returnObject = {}
-        this.setState(prevState => {
-          prevState["frequency"] = parsedMessage;
-          returnObject["frequency"] = prevState["frequency"]
-          return returnObject;
-        })
-      });
     }
    }
    getEpoch(time) {
-    if(!time || time == undefined || time == null) {
+    if(!time || time === undefined || time === null) {
       return 0;
     }
     // Convert the time input to epoch time
@@ -187,44 +200,36 @@ import Modal from "./Modal";
       return disconnected;
     }    
    }
-   onClickDisplay(e) {
-    e.preventDefault();
-
-   }
-   setModalTrue(e, station_name) {
-    // e.preventDefault();
-    console.log(e.target.innerHTML, station_name);
-    return this.setState({ModalState: true, modal_data: station_name});
-   }
-   setModalFalse() {
-    this.setState({ModalState: false});
-   }
+   
   render() {
     const stations_array = get_stations(this.state);
     const sunflag = stations_array['SUNFLAG'];
-    const sagamu = stations_array['SAGAMU'];    
+    const sagamu = stations_array['SAGAMU'];
+    const top_steel = stations_array['TOPSTEEL'];
+    const larfarge = stations_array['LARFARGE'];
+    const monarch = stations_array['MONARCH'];
 
-    const totalGeneration = (Number(sunflag.mw) < 0 ? 0 : Number(sunflag.mw)) + (Number(sagamu.mw) < 0 ? 0 : Number(sagamu.mw));
+    const totalBilateral = (Number(sunflag.mw) < 0 ? 0 : Number(sunflag.mw)) + (Number(sagamu.mw) < 0 ? 0 : Number(sagamu.mw));
         
     return (
       <>
-      <div className="ncc-menu">
-        <div className="ncc-menu-list">
-          <div className="ncc-display-div">
+      <div className="bl-menu">
+        <div className="bl-menu-list">
+          <div className="bl-display-div">
             <h2><DateTime /></h2>
             <h2 className="text-danger">IoT BILATERAL TABLE </h2>
-            <table className="ncc-tg">
+            <table className="bl-tg">
               <thead>
                 <tr>
-                  <th className="ncc-tg-zb4j">S/N</th>
-                  <th className="ncc-tg-zb4j">STATIONS</th>
-                  <th className="ncc-tg-zb4j">STATUS</th>
-                  <th className="ncc-tg-zb4j">POWER(MW)</th>
-                  <th className="ncc-tg-zb4j text-danger">VOLTAGE(kV)</th>
+                  <th className="bl-tg-zb4j">S/N</th>
+                  <th className="bl-tg-zb4j">STATIONS</th>
+                  <th className="bl-tg-zb4j">STATUS</th>
+                  <th className="bl-tg-zb4j">POWER(MW)</th>
+                  <th className="bl-tg-zb4j text-danger">VOLTAGE(kV)</th>
                 </tr>
               </thead>
               <tbody>
-                <tr  onClick={(e) => { this.setModalTrue(e, 'SUNFLAG'); }}>
+                <tr>
                   <td>1</td>
                   <td>PHONIX STEEL MILLS INDUSTRIES LTD (IBEDC) 132KV</td>
                   <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
@@ -241,9 +246,9 @@ import Modal from "./Modal";
                 <tr>
                   <td>3</td>
                   <td>MONARCH (IBEDC) 132KV</td>
-                  <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
-                  <td>{sunflag.mw}</td>
-                  <td>{sunflag.kv}</td>
+                  <td>{this.checkConnection2(this.state.monarch.server_time)}</td>
+                  <td>{monarch.mw}</td>
+                  <td>{monarch.kv}</td>
                 </tr>
                 <tr>
                   <td>4</td>
@@ -269,16 +274,16 @@ import Modal from "./Modal";
                 <tr>
                   <td>7</td>
                   <td>CEMENT FACTORY (IBEDC) 132KV</td>
-                  <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
-                  <td>{sunflag.mw}</td>
-                  <td>{sunflag.kv}</td>
+                  <td>{this.checkConnection2(this.state.larfarge.server_time)}</td>
+                  <td>{larfarge.mw}</td>
+                  <td>{larfarge.kv}</td>
                 </tr>
                 <tr>
                   <td>8</td>
                   <td>TOP STEEL NIGERIA LTD (IKEJA DISCO) 132KV</td>
-                  <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
-                  <td>{sunflag.mw}</td>
-                  <td>{sunflag.kv}</td>
+                  <td>{this.checkConnection2(this.state.topSteel.server_time)}</td>
+                  <td>{top_steel.mw}</td>
+                  <td>{top_steel.kv}</td>
                 </tr>
                 <tr>
                   <td>9</td>
@@ -318,27 +323,27 @@ import Modal from "./Modal";
                 <tr>
                   <td>29</td>
                   <td>SAGAMU 132KV TS</td>
-                  <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
-                  <td>{sunflag.mw}</td>
-                  <td>{sunflag.kv}</td>
+                  <td>{this.checkConnection2(this.state.sagamu.server_time)}</td>
+                  <td>{sagamu.mw}</td>
+                  <td>{sagamu.kv}</td>
                 </tr>
                 <tr></tr>
                 <tr>
                   <td></td>
                   <td>TOTAL BILLATERAL</td>
                   <td></td>
-                  <td>{totalGeneration.toFixed(2)}</td>
+                  <td>{totalBilateral.toFixed(2)}</td>
                   <td></td>
                 </tr> 
               </tbody>
             </table>            
           </div>
-          <div className="ncc-counter-div">
-            <table className="ncc-counter-tg">
+          <div className="bl-counter-div">
+            <table className="bl-counter-tg">
                 <thead>
                     <tr>
-                    <th className="ncc-counter-tg-zb4j"></th>
-                    <th className="ncc-counter-tg-zb4j">LEGEND</th>
+                    <th className="bl-counter-tg-zb4j"></th>
+                    <th className="bl-counter-tg-zb4j">LEGEND</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -358,7 +363,6 @@ import Modal from "./Modal";
                 </table> 
           </div>
         </div>
-        {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
       </div>      
     </>
     )         

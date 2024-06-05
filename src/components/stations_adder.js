@@ -3,6 +3,9 @@ const get_stations =  function(state_data) {
         return;
     }
     // console.log(state_data, 'the station data')
+    const monarch_ml1 = state_data.monarch.lines ? state_data.monarch.lines.filter(line => line.id === "sl1") : [{mw: null, V: null}];
+    const larfarge_ll1 = state_data.larfarge.lines ? state_data.larfarge.lines.filter(line => line.id === "sl1") : [{mw: null, V: null}];
+    const topSteel_tsl1 = state_data.topSteel.lines ? state_data.topSteel.lines.filter(line => line.id === "sl1") : [{mw: null, V: null}];
     const sunflag_sl1 = state_data.sunflag.lines ? state_data.sunflag.lines.filter(line => line.id === "sl1") : [{mw: null, V: null}];
     const sagamu_d23s = state_data.sagamu.lines ? state_data.sagamu.lines.filter(line => line.id === "d23s") : [{mw: null, V: null}];
     const sagamu_d24s = state_data.sagamu.lines ? state_data.sagamu.lines.filter(line => line.id === "d24s") : [{mw: null, V: null}];
@@ -120,6 +123,15 @@ const get_stations =  function(state_data) {
     // console.log(omotosho2_tr3, omotosho2_tr4, 'the omotoshos');
     // const multiplier = 3/10;
     return { 
+        'TOPSTEEL': {mw: Number(
+            Math.abs(topSteel_tsl1[0]?.td ? topSteel_tsl1[0].td.mw : 0)
+        ).toFixed(2), kv: (topSteel_tsl1[0]?.td ? topSteel_tsl1[0].td.V : 0)},
+        'MONARCH': {mw: Number(
+            Math.abs(monarch_ml1[0]?.td ? monarch_ml1[0].td.mw : 0)
+        ).toFixed(2), kv: (monarch_ml1[0]?.td ? monarch_ml1[0].td.V : 0)},
+        'LARFARGE': {mw: Number(
+            Math.abs(larfarge_ll1[0]?.td ? larfarge_ll1[0].td.mw : 0)
+        ).toFixed(2), kv: (larfarge_ll1[0]?.td ? larfarge_ll1[0].td.V : 0)},
         'SUNFLAG': {mw: Number(
             Math.abs(sunflag_sl1[0]?.td ? sunflag_sl1[0].td.mw : 0)
         ).toFixed(2), kv: (sunflag_sl1[0]?.td ? sunflag_sl1[0].td.V : 0)},

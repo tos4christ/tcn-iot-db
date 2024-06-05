@@ -12,6 +12,8 @@ import Modal from "./Modal";
      this.setModalTrue = this.setModalTrue.bind(this);
      this.state = { 
       frequency: "",
+      sagamu: {},
+      sunflag: {},
       afamIv_vPs: {},
       shiroroPs: {},
       egbinPs: {},
