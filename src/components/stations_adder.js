@@ -3,6 +3,9 @@ const get_stations =  function(state_data) {
         return;
     }
     // console.log(state_data, 'the station data')
+    const sunflag_sl1 = state_data.sunflag.lines ? state_data.sunflag.lines.filter(line => line.id === "sl1") : [{mw: null, V: null}];
+    const sagamu_d23s = state_data.sagamu.lines ? state_data.sagamu.lines.filter(line => line.id === "d23s") : [{mw: null, V: null}];
+    const sagamu_d24s = state_data.sagamu.lines ? state_data.sagamu.lines.filter(line => line.id === "d24s") : [{mw: null, V: null}];
     const ekim_ek1m = state_data.ekim.lines ? state_data.ekim.lines.filter(line => line.id === "ek1m") : [{mw: null, V: null}];
     const eket_e21m = state_data.eket.lines ? state_data.eket.lines.filter(line => line.id === "e21m") : [{mw: null, V: null}];
     const eket_e22m = state_data.eket.lines ? state_data.eket.lines.filter(line => line.id === "e22m") : [{mw: null, V: null}];
@@ -117,6 +120,12 @@ const get_stations =  function(state_data) {
     // console.log(omotosho2_tr3, omotosho2_tr4, 'the omotoshos');
     // const multiplier = 3/10;
     return { 
+        'SUNFLAG': {mw: Number(
+            Math.abs(sunflag_sl1[0]?.td ? sunflag_sl1[0].td.mw : 0)
+        ).toFixed(2), kv: (sunflag_sl1[0]?.td ? sunflag_sl1[0].td.V : 0)},
+        'SAGAMU': {mw: Number(
+            Math.abs(sagamu_d23s[0]?.td ? sagamu_d23s[0].td.mw : 0) + Math.abs(sagamu_d24s[0]?.td ? sagamu_d24s[0].td.mw : 0)
+        ).toFixed(2), kv: (sagamu_d23s[0]?.td ? sagamu_d23s[0].td.V : 0)},
         'TAOPEX': {mw: Number(
             Math.abs(taopex[0]?.td ? taopex[0].td.mw : 0)
         ).toFixed(2), kv: (taopex[0]?.td ? taopex[0].td.V : 0)},

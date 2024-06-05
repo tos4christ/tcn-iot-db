@@ -31,6 +31,7 @@ import DashboardHome from "./pages/DashboardHome";
 import Disco from "./pages/Disco";
 import TCN from "./pages/Tcn";
 import UserLogin from "./pages/UserLogin";
+import Bilateral from './components/Bilateral';
 
 
 class App extends React.Component {
@@ -130,6 +131,11 @@ class App extends React.Component {
           <Route exact path={`/nccnasfullpage`}>              
             <div className='App'>
               <FullPage />
+            </div>
+          </Route>
+          <Route exact path={`/bilaterals`}>              
+            <div className='App'>
+              <Bilateral />
             </div>
           </Route>
           <Route exact path={`/nccweather`}>
