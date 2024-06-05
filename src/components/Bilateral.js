@@ -209,7 +209,9 @@ import DateTime from "./DateTime";
     const larfarge = stations_array['LARFARGE'];
     const monarch = stations_array['MONARCH'];
 
-    const totalBilateral = (Number(sunflag.mw) < 0 ? 0 : Number(sunflag.mw)) + (Number(sagamu.mw) < 0 ? 0 : Number(sagamu.mw));
+    const totalBilateral = (Number(sunflag.mw) < 0 ? 0 : Number(sunflag.mw)) + (Number(sagamu.mw) < 0 ? 0 : Number(sagamu.mw))
+    + (Number(top_steel.mw) < 0 ? 0 : Number(top_steel.mw)) + (Number(larfarge.mw) < 0 ? 0 : Number(larfarge.mw)) + 
+    (Number(monarch.mw) < 0 ? 0 : Number(monarch.mw));
         
     return (
       <>
