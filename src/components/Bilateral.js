@@ -219,7 +219,7 @@ import DateTime from "./DateTime";
         <div className="bl-menu-list">
           <div className="bl-display-div">
             <h2><DateTime /></h2>
-            <h2 className="text-danger">IoT BILATERAL TABLE </h2>
+            <h2 className="text-danger">IoT CRITICAL 132KV & 33KV LOAD OFF-TAKERS </h2>
             <table className="bl-tg">
               <thead>
                 <tr>
@@ -233,28 +233,28 @@ import DateTime from "./DateTime";
               <tbody>
                 <tr>
                   <td>1</td>
-                  <td>PHONIX STEEL MILLS INDUSTRIES LTD (IBEDC) 132KV</td>
+                  <td>PHONIX STEEL IKORODU</td>
                   <td>{this.checkConnection2(null)}</td>
                   <td>{'N/A'}</td>
                   <td>{'N/A'}</td>
                 </tr>
                 <tr>
                   <td>2</td>
-                  <td>AFRICAN FOUNDARIES LTD (IBEDC) 132KV</td>
+                  <td>AFRICAN FOUNDARIES LTD IKORODU</td>
                   <td>{this.checkConnection2(null)}</td>
                   <td>{'N/A'}</td>
                   <td>{'N/A'}</td>
                 </tr>
                 <tr>
                   <td>3</td>
-                  <td>MONARCH (IBEDC) 132KV</td>
+                  <td>MONARCH IKORODU</td>
                   <td>{this.checkConnection2(this.state.monarch.server_time)}</td>
                   <td>{monarch.mw}</td>
                   <td>{monarch.kv}</td>
                 </tr>
                 <tr>
                   <td>4</td>
-                  <td>REAL INFRASTRUCTURE NIGERIA LTD (IBEDC)</td>
+                  <td>REAL INFRASTRUCTURE LTD IKORODU</td>
                   <td>{this.checkConnection2(null)}</td>
                   <td>{'N/A'}</td>
                   <td>{'N/A'}</td>
@@ -268,42 +268,42 @@ import DateTime from "./DateTime";
                 </tr>
                 <tr>
                   <td>6</td>
-                  <td>KAM STEEL SAGAMU (IBEDC) 132KV</td>
+                  <td>KAM STEEL SAGAMU</td>
                   <td>{this.checkConnection2(null)}</td>
                   <td>{'N/A'}</td>
                   <td>{'N/A'}</td>
                 </tr>
                 <tr>
                   <td>7</td>
-                  <td>CEMENT FACTORY (IBEDC) 132KV</td>
+                  <td>CEMENT FACTORY</td>
                   <td>{this.checkConnection2(this.state.larfarge.server_time)}</td>
                   <td>{larfarge.mw}</td>
                   <td>{larfarge.kv}</td>
                 </tr>
                 <tr>
                   <td>8</td>
-                  <td>TOP STEEL NIGERIA LTD (IKEJA DISCO) 132KV</td>
+                  <td>TOP STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.topSteel.server_time)}</td>
                   <td>{top_steel.mw}</td>
                   <td>{top_steel.kv}</td>
                 </tr>
                 <tr>
                   <td>9</td>
-                  <td>SUNFLAG IRON AND STEEL COMPANY LTD 132KV</td>
+                  <td>SUNFLAG IRON & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
                   <td>{sunflag.mw}</td>
                   <td>{sunflag.kv}</td>
                 </tr>
                 <tr>
                   <td>10</td>
-                  <td>PULKIT ALLOY AND STEEL LTD 132KV</td>
+                  <td>PULKIT ALLOY & STEEL IKORODU</td>
                   <td>{this.checkConnection2(null)}</td>
                   <td>{'N/A'}</td>
                   <td>{'N/A'}</td>
                 </tr>
                 <tr>
                   <td>11</td>
-                  <td>STAR PIPE PRODUCT LTD 132KV</td>
+                  <td>STAR PIPE PRODUCT IKORODU</td>
                   <td>{this.checkConnection2(null)}</td>
                   <td>{'N/A'}</td>
                   <td>{'N/A'}</td>
@@ -332,7 +332,7 @@ import DateTime from "./DateTime";
                 <tr></tr>
                 <tr>
                   <td></td>
-                  <td>TOTAL BILLATERAL</td>
+                  <td>TOTAL OFF-TAKE</td>
                   <td></td>
                   <td>{totalBilateral.toFixed(2)}</td>
                   <td></td>
