@@ -9,6 +9,8 @@ import DateTime from "./DateTime";
      super(props);
      this.state = { 
       sagamu: {},
+      pulkitSteel: {},
+      africanFoundriesLimited: {},
       sunflag: {},
       topSteel: {},
       monarch: {},
@@ -208,10 +210,13 @@ import DateTime from "./DateTime";
     const top_steel = stations_array['TOPSTEEL'];
     const larfarge = stations_array['LARFARGE'];
     const monarch = stations_array['MONARCH'];
+    const pulkitSteel = stations_array['PULKISTEEL'];
+    const africanFoundriesLimited = stations_array['AFRICANFOUNDARIES'];
 
     const totalBilateral = (Number(sunflag.mw) < 0 ? 0 : Number(sunflag.mw)) + (Number(sagamu.mw) < 0 ? 0 : Number(sagamu.mw))
     + (Number(top_steel.mw) < 0 ? 0 : Number(top_steel.mw)) + (Number(larfarge.mw) < 0 ? 0 : Number(larfarge.mw)) + 
-    (Number(monarch.mw) < 0 ? 0 : Number(monarch.mw));
+    (Number(monarch.mw) < 0 ? 0 : Number(monarch.mw)) + (Number(pulkitSteel.mw) < 0 ? 0 : Number(pulkitSteel.mw)) + 
+    (Number(africanFoundriesLimited.mw) < 0 ? 0 : Number(africanFoundriesLimited.mw));
         
     return (
       <>
@@ -241,9 +246,9 @@ import DateTime from "./DateTime";
                 <tr>
                   <td>2</td>
                   <td>AFRICAN FOUNDARIES LTD IKORODU</td>
-                  <td>{this.checkConnection2(null)}</td>
-                  <td>{'N/A'}</td>
-                  <td>{'N/A'}</td>
+                  <td>{this.checkConnection2(this.state.africanFoundriesLimited.server_time)}</td>
+                  <td>{africanFoundriesLimited.mw}</td>
+                  <td>{africanFoundriesLimited.kv}</td>
                 </tr>
                 <tr>
                   <td>3</td>
@@ -297,9 +302,9 @@ import DateTime from "./DateTime";
                 <tr>
                   <td>10</td>
                   <td>PULKIT ALLOY & STEEL IKORODU</td>
-                  <td>{this.checkConnection2(null)}</td>
-                  <td>{'N/A'}</td>
-                  <td>{'N/A'}</td>
+                  <td>{this.checkConnection2(this.state.pulkitSteel.server_time)}</td>
+                  <td>{pulkitSteel.mw}</td>
+                  <td>{pulkitSteel.kv}</td>
                 </tr>
                 <tr>
                   <td>11</td>

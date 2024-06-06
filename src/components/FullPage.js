@@ -13,6 +13,8 @@ import Modal from "./Modal";
      this.state = { 
       frequency: "",
       sagamu: {},
+      pulkitSteel: {},
+      africanFoundriesLimited: {},
       sunflag: {},
       topSteel: {},
       monarch: {},

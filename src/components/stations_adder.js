@@ -3,6 +3,8 @@ const get_stations =  function(state_data) {
         return;
     }
     // console.log(state_data, 'the station data')
+    const africanFoundriesLimited_afll1 = state_data.africanFoundriesLimited.lines ? state_data.africanFoundriesLimited.lines.filter(line => line.id === "afll1") : [{mw: null, V: null}];
+    const pulkitSteel_psl1 = state_data.pulkitSteel.lines ? state_data.pulkitSteel.lines.filter(line => line.id === "psl1") : [{mw: null, V: null}];
     const monarch_ml1 = state_data.monarch.lines ? state_data.monarch.lines.filter(line => line.id === "ml1") : [{mw: null, V: null}];
     const larfarge_ll1 = state_data.larfarge.lines ? state_data.larfarge.lines.filter(line => line.id === "ll1") : [{mw: null, V: null}];
     const topSteel_tsl1 = state_data.topSteel.lines ? state_data.topSteel.lines.filter(line => line.id === "tsl1") : [{mw: null, V: null}];
@@ -123,6 +125,12 @@ const get_stations =  function(state_data) {
     // console.log(omotosho2_tr3, omotosho2_tr4, 'the omotoshos');
     // const multiplier = 3/10;
     return { 
+        'AFRICANFOUNDARIES': {mw: Number(
+            Math.abs(africanFoundriesLimited_afll1[0]?.td ? africanFoundriesLimited_afll1[0].td.mw : 0)
+        ).toFixed(2), kv: (africanFoundriesLimited_afll1[0]?.td ? africanFoundriesLimited_afll1[0].td.V : 0)},
+        'PULKISTEEL': {mw: Number(
+            Math.abs(pulkitSteel_psl1[0]?.td ? pulkitSteel_psl1[0].td.mw : 0)
+        ).toFixed(2), kv: (pulkitSteel_psl1[0]?.td ? pulkitSteel_psl1[0].td.V : 0)},
         'TOPSTEEL': {mw: Number(
             Math.abs(topSteel_tsl1[0]?.td ? topSteel_tsl1[0].td.mw : 0)
         ).toFixed(2), kv: (topSteel_tsl1[0]?.td ? topSteel_tsl1[0].td.V : 0)},

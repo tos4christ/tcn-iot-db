@@ -9,6 +9,8 @@ import get_stations from "./stations_adder";
      this.state = { 
       frequency: "",
       sagamu: {},
+      pulkitSteel: {},
+      africanFoundriesLimited: {},
       sunflag: {},
       topSteel: {},
       monarch: {},

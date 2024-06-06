@@ -13,6 +13,8 @@ import DateTime from "./DateTime";
      this.state = { 
       frequency: "",
       sagamu: {},
+      pulkitSteel: {},
+      africanFoundriesLimited: {},
       sunflag: {},
       topSteel: {},
       monarch: {},
