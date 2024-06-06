@@ -256,7 +256,7 @@ const get_stations =  function(state_data) {
             (olorunsogoPhase1Gs_tr3[0]?.gd ?olorunsogoPhase1Gs_tr3[0].gd.mw:0) + (olorunsogoPhase1Gs_tr4[0]?.gd ?olorunsogoPhase1Gs_tr4[0].gd.mw:0))
                 ).toFixed(2), kv: (olorunsogoPhase1Gs_r2a[0]?.td ?olorunsogoPhase1Gs_r2a[0].td.V:0)},
         'PARAS ENERGY (GAS)' : {mw: Number(
-            (parasEnergyPs_132cb[0]?.gd ?parasEnergyPs_132cb[0].gd.mw:0)
+            Math.abs(parasEnergyPs_132cb[0]?.gd ?parasEnergyPs_132cb[0].gd.mw:0)
             ).toFixed(2), kv: (parasEnergyPs_132cb[0]?.gd ?parasEnergyPs_132cb[0].gd.V:0)},
         'OMOTOSHO NIPP (GAS)' : {mw: Number(
             Math.abs(Math.abs(omotoshoNippPs_tr1[0]?.gd ?omotoshoNippPs_tr1[0].gd.mw:0) + Math.abs(omotoshoNippPs_tr2[0]?.gd ?omotoshoNippPs_tr2[0].gd.mw:0) + 
