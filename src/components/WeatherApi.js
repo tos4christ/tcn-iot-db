@@ -353,7 +353,7 @@ class WeatherApi extends React.Component {
                      }}>
                         Weather Forecast
                     </button>
-                    <p className="btn btn-success" onClick={() => audio.pause()}>
+                    <p className="btn btn-success" onClick={() => {}}>
                       Accept Alarms
                     </p>
                     <button className='trim'>

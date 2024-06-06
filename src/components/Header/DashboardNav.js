@@ -34,7 +34,7 @@ const DashboardNav = ({ body }) => {
     setKIllnesses(user.knownIllnesses);
     setResAdd(user.residentialAdd);
     setName(user.name);
-    audio.play();
+    //audio.play();
     $("#myModal").modal({
       keyboard: true
     })
@@ -94,7 +94,7 @@ const DashboardNav = ({ body }) => {
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
-            <button className="btn btn-success" onClick={() => audio.pause()}>
+            <button className="btn btn-success" onClick={() => {}}>
             Accept Alarms
           </button>
           </div>
