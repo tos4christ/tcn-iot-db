@@ -4,11 +4,12 @@ import { Route, Switch, useRouteMatch, Link, withRouter } from 'react-router-dom
 import WeatherWidget_rows_ncc from './Weather/WeatherWidget_rows_ncc';
 import WeatherWidget_cards from './Weather/WeatherWidget_cards';
 import TemWeather from './Weather/TemWeather';
-import emergencyAlert from "../assets/audio/emergency_alert.mp3";
+// import emergencyAlert from "../assets/audio/emergency_alert.mp3";
 import socket from "./utility/socketIO";
 import "../assets/css/cnn_2.css";
 
-const audio = new Audio(emergencyAlert);
+// Note the Audio file has been deleted to make the html file light
+//const audio = new Audio(emergencyAlert);
 
 class WeatherApi extends React.Component {
     constructor(props) {
