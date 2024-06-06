@@ -323,7 +323,7 @@ import DateTime from "./DateTime";
                   <td>{'N/A'}</td>
                 </tr>                                
                 <tr>
-                  <td>29</td>
+                  <td>14</td>
                   <td>SAGAMU 132KV TS</td>
                   <td>{this.checkConnection2(this.state.sagamu.server_time)}</td>
                   <td>{sagamu.mw}</td>
