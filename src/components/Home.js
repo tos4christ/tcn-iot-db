@@ -12,6 +12,9 @@ import DateTime from "./DateTime";
      this.toggleDisplay = this.toggleDisplay.bind(this);
      this.state = { 
       frequency: "",
+      starPipe: {},
+      quantum: {},
+      kamSteel: {},
       sagamu: {},
       pulkitSteel: {},
       africanFoundriesLimited: {},

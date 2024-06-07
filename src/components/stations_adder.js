@@ -3,6 +3,9 @@ const get_stations =  function(state_data) {
         return;
     }
     // console.log(state_data, 'the station data')
+    const starPipe_spt1 = state_data.starPipe.transformers ? state_data.starPipe.transformers.filter(line => line.id === "spt1") : [{mw: null, V: null}];
+    const quantum_qt1 = state_data.quantum.transformers ? state_data.quantum.transformers.filter(line => line.id === "qt1") : [{mw: null, V: null}];
+    const kamSteel_ksl1 = state_data.kamSteel.lines ? state_data.kamSteel.lines.filter(line => line.id === "ksl1") : [{mw: null, V: null}];
     const africanFoundriesLimited_afll1 = state_data.africanFoundriesLimited.lines ? state_data.africanFoundriesLimited.lines.filter(line => line.id === "afll1") : [{mw: null, V: null}];
     const pulkitSteel_psl1 = state_data.pulkitSteel.lines ? state_data.pulkitSteel.lines.filter(line => line.id === "psl1") : [{mw: null, V: null}];
     const monarch_ml1 = state_data.monarch.lines ? state_data.monarch.lines.filter(line => line.id === "ml1") : [{mw: null, V: null}];
@@ -125,6 +128,15 @@ const get_stations =  function(state_data) {
     // console.log(omotosho2_tr3, omotosho2_tr4, 'the omotoshos');
     // const multiplier = 3/10;
     return { 
+        'KAMSTEEL': {mw: Number(
+            Math.abs(kamSteel_ksl1[0]?.td ? kamSteel_ksl1[0].td.mw : 0)
+        ).toFixed(2), kv: (kamSteel_ksl1[0]?.td ? kamSteel_ksl1[0].td.V : 0)},
+        'QUANTUM': {mw: Number(
+            Math.abs(quantum_qt1[0]?.td ? quantum_qt1[0].td.mw : 0)
+        ).toFixed(2), kv: (quantum_qt1[0]?.td ? quantum_qt1[0].td.V : 0)},
+        'STARPIPE': {mw: Number(
+            Math.abs(starPipe_spt1[0]?.td ? starPipe_spt1[0].td.mw : 0)
+        ).toFixed(2), kv: (starPipe_spt1[0]?.td ? starPipe_spt1[0].td.V : 0)},
         'AFRICANFOUNDARIES': {mw: Number(
             Math.abs(africanFoundriesLimited_afll1[0]?.td ? africanFoundriesLimited_afll1[0].td.mw : 0)
         ).toFixed(2), kv: (africanFoundriesLimited_afll1[0]?.td ? africanFoundriesLimited_afll1[0].td.V : 0)},

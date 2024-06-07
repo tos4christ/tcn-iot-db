@@ -8,6 +8,9 @@ import DateTime from "./DateTime";
    constructor(props) {
      super(props);
      this.state = { 
+      starPipe: {},
+      quantum: {},
+      kamSteel: {},
       sagamu: {},
       pulkitSteel: {},
       africanFoundriesLimited: {},
@@ -148,60 +151,6 @@ import DateTime from "./DateTime";
       return disconnected;
     }    
    }
-   checkConnection4(t1, t2, t3) {
-    const connected = <span className="text-success"> CN </span>
-    const disconnected = <span className="text-danger"> NC </span>
-    if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null) && (t3 === undefined || t3 === null)) {
-      return disconnected
-    }
-    try {
-      t1 = t1 ? t1 : '';
-      t2 = t2 ? t2 : '';
-      t3 = t3 ? t3 : '';
-      // Get current epoch time
-      const time_now = (new Date()).getTime();  
-      // if 30 seconds have passed without the time changing from the current time then return disconnected
-      // 30 seconds equals to 30,000 milliseconds
-      // if the time difference is greater than time_diff then return disconnected
-      const time_diff_1 = (time_now - t1) > 30000;
-      const time_diff_2 = (time_now - t2) > 30000;
-      const time_diff_3 = (time_now - t3) > 30000;
-      if ( time_diff_1 || time_diff_2 || time_diff_3 ) {
-        return disconnected
-      } else if (!isNaN(t1) && !isNaN(t2) && !isNaN(t3)) {
-          return connected
-      }
-    } catch(e) {
-      console.log(e);
-      return disconnected;
-    }    
-   }
-   checkConnection3_b(t1, t2) {
-    const connected = <span className="text-success"> CN </span>
-    const disconnected = <span className="text-danger"> NC </span>
-    if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null)) {
-      return disconnected
-    }
-    try {
-      t1 = t1 ? t1 : '';
-      t2 = t2 ? t2 : '';
-      // Get current epoch time
-      const time_now = (new Date()).getTime();
-      // if 30 seconds have passed without the time changing from the current time then return disconnected
-      // 30 seconds equals to 30,000 milliseconds
-      // if the time difference is greater than time_diff then return disconnected
-      const time_diff_1 = (time_now - t1) > 30000;
-      const time_diff_2 = (time_now - t2) > 30000;
-      if ( time_diff_1 && time_diff_2 ) {
-        return disconnected
-      } else if (!isNaN(t1) || !isNaN(t2)) {
-          return connected
-      } 
-    } catch(e) {
-      console.log(e);
-      return disconnected;
-    }    
-   }
    
   render() {
     const stations_array = get_stations(this.state);
@@ -212,11 +161,15 @@ import DateTime from "./DateTime";
     const monarch = stations_array['MONARCH'];
     const pulkitSteel = stations_array['PULKISTEEL'];
     const africanFoundriesLimited = stations_array['AFRICANFOUNDARIES'];
+    const kamSteel = stations_array['KAMSTEEL'];
+    const starPipe = stations_array['STARPIPE'];
+    const quantum = stations_array['QUANTUM'];
 
     const totalBilateral = (Number(sunflag.mw) < 0 ? 0 : Number(sunflag.mw)) + (Number(sagamu.mw) < 0 ? 0 : Number(sagamu.mw))
     + (Number(top_steel.mw) < 0 ? 0 : Number(top_steel.mw)) + (Number(larfarge.mw) < 0 ? 0 : Number(larfarge.mw)) + 
     (Number(monarch.mw) < 0 ? 0 : Number(monarch.mw)) + (Number(pulkitSteel.mw) < 0 ? 0 : Number(pulkitSteel.mw)) + 
-    (Number(africanFoundriesLimited.mw) < 0 ? 0 : Number(africanFoundriesLimited.mw));
+    (Number(africanFoundriesLimited.mw) < 0 ? 0 : Number(africanFoundriesLimited.mw)) +  (Number(quantum.mw) < 0 ? 0 : Number(quantum.mw))
+    + (Number(kamSteel.mw) < 0 ? 0 : Number(kamSteel.mw)) + (Number(starPipe.mw) < 0 ? 0 : Number(starPipe.mw));
         
     return (
       <>
@@ -260,9 +213,9 @@ import DateTime from "./DateTime";
                 <tr>
                   <td>4</td>
                   <td>REAL INFRASTRUCTURE LTD IKORODU</td>
-                  <td>{this.checkConnection2(null)}</td>
-                  <td>{'N/A'}</td>
-                  <td>{'N/A'}</td>
+                  <td>{this.checkConnection2(this.state.quantum.server_time)}</td>
+                  <td>{quantum.mw}</td>
+                  <td>{quantum.kv}</td>
                 </tr>
                 <tr>
                   <td>5</td>
@@ -274,9 +227,9 @@ import DateTime from "./DateTime";
                 <tr>
                   <td>6</td>
                   <td>KAM STEEL SAGAMU</td>
-                  <td>{this.checkConnection2(null)}</td>
-                  <td>{'N/A'}</td>
-                  <td>{'N/A'}</td>
+                  <td>{this.checkConnection2(this.state.kamSteel.server_time)}</td>
+                  <td>{kamSteel.mw}</td>
+                  <td>{kamSteel.kv}</td>
                 </tr>
                 <tr>
                   <td>7</td>
@@ -309,9 +262,9 @@ import DateTime from "./DateTime";
                 <tr>
                   <td>11</td>
                   <td>STAR PIPE PRODUCT IKORODU</td>
-                  <td>{this.checkConnection2(null)}</td>
-                  <td>{'N/A'}</td>
-                  <td>{'N/A'}</td>
+                  <td>{this.checkConnection2(this.state.starPipe.server_time)}</td>
+                  <td>{starPipe.mw}</td>
+                  <td>{starPipe.kv}</td>
                 </tr>
                 <tr>
                   <td>12</td>
