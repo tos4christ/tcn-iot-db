@@ -15,6 +15,8 @@ import DateTime from "./DateTime";
       starPipe: {},
       quantum: {},
       kamSteel: {},
+      ikorodu1: {},
+      ikorodu2: {},
       sagamu: {},
       pulkitSteel: {},
       africanFoundriesLimited: {},

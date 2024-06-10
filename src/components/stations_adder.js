@@ -3,6 +3,8 @@ const get_stations =  function(state_data) {
         return;
     }
     // console.log(state_data, 'the station data')
+    const ikorodu1_d23s = state_data.ikorodu1.lines ? state_data.ikorodu1.lines.filter(line => line.id === "d23s") : [{mw: null, V: null}];
+    const ikorodu2_d24s = state_data.ikorodu2.lines ? state_data.ikorodu2.lines.filter(line => line.id === "d24s") : [{mw: null, V: null}];
     const starPipe_spt1 = state_data.starPipe.transformers ? state_data.starPipe.transformers.filter(line => line.id === "spt1") : [{mw: null, V: null}];
     const quantum_qt1 = state_data.quantum.transformers ? state_data.quantum.transformers.filter(line => line.id === "qt1") : [{mw: null, V: null}];
     const kamSteel_ksl1 = state_data.kamSteel.lines ? state_data.kamSteel.lines.filter(line => line.id === "ksl1") : [{mw: null, V: null}];
@@ -128,6 +130,9 @@ const get_stations =  function(state_data) {
     // console.log(omotosho2_tr3, omotosho2_tr4, 'the omotoshos');
     // const multiplier = 3/10;
     return { 
+        'IKORODU-TS': {mw: Number(
+            Math.abs(ikorodu1_d23s[0]?.td ? ikorodu1_d23s[0].td.mw : 0) + Math.abs(ikorodu2_d24s[0]?.td ? ikorodu2_d24s[0].td.mw : 0)
+        ).toFixed(2), kv: (ikorodu1_d23s[0]?.td ? ikorodu1_d23s[0].td.V : 0)},
         'KAMSTEEL': {mw: Number(
             Math.abs(kamSteel_ksl1[0]?.td ? kamSteel_ksl1[0].td.mw : 0)
         ).toFixed(2), kv: (kamSteel_ksl1[0]?.td ? kamSteel_ksl1[0].td.V : 0)},

@@ -87,7 +87,7 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 /* Weather API */
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-width: 768px) {
-    .ncc-menu {
+    .ncc-menu, .bl-menu {
         width: 62em;
     }
     .item-divs {
@@ -322,9 +322,6 @@ font-weight: 500;
     font-size: small;
 }
 
-
-
-
 .tem input, .report input {
     width: 8em;
 }
@@ -490,7 +487,7 @@ table.history-tg thead tr th:nth-of-type(8), table.history-tg tbody tr td:nth-of
     display: flex;
     flex-direction: row;
     margin: 0;
-    background-image: url('./11.jpg');
+    /* background-image: url('./11.jpg'); */
 }
 .bl-counter-div {
     flex-grow: 1;

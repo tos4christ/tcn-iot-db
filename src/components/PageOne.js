@@ -11,6 +11,8 @@ import get_stations from "./stations_adder";
       starPipe: {},
       quantum: {},
       kamSteel: {},
+      ikorodu1: {},
+      ikorodu2: {},
       sagamu: {},
       pulkitSteel: {},
       africanFoundriesLimited: {},
