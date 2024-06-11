@@ -13,6 +13,7 @@ import get_stations from "./stations_adder";
       kamSteel: {},
       ikorodu1: {},
       ikorodu2: {},
+      pheonix: {},
       sagamu: {},
       pulkitSteel: {},
       africanFoundriesLimited: {},

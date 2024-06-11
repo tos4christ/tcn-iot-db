@@ -3,6 +3,7 @@ const get_stations =  function(state_data) {
         return;
     }
     // console.log(state_data, 'the station data')
+    const pheonix_pt1 = state_data.pheonix.transformers ? state_data.pheonix.transformers.filter(line => line.id === "pt1") : [{mw: null, V: null}];
     const ikorodu1_d23s = state_data.ikorodu1.lines ? state_data.ikorodu1.lines.filter(line => line.id === "d23s") : [{mw: null, V: null}];
     const ikorodu2_d24s = state_data.ikorodu2.lines ? state_data.ikorodu2.lines.filter(line => line.id === "d24s") : [{mw: null, V: null}];
     const starPipe_spt1 = state_data.starPipe.transformers ? state_data.starPipe.transformers.filter(line => line.id === "spt1") : [{mw: null, V: null}];
@@ -130,6 +131,9 @@ const get_stations =  function(state_data) {
     // console.log(omotosho2_tr3, omotosho2_tr4, 'the omotoshos');
     // const multiplier = 3/10;
     return { 
+        'PHEONIX': {mw: Number(
+            Math.abs(pheonix_pt1[0]?.td ? pheonix_pt1[0].td.mw : 0)
+        ).toFixed(2), kv: (pheonix_pt1[0]?.td ? pheonix_pt1[0].td.V : 0)},
         'IKORODU-TS': {mw: Number(
             Math.abs(ikorodu1_d23s[0]?.td ? ikorodu1_d23s[0].td.mw : 0) + Math.abs(ikorodu2_d24s[0]?.td ? ikorodu2_d24s[0].td.mw : 0)
         ).toFixed(2), kv: (ikorodu1_d23s[0]?.td ? ikorodu1_d23s[0].td.V : 0)},

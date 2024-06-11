@@ -17,6 +17,7 @@ import Modal from "./Modal";
       kamSteel: {},
       ikorodu1: {},
       ikorodu2: {},
+      pheonix: {},
       sagamu: {},
       pulkitSteel: {},
       africanFoundriesLimited: {},

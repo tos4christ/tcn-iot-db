@@ -14,6 +14,7 @@ import DateTime from "./DateTime";
       sagamu: {},
       ikorodu1: {},
       ikorodu2: {},
+      pheonix: {},
       pulkitSteel: {},
       africanFoundriesLimited: {},
       sunflag: {},
@@ -167,13 +168,14 @@ import DateTime from "./DateTime";
     const starPipe = stations_array['STARPIPE'];
     const quantum = stations_array['QUANTUM'];
     const ikorodu_ts = stations_array['IKORODU-TS'];
+    const pheonix = stations_array['PHEONIX'];
 
     const totalBilateral = (Number(sunflag.mw) < 0 ? 0 : Number(sunflag.mw)) + (Number(sagamu.mw) < 0 ? 0 : Number(sagamu.mw))
     + (Number(top_steel.mw) < 0 ? 0 : Number(top_steel.mw)) + (Number(larfarge.mw) < 0 ? 0 : Number(larfarge.mw)) + 
     (Number(monarch.mw) < 0 ? 0 : Number(monarch.mw)) + (Number(pulkitSteel.mw) < 0 ? 0 : Number(pulkitSteel.mw)) + 
     (Number(africanFoundriesLimited.mw) < 0 ? 0 : Number(africanFoundriesLimited.mw)) +  (Number(quantum.mw) < 0 ? 0 : Number(quantum.mw))
     + (Number(kamSteel.mw) < 0 ? 0 : Number(kamSteel.mw)) + (Number(starPipe.mw) < 0 ? 0 : Number(starPipe.mw)) + 
-    (Number(ikorodu_ts.mw) < 0 ? 0 : Number(ikorodu_ts.mw));
+    (Number(ikorodu_ts.mw) < 0 ? 0 : Number(ikorodu_ts.mw)) + (Number(pheonix.mw) < 0 ? 0 : Number(pheonix.mw));
         
     return (
       <>
@@ -195,10 +197,10 @@ import DateTime from "./DateTime";
               <tbody>
                 <tr>
                   <td>1</td>
-                  <td>PHONIX STEEL IKORODU</td>
-                  <td>{this.checkConnection2(null)}</td>
-                  <td>{'N/A'}</td>
-                  <td>{'N/A'}</td>
+                  <td>PHEONIX STEEL IKORODU</td>
+                  <td>{this.checkConnection2(this.state.pheonix.server_time)}</td>
+                  <td>{pheonix.mw}</td>
+                  <td>{pheonix.kv}</td>
                 </tr>
                 <tr>
                   <td>2</td>
