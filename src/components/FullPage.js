@@ -224,6 +224,34 @@ import Modal from "./Modal";
       return disconnected;
     }    
    }
+   checkConnection4_delta(t1, t2, t3) {
+    const connected = <span className="text-success"> CN </span>
+    const disconnected = <span className="text-danger"> NC </span>
+    if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null) && (t3 === undefined || t3 === null)) {
+      return disconnected
+    }
+    try {
+      t1 = t1 ? t1 : '';
+      t2 = t2 ? t2 : '';
+      t3 = t3 ? t3 : '';
+      // Get current epoch time
+      const time_now = (new Date()).getTime();  
+      // if 30 seconds have passed without the time changing from the current time then return disconnected
+      // 30 seconds equals to 30,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff_1 = (time_now - t1) > 30000;
+      const time_diff_2 = (time_now - t2) > 30000;
+      const time_diff_3 = (time_now - t3) > 30000;
+      if (time_diff_1  && time_diff_3) {
+        return disconnected
+      } else if ( !isNaN(t1) || !isNaN(t3) ) {
+          return connected
+      }
+    } catch(e) {
+      console.log(e);
+      return disconnected;
+    }    
+   }
    onClickDisplay(e) {
     e.preventDefault();
 
@@ -355,7 +383,7 @@ import Modal from "./Modal";
                 <tr>
                   <td>6</td>
                   <td>DELTA (GAS)</td>
-                  <td>{this.checkConnection3(this.state.delta3.server_time , this.state.deltaGs.server_time)}</td>
+                  <td>{this.checkConnection4_delta(this.state.delta3.server_time , this.state.deltaGs.server_time, this.state.delta2.server_time)}</td>
                   <td>{delta_gs.mw}</td>
                   <td>{delta_gs.kv}</td>
                 </tr>
