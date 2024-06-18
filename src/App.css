@@ -480,8 +480,6 @@ table.history-tg thead tr th:nth-of-type(8), table.history-tg tbody tr td:nth-of
 ----------------------------*/
 .bl-menu {
     margin: 0;
-    background-image: url('/public/tcn-nas-background.jpeg');
-    background-image: url('./11.jpg');
 }
 .bl-menu-list {
     display: flex;
