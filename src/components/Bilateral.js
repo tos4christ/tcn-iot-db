@@ -167,7 +167,8 @@ import DateTime from "./DateTime";
     const kamSteel = stations_array['KAMSTEEL'];
     const starPipe = stations_array['STARPIPE'];
     const quantum = stations_array['QUANTUM'];
-    const ikorodu_ts = stations_array['IKORODU-TS'];
+    const ikorodu_1 = stations_array['IKORODU 1'];
+    const ikorodu_2 = stations_array['IKORODU 2'];
     const pheonix = stations_array['PHEONIX'];
 
     const totalBilateral = (Number(sunflag.mw) < 0 ? 0 : Number(sunflag.mw)) + (Number(sagamu.mw) < 0 ? 0 : Number(sagamu.mw))
@@ -175,7 +176,8 @@ import DateTime from "./DateTime";
     (Number(monarch.mw) < 0 ? 0 : Number(monarch.mw)) + (Number(pulkitSteel.mw) < 0 ? 0 : Number(pulkitSteel.mw)) + 
     (Number(africanFoundriesLimited.mw) < 0 ? 0 : Number(africanFoundriesLimited.mw)) +  (Number(quantum.mw) < 0 ? 0 : Number(quantum.mw))
     + (Number(kamSteel.mw) < 0 ? 0 : Number(kamSteel.mw)) + (Number(starPipe.mw) < 0 ? 0 : Number(starPipe.mw)) + 
-    (Number(ikorodu_ts.mw) < 0 ? 0 : Number(ikorodu_ts.mw)) + (Number(pheonix.mw) < 0 ? 0 : Number(pheonix.mw));
+    (Number(ikorodu_1.mw) < 0 ? 0 : Number(ikorodu_1.mw)) + (Number(pheonix.mw) < 0 ? 0 : Number(pheonix.mw))
+    + (Number(ikorodu_2.mw) < 0 ? 0 : Number(ikorodu_2.mw));
         
     return (
       <>
@@ -281,13 +283,20 @@ import DateTime from "./DateTime";
                 </tr>
                 <tr>
                   <td>13</td>
-                  <td>IKORODU 132KV TS</td>
-                  <td>{this.checkConnection3(this.state.ikorodu1.server_time, this.state.ikorodu2.server_time)}</td>
-                  <td>{ikorodu_ts.mw}</td>
-                  <td>{ikorodu_ts.kv}</td>
-                </tr>                                
+                  <td>IKORODU 132KV TS LINE_1</td>
+                  <td>{this.checkConnection2(this.state.ikorodu1.server_time)}</td>
+                  <td>{ikorodu_1.mw}</td>
+                  <td>{ikorodu_1.kv}</td>
+                </tr>
                 <tr>
                   <td>14</td>
+                  <td>IKORODU 132KV TS LINE_2</td>
+                  <td>{this.checkConnection2(this.state.ikorodu2.server_time)}</td>
+                  <td>{ikorodu_2.mw}</td>
+                  <td>{ikorodu_2.kv}</td>
+                </tr> 
+                <tr>
+                  <td>15</td>
                   <td>SAGAMU 132KV TS</td>
                   <td>{this.checkConnection2(this.state.sagamu.server_time)}</td>
                   <td>{sagamu.mw}</td>

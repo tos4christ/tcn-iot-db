@@ -134,9 +134,10 @@ const get_stations =  function(state_data) {
         'PHEONIX': {mw: Number(
             Math.abs(pheonix_pt1[0]?.td ? pheonix_pt1[0].td.mw : 0)
         ).toFixed(2), kv: (pheonix_pt1[0]?.td ? pheonix_pt1[0].td.V : 0)},
-        'IKORODU-TS': {mw: Number(
-            Math.abs(ikorodu1_d23s[0]?.td ? ikorodu1_d23s[0].td.mw : 0) + Math.abs(ikorodu2_d24s[0]?.td ? ikorodu2_d24s[0].td.mw : 0)
+        'IKORODU 1': {mw: Number((ikorodu1_d23s[0]?.td ? ikorodu1_d23s[0].td.mw : 0)
         ).toFixed(2), kv: (ikorodu1_d23s[0]?.td ? ikorodu1_d23s[0].td.V : 0)},
+        'IKORODU 2': {mw: Number((ikorodu2_d24s[0]?.td ? ikorodu2_d24s[0].td.mw : 0)
+        ).toFixed(2), kv: (ikorodu2_d24s[0]?.td ? ikorodu2_d24s[0].td.V : 0)},
         'KAMSTEEL': {mw: Number(
             Math.abs(kamSteel_ksl1[0]?.td ? kamSteel_ksl1[0].td.mw : 0)
         ).toFixed(2), kv: (kamSteel_ksl1[0]?.td ? kamSteel_ksl1[0].td.V : 0)},
