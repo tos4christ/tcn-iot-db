@@ -14,10 +14,10 @@ import socket from "./utility/socketIO";
       socket.on("frequency001", data => {
         const { message } = data;
         //const parsedMessage = JSON.parse(message);
-        console.log("the message  ", message, " the message keys ", Object.keys(message), " the data ", data);
+        //console.log("the message  ", message, " the message keys ", Object.keys(message), " the data ", data);
         const returnObject = {}
         this.setState(prevState => {
-          prevState["frequency"] = {t: 1, value: 5};
+          prevState["frequency"] = message;
           returnObject["frequency"] = prevState["frequency"]
           return returnObject;
         })
