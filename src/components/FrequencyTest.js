@@ -17,7 +17,7 @@ import socket from "./utility/socketIO";
         console.log("the message  ", message, "  data  ", data );
         const returnObject = {}
         this.setState(prevState => {
-          prevState["frequency"] = parsedMessage;
+          prevState["frequency"] = {t: 1, value: 5};
           returnObject["frequency"] = prevState["frequency"]
           return returnObject;
         })
