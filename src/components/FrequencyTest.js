@@ -13,8 +13,8 @@ import socket from "./utility/socketIO";
     if(this.props.history.location.pathname === "/frequency_test") {      
       socket.on("frequency001", data => {
         const { message } = data;
-        const parsedMessage = JSON.parse(message);
-        console.log("the message  ", message, "  parsedMessage  ", parsedMessage );
+        //const parsedMessage = JSON.parse(message);
+        console.log("the message  ", message, "  data  ", data );
         const returnObject = {}
         this.setState(prevState => {
           prevState["frequency"] = parsedMessage;
