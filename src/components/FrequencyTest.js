@@ -14,6 +14,7 @@ import socket from "./utility/socketIO";
       socket.on("frequency001", data => {
         const { message } = data;
         const parsedMessage = JSON.parse(message);
+        console.log("the message  ", message, "  parsedMessage  ", parsedMessage );
         const returnObject = {}
         this.setState(prevState => {
           prevState["frequency"] = parsedMessage;
