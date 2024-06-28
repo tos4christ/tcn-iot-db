@@ -32,6 +32,7 @@ import Disco from "./pages/Disco";
 import TCN from "./pages/Tcn";
 import UserLogin from "./pages/UserLogin";
 import Bilateral from './components/Bilateral';
+import FrequencyTest from './components/FrequencyTest';
 
 
 class App extends React.Component {
@@ -136,6 +137,11 @@ class App extends React.Component {
           <Route exact path={`/bilaterals`}>              
             <div className='App'>
               <Bilateral />
+            </div>
+          </Route>
+          <Route exact path={`/frequency_test`}>              
+            <div className='App'>
+              <FrequencyTest />
             </div>
           </Route>
           <Route exact path={`/nccweather`}>
