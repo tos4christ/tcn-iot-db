@@ -11,7 +11,7 @@ import Modal from "./Modal";
      this.setModalFalse = this.setModalFalse.bind(this);
      this.setModalTrue = this.setModalTrue.bind(this);
      this.state = { 
-      frequency: "",
+      frequency: {t: 0, value: 0},
       starPipe: {},
       quantum: {},
       kamSteel: {},
@@ -95,13 +95,13 @@ import Modal from "./Modal";
           return returnObject;
         })
       });
-      socket.on("frequency000", data => {
+      socket.on("frequency001", data => {
         const { message } = data;
-        const parsedMessage = JSON.parse(message);
+        // const parsedMessage = JSON.parse(message);
         const returnObject = {}
         this.setState(prevState => {
-          prevState["frequency"] = parsedMessage;
-          returnObject["frequency"] = prevState["frequency"]
+          prevState["frequency"] = message;
+          returnObject["frequency"] = prevState["frequency"];
           return returnObject;
         })
       });
@@ -333,7 +333,7 @@ import Modal from "./Modal";
         <div className="ncc-menu-list">
           <div className="ncc-display-div">
             <h2><DateTime /></h2>
-            <h2 className="text-danger">IoT POWER STATIONS TABLE  -- Frequency:  { this.state.frequency }Hz</h2>
+            <h2 className="text-danger">IoT POWER STATIONS TABLE  -- Frequency:  { this.state.frequency.value }Hz</h2>
             <table className="ncc-tg">
               <thead>
                 <tr>

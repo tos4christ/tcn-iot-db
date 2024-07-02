@@ -11,7 +11,7 @@ import DateTime from "./DateTime";
      super(props);
      this.toggleDisplay = this.toggleDisplay.bind(this);
      this.state = { 
-      frequency: "",
+      frequency: {t: 0, value: 0},
       starPipe: {},
       quantum: {},
       kamSteel: {},
@@ -96,12 +96,12 @@ import DateTime from "./DateTime";
           return returnObject;
         })
       });
-      socket.on("frequency000", data => {
+      socket.on("frequency001", data => {
         const { message } = data;
-        const parsedMessage = JSON.parse(message);
+        // const parsedMessage = JSON.parse(message);
         const returnObject = {}
         this.setState(prevState => {
-          prevState["frequency"] = parsedMessage;
+          prevState["frequency"] = message;
           returnObject["frequency"] = prevState["frequency"]
           return returnObject;
         })
@@ -377,7 +377,7 @@ import DateTime from "./DateTime";
           </ul>
           <div className="display-div">
             <h2 className="pb-0 mb-0"> <DateTime /></h2>
-            <h1 className="text-danger pt-0 mt-0"> Frequency:  { this.state.frequency } Hz</h1>
+            <h1 className="text-danger pt-0 mt-0"> Frequency:  { this.state.frequency.value } Hz</h1>
             <h2 className="text-danger">IoT POWER STATIONS TABLE</h2>
             <table className="tg">
               <thead>

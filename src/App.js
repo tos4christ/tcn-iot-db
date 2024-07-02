@@ -139,11 +139,11 @@ class App extends React.Component {
               <Bilateral />
             </div>
           </Route>
-          <Route exact path={`/frequency_test`}>              
+          {/* <Route exact path={`/frequency_test`}>              
             <div className='App'>
               <FrequencyTest />
             </div>
-          </Route>
+          </Route> */}
           <Route exact path={`/nccweather`}>
               <WeatherApi />         
           </Route>

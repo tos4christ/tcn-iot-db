@@ -89,16 +89,16 @@ import get_stations from "./stations_adder";
           return returnObject;
         })
       });
-      socket.on("frequency000", data => {
-        const { message } = data;
-        const parsedMessage = JSON.parse(message);
-        const returnObject = {}
-        this.setState(prevState => {
-          prevState["frequency"] = parsedMessage;
-          returnObject["frequency"] = prevState["frequency"]
-          return returnObject;
-        })
-      });
+      // socket.on("frequency001", data => {
+      //   const { message } = data;
+      //   // const parsedMessage = JSON.parse(message);
+      //   const returnObject = {}
+      //   this.setState(prevState => {
+      //     prevState["frequency"] = message;
+      //     returnObject["frequency"] = prevState["frequency"]
+      //     return returnObject;
+      //   })
+      // });
     }
    }
    getEpoch(time) {

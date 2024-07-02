@@ -7,7 +7,7 @@ import get_stations from "./stations_adder";
    constructor(props) {
      super(props);
      this.state = { 
-      frequency: "",
+      frequency: {t: 'awaiting', value: 0},
       starPipe: {},
       quantum: {},
       kamSteel: {},
@@ -89,12 +89,12 @@ import get_stations from "./stations_adder";
           return returnObject;
         })
       });
-      socket.on("frequency000", data => {
+      socket.on("frequency001", data => {
         const { message } = data;
-        const parsedMessage = JSON.parse(message);
+        //const parsedMessage = JSON.parse(message);
         const returnObject = {}
         this.setState(prevState => {
-          prevState["frequency"] = parsedMessage;
+          prevState["frequency"] = message;
           returnObject["frequency"] = prevState["frequency"]
           return returnObject;
         })
@@ -276,7 +276,7 @@ import get_stations from "./stations_adder";
       <div className="ncc-menu">
         <div className="ncc-menu-list">
           <div className="ncc-display-div">
-            <h2 className="text-danger">IoT POWER STATIONS TABLE  -- Frequency:  { this.state.frequency }Hz</h2>
+            <h2 className="text-danger">IoT POWER STATIONS TABLE  -- Frequency:  { this.state.frequency.value }Hz</h2>
             <table className="ncc-tg">
               <thead>
                 <tr>
