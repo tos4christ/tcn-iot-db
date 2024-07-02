@@ -98,7 +98,11 @@ import Modal from "./Modal";
       socket.on("frequency001", data => {
         const { message } = data;
         // const parsedMessage = JSON.parse(message);
-        console.log(message, "  ", typeof message);
+        try {
+          console.log(JSON.parse(message), "  ", typeof JSON.parse(message));
+          console.log(JSON.stringify(message), "  ", typeof JSON.stringify(message));
+        } catch(e) { console(e) }
+        
         const returnObject = {}
         this.setState(prevState => {
           prevState["frequency"] = message;
