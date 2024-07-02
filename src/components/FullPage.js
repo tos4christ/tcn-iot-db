@@ -11,7 +11,7 @@ import Modal from "./Modal";
      this.setModalFalse = this.setModalFalse.bind(this);
      this.setModalTrue = this.setModalTrue.bind(this);
      this.state = { 
-      frequency: {t: 0, value: 0},
+      frequency: "",
       starPipe: {},
       quantum: {},
       kamSteel: {},
@@ -334,7 +334,7 @@ import Modal from "./Modal";
         <div className="ncc-menu-list">
           <div className="ncc-display-div">
             <h2><DateTime /></h2>
-            <h2 className="text-danger">IoT POWER STATIONS TABLE  -- Frequency:  { this.state.frequency.value }Hz</h2>
+            <h2 className="text-danger">IoT POWER STATIONS TABLE  -- Frequency:  {this.state.frequency.value ? this.state.frequency.value : ""}Hz</h2>
             <table className="ncc-tg">
               <thead>
                 <tr>

@@ -7,7 +7,7 @@ import get_stations from "./stations_adder";
    constructor(props) {
      super(props);
      this.state = { 
-      frequency: {t: 'awaiting', value: 0},
+      frequency: "",
       starPipe: {},
       quantum: {},
       kamSteel: {},
@@ -276,7 +276,7 @@ import get_stations from "./stations_adder";
       <div className="ncc-menu">
         <div className="ncc-menu-list">
           <div className="ncc-display-div">
-            <h2 className="text-danger">IoT POWER STATIONS TABLE  -- Frequency:  { this.state.frequency.value }Hz</h2>
+            <h2 className="text-danger">IoT POWER STATIONS TABLE  -- Frequency:  {this.state.frequency.value ? this.state.frequency.value : ""}Hz</h2>
             <table className="ncc-tg">
               <thead>
                 <tr>

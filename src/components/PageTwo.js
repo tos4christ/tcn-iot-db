@@ -6,8 +6,7 @@ import get_stations from "./stations_adder";
  class PageTwo extends React.Component {
    constructor(props) {
      super(props);
-     this.state = { 
-      frequency: "",
+     this.state = {
       starPipe: {},
       quantum: {},
       kamSteel: {},
@@ -89,16 +88,6 @@ import get_stations from "./stations_adder";
           return returnObject;
         })
       });
-      // socket.on("frequency001", data => {
-      //   const { message } = data;
-      //   // const parsedMessage = JSON.parse(message);
-      //   const returnObject = {}
-      //   this.setState(prevState => {
-      //     prevState["frequency"] = message;
-      //     returnObject["frequency"] = prevState["frequency"]
-      //     return returnObject;
-      //   })
-      // });
     }
    }
    getEpoch(time) {
