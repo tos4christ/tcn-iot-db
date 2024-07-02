@@ -65,7 +65,10 @@ import get_stations from "./stations_adder";
     if(this.props.history.location.pathname === "/nccnaspageone") {
       socket.on("client_message_111", data => {
         const { message } = data;
-        const parsedMessage = JSON.parse(message);
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
         parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.id;
         const returnObject = {}
@@ -78,7 +81,10 @@ import get_stations from "./stations_adder";
       });
       socket.on("client_message_222", data => {
         const { message } = data;
-        const parsedMessage = JSON.parse(message);
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
         parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.id;
         const returnObject = {}

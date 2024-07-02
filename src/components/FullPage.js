@@ -71,7 +71,10 @@ import Modal from "./Modal";
     if(this.props.history.location.pathname === "/nccnasfullpage") {
       socket.on("client_message_111", data => {
         const { message } = data;
-        const parsedMessage = JSON.parse(message);
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
         parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.id;
         const returnObject = {}
@@ -84,7 +87,10 @@ import Modal from "./Modal";
       });
       socket.on("client_message_222", data => {
         const { message } = data;
-        const parsedMessage = JSON.parse(message);
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
         parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.id;
         const returnObject = {}
