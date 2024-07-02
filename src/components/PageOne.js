@@ -91,10 +91,13 @@ import get_stations from "./stations_adder";
       });
       socket.on("frequency001", data => {
         const { message } = data;
-        //const parsedMessage = JSON.parse(message);
+        let parsedMessage;
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) { console(e) } 
         const returnObject = {}
         this.setState(prevState => {
-          prevState["frequency"] = message;
+          prevState["frequency"] = parsedMessage;
           returnObject["frequency"] = prevState["frequency"]
           return returnObject;
         })
