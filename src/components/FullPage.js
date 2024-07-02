@@ -327,7 +327,7 @@ import Modal from "./Modal";
     (Number(delta_gs.mw) < 0 ? 0 : Number(delta_gs.mw))+ 
     (Number(jebba_gs.mw) < 0 ? 0 : Number(jebba_gs.mw))+ 
     (Number(dadinkowa_gs.mw) < 0 ? 0 : Number(dadinkowa_gs.mw));
-        
+        console.log(this.state.frequency, "  ", typeof this.state.frequency);
     return (
       <>
       <div className="ncc-menu">
