@@ -55,18 +55,18 @@ const stations = [
         })
         .then(response => {
           // console.log(response.json());
-          return response.json();
+          return response.blob();
         })
         .then( blob => {
-          console.log("this is the blob data:-  ", blob);
-          this.setState({loading: false});
-          return;
+          // console.log("this is the blob data:-  ", blob);
+          // this.setState({loading: false});
+          // return;
           // Return a message
           this.setState({loading: false})
           var url = window.URL.createObjectURL(blob);
           var a = document.createElement('a');
           a.href = url;
-          a.download = "tem.xlsx";
+          a.download = "weather.xlsx";
           document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
           a.click();
           a.remove();  //afterwards we remove the element again 
