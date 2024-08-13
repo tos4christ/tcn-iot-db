@@ -53,7 +53,10 @@ const stations = [
           },
           body: JSON.stringify(data)
         })
-        .then(response => response.blob())
+        .then(response => {
+          console.log(response.json());
+          return response.blob();
+        })
         .then( blob => {
           console.log("this is the blob data:-  ", blob);
           this.setState({loading: false});
