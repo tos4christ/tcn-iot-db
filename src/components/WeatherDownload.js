@@ -58,7 +58,7 @@ const stations = [
           return response.blob();
         })
         .then( blob => {
-          console.log("this is the blob data:-  ", blob);
+          //console.log("this is the blob data:-  ", blob);
           this.setState({loading: false});
           return;
           // Return a message
