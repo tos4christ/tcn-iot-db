@@ -25,6 +25,9 @@ const stations = [
   }
   setDate(e) {    
     const name = e.target.name;
+    console.log(name);
+    
+    return;
     this.setState( prevState => {
       prevState[name] = this[name].value.split('T');
       return {name : prevState[name]}
@@ -134,7 +137,7 @@ const stations = [
           {/* Select Start Date */}    
           <div className="tem options">
             <label> Report Date </label> 
-            <input type={'date'} name="startDate_load" onChange={this.setDate} ref={node => this.state.startDate_weather = node}></input>
+            <input type={'date'} name="startDate_load" onChange={this.setDate} ref={node => this.startDate_weather = node}></input>
           </div>
           <div className="line"> </div>
           <button className="tem submit-button" onClick={this.handleSubmitWeather}> Download Rainfall Data </button>
