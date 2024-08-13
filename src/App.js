@@ -32,7 +32,8 @@ import Disco from "./pages/Disco";
 import TCN from "./pages/Tcn";
 import UserLogin from "./pages/UserLogin";
 import Bilateral from './components/Bilateral';
-import FrequencyTest from './components/FrequencyTest';
+// import FrequencyTest from './components/FrequencyTest';
+import WeatherDownload from './components/WeatherDownload';
 
 
 class App extends React.Component {
@@ -111,6 +112,12 @@ class App extends React.Component {
             <div className='App'>
               <Header />
               <Tem isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>            
+          </Route>
+          <Route exact path={`/weather_download`}>
+            <div className='App'>
+              <Header />
+              <WeatherDownload isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>            
           </Route>
           <Route exact path={`/collapse`}>
