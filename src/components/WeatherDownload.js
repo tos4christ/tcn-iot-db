@@ -78,8 +78,6 @@ const stations = [
       const station_data = weather_data.filter(items => [`${station}`].includes(items.station_name));
       if(station_data[0]) {
         const station_name = station_data[0].station_name;
-        station_data[0].rain_volume_1h;
-        station_data[0].rain_volume_3h
         station_container[station_name] = station_data;
       }
     });
