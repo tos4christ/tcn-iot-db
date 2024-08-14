@@ -55,12 +55,12 @@ const stations = [
         })
         .then(response => {
           // console.log(response.json());
-          return response.blob();
+          return response.json();
         })
         .then( blob => {
-          // console.log("this is the blob data:-  ", blob);
-          // this.setState({loading: false});
-          // return;
+          console.log("this is the blob data:-  ", blob);
+          this.setState({loading: false});
+          return;
           // Return a message
           this.setState({loading: false})
           var url = window.URL.createObjectURL(blob);
