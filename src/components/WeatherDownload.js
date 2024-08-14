@@ -32,7 +32,6 @@ const stations = [
   }
   handleSubmitWeather() {
     const startDate = this.state.startDate_weather[0];
-    // console.log(startDate, startTime, 'the start date and time');
     const token = localStorage.getItem("token");
     // verify that the startDate is lower than the endDate
     // This is already handled at the backend by replacing the lower to be the start
@@ -54,15 +53,10 @@ const stations = [
           body: JSON.stringify(data)
         })
         .then(response => {
-          // console.log(response.json());
           return response.blob();
         })
         .then( blob => {
-          console.log("this is the blob data:-  ", blob);
           this.setState({loading: false});
-          // return;
-          // Return a message
-          this.setState({loading: false})
           var url = window.URL.createObjectURL(blob);
           var a = document.createElement('a');
           a.href = url;
