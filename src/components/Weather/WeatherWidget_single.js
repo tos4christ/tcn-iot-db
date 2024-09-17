@@ -32,9 +32,10 @@ class SingleWeatherWidget extends React.Component {
       return dated[day];
     }
     const { weatherData } = this.props;
-    const {current: currentWeather, daily: dailyForecast, hourly: hourlyForecast} = weatherData;
+    // const {current: currentWeather, daily: dailyForecast, hourly: hourlyForecast} = weatherData;
+    const {current: currentWeather, hourly: hourlyForecast} = weatherData;
     const {list: hourly_list} = hourlyForecast;
-    const {list: daily_list} = dailyForecast;
+    // const {list: daily_list} = dailyForecast;
     //const current_icon_url = getIconUrl(currentWeather.weather[0].icon);
     return (
       <section className="vh-100" style={{ backgroundColor: "#C1CFEA" }}>
@@ -154,7 +155,7 @@ class SingleWeatherWidget extends React.Component {
                 </MDBCardBody>
               </MDBCard>
   
-              <MDBCard className="mb-4" style={{ borderRadius: "25px" }}>
+              {/* <MDBCard className="mb-4" style={{ borderRadius: "25px" }}>
                 <MDBCardBody className="p-4">
                   <div className="d-flex justify-content-around text-center pb-3 pt-2">
                     <div className="flex-column">
@@ -210,7 +211,7 @@ class SingleWeatherWidget extends React.Component {
                     
                   </div>
                 </MDBCardBody>
-              </MDBCard>
+              </MDBCard> */}
             </MDBCol>
           </MDBRow>
         </MDBContainer>
