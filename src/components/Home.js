@@ -472,7 +472,8 @@ import DateTime from "./DateTime";
                 <tr>
                   <td>11</td>
                   <td>GEREGU NIPP (GAS)</td>
-                  <td>{this.checkConnection2(this.state.gereguPs.server_time)}</td>
+                  {/* <td>{this.checkConnection2(this.state.gereguPs.server_time)}</td> */}
+                  <td><span className="text-danger"> NC </span></td>
                   <td>{geregunipp_gs.mw}</td>
                   <td>{geregunipp_gs.kv}</td>
                 </tr>
