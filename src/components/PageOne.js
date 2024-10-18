@@ -370,9 +370,9 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>11</td>
                   <td>GEREGU NIPP (GAS)</td>
-                  {/* <td>{this.checkConnection2(this.state.gereguPs.server_time)}</td> */}
-                  <td><span className="text-danger"> NC </span></td>
-                  <td>{geregunipp_gs.mw}</td>
+                  <td>{this.checkConnection2(this.state.gereguPs.server_time)}</td>
+                  {/* <td><span className="text-danger"> NC </span></td> */}
+                  <td>{Number(geregunipp_gs.mw) < 0 ? 0 : Number(geregunipp_gs.mw)}</td>                  
                   <td>{geregunipp_gs.kv}</td>
                 </tr>
                 <tr>

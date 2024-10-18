@@ -284,17 +284,17 @@ const get_stations =  function(state_data) {
             Math.abs(Math.abs(omotoshoNippPs_tr1[0]?.gd ?omotoshoNippPs_tr1[0].gd.mw:0) + Math.abs(omotoshoNippPs_tr2[0]?.gd ?omotoshoNippPs_tr2[0].gd.mw:0) + 
             Math.abs(omotoshoNippPs_tr3[0]?.gd ?omotoshoNippPs_tr3[0].gd.mw:0) + Math.abs(omotoshoNippPs_tr4[0]?.gd ?omotoshoNippPs_tr4[0].gd.mw:0))
                 ).toFixed(2), kv: (omotoshoNippPs_tr1[0]?.gd ?omotoshoNippPs_tr1[0].gd.V:0)},
-        // 'GEREGU NIPP (GAS)' : {mw: Number(
-        //     -((gereguPs_r1j[0]?.gd ?(gereguPs_r1j[0].gd.mw):0) + (gereguPs_r2j[0]?.gd ? (gereguPs_r2j[0].gd.mw):0)) - 
-        //     ((gereguPs_gt11[0]?.gd ?gereguPs_gt11[0].gd.mw:0) + (gereguPs_gt12[0]?.gd ?gereguPs_gt12[0].gd.mw:0) +
-        //     (gereguPs_gt13[0]?.gd ?gereguPs_gt13[0].gd.mw:0))
-        //         ).toFixed(2), kv: (gereguPs_r2j[0]?.gd ?gereguPs_r2j[0].gd.V:0)},
+        'GEREGU NIPP (GAS)' : {mw: Number(
+            -((gereguPs_r1j[0]?.gd ?(gereguPs_r1j[0].gd.mw):0) + (gereguPs_r2j[0]?.gd ? (gereguPs_r2j[0].gd.mw):0)) - 
+            ((gereguPs_gt11[0]?.gd ?gereguPs_gt11[0].gd.mw:0) + (gereguPs_gt12[0]?.gd ?gereguPs_gt12[0].gd.mw:0) +
+            (gereguPs_gt13[0]?.gd ?gereguPs_gt13[0].gd.mw:0))
+                ).toFixed(2), kv: (gereguPs_r2j[0]?.gd ?gereguPs_r2j[0].gd.V:0)},
         // 'GEREGU NIPP (GAS)' : {mw: Number(
         //     -((gereguPs_r1j[0]?.gd ?(gereguPs_r1j[0].gd.A * gereguPs_gt12[0].gd.V * Math.sqrt(3))/1000:0) + (gereguPs_r2j[0]?.gd ? (gereguPs_r2j[0].gd.A * gereguPs_gt12[0].gd.V * Math.sqrt(3))/1000:0)) - 
         //     ((gereguPs_gt11[0]?.gd ?gereguPs_gt11[0].gd.mw:0) + (gereguPs_gt12[0]?.gd ?gereguPs_gt12[0].gd.mw:0) +
         //     (gereguPs_gt13[0]?.gd ?gereguPs_gt13[0].gd.mw:0))
         //         ).toFixed(2), kv: (gereguPs_r2j[0]?.gd ?gereguPs_r2j[0].gd.V:0)},
-        'GEREGU NIPP (GAS)' : {mw:0, kv: (gereguPs_r2j[0]?.gd ?gereguPs_r2j[0].gd.V:0)},
+        // 'GEREGU NIPP (GAS)' : {mw:0, kv: (gereguPs_r2j[0]?.gd ?gereguPs_r2j[0].gd.V:0)},
         'AZURA-EDO IPP (GAS)' : {mw: Number(
             -((ihovborNippPs_ohl1[0]?.gd ?ihovborNippPs_ohl1[0].gd.mw:0) + (ihovborNippPs_ohl2[0]?.gd ?ihovborNippPs_ohl2[0].gd.mw:0))
         ).toFixed(2), kv: (ihovborNippPs_ohl1[0]?.gd ?ihovborNippPs_ohl1[0].gd.V:0)},
