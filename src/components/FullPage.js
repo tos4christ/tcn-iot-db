@@ -68,7 +68,7 @@ import Modal from "./Modal";
      };
    }
    componentDidMount() {
-    if(this.props.history.location.pathname === "/nccnasfullpage") {
+    if(this.props.history.location.pathname === "/tcnnaspage") {
       socket.on("client_message_111", data => {
         const { message } = data;
         let parsedMessage = {};

@@ -136,7 +136,7 @@ class App extends React.Component {
               <PageTwo />
             </div>
           </Route>
-          <Route exact path={`/nccnasfullpage`}>              
+          <Route exact path={`/tcnnaspage`}>              
             <div className='App'>
               <FullPage />
             </div>
