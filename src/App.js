@@ -34,6 +34,7 @@ import UserLogin from "./pages/UserLogin";
 import Bilateral from './components/Bilateral';
 // import FrequencyTest from './components/FrequencyTest';
 import WeatherDownload from './components/WeatherDownload';
+import VoltageProfile from './components/voltageProfileDownload';
 
 
 class App extends React.Component {
@@ -112,6 +113,12 @@ class App extends React.Component {
             <div className='App'>
               <Header />
               <Tem isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>            
+          </Route>
+          <Route exact path={`/voltageprofile`}>
+            <div className='App'>
+              <Header />
+              <VoltageProfile isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>            
           </Route>
           <Route exact path={`/weather_download`}>
