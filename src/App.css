@@ -945,6 +945,11 @@ background-color:#232323;
 }
 }
 
+.freq_font {
+    color: darkblue;
+    font-size: xx-large;
+}
+
 .App {  
 background-image: url('/public/tcn-nas-background.jpeg');
 opacity: 1;
