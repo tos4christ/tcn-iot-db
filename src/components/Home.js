@@ -271,7 +271,7 @@ import DateTime from "./DateTime";
   render() {
     const { isLoggedIn } = this.props;
     const token = localStorage.getItem("token");
-    if (!isLoggedIn || token.length < 1) {
+    if (!isLoggedIn || token === null) {
       return <Redirect to={'/'}/>
     }
     const stations_array = get_stations(this.state);
