@@ -72,6 +72,8 @@ import timeConverter from "../utility/timeConverter";
   render() {
     const { isLoggedIn } = this.props;
     const token = localStorage.getItem("token");
+    console.log(token, "   the token");
+    console.log(isLoggedIn, "  the isLoggedIn");
     if (!isLoggedIn || token.length < 1) {
       return <Redirect to={'/'}/>
     }
