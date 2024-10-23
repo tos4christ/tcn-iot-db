@@ -135,12 +135,12 @@ class App extends React.Component {
           </Route>
           <Route exact path={`/nccnaspageone`}>
             <div className='App'>
-              <PageOne />
+              <PageOne isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>                         
           </Route>
           <Route exact path={`/nccnaspagetwo`}>              
             <div className='App'>
-              <PageTwo />
+              <PageTwo isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
           </Route>
           <Route exact path={`/tcnnaspage`}>              
