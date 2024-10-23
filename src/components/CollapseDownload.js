@@ -15,7 +15,7 @@ import timeConverter from "../utility/timeConverter";
     }
   }
   componentDidMount() {
-    const token = localStorage.getItem("token");
+    
     const iLn = localStorage.getItem("isLoggedIn");
     console.log(token, "   the token");
     console.log(iLn, "  the login state");
@@ -76,8 +76,8 @@ import timeConverter from "../utility/timeConverter";
   }
   render() {
     const { isLoggedIn } = this.props;
-    
-    if (!isLoggedIn) {
+    const token = localStorage.getItem("token");
+    if (!isLoggedIn && token.length < 1) {
       return <Redirect to={'/'}/>
     }
     const { loading } = this.state;

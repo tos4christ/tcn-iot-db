@@ -59,7 +59,8 @@ import { Spinner, Button } from "react-bootstrap";
   }
   render() {
     const { isLoggedIn } = this.props;
-    if (!isLoggedIn) {
+    const token = localStorage.getItem("token");
+    if (!isLoggedIn && token.length < 1) {
       return <Redirect to={'/'}/>
     }
     const { loading } = this.state;
