@@ -285,7 +285,7 @@ import get_stations from "./stations_adder";
       <div className="ncc-menu">
         <div className="ncc-menu-list">
           <div className="ncc-display-div">
-            <h1 className="text-primary">IoT POWER STATIONS TABLE  -- Frequency:  {this.state.frequency.value ? this.state.frequency.value : ""}Hz</h1>
+            <h1 className="text-danger">IoT POWER STATIONS TABLE  -- Frequency: <span className="ncc-tg-zb4j">{this.state.frequency.value ? this.state.frequency.value : ""}Hz</span> </h1>
             <table className="ncc-tg">
               <thead>
                 <tr>
