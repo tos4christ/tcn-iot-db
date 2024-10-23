@@ -259,7 +259,7 @@ import get_stations from "./stations_adder";
   render() {
     const { isLoggedIn } = this.props;
     const token = localStorage.getItem("token");
-    if (!isLoggedIn && token.length < 1) {
+    if (!isLoggedIn || token.length < 1) {
       return <Redirect to={'/'}/>
     }
     const stations_array = get_stations(this.state);
