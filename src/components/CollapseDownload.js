@@ -14,12 +14,7 @@ import timeConverter from "../utility/timeConverter";
       loading: false
     }
   }
-  componentDidMount() {
-    
-    const iLn = localStorage.getItem("isLoggedIn");
-    console.log(token, "   the token");
-    console.log(iLn, "  the login state");
-  }
+ 
   setDate(e) {    
     const name = e.target.name;
     this.setState( prevState => {
