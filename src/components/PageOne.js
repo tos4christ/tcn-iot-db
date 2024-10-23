@@ -256,6 +256,10 @@ import get_stations from "./stations_adder";
     }    
    }
   render() {
+    const { isLoggedIn } = this.props;
+    if (!isLoggedIn) {
+      return <Redirect to={'/'}/>
+    }
     const stations_array = get_stations(this.state);
     const omoku_gs = stations_array['OMOKU (GAS)'];
     const riversipp_gs = stations_array['RIVERS IPP (GAS)'];

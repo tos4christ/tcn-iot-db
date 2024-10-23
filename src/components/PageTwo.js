@@ -214,6 +214,10 @@ import get_stations from "./stations_adder";
     }    
    }
   render() {
+    const { isLoggedIn } = this.props;
+    if (!isLoggedIn) {
+      return <Redirect to={'/'}/>
+    }
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
     const ihovbor_gs = stations_array['IHOVBOR NIPP (GAS)'];
