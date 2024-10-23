@@ -42,7 +42,7 @@ class App extends React.Component {
 
   }
   componentDidMount() {
-    localStorage.setItem("isLoggedIn", true);
+    //localStorage.setItem("isLoggedIn", true);
   }
   render() {
     return (
