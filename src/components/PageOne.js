@@ -62,7 +62,7 @@ import get_stations from "./stations_adder";
      };
    }
    componentDidMount() {
-    if(this.props.history.location.pathname === "/nccnaspageone") {
+    if(this.props.history.location.pathname === "/gridpageone") {
       socket.on("client_message_111", data => {
         const { message } = data;
         let parsedMessage = {};

@@ -133,12 +133,12 @@ class App extends React.Component {
               <Collapse isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>            
           </Route>
-          <Route exact path={`/nccnaspageone`}>
+          <Route exact path={`/gridpageone`}>
             <div className='App'>
               <PageOne isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>                         
           </Route>
-          <Route exact path={`/nccnaspagetwo`}>              
+          <Route exact path={`/gridpagetwo`}>              
             <div className='App'>
               <PageTwo isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
