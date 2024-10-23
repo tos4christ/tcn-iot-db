@@ -947,7 +947,8 @@ background-color:#232323;
 
 .freq_font {
     color: darkblue;
-    font-size: 45px;
+    font-size: 42px;
+    font-weight: bolder;
 }
 
 .App {  
