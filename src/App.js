@@ -148,6 +148,11 @@ class App extends React.Component {
               <FullPage />
             </div>
           </Route>
+          <Route exact path={`/testpage_gmncc`}>              
+            <div className='App'>
+              <FullPage />
+            </div>
+          </Route>
           <Route exact path={`/bilaterals`}>              
             <div className='App'>
               <Bilateral />

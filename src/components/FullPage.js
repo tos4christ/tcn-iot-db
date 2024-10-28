@@ -68,7 +68,7 @@ import Modal from "./Modal";
      };
    }
    componentDidMount() {
-    if(this.props.history.location.pathname === "/tcnnaspage") {
+    if(this.props.history.location.pathname === "/tcnnaspage" || this.props.history.location.pathname === "/testpage_gmncc") {
       socket.on("client_message_111", data => {
         const { message } = data;
         let parsedMessage = {};
@@ -353,7 +353,7 @@ import Modal from "./Modal";
                 </tr>
               </thead>
               <tbody>
-                <tr  onClick={(e) => { this.setModalTrue(e, 'RIVERS IPP (GAS)'); }}>
+                <tr  onClick={(e) => { this.setModalTrue(e, {e1: this.state.riversIppPs}); }}>
                   <td>1</td>
                   <td>RIVERS IPP (GAS)</td>
                   <td>{this.checkConnection2(this.state.riversIppPs.server_time)}</td>
