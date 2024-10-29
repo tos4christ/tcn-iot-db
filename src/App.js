@@ -148,7 +148,7 @@ class App extends React.Component {
               <FullPage />
             </div>
           </Route>
-          <Route exact path={`/testpage_gmncc`}>              
+          <Route exact path={`/testpage_gmncc_2`}>              
             <div className='App'>
               <FullPage />
             </div>
