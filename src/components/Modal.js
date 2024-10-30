@@ -6,7 +6,8 @@ class Modal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            setModal: {}
+            setModal: {},
+            modalData: this.props.modalData
         }
     }
 
@@ -17,9 +18,9 @@ class Modal extends React.Component {
       const li_array = [];
       const li_div_array = [];
       li_array.push(<li>Time    | Equipment | Power | KV | AMP | MVAR</li>);
-      const equipment_array = this.props.modalData;
+      const equipment_array = this.state.modalData;
       const time = equipment_array[0].t;
-      equipment_array.forEach(element => {
+      equipment_array?.forEach(element => {
         if(element.units) {
           const units = element.units;
           units.forEach(unit => {
@@ -67,7 +68,7 @@ class Modal extends React.Component {
         }        
       });
       
-      console.log(li_div_array, " this is the li array");
+      // console.log(li_div_array, " this is the li array");
       
 
       // Iterate over each item
@@ -90,7 +91,7 @@ class Modal extends React.Component {
                   </button>
                 </div>
                 <div className="title">
-                    Time |  Name   | MW | KV |  AMP  |  MVAR
+                    
                 </div>
                 <div className="body">
                   <ul className="weather_ul">                    
