@@ -10,11 +10,9 @@ class Modal extends React.Component {
             modalData: this.props.modalData
         }
     }
-    componentDidUpdate() {
-      this.setState({modalData: this.props.modalData});
-    }
-
+    
     render() {
+      this.setState({modalData: this.props.modalData});
       // Iterate over the length of the array
       // get all the lines that add up to the station
       // display all the components in a table in the modal
