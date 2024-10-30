@@ -43,9 +43,9 @@ class Modal extends React.Component {
               li_div_array.push([{time}, {line_name}, {power}, {voltage}, {current}, {reactive_power}]);
             }
           })          
-        } else if(element.line) {
-          const line = element.line;
-          line.forEach(line => {
+        } else if(element.lines) {
+          const lines = element.lines;
+          lines.forEach(line => {
             const line_name = line.id;
             if(line.gd) {
               const item = line.gd;
