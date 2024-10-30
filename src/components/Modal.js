@@ -16,7 +16,7 @@ class Modal extends React.Component {
       // display all the components in a table in the modal
       const li_array = [];
       const li_div_array = [];
-      li_array.push(<li>Time | Equipment | Power | KV | AMP | MVAR</li>);
+      li_array.push(<li>Time    | Equipment | Power | KV | AMP | MVAR</li>);
       const equipment_array = this.props.modalData;
       const time = equipment_array[0].t;
       equipment_array.forEach(element => {
@@ -30,7 +30,7 @@ class Modal extends React.Component {
               const voltage = item.V;
               const reactive_power = item.mvar;
               const current = item.A;
-              li_array.push(<li>{time} | {line_name} | {power} | {voltage} | {current} | {reactive_power}</li>);
+              li_array.push(<li>{time} | {line_name}       | {power}   | {voltage}   | {current} | {reactive_power}</li>);
               li_div_array.push([{time}, {line_name}, {power}, {voltage}, {current}, {reactive_power}]);
             } else if(unit.td) {
               const item = unit.td;
@@ -38,7 +38,7 @@ class Modal extends React.Component {
               const voltage = item.V;
               const reactive_power = item.mvar;
               const current = item.A;
-              li_array.push(<li>{time} | {line_name} | {power} | {voltage} | {current} | {reactive_power}</li>);
+              li_array.push(<li>{time} | {line_name}       | {power}   | {voltage}   | {current} | {reactive_power}</li>);
               li_div_array.push([{time}, {line_name}, {power}, {voltage}, {current}, {reactive_power}]);
             }
           })          
@@ -52,7 +52,7 @@ class Modal extends React.Component {
               const voltage = item.V;
               const reactive_power = item.mvar;
               const current = item.A;
-              li_array.push(<li>{time} | {line_name} | {power} | {voltage} | {current} | {reactive_power}</li>);
+              li_array.push(<li>{time} | {line_name}       | {power}   | {voltage}   | {current} | {reactive_power}</li>);
               li_div_array.push([{time}, {line_name}, {power}, {voltage}, {current}, {reactive_power}]);
             } else if(line.td) {
               const item = line.td;
@@ -60,7 +60,7 @@ class Modal extends React.Component {
               const voltage = item.V;
               const reactive_power = item.mvar;
               const current = item.A;
-              li_array.push(<li>{time} | {line_name} | {power} | {voltage} | {current} | {reactive_power}</li>);
+              li_array.push(<li>{time} | {line_name}       | {power}   | {voltage}   | {current} | {reactive_power}</li>);
               li_div_array.push([{time}, {line_name}, {power}, {voltage}, {current}, {reactive_power}]);
             }
           })          
