@@ -10,6 +10,9 @@ class Modal extends React.Component {
             modalData: this.props.modalData
         }
     }
+    componentDidUpdate() {
+      this.setState({modalData: this.props.modalData});
+    }
 
     render() {
       // Iterate over the length of the array
