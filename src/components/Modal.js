@@ -1,6 +1,6 @@
 import React from "react";
-// import "../assets/css/Modal.css";
-import get_stations from "./stations_splitter";
+import "../assets/css/Modal.css";
+//import get_stations from "./stations_splitter";
 
 class Modal extends React.Component {
     constructor(props) {
@@ -61,7 +61,7 @@ class Modal extends React.Component {
         }        
       });
       
-      //console.log(this.props.modalData, " this is the modal data ");
+      console.log(li_array, " this is the li array");
       
 
       // Iterate over each item
@@ -88,7 +88,7 @@ class Modal extends React.Component {
                 </div>
                 <div className="body">
                   <ul>
-                    <li>Time |  Equipment   | MEGAWATT | VOLTAGE |  AMP  |  MVAR</li>
+                    <li>Time |  Name   | MW | KV |  AMP  |  MVAR</li>
                     {
                       li_array
                     }
