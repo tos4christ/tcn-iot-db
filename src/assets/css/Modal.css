@@ -9,7 +9,7 @@
   }
   
   .modalContainer {
-    width: 500px;
+    width: 1000px;
     height: 500px;
     border-radius: 12px;
     background-color: white;
@@ -38,11 +38,11 @@
   }
   
   .modalContainer .body {
-    flex: 50%;
+    flex: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.7rem;
+    font-size: 1.4rem;
     text-align: center;
   }
   
