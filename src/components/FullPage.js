@@ -267,7 +267,7 @@ import Modal from "./Modal";
    }
    setModalTrue(e, station_name) {
     // e.preventDefault();
-    console.log(e.target.innerHTML, station_name);
+    //console.log(e.target.innerHTML, station_name);
     return this.setState({ModalState: true, modal_data: station_name});
    }
    setModalFalse() {
