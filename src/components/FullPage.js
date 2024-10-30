@@ -360,28 +360,28 @@ import Modal from "./Modal";
                   <td>{riversipp_gs.mw}</td>
                   <td>{riversipp_gs.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, [this.state.afamViTs]); }}>
                   <td>2</td>
                   <td>AFAM VI (GAS/STEAM)</td>
                   <td>{this.checkConnection2(this.state.afamViTs.server_time)}</td>
                   <td>{afam6_gs.mw}</td>
                   <td>{afam6_gs.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, [this.state.gereguPs]); }}>
                   <td>3</td>
                   <td>GEREGU (GAS)</td>
                   <td>{this.checkConnection2(this.state.gereguPs.server_time)}</td>
                   <td>{geregugas_gs.mw}</td>
                   <td>{geregugas_gs.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, [this.state.omotosho2, this.state.omotosho1]); }}>
                   <td>4</td>
                   <td>OMOTOSHO (GAS)</td>
                   <td>{this.checkConnection3(this.state.omotosho2.server_time, this.state.omotosho1.server_time)}</td>
                   <td>{omotosogas_gs.mw}</td>
                   <td>{omotosogas_gs.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, [this.state.omotoshoNippPs]); }}>
                   <td>5</td>
                   <td>OMOTOSHO NIPP (GAS)</td>
                   <td>{this.checkConnection2(this.state.omotoshoNippPs.server_time)}</td>
@@ -395,35 +395,35 @@ import Modal from "./Modal";
                   <td>{delta_gs.mw}</td>
                   <td>{delta_gs.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, [this.state.sapeleNippPs]); }}>
                   <td>7</td>
                   <td>SAPELE NIPP (GAS)</td>
                   <td>{this.checkConnection2(this.state.sapeleNippPs.server_time)}</td>
                   <td>{sapelenipp_gs.mw}</td>
                   <td>{sapelenipp_gs.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, [this.state.omokuPs1]); }}>
                   <td>8</td>
                   <td>OMOKU (GAS)</td>
                   <td>{this.checkConnection2(this.state.omokuPs1.server_time)}</td>
                   <td>{omoku_gs.mw}</td>
                   <td>{omoku_gs.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, [this.state.ihovborNippPs]); }}>
                   <td>9</td>
                   <td>AZURA-EDO IPP (GAS)</td>
                   <td>{this.checkConnection2(this.state.ihovborNippPs.server_time)}</td>
                   <td>{azura_gs.mw}</td>
                   <td>{azura_gs.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, [this.state.phMain]); }}>
                   <td>10</td>
                   <td>TRANS-AMADI (GAS)</td>
                   <td>{this.checkConnection2(this.state.phMain.server_time)}</td>
                   <td>{phMain_ts.mw}</td>
                   <td>{phMain_ts.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, [this.state.gereguPs]); }}>
                   <td>11</td>
                   <td>GEREGU NIPP (GAS)</td>
                   <td>{this.checkConnection2(this.state.gereguPs.server_time)}</td>
@@ -431,35 +431,35 @@ import Modal from "./Modal";
                   <td>{Number(geregunipp_gs.mw) < 0 ? 0 : Number(geregunipp_gs.mw)}</td>
                   <td>{geregunipp_gs.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, [this.state.gbarain]); }}>
                   <td>12</td>
                   <td>GBARAIN NIPP (GAS)</td>
                   <td>{true ? <span className="text-success"> CN </span> : this.checkConnection2(this.state.gbarain.server_time)}</td>
                   <td>{gbarain_gs.mw}</td>
                   <td>{gbarain_gs.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, [this.state.dadinKowaGs]); }}>
                   <td>13</td>
                   <td>DADINKOWA G.S (HYDRO)</td>
                   <td>{this.checkConnection2(this.state.dadinKowaGs.server_time)}</td>
                   <td>{dadinkowa_gs.mw}</td>
                   <td>{dadinkowa_gs.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, [this.state.parasEnergyPs]); }}>
                   <td>14</td>
                   <td>PARAS ENERGY (GAS)</td>
                   <td>{this.checkConnection2(this.state.parasEnergyPs.server_time)}</td>
                   <td>{paras_gs.mw}</td>
                   <td>{paras_gs.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, [this.state.eket]); }}>
                   <td>15</td>
                   <td>IBOM POWER (GAS)</td>
                   <td>{this.checkConnection2(this.state.eket.server_time)}</td>
                   <td>{ibom_gs.mw}</td>
                   <td>{ibom_gs.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, [this.state.jebbaTs]); }}>
                   <td>16</td>
                   <td>JEBBA (HYDRO)</td>
                   <td>{this.checkConnection2(this.state.jebbaTs.server_time)}</td>
