@@ -14,13 +14,55 @@ class Modal extends React.Component {
       // Iterate over the length of the array
       // get all the lines that add up to the station
       // display all the components in a table in the modal
-      const lines_name = [];
-      const power = [];
-      const voltage = [];
-      const reactive_power = [];
-      const current = [];
-      console.log(this.props.modalData, " this is the modal data ");
-      // const items_length = this.props.modalData.length;
+      const li_array = [];
+      const equipment_array = this.props.modalData;
+      const time = equipment_array[0].t;
+      equipment_array.forEach(element => {
+        if(element.units) {
+          const units = element.units;
+          units.forEach(unit => {
+            const line_name = unit.id;
+            if(unit.gd) {
+              const item = unit.gd;
+              const power = item.mw;
+              const voltage = item.V;
+              const reactive_power = item.mvar;
+              const current = item.A;
+              li_array.push(<li>{time | line_name | power | voltage | current | reactive_power}</li>);
+            } else if(unit.td) {
+              const item = unit.td;
+              const power = item.mw;
+              const voltage = item.V;
+              const reactive_power = item.mvar;
+              const current = item.A;
+              li_array.push(<li>{time | line_name | power | voltage | current | reactive_power}</li>);
+            }
+          })          
+        } else if(element.line) {
+          const line = element.line;
+          line.forEach(line => {
+            const line_name = line.id;
+            if(line.gd) {
+              const item = line.gd;
+              const power = item.mw;
+              const voltage = item.V;
+              const reactive_power = item.mvar;
+              const current = item.A;
+              li_array.push(<li>{time | line_name | power | voltage | current | reactive_power}</li>);
+            } else if(line.td) {
+              const item = line.td;
+              const power = item.mw;
+              const voltage = item.V;
+              const reactive_power = item.mvar;
+              const current = item.A;
+              li_array.push(<li>{time | line_name | power | voltage | current | reactive_power}</li>);
+            }
+          })          
+        }        
+      });
+      
+      //console.log(this.props.modalData, " this is the modal data ");
+      
 
       // Iterate over each item
       // this.props.modalData.forEach( line => {
@@ -45,7 +87,12 @@ class Modal extends React.Component {
                   Station | Load | Voltage | MegaWatt | Current
                 </div>
                 <div className="body">
-                  <p>The next page looks amazing. Hope you want to go there!</p>
+                  <ul>
+                    <li>Time |  Equipment   | MEGAWATT | VOLTAGE |  AMP  |  MVAR</li>
+                    {
+                      li_array
+                    }
+                  </ul>
                 </div>
                 <div className="footer">
                   <button

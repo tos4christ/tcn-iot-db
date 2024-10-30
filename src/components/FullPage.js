@@ -353,7 +353,7 @@ import Modal from "./Modal";
                 </tr>
               </thead>
               <tbody>
-                <tr  onClick={(e) => { this.setModalTrue(e, {e1: this.state.riversIppPs}); }}>
+                <tr  onClick={(e) => { this.setModalTrue(e, [this.state.riversIppPs]); }}>
                   <td>1</td>
                   <td>RIVERS IPP (GAS)</td>
                   <td>{this.checkConnection2(this.state.riversIppPs.server_time)}</td>
