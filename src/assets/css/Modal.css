@@ -9,14 +9,15 @@
   }
   
   .modalContainer {
-    width: 1000px;
+    width: 800px;
     height: 500px;
     border-radius: 12px;
-    background-color: white;
+    background-color: gray;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: flex;
     flex-direction: column;
-    padding: 25px;
+    padding: 55px;
+    color: black;
   }
   
   .modalContainer .title {

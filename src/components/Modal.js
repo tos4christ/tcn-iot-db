@@ -16,6 +16,7 @@ class Modal extends React.Component {
       // display all the components in a table in the modal
       const li_array = [];
       const li_div_array = [];
+      li_array.push(<li>Time | Equipment | Power | KV | AMP | MVAR</li>);
       const equipment_array = this.props.modalData;
       const time = equipment_array[0].t;
       equipment_array.forEach(element => {
