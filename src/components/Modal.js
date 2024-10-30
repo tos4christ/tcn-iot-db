@@ -15,6 +15,7 @@ class Modal extends React.Component {
       // get all the lines that add up to the station
       // display all the components in a table in the modal
       const li_array = [];
+      li_array.push(<li>Time |  Name   | MW | KV |  AMP  |  MVAR</li>);
       const equipment_array = this.props.modalData;
       const time = equipment_array[0].t;
       equipment_array.forEach(element => {
@@ -61,7 +62,7 @@ class Modal extends React.Component {
         }        
       });
       
-      console.log(li_array, " this is the li array");
+      console.log(...li_array, " this is the li array");
       
 
       // Iterate over each item
@@ -87,8 +88,7 @@ class Modal extends React.Component {
                   Station | Load | Voltage | MegaWatt | Current
                 </div>
                 <div className="body">
-                  <ul>
-                    <li>Time |  Name   | MW | KV |  AMP  |  MVAR</li>
+                  <ul>                    
                     {
                       li_array
                     }
