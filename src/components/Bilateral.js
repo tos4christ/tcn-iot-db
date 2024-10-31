@@ -174,10 +174,9 @@ import DateTime from "./DateTime";
     const totalBilateral = (Number(sunflag.mw) < 0 ? 0 : Number(sunflag.mw)) + (Number(sagamu.mw) < 0 ? 0 : Number(sagamu.mw))
     + (Number(top_steel.mw) < 0 ? 0 : Number(top_steel.mw)) + (Number(larfarge.mw) < 0 ? 0 : Number(larfarge.mw)) + 
     (Number(monarch.mw) < 0 ? 0 : Number(monarch.mw)) + (Number(pulkitSteel.mw) < 0 ? 0 : Number(pulkitSteel.mw)) + 
-    (Number(africanFoundriesLimited.mw) < 0 ? 0 : Number(africanFoundriesLimited.mw)) +  (Number(quantum.mw) < 0 ? 0 : Number(quantum.mw))
-    + (Number(kamSteel.mw) < 0 ? 0 : Number(kamSteel.mw)) + (Number(starPipe.mw) < 0 ? 0 : Number(starPipe.mw)) + 
-    (Number(ikorodu_1.mw) < 0 ? 0 : Number(ikorodu_1.mw)) + (Number(pheonix.mw) < 0 ? 0 : Number(pheonix.mw))
-    + (Number(ikorodu_2.mw) < 0 ? 0 : Number(ikorodu_2.mw));
+    (Number(africanFoundriesLimited.mw) < 0 ? 0 : Number(africanFoundriesLimited.mw)) +  
+    (Number(quantum.mw) < 0 ? 0 : Number(quantum.mw)) + (Number(kamSteel.mw) < 0 ? 0 : Number(kamSteel.mw)) +
+    (Number(starPipe.mw) < 0 ? 0 : Number(starPipe.mw)) + (Number(pheonix.mw) < 0 ? 0 : Number(pheonix.mw));
         
     return (
       <>
