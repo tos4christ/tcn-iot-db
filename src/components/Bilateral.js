@@ -3,10 +3,13 @@ import { withRouter } from 'react-router-dom';
 import socket from "./utility/socketIO";
 import get_stations from "./stations_adder";
 import DateTime from "./DateTime";
+import Modal from "./Modal";
 
  class Bilateral extends React.Component {
    constructor(props) {
      super(props);
+     this.setModalFalse = this.setModalFalse.bind(this);
+     this.setModalTrue = this.setModalTrue.bind(this);
      this.state = { 
       starPipe: {},
       quantum: {},
@@ -59,6 +62,8 @@ import DateTime from "./DateTime";
       taopex: {},
       afamVPs: {},
       connected: false,
+      ModalState: false,
+      modal_data: "TAOPEX"
      };
    }
    componentDidMount() {
@@ -154,6 +159,14 @@ import DateTime from "./DateTime";
       return disconnected;
     }    
    }
+   setModalTrue(e, station_name) {
+    // e.preventDefault();
+    //console.log(e.target.innerHTML, station_name);
+    return this.setState({ModalState: true, modal_data: station_name});
+   }
+   setModalFalse() {
+    this.setState({ModalState: false});
+   }
    
   render() {
     const stations_array = get_stations(this.state);
@@ -196,28 +209,28 @@ import DateTime from "./DateTime";
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['PHEONIX STEEL IKORODU', this.state.pheonix]); }}>
                   <td>1</td>
                   <td>PHEONIX STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.pheonix.server_time)}</td>
                   <td>{pheonix.mw}</td>
                   <td>{pheonix.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['AFRICAN FOUNDARIES LTD IKORODU', this.state.africanFoundriesLimited]); }}>
                   <td>2</td>
                   <td>AFRICAN FOUNDARIES LTD IKORODU</td>
                   <td>{this.checkConnection2(this.state.africanFoundriesLimited.server_time)}</td>
                   <td>{africanFoundriesLimited.mw}</td>
                   <td>{africanFoundriesLimited.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['MONARCH IKORODU', this.state.monarch]); }}>
                   <td>3</td>
                   <td>MONARCH IKORODU</td>
                   <td>{this.checkConnection2(this.state.monarch.server_time)}</td>
                   <td>{monarch.mw}</td>
                   <td>{monarch.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['REAL INFRASTRUCTURE LTD IKORODU', this.state.quantum]); }}>
                   <td>4</td>
                   <td>REAL INFRASTRUCTURE LTD IKORODU</td>
                   <td>{this.checkConnection2(this.state.quantum.server_time)}</td>
@@ -231,42 +244,42 @@ import DateTime from "./DateTime";
                   <td>{'N/A'}</td>
                   <td>{'N/A'}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['KAM STEEL SAGAMU', this.state.kamSteel]); }}>
                   <td>6</td>
                   <td>KAM STEEL SAGAMU</td>
                   <td>{this.checkConnection2(this.state.kamSteel.server_time)}</td>
                   <td>{kamSteel.mw}</td>
                   <td>{kamSteel.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['CEMENT FACTORY', this.state.larfarge]); }}>
                   <td>7</td>
                   <td>CEMENT FACTORY</td>
                   <td>{this.checkConnection2(this.state.larfarge.server_time)}</td>
                   <td>{larfarge.mw}</td>
                   <td>{larfarge.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['TOP STEEL IKORODU', this.state.topSteel]); }}>
                   <td>8</td>
                   <td>TOP STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.topSteel.server_time)}</td>
                   <td>{top_steel.mw}</td>
                   <td>{top_steel.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['SUNFLAG IRON & STEEL IKORODU', this.state.sunflag]); }}>
                   <td>9</td>
                   <td>SUNFLAG IRON & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
                   <td>{sunflag.mw}</td>
                   <td>{sunflag.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel]); }}>
                   <td>10</td>
                   <td>PULKIT ALLOY & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.pulkitSteel.server_time)}</td>
                   <td>{pulkitSteel.mw}</td>
                   <td>{pulkitSteel.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['STAR PIPE PRODUCT IKORODU', this.state.starPipe]); }}>
                   <td>11</td>
                   <td>STAR PIPE PRODUCT IKORODU</td>
                   <td>{this.checkConnection2(this.state.starPipe.server_time)}</td>
@@ -280,21 +293,21 @@ import DateTime from "./DateTime";
                   <td>{'N/A'}</td>
                   <td>{'N/A'}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['IKORODU 132KV TS LINE_1', this.state.ikorodu1]); }}>
                   <td>13</td>
                   <td>IKORODU 132KV TS LINE_1</td>
                   <td>{this.checkConnection2(this.state.ikorodu1.server_time)}</td>
                   <td>{ikorodu_1.mw}</td>
                   <td>{ikorodu_1.kv}</td>
                 </tr>
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['IKORODU 132KV TS LINE_2', this.state.ikorodu2]); }}>
                   <td>14</td>
                   <td>IKORODU 132KV TS LINE_2</td>
                   <td>{this.checkConnection2(this.state.ikorodu2.server_time)}</td>
                   <td>{ikorodu_2.mw}</td>
                   <td>{ikorodu_2.kv}</td>
                 </tr> 
-                <tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['SAGAMU 132KV TS', this.state.sagamu]); }}>
                   <td>15</td>
                   <td>SAGAMU 132KV TS</td>
                   <td>{this.checkConnection2(this.state.sagamu.server_time)}</td>
@@ -337,6 +350,7 @@ import DateTime from "./DateTime";
                 </table> 
           </div>
         </div>
+        {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
       </div>      
     </>
     )         
