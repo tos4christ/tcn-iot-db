@@ -25,7 +25,7 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 }
 
 /* This is the Modal container and div settings */
-.ncc-menu {
+.ncc-menu, .bl-menu {
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -34,7 +34,7 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
     font-family: "Nunito", sans-serif;
   }
 
-.ncc-menu .openModalBtn {
+.ncc-menu .openModalBtn, .bl-menu .openModalBtn {
     width: 200px;
     height: 40px;
     border: none;
