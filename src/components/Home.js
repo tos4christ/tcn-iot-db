@@ -494,8 +494,8 @@ import Modal from "./Modal";
                 <tr onClick={(e) => { this.setModalTrue(e, ['GBARAIN NIPP (GAS)', this.state.gbarain]); }}>
                   <td>12</td>
                   <td>GBARAIN NIPP (GAS)</td>
-                  {/* <td>{true ? <span className="text-success"> CN </span> : this.checkConnection2(this.state.gbarain.server_time)}</td> */}
-                  <td>{this.checkConnection2(this.state.gbarain.server_time)}</td>
+                  <td>{true ? <span className="text-success"> CN </span> : this.checkConnection2(this.state.gbarain.server_time)}</td>
+                  {/* <td>{this.checkConnection2(this.state.gbarain.server_time)}</td> */}
                   <td>{gbarain_gs.mw}</td>
                   <td>{gbarain_gs.kv}</td>
                 </tr>
