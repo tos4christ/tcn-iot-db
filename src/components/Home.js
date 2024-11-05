@@ -15,6 +15,7 @@ import Modal from "./Modal";
      this.setModalTrue = this.setModalTrue.bind(this);
      this.state = { 
       frequency: "",
+      markudi: {},
       starPipe: {},
       quantum: {},
       kamSteel: {},
@@ -289,6 +290,7 @@ import Modal from "./Modal";
     }
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
+    const markudi_ts = stations_array['MARKUDI TS'];
     const zungeru_gs = stations_array['ZUNGERU'];
     const taopex_gs = stations_array['TAOPEX'];
     const ihovbor_gs = stations_array['IHOVBOR NIPP (GAS)'];
@@ -363,6 +365,7 @@ import Modal from "./Modal";
     (Number(lokoja_ts.mw) < 0 ? 0 : Number(lokoja_ts.mw))+
     (Number(phMain_ts.mw) < 0 ? 0 : Number(phMain_ts.mw))+ 
     (Number(ikotekpene_ts.mw) < 0 ? 0 : Number(ikotekpene_ts.mw))+ 
+    (Number(markudi_ts.mw) < 0 ? 0 : Number(markudi_ts.mw))+ 
     (Number(eket_ts.mw) < 0 ? 0 : Number(eket_ts.mw));
         
     return (
@@ -675,6 +678,13 @@ import Modal from "./Modal";
                     <td>{this.checkConnection2(this.state.ugwuaji.server_time)}</td>
                     <td>{ugwuaji_ts.mw}</td>
                     <td>{ugwuaji_ts.kv}</td>
+                  </tr>
+                  <tr onClick={(e) => { this.setModalTrue(e, ['MARKUDI TS', this.state.markudi]); }}>
+                    <td>106</td>
+                    <td>MARKUDI TS</td>
+                    <td>{this.checkConnection2(this.state.markudi.server_time)}</td>
+                    <td>{markudi_ts.mw}</td>
+                    <td>{markudi_ts.kv}</td>
                   </tr>
                   <tr onClick={(e) => { this.setModalTrue(e, ['EKIM TS', this.state.ekim]); }}>
                     <td>107</td>

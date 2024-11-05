@@ -12,6 +12,7 @@ import Modal from "./Modal";
      this.setModalTrue = this.setModalTrue.bind(this);
      this.state = { 
       frequency: "",
+      markudi: {},
       starPipe: {},
       quantum: {},
       kamSteel: {},

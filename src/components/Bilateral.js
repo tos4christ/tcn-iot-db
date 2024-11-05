@@ -11,6 +11,7 @@ import Modal from "./Modal";
      this.setModalFalse = this.setModalFalse.bind(this);
      this.setModalTrue = this.setModalTrue.bind(this);
      this.state = { 
+      markudi: {},
       starPipe: {},
       quantum: {},
       kamSteel: {},

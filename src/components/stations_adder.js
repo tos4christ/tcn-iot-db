@@ -3,6 +3,8 @@ const get_stations =  function(state_data) {
         return;
     }
     // console.log(state_data, 'the station data')
+    const markudi_aif = state_data.markudi.lines ? state_data.markudi.lines.filter(line => line.id === "aif") : [{mw: null, V: null}];
+    const markudi_a2f = state_data.markudi.lines ? state_data.markudi.lines.filter(line => line.id === "a2f") : [{mw: null, V: null}];
     const pheonix_pt1 = state_data.pheonix.transformers ? state_data.pheonix.transformers.filter(line => line.id === "pt1") : [{mw: null, V: null}];
     const ikorodu1_d23s = state_data.ikorodu1.lines ? state_data.ikorodu1.lines.filter(line => line.id === "d23s") : [{mw: null, V: null}];
     const ikorodu2_d24s = state_data.ikorodu2.lines ? state_data.ikorodu2.lines.filter(line => line.id === "d24s") : [{mw: null, V: null}];
@@ -131,6 +133,9 @@ const get_stations =  function(state_data) {
     // console.log(omotosho2_tr3, omotosho2_tr4, 'the omotoshos');
     // const multiplier = 3/10;
     return { 
+        'MARKUDI TS': {mw: Number(
+            Math.abs(markudi_aif[0]?.td ? markudi_aif[0].td.mw : 0) + Math.abs(markudi_a2f[0]?.td ? markudi_a2f[0].td.mw : 0)
+        ).toFixed(2), kv: (markudi_a2f[0]?.td ? markudi_a2f[0].td.V : 0)},
         'PHEONIX': {mw: Number(
             Math.abs(pheonix_pt1[0]?.td ? pheonix_pt1[0].td.mw : 0)
         ).toFixed(2), kv: (pheonix_pt1[0]?.td ? pheonix_pt1[0].td.V : 0)},

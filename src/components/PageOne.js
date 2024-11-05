@@ -9,6 +9,7 @@ import get_stations from "./stations_adder";
      super(props);
      this.state = { 
       frequency: "",
+      markudi: {},
       starPipe: {},
       quantum: {},
       kamSteel: {},

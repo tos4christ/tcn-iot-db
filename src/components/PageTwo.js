@@ -8,6 +8,7 @@ import get_stations from "./stations_adder";
    constructor(props) {
      super(props);
      this.state = {
+      markudi: {},
       starPipe: {},
       quantum: {},
       kamSteel: {},
