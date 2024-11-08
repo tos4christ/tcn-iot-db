@@ -90,7 +90,7 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
     /* This is the Modal container and div settings */
     .ncc-menu, .bl-menu, .menu {
         width: 100vw;
-        height: 80vh;
+        height: 90vh;
         display: flex;
         align-items: center;
         flex-direction: column;

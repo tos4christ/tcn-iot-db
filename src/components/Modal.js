@@ -90,7 +90,7 @@ class Modal extends React.Component {
                     { station_name }
                 </div>
                 <div className="body">
-                  <ul className="weather_ul">                    
+                  <ul className="">                    
                     {
                       li_array
                     }
