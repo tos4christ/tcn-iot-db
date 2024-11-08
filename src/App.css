@@ -92,14 +92,14 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
         width: 70vw;
         height: 80vh;
         display: flex;
-        align-items: center;
+        align-items: left;
         flex-direction: column;
         font-family: "Nunito", sans-serif;
     }
 
     .ncc-menu .openModalBtn, .bl-menu .openModalBtn, .menu .openModalBtn {
         width: 120px;
-        height: 40px;
+        height: 50px;
         border: none;
         border-radius: 6px;
         background-color: cornflowerblue;
