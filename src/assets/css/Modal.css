@@ -19,7 +19,7 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: flex;
     flex-direction: column;
-    padding: 5px;
+    padding: 15px;
     color: black;
   }
   
@@ -44,17 +44,17 @@
   .modalContainer .body {
     flex: 50%;
     display: flex;
-    justify-content: left;
-    align-items: left;
+    justify-content: center;
+    align-items: center;
     font-size: 1.4rem;
-    text-align: left;
+    text-align: center;
   }
   
   .modalContainer .footer {
     flex: 20%;
     display: flex;
-    justify-content: left;
-    align-items: left;
+    justify-content: center;
+    align-items: center;
   }
   
   .modalContainer .footer button {
