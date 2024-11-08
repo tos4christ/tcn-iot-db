@@ -87,6 +87,27 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 /* Weather API */
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-width: 768px) {
+    /* This is the Modal container and div settings */
+    .ncc-menu, .bl-menu, .menu {
+        width: 70vw;
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        font-family: "Nunito", sans-serif;
+    }
+
+    .ncc-menu .openModalBtn, .bl-menu .openModalBtn, .menu .openModalBtn {
+        width: 120px;
+        height: 40px;
+        border: none;
+        border-radius: 6px;
+        background-color: cornflowerblue;
+        color: white;
+        cursor: pointer;
+    }
+
+  /* The Modal settings ends here */
     .ncc-menu, .bl-menu {
         width: 62em;
     }
