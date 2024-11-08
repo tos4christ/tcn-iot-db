@@ -89,7 +89,7 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 @media screen and (max-width: 768px) {
     /* This is the Modal container and div settings */
     .ncc-menu, .bl-menu, .menu {
-        width: 70vw;
+        width: 90vw;
         height: 80vh;
         display: flex;
         align-items: left;
