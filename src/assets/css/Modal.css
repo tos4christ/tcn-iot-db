@@ -5,10 +5,10 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(200, 200, 200);
-    position: relative;
+    position: absolute;
     display: flex;
-    justify-content: left ;
-    align-items: left ;
+    justify-content: center ;
+    align-items: center ;
   }
   
   .modalContainer {
@@ -42,7 +42,7 @@
   }
   
   .modalContainer .body {
-    flex: 100%;
+    flex: 30%;
     display: flex;
     justify-content: left;
     align-items: left;
