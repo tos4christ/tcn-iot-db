@@ -2,7 +2,7 @@
 
 @media screen and (max-width: 768px) {
   .modalBackground {
-    width: 100vw;
+    width: 120vw;
     height: 100vh;
     background-color: rgba(200, 200, 200);
     position: absolute;
@@ -42,7 +42,7 @@
   }
   
   .modalContainer .body {
-    flex: 80%;
+    flex: 85%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,7 +78,7 @@
 /* On bigger screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (min-width: 769px) {
   .modalBackground {
-    width: 100vw;
+    width: 120vw;
     height: 100vh;
     background-color: rgba(200, 200, 200);
     position: fixed;
@@ -118,7 +118,7 @@
   }
   
   .modalContainer .body {
-    flex: 70%;
+    flex: 75%;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -26,7 +26,7 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 
 /* This is the Modal container and div settings */
 .ncc-menu, .bl-menu, .menu {
-    width: 105vw;
+    width: 125vw;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -36,7 +36,7 @@ Description: Responsive HTML5 / CSS3 One-page Landing App Template.
 
 .li_table span {
     display: inline-block;
-    width: 5vw;
+    width: 7vw;
 }
 
 .ncc-menu .openModalBtn, .bl-menu .openModalBtn, .menu .openModalBtn {
