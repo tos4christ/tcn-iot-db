@@ -16,7 +16,7 @@ class Modal extends React.Component {
       // get all the lines that add up to the station
       // display all the components in a table in the modal
       const li_array = [];
-      li_array.push(<li>Time    | Equipment | Power | KV | AMP | MVAR</li>);
+      li_array.push(<li className="li_table"><span>Time</span>|<span>Equipment</span>|<span>Power</span>|<span>KV</span>|<span>AMP</span>|<span>MVAR</span></li>);
       const equipment_array = this.state.modalData.slice(1);
       const station_name = this.props.modalData[0];
       const time = equipment_array[0].t;
@@ -31,14 +31,14 @@ class Modal extends React.Component {
               const voltage = item.V;
               const reactive_power = item.mvar;
               const current = item.A;
-              li_array.push(<li>{time} | {line_name}       | {power}   | {voltage}   | {current} | {reactive_power}</li>);
+              li_array.push(<li className="li_table"><span>{time}</span>|<span>{line_name}</span>|<span>{power}</span>|<span>{voltage}</span>|<span>{current}</span>|<span>{reactive_power}</span></li>);
             } else if(unit.td) {
               const item = unit.td;
               const power = item.mw;
               const voltage = item.V;
               const reactive_power = item.mvar;
               const current = item.A;
-              li_array.push(<li>{time} | {line_name}       | {power}   | {voltage}   | {current} | {reactive_power}</li>);
+              li_array.push(<li className="li_table"><span>{time}</span>|<span>{line_name}</span>|<span>{power}</span>|<span>{voltage}</span>|<span>{current}</span>|<span>{reactive_power}</span></li>);
             }
           })          
         } else if(element.lines) {
@@ -51,14 +51,14 @@ class Modal extends React.Component {
               const voltage = item.V;
               const reactive_power = item.mvar;
               const current = item.A;
-              li_array.push(<li>{time} | {line_name}       | {power}   | {voltage}   | {current} | {reactive_power}</li>);
+              li_array.push(<li className="li_table"><span>{time}</span>|<span>{line_name}</span>|<span>{power}</span>|<span>{voltage}</span>|<span>{current}</span>|<span>{reactive_power}</span></li>);
             } else if(line.td) {
               const item = line.td;
               const power = item.mw;
               const voltage = item.V;
               const reactive_power = item.mvar;
               const current = item.A;
-              li_array.push(<li>{time} | {line_name}       | {power}   | {voltage}   | {current} | {reactive_power}</li>);
+              li_array.push(<li className="li_table"><span>{time}</span>|<span>{line_name}</span>|<span>{power}</span>|<span>{voltage}</span>|<span>{current}</span>|<span>{reactive_power}</span></li>);
             }
           })          
         }        
