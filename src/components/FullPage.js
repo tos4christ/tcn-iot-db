@@ -69,7 +69,7 @@ import Modal from "./Modal";
      };
    }
    componentDidMount() {
-    if(this.props.history.location.pathname === "/tcnnaspage" || this.props.history.location.pathname === "/testpage_gmncc_2") {
+    if(this.props.history.location.pathname === "/tcnnaspage" || this.props.history.location.pathname === "/secure_tcnnaspage") {
       socket.on("client_message_111", data => {
         const { message } = data;
         let parsedMessage = {};
@@ -275,6 +275,11 @@ import Modal from "./Modal";
     this.setState({ModalState: false});
    }
   render() {
+    const { isLoggedIn } = this.props;
+    const token = localStorage.getItem("token");
+    if (!isLoggedIn || token === null) {
+      return <Redirect to={'/'}/>
+    }
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
     const ihovbor_gs = stations_array['IHOVBOR NIPP (GAS)'];

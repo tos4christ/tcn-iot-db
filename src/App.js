@@ -145,12 +145,12 @@ class App extends React.Component {
           </Route>
           <Route exact path={`/tcnnaspage`}>              
             <div className='App'>
-              <FullPage />
+              <FullPage isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
           </Route>
-          <Route exact path={`/testpage_gmncc_2`}>              
+          <Route exact path={`/secure_tcnnaspage`}>              
             <div className='App'>
-              <FullPage />
+              <FullPage isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
           </Route>
           <Route exact path={`/bilaterals`}>              
