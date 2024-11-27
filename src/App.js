@@ -35,6 +35,7 @@ import Bilateral from './components/Bilateral';
 // import FrequencyTest from './components/FrequencyTest';
 import WeatherDownload from './components/WeatherDownload';
 import VoltageProfile from './components/voltageProfileDownload';
+import MESL_Page from './components/MESL_Page';
 
 
 class App extends React.Component {
@@ -156,6 +157,11 @@ class App extends React.Component {
           <Route exact path={`/bilaterals`}>              
             <div className='App'>
               <Bilateral />
+            </div>
+          </Route>
+          <Route exact path={`/mesl_bilaterals`}>              
+            <div className='App'>
+              <MESL_Page />
             </div>
           </Route>
           {/* <Route exact path={`/frequency_test`}>              
