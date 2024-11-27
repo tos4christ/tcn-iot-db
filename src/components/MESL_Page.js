@@ -39,6 +39,19 @@ import Modal from "./Modal";
           return returnObject;
         })
       });
+      socket.on("frequency001", data => {
+        const { message } = data;
+        let parsedMessage;
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) { console(e) }        
+        const returnObject = {}
+        this.setState(prevState => {
+          prevState["frequency"] = parsedMessage;
+          returnObject["frequency"] = prevState["frequency"];
+          return returnObject;
+        })
+      });
     }
    }
    getEpoch(time) {
@@ -127,10 +140,10 @@ import Modal from "./Modal";
     const {Niamey} = this.state;
     const {Inner_Galaxy1} = this.state;
     const {Inner_Galaxy2} = this.state;
-    const totalConsumption = (Number(Zeberced.mw) < 0 ? 0 : Number(Zeberced.mw)) + 
-    (Number(Niamey.mw) < 0 ? 0 : Number(Niamey.mw)) +
-    (Number(Inner_Galaxy1.mw) < 0 ? 0 : Number(Inner_Galaxy1.mw)) + 
-    (Number(Inner_Galaxy2.mw) < 0 ? 0 : Number(Inner_Galaxy2.mw))
+    const totalConsumption = (isNaN(Number(Zeberced.mw)) ? 0 : Number(Zeberced.mw)) + 
+    (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) +
+    (isNaN(Number(Inner_Galaxy1.mw)) ? 0 :  Number(Inner_Galaxy1.mw)) + 
+    (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw))
  
     return (
       <>
@@ -154,28 +167,28 @@ import Modal from "./Modal";
                   <td>1</td>
                   <td>ZEBERCED</td>
                   <td>{this.checkConnection2(this.state.Zeberced.server_time)}</td>
-                  <td>{Number(Zeberced.mw).toFixed(2)}</td>
-                  <td>{Zeberced.v}</td>
+                  <td>{isNaN(Number(Zeberced.mw)) ? 0 : Number(Zeberced.mw).toFixed(2)}</td>
+                  <td>{Zeberced.v ? Zeberced.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['NIAMEY', this.state.Niamey]); }}>
                   <td>2</td>
                   <td>NIAMEY</td>
                   <td>{this.checkConnection2(this.state.Niamey.server_time)}</td>
-                  <td>{Number(Niamey.mw).toFixed(2)}</td>
-                  <td>{Niamey.v}</td>
+                  <td>{isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw).toFixed(2)}</td>
+                  <td>{Niamey.v ? Niamey.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['INNER GALAXY 1', this.state.Inner_Galaxy1]); }}>
                   <td>3</td>
                   <td>INNER GALAXY 1</td>
                   <td>{this.checkConnection2(this.state.Inner_Galaxy1.server_time)}</td>
-                  <td>{Number(Inner_Galaxy1.mw).toFixed(2)}</td>
+                  <td>{isNaN(Number(Inner_Galaxy1.mw)) ? 0 : Number(Inner_Galaxy1.mw).toFixed(2)}</td>
                   <td>{Inner_Galaxy1.v ? Inner_Galaxy1.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['INNER GALAXY 2', this.state.Inner_Galaxy2]); }}>
                   <td>3</td>
                   <td>INNER GALAXY 2</td>
                   <td>{this.checkConnection2(this.state.Inner_Galaxy2.server_time)}</td>
-                  <td>{Number(Inner_Galaxy2.mw).toFixed(2)}</td>
+                  <td>{isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw).toFixed(2)}</td>
                   <td>{Inner_Galaxy2.v ? Inner_Galaxy2.v : 0}</td>
                 </tr>
                 {/* <tr onClick={(e) => { this.setModalTrue(e, ['OMOTOSHO (GAS)', this.state.omotosho2, this.state.omotosho1]); }}>
