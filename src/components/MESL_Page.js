@@ -185,7 +185,7 @@ import Modal from "./Modal";
                   <td>{Inner_Galaxy1.v ? Inner_Galaxy1.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['INNER GALAXY 2', this.state.Inner_Galaxy2]); }}>
-                  <td>3</td>
+                  <td>4</td>
                   <td>INNER GALAXY 2</td>
                   <td>{this.checkConnection2(this.state.Inner_Galaxy2.server_time)}</td>
                   <td>{isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw).toFixed(2)}</td>
