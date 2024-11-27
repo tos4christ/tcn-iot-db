@@ -161,7 +161,7 @@ class App extends React.Component {
           </Route>
           <Route exact path={`/mesl_bilaterals`}>              
             <div className='App'>
-              <MESL_Page />
+              <MESL_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
           </Route>
           {/* <Route exact path={`/frequency_test`}>              
