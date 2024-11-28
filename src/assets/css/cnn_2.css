@@ -4,6 +4,9 @@
     background-color: transparent;
     height: 170vh;
   }
+  .weather_background {
+    background-image: url("../img/weather-test.jpg");
+  }
 
   .weather-container {
     display: flex;
@@ -64,8 +67,6 @@
     width: 12em;
     overflow: hidden;
   }
-
-  
 
   .container {
     overflow: hidden;

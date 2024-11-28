@@ -875,104 +875,107 @@ font-size:large;
 }
 }
 @media screen and (max-width: 768px) {
-.App {
-    width: 130%;
-    height: 300vh;
-    overflow: scroll;
-    background-image: url('/public/tcn-nas-background.jpeg');
-} 
-.nav-containers {
-    display: flex;
-    flex-direction: row;
-    background-color: #666;
-    overflow: visible;
-}
-.nav-container {
-    display: flex;
-    flex-direction: row;
-    width: auto;
-    height: auto;
-    margin: 0;
-    padding: 0;
-}
-.navbar-body {
-    flex-grow: 5;
-    margin: 0;
-    padding: 0;
-}
-.navbar-header {
-    flex-grow: 2;
-}
-.nav-link {
-    padding: 0;
-    margin: 0;
-}
-.nav-item {
-    padding: 0;
-    margin: 0;
-}
-.navbar-header {
-    padding: 0;
-    flex-grow: 2;
-    margin: 0;
-}
-.nav-container li:nth-of-type(6) {
-    width: 6em;
-    float: right;
-    padding: 0;
-}
-.message {
-    width: max-content;
-    text-align: end;
-    margin-left: 40px; 
-}
-.text-white {
-    width: max-content;
-    color: aliceblue;
-    padding: 0 0 5px 20px;
-    margin: 0 0 5px 20px;
+    .App {
+        width: 130%;
+        height: 300vh;
+        overflow: scroll;
+        background-image: url('/public/tcn-nas-background.jpeg');
     }
-.menu-list {
-    display: flex;
-    flex-direction: row;
-}
-.ul-menu {    
-    flex-grow: 10;    
-    align-items: center;
-    padding: 0;
-    width: 120%;
-    margin: 20px;
+    .mesl_background {
+        background-image: url('/src/assets/img/mesl/mesl_background.png');
     }
-.ul-menu li {
-    display: block;
-    padding: 5px;
-    background-color: aqua;
-    margin: 10px;
-    width: 100%;
-    border-radius: 10px;
-    font-size:large;
-}
-.ul-menu li a {
+    .nav-containers {
+        display: flex;
+        flex-direction: row;
+        background-color: #666;
+        overflow: visible;
+    }
+    .nav-container {
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        height: auto;
+        margin: 0;
+        padding: 0;
+    }
+    .navbar-body {
+        flex-grow: 5;
+        margin: 0;
+        padding: 0;
+    }
+    .navbar-header {
+        flex-grow: 2;
+    }
+    .nav-link {
+        padding: 0;
+        margin: 0;
+    }
+    .nav-item {
+        padding: 0;
+        margin: 0;
+    }
+    .navbar-header {
+        padding: 0;
+        flex-grow: 2;
+        margin: 0;
+    }
+    .nav-container li:nth-of-type(6) {
+        width: 6em;
+        float: right;
+        padding: 0;
+    }
+    .message {
+        width: max-content;
+        text-align: end;
+        margin-left: 40px; 
+    }
+    .text-white {
+        width: max-content;
+        color: aliceblue;
+        padding: 0 0 5px 20px;
+        margin: 0 0 5px 20px;
+        }
+    .menu-list {
+        display: flex;
+        flex-direction: row;
+    }
+    .ul-menu {    
+        flex-grow: 10;    
+        align-items: center;
+        padding: 0;
+        width: 120%;
+        margin: 20px;
+        }
+    .ul-menu li {
+        display: block;
+        padding: 5px;
+        background-color: aqua;
+        margin: 10px;
+        width: 100%;
+        border-radius: 10px;
+        font-size:large;
+    }
+    .ul-menu li a {
+        padding: 0;
+        margin: 0;
+        width: 120%;
+    }
+    .display-div {
+    flex-grow: 4;
+    margin: 0;
     padding: 0;
-    margin: 0;
-    width: 120%;
-}
-.display-div {
-flex-grow: 4;
-margin: 0;
-padding: 0;
-background-color:#232323;
-}
-.display-div table {
-    margin: 0;
-}
-.display-div h2 {
-    margin: 10px;
-    text-align: center;
-}
-.counter-div {
-    flex-grow: 2;
-}
+    background-color:#232323;
+    }
+    .display-div table {
+        margin: 0;
+    }
+    .display-div h2 {
+        margin: 10px;
+        text-align: center;
+    }
+    .counter-div {
+        flex-grow: 2;
+    }
 }
 
 .freq_font {
@@ -990,6 +993,9 @@ background-attachment: fixed;
 height:300vh;
 /* overflow: scroll; */
 /* Add the blur effect */
+}
+.mesl_background {
+    background-image: url('/src/assets/img/mesl/mesl_background.png');
 }
 .responders-bg {
 /* background-color: #fff; */

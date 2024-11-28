@@ -160,7 +160,7 @@ class App extends React.Component {
             </div>
           </Route>
           <Route exact path={`/mesl_bilaterals`}>              
-            <div className='App'>
+            <div className='mesl_background'>
               <MESL_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
           </Route>
@@ -170,7 +170,9 @@ class App extends React.Component {
             </div>
           </Route> */}
           <Route exact path={`/nccweather`}>
-              <WeatherApi />         
+            <div className='weather_background'>
+              <WeatherApi />  
+            </div>                     
           </Route>
           <Route exact path={`/nccweather2`}>
               <WeatherApp />         
