@@ -130,11 +130,11 @@ import Modal from "./Modal";
     this.setState({ModalState: false});
    }
   render() {
-    const { isLoggedIn } = this.props;
-    const token = localStorage.getItem("token");
-    if (!isLoggedIn || token === null) {
-      return <Redirect to={'/'}/>
-    }
+    // const { isLoggedIn } = this.props;
+    // const token = localStorage.getItem("token");
+    // if (!isLoggedIn || token === null) {
+    //   return <Redirect to={'/'}/>
+    // }
     
     const {Zeberced} = this.state;
     const {Niamey} = this.state;
