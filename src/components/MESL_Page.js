@@ -148,10 +148,10 @@ import Modal from "./Modal";
     const {PSML} = this.state;
     const {ATVL} = this.state;
     // const quantum = this.state.quantum?.transformers[0]?.td ? this.state.quantum.transformers[0].td : {};
-    const quantum = this.state.quantum.transformers ? this.state.quantum : {};
-    console.log(quantum, "   the quantum data");
+    const quantum = this.state.quantum.transformers ? this.state.quantum.transformers[0].td : {};
+    // console.log(quantum, "   the quantum data");
     const totalConsumption = (isNaN(Number(Zeberced.mw)) ? 0 : Number(Zeberced.mw)) + 
-    (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) +
+    (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) + (isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw))) +
     (isNaN(Number(Inner_Galaxy1.mw)) ? 0 :  Number(Inner_Galaxy1.mw)) + 
     (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) +
     (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw)));
@@ -234,8 +234,8 @@ import Modal from "./Modal";
                   <td>9</td>
                   <td>Quantum</td>
                   <td>{this.checkConnection2(this.state.quantum.server_time)}</td>
-                  <td>{isNaN(Number(quantum.mw)) ? 0 : Number(this.state.quantum.mw).toFixed(2)}</td>
-                  <td>{this.state.quantum.v ? this.state.quantum.v : 0}</td>
+                  <td>{isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw).toFixed(2))}</td>
+                  <td>{quantum.V ? quantum.V : 0}</td>
                 </tr>
                 {/* <tr onClick={(e) => { this.setModalTrue(e, ['OMOTOSHO (GAS)', this.state.omotosho2, this.state.omotosho1]); }}>
                   <td>4</td>
