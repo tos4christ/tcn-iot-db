@@ -147,7 +147,8 @@ import Modal from "./Modal";
     const {Inner_Galaxy2} = this.state;
     const {PSML} = this.state;
     const {ATVL} = this.state;
-    const quantum = this.state.quantum?.transformers[0]?.td ? this.state.quantum.transformers[0].td : {};
+    // const quantum = this.state.quantum?.transformers[0]?.td ? this.state.quantum.transformers[0].td : {};
+    const {quantum} = this.state;
     console.log(quantum, "   the quantum data");
     const totalConsumption = (isNaN(Number(Zeberced.mw)) ? 0 : Number(Zeberced.mw)) + 
     (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) +
