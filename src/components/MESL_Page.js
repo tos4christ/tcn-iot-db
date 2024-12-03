@@ -18,7 +18,10 @@ import Modal from "./Modal";
       Zeberced: {},
       Niamey: {},
       Inner_Galaxy2: {},
-      Inner_Galaxy1: {}
+      Inner_Galaxy1: {},
+      PSML: {},
+      ATVL: {},
+      gazaoua: {}
      };
    }
    componentDidMount() {
@@ -140,10 +143,13 @@ import Modal from "./Modal";
     const {Niamey} = this.state;
     const {Inner_Galaxy1} = this.state;
     const {Inner_Galaxy2} = this.state;
+    const {PSML} = this.state;
+    const {ATVL} = this.state;
     const totalConsumption = (isNaN(Number(Zeberced.mw)) ? 0 : Number(Zeberced.mw)) + 
     (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) +
     (isNaN(Number(Inner_Galaxy1.mw)) ? 0 :  Number(Inner_Galaxy1.mw)) + 
-    (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw))
+    (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) +
+    (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Number(ATVL.mw));
  
     return (
       <>
@@ -190,6 +196,27 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.Inner_Galaxy2.server_time)}</td>
                   <td>{isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw).toFixed(2)}</td>
                   <td>{Inner_Galaxy2.v ? Inner_Galaxy2.v : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['PSML', this.state.PSML]); }}>
+                  <td>5</td>
+                  <td>PRISM</td>
+                  <td>{this.checkConnection2(this.state.PSML.server_time)}</td>
+                  <td>{isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw).toFixed(2)}</td>
+                  <td>{PSML.v ? PSML.v : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['ATVL', this.state.ATVL]); }}>
+                  <td>6</td>
+                  <td>ATVL</td>
+                  <td>{this.checkConnection2(this.state.ATVL.server_time)}</td>
+                  <td>{isNaN(Number(ATVL.mw)) ? 0 : Number(ATVL.mw).toFixed(2)}</td>
+                  <td>{ATVL.v ? ATVL.v : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['GAZAOUA', this.state.gazaoua]); }}>
+                  <td>7</td>
+                  <td>GAZAOUA</td>
+                  <td>{this.checkConnection2(this.state.gazaoua.server_time)}</td>
+                  <td>{isNaN(Number(this.state.gazaoua.mw)) ? 0 : Number(this.state.gazaoua.mw).toFixed(2)}</td>
+                  <td>{this.state.gazaoua.v ? this.state.gazaoua.v : 0}</td>
                 </tr>
                 {/* <tr onClick={(e) => { this.setModalTrue(e, ['OMOTOSHO (GAS)', this.state.omotosho2, this.state.omotosho1]); }}>
                   <td>4</td>
