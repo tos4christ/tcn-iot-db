@@ -35,7 +35,7 @@ import Modal from "./Modal";
           parsedMessage = JSON.parse(message);
         } catch(e) {} 
         parsedMessage.server_time = (new Date()).getTime();
-        const station = parsedMessage.name;
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
         const returnObject = {}
         // console.log(parsedMessage, 'c1 message');
         this.setState(prevState => {
