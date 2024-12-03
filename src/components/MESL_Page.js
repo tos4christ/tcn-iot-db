@@ -149,7 +149,7 @@ import Modal from "./Modal";
     (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) +
     (isNaN(Number(Inner_Galaxy1.mw)) ? 0 :  Number(Inner_Galaxy1.mw)) + 
     (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) +
-    (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Number(ATVL.mw));
+    (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw)));
  
     return (
       <>
@@ -208,7 +208,7 @@ import Modal from "./Modal";
                   <td>6</td>
                   <td>ATVL</td>
                   <td>{this.checkConnection2(this.state.ATVL.server_time)}</td>
-                  <td>{isNaN(Number(ATVL.mw)) ? 0 : Number(ATVL.mw).toFixed(2)}</td>
+                  <td>{isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw).toFixed(2))}</td>
                   <td>{ATVL.v ? ATVL.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['GAZAOUA', this.state.gazaoua]); }}>
