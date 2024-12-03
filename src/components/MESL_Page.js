@@ -21,7 +21,9 @@ import Modal from "./Modal";
       Inner_Galaxy1: {},
       PSML: {},
       ATVL: {},
-      gazaoua: {}
+      gazaoua: {},
+      kam: {},
+      quantum: {}
      };
    }
    componentDidMount() {
@@ -217,6 +219,20 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.gazaoua.server_time)}</td>
                   <td>{isNaN(Number(this.state.gazaoua.mw)) ? 0 : Number(this.state.gazaoua.mw).toFixed(2)}</td>
                   <td>{this.state.gazaoua.v ? this.state.gazaoua.v : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['KAM', this.state.kam]); }}>
+                  <td>8</td>
+                  <td>KAM</td>
+                  <td>{this.checkConnection2(this.state.kam.server_time)}</td>
+                  <td>{isNaN(Number(this.state.kam.mw)) ? 0 : Number(this.state.kam.mw).toFixed(2)}</td>
+                  <td>{this.state.kam.v ? this.state.kam.v : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['Quantum', this.state.quantum]); }}>
+                  <td>9</td>
+                  <td>Quantum</td>
+                  <td>{this.checkConnection2(this.state.quantum.server_time)}</td>
+                  <td>{isNaN(Number(this.state.quantum.mw)) ? 0 : Number(this.state.quantum.mw).toFixed(2)}</td>
+                  <td>{this.state.quantum.v ? this.state.quantum.v : 0}</td>
                 </tr>
                 {/* <tr onClick={(e) => { this.setModalTrue(e, ['OMOTOSHO (GAS)', this.state.omotosho2, this.state.omotosho1]); }}>
                   <td>4</td>
