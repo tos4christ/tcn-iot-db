@@ -148,7 +148,7 @@ import Modal from "./Modal";
     const {PSML} = this.state;
     const {ATVL} = this.state;
     // const quantum = this.state.quantum?.transformers[0]?.td ? this.state.quantum.transformers[0].td : {};
-    const quantum = this.state.quantum.transformers ? this.state.quantum : null;
+    const quantum = this.state.quantum.transformers ? this.state.quantum : {};
     console.log(quantum, "   the quantum data");
     const totalConsumption = (isNaN(Number(Zeberced.mw)) ? 0 : Number(Zeberced.mw)) + 
     (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) +
