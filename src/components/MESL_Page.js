@@ -23,6 +23,7 @@ import Modal from "./Modal";
       ATVL: {},
       gazaoua: {},
       kam: {},
+      KamInd33kv: {},
       quantum: {}
      };
    }
@@ -223,12 +224,12 @@ import Modal from "./Modal";
                   <td>{isNaN(Number(this.state.gazaoua.mw)) ? 0 : Number(this.state.gazaoua.mw).toFixed(2)}</td>
                   <td>{this.state.gazaoua.v ? this.state.gazaoua.v : 0}</td>
                 </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['KAM', this.state.kam]); }}>
+                <tr onClick={(e) => { this.setModalTrue(e, ['KAM', this.state.KamInd33kv]); }}>
                   <td>8</td>
                   <td>KAM</td>
-                  <td>{this.checkConnection2(this.state.kam.server_time)}</td>
-                  <td>{isNaN(Number(this.state.kam.mw)) ? 0 : Number(this.state.kam.mw).toFixed(2)}</td>
-                  <td>{this.state.kam.v ? this.state.kam.v : 0}</td>
+                  <td>{this.checkConnection2(this.state.KamInd33kv.server_time)}</td>
+                  <td>{isNaN(Number(this.state.KamInd33kv.mw)) ? 0 : Number(this.state.KamInd33kv.mw).toFixed(2)}</td>
+                  <td>{this.state.KamInd33kv.v ? this.state.KamInd33kv.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['Quantum', this.state.quantum]); }}>
                   <td>9</td>
