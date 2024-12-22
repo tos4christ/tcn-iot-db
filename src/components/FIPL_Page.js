@@ -14,7 +14,7 @@ import Modal from "./Modal";
       connected: false,
       ModalState: false,
       modal_data: "",
-      'Obafemi Awolowo University Ile-Ife': {},
+      'Obafemi Awolowo University Ile-Ife': {},
       'First Maximum Point Industries Akure': {}
      };
    }
@@ -136,7 +136,7 @@ import Modal from "./Modal";
     // }
     
     const FMPIA = this.state["First Maximum Point Industries Akure"];
-    const OAUI = this.state["Obafemi Awolowo University Ile-Ife"];
+    const OAUI = this.state["Obafemi Awolowo University Ile-Ife"];
 
     const totalConsumption = (isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw)) + (isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw));
  
@@ -165,10 +165,10 @@ import Modal from "./Modal";
                   <td>{isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw).toFixed(2)}</td>
                   <td>{FMPIA.v ? FMPIA.v : 0}</td>
                 </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['OAUI', this.state["Obafemi Awolowo University Ile-Ife"]]); }}>
+                <tr onClick={(e) => { this.setModalTrue(e, ['OAUI', this.state["Obafemi Awolowo University Ile-Ife"]]); }}>
                   <td>2</td>
                   <td>Obafemi Awolowo University Ile-Ife</td>
-                  <td>{this.checkConnection2(this.state["Obafemi Awolowo University Ile-Ife"].server_time)}</td>
+                  <td>{this.checkConnection2(this.state["Obafemi Awolowo University Ile-Ife"].server_time)}</td>
                   <td>{isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw).toFixed(2)}</td>
                   <td>{OAUI.v ? OAUI.v : 0}</td>
                 </tr>
