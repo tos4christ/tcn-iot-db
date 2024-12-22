@@ -36,6 +36,7 @@ import Bilateral from './components/Bilateral';
 import WeatherDownload from './components/WeatherDownload';
 import VoltageProfile from './components/voltageProfileDownload';
 import MESL_Page from './components/MESL_Page';
+import FIPL_Page from './components/FIPL_Page';
 
 
 class App extends React.Component {
@@ -162,6 +163,11 @@ class App extends React.Component {
           <Route exact path={`/mesl_bilaterals`}>              
             <div className='mesl_background'>
               <MESL_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>
+          </Route>
+          <Route exact path={`/fipl_bilaterals_old`}>
+            <div className='fipl_background'>
+              <FIPL_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
           </Route>
           {/* <Route exact path={`/frequency_test`}>              

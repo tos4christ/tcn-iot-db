@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter, Redirect } from 'react-router-dom';
 import socket from "./utility/socketIO";
-import get_stations from "./stations_adder";
 import DateTime from "./DateTime";
 import Modal from "./Modal";
 
