@@ -34,7 +34,7 @@ import Modal from "./Modal";
           prevState[station] = parsedMessage;
           returnObject[station] = prevState[station];
           // remove this later
-          console.log(returnObject);
+          // console.log(returnObject);
           return returnObject;
         })
       });
