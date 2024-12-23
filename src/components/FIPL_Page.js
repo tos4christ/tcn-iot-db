@@ -19,7 +19,7 @@ import Modal from "./Modal";
      };
    }
    componentDidMount() {
-    if(this.props.history.location.pathname === "/fipl_bilaterals_old") {
+    if(this.props.history.location.pathname === "/fipl_bilaterals") {
       socket.on("client_message_fipl", data => {
         const { message } = data;
         let parsedMessage = {};

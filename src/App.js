@@ -165,7 +165,7 @@ class App extends React.Component {
               <MESL_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
           </Route>
-          <Route exact path={`/fipl_bilaterals_old`}>
+          <Route exact path={`/fipl_bilaterals`}>
             <div className='fipl_background'>
               <FIPL_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
