@@ -14,7 +14,7 @@ import Modal from "./Modal";
       connected: false,
       ModalState: false,
       modal_data: "",
-      Zeberced: {},
+      zeberced: {},
       Niamey: {},
       Inner_Galaxy2: {},
       Inner_Galaxy1: {},
@@ -141,7 +141,7 @@ import Modal from "./Modal";
     //   return <Redirect to={'/'}/>
     // }
     
-    const {Zeberced} = this.state;
+    const {zeberced} = this.state;
     const {Niamey} = this.state;
     const {Inner_Galaxy1} = this.state;
     const {Inner_Galaxy2} = this.state;
@@ -151,7 +151,7 @@ import Modal from "./Modal";
     // const quantum = this.state.quantum?.transformers[0]?.td ? this.state.quantum.transformers[0].td : {};
     const quantum = this.state.quantum.transformers ? this.state.quantum.transformers[0].td : {};
     // console.log(quantum, "   the quantum data");
-    const totalConsumption = (isNaN(Number(Zeberced.mw)) ? 0 : Number(Zeberced.mw)) + 
+    const totalConsumption = (isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw)) + 
     (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) + (isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw))) +
     (isNaN(Number(Inner_Galaxy1.mw)) ? 0 :  Number(Inner_Galaxy1.mw)) + 
     (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) + (isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw)) +
@@ -175,12 +175,12 @@ import Modal from "./Modal";
                 </tr>
               </thead>
               <tbody>
-                <tr  onClick={(e) => { this.setModalTrue(e, ['ZEBERCED', this.state.Zeberced]); }}>
+                <tr  onClick={(e) => { this.setModalTrue(e, ['ZEBERCED', this.state.zeberced]); }}>
                   <td>1</td>
                   <td>ZEBERCED</td>
-                  <td>{this.checkConnection2(this.state.Zeberced.server_time)}</td>
-                  <td>{isNaN(Number(Zeberced.mw)) ? 0 : Number(Zeberced.mw).toFixed(2)}</td>
-                  <td>{Zeberced.v ? Zeberced.v : 0}</td>
+                  <td>{this.checkConnection2(this.state.zeberced.server_time)}</td>
+                  <td>{isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw).toFixed(2)}</td>
+                  <td>{zeberced.v ? zeberced.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['NIAMEY', this.state.Niamey]); }}>
                   <td>2</td>
