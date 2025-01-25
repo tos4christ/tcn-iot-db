@@ -155,7 +155,7 @@ import Modal from "./Modal";
     // console.log(quantum, "   the quantum data");
     const totalConsumption = (isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw)) + 
     (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) + (isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw))) +
-    (isNaN(Number(Inner_Galaxy1.mw)) ? 0 :  Number(Inner_Galaxy1.mw)) + (isNaN(Number(Gazaoua.mw)) ? 0 :  Number(Gazaoua.mw)) + 
+    (isNaN(Number(Inner_Galaxy1.mw)) ? 0 :  Number(Inner_Galaxy1.mw)) + (isNaN(Number(Gazaoua.mw)) ? 0 :  Math.abs(Number(Gazaoua.mw))) + 
     (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) + (isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw)) +
     (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw)));
  
@@ -223,7 +223,7 @@ import Modal from "./Modal";
                   <td>7</td>
                   <td>GAZAOUA</td>
                   <td>{this.checkConnection2(this.state.Gazaoua.server_time)}</td>
-                  <td>{isNaN(Number(Gazaoua.mw)) ? 0 : Number(Gazaoua.mw).toFixed(2)}</td>
+                  <td>{isNaN(Number(Gazaoua.mw)) ? 0 : Math.abs(Number(Gazaoua.mw)).toFixed(2)}</td>
                   <td>{Gazaoua.v ? Gazaoua.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['KAM', this.state.KamInd33kV]); }}>
