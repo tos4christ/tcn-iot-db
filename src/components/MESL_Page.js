@@ -20,7 +20,7 @@ import Modal from "./Modal";
       Inner_Galaxy1: {},
       PSML: {},
       ATVL: {},
-      gazaoua: {},
+      Gazaoua: {},
       kam: {},
       KamInd33kV: {},
       quantum: {}
@@ -148,12 +148,14 @@ import Modal from "./Modal";
     const {PSML} = this.state;
     const {ATVL} = this.state;
     const {KamInd33kV} = this.state;
+    const {Gazaoua} = this.state;
+    
     // const quantum = this.state.quantum?.transformers[0]?.td ? this.state.quantum.transformers[0].td : {};
     const quantum = this.state.quantum.transformers ? this.state.quantum.transformers[0].td : {};
     // console.log(quantum, "   the quantum data");
     const totalConsumption = (isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw)) + 
     (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) + (isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw))) +
-    (isNaN(Number(Inner_Galaxy1.mw)) ? 0 :  Number(Inner_Galaxy1.mw)) + 
+    (isNaN(Number(Inner_Galaxy1.mw)) ? 0 :  Number(Inner_Galaxy1.mw)) + (isNaN(Number(Gazaoua.mw)) ? 0 :  Number(Gazaoua.mw)) + 
     (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) + (isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw)) +
     (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw)));
  
@@ -217,12 +219,12 @@ import Modal from "./Modal";
                   <td>{isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw).toFixed(2))}</td>
                   <td>{ATVL.v ? ATVL.v : 0}</td>
                 </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['GAZAOUA', this.state.gazaoua]); }}>
+                <tr onClick={(e) => { this.setModalTrue(e, ['GAZAOUA', this.state.Gazaoua]); }}>
                   <td>7</td>
                   <td>GAZAOUA</td>
-                  <td>{this.checkConnection2(this.state.gazaoua.server_time)}</td>
-                  <td>{isNaN(Number(this.state.gazaoua.mw)) ? 0 : Number(this.state.gazaoua.mw).toFixed(2)}</td>
-                  <td>{this.state.gazaoua.v ? this.state.gazaoua.v : 0}</td>
+                  <td>{this.checkConnection2(this.state.Gazaoua.server_time)}</td>
+                  <td>{isNaN(Number(Gazaoua.mw)) ? 0 : Number(Gazaoua.mw).toFixed(2)}</td>
+                  <td>{Gazaoua.v ? Gazaoua.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['KAM', this.state.KamInd33kV]); }}>
                   <td>8</td>
