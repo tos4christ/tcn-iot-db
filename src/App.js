@@ -37,6 +37,7 @@ import WeatherDownload from './components/WeatherDownload';
 import VoltageProfile from './components/voltageProfileDownload';
 import MESL_Page from './components/MESL_Page';
 import FIPL_Page from './components/FIPL_Page';
+import TAOPEX_Page from './components/TAOPEX_Page';
 
 
 class App extends React.Component {
@@ -168,6 +169,11 @@ class App extends React.Component {
           <Route exact path={`/fipl_bilaterals`}>
             <div className='fipl_background'>
               <FIPL_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>
+          </Route>
+          <Route exact path={`/taopex_bilaterals_test`}>
+            <div className='taopex_background'>
+              <TAOPEX_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
           </Route>
           {/* <Route exact path={`/frequency_test`}>              
