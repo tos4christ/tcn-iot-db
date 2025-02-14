@@ -16,6 +16,7 @@ import Modal from "./Modal";
       modal_data: "",
       'kamSteel': {},
       'kamSteel-Ilorin': {},
+      'Er-Kang': {},
      };
    }
    componentDidMount() {
@@ -136,6 +137,7 @@ import Modal from "./Modal";
     // }
     
     const {kamSteel} = this.state;
+    const {Er_Kang} = this.state["Er-Kang"];
     const kamSteel_Ilorin = this.state["kamSteel-Ilorin"].name ? this.state["kamSteel-Ilorin"] : null;
     const kamSteel_Ilorin_line_1 = kamSteel_Ilorin?.lines[0] ? kamSteel_Ilorin?.lines[0] : null;
     const kamSteel_Ilorin_line_2 = kamSteel_Ilorin?.lines[1] ? kamSteel_Ilorin?.lines[1] : null;
@@ -144,8 +146,8 @@ import Modal from "./Modal";
     const kamSteel_Ilorin_voltage = kamSteel_Ilorin_line_1?.td?.v ? kamSteel_Ilorin_line_1?.td?.v : kamSteel_Ilorin_line_2?.td?.v ? kamSteel_Ilorin_line_2?.td?.v : 0;
     const kamSteel_Ilorin_mw_sum = Number(kamSteel_Ilorin_line1_mw) + Number(kamSteel_Ilorin_line2_mw);
 
-    const totalConsumption = (isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw)) +
-                             (isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum));
+    const totalConsumption = (isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw)) + (isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw))
+                            + (isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum));
  
     return (
       <>
@@ -178,6 +180,13 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state["kamSteel-Ilorin"].server_time)}</td>
                   <td>{isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum).toFixed(2)}</td>
                   <td>{kamSteel_Ilorin_voltage ? kamSteel_Ilorin_voltage : 0}</td>
+                </tr>
+                <tr  onClick={(e) => { this.setModalTrue(e, ['Er-Kang', this.state["Er-Kang"]]); }}>
+                  <td>3</td>
+                  <td>ER-KANG Limited</td>
+                  <td>{this.checkConnection2(this.state["Er-Kang"].server_time)}</td>
+                  <td>{isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw).toFixed(2)}</td>
+                  <td>{Er_Kang.v ? Er_Kang.v : 0}</td>
                 </tr>
 
                 <tr></tr>
