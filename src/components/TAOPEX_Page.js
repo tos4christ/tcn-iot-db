@@ -137,7 +137,7 @@ import Modal from "./Modal";
     
     const {kamSteel} = this.state;
     const kamSteel_Ilorin = this.state["kamSteel-Ilorin"];
-    const kamSteel_Ilorin_line_1 = kamSteel_Ilorin?.lines[0];
+    const kamSteel_Ilorin_line_1 = kamSteel_Ilorin?.lines[0] ? kamSteel_Ilorin?.lines[0] : null;
     const kamSteel_Ilorin_line_2 = kamSteel_Ilorin?.lines[1];
     const kamSteel_Ilorin_line1_mw = kamSteel_Ilorin_line_1?.td?.mw;
     const kamSteel_Ilorin_line2_mw = kamSteel_Ilorin_line_2?.td?.mw;
