@@ -171,7 +171,7 @@ class App extends React.Component {
               <FIPL_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
           </Route>
-          <Route exact path={`/taopex_bilaterals_test`}>
+          <Route exact path={`/taopex_bilaterals`}>
             <div className='taopex_background'>
               <TAOPEX_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>

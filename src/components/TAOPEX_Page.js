@@ -20,7 +20,7 @@ import Modal from "./Modal";
      };
    }
    componentDidMount() {
-    if(this.props.history.location.pathname === "/taopex_bilaterals_test") {
+    if(this.props.history.location.pathname === "/taopex_bilaterals") {
       socket.on("client_message_taopex", data => {
         const { message } = data;
         let parsedMessage = {};
