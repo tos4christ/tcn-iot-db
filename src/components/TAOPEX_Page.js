@@ -138,14 +138,14 @@ import Modal from "./Modal";
     const {kamSteel} = this.state;
     const kamSteel_Ilorin = this.state["kamSteel-Ilorin"].name ? this.state["kamSteel-Ilorin"] : null;
     const kamSteel_Ilorin_line_1 = kamSteel_Ilorin?.lines[0] ? kamSteel_Ilorin?.lines[0] : null;
-    const kamSteel_Ilorin_line_2 = kamSteel_Ilorin?.lines[1];
+    const kamSteel_Ilorin_line_2 = kamSteel_Ilorin?.lines[1] ? kamSteel_Ilorin?.lines[1] : null;
     const kamSteel_Ilorin_line1_mw = kamSteel_Ilorin_line_1?.td?.mw;
     const kamSteel_Ilorin_line2_mw = kamSteel_Ilorin_line_2?.td?.mw;
     const kamSteel_Ilorin_voltage = kamSteel_Ilorin_line_1?.td?.v ? kamSteel_Ilorin_line_1?.td?.v : kamSteel_Ilorin_line_2?.td?.v ? kamSteel_Ilorin_line_2?.td?.v : 0;
     const kamSteel_Ilorin_mw_sum = Number(kamSteel_Ilorin_line1_mw) + Number(kamSteel_Ilorin_line2_mw);
 
     const totalConsumption = (isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw)) +
-                             (isNaN(Number(kamSteel_Ilorin_mw_sum.mw)) ? 0 : Number(kamSteel_Ilorin_mw_sum.mw));
+                             (isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum));
  
     return (
       <>
