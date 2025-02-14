@@ -15,6 +15,7 @@ import Modal from "./Modal";
       ModalState: false,
       modal_data: "",
       'kamSteel': {},
+      'kamSteel-Ilorin': {},
      };
    }
    componentDidMount() {
@@ -135,8 +136,16 @@ import Modal from "./Modal";
     // }
     
     const {kamSteel} = this.state;
+    const kamSteel_Ilorin = this.state["kamSteel-Ilorin"];
+    const kamSteel_Ilorin_line_1 = kamSteel_Ilorin.lines[0];
+    const kamSteel_Ilorin_line_2 = kamSteel_Ilorin.lines[1];
+    const kamSteel_Ilorin_line1_mw = kamSteel_Ilorin_line_1.td.mw;
+    const kamSteel_Ilorin_line2_mw = kamSteel_Ilorin_line_2.td.mw;
+    const kamSteel_Ilorin_voltage = kamSteel_Ilorin_line_1.td.v ? kamSteel_Ilorin_line_1.td.v : kamSteel_Ilorin_line_2.td.v ? kamSteel_Ilorin_line_2.td.v : 0;
+    const kamSteel_Ilorin_mw_sum = Number(kamSteel_Ilorin_line1_mw) + Number(kamSteel_Ilorin_line2_mw);
 
-    const totalConsumption = (isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw));
+    const totalConsumption = (isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw)) +
+                             (isNaN(Number(kamSteel_Ilorin_mw_sum.mw)) ? 0 : Number(kamSteel_Ilorin_mw_sum.mw));
  
     return (
       <>
@@ -163,13 +172,13 @@ import Modal from "./Modal";
                   <td>{isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw).toFixed(2)}</td>
                   <td>{kamSteel.v ? kamSteel.v : 0}</td>
                 </tr>
-                {/* <tr onClick={(e) => { this.setModalTrue(e, ['kamSteel', this.state.kamSteel]); }}> */}
-                  {/* <td>2</td> */}
-                  {/* <td>Kam Steel Integrated Kwara</td> */}
-                  {/* <td>{this.checkConnection2(this.state["Obafemi Awolowo University Ile-Ife"].server_time)}</td> */}
-                  {/* <td>{isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw).toFixed(2)}</td> */}
-                  {/* <td>{OAUI.v ? OAUI.v : 0}</td> */}
-                {/* </tr> */}
+                <tr onClick={(e) => { this.setModalTrue(e, ['kamSteel-Ilorin', this.state["kamSteel-Ilorin"]]); }}>
+                  <td>2</td>
+                  <td>Kam Steel Integrated Ilorin</td>
+                  <td>{this.checkConnection2(this.state["kamSteel-Ilorin"].server_time)}</td>
+                  <td>{isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum).toFixed(2)}</td>
+                  <td>{kamSteel_Ilorin_voltage ? kamSteel_Ilorin_voltage : 0}</td>
+                </tr>
 
                 <tr></tr>
                 <tr>
