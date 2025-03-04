@@ -28,7 +28,9 @@ import Modal from "./Modal";
           parsedMessage = JSON.parse(message);
         } catch(e) {} 
         parsedMessage.server_time = (new Date()).getTime();
+        console.log(parsedMessage, " the parsedMessage data");
         const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        console.log(station, " the station data");
         const returnObject = {}
         // console.log(parsedMessage, 'c1 message');
         this.setState(prevState => {
@@ -139,8 +141,6 @@ import Modal from "./Modal";
     const {kamSteel} = this.state;
     const Er_Kang = this.state["Er-Kang"];
     const kamSteel_Ilorin = this.state["kamSteel-Ilorin"].name ? this.state["kamSteel-Ilorin"] : null;
-    console.log(kamSteel_Ilorin, " the data");
-    console.log(this.state["kamSteel-Ilorin"], " the state data");
     const kamSteel_Ilorin_line_1 = kamSteel_Ilorin?.lines[0] ? kamSteel_Ilorin?.lines[0] : null;
     const kamSteel_Ilorin_line_2 = kamSteel_Ilorin?.lines[1] ? kamSteel_Ilorin?.lines[1] : null;
     const kamSteel_Ilorin_line1_mw = kamSteel_Ilorin_line_1?.td?.mw;
