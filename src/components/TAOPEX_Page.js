@@ -23,8 +23,7 @@ import Modal from "./Modal";
     if(this.props.history.location.pathname === "/taopex_bilaterals") {
       socket.on("client_message_taopex", data => {
         const { message } = data;
-        console.log(message, " the Message data");
-        console.log(typeof message, " the type Message data");
+        console.log(JSON.parse(message), " the Message data");
         let parsedMessage = {};
         try {
           parsedMessage = JSON.parse(message);
