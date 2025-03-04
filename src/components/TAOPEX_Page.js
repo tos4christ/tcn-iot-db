@@ -23,22 +23,16 @@ import Modal from "./Modal";
     if(this.props.history.location.pathname === "/taopex_bilaterals") {
       socket.on("client_message_taopex", data => {
         const { message } = data;
-        console.log(JSON.parse(message), " the Message data");
         let parsedMessage = {};
         try {
           parsedMessage = JSON.parse(message);
         } catch(e) {} 
-        parsedMessage.server_time = (new Date()).getTime();
-        
+        parsedMessage.server_time = (new Date()).getTime();        
         const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
-        //console.log(station, " the station data");
         const returnObject = {}
-        // console.log(parsedMessage, 'c1 message');
         this.setState(prevState => {
           prevState[station] = parsedMessage;
           returnObject[station] = prevState[station];
-          // remove this later
-          // console.log(returnObject);
           return returnObject;
         })
       });
