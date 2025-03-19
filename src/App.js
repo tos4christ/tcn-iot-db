@@ -38,6 +38,7 @@ import VoltageProfile from './components/voltageProfileDownload';
 import MESL_Page from './components/MESL_Page';
 import FIPL_Page from './components/FIPL_Page';
 import TAOPEX_Page from './components/TAOPEX_Page';
+import NDPHC_Page from './components/NDPHC_Page';
 
 
 class App extends React.Component {
@@ -174,6 +175,11 @@ class App extends React.Component {
           <Route exact path={`/taopex_bilaterals`}>
             <div className='taopex_background'>
               <TAOPEX_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>
+          </Route>
+          <Route exact path={`/ndphc_bilaterals`}>
+            <div className='ndphc_background'>
+              <NDPHC_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
           </Route>
           {/* <Route exact path={`/frequency_test`}>              
