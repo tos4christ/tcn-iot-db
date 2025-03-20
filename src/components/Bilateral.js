@@ -73,7 +73,7 @@ import Modal from "./Modal";
         const { message } = data;
         const parsedMessage = JSON.parse(message);
         parsedMessage.server_time = (new Date()).getTime();
-        const station = parsedMessage.id;
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
         const returnObject = {}
         // console.log(parsedMessage, 'c1 message');
         this.setState(prevState => {
@@ -86,7 +86,7 @@ import Modal from "./Modal";
         const { message } = data;
         const parsedMessage = JSON.parse(message);
         parsedMessage.server_time = (new Date()).getTime();
-        const station = parsedMessage.id;
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
         const returnObject = {}
         // console.log(parsedMessage, 'c2 message');
         this.setState(prevState => {
