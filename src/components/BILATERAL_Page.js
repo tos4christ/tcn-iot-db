@@ -36,7 +36,7 @@ import Modal from "./Modal";
    }
    
    componentDidMount() {
-    if(this.props.history.location.pathname === "/all_bilateral") {
+    if(this.props.history.location.pathname === "/bilateral") {
       socket.on("client_message_taopex", data => {
         const { message } = data;
         let parsedMessage = {};
@@ -258,14 +258,14 @@ import Modal from "./Modal";
                 </tr>
 
                 <tr  onClick={(e) => { this.setModalTrue(e, ['FMPIA', this.state["First Maximum Point Industries Akure"]]); }}>
-                  <td>1</td>
+                  <td>4</td>
                   <td>First Maximum Point Industries Akure</td>
                   <td>{this.checkConnection2(this.state["First Maximum Point Industries Akure"].server_time)}</td>
                   <td>{isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw).toFixed(2)}</td>
                   <td>{FMPIA.v ? FMPIA.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['OAUI', this.state["Obafemi Awolowo University Ile-Ife"]]); }}>
-                  <td>2</td>
+                  <td>5</td>
                   <td>Obafemi Awolowo University Ile-Ife</td>
                   <td>{this.checkConnection2(this.state["Obafemi Awolowo University Ile-Ife"].server_time)}</td>
                   <td>{isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw).toFixed(2)}</td>
@@ -273,63 +273,63 @@ import Modal from "./Modal";
                 </tr>
 
                 <tr  onClick={(e) => { this.setModalTrue(e, ['ZEBERCED', this.state.zeberced]); }}>
-                  <td>1</td>
+                  <td>6</td>
                   <td>ZEBERCED</td>
                   <td>{this.checkConnection2(this.state.zeberced.server_time)}</td>
                   <td>{isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw).toFixed(2)}</td>
                   <td>{zeberced.v ? zeberced.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['NIAMEY', this.state.Niamey]); }}>
-                  <td>2</td>
+                  <td>7</td>
                   <td>NIAMEY</td>
                   <td>{this.checkConnection2(this.state.Niamey.server_time)}</td>
                   <td>{isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw).toFixed(2)}</td>
                   <td>{Niamey.v ? Niamey.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['INNER GALAXY 1', this.state.Inner_Galaxy1]); }}>
-                  <td>3</td>
+                  <td>8</td>
                   <td>INNER GALAXY 1</td>
                   <td>{this.checkConnection2(this.state.Inner_Galaxy1.server_time)}</td>
                   <td>{isNaN(Number(Inner_Galaxy1.mw)) ? 0 : Number(Inner_Galaxy1.mw).toFixed(2)}</td>
                   <td>{Inner_Galaxy1.v ? Inner_Galaxy1.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['INNER GALAXY 2', this.state.Inner_Galaxy2]); }}>
-                  <td>4</td>
+                  <td>9</td>
                   <td>INNER GALAXY 2</td>
                   <td>{this.checkConnection2(this.state.Inner_Galaxy2.server_time)}</td>
                   <td>{isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw).toFixed(2)}</td>
                   <td>{Inner_Galaxy2.v ? Inner_Galaxy2.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['PSML', this.state.PSML]); }}>
-                  <td>5</td>
+                  <td>10</td>
                   <td>PRISM</td>
                   <td>{this.checkConnection2(this.state.PSML.server_time)}</td>
                   <td>{isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw).toFixed(2)}</td>
                   <td>{PSML.v ? PSML.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['ATVL', this.state.ATVL]); }}>
-                  <td>6</td>
+                  <td>11</td>
                   <td>ATVL</td>
                   <td>{this.checkConnection2(this.state.ATVL.server_time)}</td>
                   <td>{isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw).toFixed(2))}</td>
                   <td>{ATVL.v ? ATVL.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['GAZAOUA', this.state.Gazaoua]); }}>
-                  <td>7</td>
+                  <td>12</td>
                   <td>GAZAOUA</td>
                   <td>{this.checkConnection2(this.state.Gazaoua.server_time)}</td>
                   <td>{isNaN(Number(Gazaoua.mw)) ? 0 : Math.abs(Number(Gazaoua.mw)).toFixed(2)}</td>
                   <td>{Gazaoua.v ? Gazaoua.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['KAM', this.state.KamInd33kV]); }}>
-                  <td>8</td>
+                  <td>13</td>
                   <td>KAM</td>
                   <td>{this.checkConnection2(this.state.KamInd33kV.server_time)}</td>
                   <td>{isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw).toFixed(2)}</td>
                   <td>{KamInd33kV.v ? KamInd33kV.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['Quantum', this.state.quantum]); }}>
-                  <td>9</td>
+                  <td>14</td>
                   <td>Quantum</td>
                   <td>{this.checkConnection2(this.state.quantum.server_time)}</td>
                   <td>{isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw).toFixed(2))}</td>
@@ -337,21 +337,21 @@ import Modal from "./Modal";
                 </tr>
 
                 <tr  onClick={(e) => { this.setModalTrue(e, ['kamSteel', this.state.kamSteel]); }}>
-                <td>1</td>
+                <td>15</td>
                   <td>kam Steel Shagamu</td>
                   <td>{this.checkConnection2(this.state.kamSteel.server_time)}</td>
                   <td>{isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw).toFixed(2)}</td>
                   <td>{kamSteel.v ? kamSteel.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['kamSteel-Ilorin', this.state["kamSteel-Ilorin"]]); }}>
-                  <td>2</td>
+                  <td>16</td>
                   <td>Kam Steel Integrated Ilorin</td>
                   <td>{this.checkConnection2(this.state["kamSteel-Ilorin"].server_time)}</td>
                   <td>{isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum).toFixed(2)}</td>
                   <td>{kamSteel_Ilorin_voltage ? kamSteel_Ilorin_voltage : 0}</td>
                 </tr>
                 <tr  onClick={(e) => { this.setModalTrue(e, ['Er-Kang', this.state["Er-Kang"]]); }}>
-                  <td>3</td>
+                  <td>17</td>
                   <td>ER-KANG Limited</td>
                   <td>{this.checkConnection2(this.state["Er-Kang"].server_time)}</td>
                   <td>{isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw).toFixed(2)}</td>

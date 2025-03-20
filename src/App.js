@@ -163,7 +163,7 @@ class App extends React.Component {
               <Bilateral />
             </div>
           </Route>
-          <Route exact path={`/all_bilateral`}>              
+          <Route exact path={`/bilateral`}>              
             <div className='App'>
               <BILATERAL_Page />
             </div>
