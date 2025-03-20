@@ -39,6 +39,7 @@ import MESL_Page from './components/MESL_Page';
 import FIPL_Page from './components/FIPL_Page';
 import TAOPEX_Page from './components/TAOPEX_Page';
 import NDPHC_Page from './components/NDPHC_Page';
+import BILATERAL_Page from './components/BILATERAL_Page';
 
 
 class App extends React.Component {
@@ -160,6 +161,11 @@ class App extends React.Component {
           <Route exact path={`/bilaterals`}>              
             <div className='App'>
               <Bilateral />
+            </div>
+          </Route>
+          <Route exact path={`/all_bilateral`}>              
+            <div className='App'>
+              <BILATERAL_Page />
             </div>
           </Route>
           <Route exact path={`/mesl_bilaterals`}>              

@@ -1,68 +1,34 @@
 import React from "react";
 import { withRouter } from 'react-router-dom';
 import socket from "./utility/socketIO";
-import get_stations from "./stations_adder";
 import DateTime from "./DateTime";
 import Modal from "./Modal";
 
-return;
- class Bilateral extends React.Component {
+ class All_Bilateral extends React.Component {
    constructor(props) {
      super(props);
      this.setModalFalse = this.setModalFalse.bind(this);
      this.setModalTrue = this.setModalTrue.bind(this);
      this.state = { 
-      markudi: {},
-      starPipe: {},
-      quantum: {},
-      kamSteel: {},
-      sagamu: {},
-      ikorodu1: {},
-      ikorodu2: {},
       pheonix: {},
       pulkitSteel: {},
-      africanFoundriesLimited: {},
       sunflag: {},
-      topSteel: {},
-      monarch: {},
-      larfarge: {},
-      afamIv_vPs: {},
-      shiroroPs: {},
-      egbinPs: {},
-      kainjiTs: {},
-      jebbaTs: {},
-      okpaiGs: {},
-      deltaGs: {},
-      omotosho2: {},
-      omotosho1: {},
-      eket: {},
-      phMain: {},
-      afamViTs: {},
-      alaoji: {},
-      sapeleNippPs: {},
-      omotoshoNippPs: {},
-      odukpaniGs: {},
-      odukpaniNippPs: {},
-      ekim: {},
-      gereguPs: {},
-      ikotEkpene: {},
-      riversIppPs: {},
-      omokuPs1: {},
-      ihovborNippPs: {},
-      olorunsogo1: {},
-      delta2: {},
-      delta3: {},
-      parasEnergyPs: {},
-      olorunsogoPhase1Gs: {},
-      gbarain: {},
-      dadinKowaGs: {},
-      asaba: {},
-      lokojaTs: {},
-      ugwuaji: {},
-      gwagwalada: {},
-      zungeru: {},
-      taopex: {},
-      afamVPs: {},
+      'Obafemi Awolowo University Ile-Ife': {},
+      'First Maximum Point Industries Akure': {},
+      zeberced: {},
+      Niamey: {},
+      Inner_Galaxy2: {},
+      Inner_Galaxy1: {},
+      PSML: {},
+      ATVL: {},
+      Gazaoua: {},
+      kam: {},
+      KamInd33kV: {},
+      quantum: {},
+      'kamSteel': {},
+      'kamSteel-Ilorin': {},
+      'Er-Kang': {},
+
       connected: false,
       ModalState: false,
       modal_data: "TAOPEX"
@@ -70,12 +36,30 @@ return;
    }
    
    componentDidMount() {
-    if(this.props.history.location.pathname === "/bilaterals") {
-      socket.on("client_message_111", data => {
+    if(this.props.history.location.pathname === "/all_bilateral") {
+      socket.on("client_message_taopex", data => {
         const { message } = data;
-        const parsedMessage = JSON.parse(message);
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
+        parsedMessage.server_time = (new Date()).getTime();        
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        const returnObject = {}
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station];
+          return returnObject;
+        })
+      });
+      socket.on("client_message_mesl", data => {
+        const { message } = data;
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
         parsedMessage.server_time = (new Date()).getTime();
-        const station = parsedMessage.id;
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
         const returnObject = {}
         // console.log(parsedMessage, 'c1 message');
         this.setState(prevState => {
@@ -84,16 +68,36 @@ return;
           return returnObject;
         })
       });
-      socket.on("client_message_222", data => {
+      socket.on("client_message_fipl", data => {
         const { message } = data;
-        const parsedMessage = JSON.parse(message);
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
         parsedMessage.server_time = (new Date()).getTime();
-        const station = parsedMessage.id;
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
         const returnObject = {}
-        // console.log(parsedMessage, 'c2 message');
+        // console.log(parsedMessage, 'c1 message');
         this.setState(prevState => {
           prevState[station] = parsedMessage;
-          returnObject[station] = prevState[station]
+          returnObject[station] = prevState[station];
+          // remove this later
+          // console.log(returnObject);
+          return returnObject;
+        })
+      });
+      socket.on("client_message_ndphc", data => {
+        const { message } = data;
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
+        parsedMessage.server_time = (new Date()).getTime();        
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        const returnObject = {}
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station];
           return returnObject;
         })
       });
@@ -172,27 +176,45 @@ return;
    }
    
   render() {
-    const stations_array = get_stations(this.state);
-    const sunflag = stations_array['SUNFLAG'];
-    const sagamu = stations_array['SAGAMU'];
-    const top_steel = stations_array['TOPSTEEL'];
-    const larfarge = stations_array['LARFARGE'];
-    const monarch = stations_array['MONARCH'];
-    const pulkitSteel = stations_array['PULKISTEEL'];
-    const africanFoundriesLimited = stations_array['AFRICANFOUNDARIES'];
-    const kamSteel = stations_array['KAMSTEEL'];
-    const starPipe = stations_array['STARPIPE'];
-    const quantum = stations_array['QUANTUM'];
-    const ikorodu_1 = stations_array['IKORODU 1'];
-    const ikorodu_2 = stations_array['IKORODU 2'];
-    const pheonix = stations_array['PHEONIX'];
+    let {pheonix} = this.state;
+    let {pulkitSteel} = this.state;
+    let {sunflag} = this.state;
+    pheonix = pheonix.transformers ? pheonix.transformers[0]?.td : {};
+    pulkitSteel = pulkitSteel.lines ? pulkitSteel.lines[0]?.td : {};
+    sunflag = sunflag.lines ? sunflag.lines[0]?.gd : {};
+    const FMPIA = this.state["First Maximum Point Industries Akure"];
+    const OAUI = this.state["Obafemi Awolowo University Ile-Ife"];
+    const {zeberced} = this.state;
+    const {Niamey} = this.state;
+    const {Inner_Galaxy1} = this.state;
+    const {Inner_Galaxy2} = this.state;
+    const {PSML} = this.state;
+    const {ATVL} = this.state;
+    const {KamInd33kV} = this.state;
+    const {Gazaoua} = this.state;
+    const quantum = this.state.quantum.transformers ? this.state.quantum.transformers[0].td : {};
+    const {kamSteel} = this.state;
+    const Er_Kang = this.state["Er-Kang"];
+    const kamSteel_Ilorin = this.state["kamSteel-Ilorin"].name ? this.state["kamSteel-Ilorin"] : null;
+    const kamSteel_Ilorin_line_1 = kamSteel_Ilorin?.lines[0] ? kamSteel_Ilorin?.lines[0] : null;
+    const kamSteel_Ilorin_line_2 = kamSteel_Ilorin?.lines[1] ? kamSteel_Ilorin?.lines[1] : null;
+    const kamSteel_Ilorin_line1_mw = kamSteel_Ilorin_line_1?.td?.mw;
+    const kamSteel_Ilorin_line2_mw = kamSteel_Ilorin_line_2?.td?.mw;
+    const kamSteel_Ilorin_voltage = kamSteel_Ilorin_line_1?.td?.v ? kamSteel_Ilorin_line_1?.td?.v : kamSteel_Ilorin_line_2?.td?.v ? kamSteel_Ilorin_line_2?.td?.v : 0;
+    const kamSteel_Ilorin_mw_sum = Number(kamSteel_Ilorin_line1_mw) + Number(kamSteel_Ilorin_line2_mw);
 
-    const totalBilateral = (Number(sunflag.mw) < 0 ? 0 : Number(sunflag.mw)) + (Number(sagamu.mw) < 0 ? 0 : Number(sagamu.mw))
-    + (Number(top_steel.mw) < 0 ? 0 : Number(top_steel.mw)) + (Number(larfarge.mw) < 0 ? 0 : Number(larfarge.mw)) + 
-    (Number(monarch.mw) < 0 ? 0 : Number(monarch.mw)) + (Number(pulkitSteel.mw) < 0 ? 0 : Number(pulkitSteel.mw)) + 
-    (Number(africanFoundriesLimited.mw) < 0 ? 0 : Number(africanFoundriesLimited.mw)) +  
-    (Number(quantum.mw) < 0 ? 0 : Number(quantum.mw)) + (Number(kamSteel.mw) < 0 ? 0 : Number(kamSteel.mw)) +
-    (Number(starPipe.mw) < 0 ? 0 : Number(starPipe.mw)) + (Number(pheonix.mw) < 0 ? 0 : Number(pheonix.mw));
+    const totalConsumption = (isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw)) + (isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw))
+                            + (isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum)) +
+    (isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw)) + 
+    (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) + (isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw))) +
+    (isNaN(Number(Inner_Galaxy1.mw)) ? 0 :  Number(Inner_Galaxy1.mw)) + (isNaN(Number(Gazaoua.mw)) ? 0 :  Math.abs(Number(Gazaoua.mw))) + 
+    (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) + (isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw)) +
+    (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw))) +
+(isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw)) + (isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw)) +
+(isNaN(Number(pheonix?.mw)) ? 0 : Math.abs(Number(pheonix.mw))) 
+                            + (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + 
+                            (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw)));
+    
         
     return (
       <>
@@ -200,7 +222,7 @@ return;
         <div className="bl-menu-list">
           <div className="bl-display-div">
             <h2><DateTime /></h2>
-            <h2 className="text-danger">IoT CRITICAL 132KV & 33KV LOAD OFF-TAKERS </h2>
+            <h2 className="text-danger"> BILATERALS </h2>
             <table className="bl-tg">
               <thead>
                 <tr>
@@ -212,115 +234,134 @@ return;
                 </tr>
               </thead>
               <tbody>
-                <tr onClick={(e) => { this.setModalTrue(e, ['PHEONIX STEEL IKORODU', this.state.pheonix]); }}>
+                
+              <tr onClick={(e) => { this.setModalTrue(e, ['PHEONIX STEEL IKORODU', this.state.pheonix]); }}>
                   <td>1</td>
                   <td>PHEONIX STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.pheonix.server_time)}</td>
-                  <td>{pheonix.mw}</td>
-                  <td>{pheonix.kv}</td>
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['AFRICAN FOUNDARIES LTD IKORODU', this.state.africanFoundriesLimited]); }}>
-                  <td>2</td>
-                  <td>AFRICAN FOUNDARIES LTD IKORODU</td>
-                  <td>{this.checkConnection2(this.state.africanFoundriesLimited.server_time)}</td>
-                  <td>{africanFoundriesLimited.mw}</td>
-                  <td>{africanFoundriesLimited.kv}</td>
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['MONARCH IKORODU', this.state.monarch]); }}>
-                  <td>3</td>
-                  <td>MONARCH IKORODU</td>
-                  <td>{this.checkConnection2(this.state.monarch.server_time)}</td>
-                  <td>{monarch.mw}</td>
-                  <td>{monarch.kv}</td>
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['REAL INFRASTRUCTURE LTD IKORODU', this.state.quantum]); }}>
-                  <td>4</td>
-                  <td>REAL INFRASTRUCTURE LTD IKORODU</td>
-                  <td>{this.checkConnection2(this.state.quantum.server_time)}</td>
-                  <td>{quantum.mw}</td>
-                  <td>{quantum.kv}</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>SAGAMU STEEL</td>
-                  <td>{this.checkConnection2(null)}</td>
-                  <td>{'N/A'}</td>
-                  <td>{'N/A'}</td>
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['KAM STEEL SAGAMU', this.state.kamSteel]); }}>
-                  <td>6</td>
-                  <td>KAM STEEL SAGAMU</td>
-                  <td>{this.checkConnection2(this.state.kamSteel.server_time)}</td>
-                  <td>{kamSteel.mw}</td>
-                  <td>{kamSteel.kv}</td>
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['CEMENT FACTORY', this.state.larfarge]); }}>
-                  <td>7</td>
-                  <td>CEMENT FACTORY</td>
-                  <td>{this.checkConnection2(this.state.larfarge.server_time)}</td>
-                  <td>{larfarge.mw}</td>
-                  <td>{larfarge.kv}</td>
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['TOP STEEL IKORODU', this.state.topSteel]); }}>
-                  <td>8</td>
-                  <td>TOP STEEL IKORODU</td>
-                  <td>{this.checkConnection2(this.state.topSteel.server_time)}</td>
-                  <td>{top_steel.mw}</td>
-                  <td>{top_steel.kv}</td>
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['SUNFLAG IRON & STEEL IKORODU', this.state.sunflag]); }}>
-                  <td>9</td>
-                  <td>SUNFLAG IRON & STEEL IKORODU</td>
-                  <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
-                  <td>{sunflag.mw}</td>
-                  <td>{sunflag.kv}</td>
+                  <td>{Math.abs(pheonix.mw)}</td>
+                  <td>{pheonix.V}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel]); }}>
-                  <td>10</td>
+                  <td>2</td>
                   <td>PULKIT ALLOY & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.pulkitSteel.server_time)}</td>
-                  <td>{pulkitSteel.mw}</td>
-                  <td>{pulkitSteel.kv}</td>
+                  <td>{Math.abs(pulkitSteel.mw)}</td>
+                  <td>{pulkitSteel.V}</td>
                 </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['STAR PIPE PRODUCT IKORODU', this.state.starPipe]); }}>
-                  <td>11</td>
-                  <td>STAR PIPE PRODUCT IKORODU</td>
-                  <td>{this.checkConnection2(this.state.starPipe.server_time)}</td>
-                  <td>{starPipe.mw}</td>
-                  <td>{starPipe.kv}</td>
+                <tr onClick={(e) => { this.setModalTrue(e, ['SUNFLAG IRON & STEEL IKORODU', this.state.sunflag]); }}>
+                  <td>3</td>
+                  <td>SUNFLAG IRON & STEEL IKORODU</td>
+                  <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
+                  <td>{Math.abs(sunflag.mw)}</td>
+                  <td>{sunflag.V}</td>
                 </tr>
-                <tr>
-                  <td>12</td>
-                  <td>ODOGUNNYAN 132KV TS</td>
-                  <td>{this.checkConnection2(null)}</td>
-                  <td>{'N/A'}</td>
-                  <td>{'N/A'}</td>
+
+                <tr  onClick={(e) => { this.setModalTrue(e, ['FMPIA', this.state["First Maximum Point Industries Akure"]]); }}>
+                  <td>1</td>
+                  <td>First Maximum Point Industries Akure</td>
+                  <td>{this.checkConnection2(this.state["First Maximum Point Industries Akure"].server_time)}</td>
+                  <td>{isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw).toFixed(2)}</td>
+                  <td>{FMPIA.v ? FMPIA.v : 0}</td>
                 </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['IKORODU 132KV TS LINE_1', this.state.ikorodu1]); }}>
-                  <td>13</td>
-                  <td>IKORODU 132KV TS LINE_1</td>
-                  <td>{this.checkConnection2(this.state.ikorodu1.server_time)}</td>
-                  <td>{ikorodu_1.mw}</td>
-                  <td>{ikorodu_1.kv}</td>
+                <tr onClick={(e) => { this.setModalTrue(e, ['OAUI', this.state["Obafemi Awolowo University Ile-Ife"]]); }}>
+                  <td>2</td>
+                  <td>Obafemi Awolowo University Ile-Ife</td>
+                  <td>{this.checkConnection2(this.state["Obafemi Awolowo University Ile-Ife"].server_time)}</td>
+                  <td>{isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw).toFixed(2)}</td>
+                  <td>{OAUI.v ? OAUI.v : 0}</td>
                 </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['IKORODU 132KV TS LINE_2', this.state.ikorodu2]); }}>
-                  <td>14</td>
-                  <td>IKORODU 132KV TS LINE_2</td>
-                  <td>{this.checkConnection2(this.state.ikorodu2.server_time)}</td>
-                  <td>{ikorodu_2.mw}</td>
-                  <td>{ikorodu_2.kv}</td>
-                </tr> 
-                <tr onClick={(e) => { this.setModalTrue(e, ['SAGAMU 132KV TS', this.state.sagamu]); }}>
-                  <td>15</td>
-                  <td>SAGAMU 132KV TS</td>
-                  <td>{this.checkConnection2(this.state.sagamu.server_time)}</td>
-                  <td>{sagamu.mw}</td>
-                  <td>{sagamu.kv}</td>
+
+                <tr  onClick={(e) => { this.setModalTrue(e, ['ZEBERCED', this.state.zeberced]); }}>
+                  <td>1</td>
+                  <td>ZEBERCED</td>
+                  <td>{this.checkConnection2(this.state.zeberced.server_time)}</td>
+                  <td>{isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw).toFixed(2)}</td>
+                  <td>{zeberced.v ? zeberced.v : 0}</td>
                 </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['NIAMEY', this.state.Niamey]); }}>
+                  <td>2</td>
+                  <td>NIAMEY</td>
+                  <td>{this.checkConnection2(this.state.Niamey.server_time)}</td>
+                  <td>{isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw).toFixed(2)}</td>
+                  <td>{Niamey.v ? Niamey.v : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['INNER GALAXY 1', this.state.Inner_Galaxy1]); }}>
+                  <td>3</td>
+                  <td>INNER GALAXY 1</td>
+                  <td>{this.checkConnection2(this.state.Inner_Galaxy1.server_time)}</td>
+                  <td>{isNaN(Number(Inner_Galaxy1.mw)) ? 0 : Number(Inner_Galaxy1.mw).toFixed(2)}</td>
+                  <td>{Inner_Galaxy1.v ? Inner_Galaxy1.v : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['INNER GALAXY 2', this.state.Inner_Galaxy2]); }}>
+                  <td>4</td>
+                  <td>INNER GALAXY 2</td>
+                  <td>{this.checkConnection2(this.state.Inner_Galaxy2.server_time)}</td>
+                  <td>{isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw).toFixed(2)}</td>
+                  <td>{Inner_Galaxy2.v ? Inner_Galaxy2.v : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['PSML', this.state.PSML]); }}>
+                  <td>5</td>
+                  <td>PRISM</td>
+                  <td>{this.checkConnection2(this.state.PSML.server_time)}</td>
+                  <td>{isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw).toFixed(2)}</td>
+                  <td>{PSML.v ? PSML.v : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['ATVL', this.state.ATVL]); }}>
+                  <td>6</td>
+                  <td>ATVL</td>
+                  <td>{this.checkConnection2(this.state.ATVL.server_time)}</td>
+                  <td>{isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw).toFixed(2))}</td>
+                  <td>{ATVL.v ? ATVL.v : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['GAZAOUA', this.state.Gazaoua]); }}>
+                  <td>7</td>
+                  <td>GAZAOUA</td>
+                  <td>{this.checkConnection2(this.state.Gazaoua.server_time)}</td>
+                  <td>{isNaN(Number(Gazaoua.mw)) ? 0 : Math.abs(Number(Gazaoua.mw)).toFixed(2)}</td>
+                  <td>{Gazaoua.v ? Gazaoua.v : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['KAM', this.state.KamInd33kV]); }}>
+                  <td>8</td>
+                  <td>KAM</td>
+                  <td>{this.checkConnection2(this.state.KamInd33kV.server_time)}</td>
+                  <td>{isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw).toFixed(2)}</td>
+                  <td>{KamInd33kV.v ? KamInd33kV.v : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['Quantum', this.state.quantum]); }}>
+                  <td>9</td>
+                  <td>Quantum</td>
+                  <td>{this.checkConnection2(this.state.quantum.server_time)}</td>
+                  <td>{isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw).toFixed(2))}</td>
+                  <td>{quantum.V ? quantum.V : 0}</td>
+                </tr>
+
+                <tr  onClick={(e) => { this.setModalTrue(e, ['kamSteel', this.state.kamSteel]); }}>
+                <td>1</td>
+                  <td>kam Steel Shagamu</td>
+                  <td>{this.checkConnection2(this.state.kamSteel.server_time)}</td>
+                  <td>{isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw).toFixed(2)}</td>
+                  <td>{kamSteel.v ? kamSteel.v : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['kamSteel-Ilorin', this.state["kamSteel-Ilorin"]]); }}>
+                  <td>2</td>
+                  <td>Kam Steel Integrated Ilorin</td>
+                  <td>{this.checkConnection2(this.state["kamSteel-Ilorin"].server_time)}</td>
+                  <td>{isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum).toFixed(2)}</td>
+                  <td>{kamSteel_Ilorin_voltage ? kamSteel_Ilorin_voltage : 0}</td>
+                </tr>
+                <tr  onClick={(e) => { this.setModalTrue(e, ['Er-Kang', this.state["Er-Kang"]]); }}>
+                  <td>3</td>
+                  <td>ER-KANG Limited</td>
+                  <td>{this.checkConnection2(this.state["Er-Kang"].server_time)}</td>
+                  <td>{isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw).toFixed(2)}</td>
+                  <td>{Er_Kang.v ? Er_Kang.v : 0}</td>
+                </tr>
+                
                 <tr></tr>
                 <tr>
                   <td></td>
-                  <td>TOTAL OFF-TAKE</td>
+                  <td>TOTAL BILATERAL</td>
                   <td></td>
                   <td>{totalBilateral.toFixed(2)}</td>
                   <td></td>
@@ -360,4 +401,4 @@ return;
   }
 }
 
-// export default withRouter(Bilateral);
+export default withRouter(All_Bilateral);
