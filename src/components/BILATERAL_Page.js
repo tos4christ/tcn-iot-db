@@ -10,7 +10,7 @@ import Modal from "./Modal";
      this.setModalFalse = this.setModalFalse.bind(this);
      this.setModalTrue = this.setModalTrue.bind(this);
      this.state = { 
-      pheonix: {},
+      phoenix: {},
       pulkitSteel: {},
       sunflag: {},
       'Obafemi Awolowo University Ile-Ife': {},
@@ -28,7 +28,6 @@ import Modal from "./Modal";
       'kamSteel': {},
       'kamSteel-Ilorin': {},
       'Er-Kang': {},
-
       connected: false,
       ModalState: false,
       modal_data: "TAOPEX"
@@ -176,10 +175,10 @@ import Modal from "./Modal";
    }
    
   render() {
-    let {pheonix} = this.state;
+    let {phoenix} = this.state;
     let {pulkitSteel} = this.state;
     let {sunflag} = this.state;
-    pheonix = pheonix.transformers ? pheonix.transformers[0]?.td : {};
+    phoenix = phoenix.transformers ? phoenix.transformers[0]?.td : {};
     pulkitSteel = pulkitSteel.lines ? pulkitSteel.lines[0]?.td : {};
     sunflag = sunflag.lines ? sunflag.lines[0]?.gd : {};
     const FMPIA = this.state["First Maximum Point Industries Akure"];
@@ -211,7 +210,7 @@ import Modal from "./Modal";
     (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) + (isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw)) +
     (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw))) +
 (isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw)) + (isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw)) +
-(isNaN(Number(pheonix?.mw)) ? 0 : Math.abs(Number(pheonix.mw))) 
+(isNaN(Number(phoenix?.mw)) ? 0 : Math.abs(Number(phoenix.mw))) 
                             + (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + 
                             (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw)));
     
@@ -235,12 +234,12 @@ import Modal from "./Modal";
               </thead>
               <tbody>
                 
-              <tr onClick={(e) => { this.setModalTrue(e, ['PHEONIX STEEL IKORODU', this.state.pheonix]); }}>
+              <tr onClick={(e) => { this.setModalTrue(e, ['PHEONIX STEEL IKORODU', this.state.phoenix]); }}>
                   <td>1</td>
                   <td>PHEONIX STEEL IKORODU</td>
-                  <td>{this.checkConnection2(this.state.pheonix.server_time)}</td>
-                  <td>{Math.abs(pheonix.mw)}</td>
-                  <td>{pheonix.V}</td>
+                  <td>{this.checkConnection2(this.state.phoenix.server_time)}</td>
+                  <td>{Math.abs(phoenix.mw)}</td>
+                  <td>{phoenix.V}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel]); }}>
                   <td>2</td>

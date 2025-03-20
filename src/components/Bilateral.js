@@ -18,7 +18,7 @@ import Modal from "./Modal";
       sagamu: {},
       ikorodu1: {},
       ikorodu2: {},
-      pheonix: {},
+      phoenix: {},
       pulkitSteel: {},
       africanFoundriesLimited: {},
       sunflag: {},
@@ -210,10 +210,10 @@ import Modal from "./Modal";
                 </tr>
               </thead>
               <tbody>
-                <tr onClick={(e) => { this.setModalTrue(e, ['PHEONIX STEEL IKORODU', this.state.pheonix]); }}>
+                <tr onClick={(e) => { this.setModalTrue(e, ['PHEONIX STEEL IKORODU', this.state.phoenix]); }}>
                   <td>1</td>
                   <td>PHEONIX STEEL IKORODU</td>
-                  <td>{this.checkConnection2(this.state.pheonix.server_time)}</td>
+                  <td>{this.checkConnection2(this.state.phoenix.server_time)}</td>
                   <td>{pheonix.mw}</td>
                   <td>{pheonix.kv}</td>
                 </tr>

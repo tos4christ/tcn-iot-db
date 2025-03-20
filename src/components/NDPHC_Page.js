@@ -14,7 +14,7 @@ import Modal from "./Modal";
       connected: false,
       ModalState: false,
       modal_data: "",
-      pheonix: {},
+      phoenix: {},
       pulkitSteel: {},
       sunflag: {},
      };
@@ -133,14 +133,14 @@ import Modal from "./Modal";
     //   return <Redirect to={'/'}/>
     // }
     
-    let {pheonix} = this.state;
+    let {phoenix} = this.state;
     let {pulkitSteel} = this.state;
     let {sunflag} = this.state;
-    pheonix = pheonix.transformers ? pheonix.transformers[0]?.td : {};
+    phoenix = phoenix.transformers ? phoenix.transformers[0]?.td : {};
     pulkitSteel = pulkitSteel.lines ? pulkitSteel.lines[0]?.td : {};
     sunflag = sunflag.lines ? sunflag.lines[0]?.gd : {};
 
-    const totalConsumption = (isNaN(Number(pheonix?.mw)) ? 0 : Math.abs(Number(pheonix.mw))) 
+    const totalConsumption = (isNaN(Number(phoenix?.mw)) ? 0 : Math.abs(Number(phoenix.mw))) 
                             + (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + 
                             (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw)));
  
@@ -162,12 +162,12 @@ import Modal from "./Modal";
                 </tr>
               </thead>
               <tbody>                
-                <tr onClick={(e) => { this.setModalTrue(e, ['PHEONIX STEEL IKORODU', this.state.pheonix]); }}>
+                <tr onClick={(e) => { this.setModalTrue(e, ['PHEONIX STEEL IKORODU', this.state.phoenix]); }}>
                   <td>1</td>
                   <td>PHEONIX STEEL IKORODU</td>
-                  <td>{this.checkConnection2(this.state.pheonix.server_time)}</td>
-                  <td>{Math.abs(pheonix.mw)}</td>
-                  <td>{pheonix.V}</td>
+                  <td>{this.checkConnection2(this.state.phoenix.server_time)}</td>
+                  <td>{Math.abs(phoenix.mw)}</td>
+                  <td>{phoenix.V}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel]); }}>
                   <td>2</td>
