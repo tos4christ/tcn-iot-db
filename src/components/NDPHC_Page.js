@@ -138,7 +138,7 @@ import Modal from "./Modal";
     let {sunflag} = this.state;
     phoenix = phoenix.transformers ? phoenix.transformers[0]?.td : {};
     pulkitSteel = pulkitSteel.lines ? pulkitSteel.lines[0]?.td : {};
-    sunflag = sunflag.lines ? sunflag.lines[0]?.gd : {};
+    sunflag = sunflag.lines ? sunflag.lines[0]?.td : {};
 
     const totalConsumption = (isNaN(Number(phoenix?.mw)) ? 0 : Math.abs(Number(phoenix.mw))) 
                             + (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + 

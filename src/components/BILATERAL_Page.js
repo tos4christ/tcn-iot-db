@@ -180,7 +180,7 @@ import Modal from "./Modal";
     let {sunflag} = this.state;
     phoenix = phoenix.transformers ? phoenix.transformers[0]?.td : {};
     pulkitSteel = pulkitSteel.lines ? pulkitSteel.lines[0]?.td : {};
-    sunflag = sunflag.lines ? sunflag.lines[0]?.gd : {};
+    sunflag = sunflag.lines ? sunflag.lines[0]?.td : {};
     const FMPIA = this.state["First Maximum Point Industries Akure"];
     const OAUI = this.state["Obafemi Awolowo University Ile-Ife"];
     const {zeberced} = this.state;

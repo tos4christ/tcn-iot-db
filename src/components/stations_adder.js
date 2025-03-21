@@ -168,8 +168,8 @@ const get_stations =  function(state_data) {
             Math.abs(larfarge_ll1[0]?.td ? larfarge_ll1[0].td.mw : 0)
         ).toFixed(2), kv: (larfarge_ll1[0]?.td ? larfarge_ll1[0].td.V : 0)},
         'SUNFLAG': {mw: Number(
-            Math.abs(sunflag_sl1[0]?.gd ? sunflag_sl1[0].gd.mw : 0)
-        ).toFixed(2), kv: (sunflag_sl1[0]?.gd ? sunflag_sl1[0].gd.v : 0)},
+            Math.abs(sunflag_sl1[0]?.td ? sunflag_sl1[0].td.mw : 0)
+        ).toFixed(2), kv: (sunflag_sl1[0]?.td ? sunflag_sl1[0].td.v : 0)},
         'SAGAMU': {mw: Number(
             Math.abs(sagamu_d23s[0]?.td ? sagamu_d23s[0].td.mw : 0) + Math.abs(sagamu_d24s[0]?.td ? sagamu_d24s[0].td.mw : 0)
         ).toFixed(2), kv: (sagamu_d23s[0]?.td ? sagamu_d23s[0].td.V : 0)},
