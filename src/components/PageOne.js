@@ -15,7 +15,7 @@ import get_stations from "./stations_adder";
       kamSteel: {},
       ikorodu1: {},
       ikorodu2: {},
-      pheonix: {},
+      phoenix: {},
       sagamu: {},
       pulkitSteel: {},
       africanFoundriesLimited: {},
@@ -72,7 +72,7 @@ import get_stations from "./stations_adder";
           parsedMessage = JSON.parse(message);
         } catch(e) {} 
         parsedMessage.server_time = (new Date()).getTime();
-        const station = parsedMessage.id;
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
         const returnObject = {}
         // console.log(parsedMessage, 'c1 message');
         this.setState(prevState => {
@@ -88,7 +88,7 @@ import get_stations from "./stations_adder";
           parsedMessage = JSON.parse(message);
         } catch(e) {} 
         parsedMessage.server_time = (new Date()).getTime();
-        const station = parsedMessage.id;
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
         const returnObject = {}
         // console.log(parsedMessage, 'c2 message');
         this.setState(prevState => {

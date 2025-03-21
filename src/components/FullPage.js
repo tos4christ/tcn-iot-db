@@ -18,7 +18,7 @@ import Modal from "./Modal";
       kamSteel: {},
       ikorodu1: {},
       ikorodu2: {},
-      pheonix: {},
+      phoenix: {},
       sagamu: {},
       pulkitSteel: {},
       africanFoundriesLimited: {},
@@ -77,7 +77,7 @@ import Modal from "./Modal";
           parsedMessage = JSON.parse(message);
         } catch(e) {} 
         parsedMessage.server_time = (new Date()).getTime();
-        const station = parsedMessage.id;
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
         const returnObject = {}
         // console.log(parsedMessage, 'c1 message');
         this.setState(prevState => {
@@ -93,7 +93,7 @@ import Modal from "./Modal";
           parsedMessage = JSON.parse(message);
         } catch(e) {} 
         parsedMessage.server_time = (new Date()).getTime();
-        const station = parsedMessage.id;
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
         const returnObject = {}
         // console.log(parsedMessage, 'c2 message');
         this.setState(prevState => {
