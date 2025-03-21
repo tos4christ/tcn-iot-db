@@ -157,7 +157,7 @@ const get_stations =  function(state_data) {
         ).toFixed(2), kv: (africanFoundriesLimited_afll1[0]?.td ? africanFoundriesLimited_afll1[0].td.V : 0)},
         'PULKISTEEL': {mw: Number(
             Math.abs(pulkitSteel_psl1[0]?.td ? pulkitSteel_psl1[0].td.mw : 0)
-        ).toFixed(2), kv: (pulkitSteel_psl1[0]?.td ? pulkitSteel_psl1[0].td.V : 0)},
+        ).toFixed(2), kv: (pulkitSteel_psl1[0]?.td ? pulkitSteel_psl1[0].td.v : 0)},
         'TOPSTEEL': {mw: Number(
             Math.abs(topSteel_tsl1[0]?.td ? topSteel_tsl1[0].td.mw : 0)
         ).toFixed(2), kv: (topSteel_tsl1[0]?.td ? topSteel_tsl1[0].td.V : 0)},
@@ -169,7 +169,7 @@ const get_stations =  function(state_data) {
         ).toFixed(2), kv: (larfarge_ll1[0]?.td ? larfarge_ll1[0].td.V : 0)},
         'SUNFLAG': {mw: Number(
             Math.abs(sunflag_sl1[0]?.gd ? sunflag_sl1[0].gd.mw : 0)
-        ).toFixed(2), kv: (sunflag_sl1[0]?.gd ? sunflag_sl1[0].gd.V : 0)},
+        ).toFixed(2), kv: (sunflag_sl1[0]?.gd ? sunflag_sl1[0].gd.v : 0)},
         'SAGAMU': {mw: Number(
             Math.abs(sagamu_d23s[0]?.td ? sagamu_d23s[0].td.mw : 0) + Math.abs(sagamu_d24s[0]?.td ? sagamu_d24s[0].td.mw : 0)
         ).toFixed(2), kv: (sagamu_d23s[0]?.td ? sagamu_d23s[0].td.V : 0)},
