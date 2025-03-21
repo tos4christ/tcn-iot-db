@@ -246,14 +246,14 @@ import Modal from "./Modal";
                   <td>PULKIT ALLOY & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.pulkitSteel.server_time)}</td>
                   <td>{Math.abs(pulkitSteel?.mw ? pulkitSteel.mw : 0)}</td>
-                  <td>{pulkitSteel.v}</td>
+                  <td>{pulkitSteel?.v ? pulkitSteel.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['SUNFLAG IRON & STEEL IKORODU', this.state.sunflag]); }}>
                   <td>3</td>
                   <td>SUNFLAG IRON & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
                   <td>{Math.abs(sunflag?.mw ? sunflag.mw : 0)}</td>
-                  <td>{sunflag.v}</td>
+                  <td>{sunflag?.v ? sunflag.v : 0}</td>
                 </tr>
 
                 <tr  onClick={(e) => { this.setModalTrue(e, ['FMPIA', this.state["First Maximum Point Industries Akure"]]); }}>
