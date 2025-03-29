@@ -142,7 +142,7 @@ import axios from "axios";
             return this.props.history.push({pathname: `/signin`});
           }
         }).catch(err => {  
-          console.log(err);
+          console.log(err.message);
           // return <Redirect to={'/signin'}/>
           return this.props.history.push({pathname: `/signin`});
         });  
@@ -313,6 +313,9 @@ import axios from "axios";
     const { verified_token_exp } = this.state;
     const { exp } = verified_token_exp.data ? verified_token_exp.data.decodedToken : {exp: 100000000000};
     // console.log(timer, "  the timer");
+    while(exp === 100000000000) {
+      console.log("waiting for token to be verified");
+    }
     if((timer.time + 100) < Date.now()) { 
       if (verified_token_exp.status === 'Error') {
         return <Redirect to={'/signin'}/>
