@@ -56,7 +56,8 @@ class App extends React.Component {
           <Route exact path={'/'}>
             <div className='App'>              
               <Header />
-              <SignIn />
+              <Home isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+              {/* <SignIn /> */}
             </div>
           </Route>
           <Route  exact path={'/signin'}>

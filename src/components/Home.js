@@ -286,7 +286,7 @@ import Modal from "./Modal";
     const { isLoggedIn } = this.props;
     const token = localStorage.getItem("token");
     if (!isLoggedIn || token === null) {
-      return <Redirect to={'/'}/>
+      return <Redirect to={'/signin'}/>
     }
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
