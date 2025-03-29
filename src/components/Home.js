@@ -138,12 +138,13 @@ import axios from "axios";
               prevState.verified_token_exp = null;
               return {verified_token_exp: prevState.verified_token_exp};
             });
-            return <Redirect to={'/signin'}/>
-            //return this.props.history.push({pathname: `/signin`});
+            // return <Redirect to={'/signin'}/>
+            return this.props.history.push({pathname: `/signin`});
           }
         }).catch(err => {  
           console.log(err);
-          return <Redirect to={'/signin'}/>
+          // return <Redirect to={'/signin'}/>
+          return this.props.history.push({pathname: `/signin`});
         });  
     }
    }
