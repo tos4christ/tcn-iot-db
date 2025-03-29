@@ -16,7 +16,7 @@ import axios from "axios";
      this.setModalTrue = this.setModalTrue.bind(this);
      this.state = { 
       frequency: "",
-      verified_token_exp: {exp: 0},
+      verified_token_exp: {data: {decodedToken: {exp: 100000000000}}},
       timer: {time: Date.now()},
       markudi: {},
       starPipe: {},
@@ -300,7 +300,7 @@ import axios from "axios";
     const {timer} = this.state;
     const { verified_token_exp } = this.state;
     const { exp } = verified_token_exp.data ? verified_token_exp.data.decodedToken : {exp: 100000000000};
-    if((timer.time + 5000) < Date.now()) { 
+    if((timer.time + 10000) < Date.now()) { 
       if (verified_token_exp.status !== 'Success' && (exp * 1000) < Date.now()) {
         return <Redirect to={'/signin'}/>
       } else console.log(verified_token_exp, ' expired token');
