@@ -143,6 +143,7 @@ import axios from "axios";
           }
         }).catch(err => {  
           console.log(err);
+          return <Redirect to={'/signin'}/>
         });  
     }
    }
