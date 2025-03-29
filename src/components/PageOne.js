@@ -109,7 +109,7 @@ import get_stations from "./stations_adder";
           returnObject["frequency"] = prevState["frequency"]
           return returnObject;
         })
-      });
+      });      
     }
    }
    getEpoch(time) {

@@ -310,7 +310,7 @@ import axios from "axios";
     const {timer} = this.state;
     const { verified_token_exp } = this.state;
     const { exp } = verified_token_exp.data ? verified_token_exp.data.decodedToken : {exp: 100000000000};
-    console.log(timer, "  the timer");
+    // console.log(timer, "  the timer");
     if((timer.time + 1000) < Date.now()) { 
       if (verified_token_exp.status === 'Error') {
         return <Redirect to={'/signin'}/>
