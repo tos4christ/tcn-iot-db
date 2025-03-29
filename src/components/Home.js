@@ -299,12 +299,15 @@ import axios from "axios";
   render() {
     const {timer} = this.state;
     const { verified_token_exp } = this.state;
-    const { exp } = verified_token_exp.data ? verified_token_exp.data.decodedToken : {exp: 0};
+    const { exp } = verified_token_exp.data ? verified_token_exp.data.decodedToken : {exp: 100000000000};
     if((timer.time + 5000) < Date.now()) { 
       if (verified_token_exp.status !== 'Success' && (exp * 1000) < Date.now()) {
         return <Redirect to={'/signin'}/>
       } else console.log(verified_token_exp, ' expired token');
-    }    
+    }
+    if((exp * 1000) < Date.now()) {
+      return <Redirect to={'/signin'}/>
+    }
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
     const markudi_ts = stations_array['MARKUDI TS'];
