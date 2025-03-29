@@ -291,7 +291,7 @@ import axios from "axios";
    async verifyToken () { 
     const requestBody = {token: localStorage.getItem("token")};
     const result = await axios.post("https://tcnnas.org/verifytoken", requestBody);
-    this.setState({verified_token_exp: result.data.exp});
+    this.setState({verified_token_exp: result});
   }
   render() {
     const { verified_token_exp } = this.state;
