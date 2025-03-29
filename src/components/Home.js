@@ -17,6 +17,7 @@ import axios from "axios";
      this.verifyToken = this.verifyToken.bind(this);
      this.state = { 
       frequency: "",
+      verified_token_exp: 0,
       markudi: {},
       starPipe: {},
       quantum: {},
@@ -284,15 +285,14 @@ import axios from "axios";
    setModalFalse() {
     this.setState({ModalState: false});
    }
-   verifyToken () { 
+   async verifyToken () { 
     const requestBody = {token: localStorage.getItem("token")};
-    const result = axios.post("https://tcnnas.org/verifytoken", requestBody);
-    // return Promise.resolve(result);
-    return result.data;
+    const result = await axios.post("https://tcnnas.org/verifytoken", requestBody);
+    this.setState({verified_token_exp: result.data.exp});
   }
   render() {
-    const result = this.verifyToken();
-    console.log(result, "  this is the result");
+    const { verified_token_exp } = this.state;
+    console.log(verified_token_exp, "  this is the result");
     const { isLoggedIn } = this.props;
     const token = localStorage.getItem("token");
     if (!isLoggedIn || token === null) {
