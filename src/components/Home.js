@@ -127,7 +127,7 @@ import axios from "axios";
       const requestBody = {token: localStorage.getItem("token")};
       axios.post("https://tcnnas.org/verifytoken", requestBody).
         then(result => {
-          console.log(result, 'verify token result');
+          // console.log(result, 'verify token result');
           if(result) {
             this.setState((prevState) => {
               prevState.verified_token_exp = result.data ? result.data : null;
