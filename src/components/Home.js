@@ -294,10 +294,8 @@ import axios from "axios";
   
   render() {
     const { verified_token_exp } = this.state;
-    console.log(verified_token_exp, "  this is the result");
-    const { isLoggedIn } = this.props;
-    const token = localStorage.getItem("token");
-    if (!isLoggedIn || token === null) {
+    const { exp } = verified_token_exp.data ? verified_token_exp.data.decodedToken : {exp: 0};
+    if (verified_token_exp.status !== 'Success' && (exp * 1000) < Date.now()) {
       return <Redirect to={'/signin'}/>
     }
     const stations_array = get_stations(this.state);
