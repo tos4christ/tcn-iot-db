@@ -14,7 +14,6 @@ import axios from "axios";
      this.toggleDisplay = this.toggleDisplay.bind(this);
      this.setModalFalse = this.setModalFalse.bind(this);
      this.setModalTrue = this.setModalTrue.bind(this);
-     this.verifyToken = this.verifyToken.bind(this);
      this.state = { 
       frequency: "",
       verified_token_exp: 0,
