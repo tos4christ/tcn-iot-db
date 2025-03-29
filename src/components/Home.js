@@ -316,6 +316,7 @@ import axios from "axios";
     // console.log(timer, "  the timer");
     while(expire === 100000000000) {
       console.log("waiting for token to be verified");
+      const { verified_token_exp } = this.state;
       expire = verified_token_exp.data ? verified_token_exp.data.decodedToken.exp : 100000000000;
       console.log(expire, "  the expire time");
     }
