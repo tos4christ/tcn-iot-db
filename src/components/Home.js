@@ -317,6 +317,7 @@ import axios from "axios";
     while(expire === 100000000000) {
       console.log("waiting for token to be verified");
       expire = verified_token_exp.data ? verified_token_exp.data.decodedToken.exp : 100000000000;
+      console.log(expire, "  the expire time");
     }
     if((timer.time + 100) < Date.now()) { 
       if (verified_token_exp.status === 'Error') {
