@@ -303,7 +303,7 @@ import axios from "axios";
     if((timer.time + 5000) < Date.now()) { 
       if (verified_token_exp.status !== 'Success' && (exp * 1000) < Date.now()) {
         return <Redirect to={'/signin'}/>
-      }
+      } else console.log(verified_token_exp, ' expired token');
     }    
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
