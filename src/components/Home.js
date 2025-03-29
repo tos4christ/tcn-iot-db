@@ -4,6 +4,7 @@ import socket from "./utility/socketIO";
 import get_stations from "./stations_adder";
 import DateTime from "./DateTime";
 import Modal from "./Modal";
+import axios from "axios";
 
 // import { Spinner, Button, Table } from "react-bootstrap";
 
@@ -282,7 +283,10 @@ import Modal from "./Modal";
    setModalFalse() {
     this.setState({ModalState: false});
    }
-  render() {
+  async render() {
+    const requestBody = {token: localStorage.getItem("token")};
+    const result = await axios.post("https://tcnnas.org/verifytoken", requestBody);
+    console.log(result, "  this is the result");
     const { isLoggedIn } = this.props;
     const token = localStorage.getItem("token");
     if (!isLoggedIn || token === null) {
