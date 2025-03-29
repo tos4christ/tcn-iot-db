@@ -284,15 +284,15 @@ import axios from "axios";
    setModalFalse() {
     this.setState({ModalState: false});
    }
-   async verifyToken () { 
+   verifyToken () { 
     const requestBody = {token: localStorage.getItem("token")};
-    const result = await axios.post("https://tcnnas.org/verifytoken", requestBody);
-    return Promise.resolve(result);
-    // return result.data;
+    const result = axios.post("https://tcnnas.org/verifytoken", requestBody);
+    // return Promise.resolve(result);
+    return result.data;
   }
   render() {
     const result = this.verifyToken();
-    console.log(result.data, "  this is the result");
+    console.log(result, "  this is the result");
     const { isLoggedIn } = this.props;
     const token = localStorage.getItem("token");
     if (!isLoggedIn || token === null) {
