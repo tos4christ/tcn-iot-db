@@ -127,10 +127,20 @@ import axios from "axios";
       const requestBody = {token: localStorage.getItem("token")};
       axios.post("https://tcnnas.org/verifytoken", requestBody).
         then(result => {
-          this.setState((prevState) => {
-            prevState.verified_token_exp = result.data;
-            return {verified_token_exp: prevState.verified_token_exp};
-          });        
+          console.log(result, 'verify token result');
+          if(result) {
+            this.setState((prevState) => {
+              prevState.verified_token_exp = result.data ? result.data : null;
+              return {verified_token_exp: prevState.verified_token_exp};
+            });        
+          } else {  
+            this.setState((prevState) => {
+              prevState.verified_token_exp = null;
+              return {verified_token_exp: prevState.verified_token_exp};
+            });
+            return <Redirect to={'/signin'}/>
+            //return this.props.history.push({pathname: `/signin`});
+          }
         }).catch(err => {  
           console.log(err);
         });  
@@ -300,7 +310,7 @@ import axios from "axios";
     const {timer} = this.state;
     const { verified_token_exp } = this.state;
     const { exp } = verified_token_exp.data ? verified_token_exp.data.decodedToken : {exp: 100000000000};
-    if((timer.time + 10000) < Date.now()) { 
+    if((timer.time + 1000) < Date.now()) { 
       if (verified_token_exp.status !== 'Success' && (exp * 1000) < Date.now()) {
         return <Redirect to={'/signin'}/>
       } else console.log(verified_token_exp, ' expired token');
@@ -308,6 +318,9 @@ import axios from "axios";
     if((exp * 1000) < Date.now()) {
       return <Redirect to={'/signin'}/>
     }
+    // if((exp * 1000) < Date.now() || !verified_token_exp) {
+    //   return <Redirect to={'/signin'}/>
+    // }
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
     const markudi_ts = stations_array['MARKUDI TS'];

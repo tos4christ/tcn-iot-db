@@ -62,7 +62,7 @@ class SignIn extends React.Component {
         // this.props.history.push({pathname: `/changePassword`});
         // console.log('it returned success', token);
         //If this is not the first login Redirect to home page
-        //]return <Redirect to={'/home'}/>
+        //return <Redirect to={'/home'}/>
         return this.props.history.push({pathname: `/home`});
       } else if (response.status === "Error") {
         this.setEmail("User Email");
