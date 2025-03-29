@@ -14,6 +14,7 @@ import axios from "axios";
      this.toggleDisplay = this.toggleDisplay.bind(this);
      this.setModalFalse = this.setModalFalse.bind(this);
      this.setModalTrue = this.setModalTrue.bind(this);
+     this.verifyToken = this.verifyToken.bind(this);
      this.state = { 
       frequency: "",
       markudi: {},
@@ -283,9 +284,13 @@ import axios from "axios";
    setModalFalse() {
     this.setState({ModalState: false});
    }
-  async render() {
+   verifyToken = async () => { 
     const requestBody = {token: localStorage.getItem("token")};
     const result = await axios.post("https://tcnnas.org/verifytoken", requestBody);
+    return result.data;
+    }
+  render() {
+    const result = this.verifyToken();
     console.log(result, "  this is the result");
     const { isLoggedIn } = this.props;
     const token = localStorage.getItem("token");
