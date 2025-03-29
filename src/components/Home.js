@@ -16,7 +16,8 @@ import axios from "axios";
      this.setModalTrue = this.setModalTrue.bind(this);
      this.state = { 
       frequency: "",
-      verified_token_exp: 0,
+      verified_token_exp: {exp: 0},
+      timer: {time: Date.now()},
       markudi: {},
       starPipe: {},
       quantum: {},
@@ -126,7 +127,10 @@ import axios from "axios";
       const requestBody = {token: localStorage.getItem("token")};
       axios.post("https://tcnnas.org/verifytoken", requestBody).
         then(result => {
-          this.setState({verified_token_exp: result.data});        
+          this.setState((prevState) => {
+            prevState.verified_token_exp = result.data;
+            return {verified_token_exp: prevState.verified_token_exp};
+          });        
         }).catch(err => {  
           console.log(err);
         });  
@@ -293,11 +297,14 @@ import axios from "axios";
    }
   
   render() {
+    const {timer} = this.state;
     const { verified_token_exp } = this.state;
     const { exp } = verified_token_exp.data ? verified_token_exp.data.decodedToken : {exp: 0};
-    if (verified_token_exp.status !== 'Success' && (exp * 1000) < Date.now()) {
-      return <Redirect to={'/signin'}/>
-    }
+    if((timer.time + 5000) < Date.now()) { 
+      if (verified_token_exp.status !== 'Success' && (exp * 1000) < Date.now()) {
+        return <Redirect to={'/signin'}/>
+      }
+    }    
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
     const markudi_ts = stations_array['MARKUDI TS'];
