@@ -284,7 +284,7 @@ import axios from "axios";
    setModalFalse() {
     this.setState({ModalState: false});
    }
-   verifyToken = async () => { 
+   async verifyToken () { 
     const requestBody = {token: localStorage.getItem("token")};
     const result = await axios.post("https://tcnnas.org/verifytoken", requestBody);
     return Promise.resolve(result);
