@@ -124,7 +124,7 @@ import axios from "axios";
           return returnObject;
         })
       });
-      if(this.state.verified_token_exp <= 0) {
+      if(this.state.verified_token_exp <= 0 && this.state.verified_token_exp !== undefined && this.state.verified_token_exp !== null) {
         this.verifyToken();
       }      
     }    
@@ -291,7 +291,7 @@ import axios from "axios";
    async verifyToken () { 
     const requestBody = {token: localStorage.getItem("token")};
     const result = await axios.post("https://tcnnas.org/verifytoken", requestBody);
-    this.setState({verified_token_exp: result});
+    this.setState({verified_token_exp: result.data});
   }
   render() {
     const { verified_token_exp } = this.state;
