@@ -124,10 +124,14 @@ import axios from "axios";
           return returnObject;
         })
       });
-      if(this.state.verified_token_exp <= 0 && this.state.verified_token_exp !== undefined && this.state.verified_token_exp !== null) {
-        this.verifyToken();
-      }      
-    }    
+      const requestBody = {token: localStorage.getItem("token")};
+      axios.post("https://tcnnas.org/verifytoken", requestBody).
+        then(result => {
+          this.setState({verified_token_exp: result.data});        
+        }).catch(err => {  
+          console.log(err);
+        });  
+    }
    }
    toggleDisplay(e) {
     this.setState(prevState => {
@@ -288,11 +292,7 @@ import axios from "axios";
    setModalFalse() {
     this.setState({ModalState: false});
    }
-   async verifyToken () { 
-    const requestBody = {token: localStorage.getItem("token")};
-    const result = await axios.post("https://tcnnas.org/verifytoken", requestBody);
-    this.setState({verified_token_exp: result.data});
-  }
+  
   render() {
     const { verified_token_exp } = this.state;
     console.log(verified_token_exp, "  this is the result");
