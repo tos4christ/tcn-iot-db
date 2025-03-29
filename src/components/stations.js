@@ -1,4 +1,13 @@
-export default {
+const stations = {
+    "GBARAIN" : ['ST1', 'ST2', 'GBARAIN'],
+    "DELTA 4" : ['G3B', 'S4G', 'DELTA 4'],
+    "SHIRORO GS" : ['411G1', '411G2', '411G3', '411G4', 'SHIRORO GS'],
+    "AFAM IV GS" : ['GT17', 'GT18', 'AFAM IV GS'],
+    "EGBIN GS" : ['ST1', 'ST2', 'ST3', 'ST4', 'ST5', 'ST6', 'EGBIN GS'],
+    "KAINJI GS" : ['K1J', 'K2J', 'K3R', 'K1F', 'KAINJI GS'],
+    "DADINKOWA GS" : ['W21B', 'W23E', 'DADINKOWA GS'],
+    "JEBBA GS" : ['B8J', 'B9J', 'JEBBA GS'],
+    "OKPAI GS" : ['K1T', 'K2T', 'OKPAI GS'],
     "OMOTOSHO 2" : ['TR4', 'TR3', 'OMOTOSHO 2'],
     "EKET" : ['E21M', 'E22M', 'EKET'],
     "PORTHARCOURT MAIN" : ['M21P', 'PORTHARCOURT MAIN'],
@@ -30,3 +39,5 @@ export default {
     'IBOM POWER' : ['IBOM POWER'],
     "OLORUNSOGO GAS": ['R2A', 'R1W', 'TR3', 'TR4', "OLORUNSOGO GAS"],
 };
+
+export default stations;

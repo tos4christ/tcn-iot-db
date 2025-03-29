@@ -1,0 +1,147 @@
+.main-weather-div {
+    /* background-image: url("./black-rain-abstract-dark-power.jpg"); */
+    background-image: url("../img/weather-test.jpg");
+    background-color: transparent;
+    height: 170vh;
+  }
+  .weather_background {
+    background-image: url("../img/weather-test.jpg");
+  }
+
+  .weather-container {
+    display: flex;
+    width: 100%;
+    height: 9vh;
+    margin-bottom: 10px;
+    overflow: visible;
+  }
+
+  .color-badge {
+    padding: 3px;
+    background-color: red;    
+    width: 1px;
+  }
+
+  .country-badge {
+    background-color: rgba(255, 255, 255, 0.733);
+    width: 10em;
+    margin: 1px 1px 1px 0px;
+    padding: 3px;
+    font-size: 30px;
+    font-weight: 700;
+    text-align: right;
+    opacity: 0.9;
+    color: #5f56af ;
+    overflow: hidden;
+  }
+  
+  .icon-badge {
+    background-color: rgba(255, 255, 255, 0.733);
+    margin: 1px;
+    padding: 0 2px;
+    color: #5f56af ;
+    overflow: hidden;
+    width: 6em;
+  }
+
+  .temp-badge {
+    background-color: rgba(255, 255, 255, 0.733);
+    color: #5f56af ;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 650;
+    padding: 3px;
+    margin: 1px;
+    width: 8em;
+    overflow: hidden;
+  }
+
+  .desc-badge {
+    background-color: rgba(255, 255, 255, 0.733);
+    color: #5f56af ;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 650;
+    padding: 3px;
+    margin: 1px;
+    width: 12em;
+    overflow: hidden;
+  }
+
+  .container {
+    overflow: hidden;
+    width: 40em;
+  }
+
+  .weather-texter-0 {
+    white-space: nowrap;
+    /* animation: roll 1.1s ease-out infinite; */
+    overflow: hidden;
+    animation: 1s ease-out 6.00s alternate both running slidein;
+  }
+
+  .weather-texter-1 {
+    white-space: nowrap;
+    /* animation: roll 1.1s ease-out infinite; */
+    overflow: hidden;
+    animation: 1s ease-out 6.15s alternate both running slidein;
+  }
+  .weather-texter-2 {
+    white-space: nowrap;
+    /* animation: roll 1.1s ease-out infinite; */
+    overflow: hidden;
+    animation: 1s ease-out 6.30s alternate both running slidein;
+  }
+  .weather-texter-3 {
+    white-space: nowrap;
+    /* animation: roll 1.1s ease-out infinite; */
+    overflow: hidden;
+    animation: 1s ease-out 6.45s alternate both running slidein;
+  }
+  .weather-texter-4 {
+    white-space: nowrap;
+    /* animation: roll 1.1s ease-out infinite; */
+    overflow: hidden;
+    animation: 1s ease-out 6.60s alternate both running slidein;
+  }
+  .weather-texter-5 {
+    white-space: nowrap;
+    /* animation: roll 1.1s ease-out infinite; */
+    overflow: hidden;
+    animation: 1s ease-out 6.75s alternate both running slidein;
+  }
+  .weather-texter-6 {
+    white-space: nowrap;
+    /* animation: roll 1.1s ease-out infinite; */
+    overflow: hidden;
+    animation: 1s ease-out 6.90s alternate both running slidein;
+  }
+  .weather-texter-7 {
+    white-space: nowrap;
+    /* animation: roll 1.1s ease-out infinite; */
+    overflow: hidden;
+    animation: 1s ease-out 7.05s alternate both running slidein;
+  }
+  .weather-texter-8 {
+    white-space: nowrap;
+    /* animation: roll 1.1s ease-out infinite; */
+    overflow: hidden;
+    animation: 1s ease-out 7.20s alternate both running slidein;
+  }
+  .weather-texter-9 {
+    white-space: nowrap;
+    /* animation: roll 1.1s ease-out infinite; */
+    overflow: hidden;
+    animation: 1s ease-out 7.35s alternate both running slidein;
+  }
+  
+  @keyframes slidein {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+  
+  

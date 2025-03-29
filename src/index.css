@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,10 +9,71 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* -->   LIST ITEMS DESIGN       <--- */
+
+.list-items, .ticket-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 0;
+}
+.tcn li {
+  border: 1px solid white;;
+}
+.list-items :nth-child(1) {
+  width: 13em;
+  color: red;
+  margin: 2px;
+}
+.list-items :nth-child(2) {
+  width: 7em;
+  color: red;
+  margin: 2px;
+}
+.list-items :nth-child(3) {
+  width: 7em;
+  color: red;
+}
+
+.ticket-header :nth-child(1) {
+  width: 13em;
+  border-right: 1px solid white;
+}
+.ticket-header :nth-child(2) {
+  width: 7em;
+  border-right: 1px solid white;
+}
+.ticket-header :nth-child(3) {
+  width: 7em;
+  border-left: 1px solid white;
+}
+
+
+form {
+  border: 2px solid green;
+}
+.disco_form {
+  margin: 20px 0 0 20px;
+  width: 100%;
+  padding: 1em;
+}
+
+.disco_form_label input {
+  width: 3em;
+}
+.disco_form_label select {
+  width: 10em;
+  margin: 1em;
+}
+.disco_form_label textarea {
+  columns: 5;
+  width: 30em;
+}
+
