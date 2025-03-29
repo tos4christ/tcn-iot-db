@@ -287,11 +287,12 @@ import axios from "axios";
    verifyToken = async () => { 
     const requestBody = {token: localStorage.getItem("token")};
     const result = await axios.post("https://tcnnas.org/verifytoken", requestBody);
-    return result.data;
-    }
+    return Promise.resolve(result);
+    // return result.data;
+  }
   render() {
     const result = this.verifyToken();
-    console.log(result, "  this is the result");
+    console.log(result.data, "  this is the result");
     const { isLoggedIn } = this.props;
     const token = localStorage.getItem("token");
     if (!isLoggedIn || token === null) {
