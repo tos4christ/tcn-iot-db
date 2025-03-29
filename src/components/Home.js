@@ -124,6 +124,9 @@ import axios from "axios";
           return returnObject;
         })
       });
+      if(this.state.verified_token_exp <= 0) {
+        this.verifyToken();
+      }      
     }    
    }
    toggleDisplay(e) {
