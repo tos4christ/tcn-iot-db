@@ -375,7 +375,7 @@ import Modal from "./Modal";
                 <tr >
                   <td>18</td>
                   <td>Ikeja West - Sakete 330kV Line 1</td>
-                  <td>{this.checkConnection2(this.state["Ikeja"].server_time)}</td>
+                  <td>{this.checkConnection2(null)}</td>
                   {/* <td>{isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw).toFixed(2)}</td> */}
                   <td>{0}</td>
                   {/* <td>{Er_Kang.v ? Er_Kang.v : 0}</td> */}
