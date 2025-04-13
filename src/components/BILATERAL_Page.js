@@ -194,9 +194,11 @@ import Modal from "./Modal";
     let {phoenix} = this.state;
     let {pulkitSteel} = this.state;
     let {sunflag} = this.state;
+    let ikejaWest_sakate = this.state["ikejaWest-sakate"];
     phoenix = phoenix.transformers ? phoenix.transformers[0]?.td : {};
     pulkitSteel = pulkitSteel.lines ? pulkitSteel.lines[0]?.td : {};
     sunflag = sunflag.lines ? sunflag.lines[0]?.td : {};
+    ikejaWest_sakate = ikejaWest_sakate.lines ? ikejaWest_sakate.lines[0]?.td : {};
     const FMPIA = this.state["First Maximum Point Industries Akure"];
     const OAUI = this.state["Obafemi Awolowo University Ile-Ife"];
     const {zeberced} = this.state;
@@ -220,15 +222,14 @@ import Modal from "./Modal";
 
     const totalBilateral = (isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw)) + (isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw))
                             + (isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum)) +
-    (isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw)) + 
+    (isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw)) + (isNaN(Number(ikejaWest_sakate.mw)) ? 0 : Number(ikejaWest_sakate.mw)) +
     (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) + (isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw))) +
     (isNaN(Number(Inner_Galaxy1.mw)) ? 0 :  Number(Inner_Galaxy1.mw)) + (isNaN(Number(Gazaoua.mw)) ? 0 :  Math.abs(Number(Gazaoua.mw))) + 
     (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) + (isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw)) +
     (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw))) +
-(isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw)) + (isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw)) +
-(isNaN(Number(phoenix?.mw)) ? 0 : Math.abs(Number(phoenix.mw))) 
-                            + (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + 
-                            (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw)));
+    (isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw)) + (isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw)) +
+    (isNaN(Number(phoenix?.mw)) ? 0 : Math.abs(Number(phoenix.mw))) + 
+    (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw)));
     
         
     return (
@@ -372,14 +373,12 @@ import Modal from "./Modal";
                   <td>{isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw).toFixed(2)}</td>
                   <td>{Er_Kang.v ? Er_Kang.v : 0}</td>
                 </tr>
-                <tr >
+                <tr  onClick={(e) => { this.setModalTrue(e, ['ikejaWest-sakate', this.state["ikejaWest-sakate"]]); }}>
                   <td>18</td>
                   <td>Ikeja West - Sakete 330kV Line 1</td>
-                  <td>{this.checkConnection2(null)}</td>
-                  {/* <td>{isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw).toFixed(2)}</td> */}
-                  <td>{0}</td>
-                  {/* <td>{Er_Kang.v ? Er_Kang.v : 0}</td> */}
-                  <td>{0}</td>
+                  <td>{this.checkConnection2(this.state["ikejaWest-sakate"].server_time)}</td>
+                  <td>{isNaN(Number(ikejaWest_sakate.mw)) ? 0 : Number(ikejaWest_sakate.mw).toFixed(2)}</td>
+                  <td>{ikejaWest_sakate.v ? ikejaWest_sakate.v : 0}</td>
                 </tr>
                 
                 <tr></tr>
