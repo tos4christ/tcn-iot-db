@@ -18,6 +18,7 @@ import Modal from "./Modal";
       zeberced: {},
       Niamey: {},
       Inner_Galaxy2: {},
+      "ikejaWest-sakate": {},
       Inner_Galaxy1: {},
       PSML: {},
       ATVL: {},
@@ -86,6 +87,21 @@ import Modal from "./Modal";
         })
       });
       socket.on("client_message_ndphc", data => {
+        const { message } = data;
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
+        parsedMessage.server_time = (new Date()).getTime();        
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        const returnObject = {}
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station];
+          return returnObject;
+        })
+      });
+      socket.on("client_message_sakete", data => {
         const { message } = data;
         let parsedMessage = {};
         try {
@@ -355,6 +371,15 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state["Er-Kang"].server_time)}</td>
                   <td>{isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw).toFixed(2)}</td>
                   <td>{Er_Kang.v ? Er_Kang.v : 0}</td>
+                </tr>
+                <tr >
+                  <td>18</td>
+                  <td>Ikeja West - Sakete 330kV Line 1</td>
+                  <td>{this.checkConnection2(this.state["Ikeja"].server_time)}</td>
+                  {/* <td>{isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw).toFixed(2)}</td> */}
+                  <td>{0}</td>
+                  {/* <td>{Er_Kang.v ? Er_Kang.v : 0}</td> */}
+                  <td>{0}</td>
                 </tr>
                 
                 <tr></tr>
