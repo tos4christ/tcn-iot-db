@@ -40,6 +40,7 @@ import FIPL_Page from './components/FIPL_Page';
 import TAOPEX_Page from './components/TAOPEX_Page';
 import NDPHC_Page from './components/NDPHC_Page';
 import BILATERAL_Page from './components/BILATERAL_Page';
+import Sakete_Page from './components/Sakete_Page';
 
 
 class App extends React.Component {
@@ -187,6 +188,11 @@ class App extends React.Component {
           <Route exact path={`/ndphc_bilaterals`}>
             <div className='ndphc_background'>
               <NDPHC_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>
+          </Route>
+          <Route exact path={`/sakete_bilaterals`}>
+            <div className='sakete_background'>
+              <Sakete_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
           </Route>
           {/* <Route exact path={`/frequency_test`}>              
