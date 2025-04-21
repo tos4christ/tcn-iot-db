@@ -3,7 +3,7 @@ import openSocket from 'socket.io-client';
 // TCN NAS Server
 const socket = openSocket('https://tcnnas.org', {
     transports: ['websocket'],
-    // secure: true,
+    secure: true,
     // rejectUnauthorized: true,
     // reconnect: true,
     auth: {
