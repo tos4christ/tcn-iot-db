@@ -67,8 +67,8 @@ class SignIn extends React.Component {
         //return <Redirect to={'/home'}/>
         return this.props.history.push({pathname: `/home`});
       } else if (response.status === "Error") {
-        this.setEmail("User Email");
-        this.setPassword("Password");
+        // this.setEmail("User Email");
+        // this.setPassword("Password");
         this.setState({message: "Incorrect Password"});
         //return this.props.history.push({pathname: `/signin`});
       }
