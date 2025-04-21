@@ -21,7 +21,7 @@ class SignIn extends React.Component {
     this.setState({email:email})
   }
   setPassword(password) {
-    console.log(password, 'this is the password in setPassword method');
+    // console.log(password, 'this is the password in setPassword method');
     this.setState({password: password});
   }
   handleSubmission = (e) => {
@@ -29,7 +29,7 @@ class SignIn extends React.Component {
     const url = "/signin";
     const email = this.state.email;
     const password = this.state.password;
-    console.log(password, 'this is the password from the state in handleSubmission');
+    // console.log(password, 'this is the password from the state in handleSubmission');
     if (email === "" || password === "") {
       return;
     }
@@ -45,7 +45,7 @@ class SignIn extends React.Component {
     })
     .then((res) => res.json())
     .then((response) => {
-      console.log(response, 'this is the response');
+      // console.log(response, 'this is the response');
       if (response.data === 'new') {
         this.props.history.push({pathname: `/updatepassword?email=${email}`});
       } else if (response.status === "Success") {
