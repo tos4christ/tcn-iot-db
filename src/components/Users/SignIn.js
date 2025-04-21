@@ -21,13 +21,15 @@ class SignIn extends React.Component {
     this.setState({email:email})
   }
   setPassword(password) {
-    this.setState({password: password})
+    console.log(password, 'this is the password in setPassword method');
+    this.setState({password: password});
   }
   handleSubmission = (e) => {
     e.preventDefault();
     const url = "/signin";
     const email = this.state.email;
     const password = this.state.password;
+    console.log(password, 'this is the password from the state in handleSubmission');
     if (email === "" || password === "") {
       return;
     }
