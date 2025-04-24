@@ -12,7 +12,7 @@ const Footer = () => {
       <p>
         Copyright &copy;
         {new Date().getFullYear()} TCN
-        All Rights Reserved  | Powered by GNZTRADES
+        All Rights Reserved  
       </p>
     </div>
   );
