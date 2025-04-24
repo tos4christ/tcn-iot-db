@@ -11,8 +11,8 @@ const Footer = () => {
     <div style={style} className="">
       <p>
         Copyright &copy;
-        {new Date().getFullYear()} TCN
-        All Rights Reserved  
+        {new Date().getFullYear()} NISO
+        All Rights Reserved  | Powered by Research and Innovation
       </p>
     </div>
   );
