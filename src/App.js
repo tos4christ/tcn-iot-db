@@ -41,6 +41,7 @@ import TAOPEX_Page from './components/TAOPEX_Page';
 import NDPHC_Page from './components/NDPHC_Page';
 import BILATERAL_Page from './components/BILATERAL_Page';
 import Sakete_Page from './components/Sakete_Page';
+import Footer from './components/Footer/Footer';
 
 
 class App extends React.Component {
@@ -55,17 +56,24 @@ class App extends React.Component {
       <Router>
         <Switch >
           <Route exact path={'/'}>
-            <div className='App'>              
-              <Header />
-              <Home isLoggedIn={localStorage.getItem("isLoggedIn")}/>
-              {/* <SignIn /> */}
-            </div>
+            <div className='body'>
+              <div className='App'>              
+                <Header />
+                <Home isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+                {/* <SignIn /> */}
+                
+              </div>
+              <Footer />
+            </div>            
           </Route>
           <Route  exact path={'/signin'}>
-            <div className='App'>              
-              <Header />
-              <SignIn />
-            </div>
+            <div className='body'>
+              <div className='App'>              
+                <Header />
+                <SignIn />                
+              </div>
+              <Footer />
+            </div>            
           </Route>
           <Route exact path={'/signup'}>
             <div className='App'>              
@@ -85,12 +93,14 @@ class App extends React.Component {
               <Header />
               <Home isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
+            <Footer />
           </Route>          
           <Route exact path={`/downtime`}>
             <div className='App'>
               <Header />
               <Downtime isLoggedIn={localStorage.getItem("isLoggedIn")}/> 
-            </div>            
+            </div>
+            <Footer />
           </Route>
           <Route exact path={`/uptime`}>
             <div className='App'>
@@ -120,7 +130,8 @@ class App extends React.Component {
             <div className='App'>
               <Header />
               <Tem isLoggedIn={localStorage.getItem("isLoggedIn")}/>
-            </div>            
+            </div>
+            <Footer />
           </Route>
           <Route exact path={`/voltageprofile`}>
             <div className='App'>
@@ -132,7 +143,8 @@ class App extends React.Component {
             <div className='App'>
               <Header />
               <WeatherDownload isLoggedIn={localStorage.getItem("isLoggedIn")}/>
-            </div>            
+            </div>
+            <Footer />
           </Route>
           <Route exact path={`/collapse`}>
             <div className='App'>
@@ -143,7 +155,7 @@ class App extends React.Component {
           <Route exact path={`/gridpageone`}>
             <div className='App'>
               <PageOne isLoggedIn={localStorage.getItem("isLoggedIn")}/>
-            </div>                         
+            </div>
           </Route>
           <Route exact path={`/gridpagetwo`}>              
             <div className='App'>
@@ -154,21 +166,25 @@ class App extends React.Component {
             <div className='App'>
               <FullPage isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
+            <Footer />
           </Route>
           <Route exact path={`/secure_tcnnaspage`}>              
             <div className='App'>
               <FullPage isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
+            <Footer />
           </Route>
           <Route exact path={`/bilaterals`}>              
             <div className='App'>
               <Bilateral />
             </div>
+            <Footer />
           </Route>
           <Route exact path={`/bilateral`}>              
             <div className='App'>
               <BILATERAL_Page />
             </div>
+            <Footer />
           </Route>
           <Route exact path={`/mesl_bilaterals`}>              
             <div className='mesl_background'>
@@ -191,9 +207,11 @@ class App extends React.Component {
             </div>
           </Route>
           <Route exact path={`/sakete_bilaterals`}>
-            <div className='sakete_background'>
-              <Sakete_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
-            </div>
+            <div>
+              <div className='sakete_background'>
+                <Sakete_Page isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+              </div>
+            </div>            
           </Route>
           {/* <Route exact path={`/frequency_test`}>              
             <div className='App'>
@@ -203,28 +221,40 @@ class App extends React.Component {
           <Route exact path={`/nccweather`}>
             <div className='weather_background'>
               <WeatherApi />  
-            </div>                     
+            </div>   
+            <Footer />                  
           </Route>
           <Route exact path={`/nccweather2`}>
-              <WeatherApp />         
+              <WeatherApp />   
+              <Footer />      
           </Route>
           <Route exact path="/api/tickets">
             <Index />
+            <Footer />
           </Route>
           <Route path="/api/tickets/login">
             <UserLogin />
+            <Footer />
           </Route>
           <Route path="/api/tickets/register">
             <Register />
+            <Footer />
           </Route>
           <Route path="/api/tickets/dashboard">
             <DashboardHome />
+            <Footer />
           </Route>
           <Route path="/api/tickets/disco">
-            <Disco />
+            <div>
+              <Disco />
+              <Footer />
+            </div>
           </Route>
           <Route path="/api/tickets/tcn">
-            <TCN />
+            <div>
+              <TCN />
+              <Footer />
+            </div>
           </Route>
         </Switch>
         {/* <Footer /> */}

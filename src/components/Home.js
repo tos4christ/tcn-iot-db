@@ -309,6 +309,11 @@ import axios from "axios";
    }
   
   render() {
+    const { isLoggedIn } = this.props;
+        const token = localStorage.getItem("token");
+        if (!isLoggedIn || token === null) {
+          return <Redirect to={'/signin'}/>
+        }
     const {timer} = this.state;
     const { verified_token_exp } = this.state;
     let { exp } = verified_token_exp.data ? verified_token_exp.data.decodedToken : {exp: 100000000000};
@@ -322,7 +327,7 @@ import axios from "axios";
     // }
     if((timer.time + 100) < Date.now()) { 
       if (verified_token_exp.status === 'Error') {
-        return <Redirect to={'/signin'}/>
+       return <Redirect to={'/signin'}/>
       }
     }
     if((exp * 1000) < Date.now()) {
