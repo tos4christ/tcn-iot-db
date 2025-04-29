@@ -68,17 +68,17 @@ const DashboardNavLive = ({ body }) => {
   }
   return (
     <div>
-      <button style={{display: "none"}} type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+      <button style={{display: "none"}} type="button" className="btn btn-primary" data-toggle="modal" data-target="#myModal">
           Open modal
       </button>
-      <div class="modal" id="myModal">
-        <div class="modal-dialog">
-          <div class="modal-content">          
-            <div class="modal-header">
-              <h4 class="modal-title">Dear Responder</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div className="modal" id="myModal">
+        <div className="modal-dialog">
+          <div className="modal-content">          
+            <div className="modal-header">
+              <h4 className="modal-title">Dear Responder</h4>
+              <button type="button" className="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <p>There is an accident at this location: <a href="#main"> {location}</a></p>
               <h3> Victim details below</h3>
               <div>
@@ -91,8 +91,8 @@ const DashboardNavLive = ({ body }) => {
               <p>Residential address: {resAdd}</p>
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
             <button className="btn btn-success" onClick={() => {}}>
             Accept Alarms

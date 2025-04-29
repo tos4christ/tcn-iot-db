@@ -106,9 +106,12 @@ class AccidentRepLive extends React.Component {
             return returnObject;
           })
         });
-      }
-      //const canvas = this.chart.canvas;
-      //const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    }
+    const canvas = this.chart.current;
+    if(canvas) {
+        this.ctx = canvas.getContext("2d", { willReadFrequently: true });
+    }
+    //const ctx = canvas.getContext("2d", { willReadFrequently: true });
   }
 
   updateDataPoints() {      
@@ -239,7 +242,7 @@ class AccidentRepLive extends React.Component {
           includeZero: false,
         },
         data: data, // random data
-        ctxx: this.chart.canvas.getContext("2d", { willReadFrequently: true }),
+        context: this.ctx,
       };
     
 
