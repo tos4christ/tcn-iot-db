@@ -110,7 +110,7 @@ class AccidentRepLive extends React.Component {
   }
 
   updateDataPoints() {      
-    let { dataPoints } = this.state;
+    const { dataPoints } = this.state;
     let { timer } = this.state;
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
@@ -179,11 +179,15 @@ class AccidentRepLive extends React.Component {
       x: timer,
       y: totalGeneration,
     };
+    let finalDataPoint = [];
     if(dataPoints.length > 10000) {
-      dataPoints = dataPoints.slice(5000);
+      const update_dataPoints = dataPoints.slice(5000);
+      finalDataPoint = update_dataPoints;
+    } else {
+        finalDataPoint = dataPoints;
     }
     this.setState({
-      dataPoints: [...dataPoints, newDataPoint],
+      dataPoints: [...finalDataPoint, newDataPoint],
         timer: timer,
     });
     this.chart.render();
