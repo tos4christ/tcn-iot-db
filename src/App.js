@@ -28,6 +28,7 @@ import WeatherApp from './components/Weather/WeatherWidget_single';
 import Index from "./pages/Index";
 import Register from "./pages/Register";
 import DashboardHome from "./pages/DashboardHome";
+import DashboardHomeLive from "./pages/DashboardHomeLive";
 import Disco from "./pages/Disco";
 import TCN from "./pages/Tcn";
 import UserLogin from "./pages/UserLogin";
@@ -242,6 +243,10 @@ class App extends React.Component {
           </Route>
           <Route path="/api/tickets/dashboard">
             <DashboardHome />
+            <Footer />
+          </Route>
+          <Route path="/charts">
+            <DashboardHomeLive />
             <Footer />
           </Route>
           <Route path="/api/tickets/disco">
