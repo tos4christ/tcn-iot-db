@@ -117,15 +117,15 @@ const DashboardNavLive = ({ body }) => {
         <div className="bg-light mt-4">
           <a
             className={route === "/dashboard" ? "active" : ""}
-            href="/dashboard"
+            href="/"
           >
             <span className="fa fa-user"></span> Dashboard
           </a>
-          <a className={route === "/crashes" ? "active" : ""} href="/crashes">
+          <a className={route === "/crashes" ? "active" : ""} href="/">
             {" "}
             <span className="fa fa-car"></span> Artificial Intelligence{" "}
           </a>
-          <a className={route === "/reports" ? "active" : ""} href="/reports">
+          <a className={route === "/reports" ? "active" : ""} href="/">
             {" "}
             <span className="fa fa-institution"></span> Reports{" "}
             <span className="text-danger">(1)</span>

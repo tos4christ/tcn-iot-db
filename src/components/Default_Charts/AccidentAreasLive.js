@@ -14,7 +14,7 @@ class AccidentAreasLive extends React.Component {
       data: [
         {
           type: "pie",
-          startAngle: 75,
+          startAngle: 45,
           toolTipContent: "<b>{label}</b>: {y}%",
           showInLegend: "true",
           legendText: "{label}",
