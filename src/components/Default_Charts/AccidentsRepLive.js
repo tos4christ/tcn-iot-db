@@ -186,20 +186,30 @@ class AccidentRepLive extends React.Component {
       x: timer,
       y: totalGeneration,
     };
+    //console.log(newDataPoint, 'newDataPoint');
+    //console.log(dataPoints, 'dataPoints');
     let finalDataPoint = [];
     if(dataPoints.length > 1000) {
       const update_dataPoints = dataPoints.slice(500);
       // finalDataPoint = [];
-      finalDataPoint = update_dataPoints;
+      finalDataPoint = [...update_dataPoints];
     } else {
-        finalDataPoint = dataPoints;
+        finalDataPoint = [...dataPoints];
     }
-    this.setState({
-      dataPoints: [...finalDataPoint, newDataPoint],
-        timer: timer,
-    });
+    // finalDataPoint.push(newDataPoint);
+    this.setState(prevState => {
+        prevState.dataPoints = [...finalDataPoint, newDataPoint];
+        // prevState.dataPoints = finalDataPoint;
+        prevState.timer = timer;
+        return prevState;
+    })
+    // this.setState({
+    //   dataPoints: [...finalDataPoint, newDataPoint],
+    //     timer: timer,
+    // });
     this.chart.render();
   }
+
 //   componentWillUnmount() {  
 //     socket.off("client_message_111");
 //     socket.off("client_message_222");
@@ -226,29 +236,29 @@ class AccidentRepLive extends React.Component {
         backgroundColor: "#d85757",
         padding: "0px 4px",
         color: "#ffffff",
-      };
-  
-      const options = {
-        zoomEnabled: true,
-        animationEnabled: true,
-        title: {
-          text: "Real-Time Representation of Total Generation",
-        },        
-        axisX: {
-          title: "Time",
-          includeZero: false,
-        },
-        axisY: {
-          title: "Total Generation (MW)",
-          suffix: "MW",
-          prefix: "",
-          includeZero: false,
-        },
-        data: data, // random data
-        // context: this.ctx,
-      };
+    };  
+    const options = {
+    zoomEnabled: true,
+    animationEnabled: true,
+    title: {
+        text: "Real-Time Representation of Total Generation",
+    },        
+    axisX: {
+        title: "Time",
+        includeZero: false,
+    },
+    axisY: {
+        title: "Total Generation (MW)",
+        suffix: "MW",
+        prefix: "",
+        includeZero: false,
+    },
+    data: data, // random data
+    // context: this.ctx,
+    };
     
-
+    
+    
     setInterval(() => {
         this.updateDataPoints();
         
@@ -258,7 +268,7 @@ class AccidentRepLive extends React.Component {
         // });
         //dataSeries.dataPoints = dataPoints;
     //data.push(dataSeries);
-        this.chart.render();
+        // this.chart.render();
     }, 5000);
     
    
