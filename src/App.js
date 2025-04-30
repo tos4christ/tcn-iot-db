@@ -43,6 +43,7 @@ import NDPHC_Page from './components/NDPHC_Page';
 import BILATERAL_Page from './components/BILATERAL_Page';
 import Sakete_Page from './components/Sakete_Page';
 import Footer from './components/Footer/Footer';
+import FullPage_SP from './components/FullPage_SP';
 
 
 class App extends React.Component {
@@ -172,6 +173,12 @@ class App extends React.Component {
           <Route exact path={`/secure_tcnnaspage`}>              
             <div className='App'>
               <FullPage isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>
+            <Footer />
+          </Route>
+          <Route exact path={`/tcnnaspage_sp`}>              
+            <div className='App'>
+              <FullPage_SP isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
             <Footer />
           </Route>

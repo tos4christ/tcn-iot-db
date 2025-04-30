@@ -186,11 +186,11 @@ class AccidentRepLive extends React.Component {
     
     var data = [];
     var dataSeries = { type: "line" };
-    const time_now = new Date();    
-
+    
     const this_time = Math.round(Date.now()/1000);
-    if( this_time == time_tracker ) {
-        const temp_object = {x: uptimer++, y: totalGeneration};
+    if( this_time == time_tracker ) {        
+        const total_gen = Number(totalGeneration.toFixed(2));
+        const temp_object = {x: (new Date()), y: total_gen};
         dataPoints.push(temp_object);
     } 
     time_tracker = Math.round(Date.now()/1000) + 1;
@@ -199,6 +199,7 @@ class AccidentRepLive extends React.Component {
         dataPoints.shift();
     }
     dataSeries.dataPoints = dataPoints;
+    //dataSeries.toolTipContent = "{x}: {y}";
     data.push(dataSeries);
 
     const spanStyle = {
@@ -215,16 +216,22 @@ class AccidentRepLive extends React.Component {
         zoomEnabled: true,
         zoomType: "xy",
         animationEnabled: true,
+        toolTip: {
+            contentFormatter: function(e) {
+                // console.log(e.entries[0].dataPoint.x);
+                return e.entries[0].dataPoint.y + " MW" + " @ " + e.entries[0].dataPoint.x.toLocaleTimeString()
+            }
+            //content: "x: {x}: y: {y}"
+        },
         title: {
             text: "Real-Time Representation of Total Generation",
         },        
         axisX: {
             title: "Time",
-            includeZero: false,
-            interval: 4,
-            intervalType: "second",
+            // includeZero: false,
+            interval: 3,
             valueFormatString: "HH:mm:ss",
-            labelFormatter: (e) => new Date().toTimeString().split(" ")[0],
+            intervalType: "second",
         },
         axisY: {
             title: "Total Generation (MW)",
