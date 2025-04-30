@@ -1865,7 +1865,7 @@ h4.post-title a {
 }
 .sidenav {
   height: 100%; /* 100% Full-height */
-  width: 250px; /* 0 width - change this with JavaScript */
+  width: 170px; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
@@ -1911,7 +1911,7 @@ h4.post-title a {
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
   transition: margin-left 0.5s;
-  padding-left: 250px;
+  padding-left: 170px;
 }
 .toggle {
   display: none;

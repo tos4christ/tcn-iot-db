@@ -7,13 +7,11 @@ import DateTime from "../DateTime";
 // var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-var startTime = 0,
+var startTime = 0, options, dataPoints = [], uptimer = 0, time_tracker,
   endTime = 0;
 class AccidentRepLive extends React.Component {
     constructor(props) {
         super(props);
-        this.updateDataPoints = this.updateDataPoints.bind(this);
-        //this.updateDataPoints = this.updateDataPoints.bind(this);
         this.state = {
             dataPoints: [{x: 0, y: 0}],
             timer: 1,
@@ -72,7 +70,7 @@ class AccidentRepLive extends React.Component {
     }
   componentDidMount() {
     endTime = new Date();
-    //document.getElementById("timeToRender").innerHTML = "Time to Render: " + (endTime - startTime) + "ms";
+    // document.getElementById("timeToRender").innerHTML = "Time to Render: " + (endTime - startTime) + "ms";
     if(this.props.history.location.pathname === "/charts") {
         socket.on("client_message_111", data => {
           const { message } = data;
@@ -108,17 +106,21 @@ class AccidentRepLive extends React.Component {
         });
     }
     this.canvas = this.chart.canvas;
-    // //console.log(canvas, 'canvas');
     if(this.canvas) {
         this.ctxx = this.canvas.getContext("2d", { willReadFrequently: true });
     }
-    //const ctx = canvas.getContext("2d", { willReadFrequently: true });
   }
 
-  updateDataPoints() {   
-    // console.log(this.ctxx, 'canvas');
-    const { dataPoints } = this.state;
-    let { timer } = this.state;
+//   componentWillUnmount() {  
+//     socket.off("client_message_111");
+//     socket.off("client_message_222");
+//   }
+//   componentDidUpdate() {
+//     endTime = new Date();
+//     //document.getElementById("timeToRender").innerHTML = "Time to Render: " + (endTime - startTime) + "ms";
+//   }
+
+  render() {
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
     const ihovbor_gs = stations_array['IHOVBOR NIPP (GAS)'];
@@ -180,52 +182,23 @@ class AccidentRepLive extends React.Component {
     (Number(delta_gs.mw) < 0 ? 0 : Number(delta_gs.mw))+ 
     (Number(jebba_gs.mw) < 0 ? 0 : Number(jebba_gs.mw))+ 
     (Number(dadinkowa_gs.mw) < 0 ? 0 : Number(dadinkowa_gs.mw));
-
-    timer += 1;
-    const newDataPoint = {
-      x: timer,
-      y: totalGeneration,
-    };
-    //console.log(newDataPoint, 'newDataPoint');
-    //console.log(dataPoints, 'dataPoints');
-    let finalDataPoint = [];
-    if(dataPoints.length > 1000) {
-      const update_dataPoints = dataPoints.slice(500);
-      // finalDataPoint = [];
-      finalDataPoint = [...update_dataPoints];
-    } else {
-        finalDataPoint = [...dataPoints];
-    }
-    // finalDataPoint.push(newDataPoint);
-    this.setState(prevState => {
-        prevState.dataPoints = [...finalDataPoint, newDataPoint];
-        // prevState.dataPoints = finalDataPoint;
-        prevState.timer = timer;
-        return prevState;
-    })
-    // this.setState({
-    //   dataPoints: [...finalDataPoint, newDataPoint],
-    //     timer: timer,
-    // });
-    this.chart.render();
-  }
-
-//   componentWillUnmount() {  
-//     socket.off("client_message_111");
-//     socket.off("client_message_222");
-//   }
-//   componentDidUpdate() {
-//     endTime = new Date();
-//     //document.getElementById("timeToRender").innerHTML = "Time to Render: " + (endTime - startTime) + "ms";
-//   }
-
-  render() {
-    startTime = new Date();
+    // startTime = new Date();
     
     var data = [];
     var dataSeries = { type: "line" };
-    
-    dataSeries.dataPoints = this.state.dataPoints;
+    const time_now = new Date();    
+
+    const this_time = Math.round(Date.now()/1000);
+    if( this_time == time_tracker ) {
+        const temp_object = {x: uptimer++, y: totalGeneration};
+        dataPoints.push(temp_object);
+    } 
+    time_tracker = Math.round(Date.now()/1000) + 1;
+
+    if(dataPoints.length > 30) {
+        dataPoints.shift();
+    }
+    dataSeries.dataPoints = dataPoints;
     data.push(dataSeries);
 
     const spanStyle = {
@@ -237,41 +210,30 @@ class AccidentRepLive extends React.Component {
         padding: "0px 4px",
         color: "#ffffff",
     };  
-    const options = {
-    zoomEnabled: true,
-    animationEnabled: true,
-    title: {
-        text: "Real-Time Representation of Total Generation",
-    },        
-    axisX: {
-        title: "Time",
-        includeZero: false,
-    },
-    axisY: {
-        title: "Total Generation (MW)",
-        suffix: "MW",
-        prefix: "",
-        includeZero: false,
-    },
-    data: data, // random data
-    // context: this.ctx,
-    };
-    
-    
-    
-    setInterval(() => {
-        this.updateDataPoints();
-        
-        // this.chart.data[0].addTo("dataPoints", {
-        //     x: timer,
-        //     y: totalGeneration,
-        // });
-        //dataSeries.dataPoints = dataPoints;
-    //data.push(dataSeries);
-        // this.chart.render();
-    }, 5000);
-    
    
+    options = {
+        zoomEnabled: true,
+        zoomType: "xy",
+        animationEnabled: true,
+        title: {
+            text: "Real-Time Representation of Total Generation",
+        },        
+        axisX: {
+            title: "Time",
+            includeZero: false,
+            interval: 4,
+            intervalType: "second",
+            valueFormatString: "HH:mm:ss",
+            labelFormatter: (e) => new Date().toTimeString().split(" ")[0],
+        },
+        axisY: {
+            title: "Total Generation (MW)",
+            suffix: "MW",
+            prefix: "",
+            includeZero: false,
+        },
+        data: data,
+        };
     
     return (
       <div>
