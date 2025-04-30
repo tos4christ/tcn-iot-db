@@ -107,14 +107,16 @@ class AccidentRepLive extends React.Component {
           })
         });
     }
-    const canvas = this.chart.current;
-    if(canvas) {
-        this.ctx = canvas.getContext("2d", { willReadFrequently: true });
+    this.canvas = this.chart.canvas;
+    // //console.log(canvas, 'canvas');
+    if(this.canvas) {
+        this.ctxx = this.canvas.getContext("2d", { willReadFrequently: true });
     }
     //const ctx = canvas.getContext("2d", { willReadFrequently: true });
   }
 
-  updateDataPoints() {      
+  updateDataPoints() {   
+    // console.log(this.ctxx, 'canvas');
     const { dataPoints } = this.state;
     let { timer } = this.state;
     const stations_array = get_stations(this.state);
@@ -257,7 +259,7 @@ class AccidentRepLive extends React.Component {
         //dataSeries.dataPoints = dataPoints;
     //data.push(dataSeries);
         this.chart.render();
-    }, 1000);
+    }, 5000);
     
    
     
