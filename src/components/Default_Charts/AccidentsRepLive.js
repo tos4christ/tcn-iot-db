@@ -185,8 +185,9 @@ class AccidentRepLive extends React.Component {
       y: totalGeneration,
     };
     let finalDataPoint = [];
-    if(dataPoints.length > 10000) {
-      const update_dataPoints = dataPoints.slice(5000);
+    if(dataPoints.length > 1000) {
+      const update_dataPoints = dataPoints.slice(500);
+      // finalDataPoint = [];
       finalDataPoint = update_dataPoints;
     } else {
         finalDataPoint = dataPoints;
@@ -242,7 +243,7 @@ class AccidentRepLive extends React.Component {
           includeZero: false,
         },
         data: data, // random data
-        context: this.ctx,
+        // context: this.ctx,
       };
     
 
