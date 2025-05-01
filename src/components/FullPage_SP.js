@@ -370,7 +370,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.riversIppPs.server_time)}</td>
                   <td>{riversipp_gs.mw}</td>
                   <td>{riversipp_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -380,7 +380,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.afamViTs.server_time)}</td>
                   <td>{afam6_gs.mw}</td>
                   <td>{afam6_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -390,7 +390,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.gereguPs.server_time)}</td>
                   <td>{geregugas_gs.mw}</td>
                   <td>{geregugas_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -400,7 +400,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection3(this.state.omotosho2.server_time, this.state.omotosho1.server_time)}</td>
                   <td>{omotosogas_gs.mw}</td>
                   <td>{omotosogas_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -410,7 +410,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.omotoshoNippPs.server_time)}</td>
                   <td>{omotosonipp_gs.mw}</td>
                   <td>{omotosonipp_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -420,7 +420,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection4_delta(this.state.delta3.server_time , this.state.deltaGs.server_time, this.state.delta2.server_time)}</td>
                   <td>{delta_gs.mw}</td>
                   <td>{delta_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -430,7 +430,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.sapeleNippPs.server_time)}</td>
                   <td>{sapelenipp_gs.mw}</td>
                   <td>{sapelenipp_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -440,7 +440,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.omokuPs1.server_time)}</td>
                   <td>{omoku_gs.mw}</td>
                   <td>{omoku_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -450,7 +450,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.ihovborNippPs.server_time)}</td>
                   <td>{azura_gs.mw}</td>
                   <td>{azura_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -460,7 +460,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.phMain.server_time)}</td>
                   <td>{phMain_ts.mw}</td>
                   <td>{phMain_ts.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -471,7 +471,7 @@ import Modal from "./Modal";
                   {/* <td><span className="text-danger"> NC </span></td> */}
                   <td>{Number(geregunipp_gs.mw) < 0 ? 0 : Number(geregunipp_gs.mw)}</td>
                   <td>{geregunipp_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -481,7 +481,7 @@ import Modal from "./Modal";
                   <td>{true ? <span className="text-success"> CN </span> : this.checkConnection2(this.state.gbarain.server_time)}</td>
                   <td>{gbarain_gs.mw}</td>
                   <td>{gbarain_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -491,7 +491,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.dadinKowaGs.server_time)}</td>
                   <td>{dadinkowa_gs.mw}</td>
                   <td>{dadinkowa_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -501,7 +501,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.parasEnergyPs.server_time)}</td>
                   <td>{paras_gs.mw}</td>
                   <td>{paras_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -511,7 +511,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.eket.server_time)}</td>
                   <td>{ibom_gs.mw}</td>
                   <td>{ibom_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -521,7 +521,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.jebbaTs.server_time)}</td>
                   <td>{jebba_gs.mw}</td>
                   <td>{jebba_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -531,7 +531,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection3(this.state.olorunsogo1.server_time, this.state.olorunsogoPhase1Gs.server_time)}</td>
                   <td>{olorunsogogas_gs.mw}</td>
                   <td>{olorunsogogas_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -541,7 +541,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection3(this.state.olorunsogo1.server_time, this.state.olorunsogoPhase1Gs.server_time)}</td>
                   <td>{Number(olorunsogonipp_gs.mw) <= -3 ? 0 : Number(olorunsogonipp_gs.mw)}</td>
                   <td>{olorunsogonipp_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -551,7 +551,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.sapeleNippPs.server_time)}</td>
                   <td>{sapelesteam_gs.mw}</td>
                   <td>{sapelesteam_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -561,7 +561,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.odukpaniNippPs.server_time)}</td>
                   <td>{odukpani_gs.mw}</td>
                   <td>{odukpani_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -571,7 +571,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.alaoji.server_time)}</td>
                   <td>{alaoji_gs.mw}</td>
                   <td>{alaoji_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -581,7 +581,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.ihovborNippPs.server_time)}</td>
                   <td>{ihovbor_gs.mw}</td>
                   <td>{ihovbor_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -591,7 +591,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.shiroroPs.server_time)}</td>
                   <td>{shiroro_gs.mw}</td>
                   <td>{shiroro_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -601,7 +601,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection3_b(this.state.afamVPs.server_time, this.state.afamIv_vPs.server_time)}</td>
                   <td>{afam4_gs.mw}</td>
                   <td>{afam4_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -611,7 +611,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.kainjiTs.server_time)}</td>
                   <td>{kainji_gs.mw}</td>
                   <td>{kainji_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -621,7 +621,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.egbinPs.server_time)}</td>
                   <td>{egbin_gs.mw}</td>
                   <td>{egbin_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -631,7 +631,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.okpaiGs.server_time)}</td>
                   <td>{okpai_gs.mw}</td>
                   <td>{okpai_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -641,7 +641,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.zungeru.server_time)}</td>
                   <td>{zungeru_gs.mw}</td>
                   <td>{zungeru_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
@@ -651,7 +651,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.taopex.server_time)}</td>
                   <td>{taopex_gs.mw}</td>
                   <td>{taopex_gs.kv}</td>
-                  <td><input type="text" placeholder="input declaration"/></td>
+                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>

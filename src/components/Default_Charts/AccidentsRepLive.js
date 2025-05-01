@@ -7,7 +7,7 @@ import DateTime from "../DateTime";
 // var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-var startTime = 0, options, dataPoints = [], uptimer = 0, time_tracker,
+var startTime = 0, options, dataPoints = [], uptimer = 0, time_tracker, time_holder = [],
   endTime = 0;
 class AccidentRepLive extends React.Component {
     constructor(props) {
@@ -104,6 +104,7 @@ class AccidentRepLive extends React.Component {
             return returnObject;
           })
         });
+        
     }
     this.canvas = this.chart.canvas;
     if(this.canvas) {
@@ -121,6 +122,7 @@ class AccidentRepLive extends React.Component {
 //   }
 
   render() {
+    // startTime = Date.now();
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
     const ihovbor_gs = stations_array['IHOVBOR NIPP (GAS)'];
@@ -188,12 +190,15 @@ class AccidentRepLive extends React.Component {
     var dataSeries = { type: "line" };
     
     const this_time = Math.round(Date.now()/1000);
-    if( this_time == time_tracker ) {        
+    time_holder.push(this_time);
+    // if( this_time == time_tracker ) {     
+    if( time_holder.length == 40 ) {
         const total_gen = Number(totalGeneration.toFixed(2));
         const temp_object = {x: (new Date()), y: total_gen};
         dataPoints.push(temp_object);
+        time_holder = [];
     } 
-    time_tracker = Math.round(Date.now()/1000) + 1;
+    time_tracker = Math.round(Date.now()/1000) + 5;
 
     if(dataPoints.length > 30) {
         dataPoints.shift();
@@ -229,7 +234,7 @@ class AccidentRepLive extends React.Component {
         axisX: {
             title: "Time",
             // includeZero: false,
-            interval: 3,
+            interval: 6,
             valueFormatString: "HH:mm:ss",
             intervalType: "second",
         },

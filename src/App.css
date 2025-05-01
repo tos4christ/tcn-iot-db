@@ -738,7 +738,7 @@ table.ncc-tg thead tr th:nth-of-type(5), table.ncc-tg tbody tr td:nth-of-type(5)
 table.ncc-tg thead tr th:nth-of-type(6), table.ncc-tg tbody tr td:nth-of-type(6) {
     width: 8em;
     font-size: 15px;
-    background-color:rgb(250, 249, 249);
+    background-color:rgb(204, 199, 199);
 }
 table.ncc-tg thead tr th:nth-of-type(7), table.ncc-tg tbody tr td:nth-of-type(7) {
     width: 5em;
