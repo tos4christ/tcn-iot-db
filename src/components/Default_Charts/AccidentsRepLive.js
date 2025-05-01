@@ -220,6 +220,9 @@ class AccidentRepLive extends React.Component {
     options = {
         zoomEnabled: true,
         zoomType: "xy",
+        height : 500,
+        width : 800,
+        exportEnabled: true,
         animationEnabled: true,
         toolTip: {
             contentFormatter: function(e) {
