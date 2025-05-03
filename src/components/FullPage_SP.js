@@ -117,6 +117,11 @@ import Modal from "./Modal";
       });
     }
    }
+   componentWillUnmount() {
+    socket.off("client_message_111");
+    socket.off("client_message_222");
+    socket.off("frequency001");
+    }
    getEpoch(time) {
     if(!time || time === undefined || time === null) {
       return 0;

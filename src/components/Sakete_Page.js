@@ -36,6 +36,9 @@ import Modal from "./Modal";
       });
     }
    }
+    componentWillUnmount() {
+    socket.off("client_message_sakete");
+    }
    getEpoch(time) {
     if(!time || time === undefined || time === null) {
       return 0;

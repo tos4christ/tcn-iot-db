@@ -113,10 +113,10 @@ class AccidentRepLive extends React.Component {
     }
   }
 
-//   componentWillUnmount() {  
-//     socket.off("client_message_111");
-//     socket.off("client_message_222");
-//   }
+  componentWillUnmount() {  
+    socket.off("client_message_111");
+    socket.off("client_message_222");
+  }
 //   componentDidUpdate() {
 //     endTime = new Date();
 //     //document.getElementById("timeToRender").innerHTML = "Time to Render: " + (endTime - startTime) + "ms";

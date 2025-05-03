@@ -24,6 +24,9 @@ import socket from "./utility/socketIO";
       });
     }
    }
+   componentWillUnmount() {
+    socket.off("frequency001");
+   }
    
   render() { 
     return (

@@ -139,6 +139,9 @@ class WeatherApi extends React.Component {
             // });
          // }
     };
+    componentWillUnmount() {
+        socket.off("client_message_weather_current");
+    }
 
   render() {
     const fake_datas = [

@@ -46,8 +46,8 @@ class DashboardHomeLive extends React.Component {
 
   render() {
 
-    const disconnectedFeedersDisplay = this.state.disconnectedFeeders.map((feeder) => {
-      return <FeederCard name={feeder.name} isOn={feeder.isOn} display={"flex"} />;
+    const disconnectedFeedersDisplay = this.state.disconnectedFeeders.map((feeder, index) => {
+      return <FeederCard key={index} name={feeder.name} isOn={feeder.isOn} display={"flex"} />;
     }
     );
     // console.log("Disconnected Feeders Display: ", disconnectedFeedersDisplay);

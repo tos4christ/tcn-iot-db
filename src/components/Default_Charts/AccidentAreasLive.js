@@ -10,6 +10,12 @@ class AccidentAreasLive extends React.Component {
       
     };
   }
+  componentDidMount() {
+    this.canvas = this.chart.canvas;
+    if(this.canvas) {
+        this.ctxx = this.canvas.getContext("2d", { willReadFrequently: true });
+    }
+  } 
   render() {
     // console.log(this.props.feeders, "  The feeders");
     const totalGeneration = this.props.feeders[29]?.totalGeneration ? this.props.feeders[29].totalGeneration : 1;

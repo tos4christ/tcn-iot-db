@@ -148,6 +148,11 @@ import axios from "axios";
         });  
     }
    }
+   componentWillUnmount() {
+    socket.off("client_message_111");
+    socket.off("client_message_222");
+    socket.off("frequency001");
+   }
    toggleDisplay(e) {
     this.setState(prevState => {
       prevState.display = this.state.display === '' ? 'none' : '';

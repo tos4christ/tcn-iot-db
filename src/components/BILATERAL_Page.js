@@ -118,6 +118,13 @@ import Modal from "./Modal";
       });
     }
    }
+   componentWillUnmount() {
+    socket.off("client_message_taopex");
+    socket.off("client_message_mesl");
+    socket.off("client_message_fipl");
+    socket.off("client_message_ndphc");
+    socket.off("client_message_sakete");
+   }
    getEpoch(time) {
     if(!time || time === undefined || time === null) {
       return 0;

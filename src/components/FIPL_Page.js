@@ -53,6 +53,10 @@ import Modal from "./Modal";
       });
     }
    }
+   componentWillUnmount() {
+    socket.off("client_message_fipl");
+    socket.off("frequency001");
+    }
    getEpoch(time) {
     if(!time || time === undefined || time === null) {
       return 0;

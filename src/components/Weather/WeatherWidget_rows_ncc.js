@@ -94,7 +94,7 @@ class WeatherWidget_rows extends React.Component {
         const count_amount = Math.round(stations_length/10);  
         let timer;
         // Function to run setInterval on that will keep changing the values
-        setInterval(() => {
+        this.startInterval = setInterval(() => {
             stations = sortedStations.slice(this.state.start, this.state.start + 10);
             // cancel the timer
             clearTimeout(timer);
@@ -207,7 +207,11 @@ class WeatherWidget_rows extends React.Component {
             
         }, 9200);
         
-    }    
+    }
+    componentWillUnmount() {
+        // Clear the interval when the component unmounts
+        clearTimeout(this.startInterval);
+    }
     getIconUrl(icon_id)  {
         return `https://openweathermap.org/img/wn/${icon_id}@2x.png`
     }
