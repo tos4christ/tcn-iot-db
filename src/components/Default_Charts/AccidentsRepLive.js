@@ -12,6 +12,7 @@ var startTime = 0, options, dataPoints = [], uptimer = 0, time_tracker, time_hol
 class AccidentRepLive extends React.Component {
     constructor(props) {
         super(props);
+        this.updateFeederState = this.updateFeederState.bind(this);
         this.state = {
             dataPoints: [{x: 0, y: 0}],
             timer: 1,
@@ -104,7 +105,7 @@ class AccidentRepLive extends React.Component {
             return returnObject;
           })
         });
-        
+        this.updateFeederState();
     }
     this.canvas = this.chart.canvas;
     if(this.canvas) {
@@ -121,8 +122,165 @@ class AccidentRepLive extends React.Component {
 //     //document.getElementById("timeToRender").innerHTML = "Time to Render: " + (endTime - startTime) + "ms";
 //   }
 
+getEpoch(time) {
+  if(!time || time === undefined || time === null) {
+    return 0;
+  }
+  // Convert the time input to epoch time
+  var options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  const date = new Date().toLocaleDateString("en-GB", options).split('/').reverse().join('-');
+  const timeTemp = time.split(':');
+  const hour = timeTemp[0];
+  const minute = timeTemp[1]
+  const seconds = timeTemp[2]
+  const dateTemp = date.split('-');
+  return new Date(Number(dateTemp[0]), Number(dateTemp[1]-1), Number(dateTemp[2]), Number(hour), Number(minute), Number(seconds)); 
+ }
+ checkConnection2(server_time) {
+  if (server_time === undefined || server_time === null) {
+    return false;
+  }
+  try {
+    // Get current epoch time
+    const time_now = (new Date()).getTime();     
+    // if 30 seconds have passed without the time changing from the current time then return disconnected
+    // 30 seconds equals to 30,000 milliseconds
+    // if the time difference is greater than time_diff then return disconnected
+    const time_diff = (time_now - server_time) > 30000;
+    if (server_time.length === 0 || time_diff ) {
+        return false;
+    } else if (!isNaN(server_time)) {
+        return true;
+    }
+  } catch(e) {
+    // console.log(e);
+    return false;
+  }
+ }
+ checkConnection3(t1, t2) {
+  const connected = true;
+  const disconnected = false;
+  if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null)) {
+    return disconnected
+  }
+  try {
+    t1 = t1 ? t1 : '';
+    t2 = t2 ? t2 : '';
+    // Get current epoch time
+    const time_now = (new Date()).getTime();
+    // if 30 seconds have passed without the time changing from the current time then return disconnected
+    // 30 seconds equals to 30,000 milliseconds
+    // if the time difference is greater than time_diff then return disconnected
+    const time_diff_1 = (time_now - t1) > 30000;
+    const time_diff_2 = (time_now - t2) > 30000;
+    if ( time_diff_1 || time_diff_2 ) {
+      return disconnected
+    } else if (!isNaN(t1) && !isNaN(t2)) {
+        return connected
+    } 
+  } catch(e) {
+    console.log(e);
+    return disconnected;
+  }    
+ }
+ checkConnection4(t1, t2, t3) {
+  const connected = true;
+  const disconnected = false;
+  if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null) && (t3 === undefined || t3 === null)) {
+    return disconnected
+  }
+  try {
+    t1 = t1 ? t1 : '';
+    t2 = t2 ? t2 : '';
+    t3 = t3 ? t3 : '';
+    // Get current epoch time
+    const time_now = (new Date()).getTime();  
+    // if 30 seconds have passed without the time changing from the current time then return disconnected
+    // 30 seconds equals to 30,000 milliseconds
+    // if the time difference is greater than time_diff then return disconnected
+    const time_diff_1 = (time_now - t1) > 30000;
+    const time_diff_2 = (time_now - t2) > 30000;
+    const time_diff_3 = (time_now - t3) > 30000;
+    if ( time_diff_1 || time_diff_2 || time_diff_3 ) {
+      return disconnected
+    } else if (!isNaN(t1) && !isNaN(t2) && !isNaN(t3)) {
+        return connected
+    }
+  } catch(e) {
+    console.log(e);
+    return disconnected;
+  }    
+ }
+ checkConnection3_b(t1, t2) {
+  const connected = true;
+  const disconnected = false;
+  if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null)) {
+    return disconnected
+  }
+  try {
+    t1 = t1 ? t1 : '';
+    t2 = t2 ? t2 : '';
+    // Get current epoch time
+    const time_now = (new Date()).getTime();
+    // if 30 seconds have passed without the time changing from the current time then return disconnected
+    // 30 seconds equals to 30,000 milliseconds
+    // if the time difference is greater than time_diff then return disconnected
+    const time_diff_1 = (time_now - t1) > 30000;
+    const time_diff_2 = (time_now - t2) > 30000;
+    if ( time_diff_1 && time_diff_2 ) {
+      return disconnected
+    } else if (!isNaN(t1) || !isNaN(t2)) {
+        return connected
+    } 
+  } catch(e) {
+    console.log(e);
+    return disconnected;
+  }    
+ }
+ checkConnection4_delta(t1, t2, t3) {
+  const connected = true;
+  const disconnected = false;
+  if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null) && (t3 === undefined || t3 === null)) {
+    return disconnected
+  }
+  try {
+    t1 = t1 ? t1 : '';
+    t2 = t2 ? t2 : '';
+    t3 = t3 ? t3 : '';
+    // Get current epoch time
+    const time_now = (new Date()).getTime();  
+    // if 30 seconds have passed without the time changing from the current time then return disconnected
+    // 30 seconds equals to 30,000 milliseconds
+    // if the time difference is greater than time_diff then return disconnected
+    const time_diff_1 = (time_now - t1) > 30000;
+    const time_diff_2 = (time_now - t2) > 30000;
+    const time_diff_3 = (time_now - t3) > 30000;
+    if (time_diff_1  && time_diff_3) {
+      return disconnected
+    } else if ( !isNaN(t1) || !isNaN(t3) ) {
+        return connected
+    }
+  } catch(e) {
+    console.log(e);
+    return disconnected;
+  }    
+ }
+ updateFeederState() {
+  
+  setTimeout(() => {
+    setInterval(() => {
+      // console.log(disconnectedFeeders, 'disconnected feeders');
+      this.props.getDisconnectedFeeders(this.disconnectedFeeders);
+      this.props.getFeeders(this.Feeders);
+      // console.log(this.disconnectedFeeders, 'disconnected feeders');
+    }, 2000);
+  }, 10000);
+  
+ }
+
   render() {
     // startTime = Date.now();
+  
     const stations_array = get_stations(this.state);
     const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
     const ihovbor_gs = stations_array['IHOVBOR NIPP (GAS)'];
@@ -155,6 +313,7 @@ class AccidentRepLive extends React.Component {
     const zungeru_gs = stations_array['ZUNGERU'];
     const taopex_gs = stations_array['TAOPEX'];
 
+
     const totalGeneration = (Number(riversipp_gs.mw) < 0 ? 0 : Number(riversipp_gs.mw))+
     (Number(afam6_gs.mw) < 0 ? 0 : Number(afam6_gs.mw))+ 
     (Number(paras_gs.mw) < 0 ? 0 : Number(paras_gs.mw))+ 
@@ -184,7 +343,41 @@ class AccidentRepLive extends React.Component {
     (Number(delta_gs.mw) < 0 ? 0 : Number(delta_gs.mw))+ 
     (Number(jebba_gs.mw) < 0 ? 0 : Number(jebba_gs.mw))+ 
     (Number(dadinkowa_gs.mw) < 0 ? 0 : Number(dadinkowa_gs.mw));
-    // startTime = new Date();
+
+    // Create an Array of objects to hold the data points for disconnected feeders
+    this.Feeders = [
+      {name: "RIVERS IPP (GAS)", isOn: this.checkConnection2(this.state.riversIppPs.server_time), mw: riversipp_gs.mw},
+      {name: "AFAM VI (GAS/STEAM)", isOn: this.checkConnection2(this.state.afamViTs.server_time), mw: afam6_gs.mw},
+      {name: "GEREGU (GAS)", isOn: this.checkConnection2(this.state.gereguPs.server_time), mw: geregugas_gs.mw},
+      {name: "OMOTOSHO (GAS)", isOn: this.checkConnection3(this.state.omotosho2.server_time, this.state.omotosho1.server_time), mw: omotosogas_gs.mw},
+      {name: "OMOTOSHO NIPP (GAS)", isOn: this.checkConnection2(this.state.omotoshoNippPs.server_time), mw: omotosonipp_gs.mw},
+      {name: "DELTA (GAS)", isOn: this.checkConnection4_delta(this.state.delta3.server_time , this.state.deltaGs.server_time, this.state.delta2.server_time), mw: delta_gs.mw},
+      {name: "SAPELE NIPP (GAS)", isOn: this.checkConnection2(this.state.sapeleNippPs.server_time), mw: sapelenipp_gs.mw},
+      {name: "OMOKU (GAS)", isOn: this.checkConnection2(this.state.omokuPs1.server_time), mw: omoku_gs.mw},
+      {name: "AZURA-EDO IPP (GAS)", isOn: this.checkConnection2(this.state.ihovborNippPs.server_time), mw: azura_gs.mw},
+      {name: "TRANS-AMADI (GAS)", isOn: this.checkConnection2(this.state.phMain.server_time), mw: phMain_ts.mw},
+      {name: "GEREGU NIPP (GAS)", isOn: this.checkConnection2(this.state.gereguPs.server_time), mw: geregunipp_gs.mw},
+      {name: "GBARAIN NIPP (GAS)", isOn: true, mw: gbarain_gs.mw},
+      {name: "DADINKOWA G.S (HYDRO)", isOn: this.checkConnection2(this.state.dadinKowaGs.server_time), mw: dadinkowa_gs.mw},
+      {name: "PARAS ENERGY (GAS)", isOn: this.checkConnection2(this.state.parasEnergyPs.server_time), mw: paras_gs.mw},
+      {name: "IBOM POWER (GAS)", isOn: this.checkConnection2(this.state.eket.server_time), mw: ibom_gs.mw},
+      {name: "JEBBA (HYDRO)", isOn: this.checkConnection2(this.state.jebbaTs.server_time), mw: jebba_gs.mw},
+      {name: "OLORUNSOGO (GAS)", isOn: this.checkConnection3(this.state.olorunsogo1.server_time, this.state.olorunsogoPhase1Gs.server_time), mw: olorunsogogas_gs.mw},
+      {name: "OLORUNSOGO NIPP", isOn: this.checkConnection3(this.state.olorunsogo1.server_time, this.state.olorunsogoPhase1Gs.server_time), mw: olorunsogonipp_gs.mw},
+      {name: "SAPELE (STEAM)", isOn: this.checkConnection2(this.state.sapeleNippPs.server_time), mw: sapelesteam_gs.mw},
+      {name: "ODUKPANI NIPP (GAS)", isOn: this.checkConnection2(this.state.odukpaniNippPs.server_time), mw: odukpani_gs.mw},
+      {name: "ALAOJI NIPP (GAS)", isOn: this.checkConnection2(this.state.alaoji.server_time), mw: alaoji_gs.mw},
+      {name: "IHOVBOR NIPP (GAS)", isOn: this.checkConnection2(this.state.ihovborNippPs.server_time), mw: ihovbor_gs.mw},
+      {name: "SHIRORO (HYDRO)", isOn: this.checkConnection2(this.state.shiroroPs.server_time), mw: shiroro_gs.mw},
+      {name: 'AFAM IV & V (GAS)', isOn: this.checkConnection3_b(this.state.afamVPs.server_time, this.state.afamIv_vPs.server_time), mw: afam4_gs.mw},
+      {name: "KAINJI (HYDRO)", isOn: this.checkConnection2(this.state.kainjiTs.server_time), mw: kainji_gs.mw},
+      {name: "EGBIN (STEAM)", isOn: this.checkConnection2(this.state.egbinPs.server_time), mw: egbin_gs.mw},
+      {name: "OKPAI (GAS/STEAM)", isOn: this.checkConnection2(this.state.okpaiGs.server_time), mw: okpai_gs.mw},
+      {name: "ZUNGERU G.S", isOn: this.checkConnection2(this.state.zungeru.server_time), mw: zungeru_gs.mw},
+      {name: "TAOPEX G.S", isOn: this.checkConnection2(this.state.taopex.server_time), mw: taopex_gs.mw},
+      {totalGeneration, isOn: true}
+    ]
+    this.disconnectedFeeders = this.Feeders.filter((feeder) => !feeder.isOn);
     
     var data = [];
     var dataSeries = { type: "line" };

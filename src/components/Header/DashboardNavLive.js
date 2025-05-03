@@ -100,7 +100,7 @@ const DashboardNavLive = ({ body }) => {
           </div>
         </div>
       </div>
-      <div id="mySidenav" className="sidenav">
+      <div id="mySidenav" className="sidenav" >
         <div className="text-center">
           {/* <img src={logo} alt="logo" /> */}
           <img
@@ -154,7 +154,7 @@ const DashboardNavLive = ({ body }) => {
           <div
             className="mr-auto d-flex pl-3"
             id="navbarSupportedContent"
-            style={{ width: 200 }}
+            style={{ width: 500 }}
           >
             <h3 className="">Responders Dashboard</h3>
           </div>
