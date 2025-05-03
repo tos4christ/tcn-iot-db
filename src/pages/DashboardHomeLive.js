@@ -55,13 +55,13 @@ class DashboardHomeLive extends React.Component {
     const body = <div className='container-fluid' >
             <div className="row my-1 pt-1 text-justify">
               <div className="col-sm-3">
-                <div className='bg-white shadow m-0 p-1'>
+                <div className='bg-white shadow m-0 p-0'>
                   <AccidentAreasLive feeders={this.state.feeders} />
                 </div>
               </div>
               <div className="col-sm-9">
                 <div style={{display: "flex"}}> {disconnectedFeedersDisplay} </div>
-                <div className='bg-white shadow m-1 p-3'><AccidentRepLive getDisconnectedFeeders={this.getDisconnectedFeeders} getFeeders={this.getFeeders} /></div>
+                <div className='bg-white shadow m-0 p-1'><AccidentRepLive getDisconnectedFeeders={this.getDisconnectedFeeders} getFeeders={this.getFeeders} /></div>
               </div>
             </div>
           </div>

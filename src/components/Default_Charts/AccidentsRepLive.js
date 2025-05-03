@@ -380,7 +380,7 @@ getEpoch(time) {
     this.disconnectedFeeders = this.Feeders.filter((feeder) => !feeder.isOn);
     
     var data = [];
-    var dataSeries = { type: "line" };
+    var dataSeries = { type: "line", cursor: "crosshair" };
     
     const this_time = Math.round(Date.now()/1000);
     time_holder.push(this_time);
