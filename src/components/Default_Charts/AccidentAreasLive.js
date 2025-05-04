@@ -23,6 +23,20 @@ class AccidentAreasLive extends React.Component {
     const options = {
       exportEnabled: true,
       animationEnabled: true,
+      // legend:{
+      //   cursor: "pointer",
+      //   verticalAlign: "top",
+      //   horizontalAlign: "right",
+      //   dockInsidePlotArea: true,
+      //   itemclick: function(e) {
+      //     if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+      //       e.dataSeries.visible = false;
+      //     } else{
+      //       e.dataSeries.visible = true;
+      //     }
+      //     e.chart.render();
+      //   }
+      // },
       title: {
         text: "Generation by Power Plants",
       },

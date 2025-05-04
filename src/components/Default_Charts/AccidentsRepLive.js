@@ -7,7 +7,7 @@ import DateTime from "../DateTime";
 // var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-var startTime = 0, options, dataPoints = [], uptimer = 0, time_tracker, time_holder = [],
+var startTime = 0, options, dataPoints = [], dataPoints_2 = [], time_holder = [],
   endTime = 0;
 class AccidentRepLive extends React.Component {
     constructor(props) {
@@ -16,6 +16,7 @@ class AccidentRepLive extends React.Component {
         this.state = {
             dataPoints: [{x: 0, y: 0}],
             timer: 1,
+            frequency: "",
             markudi: {},
             starPipe: {},
             quantum: {},
@@ -105,6 +106,20 @@ class AccidentRepLive extends React.Component {
             return returnObject;
           })
         });
+        socket.on("frequency001", data => {
+          const { message } = data;
+          let parsedMessage;
+          try {
+            parsedMessage = JSON.parse(message);
+            // console.log(parsedMessage, 'frequency001 message');
+          } catch(e) { console(e) }        
+          const returnObject = {}
+          this.setState(prevState => {
+            prevState["frequency"] = parsedMessage;
+            returnObject["frequency"] = prevState["frequency"];
+            return returnObject;
+          })
+        });
         this.updateFeederState();
     }
     this.canvas = this.chart.canvas;
@@ -116,6 +131,7 @@ class AccidentRepLive extends React.Component {
   componentWillUnmount() {  
     socket.off("client_message_111");
     socket.off("client_message_222");
+    socket.off("frequency001");
   }
 //   componentDidUpdate() {
 //     endTime = new Date();
@@ -380,48 +396,52 @@ getEpoch(time) {
     this.disconnectedFeeders = this.Feeders.filter((feeder) => !feeder.isOn);
     
     var data = [];
-    var dataSeries = { type: "line", cursor: "crosshair" };
+    var dataSeries = { type: "line", name: "generation", cursor: "crosshair",  axisYIndex: 0 };
+    var dataSeries_2 = { type: "line", name: "frequency", cursor: "crosshair", lineDashType: "dash", axisYIndex: 1};
     
     const this_time = Math.round(Date.now()/1000);
     time_holder.push(this_time);
-    // if( this_time == time_tracker ) {     
+    // Hold state frequency in a variable
+    var frequency = parseFloat(this.state.frequency?.value ? parseFloat(this.state.frequency.value) : 0);
+        
     if( time_holder.length == 40 ) {
+        const common_time = new Date();
+        // Create Temporary Object to hold the data points for total generation
         const total_gen = Number(totalGeneration.toFixed(2));
-        const temp_object = {x: (new Date()), y: total_gen};
+        const temp_object = {x: (common_time), y: total_gen};
+
+        // Create Temporary Object to hold the data points for frequency
+        const frequency_object = {x: (common_time), y: frequency};
+
         dataPoints.push(temp_object);
+        dataPoints_2.push(frequency_object);
         time_holder = [];
     } 
-    time_tracker = Math.round(Date.now()/1000) + 5;
 
-    if(dataPoints.length > 30) {
+    if(dataPoints.length > 25 || dataPoints_2.length > 25) {
         dataPoints.shift();
+        dataPoints_2.shift();
     }
     dataSeries.dataPoints = dataPoints;
-    //dataSeries.toolTipContent = "{x}: {y}";
-    data.push(dataSeries);
+    dataSeries_2.dataPoints = dataPoints_2;
 
-    const spanStyle = {
-        position: "absolute",
-        top: "10px",
-        fontSize: "20px",
-        fontWeight: "bold",
-        backgroundColor: "#d85757",
-        padding: "0px 4px",
-        color: "#ffffff",
-    };  
+    data.push(dataSeries);
+    data.push(dataSeries_2);
    
     options = {
         zoomEnabled: true,
         zoomType: "xy",
+        theme: "light1",
         height : 500,
         width : 800,
         exportEnabled: true,
         animationEnabled: true,
         toolTip: {
             contentFormatter: function(e) {
-                // console.log(e.entries[0].dataPoint.x);
-                return e.entries[0].dataPoint.y + " MW" + " @ " + e.entries[0].dataPoint.x.toLocaleTimeString()
-            }
+                console.log(e.entries);
+                return e.entries[0].dataPoint.y + " MW" + " @ " + e.entries[0].dataPoint.x.toLocaleTimeString() + "<br />" + e.entries[1].dataPoint.y + " Hz" + " @ " + e.entries[1].dataPoint.x.toLocaleTimeString();
+            },
+            shared: true,
             //content: "x: {x}: y: {y}"
         },
         title: {
@@ -429,17 +449,53 @@ getEpoch(time) {
         },        
         axisX: {
             title: "Time",
-            // includeZero: false,
+            includeZero: false,
+            crosshair: {
+              enabled: true,
+              snapToDataPoint: true,
+            },
+            titleFontSize: 20,
+            titleFontWeight: 'bolder',
+            titleMaxWidth: 100,
+            // labelFormatter: function(e) {
+            //     return DateTime(e.value).toLocaleTimeString();
+            // },
             interval: 6,
             valueFormatString: "HH:mm:ss",
             intervalType: "second",
         },
-        axisY: {
+        axisY: [{
             title: "Total Generation (MW)",
-            suffix: "MW",
-            prefix: "",
+            lineColor: "#369EAD",
+            titleFontSize: 20,
+            titleMaxWidth: 500,
+            titleFontWeight: 'bolder',
+            crosshair: {
+              enabled: true
+            },
+            //suffix: "MW",
+            // maximum: 5500,
+            // minimum: 2000,
             includeZero: false,
+            titleWrap: true,
         },
+        {
+          title: "Frequency (Hz)",
+          axisType: "secondary",
+          lineColor: "#C24642",
+          titleMaxWidth: 500,
+          titleFontSize: 20,
+          titleWrap: true,
+          titleFontWeight: 'bolder',
+          crosshair: {
+            enabled: true
+          },
+          toolTipContent: "<b>{x}</b>: {y}hz",
+          //suffix: "Hz",
+          // maximum: 60,
+          // minimum: 40,
+          includeZero: false,
+      }],
         data: data,
         };
     
@@ -447,7 +503,6 @@ getEpoch(time) {
       <div>
         <CanvasJSChart options={options} onRef={(ref) => (this.chart = ref)} />
         {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
-        <span id="timeToRender" style={spanStyle}></span>
       </div>
     );
   }
