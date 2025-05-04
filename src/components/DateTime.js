@@ -5,6 +5,8 @@ const dateStyle = {
     fontWeight: "bold"
  }
 
+ let date_interval;
+
 class DateTime extends React.Component{
     constructor(props) {
         super(props);
@@ -13,7 +15,10 @@ class DateTime extends React.Component{
         }
     }
     componentDidMount() {
-        setInterval(() => this.setState({date: new Date()}), 1000);
+        date_interval = setInterval(() => this.setState({date: new Date()}), 1000);
+    }
+    componentWillUnmount() {
+        clearInterval(date_interval);
     }
     render() {
         return(

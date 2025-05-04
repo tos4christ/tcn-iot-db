@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import './assets/css/Modal.css'
@@ -44,6 +44,11 @@ import BILATERAL_Page from './components/BILATERAL_Page';
 import Sakete_Page from './components/Sakete_Page';
 import Footer from './components/Footer/Footer';
 import FullPage_SP from './components/FullPage_SP';
+
+const FullPage_SP_Lazy = lazy(() => import('./components/FullPage_SP'));
+const Bilateral_Lazy = lazy(() => import('./components/Bilateral'));
+const Home_Lazy = lazy(() => import('./components/Home'));
+const Charts_Lazy = lazy(() => import('./pages/DashboardHomeLive'));
 
 
 class App extends React.Component {
@@ -178,7 +183,9 @@ class App extends React.Component {
           </Route>
           <Route exact path={`/tcnnaspage_sp`}>              
             <div className='App'>
-              <FullPage_SP isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+              <Suspense fallback={<div>Loading...</div>}>
+                <FullPage_SP isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+              </Suspense>              
             </div>
             <Footer />
           </Route>
@@ -253,7 +260,9 @@ class App extends React.Component {
             <Footer />
           </Route>
           <Route path="/charts">
+           <Suspense fallback={<div>Chart is Loading...</div>}>
             <DashboardHomeLive />
+           </Suspense>            
             <Footer />
           </Route>
           <Route path="/api/tickets/disco">

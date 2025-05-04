@@ -739,17 +739,64 @@ table.ncc-tg thead tr th:nth-of-type(6), table.ncc-tg tbody tr td:nth-of-type(6)
     width: 8em;
     font-size: 15px;
     background-color:rgb(204, 199, 199);
+    text-align: center;
 }
 table.ncc-tg thead tr th:nth-of-type(7), table.ncc-tg tbody tr td:nth-of-type(7) {
     width: 5em;
     font-size: 15px;
     background-color:rgb(204, 199, 199);
+    text-align: center;
 }
 table.ncc-tg thead tr th:nth-of-type(8), table.ncc-tg tbody tr td:nth-of-type(8) {
-    width: 4em;
+    width: 6em;
     font-size: 15px;
     background-color:rgb(204, 199, 199);
+    text-align: center;
 }
+
+/* System Planning table Start*/
+table.sp-tg thead tr th:nth-of-type(1), table.sp-tg tbody tr td:nth-of-type(1) {
+    width: 4em;
+    font-size: 25px;
+    background-color:rgb(204, 199, 199);
+}
+table.sp-tg thead tr th:nth-of-type(2), table.sp-tg tbody tr td:nth-of-type(2) {
+    width: 14em;
+    font-size: 25px;
+    background-color:rgb(204, 199, 199);
+}
+table.sp-tg thead tr th:nth-of-type(3), table.sp-tg tbody tr td:nth-of-type(3) {
+    width: 8em;
+    font-size: 25px;
+    background-color:rgb(204, 199, 199);
+}
+
+table.sp-tg tbody tr td:nth-of-type(1) {
+    color: blue;
+}
+table.sp-tg tbody tr td:nth-of-type(2), table.sp-tg tbody tr td:nth-of-type(3) {
+    font-weight: 600;
+}
+
+table.sp-tg tbody tr td:nth-of-type(3) input {
+    width: 100%;
+}
+
+.sp-tg th{
+    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:0px 0px;word-break:normal; color: blue;text-align: start;
+}
+.sp-tg td {
+    border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+    overflow:hidden;padding:0px 0px;word-break:normal;text-align: start;
+}
+.sp-tg .ncc-tg-zb4j{
+    font-family:"Courier New", Courier, monospace !important;;
+    padding: 5px;
+    word-wrap: break-word;
+    text-align: center;
+}
+/* System Planning table End*/
 
 table.ncc-tg tbody tr td:nth-of-type(1) {
     color: blue;
