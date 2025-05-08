@@ -432,7 +432,7 @@ getEpoch(time) {
     //console.log(dataPoints_2, 'dataPoints_2');
 
     // Check if the data points are greater than 100, if so, shift the data points to remove the first element
-    if( this.dataPoints_async.length > 100 || this.dataPoints_2_async.length > 100 ) {
+    if( this.dataPoints_async.length > 40 || this.dataPoints_2_async.length > 40 ) {
       const common_time = new Date();
       // Create Temporary Object to hold the data points for total generation
       const total_gen = Number(totalGeneration.toFixed(2));
