@@ -426,6 +426,10 @@ getEpoch(time) {
         time_holder = [];
     } 
 
+    //console.log(this.dataPoints_async, 'dataPoints_async');
+    //console.log(this.dataPoints_2_async, 'dataPoints_2_async');
+    //console.log(dataPoints, 'dataPoints ');
+    //console.log(dataPoints_2, 'dataPoints_2');
 
     // Check if the data points are greater than 100, if so, shift the data points to remove the first element
     if( this.dataPoints_async.length > 100 || this.dataPoints_2_async.length > 100 ) {
@@ -467,7 +471,7 @@ getEpoch(time) {
         animationEnabled: true,
         toolTip: {
             contentFormatter: function(e) {
-                console.log(e.entries);
+                //console.log(e.entries);
                 return e.entries[0].dataPoint.y + " MW" + " @ " + e.entries[0].dataPoint.x.toLocaleTimeString() + "<br />" + e.entries[1].dataPoint.y + " Hz" + " @ " + e.entries[1].dataPoint.x.toLocaleTimeString();
             },
             shared: true,
