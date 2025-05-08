@@ -289,9 +289,15 @@ getEpoch(time) {
   
   setTimeout(() => {
     setInterval(() => {
+      const feeders = this.Feeders;      
+      if( this.dataPoints_async.length > 40 || this.dataPoints_2_async.length > 40 ) { 
+        feeders.forEach((feeder) => {
+          feeder.mw = 0;
+        });
+      }
       // console.log(disconnectedFeeders, 'disconnected feeders');
       this.props.getDisconnectedFeeders(this.disconnectedFeeders);
-      this.props.getFeeders(this.Feeders);
+      this.props.getFeeders(feeders);
       // console.log(this.disconnectedFeeders, 'disconnected feeders');
     }, 2000);
   }, 10000);
