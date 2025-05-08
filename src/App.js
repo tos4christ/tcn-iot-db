@@ -57,6 +57,8 @@ class App extends React.Component {
   }
   componentDidMount() {
     //localStorage.setItem("isLoggedIn", true);
+
+    // this.props.history.goBack();
   }
   render() {
     return (

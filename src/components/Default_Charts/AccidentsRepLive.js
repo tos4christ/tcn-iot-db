@@ -7,7 +7,9 @@ import DateTime from "../DateTime";
 // var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-var startTime = 0, options, dataPoints = [], dataPoints_2 = [], time_holder = [],
+var startTime = 0, options, dataPoints = [], dataPoints_2 = [], time_holder = [];
+this.dataPoints_async = [];
+this.dataPoints_2_async = [];
   endTime = 0;
 class AccidentRepLive extends React.Component {
     constructor(props) {
@@ -415,13 +417,38 @@ getEpoch(time) {
 
         dataPoints.push(temp_object);
         dataPoints_2.push(frequency_object);
+        this.dataPoints_async.push(temp_object);
+        this.dataPoints_2_async.push(frequency_object);
+
+        // Create a permanent DataPoints Array that will not be shifted to hold all data
         time_holder = [];
     } 
+
+
+    // Check if the data points are greater than 100, if so, shift the data points to remove the first element
+    if( this.dataPoints_async.length > 100 || this.dataPoints_2_async.length > 100 ) {
+      const common_time = new Date();
+      // Create Temporary Object to hold the data points for total generation
+      const total_gen = Number(totalGeneration.toFixed(2));
+      const temp_object = {x: (common_time), y: 0};
+
+      // Create Temporary Object to hold the data points for frequency
+      const frequency_object = {x: (common_time), y: 0};
+
+      dataPoints.push(temp_object);
+      dataPoints_2.push(frequency_object);
+      //this.dataPoints_async.push(temp_object);
+      //this.dataPoints_2_async.push(frequency_object);
+
+      // this.dataPoints_async.shift();
+      // this.dataPoints_2_async.shift();
+  } 
 
     if(dataPoints.length > 25 || dataPoints_2.length > 25) {
         dataPoints.shift();
         dataPoints_2.shift();
     }
+
     dataSeries.dataPoints = dataPoints;
     dataSeries_2.dataPoints = dataPoints_2;
 
