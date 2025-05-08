@@ -7,14 +7,15 @@ import DateTime from "../DateTime";
 // var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-var startTime = 0, options, dataPoints = [], dataPoints_2 = [], time_holder = [];
-this.dataPoints_async = [];
-this.dataPoints_2_async = [];
-  endTime = 0;
+var startTime = 0, options, dataPoints = [], dataPoints_2 = [], time_holder = [], endTime = 0;
+
+  
 class AccidentRepLive extends React.Component {
     constructor(props) {
         super(props);
         this.updateFeederState = this.updateFeederState.bind(this);
+        this.dataPoints_async = [];
+        this.dataPoints_2_async = [];
         this.state = {
             dataPoints: [{x: 0, y: 0}],
             timer: 1,
@@ -72,6 +73,7 @@ class AccidentRepLive extends React.Component {
             afamVPs: {},
         };
     }
+    
   componentDidMount() {
     endTime = new Date();
     // document.getElementById("timeToRender").innerHTML = "Time to Render: " + (endTime - startTime) + "ms";
