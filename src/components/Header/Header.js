@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Scroll from "react-scroll";
 import mainLogo from "../../assets/img/tcnLogo.png";
+import mainLogo_2 from "../../assets/img/niso_logo_main_small.jpg";
 const ScrollLink = Scroll.Link;
 
 const Header = () => {
@@ -65,7 +66,7 @@ const Header = () => {
           <div className="col-lg-2 col-md-3 col-6">
             <div className="logo move">
               <a href="/">
-                <img src={mainLogo} alt="logo" />
+                <img src={mainLogo_2} alt="logo" />
               </a>
             </div>
           </div>

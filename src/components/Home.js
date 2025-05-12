@@ -425,7 +425,7 @@ import axios from "axios";
       <>
       <div className="menu">
         <div className="text-white rounded">
-          <h2 className="message">TCN Tool to query equipment parameters and state</h2>
+          <h2 className="message">NISO Tool to query equipment parameters and state</h2>
         </div>
         <div className="menu-list">
           <ul className="ul-menu text-center">
