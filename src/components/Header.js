@@ -2,6 +2,7 @@ import React from 'react';
 import {NavLink, Link, withRouter} from 'react-router-dom';
 import ls from 'local-storage';
 import logo from './img/tcnLogo.png';
+import logo_2 from '../assets/img/niso_logo_main_small.jpg';
 
 class Header extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class Header extends React.Component {
         <nav className='nav-containers container-fluid'>            
                 <div className='navbar-header'>
                     <Link to='/' className='navbar-brand'>
-                        <img className='homelogo' src={logo} alt="site logo"/>
+                        <img className='homelogo' src={logo_2} alt="site logo"/>
                     </Link>
                 </div>
                 <div className="navbar-body" >
