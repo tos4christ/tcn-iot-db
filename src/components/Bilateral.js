@@ -95,11 +95,27 @@ import Modal from "./Modal";
           return returnObject;
         })
       });
+      socket.on("client_message_taopex", data => {
+        const { message } = data;
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
+        parsedMessage.server_time = (new Date()).getTime();        
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        const returnObject = {}
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station];
+          return returnObject;
+        })
+      });
     }
    }
    componentWillUnmount() {
     socket.off("client_message_111");
     socket.off("client_message_222");
+    socket.off("client_message_taopex");
     }
     
    getEpoch(time) {
