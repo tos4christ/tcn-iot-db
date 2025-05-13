@@ -260,78 +260,64 @@ import Modal from "./Modal";
                   <td>{quantum.mw}</td>
                   <td>{quantum.kv}</td>
                 </tr>
-                <tr>
-                  <td>5</td>
-                  <td>SAGAMU STEEL</td>
-                  <td>{this.checkConnection2(null)}</td>
-                  <td>{'N/A'}</td>
-                  <td>{'N/A'}</td>
-                </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['KAM STEEL SAGAMU', this.state.kamSteel]); }}>
-                  <td>6</td>
+                  <td>5</td>
                   <td>KAM STEEL SAGAMU</td>
                   <td>{this.checkConnection2(this.state.kamSteel.server_time)}</td>
                   <td>{kamSteel.mw}</td>
                   <td>{kamSteel.v}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['CEMENT FACTORY', this.state.larfarge]); }}>
-                  <td>7</td>
+                  <td>6</td>
                   <td>CEMENT FACTORY</td>
                   <td>{this.checkConnection2(this.state.larfarge.server_time)}</td>
                   <td>{larfarge.mw}</td>
                   <td>{larfarge.kv}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['TOP STEEL IKORODU', this.state.topSteel]); }}>
-                  <td>8</td>
+                  <td>7</td>
                   <td>TOP STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.topSteel.server_time)}</td>
                   <td>{top_steel.mw}</td>
                   <td>{top_steel.kv}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['SUNFLAG IRON & STEEL IKORODU', this.state.sunflag]); }}>
-                  <td>9</td>
+                  <td>8</td>
                   <td>SUNFLAG IRON & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
                   <td>{sunflag.mw}</td>
                   <td>{sunflag.kv}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel]); }}>
-                  <td>10</td>
+                  <td>9</td>
                   <td>PULKIT ALLOY & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.pulkitSteel.server_time)}</td>
                   <td>{pulkitSteel.mw}</td>
                   <td>{pulkitSteel.kv}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['STAR PIPE PRODUCT IKORODU', this.state.starPipe]); }}>
-                  <td>11</td>
+                  <td>10</td>
                   <td>STAR PIPE PRODUCT IKORODU</td>
                   <td>{this.checkConnection2(this.state.starPipe.server_time)}</td>
                   <td>{starPipe.mw}</td>
                   <td>{starPipe.kv}</td>
-                </tr>
-                <tr>
-                  <td>12</td>
-                  <td>ODOGUNNYAN 132KV TS</td>
-                  <td>{this.checkConnection2(null)}</td>
-                  <td>{'N/A'}</td>
-                  <td>{'N/A'}</td>
-                </tr>
+                </tr>                
                 <tr onClick={(e) => { this.setModalTrue(e, ['IKORODU 132KV TS LINE_1', this.state.ikorodu1]); }}>
-                  <td>13</td>
+                  <td>11</td>
                   <td>IKORODU 132KV TS LINE_1</td>
                   <td>{this.checkConnection2(this.state.ikorodu1.server_time)}</td>
                   <td>{ikorodu_1.mw}</td>
                   <td>{ikorodu_1.kv}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['IKORODU 132KV TS LINE_2', this.state.ikorodu2]); }}>
-                  <td>14</td>
+                  <td>12</td>
                   <td>IKORODU 132KV TS LINE_2</td>
                   <td>{this.checkConnection2(this.state.ikorodu2.server_time)}</td>
                   <td>{ikorodu_2.mw}</td>
                   <td>{ikorodu_2.kv}</td>
                 </tr> 
                 <tr onClick={(e) => { this.setModalTrue(e, ['SAGAMU 132KV TS', this.state.sagamu]); }}>
-                  <td>15</td>
+                  <td>13</td>
                   <td>SAGAMU 132KV TS</td>
                   <td>{this.checkConnection2(this.state.sagamu.server_time)}</td>
                   <td>{sagamu.mw}</td>
