@@ -84,7 +84,6 @@ import Modal from "./Modal";
       });
       socket.on("client_message_222", data => {
         const { message } = data;
-        console.log(message, "  Error is coming here  ");
         const parsedMessage = JSON.parse(message);
         parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
