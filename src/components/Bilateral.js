@@ -272,7 +272,7 @@ import Modal from "./Modal";
                   <td>KAM STEEL SAGAMU</td>
                   <td>{this.checkConnection2(this.state.kamSteel.server_time)}</td>
                   <td>{kamSteel.mw}</td>
-                  <td>{kamSteel.kv}</td>
+                  <td>{kamSteel.v}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['CEMENT FACTORY', this.state.larfarge]); }}>
                   <td>7</td>
