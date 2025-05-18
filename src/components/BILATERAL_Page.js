@@ -397,7 +397,7 @@ import Modal from "./Modal";
                   <td></td>
                 </tr> 
               </tbody>
-            </table>            
+            </table>
           </div>
           <div className="bl-counter-div">
             <table className="bl-counter-tg">

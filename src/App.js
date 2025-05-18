@@ -44,6 +44,12 @@ import BILATERAL_Page from './components/BILATERAL_Page';
 import Sakete_Page from './components/Sakete_Page';
 import Footer from './components/Footer/Footer';
 import FullPage_SP from './components/FullPage_SP';
+// SYSTEM PLANNING MODULES
+import Systemplanning_SignIn from '../src/components/System_Planning/Users/SignIn';
+import Systemplanning_SignUp from '../src/components/System_Planning/Users/SignUp';
+import Systemplanning_UpdatePassword from '../src/components/System_Planning/Users/UpdatePassword';
+import Systemplanning_Header from '../src/components/System_Planning/Header';
+import BilateralDownload from '../src/components/System_Planning/BilateralDownload';
 
 const FullPage_SP_Lazy = lazy(() => import('./components/FullPage_SP'));
 const Bilateral_Lazy = lazy(() => import('./components/Bilateral'));
@@ -96,6 +102,35 @@ class App extends React.Component {
               <UpdatePassword />
             </div>
           </Route>
+          {/* SYSTEM PLANNING PATHS START */}
+          <Route  exact path={'/bilateral_signin'}>
+            <div className='body'>
+              <div className='App'>              
+                <Systemplanning_Header />
+                <Systemplanning_SignIn />                
+              </div>
+              <Footer />
+            </div>            
+          </Route>
+          <Route exact path={'/bilateral_signup'}>
+            <div className='App'>              
+              <Systemplanning_Header />
+              <Systemplanning_SignUp />
+            </div>
+          </Route>
+          <Route exact path={'/bilateral_updatepassword'}>
+            <div className='App'>              
+              <Systemplanning_Header />
+              <Systemplanning_UpdatePassword />
+            </div>
+          </Route>
+          <Route exact path={`/sp_bilateral`}>
+            <div className='App'>
+              <Systemplanning_Header />
+              <BilateralDownload isLoggedIn={localStorage.getItem("isLoggedIn")}/>
+            </div>            
+          </Route>
+          {/* SYSTEM PLANNING PATHS END */}
           {/* This is the protected path after successful login */}
           <Route exact path={'/home'} >
             <div className="App">
