@@ -1,6 +1,7 @@
 import React from "react";
 import {Redirect} from 'react-router-dom';
 import { Spinner, Button } from "react-bootstrap";
+import axios from "axios";
 
  class BilateralDownload extends React.Component {
   constructor(props) {
