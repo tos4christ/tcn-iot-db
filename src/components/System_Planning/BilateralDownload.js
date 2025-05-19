@@ -8,10 +8,38 @@ import { Spinner, Button } from "react-bootstrap";
     this.setDate = this.setDate.bind(this);
     this.handleSubmitLoad = this.handleSubmitLoad.bind(this);
     this.state = {
+      verified_token_exp: {data: {decodedToken: {exp: 100000000000}}},
+      timer: {time: Date.now()},
       startDate_load: '',
       loading: false
     }
   }
+  componentDidMount() {
+      if(this.props.history.location.pathname === "/sp_bilateral") {
+        const requestBody = {token: localStorage.getItem("token")};
+        axios.post("https://tcnnas.org/verifytoken/bilateral", requestBody).
+          then(result => {
+            console.log(result, 'verify token result');
+            if(result) {
+              this.setState((prevState) => {
+                prevState.verified_token_exp = result.data ? result.data : null;
+                return {verified_token_exp: prevState.verified_token_exp};
+              });        
+            } else {  
+              this.setState((prevState) => {
+                prevState.verified_token_exp = null;
+                return {verified_token_exp: prevState.verified_token_exp};
+              });
+              // return <Redirect to={'/signin'}/>
+              return this.props.history.push({pathname: `/bilateral_signin`});
+            }
+          }).catch(err => {  
+            console.log(err.message);
+            // return <Redirect to={'/signin'}/>
+            return this.props.history.push({pathname: `/bilateral_signin`});
+          });  
+      }
+     }
   setDate(e) {    
     const name = e.target.name;
     this.setState( prevState => {
@@ -60,8 +88,30 @@ import { Spinner, Button } from "react-bootstrap";
     const { isLoggedIn } = this.props;
     const token = localStorage.getItem("token");
     if (!isLoggedIn || token === null) {
-      return <Redirect to={'/'}/>
+      return <Redirect to={'/bilateral_signin'}/>
     }
+    const {timer} = this.state;
+    const { verified_token_exp } = this.state;
+    let { exp } = verified_token_exp.data ? verified_token_exp.data.decodedToken : {exp: 100000000000};
+    // let expire = 100000000000;
+    // console.log(timer, "  the timer");
+    // while(expire === 100000000000) {
+    //   console.log("waiting for token to be verified");
+    //   const { verified_token_exp } = this.state;
+    //   expire = verified_token_exp.data ? verified_token_exp.data.decodedToken.exp : 100000000000;
+    //   console.log(expire, "  the expire time");
+    // }
+    if((timer.time + 100) < Date.now()) { 
+      if (verified_token_exp.status === 'Error') {
+        return <Redirect to={'/bilateral_signin'}/>
+      }
+    }
+    if((exp * 1000) < Date.now()) {
+      return <Redirect to={'/bilateral_signin'}/>
+    }
+    // if((exp * 1000) < Date.now() || !verified_token_exp) {
+    //   return <Redirect to={'/signin'}/>
+    // }
     const { loading } = this.state;
     return (
       <div className="item-div">
