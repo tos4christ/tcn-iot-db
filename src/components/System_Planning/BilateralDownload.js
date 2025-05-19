@@ -1,5 +1,5 @@
 import React from "react";
-import {Redirect} from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { Spinner, Button } from "react-bootstrap";
 import axios from "axios";
 
@@ -152,4 +152,4 @@ import axios from "axios";
   }
 }
 
-export default BilateralDownload;
+export default withRouter(BilateralDownload);
