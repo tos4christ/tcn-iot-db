@@ -17,9 +17,9 @@ class Header extends React.Component {
   render() {
     let heading;
     const location = this.props.location.pathname;
-    if(location === '/' || location === '/api/v1/auth/signin' || location === '/signout' || !ls.get('token')) {
+    if(location === '/' || location === '/api/v1/auth/signin' || location === '/signin' || !ls.get('token')) {
       heading = 'Sign In';
-    } else {
+    } else if(location === '/bilateral_signin' || location === '/bilateral_updatepassword') {
       heading = 'Sign Out';
     }
     return (      
@@ -47,7 +47,7 @@ class Header extends React.Component {
 
                         </li>
                         <li className='nav-item'>
-                            <NavLink className='nav-link' to='/signin'>{heading}</NavLink>
+                            <NavLink className='nav-link' to='/bilateral_signin'>{heading}</NavLink>
                         </li>
                     </ul>                                          
                 </div>

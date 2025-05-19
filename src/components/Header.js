@@ -17,9 +17,9 @@ class Header extends React.Component {
   render() {
     let heading;
     const location = this.props.location.pathname;
-    if(location === '/' || location === '/api/v1/auth/signin' || location === '/signout' || !ls.get('token')) {
+    if(location === '/' || location === '/api/v1/auth/signin' || location === '/signin' || !ls.get('token')) {
       heading = 'Sign In';
-    } else {
+    } else if(location === '/home' || location === '/updatepassword' || location === '/tem' || location === '/collapse') {
       heading = 'Sign Out';
     }
     return (      
