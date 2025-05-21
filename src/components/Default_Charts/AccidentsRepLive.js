@@ -290,11 +290,11 @@ getEpoch(time) {
   setTimeout(() => {
     setInterval(() => {
       const feeders = this.Feeders;      
-      if( this.dataPoints_async.length > 40 || this.dataPoints_2_async.length > 40 ) { 
-        feeders.forEach((feeder) => {
-          feeder.mw = 0;
-        });
-      }
+      // if( this.dataPoints_async.length > 40 || this.dataPoints_2_async.length > 40 ) { 
+      //   feeders.forEach((feeder) => {
+      //     feeder.mw = 0;
+      //   });
+      // }
       // console.log(disconnectedFeeders, 'disconnected feeders');
       this.props.getDisconnectedFeeders(this.disconnectedFeeders);
       this.props.getFeeders(feeders);
@@ -425,8 +425,8 @@ getEpoch(time) {
 
         dataPoints.push(temp_object);
         dataPoints_2.push(frequency_object);
-        this.dataPoints_async.push(temp_object);
-        this.dataPoints_2_async.push(frequency_object);
+        //this.dataPoints_async.push(temp_object);
+        //this.dataPoints_2_async.push(frequency_object);
 
         // Create a permanent DataPoints Array that will not be shifted to hold all data
         time_holder = [];
@@ -438,23 +438,23 @@ getEpoch(time) {
     //console.log(dataPoints_2, 'dataPoints_2');
 
     // Check if the data points are greater than 100, if so, shift the data points to remove the first element
-    if( this.dataPoints_async.length > 40 || this.dataPoints_2_async.length > 40 ) {
-      const common_time = new Date();
-      // Create Temporary Object to hold the data points for total generation
-      const total_gen = Number(totalGeneration.toFixed(2));
-      const temp_object = {x: (common_time), y: 0};
+  //   if( this.dataPoints_async.length > 40 || this.dataPoints_2_async.length > 40 ) {
+  //     const common_time = new Date();
+  //     // Create Temporary Object to hold the data points for total generation
+  //     const total_gen = Number(totalGeneration.toFixed(2));
+  //     const temp_object = {x: (common_time), y: 0};
 
-      // Create Temporary Object to hold the data points for frequency
-      const frequency_object = {x: (common_time), y: 0};
+  //     // Create Temporary Object to hold the data points for frequency
+  //     const frequency_object = {x: (common_time), y: 0};
 
-      dataPoints.push(temp_object);
-      dataPoints_2.push(frequency_object);
-      //this.dataPoints_async.push(temp_object);
-      //this.dataPoints_2_async.push(frequency_object);
+  //     dataPoints.push(temp_object);
+  //     dataPoints_2.push(frequency_object);
+  //     //this.dataPoints_async.push(temp_object);
+  //     //this.dataPoints_2_async.push(frequency_object);
 
-      // this.dataPoints_async.shift();
-      // this.dataPoints_2_async.shift();
-  } 
+  //     // this.dataPoints_async.shift();
+  //     // this.dataPoints_2_async.shift();
+  // } 
 
     if(dataPoints.length > 25 || dataPoints_2.length > 25) {
         dataPoints.shift();
