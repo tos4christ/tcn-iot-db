@@ -122,8 +122,8 @@ const get_stations =  function(state_data) {
     const gwagwalada_r3g = state_data.gwagwalada.lines ? state_data.gwagwalada.lines.filter(line => line.id === "r3g") : [{mw: null, V: null}];
     const asaba_b3d = state_data.asaba.lines ? state_data.asaba.lines.filter(line => line.id === "b3d") : [{mw: null, V: null}];
     const asaba_d3t = state_data.asaba.lines ? state_data.asaba.lines.filter(line => line.id === "d3t") : [{mw: null, V: null}];
-    const ugwuaji_u1a = state_data.gbarain.lines ? state_data.gbarain.lines.filter(line => line.id === "u1a") : [{mw: null, V: null}];
-    const ugwuaji_u2a = state_data.gbarain.lines ? state_data.gbarain.lines.filter(line => line.id === "u2a") : [{mw: null, V: null}];    
+    const ugwuaji_u1a = state_data.ugwuaji.lines ? state_data.ugwuaji.lines.filter(line => line.id === "u1a") : [{mw: null, V: null}];
+    const ugwuaji_u2a = state_data.ugwuaji.lines ? state_data.ugwuaji.lines.filter(line => line.id === "u2a") : [{mw: null, V: null}];    
     const zungeru_z1ssX = state_data.zungeru.lines ? state_data.zungeru.lines.filter(line => line.id === "z1ssX") : [{mw: null, V: null}];    
     const zungeru_z2ssX = state_data.zungeru.lines ? state_data.zungeru.lines.filter(line => line.id === "z2ssX") : [{mw: null, V: null}];
     //Taopex
