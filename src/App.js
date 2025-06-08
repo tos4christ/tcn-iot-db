@@ -43,15 +43,17 @@ import NDPHC_Page from './components/NDPHC_Page';
 import BILATERAL_Page from './components/BILATERAL_Page';
 import Sakete_Page from './components/Sakete_Page';
 import Footer from './components/Footer/Footer';
-import FullPage_SP from './components/FullPage_SP';
+import FullPage_SP from './components/GridTable_SP';
 // SYSTEM PLANNING MODULES
 import Systemplanning_SignIn from '../src/components/System_Planning/Users/SignIn';
 import Systemplanning_SignUp from '../src/components/System_Planning/Users/SignUp';
 import Systemplanning_UpdatePassword from '../src/components/System_Planning/Users/UpdatePassword';
 import Systemplanning_Header from '../src/components/System_Planning/Header';
 import BilateralDownload from '../src/components/System_Planning/BilateralDownload';
+import InstructedPage from './components/GridTable_Instructed_SP';
+import GridTable from './components/GridTable';
 
-const FullPage_SP_Lazy = lazy(() => import('./components/FullPage_SP'));
+const FullPage_SP_Lazy = lazy(() => import('./components/GridTable_SP'));
 const Bilateral_Lazy = lazy(() => import('./components/Bilateral'));
 const Home_Lazy = lazy(() => import('./components/Home'));
 const Charts_Lazy = lazy(() => import('./pages/DashboardHomeLive'));
@@ -311,6 +313,18 @@ class App extends React.Component {
           <Route path="/api/tickets/tcn">
             <div>
               <TCN />
+              <Footer />
+            </div>
+          </Route>
+          <Route path="/api/instructor">
+            <div>
+              <InstructedPage />
+              <Footer />
+            </div>
+          </Route>
+          <Route path="/api/gridtable">
+            <div>
+              <GridTable />
               <Footer />
             </div>
           </Route>

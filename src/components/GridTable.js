@@ -4,7 +4,8 @@ import { withRouter, Redirect } from 'react-router-dom';
 import socket from './utility/socketIO';
 import get_stations from "./stations_adder";
 // import socket from "./utility/socketIO";
-import './GridTable.css';
+// import '../styles/GridTable.css';
+import '../styles/general.css'
 
 class GridTable extends Component {
   constructor(props) {
@@ -69,7 +70,8 @@ class GridTable extends Component {
   }
 
   componentDidMount() {
-    if(this.props.history.location.pathname === "/gridtable" ) {
+    console.log(this.props.location.pathname, 'pathname');
+    if(this.props.history.location.pathname === "/api/gridtable" ) {
         socket.on("client_message_111", data => {
             const { message } = data;
             let parsedMessage = {};
@@ -138,7 +140,8 @@ class GridTable extends Component {
   }
 
   render() {
-    const { stations, currentTime } = this.state;
+    let { stations, currentTime } = this.state;
+    stations = stations.sort((a, b) => b.currentTimer.localeCompare(a.currentTimer));
     const stations_array = get_stations(this.state);
     const stations_array_data = {
      olorunsogonipp_gs : stations_array['OLORUNSOGO NIPP'],
@@ -204,85 +207,98 @@ class GridTable extends Component {
     (Number(stations_array_data.dadinkowa_gs.mw) < 0 ? 0 : Number(stations_array_data.dadinkowa_gs.mw));
 
     return (
-      <div className="grid-table-container">
-        <div className="header-section">
+      <div className="card grid-card">
+        <div className="grid-header">
           <h1 className="grid-title">POWER GRID MONITORING SYSTEM</h1>
           <div className="info-bar">
             <div className="system-time">
-              System Time: {currentTime.toLocaleTimeString()}
+              <i className="fas fa-clock"></i>  System Time: {currentTime.toLocaleTimeString()}
             </div>
             <div className="station-count">
-              Active Stations: {stations.filter(s => s.status === 'Online').length}/{stations.length}
+              <i className="fas fa-bolt"></i> Active Stations: {stations.filter(s => s.status === 'Online').length}/{stations.length}
             </div>
           </div>
         </div>
-        
-        <div className="table-wrapper">
-          <table className="grid-table">
-            <thead>
-              <tr>
-                <th>S/N</th>
-                <th>STATIONS</th>
-                <th>STATUS</th>
-                <th>POWER (MW)</th>
-                <th>VOLTAGE (KV)</th>
-                <th>DECLARATION</th>
-                <th>RESERVE (%)</th>
-                <th>TIME SINCE INSTRUCTION</th>
-              </tr>
-            </thead>
-            <tbody>
-              {stations.map(station => (
-                <tr key={station.id} className={station.status === 'Offline' ? 'offline' : ''}>
-                  <td>{station.id}</td>
-                  <td>{station.name}</td>
-                  <td>
-                    <span className={`status-indicator ${station.status.toLowerCase()}`}>
-                      {station.status}
-                    </span>
-                  </td>
-                  <td>{station.power}</td>
-                  <td>{station.voltage}</td>
-                  <td className={`declaration-${station.declaration.toLowerCase()}`}>
-                    {station.declaration}
-                  </td>
-                  <td>
-                    <div className="reserve-bar-container">
-                      <div 
-                        className="reserve-bar" 
-                        style={{ width: `${station.reserve}%` }}
-                      ></div>
-                      <span className="reserve-text">{station.reserve}%</span>
+        <div className="grid-content">
+            <div className="table-container">
+                <table className="grid-table">
+                    <thead>
+                    <tr>
+                        <th className="col-sn">S/N</th>
+                        <th className="col-station">STATIONS</th>
+                        <th className="col-status">STATUS</th>
+                        <th className="col-power">POWER (MW)</th>
+                        <th className="col-voltage">VOLTAGE (KV)</th>
+                        <th className="col-declaration">DECLARATION</th>
+                        <th className="col-reserve">RESERVE (%)</th>
+                        <th className="col-time">TIME SINCE INSTRUCTION</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {stations.map(station => {
+                        // if(station.lastInstructionTime) {
+                        //     const lastInstructionTime = new Date(station.lastInstructionTime);
+                        //     const currentTime = new Date();
+                        //     const timeDiff = currentTime - lastInstructionTime; // in milliseconds
+                        //     const seconds = Math.floor((timeDiff / 1000) % 60);
+                        //     const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
+                        //     const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
+                        //     station.currentTimer = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                        //     console.log(station.currentTimer, 'station currentTimer');
+                        // } 
+                        
+                        return (
+                        <tr key={station.id} className={station.status === 'Offline' ? 'offline' : ''}>
+                        <td className="col-sn">{station.id}</td>
+                        <td className="col-station">{station.name}</td>
+                        <td className='col-status'>
+                            <span className={`status-indicator ${station.status.toLowerCase()}`}>
+                            {station.status}
+                            </span>
+                        </td>
+                        <td className="col-power">{stations_array_data[station.alias].mw}</td>
+                        <td className="col-voltage">{stations_array_data[station.alias].kv}</td>
+                        <td className={`declaration-${station.declaration} col-declaration`}>
+                            {station.declaration}
+                        </td>
+                        <td className='col-reserve'>
+                            <div className="reserve-bar-container">
+                            <div 
+                                className="reserve-bar " 
+                                style={{ width: `${station.reserve}%` }}
+                            ></div>
+                            <span className="reserve-text">{(station.reserve)}%</span>
+                            </div>
+                        </td>
+                        <td className="time-cell col-time">
+                            {station.lastInstructionTime ? station.currentTimer : '--:--:--'}
+                        </td>
+                        </tr>
+                    )})}
+                    </tbody>
+                </table>
+            </div>
+            
+            <div className="grid-footer">
+                <div className="status-legend">
+                    <div className="legend-item">
+                    <span className="legend-indicator online-indicator"></span> Online
                     </div>
-                  </td>
-                  <td className="time-cell">
-                    {station.lastInstructionTime ? station.currentTimer : '--:--:--'}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        
-        <div className="footer-section">
-          <div className="status-legend">
-            <div className="legend-item">
-              <span className="status-indicator online"></span> Online
+                    <div className="legend-item">
+                    <span className="legend-indicator offline-indicator"></span> Offline
+                    </div>
+                    <div className="legend-item">
+                    <span className="legend-indicator updated-indicator"></span> Updated in last 5 min
+                    </div>
+                </div>
+                <div className="last-update">
+                    Last Full Update: {currentTime.toLocaleString()}
+                </div>
             </div>
-            <div className="legend-item">
-              <span className="status-indicator offline"></span> Offline
-            </div>
-            <div className="legend-item">
-              <span className="recent-instruction-indicator"></span> Updated in last 5 min
-            </div>
-          </div>
-          <div className="last-update">
-            Last Full Update: {currentTime.toLocaleString()}
-          </div>
         </div>
       </div>
     );
   }
 }
 
-export default GridTable;
+export default withRouter(GridTable);

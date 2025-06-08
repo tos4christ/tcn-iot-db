@@ -1,6 +1,6 @@
 // InstructedPage.js
 import React, { Component } from 'react';
-import './InstructedPage.css';
+import '../styles/InstructedPage.css'; // Assuming you have a CSS file for styles
 
 class InstructedPage extends Component {
   constructor(props) {

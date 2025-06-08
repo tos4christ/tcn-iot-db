@@ -18,6 +18,8 @@ src/weather_response.json
 
 # production
 /build
+src/styles/test.css
+src/styles/test.html
 
 # misc
 .DS_Store
