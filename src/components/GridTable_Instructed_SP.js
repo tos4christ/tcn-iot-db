@@ -121,7 +121,7 @@ class InstructedPage extends Component {
             
             <button 
               type="submit" 
-              className="submit-button"
+              className="submit-button-sp"
               disabled={isLoading || selectedStations.length === 0}
             >
               {isLoading ? 'BROADCASTING...' : `SEND TO ${selectedStations.length} STATION${selectedStations.length !== 1 ? 'S' : ''}`}

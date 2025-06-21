@@ -165,7 +165,7 @@
   100% { opacity: 0.8; }
 }
 
-.submit-button {
+.submit-button-sp {
   width: 100%;
   padding: 20px;
   background: linear-gradient(to right, #1a2980, #26d0ce);
@@ -180,12 +180,12 @@
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-.submit-button:hover {
+.submit-button-sp:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-.submit-button:disabled {
+.submit-button-sp:disabled {
   background: linear-gradient(to right, #9e9e9e, #757575);
   cursor: not-allowed;
   transform: none;
