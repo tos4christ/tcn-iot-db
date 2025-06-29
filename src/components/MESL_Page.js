@@ -23,7 +23,8 @@ import Modal from "./Modal";
       Gazaoua: {},
       kam: {},
       KamInd33kV: {},
-      quantum: {}
+      quantum: {},
+      HYDROPOLIS: {}
      };
    }
    componentDidMount() {
@@ -153,11 +154,17 @@ import Modal from "./Modal";
     const {ATVL} = this.state;
     const {KamInd33kV} = this.state;
     const {Gazaoua} = this.state;
+    const { HYDROPOLIS } = this.state;
     
     // const quantum = this.state.quantum?.transformers[0]?.td ? this.state.quantum.transformers[0].td : {};
     const quantum = this.state.quantum.transformers ? this.state.quantum.transformers[0].td : {};
+    const hydropolis_l2 = this.state.HYDROPOLIS.lines ? this.state.HYDROPOLIS.lines[0].td : {};
+    const hydropolis_l4 = this.state.HYDROPOLIS.lines ? this.state.HYDROPOLIS.lines[1].td : {};
+    const hydropolis_mw = (Number(hydropolis_l2?.mw) + Number(hydropolis_l4?.mw)) || 0;
+    const hydropolis_kv = hydropolis_l2?.v ? hydropolis_l2.v : hydropolis_l4.v ? hydropolis_l4.v : 0;
+    
     // console.log(quantum, "   the quantum data");
-    const totalConsumption = (isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw)) + 
+    const totalConsumption = (isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw)) + (isNaN(Number(hydropolis_mw)) ? 0 : Number(hydropolis_mw)) +
     (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) + (isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw))) +
     (isNaN(Number(Inner_Galaxy1.mw)) ? 0 :  Number(Inner_Galaxy1.mw)) + (isNaN(Number(Gazaoua.mw)) ? 0 :  Math.abs(Number(Gazaoua.mw))) + 
     (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) + (isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw)) +
@@ -243,6 +250,13 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.quantum.server_time)}</td>
                   <td>{isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw).toFixed(2))}</td>
                   <td>{quantum.V ? quantum.V : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['Quantum', this.state.quantum]); }}>
+                  <td>9</td>
+                  <td>HYDROPOLIS</td>
+                  <td>{this.checkConnection2(this.state.HYDROPOLIS.server_time)}</td>
+                  <td>{isNaN((hydropolis_mw)) ? 0 : Math.abs(Number(hydropolis_mw).toFixed(2))}</td>
+                  <td>{hydropolis_kv ? hydropolis_kv : 0}</td>
                 </tr>
                 {/* <tr onClick={(e) => { this.setModalTrue(e, ['OMOTOSHO (GAS)', this.state.omotosho2, this.state.omotosho1]); }}>
                   <td>4</td>
