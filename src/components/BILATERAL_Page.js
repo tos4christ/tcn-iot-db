@@ -29,6 +29,7 @@ import Modal from "./Modal";
       'kamSteel': {},
       'kamSteel-Ilorin': {},
       'Er-Kang': {},
+      HYDROPOLIS: {},
       connected: false,
       ModalState: false,
       modal_data: "TAOPEX"
@@ -226,6 +227,11 @@ import Modal from "./Modal";
     const kamSteel_Ilorin_line2_mw = kamSteel_Ilorin_line_2?.td?.mw;
     const kamSteel_Ilorin_voltage = kamSteel_Ilorin_line_1?.td?.v ? kamSteel_Ilorin_line_1?.td?.v : kamSteel_Ilorin_line_2?.td?.v ? kamSteel_Ilorin_line_2?.td?.v : 0;
     const kamSteel_Ilorin_mw_sum = Number(kamSteel_Ilorin_line1_mw) + Number(kamSteel_Ilorin_line2_mw);
+    const { HYDROPOLIS } = this.state;
+    const hydropolis_l2 = HYDROPOLIS.lines ? HYDROPOLIS.lines[0].td : {};
+    const hydropolis_l4 = HYDROPOLIS.lines ? HYDROPOLIS.lines[1].td : {};
+    const hydropolis_mw = (Number(hydropolis_l2?.mw) + Number(hydropolis_l4?.mw)) || 0;
+    const hydropolis_kv = hydropolis_l2?.v ? hydropolis_l2.v : hydropolis_l4.v ? hydropolis_l4.v : 0;
 
     const totalBilateral = (isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw)) + (isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw))
                             + (isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum)) +
@@ -235,7 +241,7 @@ import Modal from "./Modal";
     (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) + (isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw)) +
     (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw))) +
     (isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw)) + (isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw)) +
-    (isNaN(Number(phoenix?.mw)) ? 0 : Math.abs(Number(phoenix.mw))) + 
+    (isNaN(Number(phoenix?.mw)) ? 0 : Math.abs(Number(phoenix.mw))) + (isNaN(Number(hydropolis_mw)) ? 0 : Number(hydropolis_mw)) +
     (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw)));
     
         
@@ -386,6 +392,13 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state["ikejaWest-sakate"].server_time)}</td>
                   <td>{isNaN(Number(ikejaWest_sakate.mw)) ? 0 : Number(ikejaWest_sakate.mw).toFixed(2)}</td>
                   <td>{ikejaWest_sakate.v ? ikejaWest_sakate.v : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['HYDROPOLIS', this.state.HYDROPOLIS]); }}>
+                  <td>19</td>
+                  <td>HYDROPOLIS</td>
+                  <td>{this.checkConnection2(this.state.HYDROPOLIS.server_time)}</td>
+                  <td>{isNaN((hydropolis_mw)) ? 0 : Math.abs(Number(hydropolis_mw).toFixed(2))}</td>
+                  <td>{hydropolis_kv ? hydropolis_kv : 0}</td>
                 </tr>
                 
                 <tr></tr>

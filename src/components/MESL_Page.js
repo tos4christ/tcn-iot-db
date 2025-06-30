@@ -158,8 +158,8 @@ import Modal from "./Modal";
     
     // const quantum = this.state.quantum?.transformers[0]?.td ? this.state.quantum.transformers[0].td : {};
     const quantum = this.state.quantum.transformers ? this.state.quantum.transformers[0].td : {};
-    const hydropolis_l2 = this.state.HYDROPOLIS.lines ? this.state.HYDROPOLIS.lines[0].td : {};
-    const hydropolis_l4 = this.state.HYDROPOLIS.lines ? this.state.HYDROPOLIS.lines[1].td : {};
+    const hydropolis_l2 = HYDROPOLIS.lines ? HYDROPOLIS.lines[0].td : {};
+    const hydropolis_l4 = HYDROPOLIS.lines ? HYDROPOLIS.lines[1].td : {};
     const hydropolis_mw = (Number(hydropolis_l2?.mw) + Number(hydropolis_l4?.mw)) || 0;
     const hydropolis_kv = hydropolis_l2?.v ? hydropolis_l2.v : hydropolis_l4.v ? hydropolis_l4.v : 0;
     
@@ -251,8 +251,8 @@ import Modal from "./Modal";
                   <td>{isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw).toFixed(2))}</td>
                   <td>{quantum.V ? quantum.V : 0}</td>
                 </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['Quantum', this.state.quantum]); }}>
-                  <td>9</td>
+                <tr onClick={(e) => { this.setModalTrue(e, ['HYDROPOLIS', this.state.HYDROPOLIS]); }}>
+                  <td>10</td>
                   <td>HYDROPOLIS</td>
                   <td>{this.checkConnection2(this.state.HYDROPOLIS.server_time)}</td>
                   <td>{isNaN((hydropolis_mw)) ? 0 : Math.abs(Number(hydropolis_mw).toFixed(2))}</td>
