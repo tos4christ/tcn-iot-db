@@ -24,7 +24,8 @@ import Modal from "./Modal";
       kam: {},
       KamInd33kV: {},
       quantum: {},
-      HYDROPOLIS: {}
+      HYDROPOLIS: {},
+      yongxing: {}
      };
    }
    componentDidMount() {
@@ -155,6 +156,7 @@ import Modal from "./Modal";
     const {KamInd33kV} = this.state;
     const {Gazaoua} = this.state;
     const { HYDROPOLIS } = this.state;
+    const { yongxing } = this.state;
     
     // const quantum = this.state.quantum?.transformers[0]?.td ? this.state.quantum.transformers[0].td : {};
     const quantum = this.state.quantum.transformers ? this.state.quantum.transformers[0].td : {};
@@ -162,13 +164,15 @@ import Modal from "./Modal";
     const hydropolis_l4 = HYDROPOLIS.lines ? HYDROPOLIS.lines[1].td : {};
     const hydropolis_mw = (Number(hydropolis_l2?.mw) + Number(hydropolis_l4?.mw)) || 0;
     const hydropolis_kv = hydropolis_l2?.v ? hydropolis_l2.v : hydropolis_l4.v ? hydropolis_l4.v : 0;
+    const yongxing_t1 = yongxing.transformers ? yongxing.transformers[0].td : {};
     
     // console.log(quantum, "   the quantum data");
     const totalConsumption = (isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw)) + (isNaN(Number(hydropolis_mw)) ? 0 : Number(hydropolis_mw)) +
     (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) + (isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw))) +
     (isNaN(Number(Inner_Galaxy1.mw)) ? 0 :  Number(Inner_Galaxy1.mw)) + (isNaN(Number(Gazaoua.mw)) ? 0 :  Math.abs(Number(Gazaoua.mw))) + 
     (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) + (isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw)) +
-    (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw)));
+    (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw))) + 
+    (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw)));
  
     return (
       <>
@@ -257,6 +261,13 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.HYDROPOLIS.server_time)}</td>
                   <td>{isNaN((hydropolis_mw)) ? 0 : Math.abs(Number(hydropolis_mw).toFixed(2))}</td>
                   <td>{hydropolis_kv ? hydropolis_kv : 0}</td>
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['Yongxing (PEL)', this.state.yongxing]); }}>
+                  <td>11</td>
+                  <td>Yongxing (PEL)</td>
+                  <td>{this.checkConnection2(this.state.yongxing.server_time)}</td>
+                  <td>{isNaN((yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw).toFixed(2))}</td>
+                  <td>{yongxing_t1.v ? yongxing_t1.v : 0}</td>
                 </tr>
                 {/* <tr onClick={(e) => { this.setModalTrue(e, ['OMOTOSHO (GAS)', this.state.omotosho2, this.state.omotosho1]); }}>
                   <td>4</td>
