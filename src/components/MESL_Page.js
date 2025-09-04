@@ -280,6 +280,15 @@ import Modal from "./Modal";
                   <td>{isNaN((amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw).toFixed(2))}</td>
                   <td>{amil_t1.v ? amil_t1.v : 0}</td>
                 </tr>
+                <tr>
+                  <td>13</td>
+                  <td>AENL</td>
+                  <td>{this.checkConnection2(null)}</td>
+                  <td>0</td>
+                  <td>0</td>
+                  {/* <td>{isNaN((amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw).toFixed(2))}</td>
+                  <td>{amil_t1.v ? amil_t1.v : 0}</td> */}
+                </tr>
                 {/* <tr onClick={(e) => { this.setModalTrue(e, ['OMOTOSHO (GAS)', this.state.omotosho2, this.state.omotosho1]); }}>
                   <td>4</td>
                   <td>OMOTOSHO (GAS)</td>
