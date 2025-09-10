@@ -1,0 +1,236 @@
+/* Power Station Monitoring Dashboard Styles */
+
+/* Theme Variables */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #f1f5f9;
+    --accent-color: #10b981;
+    --sidebar-width: 15%;
+    --main-width: 85%;
+}
+
+/* Base Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Station Sidebar Styles */
+.station-item {
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #e5e7eb;
+    transition: background-color 0.2s ease;
+}
+
+.station-item:hover {
+    background-color: #eff6ff;
+}
+
+.station-item.active {
+    background-color: #dbeafe;
+    border-left: 4px solid #2563eb;
+}
+
+/* Button Styles */
+.download-btn {
+    background-color: #2563eb;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.download-btn:hover {
+    background-color: #1d4ed8;
+}
+
+.download-btn.bg-green-600 {
+    background-color: #059669;
+}
+
+.download-btn.bg-green-600:hover {
+    background-color: #047857;
+}
+
+/* Table Styles */
+.generator-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.generator-table th {
+    background-color: var(--secondary-color);
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.generator-table td {
+    padding: 12px;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 14px;
+    color: #374151;
+}
+
+.generator-table tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+.generator-table tr:hover {
+    background-color: #eff6ff;
+    transition: background-color 0.15s ease;
+}
+
+/* Status Badge Styles */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-badge.online {
+    color: #047857;
+    background-color: #d1fae5;
+}
+
+.status-badge.offline {
+    color: #dc2626;
+    background-color: #fee2e2;
+}
+
+.status-badge.maintenance {
+    color: #d97706;
+    background-color: #fef3c7;
+}
+
+/* Layout Styles */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: white;
+    border-right: 1px solid #d1d5db;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.sidebar-header {
+    padding: 16px;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #f3f4f6;
+}
+
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-header {
+    background-color: white;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 24px;
+}
+
+.main-body {
+    flex: 1;
+    overflow: auto;
+    padding: 24px;
+    background-color: #f9fafb;
+}
+
+/* Icon Styles */
+.icon-container {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-primary {
+    color: var(--primary-color);
+}
+
+.icon-secondary {
+    color: #6b7280;
+}
+
+/* Utility Classes */
+.text-primary {
+    color: var(--primary-color);
+}
+
+.bg-primary {
+    background-color: var(--primary-color);
+}
+
+.text-secondary {
+    color: #6b7280;
+}
+
+.bg-secondary {
+    background-color: var(--secondary-color);
+}
+
+.rounded-lg {
+    border-radius: 8px;
+}
+
+.shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 100%;
+        --main-width: 100%;
+    }
+    
+    .sidebar {
+        position: absolute;
+        z-index: 10;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .generator-table {
+        font-size: 12px;
+    }
+    
+    .generator-table th,
+    .generator-table td {
+        padding: 8px;
+    }
+}
