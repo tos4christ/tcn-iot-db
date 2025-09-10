@@ -52,7 +52,9 @@ import Systemplanning_Header from '../src/components/System_Planning/Header';
 import BilateralDownload from '../src/components/System_Planning/BilateralDownload';
 import InstructedPage from './components/GridTable_Instructed_SP';
 import GridTable from './components/GridTable';
+import GeneratorApp from './components/Generators/GeneratorApp';
 
+// Use lazy loading for heavy components
 const FullPage_SP_Lazy = lazy(() => import('./components/GridTable_SP'));
 const Bilateral_Lazy = lazy(() => import('./components/Bilateral'));
 const Home_Lazy = lazy(() => import('./components/Home'));
@@ -325,6 +327,12 @@ class App extends React.Component {
           <Route path="/api/gridtable">
             <div>
               <GridTable />
+              <Footer />
+            </div>
+          </Route>
+          <Route path="/generator_units">
+            <div>
+              <GeneratorApp />
               <Footer />
             </div>
           </Route>
