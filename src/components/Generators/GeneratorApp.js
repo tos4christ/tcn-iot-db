@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
-import socket from "./utility/socketIO";
-import DateTime from "./DateTime";
+import socket from "../utility/socketIO";
+import DateTime from "../DateTime";
 import StationSidebar from './StationSidebar';
 import GeneratorDetails from './GeneratorDetails';
 import { generateStations } from './utils/stationData';
@@ -13,7 +13,7 @@ class GeneratorApp extends Component {
       selectedStation: null,
       stations: generateStations(),
       egbinPs: {
-        id: "egbin-ps",
+        id: "egbinPs",
         units: [ {id: "st1", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
                  {id: "st2", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
                  {id: "st3", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
@@ -33,6 +33,7 @@ class GeneratorApp extends Component {
       socket.on("generator_units", data => {
         const { message } = data;
         const parsedMessage = JSON.parse(message);
+        // console.log(Object.keys(parsedMessage), 'generator_units message');
         parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
         const returnObject = {}
@@ -94,7 +95,7 @@ class GeneratorApp extends Component {
 
 
   render() {
-    
+
     try {
       // Get all the stations and its units here and prepare them for the sidebar and details view
       const dummy_stations = generateStations();
@@ -106,6 +107,7 @@ class GeneratorApp extends Component {
       for(let i=1; i<3; i++) {
         // Prepare the real-time units data
         const temp_station = real_stations[i-1];
+        // console.log(temp_station, 'temp_station');
         const temp_units = temp_station.units ? temp_station.units : []; 
         let units = [];
         for(let j=0; j<temp_units.length; j++) {
@@ -113,19 +115,19 @@ class GeneratorApp extends Component {
           units.push({
             id: `unit-${i}-${j}`,
             name: `Unit ${unit.id}`,
-            activePower: unit["pd"] ? unit["pd"].mw : 0,
+            activePower: unit.pd ? unit.pd.mw : 0,
             voltage: unit["pd"] ? unit["pd"].v : 0,
             reactivePower: unit["pd"] ? unit["pd"].mx : 0,
-            powerFactor: unit["pd"] ? unit["pd"].pf : 0,
+            powerFactor: unit["pd"] ? Number(unit["pd"].pf) : 0,
             frequency: unit["pd"] ? unit["pd"].f : 0,
-            status: this.checkConnection2(unit.server_time)
+            status: this.checkConnection2(temp_station.server_time)
           });
         }
 
         // Prepare the real-time stations data
         stations.push({
           id: `station-${i}`,
-          name: `${temp_station[i-1].id} Power Station ${i.toString().padStart(3, '0')}`,
+          name: `${temp_station["id"]} Power Station ${i.toString().padStart(3, '0')}`,
           type: stationTypes[5],
           units: units,
           location: `Location ${i}`,
@@ -134,7 +136,7 @@ class GeneratorApp extends Component {
       }
       // Add the dummy stations data
       stations.push(...dummy_stations);
-      stations.sort((a, b) => a.id.localeCompare(b.id));
+      // stations.sort((a, b) => a.id.localeCompare(b.id));
 
       return (
         <div className="h-screen flex bg-gray-100">
@@ -157,4 +159,4 @@ class GeneratorApp extends Component {
   }
 }
 
-export default GeneratorApp;
+export default withRouter(GeneratorApp);

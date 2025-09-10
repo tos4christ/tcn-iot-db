@@ -97,7 +97,7 @@ class GeneratorDetails extends Component {
                 </h1>
                 <p className="text-gray-600 mt-1">
                   {selectedStation.units.length} Generator Units • Total Active Power: {
-                    selectedStation.units.reduce((sum, unit) => sum + unit.activePower, 0)
+                    selectedStation.units.reduce((sum, unit) => sum + Number(unit.activePower), 0)
                   } MW
                 </p>
               </div>
@@ -126,7 +126,7 @@ class GeneratorDetails extends Component {
                 <thead className="bg-gray-100">
                   <tr>
                     <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Unit</th>
-                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Status</th>
+                    <th className="px-5 py-3 text-left text-sm font-semibold text-gray-900">Status</th>
                     <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Active Power (MW)</th>
                     <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Voltage (KV)</th>
                     <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Reactive Power (MVAR)</th>
