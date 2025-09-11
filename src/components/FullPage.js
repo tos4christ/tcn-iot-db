@@ -69,7 +69,7 @@ import Modal from "./Modal";
      };
    }
    componentDidMount() {
-    if(this.props.history.location.pathname === "/tcnnaspage" || this.props.history.location.pathname === "/secure_tcnnaspage") {
+    if(this.props.history.location.pathname === "/nisonaspage" || this.props.history.location.pathname === "/secure_nisonaspage") {
       socket.on("client_message_111", data => {
         const { message } = data;
         let parsedMessage = {};

@@ -24,7 +24,7 @@ class Header extends React.Component {
     return (      
         <nav className='nav-containers container-fluid'>            
                 <div className='navbar-header'>
-                    <Link to='/' className='navbar-brand'>
+                    <Link to='/home' className='navbar-brand'>
                         <img className='homelogo' src={logo_2} alt="site logo"/>
                     </Link>
                 </div>
@@ -34,13 +34,13 @@ class Header extends React.Component {
 
                         </li>
                         <li className='nav-item'>   
-                            <NavLink className='nav-link' to='/'>Developer</NavLink>
+                            <NavLink className='nav-link' to='/developer'>Developer</NavLink>
                         </li>
                         <li className='nav-item'>
                             <NavLink className='nav-link' to='/'>IOT News</NavLink>
                         </li>
                         <li className='nav-item'>
-                            <NavLink className='nav-link' to='/tcnnaspage'>Tour</NavLink>
+                            <NavLink className='nav-link' to='/nisonaspage'>Tour</NavLink>
                         </li>
                         <li className='nav-item'>
 

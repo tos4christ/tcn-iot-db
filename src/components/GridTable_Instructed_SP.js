@@ -17,7 +17,7 @@ class InstructedPage extends Component {
 
   async componentDidMount() {
     try {
-      const response = await fetch('https://tcnnas.org/api/stations');
+      const response = await fetch('https://nisonas.org/api/stations');
       const data = await response.json();
       this.setState({ stations: data });
     } catch (error) {
@@ -30,7 +30,7 @@ class InstructedPage extends Component {
     this.setState({ isLoading: true });
     
     try {
-      const response = await fetch('https://tcnnas.org/api/instruction', {
+      const response = await fetch('https://nisonas.org/api/instruction', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

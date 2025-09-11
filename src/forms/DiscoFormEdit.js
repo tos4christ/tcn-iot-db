@@ -32,7 +32,7 @@ class Form extends React.Component {
     }
 
     updateTickets(e) {
-        const url = "https://tcnnas.org/tickets/edit";
+        const url = "https:nisonas.org/tickets/edit";
         const { disco, station, equipment, comment,ticket_id, priority } = this.state;
         const data = { 
             disco, station, equipment, comment, ticket_id, priority

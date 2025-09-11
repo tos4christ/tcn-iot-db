@@ -52,7 +52,7 @@ class Disco extends React.Component {
         this.setState({listItemArr: listItemArray});
     }    
     loadTickets() {
-        const url = `https://tcnnas.org/tickets/get?disco=${this.state.department}`;
+        const url = `https://nisonas.org/tickets/get?disco=${this.state.department}`;
         fetch(url, {
         method: "GET",
         mode: "cors",
@@ -70,7 +70,7 @@ class Disco extends React.Component {
         .catch((error) => console.error(error.message));
     }
     createTickets(e) {
-        const url = "https://tcnnas.org/tickets/new";
+        const url = "https://nisonas.org/tickets/new";
         const options = { year: 'numeric', month: '2-digit', day: '2-digit' };   
         const date = new Date().toLocaleDateString("en-GB", options).split('/').reverse().join('-');
         const {department, station, equipment, comment, priority} = this.state;
@@ -105,7 +105,7 @@ class Disco extends React.Component {
     }
     editTickets(e) {
         //e.preventDefault();
-        const url = "https://tcnnas.org/tickets/edit";
+        const url = "https://nisonas.org/tickets/edit";
         if (true) {
         return;
         }

@@ -74,7 +74,7 @@ import Modal_Sp from "./Modal_Sp";
      };
    }
    componentDidMount() {
-    if(this.props.history.location.pathname === "/tcnnaspage_sp") {
+    if(this.props.history.location.pathname === "/nisonaspage_sp") {
       socket.on("client_message_111", data => {
         const { message } = data;
         let parsedMessage = {};

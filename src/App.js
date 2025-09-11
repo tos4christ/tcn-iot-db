@@ -210,19 +210,19 @@ class App extends React.Component {
               <PageTwo isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
           </Route>
-          <Route exact path={`/tcnnaspage`}>              
+          <Route exact path={`/nisonaspage`}>              
             <div className='App'>
               <FullPage isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
             <Footer />
           </Route>
-          <Route exact path={`/secure_tcnnaspage`}>              
+          <Route exact path={`/secure_nisonaspage`}>              
             <div className='App'>
               <FullPage isLoggedIn={localStorage.getItem("isLoggedIn")}/>
             </div>
             <Footer />
           </Route>
-          <Route exact path={`/tcnnaspage_sp`}>              
+          <Route exact path={`/nisonaspage_sp`}>              
             <div className='App'>
               <Suspense fallback={<div>Loading...</div>}>
                 <FullPage_SP isLoggedIn={localStorage.getItem("isLoggedIn")}/>

@@ -64,7 +64,7 @@ const Header = () => {
         <div className="row flexbox-center">
           <div className="col-lg-2 col-md-3 col-6">
             <div className="logo move">
-              <a href="/">
+              <a href="/home">
                 <img src={mainLogo_2} alt="logo" />
               </a>
             </div>

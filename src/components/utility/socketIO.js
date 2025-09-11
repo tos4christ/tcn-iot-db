@@ -1,7 +1,7 @@
 import openSocket from 'socket.io-client';
 // start the client socket
 // TCN NAS Server
-const socket = openSocket('https://tcnnas.org', {
+const socket = openSocket('https://nisonas.org', {
     transports: ['websocket'],
     secure: true,
     // rejectUnauthorized: true,

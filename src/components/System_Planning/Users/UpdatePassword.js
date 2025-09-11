@@ -32,7 +32,7 @@ class UpdatePassword extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    const url = "https://tcnnas.org/changepassword_bilateral";
+    const url = "https://nisonas.org/changepassword_bilateral";
     const data = {
       email: this.state.email,
       password: this.state.password

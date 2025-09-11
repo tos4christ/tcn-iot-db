@@ -18,7 +18,7 @@ import axios from "axios";
   componentDidMount() {
       if(this.props.history.location.pathname === "/sp_bilateral") {
         const requestBody = {token: localStorage.getItem("token")};
-        axios.post("https://tcnnas.org/verifytoken/bilateral", requestBody).
+        axios.post("https://nisonas.org/verifytoken/bilateral", requestBody).
           then(result => {
             // console.log(result, 'verify token result');
             if(result) {

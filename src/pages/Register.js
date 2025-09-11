@@ -46,7 +46,7 @@ const Register = () => {
     if(password !== password_match) {
       return;
     }
-    const url = "https://tcnnas.org/ticketsignup";
+    const url = "https://nisonas.org/ticketsignup";
     const data = {
       name,
       email,
