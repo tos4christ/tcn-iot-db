@@ -61,6 +61,10 @@ class GeneratorDetails extends Component {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   };
+  capitalize(str) {
+    if (!str) return "";
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 
   render() {
     try {
@@ -97,7 +101,7 @@ class GeneratorDetails extends Component {
             <div className="flex justify-between items-center">
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">
-                  {chosenStation.name}
+                  {this.capitalize(chosenStation.name)}
                 </h1>
                 <p className="text-gray-600 mt-1">
                   {chosenStation.units.length} Generator Units • Total Active Power: {

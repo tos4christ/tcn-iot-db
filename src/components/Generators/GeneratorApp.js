@@ -75,12 +75,12 @@ class GeneratorApp extends Component {
         })
       });
     }
-   }
-   componentWillUnmount() {
+  }
+  componentWillUnmount() {
     socket.off("generator_units");
-    }
+  }
     
-   getEpoch(time) {
+  getEpoch(time) {
     if(!time || time === undefined || time === null) {
       return 0;
     }
@@ -93,8 +93,8 @@ class GeneratorApp extends Component {
     const seconds = timeTemp[2]
     const dateTemp = date.split('-');
     return new Date(Number(dateTemp[0]), Number(dateTemp[1]-1), Number(dateTemp[2]), Number(hour), Number(minute), Number(seconds)); 
-   }
-   checkConnection2(server_time) {
+  }
+  checkConnection2(server_time) {
     // Change connected to 'online' and 'offline'
     const connected = 'online';
     const disconnected = 'offline';
@@ -117,10 +117,14 @@ class GeneratorApp extends Component {
       console.log(e);
       return disconnected;
     }
-   }
+  }
   handleStationSelect = (station) => {
     this.setState({ selectedStation: station });
   };
+  capitalize(str) {
+    if (!str) return "";
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 
   render() {
 
@@ -139,7 +143,7 @@ class GeneratorApp extends Component {
           temp_units.forEach((unit, idx) => {
             units.push({
               id: `unit-${index+1}-${idx+1}`,
-              name: `Unit ${unit.id}`,
+              name: `${unit.id.toUpperCase()}`,
               activePower: unit.pd ? unit.pd.mw : 0.0,
               voltage: unit["pd"] ? unit["pd"].v : 0.0,
               reactivePower: unit["pd"] ? unit["pd"].mx : 0.0,
@@ -150,7 +154,7 @@ class GeneratorApp extends Component {
           });
           stations.push({
             id: `station-${index+1}`,
-            name: `${station["id"]} Power Station`,
+            name: `${station["id"]}`,
             type: stationTypes[5],
             units: units,
             location: `Location ${(index+1)}`,
