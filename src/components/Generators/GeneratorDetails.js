@@ -101,7 +101,7 @@ class GeneratorDetails extends Component {
             <div className="flex justify-between items-center">
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">
-                  {this.capitalize(chosenStation.name)}
+                  {this.capitalize(chosenStation.name).replace('Ps', ' Power Station').replace('gas', 'Gas')}
                 </h1>
                 <p className="text-gray-600 mt-1">
                   {chosenStation.units.length} Generator Units • Total Active Power: {
@@ -136,11 +136,11 @@ class GeneratorDetails extends Component {
                     <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Unit Name</th>
                     <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Status</th>
                     <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900"> (MW)</th>
-                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900"> (KV)</th>
-                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900"> (MVAR)</th>
+                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900"> (kV)</th>
+                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900"> (MVAr)</th>
                     <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900"> (PF)</th>
                     <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900"> (Hz)</th>
-                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Actions</th>
+                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Download</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">

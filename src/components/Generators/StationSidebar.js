@@ -33,7 +33,7 @@ class StationSidebar extends Component {
                   <div className="icon-building text-lg text-gray-600"></div>
                   <div>
                     <div className="font-medium text-gray-900 text-sm">
-                      {station.name.toUpperCase()}
+                      {station.name.toUpperCase().replace('PS', '')}
                     </div>
                     <div className="text-xs text-gray-500">
                       {station.units.length} units  @ {
