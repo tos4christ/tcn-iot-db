@@ -5,6 +5,26 @@ import DateTime from "../DateTime";
 import StationSidebar from './StationSidebar';
 import GeneratorDetails from './GeneratorDetails';
 import { generateStations } from './utils/stationData';
+import niso_logo_main from '../../assets/img/niso_logo_main.jpg';
+
+const headerStyle = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  padding: "10px 20px",
+  background: "linear-gradient(135deg, #1e3c72, #2a5298)",
+  color: "#fff",
+};
+
+const logoStyle = {
+  height: "60px",
+};
+
+const centerWrapper = {
+  flex: 1, // take remaining space
+  display: "flex",
+  justifyContent: "center",
+};
 
 class GeneratorApp extends Component {
   constructor(props) {
@@ -141,19 +161,31 @@ class GeneratorApp extends Component {
       // stations.sort((a, b) => a.id.localeCompare(b.id));
 
       return (
-        <div className="h-screen flex bg-gray-100">
-          <StationSidebar
-            stations={stations}
-            selectedStation={selectedStation}
-            onStationSelect={this.handleStationSelect}
-          />
-          
-          <GeneratorDetails 
-            selectedStation={selectedStation} 
-            allStations={stations} 
-            testStation={egbinPs}
-          />
+        <div>
+          <div style={headerStyle}>
+            {/* Left logo */}
+            <img src={niso_logo_main} alt="NISO Logo" style={logoStyle} />
+
+            {/* Centered DateTime */}
+            <div style={centerWrapper}>
+              <DateTime />
+            </div>
+          </div>
+          <div className="h-screen flex bg-gray-100">
+            <StationSidebar
+              stations={stations}
+              selectedStation={selectedStation}
+              onStationSelect={this.handleStationSelect}
+            />
+            
+            <GeneratorDetails 
+              selectedStation={selectedStation} 
+              allStations={stations} 
+              testStation={egbinPs}
+            />
+          </div>
         </div>
+        
       );
     } catch (error) {
       console.error('App component error:', error);
