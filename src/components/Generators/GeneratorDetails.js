@@ -67,7 +67,7 @@ class GeneratorDetails extends Component {
       const { selectedStation, testStation, allStations } = this.props;
       const checkid = selectedStation ? selectedStation.id : "";
       const chosenStation = allStations.filter(station => station.id === checkid)[0] ? allStations.filter(station => station.id === checkid)[0] : [];
-      console.log(chosenStation, " the chosen station");
+    //   console.log(chosenStation, " the chosen station");
       if (chosenStation.length === 0) {
         return (
           <div className="flex-1 flex items-center justify-center bg-gray-50">

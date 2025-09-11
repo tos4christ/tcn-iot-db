@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Scroll from "react-scroll";
-import mainLogo from "../../assets/img/tcnLogo.png";
-import mainLogo_2 from "../../assets/img/niso_logo_main_small.jpg";
+import mainLogo_2 from "../../assets/img/niso_logo_main.jpg";
 const ScrollLink = Scroll.Link;
 
 const Header = () => {

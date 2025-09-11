@@ -127,7 +127,7 @@ class GeneratorApp extends Component {
           });
           stations.push({
             id: `station-${index+1}`,
-            name: `${station["id"]} Power Station ${(index+1).toString().padStart(3, '0')}`,
+            name: `${station["id"]} Power Station`,
             type: stationTypes[5],
             units: units,
             location: `Location ${(index+1)}`,
