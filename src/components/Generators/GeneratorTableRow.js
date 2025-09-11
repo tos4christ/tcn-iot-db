@@ -27,48 +27,35 @@ class GeneratorTableRow extends Component {
         <tr 
           className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-blue-50 transition-colors duration-150`}
         >
-          <td className="px-3 py-3">
+          <td className="px-4 py-4">
             <div className="font-medium text-gray-900">{unit.name}</div>
           </td>
           
-          <td className="px-4 py-3">
+          <td className="px-3 py-4">
             <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${this.getStatusColor(unit.status)}`}>
               <div className={`${this.getStatusIcon(unit.status)} text-xs`}></div>
               <span className="capitalize">{unit.status}</span>
             </div>
           </td>
-            <td className="px-3 py-3">
-                <div className="text-sm font-medium text-gray-900"></div>
-            </td>
-          <td className="px-5 py-3">
+            
+          <td className="px-4 py-4">
             <div className="text-sm font-medium text-gray-900">{unit.activePower}</div>
           </td>
-            <td className="px-3 py-3">
-                <div className="text-sm font-medium text-gray-900"></div>
-            </td>
-          <td className="px-5 py-3">
+            
+          <td className="px-4 py-4">
             <div className="text-sm font-medium text-gray-900">{unit.voltage}</div>
           </td>
-            <td className="px-1 py-3">
-                <div className="text-sm font-medium text-gray-900"></div>
-            </td>
-          <td className="px-5 py-3">
+          <td className="px-4 py-4">
             <div className="text-sm font-medium text-gray-900">{unit.reactivePower}</div>
           </td>
-            <td className="px-2 py-3">
-                <div className="text-sm font-medium text-gray-900"></div>
-            </td>
-          <td className="px-5 py-3">
-            <div className="text-sm font-medium text-gray-900">{unit.powerFactor}</div>
+          <td className="px-4 py-4">
+            <div className="text-sm font-medium text-gray-900">{isNaN(unit.powerFactor) ? 0 : unit.powerFactor}</div>
           </td>
-            <td className="px-2 py-3">
-                <div className="text-sm font-medium text-gray-900"></div>
-            </td>
-          <td className="px-5 py-3">
-            <div className="text-sm font-medium text-gray-900">{unit.frequency}</div>
+          <td className="px-4 py-4">
+            <div className="text-sm font-medium text-gray-900">{isNaN(unit.frequency) ? 0 : unit.frequency}</div>
           </td>
-          
-          <td className="px-5 py-3">
+
+          <td className="px-4 py-4">
             <button
               onClick={onDownload}
               className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 p-1 rounded transition-colors duration-150"

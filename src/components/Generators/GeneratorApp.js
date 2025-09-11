@@ -31,9 +31,16 @@ class GeneratorApp extends Component {
   componentDidMount() {
     if(this.props.history.location.pathname === "/generator_units") {
       socket.on("generator_units", data => {
-        const { message } = data;
+        let { message } = data;
+        if(message[0] === '"') {
+          message = '{' + message;
+          message = message.replace(/.(?=\])/g, '')
+        }
+        // console.log(message, 'raw generator_units message');
         const parsedMessage = JSON.parse(message);
-        // console.log(Object.keys(parsedMessage), 'generator_units message');
+        if(parsedMessage && parsedMessage.id === "sapele-gas") {
+          // console.log(parsedMessage, 'generator_units message');
+        }        
         parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
         const returnObject = {}
@@ -88,11 +95,9 @@ class GeneratorApp extends Component {
       return disconnected;
     }
    }
-
   handleStationSelect = (station) => {
     this.setState({ selectedStation: station });
   };
-
 
   render() {
 
@@ -101,41 +106,38 @@ class GeneratorApp extends Component {
       const dummy_stations = generateStations();
       const { selectedStation, egbinPs, "sapele-gas": sapeleGas } = this.state;
       // Merge the real-time data into the dummy stations data
-      const stations = [];
+      let stations = [];
       const stationTypes = ['Thermal', 'Hydro', 'Nuclear', 'Wind', 'Solar', 'Gas'];
       const real_stations = [egbinPs, sapeleGas];
-      for(let i=1; i<3; i++) {
-        // Prepare the real-time units data
-        const temp_station = real_stations[i-1];
-        // console.log(temp_station, 'temp_station');
-        const temp_units = temp_station.units ? temp_station.units : []; 
-        let units = [];
-        for(let j=0; j<temp_units.length; j++) {
-          const unit = temp_units[j];
-          units.push({
-            id: `unit-${i}-${j}`,
-            name: `Unit ${unit.id}`,
-            activePower: unit.pd ? unit.pd.mw : 0,
-            voltage: unit["pd"] ? unit["pd"].v : 0,
-            reactivePower: unit["pd"] ? unit["pd"].mx : 0,
-            powerFactor: unit["pd"] ? Number(unit["pd"].pf) : 0,
-            frequency: unit["pd"] ? unit["pd"].f : 0,
-            status: this.checkConnection2(temp_station.server_time)
+      real_stations.forEach((station, index) => {
+        if(station && station.id) {
+          const temp_units = station.units && station.units.length > 0 ? station.units : [];
+          const units = [];
+          temp_units.forEach((unit, idx) => {
+            units.push({
+              id: `unit-${index+1}-${idx+1}`,
+              name: `Unit ${unit.id}`,
+              activePower: unit.pd ? unit.pd.mw : 0.0,
+              voltage: unit["pd"] ? unit["pd"].v : 0.0,
+              reactivePower: unit["pd"] ? unit["pd"].mx : 0.0,
+              powerFactor: unit["pd"] ? Number(unit["pd"].pf) : 0.0,
+              frequency: unit["pd"] ? unit["pd"].f : 0.0,
+              status: this.checkConnection2(station.server_time)
+            });
+          });
+          stations.push({
+            id: `station-${index+1}`,
+            name: `${station["id"]} Power Station ${(index+1).toString().padStart(3, '0')}`,
+            type: stationTypes[5],
+            units: units,
+            location: `Location ${(index+1)}`,
+            commissioned: Math.floor(Math.random() * 30) + 1990 // 1990-2020
           });
         }
-
-        // Prepare the real-time stations data
-        stations.push({
-          id: `station-${i}`,
-          name: `${temp_station["id"]} Power Station ${i.toString().padStart(3, '0')}`,
-          type: stationTypes[5],
-          units: units,
-          location: `Location ${i}`,
-          commissioned: Math.floor(Math.random() * 30) + 1990 // 1990-2020
-        });
-      }
+      });
+      
       // Add the dummy stations data
-      stations.push(...dummy_stations);
+      // stations = stations.concat(dummy_stations);
       // stations.sort((a, b) => a.id.localeCompare(b.id));
 
       return (
@@ -149,6 +151,7 @@ class GeneratorApp extends Component {
           <GeneratorDetails 
             selectedStation={selectedStation} 
             allStations={stations} 
+            testStation={egbinPs}
           />
         </div>
       );

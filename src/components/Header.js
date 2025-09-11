@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink, Link, withRouter} from 'react-router-dom';
 import ls from 'local-storage';
 import logo from './img/tcnLogo.png';
-import logo_2 from '../assets/img/niso_logo_main_small.jpg';
+import logo_2 from '../assets/img/niso_logo_main.jpg';
 
 class Header extends React.Component {
   constructor(props) {

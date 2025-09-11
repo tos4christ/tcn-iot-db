@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import './generator.css';
+import './generator_units.css';
 import GeneratorTableRow from './GeneratorTableRow';
 
 class GeneratorDetails extends Component {
@@ -62,9 +64,11 @@ class GeneratorDetails extends Component {
 
   render() {
     try {
-      const { selectedStation } = this.props;
-
-      if (!selectedStation) {
+      const { selectedStation, testStation, allStations } = this.props;
+      const checkid = selectedStation ? selectedStation.id : "";
+      const chosenStation = allStations.filter(station => station.id === checkid)[0] ? allStations.filter(station => station.id === checkid)[0] : [];
+      console.log(chosenStation, " the chosen station");
+      if (chosenStation.length === 0) {
         return (
           <div className="flex-1 flex items-center justify-center bg-gray-50">
             <div className="text-center">
@@ -93,11 +97,11 @@ class GeneratorDetails extends Component {
             <div className="flex justify-between items-center">
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">
-                  {selectedStation.name}
+                  {chosenStation.name}
                 </h1>
                 <p className="text-gray-600 mt-1">
-                  {selectedStation.units.length} Generator Units • Total Active Power: {
-                    selectedStation.units.reduce((sum, unit) => sum + Number(unit.activePower), 0)
+                  {chosenStation.units.length} Generator Units • Total Active Power: {
+                    chosenStation.units.reduce((sum, unit) => sum + Number(unit.activePower), 0).toFixed(2)
                   } MW
                 </p>
               </div>
@@ -121,22 +125,22 @@ class GeneratorDetails extends Component {
           </div>
 
           <div className="flex-1 overflow-auto p-6 bg-gray-50">
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <table className="w-full">
+            <div className="bg-white rounded-lg shadow-md overflow-x-auto">
+              <table className="w-full generator-table">
                 <thead className="bg-gray-100">
                   <tr>
-                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Unit</th>
-                    <th className="px-5 py-3 text-left text-sm font-semibold text-gray-900">Status</th>
-                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Active Power (MW)</th>
-                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Voltage (KV)</th>
-                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Reactive Power (MVAR)</th>
-                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Power Factor (PF)</th>
-                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Frequency (Hz)</th>
+                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Unit Name</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Status</th>
+                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900"> (MW)</th>
+                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900"> (KV)</th>
+                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900"> (MVAR)</th>
+                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900"> (PF)</th>
+                    <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900"> (Hz)</th>
                     <th className="px-3 py-3 text-left text-sm font-semibold text-gray-900">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {selectedStation.units.map((unit, index) => (
+                  {chosenStation.units.map((unit, index) => (
                     <GeneratorTableRow 
                       key={unit.id} 
                       unit={unit} 

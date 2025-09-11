@@ -1,0 +1,20 @@
+/* generator.css */
+.generator-table {
+  min-width: 1024px;
+}
+
+.generator-table th,
+.generator-table td {
+  min-width: 120px;
+  white-space: nowrap;
+}
+
+.generator-table th:first-child,
+.generator-table td:first-child {
+  min-width: 160px;
+}
+
+.generator-table th:last-child,
+.generator-table td:last-child {
+  min-width: 80px;
+}
