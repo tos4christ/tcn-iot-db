@@ -11,19 +11,22 @@ const headerStyle = {
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "10px 20px",
+  padding: "10px 10px",
   background: "linear-gradient(135deg, #1e3c72, #2a5298)",
   color: "#fff",
+  flexWrap: "wrap", // allow wrapping on small screens
 };
 
 const logoStyle = {
-  height: "60px",
+  height: "50px",
+  flexShrink: 0, // prevent logo from shrinking
 };
 
 const centerWrapper = {
   flex: 1, // take remaining space
   display: "flex",
   justifyContent: "center",
+  marginTop: "8px",
 };
 
 class GeneratorApp extends Component {
