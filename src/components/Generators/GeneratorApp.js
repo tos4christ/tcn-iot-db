@@ -165,12 +165,12 @@ class GeneratorApp extends Component {
         if(station && station_name) {
           const temp_units = station.units && station.units.length > 0 ? station.units : [];
           const units = [];
-          const active_units = temp_units.filter(unit => (unit.pd && unit.pd.mw > 0) || (unit.td && unit.td.mw > 0)).length;
+          const active_units = temp_units.filter(unit => (unit.pd && Math.abs(unit.pd.mw) > 0) || (unit.td && Math.abs(unit.td.mw) > 0)).length;
           temp_units.forEach((unit, idx) => {
             units.push({
               id: `unit-${index+1}-${idx+1}`,
               name: `${unit.id.toUpperCase()}`,
-              activePower: unit.pd ? unit.pd.mw : unit.td.mw ? unit.td.mw : 0.0,
+              activePower: unit.pd ? Math.abs(unit.pd.mw) : unit.td ? Math.abs(unit.td.mw) : 0.0,
               voltage: unit["pd"] ? unit["pd"].v : unit["td"] ? unit["td"].v : 0.0,
               reactivePower: unit["pd"] ? unit["pd"].mx : unit["td"] ? unit["td"].mx : 0.0,
               powerFactor: unit["pd"] ? Number(unit["pd"].pf) : unit["td"] ? Number(unit["td"].pf) : 0.0,
