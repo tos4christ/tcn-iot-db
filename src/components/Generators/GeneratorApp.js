@@ -165,6 +165,7 @@ class GeneratorApp extends Component {
         if(station && station_name) {
           const temp_units = station.units && station.units.length > 0 ? station.units : [];
           const units = [];
+          const active_units = temp_units.filter(unit => (unit.pd && unit.pd.mw > 0) || (unit.td && unit.td.mw > 0)).length;
           temp_units.forEach((unit, idx) => {
             units.push({
               id: `unit-${index+1}-${idx+1}`,
@@ -182,6 +183,7 @@ class GeneratorApp extends Component {
             name: station_name,
             type: stationTypes[5],
             units: units,
+            activeUnits: active_units
           });
         }
       });

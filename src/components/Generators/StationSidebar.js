@@ -36,7 +36,7 @@ class StationSidebar extends Component {
                       {station.name.toUpperCase().replace('PS', '')}
                     </div>
                     <div className="text-xs text-gray-500">
-                      {station.units.length} units  @ {
+                      {station.activeUnits} units  @ {
                         station.units.reduce((sum, unit) => sum + Number(unit.activePower), 0).toFixed(2)
                       } MW
                     </div>
