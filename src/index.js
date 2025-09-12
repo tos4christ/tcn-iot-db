@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './tailwind.css';
 import "./assets/css/bootstrap.min.css";
 import "./assets/css/slicknav.min.css";
 import "./assets/css/icofont.css";
