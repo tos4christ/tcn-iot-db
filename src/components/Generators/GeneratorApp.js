@@ -48,6 +48,30 @@ class GeneratorApp extends Component {
         id: "sapele-gas",
         units: [ {id: "pb203", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}]
       },
+      delta2: {
+        id: "delta2",
+        units: [ {id: "gt6", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}]
+      },
+      "delta4-2": {
+        id: "delta4-2",
+        units: [ {id: "gt15", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}]
+      },
+      delta3: {
+        id: "delta3",
+        units: [ {id: "gt9", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "gt10", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "gt11", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "gt12", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "gt13", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}]
+      },
+      "delta4-1": {
+        id: "delta4-1",
+        units: [ {id: "gt16", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "gt17", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "gt18", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "gt19", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "gt20", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}]
+      },
     };
   }
 
@@ -130,35 +154,34 @@ class GeneratorApp extends Component {
 
     try {
       // Get all the stations and its units here and prepare them for the sidebar and details view
-      const dummy_stations = generateStations();
-      const { selectedStation, egbinPs, "sapele-gas": sapeleGas } = this.state;
+      // const dummy_stations = generateStations();
+      const { selectedStation, egbinPs, "sapele-gas": sapeleGas, delta2, delta3, "delta4-2": delta4_2, "delta4-1": delta4_1 } = this.state;
       // Merge the real-time data into the dummy stations data
       let stations = [];
       const stationTypes = ['Thermal', 'Hydro', 'Nuclear', 'Wind', 'Solar', 'Gas'];
-      const real_stations = [egbinPs, sapeleGas];
+      const real_stations = [egbinPs, sapeleGas, delta2, delta3, delta4_2, delta4_1];
       real_stations.forEach((station, index) => {
-        if(station && station.id) {
+        const station_name = station.name ? station.name : station.id ? station.id : null;
+        if(station && station_name) {
           const temp_units = station.units && station.units.length > 0 ? station.units : [];
           const units = [];
           temp_units.forEach((unit, idx) => {
             units.push({
               id: `unit-${index+1}-${idx+1}`,
               name: `${unit.id.toUpperCase()}`,
-              activePower: unit.pd ? unit.pd.mw : 0.0,
-              voltage: unit["pd"] ? unit["pd"].v : 0.0,
-              reactivePower: unit["pd"] ? unit["pd"].mx : 0.0,
-              powerFactor: unit["pd"] ? Number(unit["pd"].pf) : 0.0,
-              frequency: unit["pd"] ? unit["pd"].f : 0.0,
+              activePower: unit.pd ? unit.pd.mw : unit.td.mw ? unit.td.mw : 0.0,
+              voltage: unit["pd"] ? unit["pd"].v : unit["td"] ? unit["td"].v : 0.0,
+              reactivePower: unit["pd"] ? unit["pd"].mx : unit["td"] ? unit["td"].mx : 0.0,
+              powerFactor: unit["pd"] ? Number(unit["pd"].pf) : unit["td"] ? Number(unit["td"].pf) : 0.0,
+              frequency: unit["pd"] ? unit["pd"].f : unit["td"] ? unit["td"].f : 0.0,
               status: this.checkConnection2(station.server_time)
             });
           });
           stations.push({
             id: `station-${index+1}`,
-            name: `${station["id"]}`,
+            name: station_name,
             type: stationTypes[5],
             units: units,
-            location: `Location ${(index+1)}`,
-            commissioned: Math.floor(Math.random() * 30) + 1990 // 1990-2020
           });
         }
       });
