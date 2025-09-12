@@ -224,10 +224,10 @@ const get_stations =  function(state_data) {
             (kainjiTs_k2j[0]?.td ?kainjiTs_k2j[0].td.mw:0) + (kainjiTs_k3r[0]?.td ?kainjiTs_k3r[0].td.mw:0)
                 ).toFixed(2), kv: (kainjiTs_k2j[0]?.td ?kainjiTs_k2j[0].td.V:0)},
         'EGBIN (STEAM)' : {mw: Number(
-            (egbinPs_st1[0]?.pd ?egbinPs_st1[0].pd.mw:0) + (egbinPs_st2[0]?.pd ?egbinPs_st2[0].pd.mw:0) + 
-            (egbinPs_st3[0]?.pd ?egbinPs_st3[0].pd.mw:0) + (egbinPs_st4[0]?.pd ?egbinPs_st4[0].pd.mw:0) + 
-            (egbinPs_st5[0]?.pd ?egbinPs_st5[0].pd.mw:0) + (egbinPs_st6[0]?.pd ?egbinPs_st6[0].pd.mw:0)
-                ).toFixed(2), kv: (egbinPs_st1[0]?.pd ?egbinPs_st1[0].pd.v:0)},
+            (egbinPs_st1[0]?.pd ?Number(egbinPs_st1[0].pd.mw):0) + (egbinPs_st2[0]?.pd ?Number(egbinPs_st2[0].pd.mw):0) + 
+            (egbinPs_st3[0]?.pd ?Number(egbinPs_st3[0].pd.mw):0) + (egbinPs_st4[0]?.pd ?Number(egbinPs_st4[0].pd.mw):0) + 
+            (egbinPs_st5[0]?.pd ?Number(egbinPs_st5[0].pd.mw):0) + (egbinPs_st6[0]?.pd ?Number(egbinPs_st6[0].pd.mw):0)
+                ).toFixed(2), kv: (egbinPs_st1[0]?.pd ?Number(egbinPs_st1[0].pd.v):0)},
         'OKPAI (GAS/STEAM)' : {mw: (-1 * Number(
             (okpaiGs_k1t[0]?.td ?okpaiGs_k1t[0].td.mw:0) + (okpaiGs_k2t[0]?.td ?okpaiGs_k2t[0].td.mw:0)
             ).toFixed(2)), kv: (okpaiGs_k1t[0]?.td ?okpaiGs_k1t[0].td.V:0)},
