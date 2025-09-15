@@ -32,6 +32,7 @@ import Modal from "./Modal";
       HYDROPOLIS: {},
       yongxing: {},
       amil: {},
+      AENL: {},
       connected: false,
       ModalState: false,
       modal_data: "TAOPEX"
@@ -240,7 +241,10 @@ import Modal from "./Modal";
     const yongxing_t1 = yongxing.transformers ? yongxing.transformers[0].td : {};
     // AMIL
     const { amil } = this.state;
+    const { AENL } = this.state;
     const amil_t1 = amil.transformers ? amil.transformers[0].td : {};
+    const AENL_t1 = AENL.transformers ? AENL.transformers[0].td : {};
+    const AENL_t2 = AENL.transformers ? AENL.transformers[1].td : {};
 
     const totalBilateral = (isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw)) + (isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw))
                             + (isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum)) +
@@ -252,8 +256,8 @@ import Modal from "./Modal";
     (isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw)) + (isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw)) + 
     (isNaN(Number(phoenix?.mw)) ? 0 : Math.abs(Number(phoenix.mw))) + (isNaN(Number(hydropolis_mw)) ? 0 : Number(hydropolis_mw)) +
     (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw))) +
-    (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw))) +
-    (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw)));
+    (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw)))  + (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) +
+    (isNaN(Number(AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw)));
     
         
     return (
@@ -425,7 +429,13 @@ import Modal from "./Modal";
                   <td>{isNaN((amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw).toFixed(2))}</td>
                   <td>{amil_t1.v ? amil_t1.v : 0}</td>
                 </tr>
-                
+                <tr onClick={(e) => { this.setModalTrue(e, ['AENL', this.state.AENL]); }}>
+                  <td>13</td>
+                  <td>AENL</td>
+                  <td>{this.checkConnection2(this.state.AENL.server_time)}</td>
+                  <td>{(isNaN((AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw).toFixed(2))) + (isNaN((AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw).toFixed(2)))}</td>
+                  <td>{AENL_t1.v ? AENL_t1.v : AENL_t2.v ? AENL_t2.v : 0}</td>
+                </tr>
                 <tr></tr>
                 <tr>
                   <td></td>

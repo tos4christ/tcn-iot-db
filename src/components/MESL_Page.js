@@ -26,7 +26,8 @@ import Modal from "./Modal";
       quantum: {},
       HYDROPOLIS: {},
       yongxing: {},
-      amil: {}
+      amil: {},
+      AENL: {},
      };
    }
    componentDidMount() {
@@ -159,6 +160,7 @@ import Modal from "./Modal";
     const { HYDROPOLIS } = this.state;
     const { yongxing } = this.state;
     const { amil } = this.state;
+    const { AENL } = this.state;    
     
     // const quantum = this.state.quantum?.transformers[0]?.td ? this.state.quantum.transformers[0].td : {};
     const quantum = this.state.quantum.transformers ? this.state.quantum.transformers[0].td : {};
@@ -168,6 +170,8 @@ import Modal from "./Modal";
     const hydropolis_kv = hydropolis_l2?.v ? hydropolis_l2.v : hydropolis_l4.v ? hydropolis_l4.v : 0;
     const yongxing_t1 = yongxing.transformers ? yongxing.transformers[0].td : {};
     const amil_t1 = amil.transformers ? amil.transformers[0].td : {};
+    const AENL_t1 = AENL.transformers ? AENL.transformers[0].td : {};
+    const AENL_t2 = AENL.transformers ? AENL.transformers[1].td : {};
 
     // console.log(quantum, "   the quantum data");
     const totalConsumption = (isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw)) + (isNaN(Number(hydropolis_mw)) ? 0 : Number(hydropolis_mw)) +
@@ -175,8 +179,8 @@ import Modal from "./Modal";
     (isNaN(Number(Inner_Galaxy1.mw)) ? 0 :  Number(Inner_Galaxy1.mw)) + (isNaN(Number(Gazaoua.mw)) ? 0 :  Math.abs(Number(Gazaoua.mw))) + 
     (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) + (isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw)) +
     (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw))) + 
-    (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw))) +
-    (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw)));
+    (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw))) + (isNaN(Number(AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw))) +
+    (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw)));
  
     return (
       <>
@@ -280,14 +284,12 @@ import Modal from "./Modal";
                   <td>{isNaN((amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw).toFixed(2))}</td>
                   <td>{amil_t1.v ? amil_t1.v : 0}</td>
                 </tr>
-                <tr>
+               <tr onClick={(e) => { this.setModalTrue(e, ['AENL', this.state.AENL]); }}>
                   <td>13</td>
                   <td>AENL</td>
-                  <td>{this.checkConnection2(null)}</td>
-                  <td>0</td>
-                  <td>0</td>
-                  {/* <td>{isNaN((amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw).toFixed(2))}</td>
-                  <td>{amil_t1.v ? amil_t1.v : 0}</td> */}
+                  <td>{this.checkConnection2(this.state.AENL.server_time)}</td>
+                  <td>{(isNaN((AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw).toFixed(2))) + (isNaN((AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw).toFixed(2)))}</td>
+                  <td>{AENL_t1.v ? AENL_t1.v : AENL_t2.v ? AENL_t2.v : 0}</td>
                 </tr>
                 {/* <tr onClick={(e) => { this.setModalTrue(e, ['OMOTOSHO (GAS)', this.state.omotosho2, this.state.omotosho1]); }}>
                   <td>4</td>
