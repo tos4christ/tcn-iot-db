@@ -2,7 +2,7 @@
   "name": "niso_db",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/signin",
+  "homepage": "/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.3.0",
     "@fortawesome/free-regular-svg-icons": "^6.3.0",
