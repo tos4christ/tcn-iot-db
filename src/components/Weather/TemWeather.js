@@ -27,7 +27,7 @@ class TemWeather extends React.Component {
         this.getStationList();
     };
     getStationList() {
-        const url = 'https://tcnnas.org/api/weather/getallstations';          
+        const url = 'https://nisonas.org/api/weather/getallstations';          
         fetch(url, {
             method: 'GET',
             headers: {
@@ -52,8 +52,8 @@ class TemWeather extends React.Component {
         e.preventDefault();
         // use the coordinates of selected station to query the weather API
         const { station } = this.state;
-        // hit the tcnnas backend with the api request
-        const url = "https://tcnnas.org/api/weather/getweather";
+        // hit the nisonas backend with the api request
+        const url = "https://nisonas.org/api/weather/getweather";
         const data = {lon: station.long, lat: station.lat};
         this.setState({loading: true}, () => {
         fetch(url, {
