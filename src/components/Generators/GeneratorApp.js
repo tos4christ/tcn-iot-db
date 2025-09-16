@@ -48,6 +48,10 @@ class GeneratorApp extends Component {
         id: "sapele-gas",
         units: [ {id: "pb203", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}]
       },
+      "afamVPs": {
+        id: "afamVPs",
+        units: [ {id: "gt20", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}]
+      },
       delta2: {
         id: "delta2",
         units: [ {id: "gt6", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}]
@@ -155,11 +159,12 @@ class GeneratorApp extends Component {
     try {
       // Get all the stations and its units here and prepare them for the sidebar and details view
       // const dummy_stations = generateStations();
-      const { selectedStation, egbinPs, "sapele-gas": sapeleGas, delta2, delta3, "delta4-2": delta4_2, "delta4-1": delta4_1 } = this.state;
+      const { selectedStation, egbinPs, "sapele-gas": sapeleGas, delta2, delta3, 
+        "delta4-2": delta4_2, "delta4-1": delta4_1, "afamVPs": afam_VPs } = this.state;
       // Merge the real-time data into the dummy stations data
       let stations = [];
       const stationTypes = ['Thermal', 'Hydro', 'Nuclear', 'Wind', 'Solar', 'Gas'];
-      const real_stations = [egbinPs, sapeleGas, delta2, delta3, delta4_2, delta4_1];
+      const real_stations = [egbinPs, sapeleGas, delta2, delta3, delta4_2, delta4_1, afam_VPs];
       real_stations.forEach((station, index) => {
         const station_name = station.name ? station.name : station.id ? station.id : null;
         if(station && station_name) {
