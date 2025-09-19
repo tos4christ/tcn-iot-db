@@ -6,6 +6,7 @@ import StationSidebar from './StationSidebar';
 import GeneratorDetails from './GeneratorDetails';
 import { generateStations } from './utils/stationData';
 import niso_logo_main from '../../assets/img/niso_logo_main.jpg';
+import { server } from 'websocket';
 
 const headerStyle = {
   display: "flex",
@@ -175,7 +176,9 @@ class GeneratorApp extends Component {
       // Merge the real-time data into the dummy stations data
       let stations = [];
       const stationTypes = ['Thermal', 'Hydro', 'Nuclear', 'Wind', 'Solar', 'Gas'];
-      const real_stations = [egbinPs, sapeleGas, delta2, delta3, delta4_2, delta4_1, afam_5_Ps, afam_3_Ps, afamVIPs];
+      const afam_3_5_Ps = {id: "afam III & V Ps", units: [...afam_3_Ps.units, ...afam_5_Ps.units], server_time: afam_3_Ps.server_time > afam_5_Ps.server_time ? afam_3_Ps.server_time : afam_5_Ps.server_time};
+      // console.log(afam_3_5_Ps, 'afam_3_5_Ps');
+      const real_stations = [egbinPs, sapeleGas, delta2, delta3, delta4_2, delta4_1, afam_3_5_Ps, afamVIPs];
       real_stations.forEach((station, index) => {
         const station_name = station.name ? station.name : station.id ? station.id : null;
         if(station && station_name) {
