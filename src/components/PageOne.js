@@ -53,6 +53,11 @@ import get_stations from "./stations_adder";
       olorunsogoPhase1Gs: {},
       gbarain: {},
       dadinKowaGs: {},
+      dadinkowa: {
+        id: "dadinkowa",
+        units: [ {id: "unit1", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "unit2", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
+      },
       asaba: {},
       lokojaTs: {},
       ugwuaji: {},
@@ -91,6 +96,25 @@ import get_stations from "./stations_adder";
         const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
         const returnObject = {}
         // console.log(parsedMessage, 'c2 message');
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station]
+          return returnObject;
+        })
+      });
+      socket.on("generator_units", data => {
+        let { message } = data;
+        // if(message[0] === '"') {
+        //   message = '{' + message;
+        //   message = message.replace(/.(?=\])/g, '')
+        // }
+        // console.log(message, 'raw generator_units message');
+        const parsedMessage = JSON.parse(message);
+            
+        parsedMessage.server_time = (new Date()).getTime();
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        const returnObject = {}
+        // console.log(parsedMessage, 'c1 message');
         this.setState(prevState => {
           prevState[station] = parsedMessage;
           returnObject[station] = prevState[station]
