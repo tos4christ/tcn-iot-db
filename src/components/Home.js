@@ -395,7 +395,10 @@ import axios from "axios";
     const ibom_gs = stations_array['IBOM POWER (GAS)'];
     const gbarain_gs = stations_array['GBARAIN NIPP (GAS)'];
     const olorunsogogas_gs = stations_array['OLORUNSOGO (GAS)'];
-    const dadinkowa_gs = stations_array['DADINKOWA G.S (HYDRO)'];
+    // const dadinkowa_gs = stations_array['DADINKOWA G.S (HYDRO)'];
+    const dadinkowa_gs = {mw: (Number(this.state.dadinkowa.units[0].pd.mw) + Number(this.state.dadinkowa.units[1].pd.mw)).toFixed(2) 
+      , kv: (this.state.dadinkowa.units[0].pd.v || this.state.dadinkowa.units[1].pd.v)
+    };
     const asaba_ts = stations_array['ASABA'];
     const ugwuaji_ts = stations_array['UGWUAJI'];
     const gwagwalada_ts = stations_array['GWAGWALADA'];
@@ -582,7 +585,7 @@ import axios from "axios";
                 <tr onClick={(e) => { this.setModalTrue(e, ['DADINKOWA G.S (HYDRO)', this.state.dadinKowaGs]); }}>
                   <td>13</td>
                   <td>DADINKOWA G.S (HYDRO)</td>
-                  <td>{this.checkConnection2(this.state.dadinKowaGs.server_time)}</td>
+                  <td>{this.checkConnection2(this.state.dadinkowa.server_time)}</td>
                   <td>{dadinkowa_gs.mw}</td>
                   <td>{dadinkowa_gs.kv}</td>
                 </tr>

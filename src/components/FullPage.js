@@ -338,8 +338,8 @@ import Modal from "./Modal";
     const gbarain_gs = stations_array['GBARAIN NIPP (GAS)'];
     const olorunsogogas_gs = stations_array['OLORUNSOGO (GAS)'];
     // const dadinkowa_gs = stations_array['DADINKOWA G.S (HYDRO)'];
-    const dadinkowa_gs = {mw: (this.state.dadinkowa.units[0].pd.mw + this.state.dadinkowa.units[1].pd.mw)
-      , kv: this.state.dadinkowa.units[0].pd.v || this.state.dadinkowa.units[1].pd.v
+    const dadinkowa_gs = {mw: (Number(this.state.dadinkowa.units[0].pd.mw) + Number(this.state.dadinkowa.units[1].pd.mw)).toFixed(2) 
+      , kv: (this.state.dadinkowa.units[0].pd.v || this.state.dadinkowa.units[1].pd.v)
     };
     const zungeru_gs = stations_array['ZUNGERU'];
     const taopex_gs = stations_array['TAOPEX'];
