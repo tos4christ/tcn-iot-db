@@ -9,6 +9,7 @@ package.json.lock
 package-lock.json
 
 build
+build.zip
 /build
 
 src/weather_response.json
