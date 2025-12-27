@@ -235,7 +235,7 @@ class GeneratorApp extends Component {
     try {
       // Get all the stations and its units here and prepare them for the sidebar and details view
       // const dummy_stations = generateStations();
-      const { selectedStation, egbinPs, "sapele-gas": sapeleGas, delta2, delta3, afamVIPs, dadinkowa, okpai_1, okpai_2, zungeru, kainjiPs, jebbaPs
+      const { selectedStation, egbinPs, "sapele-gas": sapeleGas, delta2, delta3, afamVIPs, dadinkowa, okpai_1, okpai_2, zungeru, kainjiPs, jebbaPs,
         "delta4-2": delta4_2, "delta4-1": delta4_1, "afamVPs": afam_5_Ps, afamIIIPs: afam_3_Ps, paras_1, paras_2, shiroroPs } = this.state;
         // console.log(paras_1, 'paras_1 in app');
         // console.log(paras_2, 'paras_2 in app');
