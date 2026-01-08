@@ -24,7 +24,7 @@ import get_stations from "./stations_adder";
       monarch: {},
       larfarge: {},
       afamIv_vPs: {},
-      shiroroPs: {},
+      // shiroroPs: {},
       egbinPs: {},
       kainjiTs: {},
       jebbaTs: {},
@@ -57,6 +57,13 @@ import get_stations from "./stations_adder";
         id: "dadinkowa",
         units: [ {id: "unit1", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
                  {id: "unit2", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
+      },
+      shiroroPs: {
+        id: "shiroroPs",
+        units: [ {id: "411g1", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "411g2", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "411g3", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "411g4", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
       },
       asaba: {},
       lokojaTs: {},
