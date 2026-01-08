@@ -27,7 +27,7 @@ import Modal from "./Modal";
       monarch: {},
       larfarge: {},
       afamIv_vPs: {},
-      shiroroPs: {},
+      // shiroroPs: {},
       egbinPs: {},
       kainjiTs: {},
       jebbaTs: {},
@@ -60,6 +60,13 @@ import Modal from "./Modal";
         id: "dadinkowa",
         units: [ {id: "unit1", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
                  {id: "unit2", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
+      },
+      shiroroPs: {
+        id: "shiroroPs",
+        units: [ {id: "411g1", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "411g2", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "411g3", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "411g4", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
       },
       asaba: {},
       lokojaTs: {},
@@ -327,7 +334,7 @@ import Modal from "./Modal";
     const egbin_gs = stations_array['EGBIN (STEAM)'];
     const kainji_gs = stations_array['KAINJI (HYDRO)'];
     const afam4_gs = stations_array['AFAM IV & V (GAS)'];
-    const shiroro_gs = stations_array['SHIRORO (HYDRO)'];
+    // const shiroro_gs = stations_array['SHIRORO (HYDRO)'];
     const paras_gs = stations_array['PARAS ENERGY (GAS)'];
     const omotosonipp_gs = stations_array['OMOTOSHO NIPP (GAS)'];
     const geregunipp_gs = stations_array['GEREGU NIPP (GAS)'];
@@ -339,7 +346,11 @@ import Modal from "./Modal";
     const olorunsogogas_gs = stations_array['OLORUNSOGO (GAS)'];
     // const dadinkowa_gs = stations_array['DADINKOWA G.S (HYDRO)'];
     const dadinkowa_gs = {mw: (Number(this.state.dadinkowa.units[0].pd.mw) + Number(this.state.dadinkowa.units[1].pd.mw)).toFixed(2) 
-      , kv: (this.state.dadinkowa.units[0].pd.v || this.state.dadinkowa.units[1].pd.v)
+                           , kv: (this.state.dadinkowa.units[0].pd.v || this.state.dadinkowa.units[1].pd.v)
+    };
+    const shiroro_gs = {mw: (Number(this.state.shiroroPs.units[0]?.pd?.mw) + Number(this.state.shiroroPs.units[1]?.pd?.mw)
+                            + Number(this.state.shiroroPs.units[2]?.pd?.mw) + Number(this.state.shiroroPs.units[3]?.pd?.mw)).toFixed(2) 
+                           , kv: (this.state.shiroroPs.units[0]?.pd?.v || this.state.shiroroPs.units[1]?.pd?.v || this.state.shiroroPs.units[2]?.pd?.v || this.state.shiroroPs.units[3]?.pd?.v)
     };
     const zungeru_gs = stations_array['ZUNGERU'];
     const taopex_gs = stations_array['TAOPEX'];
