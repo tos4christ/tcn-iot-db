@@ -350,7 +350,7 @@ import Modal from "./Modal";
     };
     const shiroro_gs = {mw: (Number(this.state.shiroroPs.units[0]?.pd?.mw) + Number(this.state.shiroroPs.units[1]?.pd?.mw)
                             + Number(this.state.shiroroPs.units[2]?.pd?.mw) + Number(this.state.shiroroPs.units[3]?.pd?.mw)).toFixed(2) 
-                           , kv: (this.state.shiroroPs.units[0]?.pd?.v || this.state.shiroroPs.units[1]?.pd?.v || this.state.shiroroPs.units[2]?.pd?.v || this.state.shiroroPs.units[3]?.pd?.v)
+                           , kv: (this.state.shiroroPs.units[1]?.pd?.v || this.state.shiroroPs.units[2]?.pd?.v || this.state.shiroroPs.units[0]?.pd?.v || this.state.shiroroPs.units[1]?.pd?.v)
     };
     const zungeru_gs = stations_array['ZUNGERU'];
     const taopex_gs = stations_array['TAOPEX'];
