@@ -430,7 +430,7 @@ import Modal from "./Modal";
                   <td>{amil_t1.v ? amil_t1.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['AENL', this.state.AENL]); }}>
-                  <td>13</td>
+                  <td>22</td>
                   <td>AENL</td>
                   <td>{this.checkConnection2(this.state.AENL.server_time)}</td>
                   <td>{(isNaN((AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw).toFixed(2))) + (isNaN((AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw).toFixed(2)))}</td>
