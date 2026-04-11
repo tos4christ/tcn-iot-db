@@ -33,6 +33,7 @@ import Modal from "./Modal";
       yongxing: {},
       amil: {},
       AENL: {},
+      weewood: {},
       connected: false,
       ModalState: false,
       modal_data: "TAOPEX"
@@ -120,6 +121,21 @@ import Modal from "./Modal";
           return returnObject;
         })
       });
+      socket.on("client_message_weewood", data => {
+        const { message } = data;
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
+        parsedMessage.server_time = (new Date()).getTime();        
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        const returnObject = {}
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station];
+          return returnObject;
+        })
+      });
     }
    }
    componentWillUnmount() {
@@ -128,6 +144,7 @@ import Modal from "./Modal";
     socket.off("client_message_fipl");
     socket.off("client_message_ndphc");
     socket.off("client_message_sakete");
+    socket.off("client_message_weewood");
    }
    getEpoch(time) {
     if(!time || time === undefined || time === null) {
@@ -242,6 +259,7 @@ import Modal from "./Modal";
     // AMIL
     const { amil } = this.state;
     const { AENL } = this.state;
+    const weewood = this.state.weewood.lines ? this.state.weewood.lines[0]?.td : {};
     const amil_t1 = amil.transformers ? amil.transformers[0].td : {};
     const AENL_t1 = AENL.transformers ? AENL.transformers[0].td : {};
     const AENL_t2 = AENL.transformers ? AENL.transformers[1].td : {};
@@ -254,6 +272,7 @@ import Modal from "./Modal";
     (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) + (isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw)) +
     (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw))) +
     (isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw)) + (isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw)) + 
+    (isNaN(Number(weewood?.mw)) ? 0 : Math.abs(Number(weewood.mw))) +
     (isNaN(Number(phoenix?.mw)) ? 0 : Math.abs(Number(phoenix.mw))) + (isNaN(Number(hydropolis_mw)) ? 0 : Number(hydropolis_mw)) +
     (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw))) +
     (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw)))  + (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) +
@@ -435,6 +454,13 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.AENL.server_time)}</td>
                   <td>{(isNaN((AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw).toFixed(2))) + (isNaN((AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw).toFixed(2)))}</td>
                   <td>{AENL_t1.v ? AENL_t1.v : AENL_t2.v ? AENL_t2.v : 0}</td>
+                </tr>
+                <tr >
+                  <td>23</td>
+                  <td>WEEwOOD</td>
+                  <td>{this.checkConnection2(this.state.weewood.server_time)}</td>
+                  <td>{(isNaN((weewood.mw)) ? 0 : Math.abs(Number(weewood.mw).toFixed(2)))}</td>
+                  <td>{weewood.v ? weewood.v : 0}</td>
                 </tr>
                 <tr></tr>
                 <tr>
