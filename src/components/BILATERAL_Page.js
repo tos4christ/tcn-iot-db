@@ -121,7 +121,7 @@ import Modal from "./Modal";
           return returnObject;
         })
       });
-      socket.on("client_message_weewood", data => {
+      socket.on("client_message_wewood", data => {
         const { message } = data;
         let parsedMessage = {};
         try {
@@ -144,7 +144,7 @@ import Modal from "./Modal";
     socket.off("client_message_fipl");
     socket.off("client_message_ndphc");
     socket.off("client_message_sakete");
-    socket.off("client_message_weewood");
+    socket.off("client_message_wewood");
    }
    getEpoch(time) {
     if(!time || time === undefined || time === null) {
@@ -452,12 +452,12 @@ import Modal from "./Modal";
                   <td>22</td>
                   <td>AENL</td>
                   <td>{this.checkConnection2(this.state.AENL.server_time)}</td>
-                  <td>{(isNaN((AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw).toFixed(2))) + (isNaN((AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw).toFixed(2)))}</td>
+                  <td>{((isNaN((AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw).toFixed(2))) + (isNaN((AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw).toFixed(2)))).toFixed(2)}</td>
                   <td>{AENL_t1.v ? AENL_t1.v : AENL_t2.v ? AENL_t2.v : 0}</td>
                 </tr>
                 <tr >
                   <td>23</td>
-                  <td>WEEwOOD</td>
+                  <td>Weewood</td>
                   <td>{this.checkConnection2(this.state.weewood.server_time)}</td>
                   <td>{(isNaN((weewood.mw)) ? 0 : Math.abs(Number(weewood.mw).toFixed(2)))}</td>
                   <td>{weewood.v ? weewood.v : 0}</td>
