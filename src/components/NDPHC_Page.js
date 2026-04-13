@@ -164,7 +164,7 @@ import Modal from "./Modal";
 
     const totalConsumption = (isNaN(Number(phoenix?.mw)) ? 0 : Math.abs(Number(phoenix.mw))) 
                             + (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + 
-                            (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw))); + 
+                            (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw))) + 
                             (isNaN(Number(weewood.mw)) ? 0 : Math.abs(Number(weewood.mw)));
  
     return (
