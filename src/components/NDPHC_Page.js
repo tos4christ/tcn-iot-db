@@ -17,6 +17,7 @@ import Modal from "./Modal";
       phoenix: {},
       pulkitSteel: {},
       sunflag: {},
+      weewood: {},
      };
    }
    componentDidMount() {
@@ -49,11 +50,27 @@ import Modal from "./Modal";
           return returnObject;
         })
       });
+      socket.on("client_message_wewood", data => {
+        const { message } = data;
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
+        parsedMessage.server_time = (new Date()).getTime();        
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        const returnObject = {}
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station];
+          return returnObject;
+        })
+      });
     }
    }
    componentWillUnmount() {
     socket.off("client_message_ndphc");
     socket.off("frequency001");
+    socket.off("client_message_wewood");
    }
    getEpoch(time) {
     if(!time || time === undefined || time === null) {
@@ -140,13 +157,15 @@ import Modal from "./Modal";
     let {phoenix} = this.state;
     let {pulkitSteel} = this.state;
     let {sunflag} = this.state;
+    let weewood = this.state.weewood.lines ? this.state.weewood.lines[0]?.td : {};
     phoenix = phoenix.transformers ? phoenix.transformers[0]?.td : {};
     pulkitSteel = pulkitSteel.lines ? pulkitSteel.lines[0]?.td : {};
     sunflag = sunflag.lines ? sunflag.lines[0]?.td : {};
 
     const totalConsumption = (isNaN(Number(phoenix?.mw)) ? 0 : Math.abs(Number(phoenix.mw))) 
                             + (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + 
-                            (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw)));
+                            (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw))); + 
+                            (isNaN(Number(weewood.mw)) ? 0 : Math.abs(Number(weewood.mw)));
  
     return (
       <>
@@ -186,6 +205,13 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
                   <td>{Math.abs(sunflag?.mw ? sunflag.mw : 0)}</td>
                   <td>{sunflag?.v ? sunflag.v : 0}</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Weewood</td>
+                  <td>{this.checkConnection2(this.state.weewood.server_time)}</td>
+                  <td>{Math.abs(weewood?.mw ? weewood.mw : 0)}</td>
+                  <td>{weewood?.v ? weewood.v : 0}</td>
                 </tr>
 
                 <tr></tr>
