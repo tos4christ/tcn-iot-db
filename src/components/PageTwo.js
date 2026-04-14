@@ -26,6 +26,15 @@ import get_stations from "./stations_adder";
       // shiroroPs: {},
       egbinPs: {},
       kainjiTs: {},
+      kainjiPs: {
+        id: "kainjiPs",
+        units: [ {id: "1g5", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "1g6", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "1g7", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "1g9", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "1g11", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "1g12", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
+      },
       jebbaTs: {},
       okpaiGs: {},
       deltaGs: {},
@@ -133,6 +142,7 @@ import get_stations from "./stations_adder";
    componentWillUnmount() { 
     socket.off("client_message_111");
     socket.off("client_message_222");
+    socket.off("generator_units");
     }
    getEpoch(time) {
     if(!time || time === undefined || time === null) {
@@ -273,7 +283,7 @@ import get_stations from "./stations_adder";
     const delta_gs = stations_array['DELTA (GAS)'];
     const okpai_gs = stations_array['OKPAI (GAS/STEAM)'];
     const egbin_gs = stations_array['EGBIN (STEAM)'];
-    const kainji_gs = stations_array['KAINJI (HYDRO)'];
+    // const kainji_gs = stations_array['KAINJI (HYDRO)'];
     const afam4_gs = stations_array['AFAM IV & V (GAS)'];
     // const shiroro_gs = stations_array['SHIRORO (HYDRO)'];
     const paras_gs = stations_array['PARAS ENERGY (GAS)'];
@@ -294,6 +304,10 @@ import get_stations from "./stations_adder";
     const shiroro_gs = {mw: (Number(this.state.shiroroPs.units[0]?.pd?.mw) + Number(this.state.shiroroPs.units[1]?.pd?.mw)
                             + Number(this.state.shiroroPs.units[2]?.pd?.mw) + Number(this.state.shiroroPs.units[3]?.pd?.mw)).toFixed(2) 
                            , kv: (this.state.shiroroPs.units[1]?.pd?.v || this.state.shiroroPs.units[2]?.pd?.v || this.state.shiroroPs.units[0]?.pd?.v || this.state.shiroroPs.units[1]?.pd?.v)
+    };
+    const { kainjiPs } = this.state;
+    const kainji_gs = {mw: (Number(kainjiPs.units[0].pd.mw) + Number(kainjiPs.units[1].pd.mw) + Number(kainjiPs.units[2].pd.mw) + Number(kainjiPs.units[3].pd.mw) + Number(kainjiPs.units[4].pd.mw) + Number(kainjiPs.units[5].pd.mw)).toFixed(2) 
+      , kv: kainjiPs.units[0].pd.v || kainjiPs.units[1].pd.v || kainjiPs.units[2].pd.v || kainjiPs.units[3].pd.v || kainjiPs.units[4].pd.v || kainjiPs.units[5].pd.v
     };
 
     const totalGeneration = (Number(riversipp_gs.mw) < 0 ? 0 : Number(riversipp_gs.mw)) +
@@ -409,7 +423,7 @@ import get_stations from "./stations_adder";
                 <tr>
                   <td>25</td>
                   <td>KAINJI (HYDRO)</td>
-                  <td>{this.checkConnection2(this.state.kainjiTs.server_time)}</td>
+                  <td>{this.checkConnection2(this.state.kainjiPs.server_time)}</td>
                   <td>{kainji_gs.mw}</td>
                   <td>{kainji_gs.kv}</td>
                 </tr>
