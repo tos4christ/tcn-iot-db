@@ -34,6 +34,7 @@ import Modal from "./Modal";
       amil: {},
       AENL: {},
       weewood: {},
+      glml: {},
       connected: false,
       ModalState: false,
       modal_data: "TAOPEX"
@@ -253,6 +254,9 @@ import Modal from "./Modal";
     const hydropolis_l4 = HYDROPOLIS.lines ? HYDROPOLIS.lines[1].td : {};
     const hydropolis_mw = (Number(hydropolis_l2?.mw) + Number(hydropolis_l4?.mw)) || 0;
     const hydropolis_kv = hydropolis_l2?.v ? hydropolis_l2.v : hydropolis_l4.v ? hydropolis_l4.v : 0;
+    // GLML
+    const { glml } = this.state;
+    const glml_l1 = glml.lines ? glml.lines[0].td : {};
     // YONGXING
     const { yongxing } = this.state;
     const yongxing_t1 = yongxing.transformers ? yongxing.transformers[0].td : {};
@@ -272,7 +276,7 @@ import Modal from "./Modal";
     (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) + (isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw)) +
     (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw))) +
     (isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw)) + (isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw)) + 
-    (isNaN(Number(weewood?.mw)) ? 0 : Math.abs(Number(weewood.mw))) +
+    (isNaN(Number(weewood?.mw)) ? 0 : Math.abs(Number(weewood.mw))) + (isNaN(Number(glml_l1?.mw)) ? 0 : Math.abs(Number(glml_l1.mw))) +
     (isNaN(Number(phoenix?.mw)) ? 0 : Math.abs(Number(phoenix.mw))) + (isNaN(Number(hydropolis_mw)) ? 0 : Number(hydropolis_mw)) +
     (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw))) +
     (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw)))  + (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) +
@@ -461,6 +465,13 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.weewood.server_time)}</td>
                   <td>{(isNaN((weewood.mw)) ? 0 : Math.abs(Number(weewood.mw).toFixed(2)))}</td>
                   <td>{weewood.v ? weewood.v : 0}</td>
+                </tr>
+                <tr >
+                  <td>24</td>
+                  <td>GLML</td>
+                  <td>{this.checkConnection2(this.state.glml.server_time)}</td>
+                  <td>{(isNaN((glml_l1?.mw)) ? 0 : Math.abs(Number(glml_l1.mw).toFixed(2)))}</td>
+                  <td>{glml_l1?.v ? glml_l1.v  : 0}</td>
                 </tr>
                 <tr></tr>
                 <tr>

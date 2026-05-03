@@ -28,6 +28,7 @@ import Modal from "./Modal";
       yongxing: {},
       amil: {},
       AENL: {},
+      glml: {}
      };
    }
    componentDidMount() {
@@ -160,8 +161,9 @@ import Modal from "./Modal";
     const { HYDROPOLIS } = this.state;
     const { yongxing } = this.state;
     const { amil } = this.state;
-    const { AENL } = this.state;    
-    
+    const { AENL } = this.state;
+    const { glml } = this.state;
+
     // const quantum = this.state.quantum?.transformers[0]?.td ? this.state.quantum.transformers[0].td : {};
     const quantum = this.state.quantum.transformers ? this.state.quantum.transformers[0].td : {};
     const hydropolis_l2 = HYDROPOLIS.lines ? HYDROPOLIS.lines[0].td : {};
@@ -172,7 +174,7 @@ import Modal from "./Modal";
     const amil_t1 = amil.transformers ? amil.transformers[0].td : {};
     const AENL_t1 = AENL.transformers ? AENL.transformers[0].td : {};
     const AENL_t2 = AENL.transformers ? AENL.transformers[1].td : {};
-
+    const glml_l1 = glml.lines ? glml.lines[0].td : {};
     // console.log(quantum, "   the quantum data");
     const totalConsumption = (isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw)) + (isNaN(Number(hydropolis_mw)) ? 0 : Number(hydropolis_mw)) +
     (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) + (isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw))) +
@@ -180,7 +182,8 @@ import Modal from "./Modal";
     (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) + (isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw)) +
     (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw))) + 
     (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw))) + (isNaN(Number(AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw))) +
-    (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw)));
+    (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw))) +
+    (isNaN(Number(glml_l1.mw)) ? 0 : Math.abs(Number(glml_l1.mw)));
  
     return (
       <>
@@ -291,43 +294,13 @@ import Modal from "./Modal";
                   <td>{(isNaN((AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw).toFixed(2))) + (isNaN((AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw).toFixed(2)))}</td>
                   <td>{AENL_t1.v ? AENL_t1.v : AENL_t2.v ? AENL_t2.v : 0}</td>
                 </tr>
-                {/* <tr onClick={(e) => { this.setModalTrue(e, ['OMOTOSHO (GAS)', this.state.omotosho2, this.state.omotosho1]); }}>
-                  <td>4</td>
-                  <td>OMOTOSHO (GAS)</td>
-                  <td>{this.checkConnection3(this.state.omotosho2.server_time, this.state.omotosho1.server_time)}</td>
-                  <td>{omotosogas_gs.mw}</td>
-                  <td>{omotosogas_gs.kv}</td>
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['OMOTOSHO NIPP (GAS)', this.state.omotoshoNippPs]); }}>
-                  <td>5</td>
-                  <td>OMOTOSHO NIPP (GAS)</td>
-                  <td>{this.checkConnection2(this.state.omotoshoNippPs.server_time)}</td>
-                  <td>{omotosonipp_gs.mw}</td>
-                  <td>{omotosonipp_gs.kv}</td>
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['DELTA (GAS)', this.state.delta3, this.state.deltaGs, this.state.delta2]); }}>
-                  <td>6</td>
-                  <td>DELTA (GAS)</td>
-                  <td>{this.checkConnection4_delta(this.state.delta3.server_time , this.state.deltaGs.server_time, this.state.delta2.server_time)}</td>
-                  <td>{delta_gs.mw}</td>
-                  <td>{delta_gs.kv}</td>
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['SAPELE NIPP (GAS)', this.state.sapeleNippPs]); }}>
-                  <td>7</td>
-                  <td>SAPELE NIPP (GAS)</td>
-                  <td>{this.checkConnection2(this.state.sapeleNippPs.server_time)}</td>
-                  <td>{sapelenipp_gs.mw}</td>
-                  <td>{sapelenipp_gs.kv}</td>
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['OMOKU (GAS)', this.state.omokuPs1]); }}>
-                  <td>8</td>
-                  <td>OMOKU (GAS)</td>
-                  <td>{this.checkConnection2(this.state.omokuPs1.server_time)}</td>
-                  <td>{omoku_gs.mw}</td>
-                  <td>{omoku_gs.kv}</td>
-                </tr> */}
-                
-                
+                <tr onClick={(e) => { this.setModalTrue(e, ['GLML', this.state.glml]); }}>
+                  <td>14</td>
+                  <td>GLML</td>
+                  <td>{this.checkConnection2(this.state.glml.server_time)}</td>
+                  <td>{isNaN((glml_l1?.mw)) ? 0 : Math.abs(Number(glml_l1.mw).toFixed(2))}</td>
+                  <td>{glml_l1?.v ? glml_l1.v : 0}</td>
+                </tr>                
                 <tr></tr>
                 <tr>
                   <td></td>
