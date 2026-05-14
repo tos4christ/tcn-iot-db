@@ -291,7 +291,7 @@ import Modal from "./Modal";
                   <td>13</td>
                   <td>AENL</td>
                   <td>{this.checkConnection2(this.state.AENL.server_time)}</td>
-                  <td>{(isNaN((AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw).toFixed(2))) + (isNaN((AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw).toFixed(2)))}</td>
+                  <td>{((isNaN((AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw).toFixed(2))) + (isNaN((AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw).toFixed(2)))).toFixed(2)}</td>
                   <td>{AENL_t1.v ? AENL_t1.v : AENL_t2.v ? AENL_t2.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['GLML', this.state.glml]); }}>
