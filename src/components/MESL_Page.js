@@ -28,7 +28,8 @@ import Modal from "./Modal";
       yongxing: {},
       amil: {},
       AENL: {},
-      glml: {}
+      glml: {},
+      phedc: {},
      };
    }
    componentDidMount() {
@@ -175,15 +176,21 @@ import Modal from "./Modal";
     const AENL_t1 = AENL.transformers ? AENL.transformers[0].td : {};
     const AENL_t2 = AENL.transformers ? AENL.transformers[1].td : {};
     const glml_l1 = glml.lines ? glml.lines[0].td : {};
+    // PHEDC FEEDERS
+    const rspub1 = phedc?.lines?.length > 0 ? phedc.lines.find(row => row.id === "rspub1") : null;
+    const refinery_line_2 = phedc?.lines?.length > 0 ? phedc.lines.find(row => row.id === "ref2") : null;
+
+    // console.log(rspub1, 'rspub1 from phedc');
+    // console.log(refinery_line_2, 'refinery_line_2 from phedc');
     // console.log(quantum, "   the quantum data");
     const totalConsumption = (isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw)) + (isNaN(Number(hydropolis_mw)) ? 0 : Number(hydropolis_mw)) +
     (isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw)) + (isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw))) +
     (isNaN(Number(Inner_Galaxy1.mw)) ? 0 :  Number(Inner_Galaxy1.mw)) + (isNaN(Number(Gazaoua.mw)) ? 0 :  Math.abs(Number(Gazaoua.mw))) + 
     (isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw)) + (isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw)) +
-    (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw))) + 
+    (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw))) + (isNaN(Number(rspub1?.td?.mw)) ? 0 : Number(rspub1.td.mw)) + 
     (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw))) + (isNaN(Number(AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw))) +
     (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw))) +
-    (isNaN(Number(glml_l1.mw)) ? 0 : Math.abs(Number(glml_l1.mw)));
+    (isNaN(Number(glml_l1.mw)) ? 0 : Math.abs(Number(glml_l1.mw))) + (isNaN(Number(refinery_line_2?.td?.mw)) ? 0 : Number(refinery_line_2.td.mw));
  
     return (
       <>
@@ -300,7 +307,21 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.glml.server_time)}</td>
                   <td>{isNaN((glml_l1?.mw)) ? 0 : Math.abs(Number(glml_l1.mw).toFixed(2))}</td>
                   <td>{glml_l1?.v ? glml_l1.v : 0}</td>
-                </tr>                
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['WOJI', this.state.phedc]); }}>
+                  <td>15</td>
+                  <td>WOJI</td>
+                  <td>{this.checkConnection2(this.state.phedc.server_time)}</td>
+                  <td>{isNaN((phedc?.lines[0]?.td?.mw)) ? 0 : Math.abs(Number(phedc.lines[0].td.mw).toFixed(2))}</td>
+                  <td>{phedc?.lines[0]?.td?.v ? phedc.lines[0].td.v : 0}</td>
+                </tr>  
+                <tr onClick={(e) => { this.setModalTrue(e, ['Refinery Line 2', this.state.phedc]); }}>
+                  <td>16</td>
+                  <td>Refinery Line 2</td>
+                  <td>{this.checkConnection2(this.state.phedc.server_time)}</td>
+                  <td>{isNaN((phedc?.lines[1]?.td?.mw)) ? 0 : Math.abs(Number(phedc.lines[1].td.mw).toFixed(2))}</td>
+                  <td>{phedc?.lines[1]?.td?.v ? phedc.lines[1].td.v : 0}</td>
+                </tr>  
                 <tr></tr>
                 <tr>
                   <td></td>
