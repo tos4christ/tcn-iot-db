@@ -164,6 +164,7 @@ import Modal from "./Modal";
     const { amil } = this.state;
     const { AENL } = this.state;
     const { glml } = this.state;
+    const { phedc } = this.state;
 
     // const quantum = this.state.quantum?.transformers[0]?.td ? this.state.quantum.transformers[0].td : {};
     const quantum = this.state.quantum.transformers ? this.state.quantum.transformers[0].td : {};

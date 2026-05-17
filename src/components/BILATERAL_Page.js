@@ -269,6 +269,7 @@ import Modal from "./Modal";
     const AENL_t1 = AENL.transformers ? AENL.transformers[0].td : {};
     const AENL_t2 = AENL.transformers ? AENL.transformers[1].td : {};
     // PHEDC FEEDERS
+    const { phedc } = this.state;
     const rspub1 = phedc?.lines?.length > 0 ? phedc.lines.find(row => row.id === "rspub1") : null;
     const refinery_line_2 = phedc?.lines?.length > 0 ? phedc.lines.find(row => row.id === "ref2") : null;
 
