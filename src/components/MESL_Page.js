@@ -322,7 +322,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.phedc.server_time)}</td>
                   <td>{isNaN((refinery_line_2?.td?.mw)) ? 0 : Math.abs(Number(refinery_line_2.td.mw).toFixed(2))}</td>
                   <td>{refinery_line_2?.td?.v ? refinery_line_2.td.v : 0}</td>
-                </tr>  
+                </tr>
                 <tr></tr>
                 <tr>
                   <td></td>
