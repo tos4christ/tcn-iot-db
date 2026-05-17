@@ -312,15 +312,15 @@ import Modal from "./Modal";
                   <td>15</td>
                   <td>WOJI</td>
                   <td>{this.checkConnection2(this.state.phedc.server_time)}</td>
-                  <td>{isNaN((phedc?.lines[0]?.td?.mw)) ? 0 : Math.abs(Number(phedc.lines[0].td.mw).toFixed(2))}</td>
-                  <td>{phedc?.lines[0]?.td?.v ? phedc.lines[0].td.v : 0}</td>
+                  <td>{isNaN((rspub1?.td?.mw)) ? 0 : Math.abs(Number(rspub1.td.mw).toFixed(2))}</td>
+                  <td>{rspub1?.td?.v ? rspub1.td.v : 0}</td>
                 </tr>  
                 <tr onClick={(e) => { this.setModalTrue(e, ['Refinery Line 2', this.state.phedc]); }}>
                   <td>16</td>
                   <td>Refinery Line 2</td>
                   <td>{this.checkConnection2(this.state.phedc.server_time)}</td>
-                  <td>{isNaN((phedc?.lines[1]?.td?.mw)) ? 0 : Math.abs(Number(phedc.lines[1].td.mw).toFixed(2))}</td>
-                  <td>{phedc?.lines[1]?.td?.v ? phedc.lines[1].td.v : 0}</td>
+                  <td>{isNaN((refinery_line_2?.td?.mw)) ? 0 : Math.abs(Number(refinery_line_2.td.mw).toFixed(2))}</td>
+                  <td>{refinery_line_2?.td?.v ? refinery_line_2.td.v : 0}</td>
                 </tr>  
                 <tr></tr>
                 <tr>
