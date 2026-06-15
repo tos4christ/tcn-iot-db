@@ -143,6 +143,10 @@ class GeneratorApp extends Component {
                  {id: "1g11", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
                  {id: "1g12", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
       },
+       geometricPlant1: {
+        id: "geometricPlant1",
+        units: [ {id: "gt1", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}]
+      },
       jebbaPs: {
         id: "jebbaPs",
         units: [ {id: "2g1", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
@@ -235,8 +239,9 @@ class GeneratorApp extends Component {
     try {
       // Get all the stations and its units here and prepare them for the sidebar and details view
       // const dummy_stations = generateStations();
-      const { selectedStation, egbinPs, "sapele-gas": sapeleGas, delta2, delta3, afamVIPs, dadinkowa, okpai_1, okpai_2, zungeru, kainjiPs, jebbaPs,
-        "delta4-2": delta4_2, "delta4-1": delta4_1, "afamVPs": afam_5_Ps, afamIIIPs: afam_3_Ps, paras_1, paras_2, shiroroPs } = this.state;
+      const { selectedStation, egbinPs, "sapele-gas": sapeleGas, delta2, delta3, afamVIPs, dadinkowa, okpai_1, okpai_2, 
+        zungeru, kainjiPs, jebbaPs, "delta4-2": delta4_2, "delta4-1": delta4_1, "afamVPs": afam_5_Ps, geometricPlant1,
+        afamIIIPs: afam_3_Ps, paras_1, paras_2, shiroroPs } = this.state;
         // console.log(paras_1, 'paras_1 in app');
         // console.log(paras_2, 'paras_2 in app');
       // Merge the real-time data into the dummy stations data
@@ -244,7 +249,7 @@ class GeneratorApp extends Component {
       const stationTypes = ['Thermal', 'Hydro', 'Nuclear', 'Wind', 'Solar', 'Gas'];
       const afam_3_5_Ps = {id: "afam III & V Ps", units: [...afam_3_Ps.units, ...afam_5_Ps.units], server_time: afam_3_Ps.server_time > afam_5_Ps.server_time ? afam_3_Ps.server_time : afam_5_Ps.server_time};
       // console.log(afam_3_5_Ps, 'afam_3_5_Ps');
-      const real_stations = [egbinPs, sapeleGas, delta2, delta3, delta4_2, delta4_1, afam_3_5_Ps, afamVIPs, dadinkowa, okpai_1, okpai_2, paras_1, paras_2, shiroroPs, zungeru, kainjiPs, jebbaPs];
+      const real_stations = [egbinPs, sapeleGas, delta2, delta3, delta4_2, delta4_1, afam_3_5_Ps, afamVIPs, dadinkowa, okpai_1, okpai_2, paras_1, paras_2, shiroroPs, zungeru, kainjiPs, jebbaPs, geometricPlant1];
       real_stations.forEach((station, index) => {
         const station_name = station.name ? station.name : station.id ? station.id : null;
         if(station && station_name) {
