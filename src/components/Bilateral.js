@@ -207,12 +207,12 @@ import Modal from "./Modal";
     const ikorodu_2 = stations_array['IKORODU 2'];
     const pheonix = stations_array['PHEONIX'];
 
-    const totalBilateral = (Number(sunflag.mw) < 0 ? 0 : Number(sunflag.mw)) + (Number(sagamu.mw) < 0 ? 0 : Number(sagamu.mw))
-    + (Number(top_steel.mw) < 0 ? 0 : Number(top_steel.mw)) + (Number(larfarge.mw) < 0 ? 0 : Number(larfarge.mw)) + 
-    (Number(monarch.mw) < 0 ? 0 : Number(monarch.mw)) + (Number(pulkitSteel.mw) < 0 ? 0 : Number(pulkitSteel.mw)) + 
-    (Number(africanFoundriesLimited.mw) < 0 ? 0 : Number(africanFoundriesLimited.mw)) +  
-    (Number(quantum.mw) < 0 ? 0 : Number(quantum.mw)) + (Number(kamSteel.mw) < 0 ? 0 : Number(kamSteel.mw)) +
-    (Number(starPipe.mw) < 0 ? 0 : Number(starPipe.mw)) + (Number(pheonix.mw) < 0 ? 0 : Number(pheonix.mw));
+    const totalBilateral = (isNaN(Number(sunflag.mw)) ? 0 : Number(sunflag.mw)) + (isNaN(Number(sagamu.mw)) ? 0 : Number(sagamu.mw))
+    + (isNaN(Number(top_steel.mw)) ? 0 : Number(top_steel.mw)) + (isNaN(Number(larfarge.mw)) ? 0 : Number(larfarge.mw)) + 
+    (isNaN(Number(monarch.mw)) ? 0 : Number(monarch.mw)) + (isNaN(Number(pulkitSteel.mw)) ? 0 : Number(pulkitSteel.mw)) + 
+    (isNaN(Number(africanFoundriesLimited.mw)) ? 0 : Number(africanFoundriesLimited.mw)) +  
+    (isNaN(Number(quantum.mw)) ? 0 : Number(quantum.mw)) + (isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw)) +
+    (isNaN(Number(starPipe.mw)) ? 0 : Number(starPipe.mw)) + (isNaN(Number(pheonix.mw)) ? 0 : Number(pheonix.mw));
         
     return (
       <>
