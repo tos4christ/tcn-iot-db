@@ -280,27 +280,27 @@ import Modal from "./Modal";
     let {sunflag} = this.state;
     let {kamSteel} = this.state;
     const stations_array = get_stations(this.state);
-    sunflag = sunflag.lines ? sunflag.lines[0]?.td : {};
+    sunflag = sunflag?.lines ? sunflag.lines[0]?.td : {};
     const sagamu = stations_array['SAGAMU'];
     const top_steel = stations_array['TOPSTEEL'];
     const larfarge = stations_array['LARFARGE'];
     const monarch = stations_array['MONARCH'];
-    pulkitSteel = pulkitSteel.lines ? pulkitSteel.lines[0]?.td : {};
+    pulkitSteel = pulkitSteel?.lines ? pulkitSteel.lines[0]?.td : {};
     const africanFoundriesLimited = stations_array['AFRICANFOUNDARIES'];
     //const kamSteel = stations_array['KAMSTEEL'];
-    kamSteel = kamSteel.lines ? kamSteel.lines[0]?.td : {};
+    kamSteel = kamSteel?.lines ? kamSteel.lines[0]?.td : {};
     const starPipe = stations_array['STARPIPE'];
     const quantum = stations_array['QUANTUM'];
     const ikorodu_1 = stations_array['IKORODU 1'];
     const ikorodu_2 = stations_array['IKORODU 2'];
-    pheonix = pheonix.transformers ? pheonix.transformers[0]?.td : {};
+    pheonix = pheonix?.transformers ? pheonix.transformers[0]?.td : {};
 
     const totalBilateral = (isNaN(Number(sunflag.mw)) ? 0 : Number(sunflag.mw)) + (isNaN(Number(sagamu.mw)) ? 0 : Number(sagamu.mw))
     + (isNaN(Number(top_steel.mw)) ? 0 : Number(top_steel.mw)) + (isNaN(Number(larfarge.mw)) ? 0 : Number(larfarge.mw)) + 
     (isNaN(Number(monarch.mw)) ? 0 : Number(monarch.mw)) + (isNaN(Number(pulkitSteel.mw)) ? 0 : Number(pulkitSteel.mw)) + 
     (isNaN(Number(africanFoundriesLimited.mw)) ? 0 : Number(africanFoundriesLimited.mw)) +  
     (isNaN(Number(quantum.mw)) ? 0 : Number(quantum.mw)) + (isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw)) +
-    (isNaN(Number(starPipe.mw)) ? 0 : Number(starPipe.mw)) + (isNaN(Number(pheonix.mw)) ? 0 : Number(pheonix.mw));
+    (isNaN(Number(starPipe.mw)) ? 0 : Number(starPipe.mw)) + (isNaN(Number(pheonix.mw)) ? 0 : Math.abs(Number(pheonix.mw)));
         
     return (
       <>
@@ -324,8 +324,8 @@ import Modal from "./Modal";
                   <td>1</td>
                   <td>PHEONIX STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.pheonix.server_time)}</td>
-                  <td>{pheonix.mw}</td>
-                  <td>{pheonix.V}</td>
+                  <td>{(pheonix?.mw ? Math.abs(Number(pheonix.mw)) : 0)}</td>
+                  <td>{pheonix?.V ? pheonix.V : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['AFRICAN FOUNDARIES LTD IKORODU', this.state.africanFoundriesLimited]); }}>
                   <td>2</td>
@@ -352,8 +352,8 @@ import Modal from "./Modal";
                   <td>5</td>
                   <td>KAM STEEL SAGAMU</td>
                   <td>{this.checkConnection2(this.state.kamSteel.server_time)}</td>
-                  <td>{kamSteel.mw}</td>
-                  <td>{kamSteel.v}</td>
+                  <td>{(kamSteel?.mw ? Math.abs(Number(kamSteel.mw)) : 0)}</td>
+                  <td>{kamSteel?.v ? kamSteel.v : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['CEMENT FACTORY', this.state.larfarge]); }}>
                   <td>6</td>
@@ -373,15 +373,15 @@ import Modal from "./Modal";
                   <td>8</td>
                   <td>SUNFLAG IRON & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
-                  <td>{sunflag.mw}</td>
-                  <td>{sunflag.V}</td>
+                  <td>{(sunflag?.mw ? Math.abs(Number(sunflag.mw)) : 0)}</td>
+                  <td>{sunflag?.V ? sunflag.V : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel]); }}>
                   <td>9</td>
                   <td>PULKIT ALLOY & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.pulkitSteel.server_time)}</td>
-                  <td>{pulkitSteel.mw}</td>
-                  <td>{pulkitSteel.V}</td>
+                  <td>{(pulkitSteel?.mw ? Math.abs(Number(pulkitSteel.mw)) : 0)}</td>
+                  <td>{pulkitSteel?.V ? pulkitSteel.V : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['STAR PIPE PRODUCT IKORODU', this.state.starPipe]); }}>
                   <td>10</td>

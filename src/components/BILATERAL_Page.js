@@ -290,6 +290,10 @@ import Modal from "./Modal";
     (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw)))  + (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) +
     (isNaN(Number(AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw)));
     
+    console.log('The Phoenix Payload:', pheonix);
+    console.log('The Pulkit Payload:', pulkitSteel);
+    console.log('The Sunflag Payload:', sunflag);
+    console.log('The Ikeja West Sakate Payload:', ikejaWest_sakate);
         
     return (
       <>
@@ -314,8 +318,8 @@ import Modal from "./Modal";
                   <td>1</td>
                   <td>PHEONIX STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.pheonix.server_time)}</td>
-                  <td>{Math.abs(pheonix.mw)}</td>
-                  <td>{pheonix.V}</td>
+                  <td>{Math.abs(pheonix?.mw ? pheonix.mw : 0)}</td>
+                  <td>{pheonix?.V ? pheonix.V : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel]); }}>
                   <td>2</td>
