@@ -285,7 +285,7 @@ import Modal from "./Modal";
     (isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw)) + (isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw))) + (isNaN(Number(refinery_line_2?.td?.mw)) ? 0 : Number(refinery_line_2.td.mw)) +
     (isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw)) + (isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw)) + (isNaN(Number(rspub1?.td?.mw)) ? 0 : Number(rspub1.td.mw)) + 
     (isNaN(Number(weewood?.mw)) ? 0 : Math.abs(Number(weewood.mw))) + (isNaN(Number(glml_l1?.mw)) ? 0 : Math.abs(Number(glml_l1.mw))) +
-    (isNaN(Number(phoenix?.mw)) ? 0 : Math.abs(Number(phoenix.mw))) + (isNaN(Number(hydropolis_mw)) ? 0 : Number(hydropolis_mw)) +
+    (isNaN(Number(pheonix?.mw)) ? 0 : Math.abs(Number(pheonix.mw))) + (isNaN(Number(hydropolis_mw)) ? 0 : Number(hydropolis_mw)) +
     (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw))) +
     (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw)))  + (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) +
     (isNaN(Number(AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw)));
@@ -310,12 +310,12 @@ import Modal from "./Modal";
               </thead>
               <tbody>
                 
-              <tr onClick={(e) => { this.setModalTrue(e, ['PHEONIX STEEL IKORODU', this.state.phoenix]); }}>
+              <tr onClick={(e) => { this.setModalTrue(e, ['PHEONIX STEEL IKORODU', this.state.pheonix]); }}>
                   <td>1</td>
                   <td>PHEONIX STEEL IKORODU</td>
-                  <td>{this.checkConnection2(this.state.phoenix.server_time)}</td>
-                  <td>{Math.abs(phoenix.mw)}</td>
-                  <td>{phoenix.v}</td>
+                  <td>{this.checkConnection2(this.state.pheonix.server_time)}</td>
+                  <td>{Math.abs(pheonix.mw)}</td>
+                  <td>{pheonix.v}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel]); }}>
                   <td>2</td>
