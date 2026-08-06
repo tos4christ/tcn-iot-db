@@ -315,7 +315,7 @@ import Modal from "./Modal";
                   <td>PHEONIX STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.pheonix.server_time)}</td>
                   <td>{Math.abs(pheonix.mw)}</td>
-                  <td>{pheonix.v}</td>
+                  <td>{pheonix.V}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel]); }}>
                   <td>2</td>

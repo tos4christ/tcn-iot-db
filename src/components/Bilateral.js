@@ -110,12 +110,96 @@ import Modal from "./Modal";
           return returnObject;
         })
       });
+      socket.on("client_message_mesl", data => {
+        const { message } = data;
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
+        parsedMessage.server_time = (new Date()).getTime();
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        const returnObject = {}
+        // console.log(parsedMessage, 'c1 message');
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station]
+          return returnObject;
+        })
+      });
+      socket.on("client_message_fipl", data => {
+        const { message } = data;
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
+        parsedMessage.server_time = (new Date()).getTime();
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        const returnObject = {}
+        // console.log(parsedMessage, 'c1 message');
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station];
+          // remove this later
+          // console.log(returnObject);
+          return returnObject;
+        })
+      });
+      socket.on("client_message_ndphc", data => {
+        const { message } = data;
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
+        parsedMessage.server_time = (new Date()).getTime();        
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        const returnObject = {}
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station];
+          return returnObject;
+        })
+      });
+      socket.on("client_message_sakete", data => {
+        const { message } = data;
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
+        parsedMessage.server_time = (new Date()).getTime();        
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        const returnObject = {}
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station];
+          return returnObject;
+        })
+      });
+      socket.on("client_message_wewood", data => {
+        const { message } = data;
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {} 
+        parsedMessage.server_time = (new Date()).getTime();        
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        const returnObject = {}
+        this.setState(prevState => {
+          prevState[station] = parsedMessage;
+          returnObject[station] = prevState[station];
+          return returnObject;
+        })
+      });
     }
    }
    componentWillUnmount() {
     socket.off("client_message_111");
     socket.off("client_message_222");
     socket.off("client_message_taopex");
+    socket.off("client_message_mesl");
+    socket.off("client_message_fipl");
+    socket.off("client_message_ndphc");
+    socket.off("client_message_sakete");
+    socket.off("client_message_wewood");
     }
     
    getEpoch(time) {
@@ -191,21 +275,25 @@ import Modal from "./Modal";
    }
    
   render() {
+    let {pheonix} = this.state;
+    let {pulkitSteel} = this.state;
+    let {sunflag} = this.state;
+    let {kamSteel} = this.state;
     const stations_array = get_stations(this.state);
-    const sunflag = this.state.sunflag.lines ? this.state.sunflag.lines[0]?.td : {};
+    sunflag = sunflag.lines ? sunflag.lines[0]?.td : {};
     const sagamu = stations_array['SAGAMU'];
     const top_steel = stations_array['TOPSTEEL'];
     const larfarge = stations_array['LARFARGE'];
     const monarch = stations_array['MONARCH'];
-    const pulkitSteel = this.state.pulkitSteel.lines ? this.state.pulkitSteel.lines[0]?.td : {};
+    pulkitSteel = pulkitSteel.lines ? pulkitSteel.lines[0]?.td : {};
     const africanFoundriesLimited = stations_array['AFRICANFOUNDARIES'];
     //const kamSteel = stations_array['KAMSTEEL'];
-    const kamSteel = this.state.kamSteel.lines ? this.state.kamSteel.lines[0]?.td : {};
+    kamSteel = kamSteel.lines ? kamSteel.lines[0]?.td : {};
     const starPipe = stations_array['STARPIPE'];
     const quantum = stations_array['QUANTUM'];
     const ikorodu_1 = stations_array['IKORODU 1'];
     const ikorodu_2 = stations_array['IKORODU 2'];
-    const pheonix = this.state.pheonix.transformers ? this.state.pheonix.transformers[0]?.td : {};
+    pheonix = pheonix.transformers ? pheonix.transformers[0]?.td : {};
 
     const totalBilateral = (isNaN(Number(sunflag.mw)) ? 0 : Number(sunflag.mw)) + (isNaN(Number(sagamu.mw)) ? 0 : Number(sagamu.mw))
     + (isNaN(Number(top_steel.mw)) ? 0 : Number(top_steel.mw)) + (isNaN(Number(larfarge.mw)) ? 0 : Number(larfarge.mw)) + 
