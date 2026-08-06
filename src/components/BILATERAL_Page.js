@@ -240,7 +240,8 @@ import Modal from "./Modal";
     const {KamInd33kV} = this.state;
     const {Gazaoua} = this.state;
     const quantum = this.state.quantum.transformers ? this.state.quantum.transformers[0].td : {};
-    const {kamSteel} = this.state;
+    let {kamSteel} = this.state;
+    kamSteel = kamSteel?.lines ? kamSteel.lines[0]?.td : {};
     const Er_Kang = this.state["Er-Kang"];
     const kamSteel_Ilorin = this.state["kamSteel-Ilorin"].name ? this.state["kamSteel-Ilorin"] : null;
     const kamSteel_Ilorin_line_1 = kamSteel_Ilorin?.lines[0] ? kamSteel_Ilorin?.lines[0] : null;
@@ -290,7 +291,7 @@ import Modal from "./Modal";
     (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw)))  + (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) +
     (isNaN(Number(AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw)));
     
-    console.log('The Phoenix Payload:', this.state.pheonix);
+    // console.log('The Phoenix Payload:', this.state.pheonix);
         
     return (
       <>
@@ -323,14 +324,14 @@ import Modal from "./Modal";
                   <td>PULKIT ALLOY & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.pulkitSteel.server_time)}</td>
                   <td>{Math.abs(pulkitSteel?.mw ? pulkitSteel.mw : 0)}</td>
-                  <td>{pulkitSteel?.v ? pulkitSteel.v : 0}</td>
+                  <td>{pulkitSteel?.V ? pulkitSteel.V : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['SUNFLAG IRON & STEEL IKORODU', this.state.sunflag]); }}>
                   <td>3</td>
                   <td>SUNFLAG IRON & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
                   <td>{Math.abs(sunflag?.mw ? sunflag.mw : 0)}</td>
-                  <td>{sunflag?.v ? sunflag.v : 0}</td>
+                  <td>{sunflag?.V ? sunflag.V : 0}</td>
                 </tr>
 
                 <tr  onClick={(e) => { this.setModalTrue(e, ['FMPIA', this.state["First Maximum Point Industries Akure"]]); }}>
@@ -417,7 +418,7 @@ import Modal from "./Modal";
                   <td>kam Steel Shagamu</td>
                   <td>{this.checkConnection2(this.state.kamSteel.server_time)}</td>
                   <td>{isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw).toFixed(2)}</td>
-                  <td>{kamSteel.v ? kamSteel.v : 0}</td>
+                  <td>{kamSteel?.V ? kamSteel.V : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['kamSteel-Ilorin', this.state["kamSteel-Ilorin"]]); }}>
                   <td>16</td>
@@ -459,7 +460,7 @@ import Modal from "./Modal";
                   <td>Atlantic Metal Industries Ltd</td>
                   <td>{this.checkConnection2(this.state.amil.server_time)}</td>
                   <td>{isNaN((amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw).toFixed(2))}</td>
-                  <td>{amil_t1.v ? amil_t1.v : 0}</td>
+                  <td>{amil_t1.V ? amil_t1.V : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['AENL', this.state.AENL]); }}>
                   <td>22</td>
