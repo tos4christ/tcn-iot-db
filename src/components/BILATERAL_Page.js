@@ -10,7 +10,7 @@ import Modal from "./Modal";
      this.setModalFalse = this.setModalFalse.bind(this);
      this.setModalTrue = this.setModalTrue.bind(this);
      this.state = { 
-      phoenix: {},
+      pheonix: {},
       pulkitSteel: {},
       sunflag: {},
       'Obafemi Awolowo University Ile-Ife': {},
@@ -221,11 +221,11 @@ import Modal from "./Modal";
    }
    
   render() {
-    let {phoenix} = this.state;
+    let {pheonix} = this.state;
     let {pulkitSteel} = this.state;
     let {sunflag} = this.state;
     let ikejaWest_sakate = this.state["ikejaWest-sakate"];
-    phoenix = phoenix.transformers ? phoenix.transformers[0]?.td : {};
+    pheonix = pheonix.transformers ? pheonix.transformers[0]?.td : {};
     pulkitSteel = pulkitSteel.lines ? pulkitSteel.lines[0]?.td : {};
     sunflag = sunflag.lines ? sunflag.lines[0]?.td : {};
     ikejaWest_sakate = ikejaWest_sakate.lines ? ikejaWest_sakate.lines[0]?.td : {};
