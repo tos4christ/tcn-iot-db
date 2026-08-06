@@ -290,10 +290,7 @@ import Modal from "./Modal";
     (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw)))  + (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) +
     (isNaN(Number(AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw)));
     
-    console.log('The Phoenix Payload:', pheonix);
-    console.log('The Pulkit Payload:', pulkitSteel);
-    console.log('The Sunflag Payload:', sunflag);
-    console.log('The Ikeja West Sakate Payload:', ikejaWest_sakate);
+    console.log('The Phoenix Payload:', this.state.pheonix);
         
     return (
       <>
