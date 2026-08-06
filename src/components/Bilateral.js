@@ -18,7 +18,7 @@ import Modal from "./Modal";
       sagamu: {},
       ikorodu1: {},
       ikorodu2: {},
-      phoenix: {},
+      pheonix: {},
       pulkitSteel: {},
       africanFoundriesLimited: {},
       sunflag: {},
@@ -192,20 +192,20 @@ import Modal from "./Modal";
    
   render() {
     const stations_array = get_stations(this.state);
-    const sunflag = stations_array['SUNFLAG'];
+    const sunflag = this.state.sunflag.lines ? this.state.sunflag.lines[0]?.td : {};
     const sagamu = stations_array['SAGAMU'];
     const top_steel = stations_array['TOPSTEEL'];
     const larfarge = stations_array['LARFARGE'];
     const monarch = stations_array['MONARCH'];
-    const pulkitSteel = stations_array['PULKISTEEL'];
+    const pulkitSteel = this.state.pulkitSteel.lines ? this.state.pulkitSteel.lines[0]?.td : {};
     const africanFoundriesLimited = stations_array['AFRICANFOUNDARIES'];
     //const kamSteel = stations_array['KAMSTEEL'];
-    const { kamSteel } = this.state;
+    const kamSteel = this.state.kamSteel.lines ? this.state.kamSteel.lines[0]?.td : {};
     const starPipe = stations_array['STARPIPE'];
     const quantum = stations_array['QUANTUM'];
     const ikorodu_1 = stations_array['IKORODU 1'];
     const ikorodu_2 = stations_array['IKORODU 2'];
-    const pheonix = stations_array['PHEONIX'];
+    const pheonix = this.state.pheonix.transformers ? this.state.pheonix.transformers[0]?.td : {};
 
     const totalBilateral = (isNaN(Number(sunflag.mw)) ? 0 : Number(sunflag.mw)) + (isNaN(Number(sagamu.mw)) ? 0 : Number(sagamu.mw))
     + (isNaN(Number(top_steel.mw)) ? 0 : Number(top_steel.mw)) + (isNaN(Number(larfarge.mw)) ? 0 : Number(larfarge.mw)) + 
@@ -232,12 +232,12 @@ import Modal from "./Modal";
                 </tr>
               </thead>
               <tbody>
-                <tr onClick={(e) => { this.setModalTrue(e, ['PHEONIX STEEL IKORODU', this.state.phoenix]); }}>
+                <tr onClick={(e) => { this.setModalTrue(e, ['PHEONIX STEEL IKORODU', this.state.pheonix]); }}>
                   <td>1</td>
                   <td>PHEONIX STEEL IKORODU</td>
-                  <td>{this.checkConnection2(this.state.phoenix.server_time)}</td>
+                  <td>{this.checkConnection2(this.state.pheonix.server_time)}</td>
                   <td>{pheonix.mw}</td>
-                  <td>{pheonix.kv}</td>
+                  <td>{pheonix.V}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['AFRICAN FOUNDARIES LTD IKORODU', this.state.africanFoundriesLimited]); }}>
                   <td>2</td>
@@ -286,14 +286,14 @@ import Modal from "./Modal";
                   <td>SUNFLAG IRON & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
                   <td>{sunflag.mw}</td>
-                  <td>{sunflag.kv}</td>
+                  <td>{sunflag.V}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel]); }}>
                   <td>9</td>
                   <td>PULKIT ALLOY & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.pulkitSteel.server_time)}</td>
                   <td>{pulkitSteel.mw}</td>
-                  <td>{pulkitSteel.kv}</td>
+                  <td>{pulkitSteel.V}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['STAR PIPE PRODUCT IKORODU', this.state.starPipe]); }}>
                   <td>10</td>
