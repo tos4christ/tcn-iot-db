@@ -24,7 +24,7 @@ import axios from "axios";
       kamSteel: {},
       ikorodu1: {},
       ikorodu2: {},
-      phoenix: {},
+      pheonix: {},
       sagamu: {},
       pulkitSteel: {},
       africanFoundriesLimited: {},
