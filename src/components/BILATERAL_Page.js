@@ -36,6 +36,7 @@ import Modal from "./Modal";
       weewood: {},
       glml: {},
       phedc: {},
+      shongai: {},
       connected: false,
       ModalState: false,
       modal_data: "TAOPEX"
@@ -224,11 +225,13 @@ import Modal from "./Modal";
     let {pheonix} = this.state;
     let {pulkitSteel} = this.state;
     let {sunflag} = this.state;
+    let {shongai} = this.state;
     let ikejaWest_sakate = this.state["ikejaWest-sakate"];
     pheonix = pheonix.transformers ? pheonix.transformers[0]?.td : {};
     pulkitSteel = pulkitSteel.lines ? pulkitSteel.lines[0]?.td : {};
     sunflag = sunflag.lines ? sunflag.lines[0]?.td : {};
     ikejaWest_sakate = ikejaWest_sakate.lines ? ikejaWest_sakate.lines[0]?.td : {};
+    shongai = shongai.lines ? shongai.lines[0]?.td : {};
     const FMPIA = this.state["First Maximum Point Industries Akure"];
     const OAUI = this.state["Obafemi Awolowo University Ile-Ife"];
     const {zeberced} = this.state;
@@ -289,9 +292,10 @@ import Modal from "./Modal";
     (isNaN(Number(pheonix?.mw)) ? 0 : Math.abs(Number(pheonix.mw))) + (isNaN(Number(hydropolis_mw)) ? 0 : Number(hydropolis_mw)) +
     (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw))) +
     (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw)))  + (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) +
-    (isNaN(Number(AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw)));
+    (isNaN(Number(AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw))) +
+    (isNaN(Number(shongai.mw)) ? 0 : Math.abs(Number(shongai.mw)));
     
-    // console.log('The Phoenix Payload:', this.state.pheonix);
+      // console.log('The Phoenix Payload:', this.state.pheonix);
         
     return (
       <>
@@ -496,7 +500,14 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.phedc.server_time)}</td>
                   <td>{isNaN((refinery_line_2?.td?.mw)) ? 0 : Math.abs(Number(refinery_line_2.td.mw).toFixed(2))}</td>
                   <td>{refinery_line_2?.td?.v ? refinery_line_2.td.v : 0}</td>
-                </tr> 
+                </tr>
+                <tr onClick={(e) => { this.setModalTrue(e, ['Shongai Ltd.', this.state.shongai]); }}>
+                  <td>27</td>
+                  <td>Shongai Ltd.</td>
+                  <td>{this.checkConnection2(this.state.shongai.server_time)}</td>
+                  <td>{isNaN((shongai?.td?.mw)) ? 0 : Math.abs(Number(shongai.td.mw).toFixed(2))}</td>
+                  <td>{shongai?.td?.v ? shongai.td.v : 0}</td>
+                </tr>
                 <tr></tr>
                 <tr>
                   <td></td>
