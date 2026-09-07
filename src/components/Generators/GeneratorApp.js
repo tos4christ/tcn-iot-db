@@ -266,7 +266,9 @@ class GeneratorApp extends Component {
       const afam_3_5_Ps = {id: "afam III & V Ps", units: [...afam_3_Ps.units, ...afam_5_Ps.units], server_time: afam_3_Ps.server_time > afam_5_Ps.server_time ? afam_3_Ps.server_time : afam_5_Ps.server_time};
       // console.log(afam_3_5_Ps, 'afam_3_5_Ps');
       const geometric_power = {id: "Geometric Power", units: [...geometricPlant1.units, ...geometricPlant2.units, ...geometricPlant3.units], server_time: geometricPlant1.server_time > geometricPlant2.server_time ? geometricPlant1.server_time : geometricPlant2.server_time > geometricPlant3.server_time ? geometricPlant2.server_time : geometricPlant3.server_time};
-      const real_stations = [ibom, cnl, egbinPs, sapeleGas, delta2, delta3, delta4_2, delta4_1, afam_3_5_Ps, afamVIPs, dadinkowa, okpai_1, okpai_2, paras_1, paras_2, shiroroPs, zungeru, kainjiPs, jebbaPs, geometric_power];
+      const rivers_IPP = {id: "Rivers IPP", units: [...cnl.units], server_time: cnl.server_time};
+
+      const real_stations = [ibom, rivers_IPP, egbinPs, sapeleGas, delta2, delta3, delta4_2, delta4_1, afam_3_5_Ps, afamVIPs, dadinkowa, okpai_1, okpai_2, paras_1, paras_2, shiroroPs, zungeru, kainjiPs, jebbaPs, geometric_power];
       real_stations.forEach((station, index) => {
         const station_name = station.name ? station.name : station.id ? station.id : null;
         if(station && station_name) {
