@@ -591,7 +591,7 @@ class All_Bilateral extends React.Component {
                       ? this.getMixedValue(gph_glitch, gph_l1?.mw)
                       : 0}
                   </td>
-                  <td>{gph_l1?.v ? gph_l1.v : 0}</td>
+                  <td>{(gph_glitch === null) ? gph_l1.v : 0}</td>
                 </tr>
 
                 {/* 29: OLAM */}
@@ -604,7 +604,7 @@ class All_Bilateral extends React.Component {
                       ? this.getMixedValue(olam_glitch, olam?.mw)
                       : 0}
                   </td>
-                  <td>{olam?.v ? olam.v : 0}</td>
+                  <td>{(olam_glitch === null) ? olam?.v : 0}</td>
                 </tr>
 
                 {/* 30: BAO YAO */}
@@ -617,7 +617,7 @@ class All_Bilateral extends React.Component {
                       ? this.getMixedValue(bao_yao_glitch, bao_yao?.mw)
                       : 0}
                   </td>
-                  <td>{bao_yao?.v ? bao_yao.v : 0}</td>
+                  <td>{(bao_yao_glitch === null) ? bao_yao?.v : 0}</td>
                 </tr>
 
                 <tr></tr>
