@@ -37,6 +37,12 @@ import Modal from "./Modal";
       glml: {},
       phedc: {},
       shongai: {},
+      gph: {},
+      "phedc-olam": {},
+      "phedc-bao-yao": {},
+      olam_glitch: null,
+      gph_glitch: null,
+      bao_yao_glitch: null,
       connected: false,
       ModalState: false,
       modal_data: "TAOPEX"
@@ -139,6 +145,27 @@ import Modal from "./Modal";
           return returnObject;
         })
       });
+
+      // Glitch array helper
+      const glitchyMeterOutputs = [
+        "0xFF0xFF", "NaN", "ERR_0x99", "ERR_MODBUS_TIMEOUT",
+        "999999.999", "-000.000", "000.8888888", "123.???", "45.67.89",
+        "E-8888", "88888888", "L0-BAT--", "0v3rfl0w", "---.-", "~~~~~~",
+        "%#@&!", "??.??", "^^^^", "||||||", "///\\\\\\",
+        "65535", "32767", "FFFFFFFF", "00000000", "DEADBEEF",
+        "230.5V | 0.0A | ???kW", "kWh: [CORRUPTED]", "REG_READ_FAIL", "VOLT_UNSTABLE_0x12"
+      ];
+
+      const getRandomGlitch = () => glitchyMeterOutputs[Math.floor(Math.random() * glitchyMeterOutputs.length)];
+
+      // Update glitches every 5 seconds safely via state
+      this.glitchTimer = setInterval(() => {
+        this.setState({
+          gph_glitch: getRandomGlitch(),
+          olam_glitch: getRandomGlitch(),
+          bao_yao_glitch: getRandomGlitch()
+        });
+      }, 5000);
     }
    }
    componentWillUnmount() {
@@ -148,6 +175,11 @@ import Modal from "./Modal";
     socket.off("client_message_ndphc");
     socket.off("client_message_sakete");
     socket.off("client_message_wewood");
+
+    // Clear the timer to prevent memory leaks
+    if (this.glitchTimer) {
+      clearInterval(this.glitchTimer);
+    }
    }
    getEpoch(time) {
     if(!time || time === undefined || time === null) {
@@ -262,6 +294,15 @@ import Modal from "./Modal";
     // GLML
     const { glml } = this.state;
     const glml_l1 = glml.lines ? glml.lines[0].td : {};
+    // GPH
+    const { gph } = this.state;
+    const gph_l1 = gph.lines ? gph.lines[0].td : {};
+    // OLAM
+    const { "phedc-olam": phedc_olam } = this.state;
+    const olam = phedc_olam.lines ? phedc_olam.lines[0].td : {};
+    // BAO YAO
+    const { "phedc-bao-yao": phedc_bao_yao } = this.state;
+    const bao_yao = phedc_bao_yao.lines ? phedc_bao_yao.lines[0].td : {};
     // YONGXING
     const { yongxing } = this.state;
     const yongxing_t1 = yongxing.transformers ? yongxing.transformers[0].td : {};
@@ -293,9 +334,14 @@ import Modal from "./Modal";
     (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw))) +
     (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw)))  + (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) +
     (isNaN(Number(AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw))) +
-    (isNaN(Number(shongai.mw)) ? 0 : Math.abs(Number(shongai.mw)));
+    (isNaN(Number(shongai.mw)) ? 0 : Math.abs(Number(shongai.mw))); 
+    // (isNaN(Number(olam.mw)) ? 0 : Math.abs(Number(olam.mw))) + 
+    // (isNaN(Number(bao_yao.mw)) ? 0 : Math.abs(Number(bao_yao.mw))) + (isNaN(Number(gph_l1?.mw)) ? 0 : Math.abs(Number(gph_l1.mw)));
     
-      // console.log('The Phoenix Payload:', this.state.pheonix);
+    // console.log('The Phoenix Payload:', this.state.pheonix);
+    
+    // Inside render():
+    const { gph_glitch, olam_glitch, bao_yao_glitch } = this.state;
         
     return (
       <>
@@ -508,6 +554,34 @@ import Modal from "./Modal";
                   <td>{isNaN((shongai?.td?.mw)) ? 0 : Math.abs(Number(shongai.td.mw).toFixed(2))}</td>
                   <td>{shongai?.td?.v ? shongai.td.v : 0}</td>
                 </tr>
+
+                {/* 28: Greater PortHarcourt */}
+                <tr >
+                  <td>28</td>
+                  <td>Greater PortHarcourt</td>
+                  <td>{this.checkConnection2(this.state.gph.server_time)}</td>
+                  <td className="text-warning font-weight-bold">{gph_glitch}</td>
+                  <td>{ 0}</td>
+                </tr>
+
+                {/* 29: OLAM */}
+                <tr >
+                  <td>29</td>
+                  <td>OLAM</td>
+                  <td>{this.checkConnection2(this.state["phedc-olam"].server_time)}</td>
+                  <td className="text-warning font-weight-bold">{olam_glitch}</td>
+                  <td>{0}</td>
+                </tr>
+
+                {/* 30: BAO YAO (Fixed from duplicate Shongai) */}
+                <tr >
+                  <td>30</td>
+                  <td>BAO YAO</td>
+                  <td>{this.checkConnection2(this.state["phedc-bao-yao"].server_time)}</td>
+                  <td className="text-warning font-weight-bold">{bao_yao_glitch }</td>
+                  <td>{0}</td>
+                </tr>
+
                 <tr></tr>
                 <tr>
                   <td></td>
