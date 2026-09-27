@@ -149,11 +149,9 @@ import Modal from "./Modal";
       // Glitch array helper
       const glitchyMeterOutputs = [
         "0xFF0xFF", "NaN", "ERR_0x99", "ERR_MODBUS_TIMEOUT",
-        "999999.999", "-000.000", "000.8888888", "123.???", "45.67.89",
-        "E-8888", "88888888", "L0-BAT--", "0v3rfl0w", "---.-", "~~~~~~",
+         "123.???", "E-8888", "L0-BAT--", "0v3rfl0w", "---.-", "~~~~~~",
         "%#@&!", "??.??", "^^^^", "||||||", "///\\\\\\",
-        "65535", "32767", "FFFFFFFF", "00000000", "DEADBEEF",
-        "230.5V | 0.0A | ???kW", "kWh: [CORRUPTED]", "REG_READ_FAIL", "VOLT_UNSTABLE_0x12"
+         "FFFFFFFF", "DEADBEEF", "kWh: [CORRUPTED]", "REG_READ_FAIL", "VOLT_UNSTABLE_0x12"
       ];
 
       const getRandomGlitch = () => glitchyMeterOutputs[Math.floor(Math.random() * glitchyMeterOutputs.length)];
