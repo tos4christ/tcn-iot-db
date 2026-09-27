@@ -37,7 +37,7 @@ import Modal from "./Modal";
       glml: {},
       phedc: {},
       shongai: {},
-      gph: {},
+      "phedc-gph": {},
       "phedc-olam": {},
       "phedc-bao-yao": {},
       olam_glitch: null,
@@ -316,7 +316,7 @@ import Modal from "./Modal";
     const { glml } = this.state;
     const glml_l1 = glml.lines ? glml.lines[0].td : {};
     // GPH
-    const { gph } = this.state;
+    const { "phedc-gph": gph } = this.state;
     const gph_l1 = gph.lines ? gph.lines[0].td : {};
     // OLAM
     const { "phedc-olam": phedc_olam } = this.state;
@@ -580,8 +580,8 @@ import Modal from "./Modal";
                 <tr >
                   <td>28</td>
                   <td>Greater PortHarcourt</td>
-                  <td>{this.checkConnection2(this.state.gph.server_time)}</td>
-                  <td className="text-warning font-weight-bold">{this.checkConnection222(this.state.gph.server_time) ? gph_glitch : null}</td>
+                  <td>{this.checkConnection2(this.state["phedc-gph"].server_time)}</td>
+                  <td className="text-warning font-weight-bold">{this.checkConnection222(this.state["phedc-gph"].server_time) ? gph_glitch : null}</td>
                   <td>{ 0}</td>
                 </tr>
 
