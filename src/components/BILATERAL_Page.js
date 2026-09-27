@@ -216,6 +216,29 @@ import Modal from "./Modal";
       return disconnected;
     }
    }
+   checkConnection222(server_time) {
+    const connected = true;
+    const disconnected = false;
+    if (server_time === undefined || server_time === null) {
+      return disconnected
+    }
+    try {
+      // Get current epoch time
+      const time_now = (new Date()).getTime();     
+      // if 30 seconds have passed without the time changing from the current time then return disconnected
+      // 30 seconds equals to 30,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff = (time_now - server_time) > 30000;
+      if (server_time.length === 0 || time_diff ) {
+          return disconnected
+      } else if (!isNaN(server_time)) {
+          return connected
+      }
+    } catch(e) {
+      console.log(e);
+      return disconnected;
+    }
+   }
    checkConnection3(t1, t2) {
     const connected = <span className="text-success"> CN </span>
     const disconnected = <span className="text-danger"> NC </span>
@@ -558,7 +581,7 @@ import Modal from "./Modal";
                   <td>28</td>
                   <td>Greater PortHarcourt</td>
                   <td>{this.checkConnection2(this.state.gph.server_time)}</td>
-                  <td className="text-warning font-weight-bold">{gph_glitch}</td>
+                  <td className="text-warning font-weight-bold">{this.checkConnection222(this.state.gph.server_time) ? gph_glitch : null}</td>
                   <td>{ 0}</td>
                 </tr>
 
@@ -567,7 +590,7 @@ import Modal from "./Modal";
                   <td>29</td>
                   <td>OLAM</td>
                   <td>{this.checkConnection2(this.state["phedc-olam"].server_time)}</td>
-                  <td className="text-warning font-weight-bold">{olam_glitch}</td>
+                  <td className="text-warning font-weight-bold">{this.checkConnection222(this.state["phedc-olam"].server_time) ? olam_glitch : null}</td>
                   <td>{0}</td>
                 </tr>
 
@@ -576,7 +599,7 @@ import Modal from "./Modal";
                   <td>30</td>
                   <td>BAO YAO</td>
                   <td>{this.checkConnection2(this.state["phedc-bao-yao"].server_time)}</td>
-                  <td className="text-warning font-weight-bold">{bao_yao_glitch }</td>
+                  <td className="text-warning font-weight-bold">{this.checkConnection222(this.state["phedc-bao-yao"].server_time) ? bao_yao_glitch : null}</td>
                   <td>{0}</td>
                 </tr>
 
