@@ -4,11 +4,12 @@ import socket from "./utility/socketIO";
 import DateTime from "./DateTime";
 import Modal from "./Modal";
 
- class All_Bilateral extends React.Component {
+class All_Bilateral extends React.Component {
    constructor(props) {
      super(props);
      this.setModalFalse = this.setModalFalse.bind(this);
      this.setModalTrue = this.setModalTrue.bind(this);
+     this.getMixedValue = this.getMixedValue.bind(this);
      this.state = { 
       pheonix: {},
       pulkitSteel: {},
@@ -48,6 +49,15 @@ import Modal from "./Modal";
       modal_data: "TAOPEX"
      };
    }
+
+   // Helper to decide between glitch or real value
+   getMixedValue(glitchVal, realVal) {
+     if (glitchVal !== null && glitchVal !== undefined) {
+       return glitchVal;
+     }
+     const formattedReal = Number(realVal);
+     return isNaN(formattedReal) ? "0.00" : Math.abs(formattedReal).toFixed(2);
+   }
    
    componentDidMount() {
     if(this.props.history.location.pathname === "/bilateral") {
@@ -75,7 +85,6 @@ import Modal from "./Modal";
         parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
         const returnObject = {}
-        // console.log(parsedMessage, 'c1 message');
         this.setState(prevState => {
           prevState[station] = parsedMessage;
           returnObject[station] = prevState[station]
@@ -91,12 +100,9 @@ import Modal from "./Modal";
         parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
         const returnObject = {}
-        // console.log(parsedMessage, 'c1 message');
         this.setState(prevState => {
           prevState[station] = parsedMessage;
           returnObject[station] = prevState[station];
-          // remove this later
-          // console.log(returnObject);
           return returnObject;
         })
       });
@@ -154,16 +160,21 @@ import Modal from "./Modal";
 
       const getRandomGlitch = () => glitchyMeterOutputs[Math.floor(Math.random() * glitchyMeterOutputs.length)];
 
-      // Update glitches every 5 seconds safely via state
+      // Glitch Ratio: 0.70 means 70% chance of glitch, 30% chance of real data
+      const GLITCH_RATIO = 0.70; 
+      const getGlitchOrNull = () => (Math.random() < GLITCH_RATIO ? getRandomGlitch() : null);
+
+      // Update glitches every 5 seconds
       this.glitchTimer = setInterval(() => {
         this.setState({
-          gph_glitch: getRandomGlitch(),
-          olam_glitch: getRandomGlitch(),
-          bao_yao_glitch: getRandomGlitch()
+          gph_glitch: getGlitchOrNull(),
+          olam_glitch: getGlitchOrNull(),
+          bao_yao_glitch: getGlitchOrNull()
         });
       }, 5000);
     }
    }
+
    componentWillUnmount() {
     socket.off("client_message_taopex");
     socket.off("client_message_mesl");
@@ -172,107 +183,99 @@ import Modal from "./Modal";
     socket.off("client_message_sakete");
     socket.off("client_message_wewood");
 
-    // Clear the timer to prevent memory leaks
     if (this.glitchTimer) {
       clearInterval(this.glitchTimer);
     }
    }
+
    getEpoch(time) {
     if(!time || time === undefined || time === null) {
       return 0;
     }
-    // Convert the time input to epoch time
     var options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     const date = new Date().toLocaleDateString("en-GB", options).split('/').reverse().join('-');
     const timeTemp = time.split(':');
     const hour = timeTemp[0];
-    const minute = timeTemp[1]
-    const seconds = timeTemp[2]
+    const minute = timeTemp[1];
+    const seconds = timeTemp[2];
     const dateTemp = date.split('-');
     return new Date(Number(dateTemp[0]), Number(dateTemp[1]-1), Number(dateTemp[2]), Number(hour), Number(minute), Number(seconds)); 
    }
+
    checkConnection2(server_time) {
-    const connected = <span className="text-success"> CN </span>
-    const disconnected = <span className="text-danger"> NC </span>
+    const connected = <span className="text-success"> CN </span>;
+    const disconnected = <span className="text-danger"> NC </span>;
     if (server_time === undefined || server_time === null) {
-      return disconnected
+      return disconnected;
     }
     try {
-      // Get current epoch time
       const time_now = (new Date()).getTime();     
-      // if 30 seconds have passed without the time changing from the current time then return disconnected
-      // 30 seconds equals to 30,000 milliseconds
-      // if the time difference is greater than time_diff then return disconnected
       const time_diff = (time_now - server_time) > 30000;
       if (server_time.length === 0 || time_diff ) {
-          return disconnected
+          return disconnected;
       } else if (!isNaN(server_time)) {
-          return connected
+          return connected;
       }
     } catch(e) {
       console.log(e);
       return disconnected;
     }
    }
+
    checkConnection222(server_time) {
     const connected = true;
     const disconnected = false;
     if (server_time === undefined || server_time === null) {
-      return disconnected
+      return disconnected;
     }
     try {
-      // Get current epoch time
       const time_now = (new Date()).getTime();     
-      // if 30 seconds have passed without the time changing from the current time then return disconnected
-      // 30 seconds equals to 30,000 milliseconds
-      // if the time difference is greater than time_diff then return disconnected
       const time_diff = (time_now - server_time) > 30000;
       if (server_time.length === 0 || time_diff ) {
-          return disconnected
+          return disconnected;
       } else if (!isNaN(server_time)) {
-          return connected
+          return connected;
       }
     } catch(e) {
       console.log(e);
       return disconnected;
     }
    }
+
    checkConnection3(t1, t2) {
-    const connected = <span className="text-success"> CN </span>
-    const disconnected = <span className="text-danger"> NC </span>
+    const connected = <span className="text-success"> CN </span>;
+    const disconnected = <span className="text-danger"> NC </span>;
     if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null)) {
-      return disconnected
+      return disconnected;
     }
     try {
       t1 = t1 ? t1 : '';
       t2 = t2 ? t2 : '';
-      // Get current epoch time
       const time_now = (new Date()).getTime();
-      // if 30 seconds have passed without the time changing from the current time then return disconnected
-      // 30 seconds equals to 30,000 milliseconds
-      // if the time difference is greater than time_diff then return disconnected
       const time_diff_1 = (time_now - t1) > 30000;
       const time_diff_2 = (time_now - t2) > 30000;
       if ( time_diff_1 || time_diff_2 ) {
-        return disconnected
+        return disconnected;
       } else if (!isNaN(t1) && !isNaN(t2)) {
-          return connected
+          return connected;
       } 
     } catch(e) {
       console.log(e);
       return disconnected;
     }    
    }
+
    setModalTrue(e, station_name) {
-    // e.preventDefault();
-    //console.log(e.target.innerHTML, station_name);
     return this.setState({ModalState: true, modal_data: station_name});
    }
+
    setModalFalse() {
     this.setState({ModalState: false});
    }
    
   render() {
+    const { gph_glitch, olam_glitch, bao_yao_glitch } = this.state;
+
     let {pheonix} = this.state;
     let {pulkitSteel} = this.state;
     let {sunflag} = this.state;
@@ -304,27 +307,34 @@ import Modal from "./Modal";
     const kamSteel_Ilorin_line2_mw = kamSteel_Ilorin_line_2?.td?.mw;
     const kamSteel_Ilorin_voltage = kamSteel_Ilorin_line_1?.td?.v ? kamSteel_Ilorin_line_1?.td?.v : kamSteel_Ilorin_line_2?.td?.v ? kamSteel_Ilorin_line_2?.td?.v : 0;
     const kamSteel_Ilorin_mw_sum = Number(kamSteel_Ilorin_line1_mw) + Number(kamSteel_Ilorin_line2_mw);
+
     // HYDROPOLIS
     const { HYDROPOLIS } = this.state;
     const hydropolis_l2 = HYDROPOLIS.lines ? HYDROPOLIS.lines[0].td : {};
     const hydropolis_l4 = HYDROPOLIS.lines ? HYDROPOLIS.lines[1].td : {};
     const hydropolis_mw = (Number(hydropolis_l2?.mw) + Number(hydropolis_l4?.mw)) || 0;
     const hydropolis_kv = hydropolis_l2?.v ? hydropolis_l2.v : hydropolis_l4.v ? hydropolis_l4.v : 0;
+
     // GLML
     const { glml } = this.state;
     const glml_l1 = glml.lines ? glml.lines[0].td : {};
+
     // GPH
     const { "phedc-gph": gph } = this.state;
     const gph_l1 = gph.lines ? gph.lines[0].td : {};
+
     // OLAM
     const { "phedc-olam": phedc_olam } = this.state;
     const olam = phedc_olam.lines ? phedc_olam.lines[0].td : {};
+
     // BAO YAO
     const { "phedc-bao-yao": phedc_bao_yao } = this.state;
     const bao_yao = phedc_bao_yao.lines ? phedc_bao_yao.lines[0].td : {};
+
     // YONGXING
     const { yongxing } = this.state;
     const yongxing_t1 = yongxing.transformers ? yongxing.transformers[0].td : {};
+
     // AMIL
     const { amil } = this.state;
     const { AENL } = this.state;
@@ -332,13 +342,16 @@ import Modal from "./Modal";
     const amil_t1 = amil.transformers ? amil.transformers[0].td : {};
     const AENL_t1 = AENL.transformers ? AENL.transformers[0].td : {};
     const AENL_t2 = AENL.transformers ? AENL.transformers[1].td : {};
+
     // PHEDC FEEDERS
     const { phedc } = this.state;
     const rspub1 = phedc?.lines?.length > 0 ? phedc.lines.find(row => row.id === "rspub1") : null;
     const refinery_line_2 = phedc?.lines?.length > 0 ? phedc.lines.find(row => row.id === "ref2") : null;
 
-    // console.log(rspub1, 'rspub1 from phedc');
-    // console.log(refinery_line_2, 'refinery_line_2 from phedc');
+    // Evaluate dynamic MW contributions for the 3 glitching stations (0 if currently glitching or NaN)
+    const gph_valid_mw = (!gph_glitch && !isNaN(Number(gph_l1?.mw))) ? Math.abs(Number(gph_l1.mw)) : 0;
+    const olam_valid_mw = (!olam_glitch && !isNaN(Number(olam?.mw))) ? Math.abs(Number(olam.mw)) : 0;
+    const bao_yao_valid_mw = (!bao_yao_glitch && !isNaN(Number(bao_yao?.mw))) ? Math.abs(Number(bao_yao.mw)) : 0;
 
     const totalBilateral = (isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw)) + (isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw))
                             + (isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum)) +
@@ -353,14 +366,8 @@ import Modal from "./Modal";
     (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw))) +
     (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw)))  + (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) +
     (isNaN(Number(AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw))) +
-    (isNaN(Number(shongai.mw)) ? 0 : Math.abs(Number(shongai.mw))); 
-    // (isNaN(Number(olam.mw)) ? 0 : Math.abs(Number(olam.mw))) + 
-    // (isNaN(Number(bao_yao.mw)) ? 0 : Math.abs(Number(bao_yao.mw))) + (isNaN(Number(gph_l1?.mw)) ? 0 : Math.abs(Number(gph_l1.mw)));
-    
-    // console.log('The Phoenix Payload:', this.state.pheonix);
-    
-    // Inside render():
-    const { gph_glitch, olam_glitch, bao_yao_glitch } = this.state;
+    (isNaN(Number(shongai.mw)) ? 0 : Math.abs(Number(shongai.mw))) +
+    gph_valid_mw + olam_valid_mw + bao_yao_valid_mw;
         
     return (
       <>
@@ -517,9 +524,9 @@ import Modal from "./Modal";
                   <td>{isNaN((hydropolis_mw)) ? 0 : Math.abs(Number(hydropolis_mw).toFixed(2))}</td>
                   <td>{hydropolis_kv ? hydropolis_kv : 0}</td>
                 </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['Yongxing (PEL)', this.state.yongxing]); }}>
+                <tr onClick={(e) => { this.setModalTrue(e, ['Yongxing (PEL)', this.state.yongxing]); }}>
                   <td>20</td>
-                  <td>Yongxing (PEL)</td>
+                  <td>Yongxing (PEL)</td>
                   <td>{this.checkConnection2(this.state.yongxing.server_time)}</td>
                   <td>{isNaN((yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw).toFixed(2))}</td>
                   <td>{yongxing_t1.v ? yongxing_t1.v : 0}</td>
@@ -575,30 +582,42 @@ import Modal from "./Modal";
                 </tr>
 
                 {/* 28: Greater PortHarcourt */}
-                <tr >
+                <tr onClick={(e) => { this.setModalTrue(e, ['Greater PortHarcourt', this.state["phedc-gph"]]); }}>
                   <td>28</td>
                   <td>Greater PortHarcourt</td>
                   <td>{this.checkConnection2(this.state["phedc-gph"].server_time)}</td>
-                  <td className="text-warning font-weight-bold">{this.checkConnection222(this.state["phedc-gph"].server_time) ? gph_glitch : null}</td>
-                  <td>{ 0}</td>
+                  <td className={gph_glitch ? "text-warning font-weight-bold" : ""}>
+                    {this.checkConnection222(this.state["phedc-gph"].server_time)
+                      ? this.getMixedValue(gph_glitch, gph_l1?.mw)
+                      : 0}
+                  </td>
+                  <td>{gph_l1?.v ? gph_l1.v : 0}</td>
                 </tr>
 
                 {/* 29: OLAM */}
-                <tr >
+                <tr onClick={(e) => { this.setModalTrue(e, ['OLAM', this.state["phedc-olam"]]); }}>
                   <td>29</td>
                   <td>OLAM</td>
                   <td>{this.checkConnection2(this.state["phedc-olam"].server_time)}</td>
-                  <td className="text-warning font-weight-bold">{this.checkConnection222(this.state["phedc-olam"].server_time) ? olam_glitch : null}</td>
-                  <td>{0}</td>
+                  <td className={olam_glitch ? "text-warning font-weight-bold" : ""}>
+                    {this.checkConnection222(this.state["phedc-olam"].server_time)
+                      ? this.getMixedValue(olam_glitch, olam?.mw)
+                      : 0}
+                  </td>
+                  <td>{olam?.v ? olam.v : 0}</td>
                 </tr>
 
-                {/* 30: BAO YAO (Fixed from duplicate Shongai) */}
-                <tr >
+                {/* 30: BAO YAO */}
+                <tr onClick={(e) => { this.setModalTrue(e, ['BAO YAO', this.state["phedc-bao-yao"]]); }}>
                   <td>30</td>
                   <td>BAO YAO</td>
                   <td>{this.checkConnection2(this.state["phedc-bao-yao"].server_time)}</td>
-                  <td className="text-warning font-weight-bold">{this.checkConnection222(this.state["phedc-bao-yao"].server_time) ? bao_yao_glitch : null}</td>
-                  <td>{0}</td>
+                  <td className={bao_yao_glitch ? "text-warning font-weight-bold" : ""}>
+                    {this.checkConnection222(this.state["phedc-bao-yao"].server_time)
+                      ? this.getMixedValue(bao_yao_glitch, bao_yao?.mw)
+                      : 0}
+                  </td>
+                  <td>{bao_yao?.v ? bao_yao.v : 0}</td>
                 </tr>
 
                 <tr></tr>
