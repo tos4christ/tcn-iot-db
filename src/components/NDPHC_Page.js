@@ -189,22 +189,22 @@ import Modal from "./Modal";
                   <td>1</td>
                   <td>PHEONIX STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.pheonix.server_time)}</td>
-                  <td>{Math.abs(pheonix.mw)}</td>
-                  <td>{pheonix.v}</td>
+                  <td>{Math.abs(pheonix?.mw ? pheonix.mw : 0)}</td>
+                  <td>{pheonix?.V ? pheonix.V : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel]); }}>
                   <td>2</td>
                   <td>PULKIT ALLOY & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.pulkitSteel.server_time)}</td>
                   <td>{Math.abs(pulkitSteel?.mw ? pulkitSteel.mw : 0)}</td>
-                  <td>{pulkitSteel?.v ? pulkitSteel.v : 0}</td>
+                  <td>{pulkitSteel?.V ? pulkitSteel.V : 0}</td>
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['SUNFLAG IRON & STEEL IKORODU', this.state.sunflag]); }}>
                   <td>3</td>
                   <td>SUNFLAG IRON & STEEL IKORODU</td>
                   <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
                   <td>{Math.abs(sunflag?.mw ? sunflag.mw : 0)}</td>
-                  <td>{sunflag?.v ? sunflag.v : 0}</td>
+                  <td>{sunflag?.V ? sunflag.V : 0}</td>
                 </tr>
                 <tr>
                   <td>4</td>
