@@ -172,6 +172,20 @@ class GeneratorApp extends Component {
                  {id: "2g5", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
                  {id: "2g6", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
       },
+      mepp: {
+        id: "mepp",
+        units: [ {id: "gt1", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}]
+      },
+      afamIIIPs_delta1: {
+        id: "afamIIIPs_delta1",
+        units: [ {id: "tm11", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "tm12", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
+      },
+      afamIIIPs_delta2: {
+        id: "afamIIIPs_delta2",
+        units: [ {id: "tm27", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "tm28", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
+      },
     };
   }
 
@@ -257,7 +271,8 @@ class GeneratorApp extends Component {
       // const dummy_stations = generateStations();
       const { selectedStation, egbinPs, "sapele-gas": sapeleGas, delta2, delta3, afamVIPs, dadinkowa, okpai_1, okpai_2, 
         zungeru, kainjiPs, jebbaPs, "delta4-2": delta4_2, "delta4-1": delta4_1, "afamVPs": afam_5_Ps, geometricPlant1,
-        afamIIIPs: afam_3_Ps, paras_1, paras_2, shiroroPs, geometricPlant2, geometricPlant3, ibom, cnl } = this.state;
+        afamIIIPs: afam_3_Ps, paras_1, paras_2, shiroroPs, geometricPlant2, geometricPlant3, ibom, cnl,
+        mepp, afamIIIPs_delta1, afamIIIPs_delta2 } = this.state;
         // console.log(paras_1, 'paras_1 in app');
         // console.log(paras_2, 'paras_2 in app');
       // Merge the real-time data into the dummy stations data
@@ -268,7 +283,7 @@ class GeneratorApp extends Component {
       const geometric_power = {id: "Geometric Power", units: [...geometricPlant1.units, ...geometricPlant2.units, ...geometricPlant3.units], server_time: geometricPlant1.server_time > geometricPlant2.server_time ? geometricPlant1.server_time : geometricPlant2.server_time > geometricPlant3.server_time ? geometricPlant2.server_time : geometricPlant3.server_time};
       const rivers_IPP = {id: "Rivers IPP", units: [...cnl.units], server_time: cnl.server_time};
 
-      const real_stations = [ibom, rivers_IPP, egbinPs, sapeleGas, delta2, delta3, delta4_2, delta4_1, afam_3_5_Ps, afamVIPs, dadinkowa, okpai_1, okpai_2, paras_1, paras_2, shiroroPs, zungeru, kainjiPs, jebbaPs, geometric_power];
+      const real_stations = [ibom, rivers_IPP, egbinPs, sapeleGas, mepp, afamIIIPs_delta1, afamIIIPs_delta2, delta2, delta3, delta4_2, delta4_1, afam_3_5_Ps, afamVIPs, dadinkowa, okpai_1, okpai_2, paras_1, paras_2, shiroroPs, zungeru, kainjiPs, jebbaPs, geometric_power];
       real_stations.forEach((station, index) => {
         const station_name = station.name ? station.name : station.id ? station.id : null;
         if(station && station_name) {
