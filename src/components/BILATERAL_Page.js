@@ -161,13 +161,13 @@ class All_Bilateral extends React.Component {
       const getRandomGlitch = () => glitchyMeterOutputs[Math.floor(Math.random() * glitchyMeterOutputs.length)];
 
       // Glitch Ratio: 0.70 means 70% chance of glitch, 30% chance of real data
-      const GLITCH_RATIO = 0.80; 
+      const GLITCH_RATIO = 0.20; 
       const getGlitchOrNull = () => (Math.random() < GLITCH_RATIO ? getRandomGlitch() : null);
 
       // Update glitches every 5 seconds
       this.glitchTimer = setInterval(() => {
         this.setState({
-          gph_glitch: getGlitchOrNull(),
+          // gph_glitch: getGlitchOrNull(),
           olam_glitch: getGlitchOrNull(),
           bao_yao_glitch: getGlitchOrNull()
         });
