@@ -168,8 +168,8 @@ class All_Bilateral extends React.Component {
       this.glitchTimer = setInterval(() => {
         this.setState({
           // gph_glitch: getGlitchOrNull(),
-          olam_glitch: getGlitchOrNull(),
-          bao_yao_glitch: getGlitchOrNull()
+          // olam_glitch: getGlitchOrNull(),
+          // bao_yao_glitch: getGlitchOrNull()
         });
       }, 5000);
     }
