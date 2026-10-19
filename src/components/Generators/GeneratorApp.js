@@ -286,6 +286,13 @@ class GeneratorApp extends Component {
     if (!str) return "";
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
+  // Latest valid server_time among sub-plants (undefined if none have reported yet)
+  latestServerTime(...plants) {
+    const times = plants
+      .map(p => p && p.server_time)
+      .filter(t => typeof t === 'number' && !isNaN(t));
+    return times.length ? Math.max(...times) : undefined;
+  }
 
   render() {
 
@@ -301,12 +308,15 @@ class GeneratorApp extends Component {
       // Merge the real-time data into the dummy stations data
       let stations = [];
       const stationTypes = ['Thermal', 'Hydro', 'Nuclear', 'Wind', 'Solar', 'Gas'];
-      const afam_3_5_Ps = {id: "afam III & V Ps", units: [...afam_3_Ps.units, ...afam_5_Ps.units], server_time: afam_3_Ps.server_time > afam_5_Ps.server_time ? afam_3_Ps.server_time : afam_5_Ps.server_time};
+      const afam_3_5_Ps = {id: "afam III & V Ps", units: [...afam_3_Ps.units, ...afam_5_Ps.units], 
+          server_time: this.latestServerTime(afam_3_Ps, afam_5_Ps)};
       // console.log(afam_3_5_Ps, 'afam_3_5_Ps');
-      const geometric_power = {id: "Geometric Power", units: [...geometricPlant1.units, ...geometricPlant2.units, ...geometricPlant3.units], server_time: geometricPlant1.server_time > geometricPlant2.server_time ? geometricPlant1.server_time : geometricPlant2.server_time > geometricPlant3.server_time ? geometricPlant2.server_time : geometricPlant3.server_time};
+      const geometric_power = {id: "Geometric Power", units: [...geometricPlant1.units, ...geometricPlant2.units, ...geometricPlant3.units], 
+        server_time: this.latestServerTime(geometricPlant1, geometricPlant2, geometricPlant3)};
       const rivers_IPP = {id: "Rivers IPP", units: [...cnl.units], server_time: cnl.server_time};
 
-      const olorunsogoGas = {id: "Olorunsogo Gas", units: [...olorunsogoGas1.units, ...olorunsogoGas3.units, ...olorunsogoGas5.units, ...olorunsogoGas7.units], server_time: olorunsogoGas1?.server_time >= olorunsogoGas3?.server_time ? olorunsogoGas1?.server_time : olorunsogoGas3?.server_time >= olorunsogoGas5?.server_time ? olorunsogoGas3?.server_time : olorunsogoGas5?.server_time >= olorunsogoGas7?.server_time ? olorunsogoGas5?.server_time : olorunsogoGas7?.server_time};
+      const olorunsogoGas = {id: "Olorunsogo Gas", units: [...olorunsogoGas1.units, ...olorunsogoGas3.units, ...olorunsogoGas5.units, ...olorunsogoGas7.units], 
+        server_time: this.latestServerTime(olorunsogoGas1, olorunsogoGas3, olorunsogoGas5, olorunsogoGas7)};
 
       const real_stations = [ibom, rivers_IPP, egbinPs, sapeleGas, mepp, afamIIIPs_delta1, afamIIIPs_delta2, delta2, delta3, delta4_2, delta4_1, afam_3_5_Ps, afamVIPs, dadinkowa, okpai_1, okpai_2, paras_1, paras_2, shiroroPs, zungeru, kainjiPs, jebbaPs, geometric_power, olorunsogoGas];
       real_stations.forEach((station, index) => {
