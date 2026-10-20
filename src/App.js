@@ -53,6 +53,7 @@ import BilateralDownload from '../src/components/System_Planning/BilateralDownlo
 import InstructedPage from './components/GridTable_Instructed_SP';
 import GridTable from './components/GridTable';
 import GeneratorApp from './components/Generators/GeneratorApp';
+import { gencoRoutes } from './components/GencoPortal';
 
 // Use lazy loading for heavy components
 const FullPage_SP_Lazy = lazy(() => import('./components/GridTable_SP'));
@@ -74,6 +75,8 @@ class App extends React.Component {
     return (
       <Router>
         <Switch >
+          {/* Genco portals: /egbin_units, /kainji_units, ... (see components/GencoPortal/gencos.js) */}
+          {gencoRoutes}
           <Route exact path={'/'}>
             <div className='body'>
               <div className='App'>              
