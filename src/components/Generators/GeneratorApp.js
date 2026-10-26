@@ -208,6 +208,26 @@ class GeneratorApp extends Component {
         id: "olorunsogoGas7",
         units: [ {id: "gt7", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
                  {id: "gt8", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
+      },
+      omotoshoGas1: {
+        id: "omotoshoGas1",
+        units: [ {id: "gt1", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "gt2", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
+      },
+      omotoshoGas3: {
+        id: "omotoshoGas3",
+        units: [ {id: "gt3", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "gt4", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
+      },
+      omotoshoGas5: {
+        id: "omotoshoGas5",
+        units: [ {id: "gt5", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "gt6", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
+      },
+      omotoshoGas7: {
+        id: "omotoshoGas7",
+        units: [ {id: "gt7", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "gt8", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
       }
     };
   }
@@ -302,7 +322,8 @@ class GeneratorApp extends Component {
       const { selectedStation, egbinPs, "sapele-gas": sapeleGas, delta2, delta3, afamVIPs, dadinkowa, okpai_1, okpai_2, 
         zungeru, kainjiPs, jebbaPs, "delta4-2": delta4_2, "delta4-1": delta4_1, "afamVPs": afam_5_Ps, geometricPlant1,
         afamIIIPs: afam_3_Ps, paras_1, paras_2, shiroroPs, geometricPlant2, geometricPlant3, ibom, cnl,
-        mepp, afamIIIPs_delta1, afamIIIPs_delta2, olorunsogoGas1, olorunsogoGas3, olorunsogoGas5, olorunsogoGas7 } = this.state;
+        mepp, afamIIIPs_delta1, afamIIIPs_delta2, olorunsogoGas1, olorunsogoGas3, olorunsogoGas5, olorunsogoGas7, 
+        omotoshoGas1, omotoshoGas3, omotoshoGas5, omotoshoGas7 } = this.state;
         // console.log(paras_1, 'paras_1 in app');
         // console.log(paras_2, 'paras_2 in app');
       // Merge the real-time data into the dummy stations data
@@ -318,7 +339,10 @@ class GeneratorApp extends Component {
       const olorunsogoGas = {id: "Olorunsogo Gas", units: [...olorunsogoGas1.units, ...olorunsogoGas3.units, ...olorunsogoGas5.units, ...olorunsogoGas7.units], 
         server_time: this.latestServerTime(olorunsogoGas1, olorunsogoGas3, olorunsogoGas5, olorunsogoGas7)};
 
-      const real_stations = [ibom, rivers_IPP, egbinPs, sapeleGas, mepp, afamIIIPs_delta1, afamIIIPs_delta2, delta2, delta3, delta4_2, delta4_1, afam_3_5_Ps, afamVIPs, dadinkowa, okpai_1, okpai_2, paras_1, paras_2, shiroroPs, zungeru, kainjiPs, jebbaPs, geometric_power, olorunsogoGas];
+      const omotoshoGas = {id: "Omotosho Gas", units: [...omotoshoGas1.units, ...omotoshoGas3.units, ...omotoshoGas5.units, ...omotoshoGas7.units], 
+        server_time: this.latestServerTime(omotoshoGas1, omotoshoGas3, omotoshoGas5, omotoshoGas7)};
+
+      const real_stations = [ibom, rivers_IPP, egbinPs, sapeleGas, mepp, afamIIIPs_delta1, afamIIIPs_delta2, delta2, delta3, delta4_2, delta4_1, afam_3_5_Ps, afamVIPs, dadinkowa, okpai_1, okpai_2, paras_1, paras_2, shiroroPs, zungeru, kainjiPs, jebbaPs, geometric_power, olorunsogoGas, omotoshoGas];
       real_stations.forEach((station, index) => {
         const station_name = station.name ? station.name : station.id ? station.id : null;
         if(station && station_name) {
