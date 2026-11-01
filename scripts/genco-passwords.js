@@ -57,7 +57,8 @@ function main() {
   for (const g of entries) {
     if (only.size && !only.has(g.slug)) continue;
     const password = makePassword();
-    const block = new RegExp(`(\\{ slug: '${g.slug}',[\\s\\S]*?hash: ')[0-9a-f]{64}(')`);
+    // A new Genco may start with an empty fingerprint: hash: ''
+    const block = new RegExp(`(\\{ slug: '${g.slug}',[\\s\\S]*?hash: ')[0-9a-f]{0,64}(')`);
     if (!block.test(src)) throw new Error(`No hash found for ${g.slug}`);
     src = src.replace(block, `$1${fingerprint(g.slug, password)}$2`);
     issued.push({ Genco: g.name, Route: `${SITE}/${g.slug}_units`, Username: g.slug, Password: password });
@@ -68,12 +69,26 @@ function main() {
   let xlsx = null;
   try { xlsx = require(process.env.XLSX_MODULE || 'xlsx'); } catch (e) { /* fall back to CSV */ }
   if (xlsx && out.endsWith('.xlsx')) {
+    // Keep the passwords already in the file for Gencos that were not reissued this time,
+    // so issuing one new Genco never wipes out the others.
+    const byUser = new Map();
+    if (fs.existsSync(out)) {
+      const old = xlsx.readFile(out);
+      const sheet = old.Sheets.Credentials || old.Sheets[old.SheetNames[0]];
+      xlsx.utils.sheet_to_json(sheet, { header: 1 }).slice(4).forEach((r) => {
+        if (r && r[2]) byUser.set(String(r[2]), { Genco: r[0], Route: r[1], Username: String(r[2]), Password: String(r[3] ?? '') });
+      });
+    }
+    issued.forEach((r) => byUser.set(r.Username, r));
+    const all = [
+      ...entries.filter((g) => byUser.has(g.slug)).map((g) => ({ ...byUser.get(g.slug), Genco: g.name, Route: `${SITE}/${g.slug}_units` })),
+    ];
     const rows = [
       ['NISO Genco Portal - login credentials'],
-      [`Issued ${issuedOn}. Confidential: give each Genco only its own row.`],
+      [`Updated ${issuedOn} (new password for: ${issued.map((r) => r.Username).join(', ')}). Confidential: give each Genco only its own row.`],
       [],
       ['Genco', 'Page (route)', 'Username', 'Password'],
-      ...issued.map((r) => [r.Genco, r.Route, r.Username, r.Password]),
+      ...all.map((r) => [r.Genco, r.Route, r.Username, r.Password]),
     ];
     const ws = xlsx.utils.aoa_to_sheet(rows);
     ws['!cols'] = [{ wch: 30 }, { wch: 40 }, { wch: 14 }, { wch: 22 }];
