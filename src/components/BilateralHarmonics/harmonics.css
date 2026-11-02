@@ -114,3 +114,61 @@ table.bl-tg tbody tr td.hx-td.hx-over, table.ncc-tg tbody tr td.hx-td.hx-over { 
 
 @media (max-width: 1100px) { .hx-grid { grid-template-columns: 1fr; } }
 @media (max-width: 640px) { .hx-strip-row { grid-template-columns: 1fr; } .hx-alerts { grid-template-columns: 1fr; } .hx-verdict p { min-width: 0; flex-basis: 100%; order: 3; } }
+
+/* ---------- smart bilateral table ---------- */
+.hx-under .gx-root.hx-section { max-width: none; margin: 0; padding: 0; background: none; }
+.gx-main.hx-under { padding-top: 0; }
+.hx-summary b small { font-size: 16px; color: var(--gx-text-2); }
+.hx-table-head { flex-direction: row; }
+.hx-table-tools { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.gx-root .hx-search { height: 36px; width: 220px; max-width: 100%; background: var(--gx-bg); color: var(--gx-text); border: 1px solid var(--gx-border); border-radius: 10px; padding: 0 12px; font-size: 14px; font-family: inherit; }
+.gx-root .hx-search:focus { border-color: var(--gx-accent); outline: none; }
+.gx-root .hx-sort { all: unset; cursor: pointer; font: inherit; letter-spacing: inherit; }
+.gx-root .hx-sort:focus-visible { outline: 2px solid var(--gx-accent); outline-offset: 2px; }
+.gx-root .hx-bl-table th { white-space: nowrap; position: sticky; top: 0; background: var(--gx-surface); z-index: 1; }
+.gx-root .hx-bl-table tbody tr.can-open { cursor: pointer; }
+.gx-root .hx-bl-table tbody tr:hover td { background: var(--gx-surface-2); }
+.gx-root .hx-bl-table tbody tr.is-off td { color: var(--gx-text-2); }
+.gx-root .hx-bl-table td.hx-sn { color: var(--gx-muted); font-family: var(--gx-mono); }
+.gx-root .hx-bl-table td.hx-mw { position: relative; }
+.gx-root .hx-bl-table td.hx-warn { color: var(--gx-warning); font-weight: 800; }
+.hx-load { position: absolute; right: 10px; bottom: 3px; height: 3px; max-width: calc(100% - 20px); background: var(--gx-accent); border-radius: 2px; }
+.gx-root .hx-bl-table td.hx-none { text-align: center; color: var(--gx-muted); padding: 24px; cursor: default; }
+.hx-pill.off { color: var(--gx-text-2); }
+/* Meter detail: Modal.css places it in the page flow, which is below the harmonics section here. */
+.gx-root .modalBackground { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 1000; background-color: rgb(0 0 0 / 0.6); padding: 16px; box-sizing: border-box; }
+.gx-root .modalContainer { width: 850px; height: auto; max-width: 100%; max-height: 100%; overflow: auto; background-color: #fff; color: #1a2233; }
+.gx-root .modalContainer .body { display: block; flex: none; overflow-x: auto; margin: 12px 0; }
+.gx-root .modalContainer .footer { flex: none; background: none; padding-bottom: 0; }
+.gx-root .modalContainer .footer::before { display: none; }
+.gx-root .modalContainer ul { list-style: none; margin: 0; padding: 0; min-width: 520px; }
+.gx-root .modalContainer .li_table { display: flex; padding: 8px 4px; font-size: 0; color: #1a2233; text-align: left; border-bottom: 1px solid #e2e6ee; }
+.gx-root .modalContainer .li_table span { flex: 1 1 0; min-width: 0; font-size: 14px; color: inherit; }
+.gx-root .modalContainer .li_table:first-child span { font-weight: 700; }
+
+/* ---------- OAU keypad ---------- */
+.hx-pin-screen { display: grid; place-items: center; padding: 24px 16px; }
+.hx-pin-card { width: min(380px, 100%); display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 32px 28px; text-align: center; border: 1px solid var(--gx-border); border-radius: 18px; background: var(--gx-surface); box-shadow: 0 30px 80px rgb(0 0 0 / 0.45); position: relative; }
+.hx-pin-card img { height: 46px; width: auto; border-radius: 8px; background: #fff; padding: 3px 8px; }
+.hx-pin-card h1 { font-size: 24px; font-weight: 800; }
+.hx-pin-dots { display: flex; gap: 10px; margin: 6px 0; }
+.hx-pin-dots span { width: 13px; height: 13px; border-radius: 50%; border: 2px solid var(--gx-border); }
+.hx-pin-dots span.on { background: var(--gx-accent); border-color: var(--gx-accent); }
+.hx-pin-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+.gx-root .hx-pin-pad button { height: 58px; border-radius: 12px; border: 1px solid var(--gx-border); background-color: var(--gx-surface-2); color: var(--gx-text); font-size: 22px; font-weight: 700; cursor: pointer; }
+.gx-root .hx-pin-pad button:hover:not(:disabled) { border-color: #35496d; background-color: #1c2840; }
+.gx-root .hx-pin-pad button.ghost { background-color: transparent; }
+.gx-root .hx-pin-pad button.go { background-color: var(--gx-accent); border-color: var(--gx-accent); color: #fff; font-size: 17px; }
+.gx-root .hx-pin-pad button:disabled { opacity: 0.5; cursor: not-allowed; }
+.hx-sr { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+@media (max-width: 640px) {
+  .hx-table-tools { margin-left: 0; width: 100%; }
+  .gx-root .hx-search { width: 100%; }
+  /* Phones: drop S/N and shrink the status to its dot so MW and kV are visible without scrolling. */
+  .gx-root .hx-bl-table { min-width: 0; }
+  .gx-root .hx-bl-table tr > :first-child:not(.hx-none) { display: none; }
+  .gx-root .hx-bl-table .hx-pill { font-size: 0; gap: 0; padding: 5px; }
+  .gx-root .hx-bl-table th:nth-child(3) .hx-sort { font-size: 0; }
+  .gx-root .hx-bl-table td, .gx-root .hx-bl-table th { padding-left: 6px; padding-right: 6px; }
+}

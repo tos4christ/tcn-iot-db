@@ -9,7 +9,7 @@ const key = (slug) => `niso.genco.session.${slug}`;
 
 // SHA-256 as hex. Uses the browser's crypto when available (https / localhost); falls back to a
 // small pure-JS version when the page is opened over plain http on the internal network.
-async function sha256Hex(text) {
+export async function sha256Hex(text) {
   const bytes = new TextEncoder().encode(text);
   if (window.crypto && window.crypto.subtle) {
     const buf = await window.crypto.subtle.digest('SHA-256', bytes);

@@ -236,14 +236,16 @@ class App extends React.Component {
             </div>
             <Footer />
           </Route>
-          <Route exact path={`/bilaterals`}>              
-            <div className='App'>
+          <Route exact path={`/bilaterals`}>
+            {/* Not in .App: its fixed 300vh height left the footer floating mid-page */}
+            <div>
               <Bilateral />
             </div>
             <Footer />
           </Route>
-          <Route exact path={`/bilateral`}>              
-            <div className='App'>
+          <Route exact path={`/bilateral`}>
+            {/* Not in .App: its fixed 300vh height left the footer floating mid-page */}
+            <div>
               <BILATERAL_Page />
             </div>
             <Footer />

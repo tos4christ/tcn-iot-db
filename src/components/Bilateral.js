@@ -2,9 +2,8 @@ import React from "react";
 import { withRouter } from 'react-router-dom';
 import socket from "./utility/socketIO";
 import get_stations from "./stations_adder";
-import DateTime from "./DateTime";
 import Modal from "./Modal";
-import { HarmonicCells, HarmonicHeaders, HarmonicsSection } from './BilateralHarmonics';
+import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
 
  class Bilateral extends React.Component {
    constructor(props) {
@@ -303,169 +302,128 @@ import { HarmonicCells, HarmonicHeaders, HarmonicsSection } from './BilateralHar
     (isNaN(Number(quantum.mw)) ? 0 : Number(quantum.mw)) + (isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw)) +
     (isNaN(Number(starPipe.mw)) ? 0 : Number(starPipe.mw)) + (isNaN(Number(pheonix.mw)) ? 0 : Math.abs(Number(pheonix.mw)));
         
+    // Every value below is this page's original calculation; only the table around it changed.
+    const rows = [
+      {
+        sn: 1, label: "PHEONIX STEEL IKORODU",
+        status: this.checkConnection2(this.state.pheonix.server_time),
+        mw: (pheonix?.mw ? Math.abs(Number(pheonix.mw)) : 0),
+        kv: pheonix?.V ? pheonix.V : 0,
+        data: this.state.pheonix,
+        modal: ['PHEONIX STEEL IKORODU', this.state.pheonix],
+      },
+      {
+        sn: 2, label: "AFRICAN FOUNDARIES LTD IKORODU",
+        status: this.checkConnection2(this.state.africanFoundriesLimited.server_time),
+        mw: africanFoundriesLimited.mw,
+        kv: africanFoundriesLimited.kv,
+        data: this.state.africanFoundriesLimited,
+        modal: ['AFRICAN FOUNDARIES LTD IKORODU', this.state.africanFoundriesLimited],
+      },
+      {
+        sn: 3, label: "MONARCH IKORODU",
+        status: this.checkConnection2(this.state.monarch.server_time),
+        mw: monarch.mw,
+        kv: monarch.kv,
+        data: this.state.monarch,
+        modal: ['MONARCH IKORODU', this.state.monarch],
+      },
+      {
+        sn: 4, label: "REAL INFRASTRUCTURE LTD IKORODU",
+        status: this.checkConnection2(this.state.quantum.server_time),
+        mw: quantum.mw,
+        kv: quantum.kv,
+        data: this.state.quantum,
+        modal: ['REAL INFRASTRUCTURE LTD IKORODU', this.state.quantum],
+      },
+      {
+        sn: 5, label: "KAM STEEL SAGAMU",
+        status: this.checkConnection2(this.state.kamSteel.server_time),
+        mw: (kamSteel?.mw ? Math.abs(Number(kamSteel.mw)) : 0),
+        kv: kamSteel?.V ? kamSteel.V : 0,
+        data: this.state.kamSteel,
+        modal: ['KAM STEEL SAGAMU', this.state.kamSteel],
+      },
+      {
+        sn: 6, label: "CEMENT FACTORY",
+        status: this.checkConnection2(this.state.larfarge.server_time),
+        mw: larfarge.mw,
+        kv: larfarge.kv,
+        data: this.state.larfarge,
+        modal: ['CEMENT FACTORY', this.state.larfarge],
+      },
+      {
+        sn: 7, label: "TOP STEEL IKORODU",
+        status: this.checkConnection2(this.state.topSteel.server_time),
+        mw: top_steel.mw,
+        kv: top_steel.kv,
+        data: this.state.topSteel,
+        modal: ['TOP STEEL IKORODU', this.state.topSteel],
+      },
+      {
+        sn: 8, label: "SUNFLAG IRON & STEEL IKORODU",
+        status: this.checkConnection2(this.state.sunflag.server_time),
+        mw: (sunflag?.mw ? Math.abs(Number(sunflag.mw)) : 0),
+        kv: sunflag?.V ? sunflag.V : 0,
+        data: this.state.sunflag,
+        modal: ['SUNFLAG IRON & STEEL IKORODU', this.state.sunflag],
+      },
+      {
+        sn: 9, label: "PULKIT ALLOY & STEEL IKORODU",
+        status: this.checkConnection2(this.state.pulkitSteel.server_time),
+        mw: (pulkitSteel?.mw ? Math.abs(Number(pulkitSteel.mw)) : 0),
+        kv: pulkitSteel?.V ? pulkitSteel.V : 0,
+        data: this.state.pulkitSteel,
+        modal: ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel],
+      },
+      {
+        sn: 10, label: "STAR PIPE PRODUCT IKORODU",
+        status: this.checkConnection2(this.state.starPipe.server_time),
+        mw: starPipe.mw,
+        kv: starPipe.kv,
+        data: this.state.starPipe,
+        modal: ['STAR PIPE PRODUCT IKORODU', this.state.starPipe],
+      },
+      {
+        sn: 11, label: "IKORODU 132KV TS LINE_1",
+        status: this.checkConnection2(this.state.ikorodu1.server_time),
+        mw: ikorodu_1.mw,
+        kv: ikorodu_1.kv,
+        data: this.state.ikorodu1,
+        modal: ['IKORODU 132KV TS LINE_1', this.state.ikorodu1],
+      },
+      {
+        sn: 12, label: "IKORODU 132KV TS LINE_2",
+        status: this.checkConnection2(this.state.ikorodu2.server_time),
+        mw: ikorodu_2.mw,
+        kv: ikorodu_2.kv,
+        data: this.state.ikorodu2,
+        modal: ['IKORODU 132KV TS LINE_2', this.state.ikorodu2],
+      },
+      {
+        sn: 13, label: "SAGAMU 132KV TS",
+        status: this.checkConnection2(this.state.sagamu.server_time),
+        mw: sagamu.mw,
+        kv: sagamu.kv,
+        data: this.state.sagamu,
+        modal: ['SAGAMU 132KV TS', this.state.sagamu],
+      },
+    ];
+
     return (
       <>
-      <div className="bl-menu hx-page">
-        <div className="bl-menu-list">
-          <div className="bl-display-div">
-            <h2><DateTime /></h2>
-            <h2 className="text-danger">IoT CRITICAL 132KV & 33KV LOAD OFF-TAKERS </h2>
-            <table className="bl-tg">
-              <thead>
-                <tr>
-                  <th className="bl-tg-zb4j">S/N</th>
-                  <th className="bl-tg-zb4j">STATIONS</th>
-                  <th className="bl-tg-zb4j">STATUS</th>
-                  <th className="bl-tg-zb4j">POWER(MW)</th>
-                  <th className="bl-tg-zb4j text-danger">VOLTAGE(kV)</th>
-                  <HarmonicHeaders className="bl-tg-zb4j" />
-                </tr>
-              </thead>
-              <tbody>
-                <tr onClick={(e) => { this.setModalTrue(e, ['PHEONIX STEEL IKORODU', this.state.pheonix]); }}>
-                  <td>1</td>
-                  <td>PHEONIX STEEL IKORODU</td>
-                  <td>{this.checkConnection2(this.state.pheonix.server_time)}</td>
-                  <td>{(pheonix?.mw ? Math.abs(Number(pheonix.mw)) : 0)}</td>
-                  <td>{pheonix?.V ? pheonix.V : 0}</td>
-                  <HarmonicCells data={this.state.pheonix} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['AFRICAN FOUNDARIES LTD IKORODU', this.state.africanFoundriesLimited]); }}>
-                  <td>2</td>
-                  <td>AFRICAN FOUNDARIES LTD IKORODU</td>
-                  <td>{this.checkConnection2(this.state.africanFoundriesLimited.server_time)}</td>
-                  <td>{africanFoundriesLimited.mw}</td>
-                  <td>{africanFoundriesLimited.kv}</td>
-                  <HarmonicCells data={this.state.africanFoundriesLimited} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['MONARCH IKORODU', this.state.monarch]); }}>
-                  <td>3</td>
-                  <td>MONARCH IKORODU</td>
-                  <td>{this.checkConnection2(this.state.monarch.server_time)}</td>
-                  <td>{monarch.mw}</td>
-                  <td>{monarch.kv}</td>
-                  <HarmonicCells data={this.state.monarch} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['REAL INFRASTRUCTURE LTD IKORODU', this.state.quantum]); }}>
-                  <td>4</td>
-                  <td>REAL INFRASTRUCTURE LTD IKORODU</td>
-                  <td>{this.checkConnection2(this.state.quantum.server_time)}</td>
-                  <td>{quantum.mw}</td>
-                  <td>{quantum.kv}</td>
-                  <HarmonicCells data={this.state.quantum} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['KAM STEEL SAGAMU', this.state.kamSteel]); }}>
-                  <td>5</td>
-                  <td>KAM STEEL SAGAMU</td>
-                  <td>{this.checkConnection2(this.state.kamSteel.server_time)}</td>
-                  <td>{(kamSteel?.mw ? Math.abs(Number(kamSteel.mw)) : 0)}</td>
-                  <td>{kamSteel?.V ? kamSteel.V : 0}</td>
-                  <HarmonicCells data={this.state.kamSteel} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['CEMENT FACTORY', this.state.larfarge]); }}>
-                  <td>6</td>
-                  <td>CEMENT FACTORY</td>
-                  <td>{this.checkConnection2(this.state.larfarge.server_time)}</td>
-                  <td>{larfarge.mw}</td>
-                  <td>{larfarge.kv}</td>
-                  <HarmonicCells data={this.state.larfarge} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['TOP STEEL IKORODU', this.state.topSteel]); }}>
-                  <td>7</td>
-                  <td>TOP STEEL IKORODU</td>
-                  <td>{this.checkConnection2(this.state.topSteel.server_time)}</td>
-                  <td>{top_steel.mw}</td>
-                  <td>{top_steel.kv}</td>
-                  <HarmonicCells data={this.state.topSteel} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['SUNFLAG IRON & STEEL IKORODU', this.state.sunflag]); }}>
-                  <td>8</td>
-                  <td>SUNFLAG IRON & STEEL IKORODU</td>
-                  <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
-                  <td>{(sunflag?.mw ? Math.abs(Number(sunflag.mw)) : 0)}</td>
-                  <td>{sunflag?.V ? sunflag.V : 0}</td>
-                  <HarmonicCells data={this.state.sunflag} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel]); }}>
-                  <td>9</td>
-                  <td>PULKIT ALLOY & STEEL IKORODU</td>
-                  <td>{this.checkConnection2(this.state.pulkitSteel.server_time)}</td>
-                  <td>{(pulkitSteel?.mw ? Math.abs(Number(pulkitSteel.mw)) : 0)}</td>
-                  <td>{pulkitSteel?.V ? pulkitSteel.V : 0}</td>
-                  <HarmonicCells data={this.state.pulkitSteel} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['STAR PIPE PRODUCT IKORODU', this.state.starPipe]); }}>
-                  <td>10</td>
-                  <td>STAR PIPE PRODUCT IKORODU</td>
-                  <td>{this.checkConnection2(this.state.starPipe.server_time)}</td>
-                  <td>{starPipe.mw}</td>
-                  <td>{starPipe.kv}</td>
-                  <HarmonicCells data={this.state.starPipe} />
-                </tr>                
-                <tr onClick={(e) => { this.setModalTrue(e, ['IKORODU 132KV TS LINE_1', this.state.ikorodu1]); }}>
-                  <td>11</td>
-                  <td>IKORODU 132KV TS LINE_1</td>
-                  <td>{this.checkConnection2(this.state.ikorodu1.server_time)}</td>
-                  <td>{ikorodu_1.mw}</td>
-                  <td>{ikorodu_1.kv}</td>
-                  <HarmonicCells data={this.state.ikorodu1} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['IKORODU 132KV TS LINE_2', this.state.ikorodu2]); }}>
-                  <td>12</td>
-                  <td>IKORODU 132KV TS LINE_2</td>
-                  <td>{this.checkConnection2(this.state.ikorodu2.server_time)}</td>
-                  <td>{ikorodu_2.mw}</td>
-                  <td>{ikorodu_2.kv}</td>
-                  <HarmonicCells data={this.state.ikorodu2} />
-                </tr> 
-                <tr onClick={(e) => { this.setModalTrue(e, ['SAGAMU 132KV TS', this.state.sagamu]); }}>
-                  <td>13</td>
-                  <td>SAGAMU 132KV TS</td>
-                  <td>{this.checkConnection2(this.state.sagamu.server_time)}</td>
-                  <td>{sagamu.mw}</td>
-                  <td>{sagamu.kv}</td>
-                  <HarmonicCells data={this.state.sagamu} />
-                </tr>
-                <tr></tr>
-                <tr>
-                  <td></td>
-                  <td>TOTAL OFF-TAKE</td>
-                  <td></td>
-                  <td>{totalBilateral.toFixed(2)}</td>
-                  <td></td>
-                  <HarmonicCells />
-                </tr> 
-              </tbody>
-            </table>            
-          </div>
-          <div className="bl-counter-div">
-            <table className="bl-counter-tg">
-                <thead>
-                    <tr>
-                    <th className="bl-counter-tg-zb4j"></th>
-                    <th className="bl-counter-tg-zb4j">LEGEND</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>CN</td>
-                    <td>CONNECTED</td>
-                    </tr>
-                    <tr>
-                    <td>NC</td>
-                    <td>NOT CONNECTED</td>
-                    </tr>
-                    <tr>
-                    <td>PNDG</td>
-                    <td>PENDING</td>
-                    </tr>                                        
-                </tbody>
-                </table> 
-          </div>
-        </div>
+      <div className="gx-root">
+        <BilateralTable
+          title="Critical load off-takers"
+          tableTitle="IoT critical 132 kV &amp; 33 kV load off-takers"
+          rows={rows}
+          total={totalBilateral}
+          totalLabel="Total off-take"
+          onRowClick={(modal) => this.setModalTrue(null, modal)}
+        />
+        <main className="gx-main hx-under"><HarmonicsSection group="critical" title="Harmonics analysis: critical off-takers" /></main>
         {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
       </div>      
-      <HarmonicsSection group="critical" title="Harmonics analysis: critical off-takers" />
     </>
     )         
   }

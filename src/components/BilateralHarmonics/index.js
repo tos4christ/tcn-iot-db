@@ -2,6 +2,7 @@
  * Bilateral harmonics routes.
  *   /harmonics            all stations, ranked by grid impact
  *   /{slug}_harmonics     one station, e.g. /oau_harmonics
+ *   /oau_steel_bilaterals OAU page behind a keypad
  *
  * In App.js, inside <Switch>:
  *   {harmonicsRoutes()}
@@ -11,8 +12,12 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import HarmonicsPage, { HarmonicsSection } from './HarmonicsDashboard';
 import { STATIONS } from './harmonicsConfig';
+import OauSteelPage from './OauSteelPage';
 
 export const harmonicsRoutes = () => [
+  <Route key="oau-steel" exact path="/oau_steel_bilaterals">
+    <OauSteelPage />
+  </Route>,
   <Route key="harmonics" exact path="/harmonics">
     <HarmonicsPage isLoggedIn={localStorage.getItem('isLoggedIn')} />
   </Route>,
@@ -24,4 +29,5 @@ export const harmonicsRoutes = () => [
 ];
 
 export { HarmonicsSection };
+export { default as BilateralTable } from './BilateralTable';
 export { HarmonicCells, HarmonicHeaders } from './HarmonicCells';

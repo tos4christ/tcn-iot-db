@@ -25,25 +25,32 @@ export function HarmonicHeaders({ className = '' }) {
   );
 }
 
-export function HarmonicCells({ data, line }) {
-  useEffect(() => { if (data) harmonicsStore.start(); }, [data]);
+/** The five values for one row, plus whether each is over its limit. */
+export function harmonicValues(data, line) {
+  const empty = { tdd: null, thdv: null, ia: null, ib: null, ic: null, overTdd: false, overThdv: false };
+  if (!data) return empty;
   const points = harmonicPoints(data);
   const point = line ? points.find((p) => p.lineId === line) : points[0];
-  const td = point ? point.td : null;
-  const summary = point ? harmonicsStore.summaryFor(point.stationId, point.lineId) : null;
-  let tdd = null;
-  if (td && summary && summary.il) {
-    tdd = deriveSample({ a: Number(td.a), ia: Number(td.thdia), ib: Number(td.thdib), ic: Number(td.thdic) }, summary.il).tdd;
-  }
+  if (!point) return empty;
+  const td = point.td;
+  const n = (v) => { const x = Number(v); return v === null || v === undefined || v === '' || !Number.isFinite(x) ? null : x; };
+  const summary = harmonicsStore.summaryFor(point.stationId, point.lineId);
+  const tdd = summary && summary.il ? deriveSample({ a: Number(td.a), ia: n(td.thdia), ib: n(td.thdib), ic: n(td.thdic) }, summary.il).tdd : null;
   const limits = summary ? summary.limits : null;
-  const over = (v, limit) => (limits && Number(v) > limit ? ' hx-over' : '');
+  const thdv = n(td.thdv);
+  return { tdd, thdv, ia: n(td.thdia), ib: n(td.thdib), ic: n(td.thdic), overTdd: Boolean(limits && tdd !== null && tdd > limits.tdd), overThdv: Boolean(limits && thdv !== null && thdv > limits.thdv) };
+}
+
+export function HarmonicCells({ data, line }) {
+  useEffect(() => { if (data) harmonicsStore.start(); }, [data]);
+  const v = harmonicValues(data, line);
   return (
     <>
-      <td className={`hx-td${over(tdd, limits ? limits.tdd : 0)}`}>{fmt(tdd)}</td>
-      <td className={`hx-td${over(td && td.thdv, limits ? limits.thdv : 0)}`}>{fmt(td && td.thdv)}</td>
-      <td className="hx-td">{fmt(td && td.thdia)}</td>
-      <td className="hx-td">{fmt(td && td.thdib)}</td>
-      <td className="hx-td">{fmt(td && td.thdic)}</td>
+      <td className={`hx-td${v.overTdd ? ' hx-over' : ''}`}>{fmt(v.tdd)}</td>
+      <td className={`hx-td${v.overThdv ? ' hx-over' : ''}`}>{fmt(v.thdv)}</td>
+      <td className="hx-td">{fmt(v.ia)}</td>
+      <td className="hx-td">{fmt(v.ib)}</td>
+      <td className="hx-td">{fmt(v.ic)}</td>
     </>
   );
 }
