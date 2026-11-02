@@ -612,6 +612,7 @@ class All_Bilateral extends React.Component {
         data: this.state["phedc-bao-yao"], warn: bao_yao_glitch,
         modal: ['BAO YAO', this.state["phedc-bao-yao"]],
       },
+      /* OAU: hidden until commissioned
       {
         sn: 31, label: "OAU (power quality meter)",
         status: this.checkConnection2(this.state.oau.server_time),
@@ -620,6 +621,7 @@ class All_Bilateral extends React.Component {
         data: this.state.oau, excluded: true,
         modal: ['OAU (power quality meter)', this.state.oau],
       },
+      */
     ];
 
     return (
@@ -632,7 +634,7 @@ class All_Bilateral extends React.Component {
           total={totalBilateral}
           totalLabel="Total bilateral"
           onRowClick={(modal) => this.setModalTrue(null, modal)}
-          footnote="OAU (power quality meter) is not in the total, because the OAU row above may meter the same load."
+          // footnote="OAU (power quality meter) is not in the total, because the OAU row above may meter the same load."
         />
         <main className="gx-main hx-under"><HarmonicsSection /></main>
         {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}

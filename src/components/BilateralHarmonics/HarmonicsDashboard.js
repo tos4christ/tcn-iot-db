@@ -355,7 +355,8 @@ export function StationsTable({ entries, selected, onSelect, linkPages = false }
 /** group = mesl, fipl, taopex, ndphc, sakete; leave out for every station. */
 export function HarmonicsSection({ group = null, title = 'Harmonics analysis' }) {
   useTick();
-  const entries = harmonicsStore.stations(group);
+  // OAU hidden until commissioned. To bring it back, remove the .filter(...) part.
+  const entries = harmonicsStore.stations(group).filter((e) => e.cfg.slug !== 'oau');;
   const [selected, setSelected] = useState(null);
   const withData = entries.filter((e) => e.samples.length);
   const active = entries.find((e) => e.key === selected) || withData[0] || null;

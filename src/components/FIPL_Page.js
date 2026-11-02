@@ -182,14 +182,14 @@ import { HarmonicCells, HarmonicHeaders, HarmonicsSection } from './BilateralHar
                   <HarmonicCells data={this.state["Obafemi Awolowo University Ile-Ife"]} />
                 </tr>
                 {/* OAU power-quality meter. Not in the total: the row above may meter the same load. */}
-                <tr onClick={(e) => { this.setModalTrue(e, ['OAU (power quality meter)', this.state.oau]); }}>
+                {/* <tr onClick={(e) => { this.setModalTrue(e, ['OAU (power quality meter)', this.state.oau]); }}>
                   <td>3</td>
                   <td>OAU (power quality meter)</td>
                   <td>{this.checkConnection2(this.state.oau.server_time)}</td>
                   <td>{Number(this.state.oau?.lines?.[0]?.td?.mw || 0).toFixed(2)}</td>
                   <td>{this.state.oau?.lines?.[0]?.td?.v || 0}</td>
                   <HarmonicCells data={this.state.oau} />
-                </tr>
+                </tr> */}
 
                 <tr></tr>
                 <tr>
