@@ -1,9 +1,8 @@
 import React from "react";
 import { withRouter, Redirect } from 'react-router-dom';
 import socket from "./utility/socketIO";
-import DateTime from "./DateTime";
 import Modal from "./Modal";
-import { HarmonicCells, HarmonicHeaders, HarmonicsSection } from './BilateralHarmonics';
+import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
 
  class MESL_Page extends React.Component {
    constructor(props) {
@@ -194,193 +193,153 @@ import { HarmonicCells, HarmonicHeaders, HarmonicsSection } from './BilateralHar
     (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw))) +
     (isNaN(Number(glml_l1.mw)) ? 0 : Math.abs(Number(glml_l1.mw))) + (isNaN(Number(refinery_line_2?.td?.mw)) ? 0 : Number(refinery_line_2.td.mw));
  
+    // Every value below is this page's original calculation; only the table around it changed.
+    const rows = [
+      {
+        sn: 1, label: "ZEBERCED",
+        status: this.checkConnection2(this.state.zeberced.server_time),
+        mw: isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw).toFixed(2),
+        kv: zeberced.v ? zeberced.v : 0,
+        data: this.state.zeberced,
+        modal: ['ZEBERCED', this.state.zeberced],
+      },
+      {
+        sn: 2, label: "NIAMEY",
+        status: this.checkConnection2(this.state.Niamey.server_time),
+        mw: isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw).toFixed(2),
+        kv: Niamey.v ? Niamey.v : 0,
+        data: this.state.Niamey,
+        modal: ['NIAMEY', this.state.Niamey],
+      },
+      {
+        sn: 3, label: "INNER GALAXY 1",
+        status: this.checkConnection2(this.state.Inner_Galaxy1.server_time),
+        mw: isNaN(Number(Inner_Galaxy1.mw)) ? 0 : Number(Inner_Galaxy1.mw).toFixed(2),
+        kv: Inner_Galaxy1.v ? Inner_Galaxy1.v : 0,
+        data: this.state.Inner_Galaxy1,
+        modal: ['INNER GALAXY 1', this.state.Inner_Galaxy1],
+      },
+      {
+        sn: 4, label: "INNER GALAXY 2",
+        status: this.checkConnection2(this.state.Inner_Galaxy2.server_time),
+        mw: isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw).toFixed(2),
+        kv: Inner_Galaxy2.v ? Inner_Galaxy2.v : 0,
+        data: this.state.Inner_Galaxy2,
+        modal: ['INNER GALAXY 2', this.state.Inner_Galaxy2],
+      },
+      {
+        sn: 5, label: "PRISM",
+        status: this.checkConnection2(this.state.PSML.server_time),
+        mw: isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw).toFixed(2),
+        kv: PSML.v ? PSML.v : 0,
+        data: this.state.PSML,
+        modal: ['PSML', this.state.PSML],
+      },
+      {
+        sn: 6, label: "ATVL",
+        status: this.checkConnection2(this.state.ATVL.server_time),
+        mw: isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw).toFixed(2)),
+        kv: ATVL.v ? ATVL.v : 0,
+        data: this.state.ATVL,
+        modal: ['ATVL', this.state.ATVL],
+      },
+      {
+        sn: 7, label: "GAZAOUA",
+        status: this.checkConnection2(this.state.Gazaoua.server_time),
+        mw: isNaN(Number(Gazaoua.mw)) ? 0 : Math.abs(Number(Gazaoua.mw)).toFixed(2),
+        kv: Gazaoua.v ? Gazaoua.v : 0,
+        data: this.state.Gazaoua,
+        modal: ['GAZAOUA', this.state.Gazaoua],
+      },
+      {
+        sn: 8, label: "KAM",
+        status: this.checkConnection2(this.state.KamInd33kV.server_time),
+        mw: isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw).toFixed(2),
+        kv: KamInd33kV.v ? KamInd33kV.v : 0,
+        data: this.state.KamInd33kV,
+        modal: ['KAM', this.state.KamInd33kV],
+      },
+      {
+        sn: 9, label: "Quantum",
+        status: this.checkConnection2(this.state.quantum.server_time),
+        mw: isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw).toFixed(2)),
+        kv: quantum.V ? quantum.V : 0,
+        data: this.state.quantum,
+        modal: ['Quantum', this.state.quantum],
+      },
+      {
+        sn: 10, label: "HYDROPOLIS",
+        status: this.checkConnection2(this.state.HYDROPOLIS.server_time),
+        mw: isNaN((hydropolis_mw)) ? 0 : Math.abs(Number(hydropolis_mw).toFixed(2)),
+        kv: hydropolis_kv ? hydropolis_kv : 0,
+        data: this.state.HYDROPOLIS,
+        modal: ['HYDROPOLIS', this.state.HYDROPOLIS],
+      },
+      {
+        sn: 11, label: "Yongxing (PEL)",
+        status: this.checkConnection2(this.state.yongxing.server_time),
+        mw: isNaN((yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw).toFixed(2)),
+        kv: yongxing_t1.v ? yongxing_t1.v : 0,
+        data: this.state.yongxing,
+        modal: ['Yongxing (PEL)', this.state.yongxing],
+      },
+      {
+        sn: 12, label: "Atlantic Metal Industries Ltd",
+        status: this.checkConnection2(this.state.amil.server_time),
+        mw: isNaN((amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw).toFixed(2)),
+        kv: amil_t1.v ? amil_t1.v : 0,
+        data: this.state.amil,
+        modal: ['Atlantic Metal Industries Ltd', this.state.amil],
+      },
+      {
+        sn: 13, label: "AENL",
+        status: this.checkConnection2(this.state.AENL.server_time),
+        mw: ((isNaN((AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw).toFixed(2))) + (isNaN((AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw).toFixed(2)))).toFixed(2),
+        kv: AENL_t1.v ? AENL_t1.v : AENL_t2.v ? AENL_t2.v : 0,
+        data: this.state.AENL,
+        modal: ['AENL', this.state.AENL],
+      },
+      {
+        sn: 14, label: "GLML",
+        status: this.checkConnection2(this.state.glml.server_time),
+        mw: isNaN((glml_l1?.mw)) ? 0 : Math.abs(Number(glml_l1.mw).toFixed(2)),
+        kv: glml_l1?.v ? glml_l1.v : 0,
+        data: this.state.glml,
+        modal: ['GLML', this.state.glml],
+      },
+      {
+        sn: 15, label: "WOJI",
+        status: this.checkConnection2(this.state.phedc.server_time),
+        mw: isNaN((rspub1?.td?.mw)) ? 0 : Math.abs(Number(rspub1.td.mw).toFixed(2)),
+        kv: rspub1?.td?.v ? rspub1.td.v : 0,
+        data: this.state.phedc, line: 'rspub1',
+        modal: ['WOJI', this.state.phedc],
+      },
+      {
+        sn: 16, label: "Refinery Line 2",
+        status: this.checkConnection2(this.state.phedc.server_time),
+        mw: isNaN((refinery_line_2?.td?.mw)) ? 0 : Math.abs(Number(refinery_line_2.td.mw).toFixed(2)),
+        kv: refinery_line_2?.td?.v ? refinery_line_2.td.v : 0,
+        data: this.state.phedc, line: 'ref2',
+        modal: ['Refinery Line 2', this.state.phedc],
+      },
+    ];
+
     return (
       <>
-      <div className="ncc-menu hx-page">
-        <div className="ncc-menu-list">
-          <div className="ncc-display-div">
-            <h2><DateTime /></h2>
-            <h2 className="text-danger">Main Stream IoT Bilateral TABLE  -- Frequency:  {this.state.frequency.value ? this.state.frequency.value : ""}Hz</h2>
-            <table className="ncc-tg">
-              <thead>
-                <tr>
-                  <th className="ncc-tg-zb4j">S/N</th>
-                  <th className="ncc-tg-zb4j">STATIONS</th>
-                  <th className="ncc-tg-zb4j">STATUS</th>
-                  <th className="ncc-tg-zb4j">POWER(MW)</th>
-                  <th className="ncc-tg-zb4j text-danger">VOLTAGE(kV)</th>
-                  <HarmonicHeaders className="ncc-tg-zb4j" />
-                </tr>
-              </thead>
-              <tbody>
-                <tr  onClick={(e) => { this.setModalTrue(e, ['ZEBERCED', this.state.zeberced]); }}>
-                  <td>1</td>
-                  <td>ZEBERCED</td>
-                  <td>{this.checkConnection2(this.state.zeberced.server_time)}</td>
-                  <td>{isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw).toFixed(2)}</td>
-                  <td>{zeberced.v ? zeberced.v : 0}</td>
-                  <HarmonicCells data={this.state.zeberced} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['NIAMEY', this.state.Niamey]); }}>
-                  <td>2</td>
-                  <td>NIAMEY</td>
-                  <td>{this.checkConnection2(this.state.Niamey.server_time)}</td>
-                  <td>{isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw).toFixed(2)}</td>
-                  <td>{Niamey.v ? Niamey.v : 0}</td>
-                  <HarmonicCells data={this.state.Niamey} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['INNER GALAXY 1', this.state.Inner_Galaxy1]); }}>
-                  <td>3</td>
-                  <td>INNER GALAXY 1</td>
-                  <td>{this.checkConnection2(this.state.Inner_Galaxy1.server_time)}</td>
-                  <td>{isNaN(Number(Inner_Galaxy1.mw)) ? 0 : Number(Inner_Galaxy1.mw).toFixed(2)}</td>
-                  <td>{Inner_Galaxy1.v ? Inner_Galaxy1.v : 0}</td>
-                  <HarmonicCells data={this.state.Inner_Galaxy1} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['INNER GALAXY 2', this.state.Inner_Galaxy2]); }}>
-                  <td>4</td>
-                  <td>INNER GALAXY 2</td>
-                  <td>{this.checkConnection2(this.state.Inner_Galaxy2.server_time)}</td>
-                  <td>{isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw).toFixed(2)}</td>
-                  <td>{Inner_Galaxy2.v ? Inner_Galaxy2.v : 0}</td>
-                  <HarmonicCells data={this.state.Inner_Galaxy2} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['PSML', this.state.PSML]); }}>
-                  <td>5</td>
-                  <td>PRISM</td>
-                  <td>{this.checkConnection2(this.state.PSML.server_time)}</td>
-                  <td>{isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw).toFixed(2)}</td>
-                  <td>{PSML.v ? PSML.v : 0}</td>
-                  <HarmonicCells data={this.state.PSML} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['ATVL', this.state.ATVL]); }}>
-                  <td>6</td>
-                  <td>ATVL</td>
-                  <td>{this.checkConnection2(this.state.ATVL.server_time)}</td>
-                  <td>{isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw).toFixed(2))}</td>
-                  <td>{ATVL.v ? ATVL.v : 0}</td>
-                  <HarmonicCells data={this.state.ATVL} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['GAZAOUA', this.state.Gazaoua]); }}>
-                  <td>7</td>
-                  <td>GAZAOUA</td>
-                  <td>{this.checkConnection2(this.state.Gazaoua.server_time)}</td>
-                  <td>{isNaN(Number(Gazaoua.mw)) ? 0 : Math.abs(Number(Gazaoua.mw)).toFixed(2)}</td>
-                  <td>{Gazaoua.v ? Gazaoua.v : 0}</td>
-                  <HarmonicCells data={this.state.Gazaoua} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['KAM', this.state.KamInd33kV]); }}>
-                  <td>8</td>
-                  <td>KAM</td>
-                  <td>{this.checkConnection2(this.state.KamInd33kV.server_time)}</td>
-                  <td>{isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw).toFixed(2)}</td>
-                  <td>{KamInd33kV.v ? KamInd33kV.v : 0}</td>
-                  <HarmonicCells data={this.state.KamInd33kV} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['Quantum', this.state.quantum]); }}>
-                  <td>9</td>
-                  <td>Quantum</td>
-                  <td>{this.checkConnection2(this.state.quantum.server_time)}</td>
-                  <td>{isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw).toFixed(2))}</td>
-                  <td>{quantum.V ? quantum.V : 0}</td>
-                  <HarmonicCells data={this.state.quantum} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['HYDROPOLIS', this.state.HYDROPOLIS]); }}>
-                  <td>10</td>
-                  <td>HYDROPOLIS</td>
-                  <td>{this.checkConnection2(this.state.HYDROPOLIS.server_time)}</td>
-                  <td>{isNaN((hydropolis_mw)) ? 0 : Math.abs(Number(hydropolis_mw).toFixed(2))}</td>
-                  <td>{hydropolis_kv ? hydropolis_kv : 0}</td>
-                  <HarmonicCells data={this.state.HYDROPOLIS} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['Yongxing (PEL)', this.state.yongxing]); }}>
-                  <td>11</td>
-                  <td>Yongxing (PEL)</td>
-                  <td>{this.checkConnection2(this.state.yongxing.server_time)}</td>
-                  <td>{isNaN((yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw).toFixed(2))}</td>
-                  <td>{yongxing_t1.v ? yongxing_t1.v : 0}</td>
-                  <HarmonicCells data={this.state.yongxing} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['Atlantic Metal Industries Ltd', this.state.amil]); }}>
-                  <td>12</td>
-                  <td>Atlantic Metal Industries Ltd</td>
-                  <td>{this.checkConnection2(this.state.amil.server_time)}</td>
-                  <td>{isNaN((amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw).toFixed(2))}</td>
-                  <td>{amil_t1.v ? amil_t1.v : 0}</td>
-                  <HarmonicCells data={this.state.amil} />
-                </tr>
-               <tr onClick={(e) => { this.setModalTrue(e, ['AENL', this.state.AENL]); }}>
-                  <td>13</td>
-                  <td>AENL</td>
-                  <td>{this.checkConnection2(this.state.AENL.server_time)}</td>
-                  <td>{((isNaN((AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw).toFixed(2))) + (isNaN((AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw).toFixed(2)))).toFixed(2)}</td>
-                  <td>{AENL_t1.v ? AENL_t1.v : AENL_t2.v ? AENL_t2.v : 0}</td>
-                  <HarmonicCells data={this.state.AENL} />
-               </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['GLML', this.state.glml]); }}>
-                  <td>14</td>
-                  <td>GLML</td>
-                  <td>{this.checkConnection2(this.state.glml.server_time)}</td>
-                  <td>{isNaN((glml_l1?.mw)) ? 0 : Math.abs(Number(glml_l1.mw).toFixed(2))}</td>
-                  <td>{glml_l1?.v ? glml_l1.v : 0}</td>
-                  <HarmonicCells data={this.state.glml} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['WOJI', this.state.phedc]); }}>
-                  <td>15</td>
-                  <td>WOJI</td>
-                  <td>{this.checkConnection2(this.state.phedc.server_time)}</td>
-                  <td>{isNaN((rspub1?.td?.mw)) ? 0 : Math.abs(Number(rspub1.td.mw).toFixed(2))}</td>
-                  <td>{rspub1?.td?.v ? rspub1.td.v : 0}</td>
-                  <HarmonicCells data={this.state.phedc} line="rspub1" />
-                </tr>  
-                <tr onClick={(e) => { this.setModalTrue(e, ['Refinery Line 2', this.state.phedc]); }}>
-                  <td>16</td>
-                  <td>Refinery Line 2</td>
-                  <td>{this.checkConnection2(this.state.phedc.server_time)}</td>
-                  <td>{isNaN((refinery_line_2?.td?.mw)) ? 0 : Math.abs(Number(refinery_line_2.td.mw).toFixed(2))}</td>
-                  <td>{refinery_line_2?.td?.v ? refinery_line_2.td.v : 0}</td>
-                  <HarmonicCells data={this.state.phedc} line="ref2" />
-                </tr>
-                <tr></tr>
-                <tr>
-                  <td></td>
-                  <td>TOTAL CONSUMPTION</td>
-                  <td></td>
-                  <td>{totalConsumption.toFixed(2)}</td>
-                  <td></td>
-                  <HarmonicCells />
-                </tr> 
-              </tbody>
-            </table>            
-          </div>
-          <div className="ncc-counter-div">
-            <table className="ncc-counter-tg">
-                <thead>
-                    <tr>
-                    <th className="ncc-counter-tg-zb4j"></th>
-                    <th className="ncc-counter-tg-zb4j">LEGEND</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>CN</td>
-                    <td>CONNECTED</td>
-                    </tr>
-                    <tr>
-                    <td>NC</td>
-                    <td>NOT CONNECTED</td>
-                    </tr>
-                    <tr>
-                    <td>PNDG</td>
-                    <td>PENDING</td>
-                    </tr>                                        
-                </tbody>
-                </table> 
-          </div>
-        </div>
+      <div className="gx-root">
+        <BilateralTable
+          title="Main Stream bilaterals"
+          tableTitle="Bilateral stations"
+          rows={rows}
+          total={totalConsumption}
+          totalLabel="Total consumption"
+          frequency={this.state.frequency.value}
+          onRowClick={(modal) => this.setModalTrue(null, modal)}
+        />
+        <main className="gx-main hx-under"><HarmonicsSection group="mesl" title="Harmonics analysis: MESL" /></main>
         {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
       </div>      
-      <HarmonicsSection group="mesl" title="Harmonics analysis: MESL" />
     </>
     )         
   }

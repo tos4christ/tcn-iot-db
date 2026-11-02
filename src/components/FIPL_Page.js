@@ -1,9 +1,8 @@
 import React from "react";
 import { withRouter, Redirect } from 'react-router-dom';
 import socket from "./utility/socketIO";
-import DateTime from "./DateTime";
 import Modal from "./Modal";
-import { HarmonicCells, HarmonicHeaders, HarmonicsSection } from './BilateralHarmonics';
+import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
 
  class FIPL_Page extends React.Component {
    constructor(props) {
@@ -146,91 +145,51 @@ import { HarmonicCells, HarmonicHeaders, HarmonicsSection } from './BilateralHar
 
     const totalConsumption = (isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw)) + (isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw));
  
+    // Every value below is this page's original calculation; only the table around it changed.
+    const rows = [
+      {
+        sn: 1, label: "First Maximum Point Industries Akure",
+        status: this.checkConnection2(this.state["First Maximum Point Industries Akure"].server_time),
+        mw: isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw).toFixed(2),
+        kv: FMPIA.v ? FMPIA.v : 0,
+        data: this.state["First Maximum Point Industries Akure"],
+        modal: ['FMPIA', this.state["First Maximum Point Industries Akure"]],
+      },
+      {
+        sn: 2, label: "Obafemi Awolowo University Ile-Ife",
+        status: this.checkConnection2(this.state["Obafemi Awolowo University Ile-Ife"].server_time),
+        mw: isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw).toFixed(2),
+        kv: OAUI.v ? OAUI.v : 0,
+        data: this.state["Obafemi Awolowo University Ile-Ife"],
+        modal: ['OAUI', this.state["Obafemi Awolowo University Ile-Ife"]],
+      },
+      /* OAU power-quality meter, hidden until commissioned. Not in the total: the row above may meter the same load.
+      {
+        sn: 3, label: "OAU (power quality meter)",
+        status: this.checkConnection2(this.state.oau.server_time),
+        mw: Number(this.state.oau?.lines?.[0]?.td?.mw || 0).toFixed(2),
+        kv: this.state.oau?.lines?.[0]?.td?.v || 0,
+        data: this.state.oau, excluded: true,
+        modal: ['OAU (power quality meter)', this.state.oau],
+      },
+      */
+    ];
+
     return (
       <>
-      <div className="ncc-menu hx-page">
-        <div className="ncc-menu-list">
-          <div className="ncc-display-div">
-            <h2><DateTime /></h2>
-            <h2 className="text-danger">FIPL IoT Bilateral TABLE  -- Frequency:  {this.state.frequency.value ? this.state.frequency.value : ""}Hz</h2>
-            <table className="ncc-tg">
-              <thead>
-                <tr>
-                  <th className="ncc-tg-zb4j">S/N</th>
-                  <th className="ncc-tg-zb4j">STATIONS</th>
-                  <th className="ncc-tg-zb4j">STATUS</th>
-                  <th className="ncc-tg-zb4j">POWER(MW)</th>
-                  <th className="ncc-tg-zb4j text-danger">VOLTAGE(kV)</th>
-                  <HarmonicHeaders className="ncc-tg-zb4j" />
-                </tr>
-              </thead>
-              <tbody>
-                <tr  onClick={(e) => { this.setModalTrue(e, ['FMPIA', this.state["First Maximum Point Industries Akure"]]); }}>
-                  <td>1</td>
-                  <td>First Maximum Point Industries Akure</td>
-                  <td>{this.checkConnection2(this.state["First Maximum Point Industries Akure"].server_time)}</td>
-                  <td>{isNaN(Number(FMPIA.mw)) ? 0 : Number(FMPIA.mw).toFixed(2)}</td>
-                  <td>{FMPIA.v ? FMPIA.v : 0}</td>
-                  <HarmonicCells data={this.state["First Maximum Point Industries Akure"]} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['OAUI', this.state["Obafemi Awolowo University Ile-Ife"]]); }}>
-                  <td>2</td>
-                  <td>Obafemi Awolowo University Ile-Ife</td>
-                  <td>{this.checkConnection2(this.state["Obafemi Awolowo University Ile-Ife"].server_time)}</td>
-                  <td>{isNaN(Number(OAUI.mw)) ? 0 : Number(OAUI.mw).toFixed(2)}</td>
-                  <td>{OAUI.v ? OAUI.v : 0}</td>
-                  <HarmonicCells data={this.state["Obafemi Awolowo University Ile-Ife"]} />
-                </tr>
-                {/* OAU power-quality meter. Not in the total: the row above may meter the same load. */}
-                {/* <tr onClick={(e) => { this.setModalTrue(e, ['OAU (power quality meter)', this.state.oau]); }}>
-                  <td>3</td>
-                  <td>OAU (power quality meter)</td>
-                  <td>{this.checkConnection2(this.state.oau.server_time)}</td>
-                  <td>{Number(this.state.oau?.lines?.[0]?.td?.mw || 0).toFixed(2)}</td>
-                  <td>{this.state.oau?.lines?.[0]?.td?.v || 0}</td>
-                  <HarmonicCells data={this.state.oau} />
-                </tr> */}
-
-                <tr></tr>
-                <tr>
-                  <td></td>
-                  <td>TOTAL CONSUMPTION</td>
-                  <td></td>
-                  <td>{totalConsumption.toFixed(2)}</td>
-                  <td></td>
-                  <HarmonicCells />
-                </tr> 
-              </tbody>
-            </table>            
-          </div>
-          <div className="ncc-counter-div">
-            <table className="ncc-counter-tg">
-                <thead>
-                    <tr>
-                    <th className="ncc-counter-tg-zb4j"></th>
-                    <th className="ncc-counter-tg-zb4j">LEGEND</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>CN</td>
-                    <td>CONNECTED</td>
-                    </tr>
-                    <tr>
-                    <td>NC</td>
-                    <td>NOT CONNECTED</td>
-                    </tr>
-                    <tr>
-                    <td>PNDG</td>
-                    <td>PENDING</td>
-                    </tr>                                        
-                </tbody>
-                </table> 
-          </div>
-        </div>
+      <div className="gx-root">
+        <BilateralTable
+          title="FIPL bilaterals"
+          tableTitle="Bilateral stations"
+          rows={rows}
+          total={totalConsumption}
+          totalLabel="Total consumption"
+          frequency={this.state.frequency.value}
+          onRowClick={(modal) => this.setModalTrue(null, modal)}
+        />
+        <main className="gx-main hx-under"><HarmonicsSection group="fipl" title="Harmonics analysis: FIPL" /></main>
         {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
       </div>      
-      <HarmonicsSection group="fipl" title="Harmonics analysis: FIPL" />
     </>
     )         
   }

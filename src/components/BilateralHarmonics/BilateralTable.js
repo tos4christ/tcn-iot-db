@@ -1,5 +1,5 @@
 /**
- * Smart bilateral table used by /bilateral, /bilaterals and /oau_steel_bilaterals.
+ * Smart bilateral table used by every bilateral page and /oau_steel_bilaterals.
  * The pages keep their own MW, kV, status and total calculations and pass the results in:
  *   rows: [{ sn, label, status: <checkConnection span> or 'live'/'off', mw, kv, data, line,
  *            modal, warn, excluded }]
@@ -47,7 +47,7 @@ function Clock() {
   );
 }
 
-export default function BilateralTable({ title, eyebrow = 'Bilateral stations', tableTitle, rows, total, totalLabel = 'Total', onRowClick, actions, footnote }) {
+export default function BilateralTable({ title, eyebrow = 'Bilateral stations', tableTitle, rows, total, totalLabel = 'Total', frequency, onRowClick, actions, footnote }) {
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState('all');
   const [sort, setSort] = useState({ key: 'sn', dir: 1 });
@@ -86,6 +86,7 @@ export default function BilateralTable({ title, eyebrow = 'Bilateral stations', 
           <span className="gx-eyebrow">{eyebrow}</span>
           <h1>{title}</h1>
         </div>
+        {frequency ? <span className="gx-status" title="Grid frequency">{frequency} Hz</span> : null}
         <span className={`gx-status ${connected ? 'live' : 'waiting'}`}><i />{connected} of {enriched.length} connected</span>
         <Clock />
         {actions}

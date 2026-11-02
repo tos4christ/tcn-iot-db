@@ -30,4 +30,3 @@ export const harmonicsRoutes = () => [
 
 export { HarmonicsSection };
 export { default as BilateralTable } from './BilateralTable';
-export { HarmonicCells, HarmonicHeaders } from './HarmonicCells';

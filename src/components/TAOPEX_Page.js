@@ -1,9 +1,8 @@
 import React from "react";
 import { withRouter, Redirect } from 'react-router-dom';
 import socket from "./utility/socketIO";
-import DateTime from "./DateTime";
 import Modal from "./Modal";
-import { HarmonicCells, HarmonicHeaders, HarmonicsSection } from './BilateralHarmonics';
+import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
 
  class TAOPEX_Page extends React.Component {
    constructor(props) {
@@ -151,90 +150,49 @@ import { HarmonicCells, HarmonicHeaders, HarmonicsSection } from './BilateralHar
     const totalConsumption = (isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw)) + (isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw))
                             + (isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum));
  
+    // Every value below is this page's original calculation; only the table around it changed.
+    const rows = [
+      {
+        sn: 1, label: "kam Steel Shagamu",
+        status: this.checkConnection2(this.state.kamSteel.server_time),
+        mw: isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw).toFixed(2),
+        kv: kamSteel.v ? kamSteel.v : 0,
+        data: this.state.kamSteel,
+        modal: ['kamSteel', this.state.kamSteel],
+      },
+      {
+        sn: 2, label: "Kam Steel Integrated Ilorin",
+        status: this.checkConnection2(this.state["kamSteel-Ilorin"].server_time),
+        mw: isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum).toFixed(2),
+        kv: kamSteel_Ilorin_voltage ? kamSteel_Ilorin_voltage : 0,
+        data: this.state["kamSteel-Ilorin"],
+        modal: ['kamSteel-Ilorin', this.state["kamSteel-Ilorin"]],
+      },
+      {
+        sn: 3, label: "ER-KANG Limited",
+        status: this.checkConnection2(this.state["Er-Kang"].server_time),
+        mw: isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw).toFixed(2),
+        kv: Er_Kang.v ? Er_Kang.v : 0,
+        data: this.state["Er-Kang"],
+        modal: ['Er-Kang', this.state["Er-Kang"]],
+      },
+    ];
+
     return (
       <>
-      <div className="ncc-menu hx-page">
-        <div className="ncc-menu-list">
-          <div className="ncc-display-div">
-            <h2><DateTime /></h2>
-            <h2 className="text-danger">TAOPEX IoT Bilateral TABLE  -- Frequency:  {this.state.frequency.value ? this.state.frequency.value : ""}Hz</h2>
-            <table className="ncc-tg">
-              <thead>
-                <tr>
-                  <th className="ncc-tg-zb4j">S/N</th>
-                  <th className="ncc-tg-zb4j">STATIONS</th>
-                  <th className="ncc-tg-zb4j">STATUS</th>
-                  <th className="ncc-tg-zb4j">POWER(MW)</th>
-                  <th className="ncc-tg-zb4j text-danger">VOLTAGE(kV)</th>
-                  <HarmonicHeaders className="ncc-tg-zb4j" />
-                </tr>
-              </thead>
-              <tbody>
-                <tr  onClick={(e) => { this.setModalTrue(e, ['kamSteel', this.state.kamSteel]); }}>
-                  <td>1</td>
-                  <td>kam Steel Shagamu</td>
-                  <td>{this.checkConnection2(this.state.kamSteel.server_time)}</td>
-                  <td>{isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw).toFixed(2)}</td>
-                  <td>{kamSteel.v ? kamSteel.v : 0}</td>
-                  <HarmonicCells data={this.state.kamSteel} />
-                </tr>
-                <tr onClick={(e) => { this.setModalTrue(e, ['kamSteel-Ilorin', this.state["kamSteel-Ilorin"]]); }}>
-                  <td>2</td>
-                  <td>Kam Steel Integrated Ilorin</td>
-                  <td>{this.checkConnection2(this.state["kamSteel-Ilorin"].server_time)}</td>
-                  <td>{isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum).toFixed(2)}</td>
-                  <td>{kamSteel_Ilorin_voltage ? kamSteel_Ilorin_voltage : 0}</td>
-                  <HarmonicCells data={this.state["kamSteel-Ilorin"]} />
-                </tr>
-                <tr  onClick={(e) => { this.setModalTrue(e, ['Er-Kang', this.state["Er-Kang"]]); }}>
-                  <td>3</td>
-                  <td>ER-KANG Limited</td>
-                  <td>{this.checkConnection2(this.state["Er-Kang"].server_time)}</td>
-                  <td>{isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw).toFixed(2)}</td>
-                  <td>{Er_Kang.v ? Er_Kang.v : 0}</td>
-                  <HarmonicCells data={this.state["Er-Kang"]} />
-                </tr>
-
-                <tr></tr>
-                <tr>
-                  <td></td>
-                  <td>TOTAL CONSUMPTION</td>
-                  <td></td>
-                  <td>{totalConsumption.toFixed(2)}</td>
-                  <td></td>
-                  <HarmonicCells />
-                </tr> 
-              </tbody>
-            </table>            
-          </div>
-          <div className="ncc-counter-div">
-            <table className="ncc-counter-tg">
-                <thead>
-                    <tr>
-                    <th className="ncc-counter-tg-zb4j"></th>
-                    <th className="ncc-counter-tg-zb4j">LEGEND</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <td>CN</td>
-                    <td>CONNECTED</td>
-                    </tr>
-                    <tr>
-                    <td>NC</td>
-                    <td>NOT CONNECTED</td>
-                    </tr>
-                    <tr>
-                    <td>PNDG</td>
-                    <td>PENDING</td>
-                    </tr>                                        
-                </tbody>
-                </table> 
-          </div>
-        </div>
+      <div className="gx-root">
+        <BilateralTable
+          title="TAOPEX bilaterals"
+          tableTitle="Bilateral stations"
+          rows={rows}
+          total={totalConsumption}
+          totalLabel="Total consumption"
+          frequency={this.state.frequency.value}
+          onRowClick={(modal) => this.setModalTrue(null, modal)}
+        />
+        <main className="gx-main hx-under"><HarmonicsSection group="taopex" title="Harmonics analysis: TAOPEX" /></main>
         {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
       </div>      
-      <HarmonicsSection group="taopex" title="Harmonics analysis: TAOPEX" />
     </>
     )         
   }
