@@ -4,6 +4,7 @@ import socket from "./utility/socketIO";
 import get_stations from "./stations_adder";
 import DateTime from "./DateTime";
 import Modal from "./Modal";
+import { HarmonicCells, HarmonicHeaders, HarmonicsSection } from './BilateralHarmonics';
 
  class Bilateral extends React.Component {
    constructor(props) {
@@ -304,7 +305,7 @@ import Modal from "./Modal";
         
     return (
       <>
-      <div className="bl-menu">
+      <div className="bl-menu hx-page">
         <div className="bl-menu-list">
           <div className="bl-display-div">
             <h2><DateTime /></h2>
@@ -317,6 +318,7 @@ import Modal from "./Modal";
                   <th className="bl-tg-zb4j">STATUS</th>
                   <th className="bl-tg-zb4j">POWER(MW)</th>
                   <th className="bl-tg-zb4j text-danger">VOLTAGE(kV)</th>
+                  <HarmonicHeaders className="bl-tg-zb4j" />
                 </tr>
               </thead>
               <tbody>
@@ -326,6 +328,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.pheonix.server_time)}</td>
                   <td>{(pheonix?.mw ? Math.abs(Number(pheonix.mw)) : 0)}</td>
                   <td>{pheonix?.V ? pheonix.V : 0}</td>
+                  <HarmonicCells data={this.state.pheonix} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['AFRICAN FOUNDARIES LTD IKORODU', this.state.africanFoundriesLimited]); }}>
                   <td>2</td>
@@ -333,6 +336,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.africanFoundriesLimited.server_time)}</td>
                   <td>{africanFoundriesLimited.mw}</td>
                   <td>{africanFoundriesLimited.kv}</td>
+                  <HarmonicCells data={this.state.africanFoundriesLimited} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['MONARCH IKORODU', this.state.monarch]); }}>
                   <td>3</td>
@@ -340,6 +344,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.monarch.server_time)}</td>
                   <td>{monarch.mw}</td>
                   <td>{monarch.kv}</td>
+                  <HarmonicCells data={this.state.monarch} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['REAL INFRASTRUCTURE LTD IKORODU', this.state.quantum]); }}>
                   <td>4</td>
@@ -347,6 +352,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.quantum.server_time)}</td>
                   <td>{quantum.mw}</td>
                   <td>{quantum.kv}</td>
+                  <HarmonicCells data={this.state.quantum} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['KAM STEEL SAGAMU', this.state.kamSteel]); }}>
                   <td>5</td>
@@ -354,6 +360,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.kamSteel.server_time)}</td>
                   <td>{(kamSteel?.mw ? Math.abs(Number(kamSteel.mw)) : 0)}</td>
                   <td>{kamSteel?.V ? kamSteel.V : 0}</td>
+                  <HarmonicCells data={this.state.kamSteel} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['CEMENT FACTORY', this.state.larfarge]); }}>
                   <td>6</td>
@@ -361,6 +368,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.larfarge.server_time)}</td>
                   <td>{larfarge.mw}</td>
                   <td>{larfarge.kv}</td>
+                  <HarmonicCells data={this.state.larfarge} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['TOP STEEL IKORODU', this.state.topSteel]); }}>
                   <td>7</td>
@@ -368,6 +376,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.topSteel.server_time)}</td>
                   <td>{top_steel.mw}</td>
                   <td>{top_steel.kv}</td>
+                  <HarmonicCells data={this.state.topSteel} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['SUNFLAG IRON & STEEL IKORODU', this.state.sunflag]); }}>
                   <td>8</td>
@@ -375,6 +384,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
                   <td>{(sunflag?.mw ? Math.abs(Number(sunflag.mw)) : 0)}</td>
                   <td>{sunflag?.V ? sunflag.V : 0}</td>
+                  <HarmonicCells data={this.state.sunflag} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel]); }}>
                   <td>9</td>
@@ -382,6 +392,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.pulkitSteel.server_time)}</td>
                   <td>{(pulkitSteel?.mw ? Math.abs(Number(pulkitSteel.mw)) : 0)}</td>
                   <td>{pulkitSteel?.V ? pulkitSteel.V : 0}</td>
+                  <HarmonicCells data={this.state.pulkitSteel} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['STAR PIPE PRODUCT IKORODU', this.state.starPipe]); }}>
                   <td>10</td>
@@ -389,6 +400,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.starPipe.server_time)}</td>
                   <td>{starPipe.mw}</td>
                   <td>{starPipe.kv}</td>
+                  <HarmonicCells data={this.state.starPipe} />
                 </tr>                
                 <tr onClick={(e) => { this.setModalTrue(e, ['IKORODU 132KV TS LINE_1', this.state.ikorodu1]); }}>
                   <td>11</td>
@@ -396,6 +408,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.ikorodu1.server_time)}</td>
                   <td>{ikorodu_1.mw}</td>
                   <td>{ikorodu_1.kv}</td>
+                  <HarmonicCells data={this.state.ikorodu1} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['IKORODU 132KV TS LINE_2', this.state.ikorodu2]); }}>
                   <td>12</td>
@@ -403,6 +416,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.ikorodu2.server_time)}</td>
                   <td>{ikorodu_2.mw}</td>
                   <td>{ikorodu_2.kv}</td>
+                  <HarmonicCells data={this.state.ikorodu2} />
                 </tr> 
                 <tr onClick={(e) => { this.setModalTrue(e, ['SAGAMU 132KV TS', this.state.sagamu]); }}>
                   <td>13</td>
@@ -410,6 +424,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.sagamu.server_time)}</td>
                   <td>{sagamu.mw}</td>
                   <td>{sagamu.kv}</td>
+                  <HarmonicCells data={this.state.sagamu} />
                 </tr>
                 <tr></tr>
                 <tr>
@@ -418,6 +433,7 @@ import Modal from "./Modal";
                   <td></td>
                   <td>{totalBilateral.toFixed(2)}</td>
                   <td></td>
+                  <HarmonicCells />
                 </tr> 
               </tbody>
             </table>            
@@ -449,6 +465,7 @@ import Modal from "./Modal";
         </div>
         {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
       </div>      
+      <HarmonicsSection group="critical" title="Harmonics analysis: critical off-takers" />
     </>
     )         
   }

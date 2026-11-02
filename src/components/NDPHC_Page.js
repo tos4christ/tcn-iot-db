@@ -3,6 +3,7 @@ import { withRouter, Redirect } from 'react-router-dom';
 import socket from "./utility/socketIO";
 import DateTime from "./DateTime";
 import Modal from "./Modal";
+import { HarmonicCells, HarmonicHeaders, HarmonicsSection } from './BilateralHarmonics';
 
  class NDPHC_Page extends React.Component {
    constructor(props) {
@@ -169,7 +170,7 @@ import Modal from "./Modal";
  
     return (
       <>
-      <div className="ncc-menu">
+      <div className="ncc-menu hx-page">
         <div className="ncc-menu-list">
           <div className="ncc-display-div">
             <h2><DateTime /></h2>
@@ -182,6 +183,7 @@ import Modal from "./Modal";
                   <th className="ncc-tg-zb4j">STATUS</th>
                   <th className="ncc-tg-zb4j">POWER(MW)</th>
                   <th className="ncc-tg-zb4j text-danger">VOLTAGE(kV)</th>
+                  <HarmonicHeaders className="ncc-tg-zb4j" />
                 </tr>
               </thead>
               <tbody>                
@@ -191,6 +193,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.pheonix.server_time)}</td>
                   <td>{Math.abs(pheonix?.mw ? pheonix.mw : 0)}</td>
                   <td>{pheonix?.V ? pheonix.V : 0}</td>
+                  <HarmonicCells data={this.state.pheonix} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel]); }}>
                   <td>2</td>
@@ -198,6 +201,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.pulkitSteel.server_time)}</td>
                   <td>{Math.abs(pulkitSteel?.mw ? pulkitSteel.mw : 0)}</td>
                   <td>{pulkitSteel?.V ? pulkitSteel.V : 0}</td>
+                  <HarmonicCells data={this.state.pulkitSteel} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['SUNFLAG IRON & STEEL IKORODU', this.state.sunflag]); }}>
                   <td>3</td>
@@ -205,6 +209,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.sunflag.server_time)}</td>
                   <td>{Math.abs(sunflag?.mw ? sunflag.mw : 0)}</td>
                   <td>{sunflag?.V ? sunflag.V : 0}</td>
+                  <HarmonicCells data={this.state.sunflag} />
                 </tr>
                 <tr>
                   <td>4</td>
@@ -212,6 +217,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.weewood.server_time)}</td>
                   <td>{Math.abs(weewood?.mw ? weewood.mw : 0)}</td>
                   <td>{weewood?.v ? weewood.v : 0}</td>
+                  <HarmonicCells data={this.state.weewood} />
                 </tr>
 
                 <tr></tr>
@@ -221,6 +227,7 @@ import Modal from "./Modal";
                   <td></td>
                   <td>{totalConsumption.toFixed(2)}</td>
                   <td></td>
+                  <HarmonicCells />
                 </tr> 
               </tbody>
             </table>            
@@ -252,6 +259,7 @@ import Modal from "./Modal";
         </div>
         {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
       </div>      
+      <HarmonicsSection group="ndphc" title="Harmonics analysis: NDPHC" />
     </>
     )         
   }

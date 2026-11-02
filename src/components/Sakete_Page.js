@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import socket from "./utility/socketIO";
 import DateTime from "./DateTime";
 import Modal from "./Modal";
+import { HarmonicCells, HarmonicHeaders, HarmonicsSection } from './BilateralHarmonics';
 
  class Sakete_Page extends React.Component {
    constructor(props) {
@@ -119,7 +120,7 @@ import Modal from "./Modal";
         
     return (
       <>
-      <div className="bl-menu">
+      <div className="bl-menu hx-page">
         <div className="bl-menu-list">
           <div className="bl-display-div">
             <h2><DateTime /></h2>
@@ -132,6 +133,7 @@ import Modal from "./Modal";
                   <th className="bl-tg-zb4j">STATUS</th>
                   <th className="bl-tg-zb4j">POWER(MW)</th>
                   <th className="bl-tg-zb4j text-danger">VOLTAGE(kV)</th>
+                  <HarmonicHeaders className="bl-tg-zb4j" />
                 </tr>
               </thead>
               <tbody>
@@ -142,6 +144,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state["ikejaWest-sakate"].server_time)}</td>
                   <td>{isNaN(Number(ikejaWest_sakate.mw)) ? 0 : Number(ikejaWest_sakate.mw).toFixed(2)}</td>
                   <td>{ikejaWest_sakate.v ? ikejaWest_sakate.v : 0}</td>
+                  <HarmonicCells data={this.state["ikejaWest-sakate"]} />
                 </tr>
                 
                 <tr></tr>
@@ -151,6 +154,7 @@ import Modal from "./Modal";
                   <td></td>
                   <td>{totalBilateral.toFixed(2)}</td>
                   <td></td>
+                  <HarmonicCells />
                 </tr> 
               </tbody>
             </table>            
@@ -182,6 +186,7 @@ import Modal from "./Modal";
         </div>
         {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
       </div>      
+      <HarmonicsSection group="sakete" title="Harmonics analysis: Sakete" />
     </>
     )         
   }

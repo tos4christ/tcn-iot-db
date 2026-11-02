@@ -3,6 +3,7 @@ import { withRouter, Redirect } from 'react-router-dom';
 import socket from "./utility/socketIO";
 import DateTime from "./DateTime";
 import Modal from "./Modal";
+import { HarmonicCells, HarmonicHeaders, HarmonicsSection } from './BilateralHarmonics';
 
  class TAOPEX_Page extends React.Component {
    constructor(props) {
@@ -152,7 +153,7 @@ import Modal from "./Modal";
  
     return (
       <>
-      <div className="ncc-menu">
+      <div className="ncc-menu hx-page">
         <div className="ncc-menu-list">
           <div className="ncc-display-div">
             <h2><DateTime /></h2>
@@ -165,6 +166,7 @@ import Modal from "./Modal";
                   <th className="ncc-tg-zb4j">STATUS</th>
                   <th className="ncc-tg-zb4j">POWER(MW)</th>
                   <th className="ncc-tg-zb4j text-danger">VOLTAGE(kV)</th>
+                  <HarmonicHeaders className="ncc-tg-zb4j" />
                 </tr>
               </thead>
               <tbody>
@@ -174,6 +176,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.kamSteel.server_time)}</td>
                   <td>{isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw).toFixed(2)}</td>
                   <td>{kamSteel.v ? kamSteel.v : 0}</td>
+                  <HarmonicCells data={this.state.kamSteel} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['kamSteel-Ilorin', this.state["kamSteel-Ilorin"]]); }}>
                   <td>2</td>
@@ -181,6 +184,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state["kamSteel-Ilorin"].server_time)}</td>
                   <td>{isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum).toFixed(2)}</td>
                   <td>{kamSteel_Ilorin_voltage ? kamSteel_Ilorin_voltage : 0}</td>
+                  <HarmonicCells data={this.state["kamSteel-Ilorin"]} />
                 </tr>
                 <tr  onClick={(e) => { this.setModalTrue(e, ['Er-Kang', this.state["Er-Kang"]]); }}>
                   <td>3</td>
@@ -188,6 +192,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state["Er-Kang"].server_time)}</td>
                   <td>{isNaN(Number(Er_Kang.mw)) ? 0 : Number(Er_Kang.mw).toFixed(2)}</td>
                   <td>{Er_Kang.v ? Er_Kang.v : 0}</td>
+                  <HarmonicCells data={this.state["Er-Kang"]} />
                 </tr>
 
                 <tr></tr>
@@ -197,6 +202,7 @@ import Modal from "./Modal";
                   <td></td>
                   <td>{totalConsumption.toFixed(2)}</td>
                   <td></td>
+                  <HarmonicCells />
                 </tr> 
               </tbody>
             </table>            
@@ -228,6 +234,7 @@ import Modal from "./Modal";
         </div>
         {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
       </div>      
+      <HarmonicsSection group="taopex" title="Harmonics analysis: TAOPEX" />
     </>
     )         
   }

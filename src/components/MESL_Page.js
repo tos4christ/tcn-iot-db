@@ -3,6 +3,7 @@ import { withRouter, Redirect } from 'react-router-dom';
 import socket from "./utility/socketIO";
 import DateTime from "./DateTime";
 import Modal from "./Modal";
+import { HarmonicCells, HarmonicHeaders, HarmonicsSection } from './BilateralHarmonics';
 
  class MESL_Page extends React.Component {
    constructor(props) {
@@ -195,7 +196,7 @@ import Modal from "./Modal";
  
     return (
       <>
-      <div className="ncc-menu">
+      <div className="ncc-menu hx-page">
         <div className="ncc-menu-list">
           <div className="ncc-display-div">
             <h2><DateTime /></h2>
@@ -208,6 +209,7 @@ import Modal from "./Modal";
                   <th className="ncc-tg-zb4j">STATUS</th>
                   <th className="ncc-tg-zb4j">POWER(MW)</th>
                   <th className="ncc-tg-zb4j text-danger">VOLTAGE(kV)</th>
+                  <HarmonicHeaders className="ncc-tg-zb4j" />
                 </tr>
               </thead>
               <tbody>
@@ -217,6 +219,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.zeberced.server_time)}</td>
                   <td>{isNaN(Number(zeberced.mw)) ? 0 : Number(zeberced.mw).toFixed(2)}</td>
                   <td>{zeberced.v ? zeberced.v : 0}</td>
+                  <HarmonicCells data={this.state.zeberced} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['NIAMEY', this.state.Niamey]); }}>
                   <td>2</td>
@@ -224,6 +227,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.Niamey.server_time)}</td>
                   <td>{isNaN(Number(Niamey.mw)) ? 0 : Number(Niamey.mw).toFixed(2)}</td>
                   <td>{Niamey.v ? Niamey.v : 0}</td>
+                  <HarmonicCells data={this.state.Niamey} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['INNER GALAXY 1', this.state.Inner_Galaxy1]); }}>
                   <td>3</td>
@@ -231,6 +235,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.Inner_Galaxy1.server_time)}</td>
                   <td>{isNaN(Number(Inner_Galaxy1.mw)) ? 0 : Number(Inner_Galaxy1.mw).toFixed(2)}</td>
                   <td>{Inner_Galaxy1.v ? Inner_Galaxy1.v : 0}</td>
+                  <HarmonicCells data={this.state.Inner_Galaxy1} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['INNER GALAXY 2', this.state.Inner_Galaxy2]); }}>
                   <td>4</td>
@@ -238,6 +243,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.Inner_Galaxy2.server_time)}</td>
                   <td>{isNaN(Number(Inner_Galaxy2.mw)) ? 0 : Number(Inner_Galaxy2.mw).toFixed(2)}</td>
                   <td>{Inner_Galaxy2.v ? Inner_Galaxy2.v : 0}</td>
+                  <HarmonicCells data={this.state.Inner_Galaxy2} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['PSML', this.state.PSML]); }}>
                   <td>5</td>
@@ -245,6 +251,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.PSML.server_time)}</td>
                   <td>{isNaN(Number(PSML.mw)) ? 0 : Number(PSML.mw).toFixed(2)}</td>
                   <td>{PSML.v ? PSML.v : 0}</td>
+                  <HarmonicCells data={this.state.PSML} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['ATVL', this.state.ATVL]); }}>
                   <td>6</td>
@@ -252,6 +259,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.ATVL.server_time)}</td>
                   <td>{isNaN(Number(ATVL.mw)) ? 0 : Math.abs(Number(ATVL.mw).toFixed(2))}</td>
                   <td>{ATVL.v ? ATVL.v : 0}</td>
+                  <HarmonicCells data={this.state.ATVL} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['GAZAOUA', this.state.Gazaoua]); }}>
                   <td>7</td>
@@ -259,6 +267,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.Gazaoua.server_time)}</td>
                   <td>{isNaN(Number(Gazaoua.mw)) ? 0 : Math.abs(Number(Gazaoua.mw)).toFixed(2)}</td>
                   <td>{Gazaoua.v ? Gazaoua.v : 0}</td>
+                  <HarmonicCells data={this.state.Gazaoua} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['KAM', this.state.KamInd33kV]); }}>
                   <td>8</td>
@@ -266,6 +275,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.KamInd33kV.server_time)}</td>
                   <td>{isNaN(Number(KamInd33kV.mw)) ? 0 : Number(KamInd33kV.mw).toFixed(2)}</td>
                   <td>{KamInd33kV.v ? KamInd33kV.v : 0}</td>
+                  <HarmonicCells data={this.state.KamInd33kV} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['Quantum', this.state.quantum]); }}>
                   <td>9</td>
@@ -273,6 +283,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.quantum.server_time)}</td>
                   <td>{isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw).toFixed(2))}</td>
                   <td>{quantum.V ? quantum.V : 0}</td>
+                  <HarmonicCells data={this.state.quantum} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['HYDROPOLIS', this.state.HYDROPOLIS]); }}>
                   <td>10</td>
@@ -280,6 +291,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.HYDROPOLIS.server_time)}</td>
                   <td>{isNaN((hydropolis_mw)) ? 0 : Math.abs(Number(hydropolis_mw).toFixed(2))}</td>
                   <td>{hydropolis_kv ? hydropolis_kv : 0}</td>
+                  <HarmonicCells data={this.state.HYDROPOLIS} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['Yongxing (PEL)', this.state.yongxing]); }}>
                   <td>11</td>
@@ -287,6 +299,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.yongxing.server_time)}</td>
                   <td>{isNaN((yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw).toFixed(2))}</td>
                   <td>{yongxing_t1.v ? yongxing_t1.v : 0}</td>
+                  <HarmonicCells data={this.state.yongxing} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['Atlantic Metal Industries Ltd', this.state.amil]); }}>
                   <td>12</td>
@@ -294,6 +307,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.amil.server_time)}</td>
                   <td>{isNaN((amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw).toFixed(2))}</td>
                   <td>{amil_t1.v ? amil_t1.v : 0}</td>
+                  <HarmonicCells data={this.state.amil} />
                 </tr>
                <tr onClick={(e) => { this.setModalTrue(e, ['AENL', this.state.AENL]); }}>
                   <td>13</td>
@@ -301,13 +315,15 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.AENL.server_time)}</td>
                   <td>{((isNaN((AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw).toFixed(2))) + (isNaN((AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw).toFixed(2)))).toFixed(2)}</td>
                   <td>{AENL_t1.v ? AENL_t1.v : AENL_t2.v ? AENL_t2.v : 0}</td>
-                </tr>
+                  <HarmonicCells data={this.state.AENL} />
+               </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['GLML', this.state.glml]); }}>
                   <td>14</td>
                   <td>GLML</td>
                   <td>{this.checkConnection2(this.state.glml.server_time)}</td>
                   <td>{isNaN((glml_l1?.mw)) ? 0 : Math.abs(Number(glml_l1.mw).toFixed(2))}</td>
                   <td>{glml_l1?.v ? glml_l1.v : 0}</td>
+                  <HarmonicCells data={this.state.glml} />
                 </tr>
                 <tr onClick={(e) => { this.setModalTrue(e, ['WOJI', this.state.phedc]); }}>
                   <td>15</td>
@@ -315,6 +331,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.phedc.server_time)}</td>
                   <td>{isNaN((rspub1?.td?.mw)) ? 0 : Math.abs(Number(rspub1.td.mw).toFixed(2))}</td>
                   <td>{rspub1?.td?.v ? rspub1.td.v : 0}</td>
+                  <HarmonicCells data={this.state.phedc} line="rspub1" />
                 </tr>  
                 <tr onClick={(e) => { this.setModalTrue(e, ['Refinery Line 2', this.state.phedc]); }}>
                   <td>16</td>
@@ -322,6 +339,7 @@ import Modal from "./Modal";
                   <td>{this.checkConnection2(this.state.phedc.server_time)}</td>
                   <td>{isNaN((refinery_line_2?.td?.mw)) ? 0 : Math.abs(Number(refinery_line_2.td.mw).toFixed(2))}</td>
                   <td>{refinery_line_2?.td?.v ? refinery_line_2.td.v : 0}</td>
+                  <HarmonicCells data={this.state.phedc} line="ref2" />
                 </tr>
                 <tr></tr>
                 <tr>
@@ -330,6 +348,7 @@ import Modal from "./Modal";
                   <td></td>
                   <td>{totalConsumption.toFixed(2)}</td>
                   <td></td>
+                  <HarmonicCells />
                 </tr> 
               </tbody>
             </table>            
@@ -361,6 +380,7 @@ import Modal from "./Modal";
         </div>
         {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
       </div>      
+      <HarmonicsSection group="mesl" title="Harmonics analysis: MESL" />
     </>
     )         
   }
