@@ -11,7 +11,7 @@ import { Sparkline, TrendChart, useWidth } from '../GencoPortal/charts';
 import '../GencoPortal/genco_portal.css';
 import './harmonics.css';
 import { headline } from './harmonicsAnalysis';
-import { SETTINGS, stationBySlug } from './harmonicsConfig';
+import { SETTINGS, isCommissioned, stationBySlug } from './harmonicsConfig';
 import { harmonicsStore, stationKey } from './harmonicsStore';
 
 // Validated categorical palette, same as the Genco portal.
@@ -355,8 +355,7 @@ export function StationsTable({ entries, selected, onSelect, linkPages = false }
 /** group = mesl, fipl, taopex, ndphc, sakete; leave out for every station. */
 export function HarmonicsSection({ group = null, title = 'Harmonics analysis' }) {
   useTick();
-  // Zenith Power 132 kV TS hidden until commissioned. To bring it back, remove the .filter(...) part.
-  const entries = harmonicsStore.stations(group).filter((e) => e.cfg.slug !== 'zenith-power-132-kv-ts');
+  const entries = harmonicsStore.stations(group).filter(isCommissioned); // see UNCOMMISSIONED in harmonicsConfig.js
   const [selected, setSelected] = useState(null);
   const withData = entries.filter((e) => e.samples.length);
   const active = entries.find((e) => e.key === selected) || withData[0] || null;
@@ -390,7 +389,7 @@ export default function HarmonicsPage({ slug = null, isLoggedIn }) {
 
   const entries = harmonicsStore.stations();
   const single = cfg ? entries.find((e) => e.key === stationKey(cfg.id, cfg.line) || e.cfg === cfg) : null;
-  const shown = cfg ? [single].filter(Boolean) : entries;
+  const shown = cfg ? [single].filter(Boolean) : entries.filter(isCommissioned); // a station's own page always shows it
   const analyses = shown.map((e) => harmonicsStore.analysis(e));
   const violations = analyses.filter((a) => a.overall === 'violation').length;
   const near = analyses.filter((a) => a.overall === 'watch').length;

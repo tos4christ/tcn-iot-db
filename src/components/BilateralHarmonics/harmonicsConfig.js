@@ -75,6 +75,16 @@ export const STATIONS = [
   { slug: 'baoyao', id: 'phedc-bao-yao', line: 'bao-yao', name: 'BAO YAO', short: 'BAO YAO', group: 'mesl', nominalKv: null, demandCurrentA: null, iscKA: null },
 ];
 
+/**
+ * Not yet commissioned: kept off /harmonics and the sections under the bilateral tables.
+ * They still have their own pages (/{slug}_harmonics, and /oau_steel_bilaterals for Zenith Power).
+ * To show a station everywhere, comment out its line here.
+ */
+export const UNCOMMISSIONED = [
+  'zenith-power-132-kv-ts',
+];
+export const isCommissioned = (entry) => !UNCOMMISSIONED.includes(entry.cfg.slug);
+
 /** Standard system voltages, used to work out nominal voltage from the live reading. */
 export const SYSTEM_KV = [0.415, 11, 33, 132, 330];
 
