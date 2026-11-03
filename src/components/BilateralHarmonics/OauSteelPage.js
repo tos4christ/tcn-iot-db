@@ -1,6 +1,6 @@
 /**
- * /oau_steel_bilaterals: OAU's own page behind a keypad. Shows the live table and the full
- * harmonic analysis for OAU only, with no links into the rest of the platform.
+ * /oau_steel_bilaterals: Zenith Power 132 kV TS's own page behind a keypad. Shows the live table and
+ * the full harmonic analysis for that station only, with no links into the rest of the platform.
  *
  * The password is not stored here in plain text, only a SHA-256 fingerprint of
  * "niso-bilateral:oau_steel:{password}". To change it:

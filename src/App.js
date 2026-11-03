@@ -78,7 +78,7 @@ class App extends React.Component {
         <Switch >
           {/* Genco portals: /egbin_units, /kainji_units, ... (see components/GencoPortal/gencos.js) */}
           {gencoRoutes}
-          {/* Bilateral harmonics: /harmonics, /oau_harmonics, ... (see components/BilateralHarmonics/harmonicsConfig.js) */}
+          {/* Bilateral harmonics: /harmonics, /gph_harmonics, ... (see components/BilateralHarmonics/harmonicsConfig.js) */}
           {harmonicsRoutes()}
           <Route exact path={'/'}>
             <div className='body'>

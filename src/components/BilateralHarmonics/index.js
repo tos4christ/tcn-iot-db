@@ -1,8 +1,8 @@
 /**
  * Bilateral harmonics routes.
  *   /harmonics            all stations, ranked by grid impact
- *   /{slug}_harmonics     one station, e.g. /oau_harmonics
- *   /oau_steel_bilaterals OAU page behind a keypad
+ *   /{slug}_harmonics     one station, e.g. /gph_harmonics
+ *   /oau_steel_bilaterals Zenith Power 132 kV TS page behind a keypad
  *
  * In App.js, inside <Switch>:
  *   {harmonicsRoutes()}

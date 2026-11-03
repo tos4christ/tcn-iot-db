@@ -69,7 +69,7 @@ export const SETTINGS = {
  *   iscKA          fault level at the connection point (kA). null = strictest TDD limit used
  */
 export const STATIONS = [
-  { slug: 'oau', id: 'oau', line: 'oau', name: 'Obafemi Awolowo University, Ile-Ife', short: 'OAU', group: 'fipl', nominalKv: null, demandCurrentA: null, iscKA: null },
+  { slug: 'zenith-power-132-kv-ts', id: 'oau', line: 'oau', name: 'Zenith Power 132 kV TS', short: 'Zenith Power', group: 'fipl', nominalKv: null, demandCurrentA: null, iscKA: null },
   { slug: 'gph', id: 'phedc-gph', line: 'gph', name: 'Greater Port Harcourt', short: 'GPH', group: 'mesl', nominalKv: null, demandCurrentA: null, iscKA: null },
   { slug: 'olam', id: 'phedc-olam', line: null, name: 'OLAM', short: 'OLAM', group: 'mesl', nominalKv: null, demandCurrentA: null, iscKA: null },
   { slug: 'baoyao', id: 'phedc-bao-yao', line: 'bao-yao', name: 'BAO YAO', short: 'BAO YAO', group: 'mesl', nominalKv: null, demandCurrentA: null, iscKA: null },

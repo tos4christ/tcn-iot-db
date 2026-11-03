@@ -163,14 +163,14 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         data: this.state["Obafemi Awolowo University Ile-Ife"],
         modal: ['OAUI', this.state["Obafemi Awolowo University Ile-Ife"]],
       },
-      /* OAU power-quality meter, hidden until commissioned. Not in the total: the row above may meter the same load.
+      /* Zenith Power 132 kV TS (OAU power-quality meter): hidden until commissioned. Not in totalConsumption yet.
       {
-        sn: 3, label: "OAU (power quality meter)",
+        sn: 3, label: "Zenith Power 132 kV TS",
         status: this.checkConnection2(this.state.oau.server_time),
         mw: Number(this.state.oau?.lines?.[0]?.td?.mw || 0).toFixed(2),
         kv: this.state.oau?.lines?.[0]?.td?.v || 0,
         data: this.state.oau, excluded: true,
-        modal: ['OAU (power quality meter)', this.state.oau],
+        modal: ['Zenith Power 132 kV TS', this.state.oau],
       },
       */
     ];
