@@ -72,7 +72,7 @@ function Keypad({ onUnlock }) {
       <form className="hx-pin-card" onSubmit={(e) => { e.preventDefault(); submit(); }}>
         <img src={nisoLogo} alt="NISO" />
         <span className="gx-eyebrow">Bilateral portal</span>
-        <h1>OAU Steel</h1>
+        <h1>Zenith Power 132 kV TS</h1>
         <p className="gx-muted">Enter your password to view this page.</p>
         <div className="hx-pin-dots" aria-label={`${pin.length} digits entered`}>
           {Array.from({ length: Math.max(9, pin.length) }, (_, i) => <span key={i} className={i < pin.length ? 'on' : ''} />)}
@@ -99,15 +99,15 @@ function OauView({ onSignOut }) {
     const t = setInterval(() => setTick((n) => n + 1), 3000);
     return () => clearInterval(t);
   }, []);
-  const cfg = stationBySlug('oau');
+  const cfg = stationBySlug('zenith-power-132-kv-ts');
   const entry = harmonicsStore.stations().find((e) => e.cfg === cfg) || { key: stationKey(cfg.id, cfg.line), cfg, samples: [] };
   const a = harmonicsStore.analysis(entry);
   const s = a.lastLiveSample || a.last || null;
   const data = s ? { id: cfg.id, lines: [{ id: cfg.line, td: { mw: s.mw, a: s.a, v: s.v, thdv: s.thdv, thdia: s.ia, thdib: s.ib, thdic: s.ic } }] } : null;
-  const rows = [{ sn: 1, label: 'OAU (power quality meter)', status: a.live ? 'live' : 'off', mw: s ? s.mw : null, kv: s ? s.v : null, data }];
+  const rows = [{ sn: 1, label: 'Zenith Power 132 kV TS', status: a.live ? 'live' : 'off', mw: s ? s.mw : null, kv: s ? s.v : null, data }];
   return (
     <div className="gx-root">
-      <BilateralTable title="OAU Steel" eyebrow="Bilateral portal" tableTitle="Live readings" rows={rows} total={a.live && s && s.mw ? s.mw : 0} totalLabel="Total load"
+      <BilateralTable title="Zenith Power 132 kV TS" eyebrow="Bilateral portal" tableTitle="Live readings" rows={rows} total={a.live && s && s.mw ? s.mw : 0} totalLabel="Total load"
         actions={<button type="button" className="gx-btn gx-btn-ghost" onClick={onSignOut}>Sign out</button>} />
       <main className="gx-main hx-under"><StationAnalysis entry={entry} /></main>
     </div>
@@ -116,7 +116,7 @@ function OauView({ onSignOut }) {
 
 export default function OauSteelPage() {
   const [unlocked, setUnlocked] = useState(hasSession);
-  useEffect(() => { document.title = 'OAU Steel · NISO'; }, []);
+  useEffect(() => { document.title = 'Zenith Power 132 kV TS · NISO'; }, []);
   const set = (value) => {
     try {
       if (value) sessionStorage.setItem(SESSION_KEY, String(Date.now())); else sessionStorage.removeItem(SESSION_KEY);
