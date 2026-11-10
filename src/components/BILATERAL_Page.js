@@ -368,7 +368,7 @@ class All_Bilateral extends React.Component {
     (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw))) +
     (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw)))  + (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) +
     (isNaN(Number(AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw))) +
-    (isNaN(Number(shongai.mw)) ? 0 : Math.abs(Number(shongai.mw))) + (isNaN(Number(oau?.mw)) ? 0 : Math.abs(Number(oau.mw)))
+    (isNaN(Number(shongai.mw)) ? 0 : Math.abs(Number(shongai.mw))) + (isNaN(Number(oau?.mw)) ? 0 : Math.abs(Number(oau.mw))) +
     gph_valid_mw + olam_valid_mw + bao_yao_valid_mw;
         
     // Every value below is this page's original calculation; only the table around it changed.
