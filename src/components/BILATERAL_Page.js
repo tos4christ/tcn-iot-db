@@ -277,7 +277,7 @@ class All_Bilateral extends React.Component {
   render() {
     const { gph_glitch, olam_glitch, bao_yao_glitch } = this.state;
 
-    let {pheonix} = this.state;
+    let {pheonix, oau} = this.state;
     let {pulkitSteel} = this.state;
     let {sunflag} = this.state;
     let {shongai} = this.state;
@@ -287,6 +287,7 @@ class All_Bilateral extends React.Component {
     sunflag = sunflag.lines ? sunflag.lines[0]?.td : {};
     ikejaWest_sakate = ikejaWest_sakate.lines ? ikejaWest_sakate.lines[0]?.td : {};
     shongai = shongai.lines ? shongai.lines[0]?.td : {};
+    oau = oau.lines ? oau.lines[0]?.td : {};
     const FMPIA = this.state["First Maximum Point Industries Akure"];
     const OAUI = this.state["Obafemi Awolowo University Ile-Ife"];
     const {zeberced} = this.state;
@@ -367,7 +368,7 @@ class All_Bilateral extends React.Component {
     (isNaN(Number(pulkitSteel?.mw)) ? 0 : Math.abs(Number(pulkitSteel.mw))) + (isNaN(Number(sunflag?.mw)) ? 0 : Math.abs(Number(sunflag.mw))) +
     (isNaN(Number(yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw)))  + (isNaN(Number(amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw))) +
     (isNaN(Number(AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw))) + (isNaN(Number(AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw))) +
-    (isNaN(Number(shongai.mw)) ? 0 : Math.abs(Number(shongai.mw))) +
+    (isNaN(Number(shongai.mw)) ? 0 : Math.abs(Number(shongai.mw))) + (isNaN(Number(oau?.mw)) ? 0 : Math.abs(Number(oau.mw)))
     gph_valid_mw + olam_valid_mw + bao_yao_valid_mw;
         
     // Every value below is this page's original calculation; only the table around it changed.
@@ -612,7 +613,6 @@ class All_Bilateral extends React.Component {
         data: this.state["phedc-bao-yao"], warn: bao_yao_glitch,
         modal: ['BAO YAO', this.state["phedc-bao-yao"]],
       },
-      /* Zenith Power 132 kV TS (OAU power-quality meter): hidden until commissioned. Not in totalBilateral yet.
       {
         sn: 31, label: "Zenith Power 132 kV TS",
         status: this.checkConnection2(this.state.oau.server_time),
@@ -621,7 +621,6 @@ class All_Bilateral extends React.Component {
         data: this.state.oau, excluded: true,
         modal: ['Zenith Power 132 kV TS', this.state.oau],
       },
-      */
     ];
 
     return (

@@ -81,7 +81,7 @@ export const STATIONS = [
  * To show a station everywhere, comment out its line here.
  */
 export const UNCOMMISSIONED = [
-  'zenith-power-132-kv-ts',
+  // 'zenith-power-132-kv-ts',
 ];
 export const isCommissioned = (entry) => !UNCOMMISSIONED.includes(entry.cfg.slug);
 
