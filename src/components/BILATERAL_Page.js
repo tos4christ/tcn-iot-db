@@ -618,7 +618,7 @@ class All_Bilateral extends React.Component {
         status: this.checkConnection2(this.state.oau.server_time),
         mw: Number(this.state.oau?.lines?.[0]?.td?.mw || 0).toFixed(2),
         kv: this.state.oau?.lines?.[0]?.td?.v || 0,
-        data: this.state.oau, excluded: true,
+        data: this.state.oau, excluded: false,
         modal: ['Zenith Power 132 kV TS', this.state.oau],
       },
     ];
@@ -633,7 +633,6 @@ class All_Bilateral extends React.Component {
           total={totalBilateral}
           totalLabel="Total bilateral"
           onRowClick={(modal) => this.setModalTrue(null, modal)}
-          // footnote="Zenith Power 132 kV TS is not in the total yet."
         />
         <main className="gx-main hx-under"><HarmonicsSection /></main>
         {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
