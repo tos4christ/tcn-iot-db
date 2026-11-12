@@ -346,6 +346,8 @@ class GeneratorApp extends Component {
       const olorunsogoGas = {id: "Olorunsogo Gas", units: [...olorunsogoGas1.units, ...olorunsogoGas3.units, ...olorunsogoGas5.units, ...olorunsogoGas7.units], 
         server_time: this.latestServerTime(olorunsogoGas1, olorunsogoGas3, olorunsogoGas5, olorunsogoGas7)};
 
+      console.log(olorunsogoGas, 'olorunsogoGas in second stage');
+
       const omotoshoGas = {id: "Omotosho Gas", units: [...omotoshoGas1.units, ...omotoshoGas3.units, ...omotoshoGas5.units, ...omotoshoGas7.units], 
         server_time: this.latestServerTime(omotoshoGas1, omotoshoGas3, omotoshoGas5, omotoshoGas7)};
 
