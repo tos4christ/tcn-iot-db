@@ -249,8 +249,8 @@ class GeneratorApp extends Component {
         }
         // console.log(message, 'raw generator_units message');
         const parsedMessage = JSON.parse(message);
-        if(parsedMessage && parsedMessage.id === "sapele-gas") {
-          // console.log(parsedMessage, 'generator_units message');
+        if(parsedMessage && parsedMessage.id === "olorunsogo7") {
+          console.log(parsedMessage, 'generator_units message');
         }      
         parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
@@ -331,7 +331,7 @@ class GeneratorApp extends Component {
         afamIIIPs: afam_3_Ps, paras_1, paras_2, shiroroPs, geometricPlant2, geometricPlant3, ibom, cnl,
         mepp, afamIIIPs_delta1, afamIIIPs_delta2, olorunsogoGas1, olorunsogoGas3, olorunsogoGas5, olorunsogoGas7, 
         omotoshoGas1, omotoshoGas3, omotoshoGas5, omotoshoGas7, kashimbila } = this.state;
-        console.log(olorunsogoGas7, 'olorunsogoGas7 in app');
+        // console.log(olorunsogoGas7, 'olorunsogoGas7 in app');
         // console.log(paras_2, 'paras_2 in app');
       // Merge the real-time data into the dummy stations data
       let stations = [];
@@ -346,7 +346,7 @@ class GeneratorApp extends Component {
       const olorunsogoGas = {id: "Olorunsogo Gas", units: [...olorunsogoGas1.units, ...olorunsogoGas3.units, ...olorunsogoGas5.units, ...olorunsogoGas7.units], 
         server_time: this.latestServerTime(olorunsogoGas1, olorunsogoGas3, olorunsogoGas5, olorunsogoGas7)};
 
-      console.log(olorunsogoGas, 'olorunsogoGas in second stage');
+      // console.log(olorunsogoGas, 'olorunsogoGas in second stage');
 
       const omotoshoGas = {id: "Omotosho Gas", units: [...omotoshoGas1.units, ...omotoshoGas3.units, ...omotoshoGas5.units, ...omotoshoGas7.units], 
         server_time: this.latestServerTime(omotoshoGas1, omotoshoGas3, omotoshoGas5, omotoshoGas7)};
