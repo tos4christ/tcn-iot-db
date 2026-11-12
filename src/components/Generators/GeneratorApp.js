@@ -331,7 +331,7 @@ class GeneratorApp extends Component {
         afamIIIPs: afam_3_Ps, paras_1, paras_2, shiroroPs, geometricPlant2, geometricPlant3, ibom, cnl,
         mepp, afamIIIPs_delta1, afamIIIPs_delta2, olorunsogoGas1, olorunsogoGas3, olorunsogoGas5, olorunsogoGas7, 
         omotoshoGas1, omotoshoGas3, omotoshoGas5, omotoshoGas7, kashimbila } = this.state;
-        // console.log(paras_1, 'paras_1 in app');
+        console.log(omotoshoGas7, 'omotoshoGas7 in app');
         // console.log(paras_2, 'paras_2 in app');
       // Merge the real-time data into the dummy stations data
       let stations = [];
