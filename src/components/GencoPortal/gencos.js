@@ -64,7 +64,7 @@ export const GENCOS = [
     hash: '58bd68b2693f859b7f5375a07a65758d14306a473e3046643debfed2b0619b9e' },
   { slug: 'olorunsogo', name: 'Olorunsogo Gas', type: 'Gas',
     stations: [{ id: 'olorunsogoGas1', units: ['gt1', 'gt2'] }, { id: 'olorunsogoGas3', units: ['gt3', 'gt4'] },
-      { id: 'olorunsogoGas5', units: ['gt5', 'gt6'] }, { id: 'olorunsogoGas7', units: ['gt7', 'gt8'] }],
+      { id: 'olorunsogoGas5', units: ['gt5', 'gt6'] }, { id: 'olorunsogo7', units: ['gt7', 'gt8'] }],
     hash: '46ae14eb4c42ac1af25cb39e654af7a1d6ed7ca5973897f5dbbb268d08e8ccdc' },
 ];
 
