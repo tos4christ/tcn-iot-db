@@ -204,8 +204,8 @@ class GeneratorApp extends Component {
                  {id: "gt6", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
       }
       ,
-      olorunsogoGas7: {
-        id: "olorunsogoGas7",
+      olorunsogo7: {
+        id: "olorunsogo7",
         units: [ {id: "gt7", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
                  {id: "gt8", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
       },
@@ -250,7 +250,7 @@ class GeneratorApp extends Component {
         // console.log(message, 'raw generator_units message');
         const parsedMessage = JSON.parse(message);
         if(parsedMessage && parsedMessage.id === "olorunsogo7") {
-          console.log(parsedMessage, 'generator_units message');
+          // console.log(parsedMessage, 'generator_units message');
         }      
         parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
@@ -329,7 +329,7 @@ class GeneratorApp extends Component {
       const { selectedStation, egbinPs, "sapele-gas": sapeleGas, delta2, delta3, afamVIPs, dadinkowa, okpai_1, okpai_2, 
         zungeru, kainjiPs, jebbaPs, "delta4-2": delta4_2, "delta4-1": delta4_1, "afamVPs": afam_5_Ps, geometricPlant1,
         afamIIIPs: afam_3_Ps, paras_1, paras_2, shiroroPs, geometricPlant2, geometricPlant3, ibom, cnl,
-        mepp, afamIIIPs_delta1, afamIIIPs_delta2, olorunsogoGas1, olorunsogoGas3, olorunsogoGas5, olorunsogoGas7, 
+        mepp, afamIIIPs_delta1, afamIIIPs_delta2, olorunsogoGas1, olorunsogoGas3, olorunsogoGas5, olorunsogo7, 
         omotoshoGas1, omotoshoGas3, omotoshoGas5, omotoshoGas7, kashimbila } = this.state;
         // console.log(olorunsogoGas7, 'olorunsogoGas7 in app');
         // console.log(paras_2, 'paras_2 in app');
@@ -343,8 +343,8 @@ class GeneratorApp extends Component {
         server_time: this.latestServerTime(geometricPlant1, geometricPlant2, geometricPlant3)};
       const rivers_IPP = {id: "Rivers IPP", units: [...cnl.units], server_time: cnl.server_time};
 
-      const olorunsogoGas = {id: "Olorunsogo Gas", units: [...olorunsogoGas1.units, ...olorunsogoGas3.units, ...olorunsogoGas5.units, ...olorunsogoGas7.units], 
-        server_time: this.latestServerTime(olorunsogoGas1, olorunsogoGas3, olorunsogoGas5, olorunsogoGas7)};
+      const olorunsogoGas = {id: "Olorunsogo Gas", units: [...olorunsogoGas1.units, ...olorunsogoGas3.units, ...olorunsogoGas5.units, ...olorunsogo7.units], 
+        server_time: this.latestServerTime(olorunsogoGas1, olorunsogoGas3, olorunsogoGas5, olorunsogo7)};
 
       // console.log(olorunsogoGas, 'olorunsogoGas in second stage');
 
