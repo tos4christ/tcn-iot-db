@@ -66,6 +66,12 @@ export const GENCOS = [
     stations: [{ id: 'olorunsogoGas1', units: ['gt1', 'gt2'] }, { id: 'olorunsogoGas3', units: ['gt3', 'gt4'] },
       { id: 'olorunsogoGas5', units: ['gt5', 'gt6'] }, { id: 'olorunsogo7', units: ['gt7', 'gt8'] }],
     hash: '46ae14eb4c42ac1af25cb39e654af7a1d6ed7ca5973897f5dbbb268d08e8ccdc' },
+  { slug: 'omotosho', name: 'Omotosho Gas', type: 'Gas',
+    stations: [{ id: 'omotoshoGas1', units: ['gt1', 'gt2'] }, { id: 'omotoshoGas3', units: ['gt3', 'gt4'] },
+      { id: 'omotoshoGas5', units: ['gt5', 'gt6'] }, { id: 'omotoshoGas7', units: ['gt7', 'gt8'] }],
+    hash: '8099c95052f93766d001900a670d565b42d2363c71b9acc2e8eb6f7173ddd7ca' },
+  { slug: 'kashimbila', name: 'Kashimbila IPP', type: 'Gas', stations: [{ id: 'kashimbila', units: ['unit1', 'unit2', 'unit3', 'unit4'] }],
+    hash: '4ba09530fab0d9f3c01040980d5a6c6175cdba95ea67ac5a792be2b6b2bf82ad' },
 ];
 
 export const gencoBySlug = (slug) => GENCOS.find((g) => g.slug === slug) || null;
