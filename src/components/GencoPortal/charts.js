@@ -24,6 +24,10 @@ export function useWidth() {
   return [ref, width];
 }
 
+// Each chart clips its drawing to its own plot area; ids must be unique on the page.
+let clipSeq = 0;
+export const useClipId = () => useState(() => { clipSeq += 1; return `gx-clip-${clipSeq}`; })[0];
+
 const fmtTime = (t) => new Date(t).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Africa/Lagos' });
 const fmtTimeSec = (t) => new Date(t).toLocaleTimeString('en-GB', { timeZone: 'Africa/Lagos' });
 
@@ -49,6 +53,7 @@ function niceTicks(min, max, count = 4) {
 export function TrendChart({ series, height = 260, unit = 'MW', digits = 1, yMin, yMax, refLines = [], emptyText = 'Collecting data…' }) {
   const [wrapRef, width] = useWidth();
   const [hoverX, setHoverX] = useState(null);
+  const clipId = useClipId();
   const pad = { l: 52, r: 16, t: 14, b: 28 };
   const all = series.flatMap((s) => s.points);
   const ready = all.length > 1;
@@ -58,8 +63,11 @@ export function TrendChart({ series, height = 260, unit = 'MW', digits = 1, yMin
     const t0 = Math.min(...all.map((p) => p.t));
     const t1 = Math.max(...all.map((p) => p.t));
     const vals = all.map((p) => p.v).filter(Number.isFinite);
-    const lo = yMin !== undefined ? yMin : Math.min(...vals, ...refLines.map((r) => r.v));
-    const hi = yMax !== undefined ? yMax : Math.max(...vals, ...refLines.map((r) => r.v));
+    // yMin / yMax are where the axis prefers to end; readings beyond them widen the axis
+    // instead of being drawn outside the chart (for example negative MW against yMin 0).
+    const keep = [...refLines.map((r) => r.v), ...[yMin, yMax].filter((v) => v !== undefined)];
+    const lo = Math.min(...vals, ...keep);
+    const hi = Math.max(...vals, ...keep);
     const ticks = niceTicks(lo, hi);
     const y0 = ticks[0];
     const y1 = ticks[ticks.length - 1];
@@ -67,7 +75,7 @@ export function TrendChart({ series, height = 260, unit = 'MW', digits = 1, yMin
     const h = height - pad.t - pad.b;
     const x = (t) => pad.l + (t1 === t0 ? w / 2 : ((t - t0) / (t1 - t0)) * w);
     const y = (v) => pad.t + h - ((v - y0) / (y1 - y0 || 1)) * h;
-    const xticks = [0, 0.25, 0.5, 0.75, 1].map((f) => t0 + f * (t1 - t0));
+    const xticks = t1 === t0 ? [t0] : [0, 0.25, 0.5, 0.75, 1].map((f) => t0 + f * (t1 - t0));
     return { t0, t1, ticks, x, y, w, h, xticks };
   }, [series, width, height, yMin, yMax, refLines]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -97,6 +105,7 @@ export function TrendChart({ series, height = 260, unit = 'MW', digits = 1, yMin
       onMouseLeave={() => setHoverX(null)}>
       <svg width={width} height={height} role="img" aria-label={series.map((s) => s.label).join(', ')}>
         <defs>
+          <clipPath id={clipId}><rect x={pad.l - 6} y={pad.t - 6} width={geo.w + 12} height={h + 12} /></clipPath>
           {single && (
             <linearGradient id={`gx-fill-${series[0].key}`} x1="0" x2="0" y1="0" y2="1">
               <stop offset="0%" stopColor={series[0].color} stopOpacity="0.32" />
@@ -111,7 +120,7 @@ export function TrendChart({ series, height = 260, unit = 'MW', digits = 1, yMin
           </g>
         ))}
         {xticks.map((t, i) => (
-          <text key={i} x={x(t)} y={height - 8} textAnchor={i === 0 ? 'start' : i === 4 ? 'end' : 'middle'} className="gx-axis">{t1 - t0 < 5 * 60000 ? fmtTimeSec(t) : fmtTime(t)}</text>
+          <text key={i} x={x(t)} y={height - 8} textAnchor={xticks.length === 1 ? 'middle' : i === 0 ? 'start' : i === 4 ? 'end' : 'middle'} className="gx-axis">{t1 - t0 < 5 * 60000 ? fmtTimeSec(t) : fmtTime(t)}</text>
         ))}
         {refLines.map((r) => (
           <g key={r.label}>
@@ -119,6 +128,7 @@ export function TrendChart({ series, height = 260, unit = 'MW', digits = 1, yMin
             <text x={width - pad.r} y={y(r.v) - 5} textAnchor="end" className="gx-ref-label">{r.label}</text>
           </g>
         ))}
+        <g clipPath={`url(#${clipId})`}>
         {single && (() => {
           const pts = series[0].points.filter((p) => Number.isFinite(p.v));
           if (pts.length < 2) return null;
@@ -141,6 +151,7 @@ export function TrendChart({ series, height = 260, unit = 'MW', digits = 1, yMin
             })}
           </g>
         )}
+        </g>
       </svg>
       {hoverT !== null && (
         <div className="gx-tooltip" style={{ left: tipLeft ? undefined : x(hoverT) + 12, right: tipLeft ? width - x(hoverT) + 12 : undefined }}>

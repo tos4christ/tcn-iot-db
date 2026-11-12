@@ -7,7 +7,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import nisoLogo from '../../assets/img/niso_logo_main.jpg';
-import { Sparkline, TrendChart, useWidth } from '../GencoPortal/charts';
+import { Sparkline, TrendChart, useClipId, useWidth } from '../GencoPortal/charts';
 import '../GencoPortal/genco_portal.css';
 import './harmonics.css';
 import { headline } from './harmonicsAnalysis';
@@ -68,6 +68,7 @@ function Gauge({ label, value, limit, unit = '%', sub }) {
 function Scatter({ points, fit, height = 260 }) {
   const [ref, width] = useWidth();
   const [hover, setHover] = useState(null);
+  const clipId = useClipId();
   if (points.length < 3) return <div ref={ref} className="gx-chart-empty" style={{ height }}>Collecting one-minute readings under load…</div>;
   const pad = { l: 52, r: 16, t: 12, b: 38 };
   const xs = points.map((p) => p.x);
@@ -93,11 +94,14 @@ function Scatter({ points, fit, height = 260 }) {
         ))}
         <text x={width - pad.r} y={height - 6} textAnchor="end" className="gx-axis">Harmonic current (A)</text>
         <text x={pad.l} y={pad.t - 2} className="gx-axis">THDv %</text>
+        <defs><clipPath id={clipId}><rect x={pad.l - 6} y={pad.t - 6} width={w + 12} height={h + 12} /></clipPath></defs>
+        <g clipPath={`url(#${clipId})`}>
         {points.map((p) => (
           <circle key={p.t} cx={X(p.x)} cy={Y(p.y)} r={hover === p.t ? 6 : 4} fill={PHASE.ia} fillOpacity={0.7} stroke="var(--gx-surface)" strokeWidth={1}
             onMouseEnter={() => setHover(p.t)} onMouseLeave={() => setHover(null)} />
         ))}
         {fit && <line x1={X(0)} y1={Y(fit.intercept)} x2={X(x1)} y2={Y(fit.intercept + fit.slope * x1)} stroke="#d95926" strokeWidth={2} />}
+        </g>
       </svg>
       {hover && (() => {
         const p = points.find((q) => q.t === hover);
