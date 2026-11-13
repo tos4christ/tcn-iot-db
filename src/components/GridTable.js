@@ -136,7 +136,13 @@ class GridTable extends Component {
 
   componentWillUnmount() {
     clearInterval(this.timeInterval);
-    socket.disconnect();
+    // Remove only this page's listeners: the socket is shared, and disconnect() would stop every page's data.
+    socket.off("client_message_111");
+    socket.off("client_message_222");
+    socket.off("frequency001");
+    socket.off("initial_data");
+    socket.off("station_update");
+    socket.off("timer_update");
   }
 
   render() {
