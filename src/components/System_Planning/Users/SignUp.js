@@ -14,7 +14,10 @@ const SignUp = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = "/sp_signup";
+    // New accounts need the administrator key: open this page as ...?signup_admin=<key>
+    // and the key is passed on to the server.
+    const adminKey = new URLSearchParams(window.location.search).get("signup_admin") || "";
+    const url = "/sp_signup" + (adminKey ? `?signup_admin=${encodeURIComponent(adminKey)}` : "");
     const data = {
       name,
       role,
@@ -29,8 +32,12 @@ const SignUp = (props) => {
         "Content-Type": "application/json"
       }
     })
-    .then( (res) => res.json())
-    .then( (response) => {
+    .then( (res) => res.json().catch(() => ({})).then((body) => ({ ok: res.ok, body })))
+    .then( ({ ok, body }) => {
+      if (!ok) {
+        window.alert((body && (body.error || body.message)) || 'The account was not created.');
+        return;
+      }
       // This would push to the signin page for the user to now login
       history.push(`/bilateral_signin`);
     })

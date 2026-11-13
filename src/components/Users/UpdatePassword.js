@@ -37,17 +37,24 @@ class UpdatePassword extends React.Component {
       email: this.state.email,
       password: this.state.password
     }
+    // The server now needs proof of who is changing the password: the sign-in token.
+    const token = localStorage.getItem("token");
     fetch(url, {
       method: 'PUT',
       mode: 'cors',
       body: JSON.stringify(data),
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
       }
     })
-    .then( (res) => res.json())
-    .then( (response) => {
-      // console.log(response, 'the response')
+    .then( (res) => res.json().catch(() => ({})).then((body) => ({ ok: res.ok, body })))
+    .then( ({ ok, body }) => {
+      if (!ok) {
+        // e.g. the sign-in has expired: say so instead of pretending it worked
+        window.alert((body && (body.error || (body.data && body.data.message))) || 'The password was not changed. Please sign in again and retry.');
+        return;
+      }
       // This would push to the signin page for the user to now login
       this.props.history.push({pathname: `/home`});
     })

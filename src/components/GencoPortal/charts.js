@@ -4,23 +4,32 @@
  * Colours come from the caller (validated categorical palette in GencoPortal.js); text always
  * uses the page's text colours, never the series colour.
  */
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+/**
+ * Width of a chart box, kept up to date. A callback ref follows whichever element is mounted: a
+ * chart that switches from its "empty" box to the drawn one is measured again (the earlier
+ * version kept watching the removed box, so the chart kept a stale width and could stick out of
+ * the page on a phone).
+ */
 export function useWidth() {
-  const ref = useRef(null);
   const [width, setWidth] = useState(600);
-  useEffect(() => {
-    if (!ref.current) return undefined;
-    const update = () => setWidth(ref.current ? ref.current.clientWidth : 600);
+  const stop = useRef(null);
+  const ref = useCallback((node) => {
+    if (stop.current) { stop.current(); stop.current = null; }
+    if (!node) return;
+    const update = () => setWidth(node.clientWidth || 600);
     update();
     if (typeof ResizeObserver === 'undefined') {
       window.addEventListener('resize', update);
-      return () => window.removeEventListener('resize', update);
+      stop.current = () => window.removeEventListener('resize', update);
+    } else {
+      const ro = new ResizeObserver(update);
+      ro.observe(node);
+      stop.current = () => ro.disconnect();
     }
-    const ro = new ResizeObserver(update);
-    ro.observe(ref.current);
-    return () => ro.disconnect();
   }, []);
+  useEffect(() => () => { if (stop.current) stop.current(); }, []);
   return [ref, width];
 }
 

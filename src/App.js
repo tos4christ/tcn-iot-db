@@ -55,6 +55,7 @@ import GridTable from './components/GridTable';
 import GeneratorApp from './components/Generators/GeneratorApp';
 import { gencoRoutes } from './components/GencoPortal';
 import { harmonicsRoutes } from './components/BilateralHarmonics';
+import { fixRoutes } from './components/Fix';
 
 // Use lazy loading for heavy components
 const FullPage_SP_Lazy = lazy(() => import('./components/GridTable_SP'));
@@ -80,6 +81,8 @@ class App extends React.Component {
           {gencoRoutes}
           {/* Bilateral harmonics: /harmonics, /gph_harmonics, ... (see components/BilateralHarmonics/harmonicsConfig.js) */}
           {harmonicsRoutes()}
+          {/* *_fix pages: fixed and modernised replicas, server-side sign-in and audit (see components/Fix/index.js) */}
+          {fixRoutes()}
           <Route exact path={'/'}>
             <div className='body'>
               <div className='App'>              

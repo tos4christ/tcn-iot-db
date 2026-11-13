@@ -1,0 +1,500 @@
+/**
+ * PageTwoFix: copy of components/PageTwo.js for its *_fix route, with the bug fixes applied.
+ * The original page is unchanged. Generated changes:
+ *   - socket listeners: added and removed through scopedSocket, so leaving this page removes only
+ *     its own listeners (socket.off("event") removed every page's listener for that event)
+ *   - console(e) -> console.error(e) (console is not a function; the old line threw a second error),
+ *     and a malformed or empty message is skipped, keeping the last good reading
+ *   - the live-data check uses this page's *_fix path (the page only listens on its own path)
+ *   - setState no longer modifies the current state in place
+ *   - meter detail uses ModalFix (reads lines, units, transformers and single-meter payloads)
+ *   - sign-in is checked by the server session on the route, not by the localStorage token
+ *   - debugging console.log statements are commented out
+ */
+import React from "react";
+import {Redirect} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { scopedSocket, parseMessage } from "../live";
+import get_stations from "../../stations_adder";
+
+ class PageTwo extends React.Component {
+   constructor(props) {
+     super(props);
+    this.live = scopedSocket(); // removes only this page's listeners (fix 5)
+     this.state = {
+      markudi: {},
+      starPipe: {},
+      quantum: {},
+      kamSteel: {},
+      ikorodu1: {},
+      ikorodu2: {},
+      pheonix: {},
+      sagamu: {},
+      pulkitSteel: {},
+      africanFoundriesLimited: {},
+      sunflag: {},
+      topSteel: {},
+      monarch: {},
+      larfarge: {},
+      afamIv_vPs: {},
+      // shiroroPs: {},
+      egbinPs: {},
+      kainjiTs: {},
+      kainjiPs: {
+        id: "kainjiPs",
+        units: [ {id: "1g5", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "1g6", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "1g7", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "1g9", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "1g11", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "1g12", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
+      },
+      jebbaTs: {},
+      okpaiGs: {},
+      deltaGs: {},
+      omotosho2: {},
+      omotosho1: {},
+      eket: {},
+      phMain: {},
+      afamViTs: {},
+      alaoji: {},
+      sapeleNippPs: {},
+      omotoshoNippPs: {},
+      odukpaniGs: {},
+      odukpaniNippPs: {},
+      ekim: {},
+      gereguPs: {},
+      ikotEkpene: {},
+      riversIppPs: {},
+      omokuPs1: {},
+      ihovborNippPs: {},
+      olorunsogo1: {},
+      delta2: {},
+      delta3: {},
+      parasEnergyPs: {},
+      olorunsogoPhase1Gs: {},
+      gbarain: {},
+      dadinKowaGs: {},
+      dadinkowa: {
+        id: "dadinkowa",
+        units: [ {id: "unit1", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "unit2", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
+      },
+      shiroroPs: {
+        id: "shiroroPs",
+        units: [ {id: "411g1", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "411g2", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},
+                 {id: "411g3", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}}, 
+                 {id: "411g4", pd: {mw:0, a: 0, v: 0, mx: 0, f: 0, pf: 0}},]
+      },
+      asaba: {},
+      lokojaTs: {},
+      ugwuaji: {},
+      gwagwalada: {},
+      zungeru: {},
+      taopex: {},
+      afamVPs: {},
+      connected: false,
+     };
+   }
+   componentDidMount() {
+    if(this.props.history.location.pathname === "/gridpagetwo_fix") {
+      this.live.on("client_message_111", data => {
+        const { message } = data;
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {}        
+        parsedMessage.server_time = (new Date()).getTime();
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        // console.log(parsedMessage, 'c1 message');
+        this.setState({ [station]: parsedMessage })
+      });
+      this.live.on("client_message_222", data => {
+        const { message } = data;
+        let parsedMessage = {};
+        try {
+          parsedMessage = JSON.parse(message);
+        } catch(e) {}
+        parsedMessage.server_time = (new Date()).getTime();
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        // console.log(parsedMessage, 'c2 message');
+        this.setState({ [station]: parsedMessage })
+      });
+      this.live.on("generator_units", data => {
+        let { message } = data;
+        // if(message[0] === '"') {
+        //   message = '{' + message;
+        //   message = message.replace(/.(?=\])/g, '')
+        // }
+        // console.log(message, 'raw generator_units message');
+        const parsedMessage = parseMessage(message, 'socket');
+        if (!parsedMessage || typeof parsedMessage !== 'object') return null;
+            
+        parsedMessage.server_time = (new Date()).getTime();
+        const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
+        if (station === 'zungeru') return null;
+        // console.log(parsedMessage, 'c1 message');
+        this.setState({ [station]: parsedMessage })
+      });
+    }
+   }
+   componentWillUnmount() {
+    this.live.offAll(); 
+    this.live.off("client_message_111");
+    this.live.off("client_message_222");
+    this.live.off("generator_units");
+    }
+   getEpoch(time) {
+    if(!time || time === undefined || time === null) {
+      return 0;
+    }
+    // Convert the time input to epoch time
+    var options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const date = new Date().toLocaleDateString("en-GB", options).split('/').reverse().join('-');
+    const timeTemp = time.split(':');
+    const hour = timeTemp[0];
+    const minute = timeTemp[1]
+    const seconds = timeTemp[2]
+    const dateTemp = date.split('-');
+    return new Date(Number(dateTemp[0]), Number(dateTemp[1]-1), Number(dateTemp[2]), Number(hour), Number(minute), Number(seconds)); 
+   }
+   checkConnection2(server_time) {
+    const connected = <span className="text-success"> CN </span>
+    const disconnected = <span className="text-danger"> NC </span>
+    if (server_time === undefined || server_time === null) {
+      return disconnected
+    }
+    try {
+      // Get current epoch time
+      const time_now = (new Date()).getTime();     
+      // if 30 seconds have passed without the time changing from the current time then return disconnected
+      // 30 seconds equals to 30,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff = (time_now - server_time) > 30000;
+      if (server_time.length === 0 || time_diff ) {
+          return disconnected
+      } else if (!isNaN(server_time)) {
+          return connected
+      }
+    } catch(e) {
+      // console.log(e);
+      return disconnected;
+    }
+   }
+   checkConnection3(t1, t2) {
+    const connected = <span className="text-success"> CN </span>
+    const disconnected = <span className="text-danger"> NC </span>
+    if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null)) {
+      return disconnected
+    }
+    try {
+      t1 = t1 ? t1 : '';
+      t2 = t2 ? t2 : '';
+      // Get current epoch time
+      const time_now = (new Date()).getTime();
+      // if 30 seconds have passed without the time changing from the current time then return disconnected
+      // 30 seconds equals to 30,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff_1 = (time_now - t1) > 30000;
+      const time_diff_2 = (time_now - t2) > 30000;
+      if ( time_diff_1 || time_diff_2 ) {
+        return disconnected
+      } else if (!isNaN(t1) && !isNaN(t2)) {
+          return connected
+      } 
+    } catch(e) {
+      // console.log(e);
+      return disconnected;
+    }    
+   }
+   checkConnection4(t1, t2, t3) {
+    const connected = <span className="text-success"> CN </span>
+    const disconnected = <span className="text-danger"> NC </span>
+    if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null) && (t3 === undefined || t3 === null)) {
+      return disconnected
+    }
+    try {
+      t1 = t1 ? t1 : '';
+      t2 = t2 ? t2 : '';
+      t3 = t3 ? t3 : '';
+      // Get current epoch time
+      const time_now = (new Date()).getTime();  
+      // if 30 seconds have passed without the time changing from the current time then return disconnected
+      // 30 seconds equals to 30,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff_1 = (time_now - t1) > 30000;
+      const time_diff_2 = (time_now - t2) > 30000;
+      const time_diff_3 = (time_now - t3) > 30000;
+      if ( time_diff_1 || time_diff_2 || time_diff_3 ) {
+        return disconnected
+      } else if (!isNaN(t1) && !isNaN(t2) && !isNaN(t3)) {
+          return connected
+      }
+    } catch(e) {
+      // console.log(e);
+      return disconnected;
+    }    
+   }
+   checkConnection3_b(t1, t2) {
+    const connected = <span className="text-success"> CN </span>
+    const disconnected = <span className="text-danger"> NC </span>
+    if ((t1 === undefined || t1 === null) && (t2 === undefined || t2 === null)) {
+      return disconnected
+    }
+    try {
+      t1 = t1 ? t1 : '';
+      t2 = t2 ? t2 : '';
+      // Get current epoch time
+      const time_now = (new Date()).getTime();
+      // if 30 seconds have passed without the time changing from the current time then return disconnected
+      // 30 seconds equals to 30,000 milliseconds
+      // if the time difference is greater than time_diff then return disconnected
+      const time_diff_1 = (time_now - t1) > 30000;
+      const time_diff_2 = (time_now - t2) > 30000;
+      if ( time_diff_1 && time_diff_2 ) {
+        return disconnected
+      } else if (!isNaN(t1) || !isNaN(t2)) {
+          return connected
+      } 
+    } catch(e) {
+      // console.log(e);
+      return disconnected;
+    }    
+   }
+  render() {
+    const { isLoggedIn } = this.props;
+    if (!isLoggedIn) {
+      return <Redirect to={'/'}/>
+    }
+    const stations_array = get_stations(this.state);
+    const olorunsogonipp_gs = stations_array['OLORUNSOGO NIPP'];
+    const ihovbor_gs = stations_array['IHOVBOR NIPP (GAS)'];
+    const omoku_gs = stations_array['OMOKU (GAS)'];
+    const riversipp_gs = stations_array['RIVERS IPP (GAS)'];
+    const geregugas_gs = stations_array['GEREGU (GAS)'];
+    const omotosogas_gs = stations_array['OMOTOSHO (GAS)'];
+    const odukpani_gs = stations_array['ODUKPANI NIPP (GAS)'];
+    const sapelenipp_gs = stations_array['SAPELE NIPP (GAS)'];
+    const sapelesteam_gs = stations_array['SAPELE (STEAM)'];
+    const alaoji_gs = stations_array['ALAOJI NIPP (GAS)'];
+    const afam6_gs = stations_array['AFAM VI (GAS/STEAM)'];
+    const jebba_gs = stations_array['JEBBA (HYDRO)'];
+    const delta_gs = stations_array['DELTA (GAS)'];
+    const okpai_gs = stations_array['OKPAI (GAS/STEAM)'];
+    const egbin_gs = stations_array['EGBIN (STEAM)'];
+    // const kainji_gs = stations_array['KAINJI (HYDRO)'];
+    const afam4_gs = stations_array['AFAM IV & V (GAS)'];
+    // const shiroro_gs = stations_array['SHIRORO (HYDRO)'];
+    const paras_gs = stations_array['PARAS ENERGY (GAS)'];
+    const omotosonipp_gs = stations_array['OMOTOSHO NIPP (GAS)'];
+    const geregunipp_gs = stations_array['GEREGU NIPP (GAS)'];
+    const azura_gs = stations_array['AZURA-EDO IPP (GAS)'];
+    // const transamadi_gs = stations_array['TRANS-AMADI (GAS)'];
+    const phMain_ts = stations_array['PORT-HARCOURT MAIN'];
+    const ibom_gs = stations_array['IBOM POWER (GAS)'];
+    const gbarain_gs = stations_array['GBARAIN NIPP (GAS)'];
+    const olorunsogogas_gs = stations_array['OLORUNSOGO (GAS)'];
+    // const dadinkowa_gs = stations_array['DADINKOWA G.S (HYDRO)'];
+    const zungeru_gs = stations_array['ZUNGERU'];
+    const taopex_gs = stations_array['TAOPEX'];
+    const dadinkowa_gs = {mw: (Number(this.state.dadinkowa.units[0].pd.mw) + Number(this.state.dadinkowa.units[1].pd.mw)).toFixed(2) 
+      , kv: (this.state.dadinkowa.units[0].pd.v || this.state.dadinkowa.units[1].pd.v)
+    };
+    const shiroro_gs = {mw: (Number(this.state.shiroroPs.units[0]?.pd?.mw) + Number(this.state.shiroroPs.units[1]?.pd?.mw)
+                            + Number(this.state.shiroroPs.units[2]?.pd?.mw) + Number(this.state.shiroroPs.units[3]?.pd?.mw)).toFixed(2) 
+                           , kv: (this.state.shiroroPs.units[1]?.pd?.v || this.state.shiroroPs.units[2]?.pd?.v || this.state.shiroroPs.units[0]?.pd?.v || this.state.shiroroPs.units[1]?.pd?.v)
+    };
+    const { kainjiPs } = this.state;
+    const kainji_gs = {mw: (Number(kainjiPs.units[0].pd.mw) + Number(kainjiPs.units[1].pd.mw) + Number(kainjiPs.units[2].pd.mw) + Number(kainjiPs.units[3].pd.mw) + Number(kainjiPs.units[4].pd.mw) + Number(kainjiPs.units[5].pd.mw)).toFixed(2) 
+      , kv: kainjiPs.units[0].pd.v || kainjiPs.units[1].pd.v || kainjiPs.units[2].pd.v || kainjiPs.units[3].pd.v || kainjiPs.units[4].pd.v || kainjiPs.units[5].pd.v
+    };
+
+    const totalGeneration = (Number(riversipp_gs.mw) < 0 ? 0 : Number(riversipp_gs.mw)) +
+    (Number(afam6_gs.mw) < 0 ? 0 : Number(afam6_gs.mw)) +
+    (Number(paras_gs.mw) < 0 ? 0 : Number(paras_gs.mw)) +
+    (Number(geregugas_gs.mw) < 0 ? 0 : Number(geregugas_gs.mw)) +
+    (Number(geregunipp_gs.mw) < 0 ? 0 : Number(geregunipp_gs.mw))+ 
+    (Number(omotosogas_gs.mw) < 0 ? 0 : Number(omotosogas_gs.mw))+ 
+    (Number(omotosonipp_gs.mw) < 0 ? 0 : Number(omotosonipp_gs.mw))+ 
+    (Number(sapelenipp_gs.mw) < 0 ? 0 : Number(sapelenipp_gs.mw))+ 
+    (Number(sapelesteam_gs.mw) < 0 ? 0 : Number(sapelesteam_gs.mw))+
+    (Number(omoku_gs.mw) < 0 ? 0 : Number(omoku_gs.mw))+ 
+    (Number(odukpani_gs.mw) < 0 ? 0 : Number(odukpani_gs.mw))+ 
+    (Number(alaoji_gs.mw) < 0 ? 0 : Number(alaoji_gs.mw))+ 
+    (Number(azura_gs.mw) < 0 ? 0 : Number(azura_gs.mw))+ 
+    (Number(taopex_gs.mw) < 0 ? 0 : Number(taopex_gs.mw))+
+    (Number(olorunsogonipp_gs.mw) < 0 ? 0 : Number(olorunsogonipp_gs.mw)) + 
+    (Number(ihovbor_gs.mw) < 0 ? 0 : Number(ihovbor_gs.mw))+
+    (Number(phMain_ts.mw) < 0 ? 0 : Number(phMain_ts.mw))+ 
+    (Number(ibom_gs.mw) < 0 ? 0 : Number(ibom_gs.mw))+ 
+    (Number(olorunsogogas_gs.mw) < 0 ? 0 : Number(olorunsogogas_gs.mw))+ 
+    (Number(gbarain_gs.mw) < 0 ? 0 : Number(gbarain_gs.mw))+ 
+    (Number(shiroro_gs.mw) < 0 ? 0 : Number(shiroro_gs.mw))+
+    (Number(afam4_gs.mw) < 0 ? 0 : Number(afam4_gs.mw))+ 
+    (Number(kainji_gs.mw) < 0 ? 0 : Number(kainji_gs.mw))+ 
+    (Number(egbin_gs.mw) < 0 ? 0 : Number(egbin_gs.mw))+ 
+    (Number(okpai_gs.mw) < 0 ? 0 : Number(okpai_gs.mw))+ 
+    (Number(delta_gs.mw) < 0 ? 0 : Number(delta_gs.mw))+
+    (Number(jebba_gs.mw) < 0 ? 0 : Number(jebba_gs.mw))+ 
+    (Number(dadinkowa_gs.mw) < 0 ? 0 : Number(dadinkowa_gs.mw))+ 
+    (Number(zungeru_gs.mw) < 0 ? 0 : Number(zungeru_gs.mw));
+            
+    return (
+      <>
+      <div className="ncc-menu">
+        <div className="ncc-menu-list">
+          <div className="ncc-display-div">
+            <h2 className="text-danger">IoT POWER STATIONS TABLE</h2>
+            <table className="ncc-tg">
+              <thead>
+                <tr>
+                  <th className="ncc-tg-zb4j">S/N</th>
+                  <th className="ncc-tg-zb4j">STATIONS</th>
+                  <th className="ncc-tg-zb4j">STATUS</th>
+                  <th className="ncc-tg-zb4j">POWER(MW)</th>
+                  <th className="ncc-tg-zb4j text-danger">VOLTAGE(kV)</th>
+                </tr>
+              </thead>
+              <tbody>                
+                <tr>
+                  <td>16</td>
+                  <td>JEBBA (HYDRO)</td>
+                  <td>{this.checkConnection2(this.state.jebbaTs.server_time)}</td>
+                  <td>{jebba_gs.mw}</td>
+                  <td>{jebba_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>17</td>
+                  <td>OLORUNSOGO (GAS)</td>
+                  <td>{this.checkConnection3(this.state.olorunsogo1.server_time, this.state.olorunsogoPhase1Gs.server_time)}</td>
+                  <td>{olorunsogogas_gs.mw}</td>
+                  <td>{olorunsogogas_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>18</td>
+                  <td>OLORUNSOGO NIPP</td>
+                  <td>{this.checkConnection3(this.state.olorunsogo1.server_time, this.state.olorunsogoPhase1Gs.server_time)}</td>
+                  <td>{Number(olorunsogonipp_gs.mw) <= -3 ? 0 : Number(olorunsogonipp_gs.mw)}</td>
+                  <td>{olorunsogonipp_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>19</td>
+                  <td>SAPELE (STEAM)</td>
+                  <td>{this.checkConnection2(this.state.sapeleNippPs.server_time)}</td>
+                  <td>{sapelesteam_gs.mw}</td>
+                  <td>{sapelesteam_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>20</td>
+                  <td>ODUKPANI NIPP (GAS)</td>
+                  <td>{this.checkConnection2(this.state.odukpaniNippPs.server_time)}</td>
+                  <td>{odukpani_gs.mw}</td>
+                  <td>{odukpani_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>21</td>
+                  <td>ALAOJI NIPP (GAS)</td>
+                  <td>{this.checkConnection2(this.state.alaoji.server_time)}</td>
+                  <td>{alaoji_gs.mw}</td>
+                  <td>{alaoji_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>22</td>
+                  <td>IHOVBOR NIPP (GAS)</td>
+                  <td>{this.checkConnection2(this.state.ihovborNippPs.server_time)}</td>
+                  <td>{ihovbor_gs.mw}</td>
+                  <td>{ihovbor_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>23</td>
+                  <td>SHIRORO (HYDRO)</td>
+                  <td>{this.checkConnection2(this.state.shiroroPs.server_time)}</td>
+                  <td>{shiroro_gs.mw}</td>
+                  <td>{shiroro_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>24</td>
+                  <td>{'AFAM IV & V (GAS)'}</td>
+                  <td>{this.checkConnection3_b(this.state.afamVPs.server_time, this.state.afamIv_vPs.server_time)}</td>
+                  <td>{afam4_gs.mw}</td>
+                  <td>{afam4_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>25</td>
+                  <td>KAINJI (HYDRO)</td>
+                  <td>{this.checkConnection2(this.state.kainjiPs.server_time)}</td>
+                  <td>{kainji_gs.mw}</td>
+                  <td>{kainji_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>26</td>
+                  <td>EGBIN (STEAM)</td>
+                  <td>{this.checkConnection2(this.state.egbinPs.server_time)}</td>
+                  <td>{egbin_gs.mw}</td>
+                  <td>{egbin_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>27</td>
+                  <td>OKPAI (GAS/STEAM)</td>
+                  <td>{this.checkConnection2(this.state.okpaiGs.server_time)}</td>
+                  <td>{okpai_gs.mw}</td>
+                  <td>{okpai_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>28</td>
+                  <td>ZUNGERU G.S</td>
+                  <td>{this.checkConnection2(this.state.zungeru.server_time)}</td>
+                  <td>{zungeru_gs.mw}</td>
+                  <td>{zungeru_gs.kv}</td>
+                </tr>
+                <tr>
+                  <td>29</td>
+                  <td>TAOPEX G.S</td>
+                  <td>{this.checkConnection2(this.state.taopex.server_time)}</td>
+                  <td>{taopex_gs.mw}</td>
+                  <td>{taopex_gs.kv}</td>
+                </tr>
+                <tr></tr>
+                <tr>
+                  <td></td>
+                  <td>TOTAL GENERATION</td>
+                  <td></td>
+                  <td>{totalGeneration.toFixed(2)}</td>
+                  <td></td>
+                </tr>              
+              </tbody>
+            </table>            
+          </div>
+          <div className="ncc-counter-div-2">
+            <table className="ncc-counter-tg">
+                <thead>
+                    <tr>
+                    <th className="ncc-counter-tg-zb4j"></th>
+                    <th className="ncc-counter-tg-zb4j">LEGEND</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>CN</td>
+                    <td>CONNECTED</td>
+                    </tr>
+                    <tr>
+                    <td>NC</td>
+                    <td>NOT CONNECTED</td>
+                    </tr>
+                    <tr>
+                    <td>PNDG</td>
+                    <td>PENDING</td>
+                    </tr>                                        
+                </tbody>
+                </table> 
+          </div>
+        </div>              
+      </div>
+    </>
+    )         
+  }
+}
+
+export default withRouter(PageTwo);
