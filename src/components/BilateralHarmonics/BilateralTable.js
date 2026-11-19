@@ -9,7 +9,7 @@
  * Adds search, a connection filter, sortable columns, summary tiles, the live frequency and
  * the current, MVar, power factor and harmonic columns.
  */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import nisoLogo from '../../assets/img/niso_logo_main.jpg';
 import socket from '../utility/socketIO';
 import '../GencoPortal/genco_portal.css';
@@ -106,6 +106,30 @@ function fmtPf(v) {
   return (t.split('.')[1] || '').length >= 2 ? t : v.toFixed(2);
 }
 
+const rowKey = (r) => `${r.sn}-${r.label}`;
+
+/** The power factor explanation, placed below (or above) the value and kept on screen. */
+function PfPopover({ row, rect }) {
+  const ref = useRef(null);
+  const [top, setTop] = useState(null);
+  const width = Math.min(340, window.innerWidth - 16);
+  const left = Math.max(8, Math.min(rect.right - width, window.innerWidth - width - 8));
+  // Measured after drawing: below the value if it fits, else above, else as high as fits on screen.
+  useLayoutEffect(() => {
+    const h = ref.current ? ref.current.offsetHeight : 0;
+    const vh = window.innerHeight;
+    let t = rect.bottom + 6;
+    if (t + h > vh - 8) t = rect.top - h - 6 >= 8 ? rect.top - h - 6 : Math.max(8, vh - h - 8);
+    t = Math.round(t);
+    if (t !== top) setTop(t); // only when it moves, so this settles after one pass
+  }, [rect.top, rect.bottom, top, row]);
+  return (
+    <div ref={ref} className="hx-pf-pop" role="tooltip" style={{ left, width, top: top === null ? rect.bottom + 6 : top, maxHeight: window.innerHeight - 16, visibility: top === null ? 'hidden' : 'visible' }}>
+      <PfExplain r={row} />
+    </div>
+  );
+}
+
 /** The explanation shown when a power factor is hovered, tapped or focused. */
 function PfExplain({ r }) {
   const f2 = (v) => v.toFixed(2);
@@ -130,7 +154,8 @@ function PfExplain({ r }) {
       </p>,
     );
   } else {
-    lines.push(<p key="c"><b>Worked out:</b> not possible — {r.meters ? 'the meter does not send both MW and MVar' : 'no reading yet'}.</p>);
+    const reason = r.s === 0 ? 'no load: P and Q are both 0' : r.meters ? `the meter${r.meters > 1 ? 's do' : ' does'} not send both MW and MVar` : 'no reading yet';
+    lines.push(<p key="c"><b>Worked out:</b> not possible — {reason}.</p>);
   }
   let why;
   if (r.pfMeter === null && r.pfCalc !== null) {
@@ -138,12 +163,14 @@ function PfExplain({ r }) {
       ? `This row adds ${r.meters} meters, so no single meter's power factor describes it: the worked-out value is shown instead.`
       : 'This meter does not send a power factor, so the worked-out value is shown instead.';
   } else if (r.pfMeter !== null && r.pfCalc === null) {
-    why = 'The meter does not send MVar, so its power factor cannot be checked here.';
+    why = r.s === 0
+      ? 'There is no load at the moment, so the meter\'s power factor cannot be checked against its MW and MVar.'
+      : `The meter does not send MVar, so its power factor cannot be checked here.${r.pfFlag === 'above1' ? ' A power factor can never be above 1, so this meter figure needs a look.' : ''}`;
   } else if (r.pfFlag === 'above1') {
     const m = Math.abs(r.pfMeter);
     const matches = Math.abs((2 - m) - r.pfCalc) <= 0.03;
     why = matches
-      ? `A power factor can never be above 1. The meter's ${r.pfMeter} equals 2 − ${(2 - m).toFixed(2)}, and ${r.pfCalc.toFixed(2)} is what its own MW and MVar give: this meter sends 2 − PF in one quadrant (a register format some meters use for leading or lagging load). The real power factor is ${r.pfCalc.toFixed(3)}. The meter set-up should be checked.`
+      ? `A power factor can never be above 1. The meter's ${r.pfMeter} equals ${r.pfMeter < 0 ? `−(2 − ${(2 - m).toFixed(2)})` : `2 − ${(2 - m).toFixed(2)}`}, and ${r.pfCalc.toFixed(2)} is what its own MW and MVar give: this meter sends ${r.pfMeter < 0 ? '−(2 − PF)' : '2 − PF'} in one quadrant (a register format some meters use for leading or lagging load). The real power factor is ${r.pfCalc.toFixed(3)}. The meter set-up should be checked.`
       : `A power factor can never be above 1, and the meter's ${r.pfMeter} does not match its own MW and MVar (${r.pfCalc.toFixed(3)}). The meter should be checked.`;
   } else if (r.pfFlag === 'differs') {
     why = `The meter's figure differs from the one its own MW and MVar give by ${Math.abs(Math.abs(r.pfMeter) - r.pfCalc).toFixed(3)}. The readings may be from different moments or measuring points; worth checking with the meter.`;
@@ -315,7 +342,12 @@ export default function BilateralTable({ title, eyebrow = 'Bilateral stations', 
                           aria-label={`Power factor ${r.pfSource === 'calc' ? r.pf.toFixed(3) + ', worked out' : r.pf}. Show how it is checked.`}
                           onMouseEnter={(e) => { const rect = e.currentTarget.getBoundingClientRect(); setPfTip((t) => (t && t.pinned ? t : { key: rowKey(r), rect, pinned: false })); }}
                           onMouseLeave={() => setPfTip((t) => (t && t.pinned ? t : null))}
-                          onFocus={(e) => { const rect = e.currentTarget.getBoundingClientRect(); setPfTip({ key: rowKey(r), rect, pinned: true }); }}
+                          onFocus={(e) => {
+                            // Keyboard focus only: a mouse click or tap focuses first and is handled by onClick.
+                            let keyboard = false;
+                            try { keyboard = e.currentTarget.matches(':focus-visible'); } catch (err) { /* old browser */ }
+                            if (keyboard) { const rect = e.currentTarget.getBoundingClientRect(); setPfTip({ key: rowKey(r), rect, pinned: true }); }
+                          }}
                           onBlur={() => setPfTip(null)}
                           onClick={(e) => { e.stopPropagation(); const rect = e.currentTarget.getBoundingClientRect(); setPfTip((t) => (t && t.pinned && t.key === rowKey(r) ? null : { key: rowKey(r), rect, pinned: true })); }}
                         >
@@ -342,6 +374,11 @@ export default function BilateralTable({ title, eyebrow = 'Bilateral stations', 
           {footnote && <p className="hx-note">{footnote}</p>}
         </section>
       </main>
+      {pfTip && (() => {
+        // Looked up on every render, so the explanation follows the live readings.
+        const row = enriched.find((x) => rowKey(x) === pfTip.key);
+        return row && row.pf !== null ? <PfPopover row={row} rect={pfTip.rect} /> : null;
+      })()}
     </>
   );
 }
