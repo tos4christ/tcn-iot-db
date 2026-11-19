@@ -135,6 +135,7 @@ import { BilateralTable, HarmonicsSection } from '../../BilateralHarmonics';
         mw: isNaN(Number(ikejaWest_sakate.mw)) ? 0 : Number(ikejaWest_sakate.mw).toFixed(2),
         kv: ikejaWest_sakate.v ? ikejaWest_sakate.v : 0,
         data: this.state["ikejaWest-sakate"],
+        parts: [ikejaWest_sakate],
         modal: ['ikejaWest-sakate', this.state["ikejaWest-sakate"]],
       },
     ];

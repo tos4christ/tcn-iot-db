@@ -164,6 +164,7 @@ import { BilateralTable, HarmonicsSection } from '../../BilateralHarmonics';
         mw: isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw).toFixed(2),
         kv: kamSteel.v ? kamSteel.v : 0,
         data: this.state.kamSteel,
+        parts: [kamSteel],
         modal: ['kamSteel', this.state.kamSteel],
       },
       {
@@ -172,6 +173,7 @@ import { BilateralTable, HarmonicsSection } from '../../BilateralHarmonics';
         mw: isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum).toFixed(2),
         kv: kamSteel_Ilorin_voltage ? kamSteel_Ilorin_voltage : 0,
         data: this.state["kamSteel-Ilorin"],
+        parts: [kamSteel_Ilorin_line_1?.td, kamSteel_Ilorin_line_2?.td],
         modal: ['kamSteel-Ilorin', this.state["kamSteel-Ilorin"]],
       },
       {

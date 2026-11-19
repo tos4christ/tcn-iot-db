@@ -103,7 +103,7 @@ function OauView({ onSignOut }) {
   const entry = harmonicsStore.stations().find((e) => e.cfg === cfg) || { key: stationKey(cfg.id, cfg.line), cfg, samples: [] };
   const a = harmonicsStore.analysis(entry);
   const s = a.lastLiveSample || a.last || null;
-  const data = s ? { id: cfg.id, lines: [{ id: cfg.line, td: { mw: s.mw, a: s.a, v: s.v, thdv: s.thdv, thdia: s.ia, thdib: s.ib, thdic: s.ic } }] } : null;
+  const data = s ? { id: cfg.id, lines: [{ id: cfg.line, td: { mw: s.mw, a: s.a, v: s.v, mx: s.mx, pf: s.pf, thdv: s.thdv, thdia: s.ia, thdib: s.ib, thdic: s.ic } }] } : null;
   const rows = [{ sn: 1, label: 'Zenith Power 132 kV TS', status: a.live ? 'live' : 'off', mw: s ? s.mw : null, kv: s ? s.v : null, data }];
   return (
     <div className="gx-root">

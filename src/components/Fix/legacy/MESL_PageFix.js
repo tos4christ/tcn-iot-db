@@ -271,6 +271,7 @@ import { BilateralTable, HarmonicsSection } from '../../BilateralHarmonics';
         mw: isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw).toFixed(2)),
         kv: quantum.V ? quantum.V : 0,
         data: this.state.quantum,
+        parts: [quantum],
         modal: ['Quantum', this.state.quantum],
       },
       {
@@ -279,6 +280,7 @@ import { BilateralTable, HarmonicsSection } from '../../BilateralHarmonics';
         mw: isNaN((hydropolis_mw)) ? 0 : Math.abs(Number(hydropolis_mw).toFixed(2)),
         kv: hydropolis_kv ? hydropolis_kv : 0,
         data: this.state.HYDROPOLIS,
+        parts: [hydropolis_l2, hydropolis_l4],
         modal: ['HYDROPOLIS', this.state.HYDROPOLIS],
       },
       {
@@ -287,6 +289,7 @@ import { BilateralTable, HarmonicsSection } from '../../BilateralHarmonics';
         mw: isNaN((yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw).toFixed(2)),
         kv: yongxing_t1.v ? yongxing_t1.v : 0,
         data: this.state.yongxing,
+        parts: [yongxing_t1],
         modal: ['Yongxing (PEL)', this.state.yongxing],
       },
       {
@@ -295,6 +298,7 @@ import { BilateralTable, HarmonicsSection } from '../../BilateralHarmonics';
         mw: isNaN((amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw).toFixed(2)),
         kv: amil_t1.v ? amil_t1.v : 0,
         data: this.state.amil,
+        parts: [amil_t1],
         modal: ['Atlantic Metal Industries Ltd', this.state.amil],
       },
       {
@@ -303,6 +307,7 @@ import { BilateralTable, HarmonicsSection } from '../../BilateralHarmonics';
         mw: ((isNaN((AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw).toFixed(2))) + (isNaN((AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw).toFixed(2)))).toFixed(2),
         kv: AENL_t1.v ? AENL_t1.v : AENL_t2.v ? AENL_t2.v : 0,
         data: this.state.AENL,
+        parts: [AENL_t1, AENL_t2],
         modal: ['AENL', this.state.AENL],
       },
       {
@@ -311,6 +316,7 @@ import { BilateralTable, HarmonicsSection } from '../../BilateralHarmonics';
         mw: isNaN((glml_l1?.mw)) ? 0 : Math.abs(Number(glml_l1.mw).toFixed(2)),
         kv: glml_l1?.v ? glml_l1.v : 0,
         data: this.state.glml,
+        parts: [glml_l1],
         modal: ['GLML', this.state.glml],
       },
       {

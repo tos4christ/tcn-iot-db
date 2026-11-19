@@ -148,7 +148,18 @@
 .gx-root .hx-pin-pad button:disabled { opacity: 0.5; cursor: not-allowed; }
 .hx-sr { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 
+/* Live frequency in the header: next to the logo, top right, on phones. */
+.gx-top .hx-freq { font-family: var(--gx-mono); font-size: 14px; color: var(--gx-text); }
 @media (max-width: 640px) {
+  .gx-top .gx-top-logo { order: -2; }
+  .gx-top .hx-freq { order: -1; margin-left: auto; }
+  .hx-summary { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .hx-summary > div { padding: 10px 12px; min-width: 0; }
+  .hx-summary b { font-size: 22px; }
+  .hx-summary span { overflow-wrap: anywhere; }
+  /* Keep the station name in view while the readings scroll sideways. */
+  .gx-root .hx-bl-table tr > :nth-child(2) { position: sticky; left: 0; z-index: 1; background: var(--gx-surface); box-shadow: -12px 0 0 var(--gx-surface), 6px 0 8px -6px rgb(0 0 0 / 0.6); max-width: 128px; }
+  .gx-root .hx-bl-table thead tr > :nth-child(2) { z-index: 2; }
   .hx-table-tools { margin-left: 0; width: 100%; }
   .gx-root .hx-search { width: 100%; }
   /* Phones: drop S/N and shrink the status to its dot so MW and kV are visible without scrolling. */

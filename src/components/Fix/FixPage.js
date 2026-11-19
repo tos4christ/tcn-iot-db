@@ -27,7 +27,8 @@ export const NCC_NAV = [
   ['/collapse_fix', 'Generation analysis'],
   ['/tem_fix', 'TEM & frequency'],
   ['/voltageprofile_fix', 'Voltage profile'],
-  ['/weather_download_fix', 'Weather'],
+  ['/nccweather_fix', 'Weather'],
+  ['/weather_download_fix', 'Weather report'],
 ];
 
 export function Clock() {

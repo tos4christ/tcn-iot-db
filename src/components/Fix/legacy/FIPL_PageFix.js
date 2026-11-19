@@ -174,6 +174,7 @@ import { BilateralTable, HarmonicsSection } from '../../BilateralHarmonics';
         mw: Number(this.state.oau?.lines?.[0]?.td?.mw || 0).toFixed(2),
         kv: this.state.oau?.lines?.[0]?.td?.v || 0,
         data: this.state.oau, excluded: true,
+        parts: [this.state.oau?.lines?.[0]?.td],
         modal: ['Zenith Power 132 kV TS', this.state.oau],
       },
       */

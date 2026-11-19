@@ -364,6 +364,7 @@ class All_Bilateral extends React.Component {
         mw: Math.abs(pheonix?.mw ? pheonix.mw : 0),
         kv: pheonix?.V ? pheonix.V : 0,
         data: this.state.pheonix,
+        parts: [pheonix],
         modal: ['PHEONIX STEEL IKORODU', this.state.pheonix],
       },
       {
@@ -372,6 +373,7 @@ class All_Bilateral extends React.Component {
         mw: Math.abs(pulkitSteel?.mw ? pulkitSteel.mw : 0),
         kv: pulkitSteel?.V ? pulkitSteel.V : 0,
         data: this.state.pulkitSteel,
+        parts: [pulkitSteel],
         modal: ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel],
       },
       {
@@ -380,6 +382,7 @@ class All_Bilateral extends React.Component {
         mw: Math.abs(sunflag?.mw ? sunflag.mw : 0),
         kv: sunflag?.V ? sunflag.V : 0,
         data: this.state.sunflag,
+        parts: [sunflag],
         modal: ['SUNFLAG IRON & STEEL IKORODU', this.state.sunflag],
       },
       {
@@ -468,6 +471,7 @@ class All_Bilateral extends React.Component {
         mw: isNaN(Number(quantum.mw)) ? 0 : Math.abs(Number(quantum.mw).toFixed(2)),
         kv: quantum.V ? quantum.V : 0,
         data: this.state.quantum,
+        parts: [quantum],
         modal: ['Quantum', this.state.quantum],
       },
       {
@@ -476,6 +480,7 @@ class All_Bilateral extends React.Component {
         mw: isNaN(Number(kamSteel.mw)) ? 0 : Number(kamSteel.mw).toFixed(2),
         kv: kamSteel?.V ? kamSteel.V : 0,
         data: this.state.kamSteel,
+        parts: [kamSteel],
         modal: ['kamSteel', this.state.kamSteel],
       },
       {
@@ -484,6 +489,7 @@ class All_Bilateral extends React.Component {
         mw: isNaN(Number(kamSteel_Ilorin_mw_sum)) ? 0 : Number(kamSteel_Ilorin_mw_sum).toFixed(2),
         kv: kamSteel_Ilorin_voltage ? kamSteel_Ilorin_voltage : 0,
         data: this.state["kamSteel-Ilorin"],
+        parts: [kamSteel_Ilorin_line_1?.td, kamSteel_Ilorin_line_2?.td],
         modal: ['kamSteel-Ilorin', this.state["kamSteel-Ilorin"]],
       },
       {
@@ -500,6 +506,7 @@ class All_Bilateral extends React.Component {
         mw: isNaN(Number(ikejaWest_sakate.mw)) ? 0 : Number(ikejaWest_sakate.mw).toFixed(2),
         kv: ikejaWest_sakate.v ? ikejaWest_sakate.v : 0,
         data: this.state["ikejaWest-sakate"],
+        parts: [ikejaWest_sakate],
         modal: ['ikejaWest-sakate', this.state["ikejaWest-sakate"]],
       },
       {
@@ -508,6 +515,7 @@ class All_Bilateral extends React.Component {
         mw: isNaN((hydropolis_mw)) ? 0 : Math.abs(Number(hydropolis_mw).toFixed(2)),
         kv: hydropolis_kv ? hydropolis_kv : 0,
         data: this.state.HYDROPOLIS,
+        parts: [hydropolis_l2, hydropolis_l4],
         modal: ['HYDROPOLIS', this.state.HYDROPOLIS],
       },
       {
@@ -516,6 +524,7 @@ class All_Bilateral extends React.Component {
         mw: isNaN((yongxing_t1.mw)) ? 0 : Math.abs(Number(yongxing_t1.mw).toFixed(2)),
         kv: yongxing_t1.v ? yongxing_t1.v : 0,
         data: this.state.yongxing,
+        parts: [yongxing_t1],
         modal: ['Yongxing (PEL)', this.state.yongxing],
       },
       {
@@ -524,6 +533,7 @@ class All_Bilateral extends React.Component {
         mw: isNaN((amil_t1.mw)) ? 0 : Math.abs(Number(amil_t1.mw).toFixed(2)),
         kv: amil_t1.V ? amil_t1.V : 0,
         data: this.state.amil,
+        parts: [amil_t1],
         modal: ['Atlantic Metal Industries Ltd', this.state.amil],
       },
       {
@@ -532,6 +542,7 @@ class All_Bilateral extends React.Component {
         mw: ((isNaN((AENL_t1.mw)) ? 0 : Math.abs(Number(AENL_t1.mw).toFixed(2))) + (isNaN((AENL_t2.mw)) ? 0 : Math.abs(Number(AENL_t2.mw).toFixed(2)))).toFixed(2),
         kv: AENL_t1.v ? AENL_t1.v : AENL_t2.v ? AENL_t2.v : 0,
         data: this.state.AENL,
+        parts: [AENL_t1, AENL_t2],
         modal: ['AENL', this.state.AENL],
       },
       {
@@ -540,6 +551,7 @@ class All_Bilateral extends React.Component {
         mw: (isNaN((weewood.mw)) ? 0 : Math.abs(Number(weewood.mw).toFixed(2))),
         kv: weewood.v ? weewood.v : 0,
         data: this.state.weewood,
+        parts: [weewood],
         modal: null,
       },
       {
@@ -548,6 +560,7 @@ class All_Bilateral extends React.Component {
         mw: (isNaN((glml_l1?.mw)) ? 0 : Math.abs(Number(glml_l1.mw).toFixed(2))),
         kv: glml_l1?.v ? glml_l1.v  : 0,
         data: this.state.glml,
+        parts: [glml_l1],
         modal: null,
       },
       {
@@ -569,9 +582,10 @@ class All_Bilateral extends React.Component {
       {
         sn: 27, label: "Shongai Ltd.",
         status: this.checkConnection2(this.state.shongai.server_time),
-        mw: isNaN((shongai?.td?.mw)) ? 0 : Math.abs(Number(shongai.td.mw).toFixed(2)),
-        kv: shongai?.td?.v ? shongai.td.v : 0,
+        mw: isNaN(Number(shongai?.mw)) ? 0 : Math.abs(Number(shongai.mw)).toFixed(2),
+        kv: shongai?.v ? shongai.v : 0,
         data: this.state.shongai,
+        parts: [shongai],
         modal: ['Shongai Ltd.', this.state.shongai],
       },
       {
@@ -580,6 +594,7 @@ class All_Bilateral extends React.Component {
         mw: this.checkConnection222(this.state["phedc-gph"].server_time) ? this.getMixedValue(gph_glitch, gph_l1?.mw) : 0,
         kv: (gph_glitch === null) ? gph_l1.v : 0,
         data: this.state["phedc-gph"], warn: gph_glitch,
+        parts: [gph_l1],
         modal: ['Greater PortHarcourt', this.state["phedc-gph"]],
       },
       {
@@ -588,6 +603,7 @@ class All_Bilateral extends React.Component {
         mw: this.checkConnection222(this.state["phedc-olam"].server_time) ? this.getMixedValue(olam_glitch, olam?.mw) : 0,
         kv: (olam_glitch === null) ? olam?.v : 0,
         data: this.state["phedc-olam"], warn: olam_glitch,
+        parts: [olam],
         modal: ['OLAM', this.state["phedc-olam"]],
       },
       {
@@ -596,6 +612,7 @@ class All_Bilateral extends React.Component {
         mw: this.checkConnection222(this.state["phedc-bao-yao"].server_time) ? this.getMixedValue(bao_yao_glitch, bao_yao?.mw) : 0,
         kv: (bao_yao_glitch === null) ? bao_yao?.v : 0,
         data: this.state["phedc-bao-yao"], warn: bao_yao_glitch,
+        parts: [bao_yao],
         modal: ['BAO YAO', this.state["phedc-bao-yao"]],
       },
       {
@@ -604,6 +621,7 @@ class All_Bilateral extends React.Component {
         mw: Number(this.state.oau?.lines?.[0]?.td?.mw || 0).toFixed(2),
         kv: this.state.oau?.lines?.[0]?.td?.v || 0,
         data: this.state.oau, excluded: false,
+        parts: [oau],
         modal: ['Zenith Power 132 kV TS', this.state.oau],
       },
     ];

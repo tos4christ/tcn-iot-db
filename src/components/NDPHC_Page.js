@@ -175,6 +175,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: Math.abs(pheonix?.mw ? pheonix.mw : 0),
         kv: pheonix?.V ? pheonix.V : 0,
         data: this.state.pheonix,
+        parts: [pheonix],
         modal: ['PHEONIX STEEL IKORODU', this.state.pheonix],
       },
       {
@@ -183,6 +184,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: Math.abs(pulkitSteel?.mw ? pulkitSteel.mw : 0),
         kv: pulkitSteel?.V ? pulkitSteel.V : 0,
         data: this.state.pulkitSteel,
+        parts: [pulkitSteel],
         modal: ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel],
       },
       {
@@ -191,6 +193,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: Math.abs(sunflag?.mw ? sunflag.mw : 0),
         kv: sunflag?.V ? sunflag.V : 0,
         data: this.state.sunflag,
+        parts: [sunflag],
         modal: ['SUNFLAG IRON & STEEL IKORODU', this.state.sunflag],
       },
       {
@@ -199,6 +202,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: Math.abs(weewood?.mw ? weewood.mw : 0),
         kv: weewood?.v ? weewood.v : 0,
         data: this.state.weewood,
+        parts: [weewood],
         modal: null,
       },
     ];

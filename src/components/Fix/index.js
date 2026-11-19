@@ -4,6 +4,7 @@
  *
  *   Modern rebuilds  /home_fix, /charts_fix, /history_fix, /average_fix, /profile_fix, /downtime_fix, /uptime_fix,
  *                    /collapse_fix, /tem_fix, /voltageprofile_fix, /weather_download_fix,
+ *                    /nccweather_fix (+ /nccweather_fix/:station),
  *                    /sp_bilateral_fix, /audit_fix, /updatepassword_fix,
  *                    /signin_fix, /bilateral_signin_fix
  *   Fixed copies     /gridpageone_fix, /gridpagetwo_fix (wall screens: never signed out),
@@ -25,6 +26,7 @@ const AnalyticsFix = lazy(() => import('./AnalyticsFix'));
 const DownloadsFix = lazy(() => import('./DownloadsFix'));
 const AuditFix = lazy(() => import('./AuditFix'));
 const ChartsFix = lazy(() => import('./ChartsFix'));
+const WeatherFix = lazy(() => import('./WeatherFix'));
 const PageOneFix = lazy(() => import('./legacy/PageOneFix'));
 const PageTwoFix = lazy(() => import('./legacy/PageTwoFix'));
 const FullPageFix = lazy(() => import('./legacy/FullPageFix'));
@@ -63,6 +65,9 @@ export function fixRoutes() {
     <Route key="sp_bilateral_fix" exact path="/sp_bilateral_fix"><Suspense fallback={<Loading />}><DownloadsFix kind="bilateral" /></Suspense></Route>,
     <Route key="audit_fix" exact path="/audit_fix"><Suspense fallback={<Loading />}><AuditFix /></Suspense></Route>,
     <Route key="charts_fix" exact path="/charts_fix"><Suspense fallback={<Loading />}><ChartsFix /></Suspense></Route>,
+    // Weather centre (the NISO NAS v2 weather app): overview and one page per station.
+    <Route key="nccweather_fix" exact path="/nccweather_fix"><Suspense fallback={<Loading />}><WeatherFix /></Suspense></Route>,
+    <Route key="nccweather_fix_station" exact path="/nccweather_fix/:name"><Suspense fallback={<Loading />}><WeatherFix /></Suspense></Route>,
 
     // Wall screens: signed in for good, no sign-out button, full-screen layout as before.
     <Route key="gridpageone_fix" exact path="/gridpageone_fix"><Suspense fallback={<Loading />}>

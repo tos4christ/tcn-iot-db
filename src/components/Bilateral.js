@@ -310,6 +310,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: (pheonix?.mw ? Math.abs(Number(pheonix.mw)) : 0),
         kv: pheonix?.V ? pheonix.V : 0,
         data: this.state.pheonix,
+        parts: [pheonix],
         modal: ['PHEONIX STEEL IKORODU', this.state.pheonix],
       },
       {
@@ -318,6 +319,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: africanFoundriesLimited.mw,
         kv: africanFoundriesLimited.kv,
         data: this.state.africanFoundriesLimited,
+        line: 'afll1',
         modal: ['AFRICAN FOUNDARIES LTD IKORODU', this.state.africanFoundriesLimited],
       },
       {
@@ -326,6 +328,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: monarch.mw,
         kv: monarch.kv,
         data: this.state.monarch,
+        line: 'ml1',
         modal: ['MONARCH IKORODU', this.state.monarch],
       },
       {
@@ -334,6 +337,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: quantum.mw,
         kv: quantum.kv,
         data: this.state.quantum,
+        line: 'qt1',
         modal: ['REAL INFRASTRUCTURE LTD IKORODU', this.state.quantum],
       },
       {
@@ -342,6 +346,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: (kamSteel?.mw ? Math.abs(Number(kamSteel.mw)) : 0),
         kv: kamSteel?.V ? kamSteel.V : 0,
         data: this.state.kamSteel,
+        parts: [kamSteel],
         modal: ['KAM STEEL SAGAMU', this.state.kamSteel],
       },
       {
@@ -350,6 +355,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: larfarge.mw,
         kv: larfarge.kv,
         data: this.state.larfarge,
+        line: 'll1',
         modal: ['CEMENT FACTORY', this.state.larfarge],
       },
       {
@@ -358,6 +364,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: top_steel.mw,
         kv: top_steel.kv,
         data: this.state.topSteel,
+        line: 'tsl1',
         modal: ['TOP STEEL IKORODU', this.state.topSteel],
       },
       {
@@ -366,6 +373,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: (sunflag?.mw ? Math.abs(Number(sunflag.mw)) : 0),
         kv: sunflag?.V ? sunflag.V : 0,
         data: this.state.sunflag,
+        parts: [sunflag],
         modal: ['SUNFLAG IRON & STEEL IKORODU', this.state.sunflag],
       },
       {
@@ -374,6 +382,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: (pulkitSteel?.mw ? Math.abs(Number(pulkitSteel.mw)) : 0),
         kv: pulkitSteel?.V ? pulkitSteel.V : 0,
         data: this.state.pulkitSteel,
+        parts: [pulkitSteel],
         modal: ['PULKIT ALLOY & STEEL IKORODU', this.state.pulkitSteel],
       },
       {
@@ -382,6 +391,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: starPipe.mw,
         kv: starPipe.kv,
         data: this.state.starPipe,
+        line: 'spt1',
         modal: ['STAR PIPE PRODUCT IKORODU', this.state.starPipe],
       },
       {
@@ -390,6 +400,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: ikorodu_1.mw,
         kv: ikorodu_1.kv,
         data: this.state.ikorodu1,
+        line: 'd23s',
         modal: ['IKORODU 132KV TS LINE_1', this.state.ikorodu1],
       },
       {
@@ -398,6 +409,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: ikorodu_2.mw,
         kv: ikorodu_2.kv,
         data: this.state.ikorodu2,
+        line: 'd24s',
         modal: ['IKORODU 132KV TS LINE_2', this.state.ikorodu2],
       },
       {
@@ -406,6 +418,7 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         mw: sagamu.mw,
         kv: sagamu.kv,
         data: this.state.sagamu,
+        parts: (this.state.sagamu?.lines || []).filter((l) => l && (l.id === 'd23s' || l.id === 'd24s')).map((l) => l.td),
         modal: ['SAGAMU 132KV TS', this.state.sagamu],
       },
     ];
