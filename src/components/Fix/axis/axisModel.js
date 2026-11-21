@@ -226,6 +226,29 @@ export function moveNode(layout, key, delta) {
   return { ...layout, nodes };
 }
 
+/** Where a node sits along its line: { index (1 = first after the Ikorodu end), count }, or null. */
+export function positionOf(layout, key) {
+  const cfg = layout.nodes[key];
+  if (!cfg || !cfg.line || NODE_BY_KEY[key].fixedStart) return null;
+  const order = lineNodes(layout, cfg.line).filter((n) => !n.fixedStart).map((n) => n.key);
+  return { index: order.indexOf(key) + 1, count: order.length };
+}
+
+/** Moves a node to place `index` (1 = first after the Ikorodu end) on its own line. */
+export function moveNodeTo(layout, key, index) {
+  const cfg = layout.nodes[key];
+  if (!cfg || !cfg.line || NODE_BY_KEY[key].fixedStart) return layout;
+  const order = lineNodes(layout, cfg.line).filter((n) => !n.fixedStart).map((n) => n.key);
+  const from = order.indexOf(key);
+  const to = Math.max(0, Math.min(order.length - 1, Math.round(Number(index)) - 1));
+  if (from < 0 || !Number.isFinite(to) || from === to) return layout;
+  order.splice(from, 1);
+  order.splice(to, 0, key);
+  const nodes = { ...layout.nodes };
+  order.forEach((k, idx) => { nodes[k] = { ...nodes[k], pos: idx + 1 }; });
+  return { ...layout, nodes };
+}
+
 /**
  * Puts a node on another line (0 = not on the axis). It goes at the end of that line, but in front
  * of a Sagamu end that is currently last, so a station never lands beyond the Sagamu end.

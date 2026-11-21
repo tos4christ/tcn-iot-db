@@ -4,6 +4,12 @@ import socket from "./utility/socketIO";
 import get_stations from "./stations_adder";
 import Modal from "./Modal";
 import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
+// Ikorodu-Sagamu axis (2026-11): live load-flow panel, new meters and the gencos' sent-out rows
+import AxisFlow from './Fix/axis/AxisFlow';
+import AxisJump from './Fix/axis/AxisJump';
+import { addAxisRows, AXIS_LABELS } from './Fix/axis/axisRows';
+import ModalFix from './Fix/ModalFix';
+import { parseMessage } from './Fix/live';
 
  class Bilateral extends React.Component {
    constructor(props) {
@@ -84,7 +90,9 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
       });
       socket.on("client_message_222", data => {
         const { message } = data;
-        const parsedMessage = JSON.parse(message);
+        // some new meters send bare NaN: read it as "no value" and skip unreadable messages
+        const parsedMessage = parseMessage(message, 'socket');
+        if (!parsedMessage || typeof parsedMessage !== 'object') return null;
         parsedMessage.server_time = (new Date()).getTime();
         const station = parsedMessage.name ? parsedMessage.name : parsedMessage.id ? parsedMessage.id : null;
         const returnObject = {}
@@ -422,6 +430,8 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
         modal: ['SAGAMU 132KV TS', this.state.sagamu],
       },
     ];
+    // Ikorodu-Sagamu axis meters (new off-takers + the two gencos, sent out): Fix/axis/axisRows.js
+    const axisOfftake = addAxisRows(rows, this.state, (t) => this.checkConnection2(t));
 
     return (
       <>
@@ -430,12 +440,16 @@ import { BilateralTable, HarmonicsSection } from './BilateralHarmonics';
           title="Critical load off-takers"
           tableTitle="IoT critical 132 kV &amp; 33 kV load off-takers"
           rows={rows}
-          total={totalBilateral}
+          total={totalBilateral + axisOfftake}
           totalLabel="Total off-take"
+          notice={<AxisJump />}
           onRowClick={(modal) => this.setModalTrue(null, modal)}
         />
+        <main className="gx-main hx-under"><AxisFlow state={this.state} /></main>
         <main className="gx-main hx-under"><HarmonicsSection group="critical" title="Harmonics analysis: critical off-takers" /></main>
-        {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
+        {this.state.ModalState && (Array.isArray(this.state.modal_data) && AXIS_LABELS.includes(this.state.modal_data[0])
+          ? <ModalFix setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />
+          : <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />)}
       </div>      
     </>
     )         

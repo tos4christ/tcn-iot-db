@@ -1,7 +1,7 @@
 /**
  * Ikorodu-Sagamu axis: live single-line flow diagram, power balance per line, and the locked
- * arrangement editor. Used by /bilaterals_fix (Fix/legacy/BilateralFix.js), which passes its
- * socket state in.
+ * arrangement editor. Used by /bilaterals (components/Bilateral.js) and /bilaterals_fix
+ * (Fix/legacy/BilateralFix.js), which pass their socket state in. Both read the same saved arrangement.
  *
  * Arrangement (which line, order along it, meter direction, counted or not, TLF) is read from the
  * server for everyone; changing it needs the lock password, checked on the server only.
@@ -10,8 +10,9 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { api } from '../fixApi';
 import {
   NODES, NODE_BY_KEY, DIRECTIONS, DEFAULT_TLF_PCT, completeLayout, readAll, analyseAxis, lineNodes,
-  moveNode, setLine, setNode, num,
+  moveNode, moveNodeTo, positionOf, setLine, setNode, num,
 } from './axisModel';
+import { AXIS_SECTION_ID } from './AxisJump';
 import './axis.css';
 
 const HISTORY_EVERY_MS = 10000;
@@ -174,6 +175,82 @@ function LockDialog({ onClose, onUnlocked }) {
   );
 }
 
+/* ------------------------------------------------------------------ position along the line */
+/** ◀ [place n of m] ▶ : moves a station forward or back along its own line (same line). */
+function PositionControl({ draft, setDraft, node }) {
+  const p = positionOf(draft, node.key);
+  if (!p) return null;
+  const places = Array.from({ length: p.count }, (_, i) => i + 1);
+  return (
+    <span className="ax-pos">
+      <button type="button" className="gx-btn" aria-label={`Move ${node.name} one place towards Ikorodu`} title="One place towards Ikorodu"
+        disabled={p.index <= 1} onClick={() => setDraft(moveNode(draft, node.key, -1))}>◀</button>
+      <select aria-label={`Place of ${node.name} along the line, counted from Ikorodu`} value={p.index}
+        onChange={(e) => setDraft(moveNodeTo(draft, node.key, Number(e.target.value)))}>
+        {places.map((i) => <option key={i} value={i}>{`Place ${i} of ${p.count}`}</option>)}
+      </select>
+      <button type="button" className="gx-btn" aria-label={`Move ${node.name} one place towards Sagamu`} title="One place towards Sagamu"
+        disabled={p.index >= p.count} onClick={() => setDraft(moveNode(draft, node.key, 1))}>▶</button>
+    </span>
+  );
+}
+
+/* ------------------------------------------------------------------ change lock password */
+function PasswordDialog({ onClose, onChanged }) {
+  const [form, setForm] = useState({ oldPassword: '', newPassword: '', confirmPassword: '' });
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState(null);
+  const ref = useRef(null);
+  useEffect(() => { if (ref.current) ref.current.focus(); }, []);
+  useEffect(() => {
+    const esc = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', esc);
+    return () => window.removeEventListener('keydown', esc);
+  }, [onClose]);
+  const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+  const mismatch = form.confirmPassword !== '' && form.newPassword !== form.confirmPassword;
+  const tooShort = form.newPassword !== '' && form.newPassword.length < 8;
+  const submit = async (e) => {
+    e.preventDefault();
+    if (mismatch || tooShort) return;
+    setBusy(true); setErr(null);
+    try {
+      await api('/api2/axis/password', { method: 'POST', body: form });
+      setForm({ oldPassword: '', newPassword: '', confirmPassword: '' });
+      onChanged();
+    } catch (x) {
+      setErr(x.message);
+    } finally {
+      setBusy(false);
+    }
+  };
+  return (
+    <div className="ax-modal" role="dialog" aria-modal="true" aria-labelledby="ax-pw-title" onClick={onClose}>
+      <form className="ax-dialog" onClick={(e) => e.stopPropagation()} onSubmit={submit}>
+        <h3 id="ax-pw-title">Change lock password</h3>
+        <p>Enter the current lock password, then the new one twice. Other browsers that are unlocked will be locked.</p>
+        <label className="ax-field">Current password
+          <input ref={ref} type="password" autoComplete="current-password" value={form.oldPassword} onChange={set('oldPassword')} />
+        </label>
+        <label className="ax-field">New password <small>(at least 8 characters)</small>
+          <input type="password" autoComplete="new-password" value={form.newPassword} onChange={set('newPassword')} aria-invalid={tooShort} />
+        </label>
+        <label className="ax-field">New password again
+          <input type="password" autoComplete="new-password" value={form.confirmPassword} onChange={set('confirmPassword')} aria-invalid={mismatch} />
+        </label>
+        {tooShort && <p className="ax-err">The new password must be at least 8 characters.</p>}
+        {mismatch && <p className="ax-err">The two new passwords do not match.</p>}
+        {err && <p className="ax-err" role="alert">{err}</p>}
+        <div className="ax-row">
+          <button type="button" className="gx-btn gx-btn-ghost" onClick={onClose}>Cancel</button>
+          <button type="submit" className="gx-btn gx-btn-primary"
+            disabled={busy || !form.oldPassword || !form.newPassword || !form.confirmPassword || mismatch || tooShort}>{busy ? 'Saving…' : 'Change password'}</button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
 /* ------------------------------------------------------------------ editor */
 function Editor({ draft, setDraft, selected, onSelect, readings }) {
   const groups = [1, 2, 0].map((l) => ({ l, nodes: l === 0 ? NODES.filter((n) => draft.nodes[n.key].line === 0) : lineNodes(draft, l) }));
@@ -198,12 +275,7 @@ function Editor({ draft, setDraft, selected, onSelect, readings }) {
                     <b>{n.name}</b><small>{n.kind === 'end' ? 'line end' : n.kind}{r && r.mw !== null ? ` · ${r.mw.toFixed(2)} MW` : ` · ${STATUS_TEXT[r ? r.status : 'never']}`}</small>
                   </button>
                   <div className="ax-ectl">
-                    {!n.fixedStart && (
-                      <>
-                        <button type="button" className="gx-btn" aria-label={`Move ${n.name} towards Ikorodu`} disabled={l === 0} onClick={() => setDraft(moveNode(draft, n.key, -1))}>◀</button>
-                        <button type="button" className="gx-btn" aria-label={`Move ${n.name} towards Sagamu`} disabled={l === 0} onClick={() => setDraft(moveNode(draft, n.key, 1))}>▶</button>
-                      </>
-                    )}
+                    {!n.fixedStart && l !== 0 && <PositionControl draft={draft} setDraft={setDraft} node={n} />}
                     <select aria-label={`Line for ${n.name}`} value={c.line} onChange={(e) => setDraft(setLine(draft, n.key, Number(e.target.value)))}>
                       <option value={1}>Line 1</option><option value={2}>Line 2</option><option value={0}>Not on axis</option>
                     </select>
@@ -232,6 +304,7 @@ export default function AxisFlow({ state }) {
   const [selected, setSelected] = useState(null);
   const [msg, setMsg] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [askPassword, setAskPassword] = useState(false);
   const history = useRef([]);
   const lastSample = useRef(0);
 
@@ -293,10 +366,10 @@ export default function AxisFlow({ state }) {
   const v = VERDICT[axis.verdict];
 
   return (
-    <section className="gx-panel ax-root" aria-labelledby="ax-title">
+    <section className="gx-panel ax-root" id={AXIS_SECTION_ID} aria-labelledby="ax-title">
       <header className="ax-head">
         <div>
-          <h2 id="ax-title">Ikorodu–Sagamu axis: live load flow</h2>
+          <h2 id="ax-title" tabIndex={-1}>Ikorodu–Sagamu axis: live load flow</h2>
           <p className="ax-sub">
             Gencos use their <b>sent-out</b> (line meter) value. Allowed loss uses the NERC MYTO transmission loss factor
             ({f1(layout.tlfPct)} %). {saved.updatedAt ? `Arrangement saved ${new Date(saved.updatedAt).toLocaleString('en-GB')}.` : 'Default arrangement (not yet saved).'}
@@ -353,7 +426,10 @@ export default function AxisFlow({ state }) {
           <span>Line {selItem.cfg.line || '—'} · {selItem.cfg.include ? 'counted in the balance' : 'not counted'} · {DIRECTIONS.find((d) => d.key === selItem.cfg.dir)?.label}</span>
           <span>Meter: {f2(selItem.reading.mw)} MW · {f2(selItem.reading.mvar)} MVar · {f2(selItem.reading.amp)} A · {f2(selItem.reading.kv)} kV · {STATUS_TEXT[selItem.reading.status]}</span>
           <span>Into the line: {selItem.inj === null ? '—' : `${selItem.inj.toFixed(2)} MW`}{sel.kind === 'genco' ? ' · sent-out value' : ''}</span>
-          <button type="button" className="gx-btn gx-btn-ghost" onClick={() => setSelected(null)}>Close</button>
+          {draft && !sel.fixedStart && selItem.cfg.line !== 0 && (
+            <span className="ax-detail-move">Place along Line {selItem.cfg.line}: <PositionControl draft={draft} setDraft={setDraft} node={sel} /></span>
+          )}
+          <button type="button" className="gx-btn gx-btn-ghost" onClick={() => setSelected(null)} aria-label="Close these details" title="Hide these details">Close</button>
         </div>
       )}
 
@@ -372,7 +448,13 @@ export default function AxisFlow({ state }) {
           The trend above helps: a gap that follows one customer's load points to that customer.</p>
       </details>
 
+      <div className="ax-admin">
+        <button type="button" className="gx-btn gx-btn-ghost" onClick={() => { setMsg(null); setAskPassword(true); }}>🔑 Change lock password</button>
+      </div>
+
       {askLock && <LockDialog onClose={() => setAskLock(false)} onUnlocked={onUnlocked} />}
+      {askPassword && <PasswordDialog onClose={() => setAskPassword(false)}
+        onChanged={() => { setAskPassword(false); setMsg({ ok: true, text: 'Lock password changed. Use the new password from now on.' }); }} />}
     </section>
   );
 }

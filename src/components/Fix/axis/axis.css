@@ -87,6 +87,24 @@
 .ax-root select, .ax-root input[type='number'], .ax-dialog input { background: var(--gx-bg); color: var(--gx-text); border: 1px solid var(--gx-border); border-radius: 8px; padding: 6px 8px; font: inherit; }
 .ax-chk { color: var(--gx-text-2); font-size: 13px; display: flex; gap: 4px; align-items: center; }
 
+.ax-pos { display: inline-flex; gap: 4px; align-items: center; }
+.ax-pos .gx-btn { padding: 6px 10px; }
+.ax-pos .gx-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.ax-detail-move { display: inline-flex; gap: 8px; align-items: center; flex-wrap: wrap; color: var(--gx-text); }
+.ax-admin { display: flex; justify-content: flex-end; border-top: 1px solid var(--gx-border); padding-top: 12px; }
+.ax-field { display: grid; gap: 4px; font-size: 13px; color: var(--gx-text-2); }
+.ax-field small { color: var(--gx-muted); }
+.ax-dialog input[aria-invalid='true'] { border-color: var(--gx-critical); }
+
+.ax-jump { display: flex; align-items: center; gap: 12px 16px; flex-wrap: wrap; margin-bottom: 16px; padding: 12px 16px; border-radius: 14px; background: var(--gx-surface-2); border: 1px solid var(--gx-accent); }
+.ax-jump p { margin: 0; flex: 1 1 320px; color: var(--gx-text-2); font-size: 14px; }
+.ax-jump b { color: var(--gx-text); }
+.ax-jump-icon { font-size: 20px; }
+.ax-jump .gx-btn { white-space: nowrap; }
+.ax-root h2:focus { outline: none; }
+.ax-root h2:focus-visible { outline: 2px solid var(--gx-accent); outline-offset: 4px; border-radius: 4px; }
+@media (max-width: 640px) { .ax-jump .gx-btn { width: 100%; } }
+
 .ax-how summary { cursor: pointer; color: var(--gx-text); font-weight: 600; }
 .ax-how p { color: var(--gx-text-2); font-size: 13px; }
 

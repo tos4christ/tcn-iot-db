@@ -226,7 +226,7 @@ function Clock() {
   );
 }
 
-export default function BilateralTable({ title, eyebrow = 'Bilateral stations', tableTitle, rows, total, totalLabel = 'Total', frequency, onRowClick, actions, footnote }) {
+export default function BilateralTable({ title, eyebrow = 'Bilateral stations', tableTitle, rows, total, totalLabel = 'Total', frequency, onRowClick, actions, footnote, notice }) {
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState('all');
   const [sort, setSort] = useState({ key: 'sn', dir: 1 });
@@ -289,6 +289,7 @@ export default function BilateralTable({ title, eyebrow = 'Bilateral stations', 
         {actions}
       </header>
       <main className="gx-main">
+        {notice /* optional banner at the top of the page, e.g. the link down to the axis load flow diagram */}
         <div className="hx-summary">
           <div><b>{Number(total).toFixed(2)}</b><span>{totalLabel}, MW</span></div>
           <div><b>{freq !== null ? freq.toFixed(2) : '—'}<small> Hz</small></b><span>{freq !== null ? 'Grid frequency, live' : 'Waiting for the frequency'}</span></div>
