@@ -101,7 +101,8 @@ export function defaultLayout() {
     else if (n.key === 'sagamu2') nodes[n.key] = { line: 2, pos: 900, dir: 'out', include: true };
     else nodes[n.key] = { line: 1, pos: pos++, dir: n.kind === 'genco' ? 'absIn' : 'absOut', include: true };
   });
-  return { tlfPct: DEFAULT_TLF_PCT, nodes };
+  // Ikorodu bus coupler between Line 1 and Line 2: open by default, set by hand (no telemetry).
+  return { tlfPct: DEFAULT_TLF_PCT, nodes, coupler: { closed: false } };
 }
 
 /** A saved layout with any missing station filled from the default (a station added later). */
@@ -111,7 +112,12 @@ export function completeLayout(saved) {
   const nodes = { ...base.nodes };
   Object.keys(saved.nodes).forEach((k) => { if (NODE_BY_KEY[k]) nodes[k] = { ...nodes[k], ...saved.nodes[k] }; });
   const tlf = num(saved.tlfPct);
-  return { tlfPct: tlf === null ? base.tlfPct : tlf, nodes };
+  const closed = Boolean(saved.coupler && saved.coupler.closed === true);
+  return { tlfPct: tlf === null ? base.tlfPct : tlf, nodes, coupler: { closed } };
+}
+
+export function setCoupler(layout, closed) {
+  return { ...layout, coupler: { closed: Boolean(closed) } };
 }
 
 /** Raw meter MW turned into MW into the line. */
@@ -209,6 +215,40 @@ export function analyseAxis(layout, readings) {
     generationShare: generation > 0 ? Math.min(100, (consumption / generation) * 100) : null,
     verdict: missing.length ? 'incomplete' : lines.some((L) => L.verdict === 'unaccounted') ? 'unaccounted'
       : lines.some((L) => L.verdict === 'overmetered') ? 'overmetered' : 'balanced',
+  };
+}
+
+/**
+ * Both lines as one, and the Ikorodu bus coupler between them.
+ *
+ * Coupler OPEN: the lines are separate; each line's own balance stands.
+ * Coupler CLOSED: power can pass from one line to the other through the coupler, which has no
+ * meter. A line's own balance then includes that unmetered transfer, so "not accounted for" can
+ * no longer be pinned on one line; the balance of both lines together is still exact and is the
+ * verdict. `transfer` (MW from Line 1 to Line 2) is an ESTIMATE: the transfer that leaves both lines
+ * with the same unaccounted power, i.e. it blames neither line. null while a meter is missing.
+ */
+export function analyseCoupled(axis, layout) {
+  const closed = Boolean(layout.coupler && layout.coupler.closed);
+  const [L1, L2] = axis.lines;
+  const inflow = L1.inflow + L2.inflow;
+  const outflow = L1.outflow + L2.outflow;
+  const residual = inflow - outflow;
+  const allowed = L1.allowed + L2.allowed;
+  const unaccounted = residual - allowed;
+  const missing = [...L1.missing, ...L2.missing];
+  const noise = Math.max(NOISE_MW, (NOISE_PCT / 100) * inflow);
+  const counted = [...L1.items, ...L2.items].some((i) => i.cfg.include);
+  let verdict = 'balanced';
+  if (!counted) verdict = 'empty';
+  else if (missing.length) verdict = 'incomplete';
+  else if (unaccounted > noise) verdict = 'unaccounted';
+  else if (residual < -noise) verdict = 'overmetered';
+  const transfer = closed && !missing.length ? (L1.unaccounted - L2.unaccounted) / 2 : null;
+  return {
+    closed, transfer,
+    combined: { inflow, outflow, residual, allowed, unaccounted, missing, noise, verdict, tlfPct: L1.tlfPct,
+      unaccountedPct: inflow > 0 ? (unaccounted / inflow) * 100 : null },
   };
 }
 

@@ -415,7 +415,7 @@ import { addAxisRows } from '../axis/axisRows';
           notice={<AxisJump />}
           onRowClick={(modal) => this.setModalTrue(null, modal)}
         />
-        <main className="gx-main hx-under"><AxisFlow state={this.state} /></main>
+        <main className="gx-main hx-under"><AxisFlow state={this.state} singleLine /></main>
         <main className="gx-main hx-under"><HarmonicsSection group="critical" title="Harmonics analysis: critical off-takers" /></main>
         {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
       </div>      

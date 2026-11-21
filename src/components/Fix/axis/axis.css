@@ -96,6 +96,21 @@
 .ax-field small { color: var(--gx-muted); }
 .ax-dialog input[aria-invalid='true'] { border-color: var(--gx-critical); }
 
+/* single-line diagram with the Ikorodu bus coupler (/bilaterals_fix trial) */
+.ax-twin .ax-balance { gap: 14px; }
+.ax-lbal { display: flex; flex-direction: column; gap: 6px; }
+.ax-combined { border-top: 2px solid var(--gx-border); padding-top: 10px; }
+.ax-btable td.ax-muted { color: var(--gx-muted); font-family: var(--gx-font); }
+.ax-cb .ax-cb-wire { stroke-width: 4; }
+.ax-cb.is-open .ax-cb-box { fill: var(--gx-bg); stroke: var(--gx-good); stroke-width: 2.5; }
+.ax-cb.is-closed .ax-cb-box { fill: var(--gx-critical); stroke: var(--gx-critical); stroke-width: 2.5; }
+.ax-cb.is-closed .ax-cb-wire.flow-none { stroke: var(--gx-text-2); }
+.ax-cb-title { fill: var(--gx-text); font: 700 12px var(--gx-font); }
+.ax-cb-state { fill: var(--gx-text-2); font: 600 11px var(--gx-font); }
+.ax-cb.is-closed .ax-cb-state { fill: var(--gx-text); }
+.ax-cb.is-edit { cursor: pointer; outline: none; }
+.ax-cb.is-edit:hover .ax-cb-box, .ax-cb.is-edit:focus-visible .ax-cb-box { stroke: #fff; }
+
 .ax-jump { display: flex; align-items: center; gap: 12px 16px; flex-wrap: wrap; margin-bottom: 16px; padding: 12px 16px; border-radius: 14px; background: var(--gx-surface-2); border: 1px solid var(--gx-accent); }
 .ax-jump p { margin: 0; flex: 1 1 320px; color: var(--gx-text-2); font-size: 14px; }
 .ax-jump b { color: var(--gx-text); }
