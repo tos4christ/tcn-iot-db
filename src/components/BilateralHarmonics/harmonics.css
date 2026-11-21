@@ -174,6 +174,7 @@
 .gx-root .hx-pf { all: unset; cursor: help; display: inline-flex; align-items: baseline; gap: 4px; font: inherit; border-bottom: 1px dotted var(--gx-text-2); border-radius: 2px; }
 .gx-root .hx-pf:focus-visible { outline: 2px solid var(--gx-accent); outline-offset: 2px; }
 .gx-root .hx-pf.is-calc { color: var(--gx-text-2); font-style: italic; }
+.gx-root .hx-calc { margin-left: 4px; font-size: 10px; font-style: normal; font-weight: 400; color: var(--gx-muted); text-transform: uppercase; letter-spacing: 0.04em; }
 .gx-root .hx-pf small { font-size: 10px; font-style: normal; color: var(--gx-muted); text-transform: uppercase; letter-spacing: 0.04em; }
 .gx-root .hx-pf.is-flag { color: var(--gx-warning); font-weight: 800; }
 .gx-root .hx-pf-mark { display: inline-grid; place-items: center; width: 15px; height: 15px; border-radius: 50%; background: var(--gx-warning); color: #111; font-size: 11px; font-weight: 900; font-style: normal; }

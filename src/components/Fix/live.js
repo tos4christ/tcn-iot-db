@@ -43,7 +43,14 @@ export function scopedSocket() {
 const lastWarned = {};
 export function parseMessage(raw, label = 'socket') {
   try {
-    return typeof raw === 'string' ? JSON.parse(raw) : raw;
+    if (typeof raw !== 'string') return raw;
+    try {
+      return JSON.parse(raw);
+    } catch (first) {
+      // Some meters send a bare NaN / Infinity, which is not JSON: read it as "no value".
+      if (!/(NaN|Infinity)/.test(raw)) throw first;
+      return JSON.parse(raw.replace(/(:\s*)-?(NaN|Infinity)\b/g, '$1null'));
+    }
   } catch (e) {
     const now = Date.now();
     if (!lastWarned[label] || now - lastWarned[label] > 60000) {

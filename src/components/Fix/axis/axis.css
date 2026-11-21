@@ -1,0 +1,107 @@
+/* Ikorodu-Sagamu axis flow diagram (AxisFlow.js). Uses the gx tokens of the bilateral pages. */
+.ax-root { gap: 16px; }
+.ax-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+.ax-head h2 { margin: 0; font-size: 20px; color: var(--gx-text); }
+.ax-sub { margin: 4px 0 0; color: var(--gx-text-2); font-size: 13px; max-width: 760px; }
+.ax-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.ax-err { color: var(--gx-critical); margin: 0; font-weight: 600; }
+.ax-ok { color: var(--gx-good); margin: 0; font-weight: 600; }
+.ax-editing { margin: 0; padding: 8px 12px; border-radius: 10px; border: 1px dashed var(--gx-warning); color: var(--gx-text); font-size: 13px; }
+.ax-note { color: var(--gx-muted); font-size: 12px; margin: 0; }
+
+.ax-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+.ax-kpis > div { background: var(--gx-surface-2); border: 1px solid var(--gx-border); border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; }
+.ax-kpis b { font: 700 22px var(--gx-mono); color: var(--gx-text); }
+.ax-kpis span { font-size: 12px; color: var(--gx-text-2); }
+.ax-kpis .ax-kpi-bad { border-color: var(--gx-critical); }
+.ax-kpis .ax-kpi-watch { border-color: var(--gx-warning); }
+.ax-kpis .is-partial { border-color: var(--gx-warning); border-style: dashed; }
+.ax-kpis .is-partial b { color: var(--gx-muted); }
+
+.ax-verdict { margin: 0; font-size: 13px; color: var(--gx-text-2); padding-left: 10px; border-left: 3px solid var(--gx-border); }
+.ax-verdict.v-ok { border-left-color: var(--gx-good); }
+.ax-verdict.v-bad { border-left-color: var(--gx-critical); }
+.ax-verdict.v-watch { border-left-color: var(--gx-warning); }
+.ax-verdict b { color: var(--gx-text); }
+
+.ax-line { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 14px; align-items: start; border-top: 1px solid var(--gx-border); padding-top: 14px; }
+.ax-scroll { overflow-x: auto; border-radius: 12px; background: var(--gx-bg); border: 1px solid var(--gx-border); -webkit-overflow-scrolling: touch; }
+.ax-svg { display: block; }
+.ax-linelabel { fill: var(--gx-text); font: 700 15px var(--gx-font); }
+.ax-hint { fill: var(--gx-muted); font: 400 11px var(--gx-font); }
+.ax-segval { fill: var(--gx-text); font: 700 12px var(--gx-mono); }
+
+.ax-wire { stroke: var(--gx-muted); stroke-width: 3; stroke-linecap: round; }
+.ax-bus { stroke-width: 6; stroke: #4b6487; }
+.ax-wire.flow-fwd, .ax-wire.flow-rev { stroke: var(--gx-accent); stroke-dasharray: 10 8; animation: ax-flow 1.1s linear infinite; }
+.ax-wire.flow-rev { animation-direction: reverse; }
+.ax-tap.flow-fwd, .ax-tap.flow-rev { stroke: var(--gx-good); }
+@keyframes ax-flow { to { stroke-dashoffset: -36; } }
+@media (prefers-reduced-motion: reduce) { .ax-wire.flow-fwd, .ax-wire.flow-rev { animation: none; } }
+.ax-joint { fill: var(--gx-text-2); }
+
+.ax-node { cursor: pointer; outline: none; }
+.ax-node rect { fill: var(--gx-surface-2); stroke: var(--gx-border); stroke-width: 1.5; }
+.ax-node.k-genco rect { stroke: var(--gx-good); }
+.ax-node.k-end rect { stroke: var(--gx-accent); stroke-width: 2; }
+.ax-node.is-sel rect, .ax-node:focus-visible rect { stroke: #fff; stroke-width: 2.5; }
+.ax-node.is-off { opacity: 0.45; }
+.ax-node .ax-name { fill: var(--gx-text); font: 700 12px var(--gx-font); }
+.ax-node .ax-mw { fill: var(--gx-text); font: 700 14px var(--gx-mono); }
+.ax-node .ax-verb { fill: var(--gx-text-2); font: 400 11px var(--gx-font); }
+.ax-dot { fill: var(--gx-muted); }
+.ax-node.s-live .ax-dot { fill: var(--gx-good); }
+.ax-node.s-stale .ax-dot, .ax-node.s-nan .ax-dot { fill: var(--gx-warning); }
+.ax-node.s-never .ax-dot { fill: var(--gx-critical); }
+.ax-node.s-nan .ax-verb, .ax-node.s-stale .ax-verb, .ax-node.s-never .ax-verb { fill: var(--gx-warning); }
+
+.ax-balance { display: flex; flex-direction: column; gap: 8px; }
+.ax-btable { width: 100%; font-size: 13px; border-collapse: collapse; table-layout: fixed; }
+.ax-btable th, .ax-btable td { padding: 5px 0; border-bottom: 1px solid var(--gx-border); }
+.ax-btable th { width: 60%; }
+.ax-btable caption { text-align: left; font-weight: 700; color: var(--gx-text); caption-side: top; padding: 0 0 4px; }
+.ax-btable th { text-align: left; font-weight: 400; color: var(--gx-text-2); }
+.ax-btable td { text-align: right; font-family: var(--gx-mono); color: var(--gx-text); white-space: nowrap; }
+.ax-btable tr.v-bad td, .ax-btable tr.v-bad th { color: var(--gx-critical); }
+.ax-btable tr.v-watch td { color: var(--gx-warning); }
+.ax-trend { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--gx-text-2); }
+.ax-spark { width: 100%; height: 60px; background: var(--gx-bg); border-radius: 8px; }
+.ax-spark-zero { stroke: var(--gx-border); stroke-dasharray: 3 3; }
+.ax-spark-line { fill: none; stroke: var(--gx-warning); stroke-width: 2; }
+
+.ax-detail { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; padding: 10px 12px; border-radius: 12px; background: var(--gx-surface-2); border: 1px solid var(--gx-border); font-size: 13px; color: var(--gx-text-2); }
+.ax-detail b { color: var(--gx-text); }
+
+.ax-editor { display: grid; gap: 14px; border: 1px dashed var(--gx-warning); border-radius: 14px; padding: 14px; }
+.ax-tlf { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; color: var(--gx-text); font-weight: 600; }
+.ax-tlf input { width: 90px; }
+.ax-tlf small { color: var(--gx-muted); font-weight: 400; }
+.ax-egroup h4 { margin: 0 0 6px; color: var(--gx-text); font-size: 14px; }
+.ax-egroup ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.ax-egroup li { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: center; padding: 8px 10px; border-radius: 10px; background: var(--gx-surface-2); border: 1px solid var(--gx-border); }
+.ax-egroup li.is-sel { border-color: #fff; }
+.ax-ename { background: none; border: 0; color: var(--gx-text); text-align: left; padding: 0; cursor: pointer; display: flex; flex-direction: column; }
+.ax-ename small { color: var(--gx-text-2); }
+.ax-ectl { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.ax-ectl .gx-btn { padding: 6px 10px; }
+.ax-root select, .ax-root input[type='number'], .ax-dialog input { background: var(--gx-bg); color: var(--gx-text); border: 1px solid var(--gx-border); border-radius: 8px; padding: 6px 8px; font: inherit; }
+.ax-chk { color: var(--gx-text-2); font-size: 13px; display: flex; gap: 4px; align-items: center; }
+
+.ax-how summary { cursor: pointer; color: var(--gx-text); font-weight: 600; }
+.ax-how p { color: var(--gx-text-2); font-size: 13px; }
+
+.ax-modal { position: fixed; inset: 0; background: rgb(0 0 0 / 0.6); display: grid; place-items: center; z-index: 60; padding: 16px; }
+.ax-dialog { background: var(--gx-surface); border: 1px solid var(--gx-border); border-radius: 16px; padding: 20px; width: min(380px, 100%); display: grid; gap: 12px; color: var(--gx-text); }
+.ax-dialog h3 { margin: 0; }
+.ax-dialog p { margin: 0; color: var(--gx-text-2); font-size: 14px; }
+.ax-dialog input { font-size: 18px; letter-spacing: 0.1em; }
+.ax-row { display: flex; justify-content: flex-end; gap: 8px; }
+
+@media (max-width: 900px) {
+  .ax-line { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .ax-head h2 { font-size: 17px; }
+  .ax-kpis b { font-size: 18px; }
+  .ax-egroup li { flex-direction: column; align-items: stretch; }
+}

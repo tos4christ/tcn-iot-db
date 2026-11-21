@@ -17,6 +17,28 @@ import { scopedSocket, parseMessage } from "../live";
 import get_stations from "../../stations_adder";
 import Modal from "../ModalFix";
 import { BilateralTable, HarmonicsSection } from '../../BilateralHarmonics';
+import AxisFlow from '../axis/AxisFlow';
+import { NODE_BY_KEY } from '../axis/axisModel';
+
+// Ikorodu-Sagamu axis additions (2026-11): four new off-takers and the two gencos (sent out).
+const nz = (v) => (v === null || v === undefined || !Number.isFinite(Number(v)) || v === '' ? null : Number(v));
+/** A meter block in the a/v/mx form the table reads; NaN / missing become null, not 0. */
+const tableBlock = (b) => (b ? { mw: nz(b.mw), a: nz(b.a !== undefined ? b.a : b.A), v: nz(b.v !== undefined ? b.v : b.V), mx: nz(b.mx !== undefined ? b.mx : b.mvar), pf: nz(b.pf) } : {});
+const blocksOf = (payload, ids) => {
+  const all = [...((payload && payload.lines) || []), ...((payload && payload.transformers) || [])].filter(Boolean);
+  const picked = ids ? all.filter((x) => ids.includes(String(x.id))) : all.slice(0, 1);
+  return picked.map((x) => tableBlock(x.td || x.gd));
+};
+const AXIS_ROWS = [
+  { key: 'monarchOgijo', label: 'MONARCH ALLOY OGIJO', state: 'monarch-alloy-ogijo' },
+  { key: 'monarchOdogunyan', label: 'MONARCH ALLOY ODOGUNYAN', state: 'monarch-alloy-odogunyan' },
+  { key: 'odogunyan', label: 'ODOGUNYAN 132KV TS (T1 + T21)', state: 'odogunyan', ids: ['t1', '21'] },
+  { key: 'sagamuSteel', label: 'SAGAMU STEEL', state: 'sagamuSteel' },
+];
+const AXIS_GENCOS = [
+  { key: 'taopex', label: 'TAOPEX G.S', state: 'taopex', ids: ['line1'] },
+  { key: 'paras', label: 'PARAS ENERGY', state: 'parasEnergyPs', ids: ['132cb'] },
+];
 
  class Bilateral extends React.Component {
    constructor(props) {
@@ -397,6 +419,35 @@ import { BilateralTable, HarmonicsSection } from '../../BilateralHarmonics';
         modal: ['SAGAMU 132KV TS', this.state.sagamu],
       },
     ];
+    // New axis off-takers: MW as the meter sent it (magnitude, like the rows above); NaN = no reading.
+    let axisOfftake = 0;
+    AXIS_ROWS.forEach((a) => {
+      const r = NODE_BY_KEY[a.key].read(this.state);
+      const mw = r && r.mw !== null ? Math.abs(r.mw) : null;
+      if (mw !== null) axisOfftake += mw;
+      rows.push({
+        sn: rows.length + 1, label: a.label,
+        status: this.checkConnection2(this.state[a.state]?.server_time),
+        mw: mw === null ? '—' : mw.toFixed(2), kv: r && r.kv !== null ? r.kv : '—',
+        warn: Boolean(this.state[a.state]) && mw === null,
+        data: this.state[a.state] || {},
+        parts: blocksOf(this.state[a.state], a.ids),
+        modal: [a.label, this.state[a.state] || {}],
+      });
+    });
+    // Gencos feeding the axis: sent-out value of their line meter, not part of the off-take total.
+    AXIS_GENCOS.forEach((g) => {
+      const r = NODE_BY_KEY[g.key].read(this.state);
+      const mw = r && r.mw !== null ? Math.abs(r.mw) : null;
+      rows.push({
+        sn: rows.length + 1, label: g.label, note: 'generation · sent out', excluded: true,
+        status: this.checkConnection2(this.state[g.state]?.server_time),
+        mw: mw === null ? '—' : mw.toFixed(2), kv: r && r.kv !== null ? r.kv : '—',
+        data: this.state[g.state] || {},
+        parts: blocksOf(this.state[g.state], g.ids),
+        modal: [g.label, this.state[g.state] || {}],
+      });
+    });
 
     return (
       <>
@@ -405,10 +456,11 @@ import { BilateralTable, HarmonicsSection } from '../../BilateralHarmonics';
           title="Critical load off-takers"
           tableTitle="IoT critical 132 kV &amp; 33 kV load off-takers"
           rows={rows}
-          total={totalBilateral}
+          total={totalBilateral + axisOfftake}
           totalLabel="Total off-take"
           onRowClick={(modal) => this.setModalTrue(null, modal)}
         />
+        <main className="gx-main hx-under"><AxisFlow state={this.state} /></main>
         <main className="gx-main hx-under"><HarmonicsSection group="critical" title="Harmonics analysis: critical off-takers" /></main>
         {this.state.ModalState && <Modal setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}
       </div>      

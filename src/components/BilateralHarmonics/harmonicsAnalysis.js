@@ -88,14 +88,25 @@ export function limitsFor(kv, il, iscKA) {
 
 /* ---------------------------------------------------------------- derived values */
 
-/** Harmonic current and TDD for one sample, using the worst phase. */
+/**
+ * Harmonic current and TDD for one sample, using the worst phase.
+ * tdd is the meter's own TDD whenever the meter sends one (it is the figure used for display,
+ * limits and alerts); otherwise it is worked out from THD and current. tddCalc is always the
+ * worked-out value, kept for comparison.
+ */
 export function deriveSample(s, il) {
   const phases = [s.ia, s.ib, s.ic].filter(isNum);
   const thdi = phases.length ? Math.max(...phases) : null;
-  if (thdi === null || !isNum(s.a)) return { ...s, thdi, ih: null, tdd: null };
-  const fundamental = s.a / Math.sqrt(1 + (thdi / 100) ** 2);
-  const ih = fundamental * (thdi / 100);
-  return { ...s, thdi, ih, tdd: il ? (ih / il) * 100 : null };
+  let ih = null;
+  let tddCalc = null;
+  if (thdi !== null && isNum(s.a)) {
+    const fundamental = s.a / Math.sqrt(1 + (thdi / 100) ** 2);
+    ih = fundamental * (thdi / 100);
+    tddCalc = il ? (ih / il) * 100 : null;
+  }
+  const meter = isNum(s.tddMeter) && s.tddMeter >= 0 ? s.tddMeter : null;
+  const tdd = meter !== null ? meter : tddCalc;
+  return { ...s, thdi, ih, tddCalc, tdd, tddSource: meter !== null ? 'meter' : tddCalc !== null ? 'calc' : null };
 }
 
 /** RMS 10-minute blocks, clock aligned. */
@@ -213,8 +224,8 @@ function dataQuality(samples, derived, il, ilInfo, cfg, kvInfo, limits) {
     const typicalMeter = percentile(check.map((s) => s.tddMeter), 50);
     const wrong = il ? il / implied : null;
     if (wrong !== null && (wrong > SETTINGS.meterTddTolerance || wrong < 1 / SETTINGS.meterTddTolerance)) {
-      add('warning', 'Meter TDD is not reliable',
-        `The meter reports TDD of about ${typicalMeter.toFixed(1)}%, which means it is dividing by a demand current of only about ${implied.toFixed(1)} A. This station's demand current is ${il.toFixed(0)} A. This dashboard ignores the meter's TDD and calculates it from THD and current.`,
+      add('warning', 'Meter TDD set-up should be checked',
+        `The meter reports TDD of about ${typicalMeter.toFixed(1)}%, which means it is dividing by a demand current of about ${implied.toFixed(1)} A. This station's demand current is ${il.toFixed(0)} A. The dashboard shows and alerts on the meter's TDD as sent; worked out from THD and current it would be about ${(typicalMeter * implied / il).toFixed(1)}%.`,
         'Enter the true peak demand current in the meter (PM5100 register 2048, in primary amps) and in harmonicsConfig.js.');
     }
   }
@@ -284,9 +295,9 @@ function buildAlerts(thdv, tdd, derivedNow, events, attr, phaseSpread, extraHeat
       push({ level: 'violation', code: 'thdv-live', title: 'Voltage distortion is above the limit now',
         detail: `THDv is ${derivedNow.thdv.toFixed(2)}% against a ${thdv.limit}% limit.`, ...ACTIONS.thdv });
     }
-    if (isNum(derivedNow.tdd) && derivedNow.tdd > tdd.limit && derivedNow.loaded && tdd.status !== 'violation') {
+    if (isNum(derivedNow.tdd) && derivedNow.tdd > tdd.limit && derivedNow.tddOk && tdd.status !== 'violation') {
       push({ level: 'watch', code: 'tdd-live', title: 'Current distortion is above the limit now',
-        detail: `TDD is ${derivedNow.tdd.toFixed(2)}% against a ${tdd.limit}% limit. Short peaks are allowed; a sustained level is not.`, ...ACTIONS.tdd });
+        detail: `TDD${derivedNow.tddSource === 'meter' ? ' (from the meter)' : ' (worked out)'} is ${derivedNow.tdd.toFixed(2)}% against a ${tdd.limit}% limit. Short peaks are allowed; a sustained level is not.`, ...ACTIONS.tdd });
     }
   }
   if (attr.verdict === 'station' && (thdv.status === 'violation' || thdv.status === 'watch')) {
@@ -324,25 +335,33 @@ export function analyseStation(samples, cfg, now = Date.now()) {
   const limits = limitsFor(kvInfo.kv, ilInfo.il, cfg ? cfg.iscKA : null);
   const derived = samples.map((s) => deriveSample(s, ilInfo.il));
   const minLoad = ilInfo.il ? ilInfo.il * SETTINGS.minLoadFraction : Infinity;
-  derived.forEach((s) => { s.loaded = isNum(s.a) && s.a >= minLoad; });
+  derived.forEach((s) => {
+    s.loaded = isNum(s.a) && s.a >= minLoad;
+    // The meter's TDD is already relative to demand current, so it counts at any load.
+    // A worked-out TDD only counts under load (THD of a small current is not meaningful).
+    s.tddOk = isNum(s.tdd) && (s.tddSource === 'meter' || s.loaded);
+  });
   const loaded = derived.filter((s) => s.loaded);
+  const tddSamples = derived.filter((s) => s.tddOk);
+  const tddFrom = tddSamples.length && tddSamples.every((s) => s.tddSource === 'meter') ? 'meter'
+    : tddSamples.some((s) => s.tddSource === 'meter') ? 'mixed' : 'calc';
 
   // Typical spacing between samples, so a 10-minute block's fill is judged fairly.
   const span = samples[samples.length - 1].t - samples[0].t;
   const period = samples.length > 1 ? Math.max(SETTINGS.minGapSec * 1000, percentile(samples.slice(1).map((s, i) => s.t - samples[i].t), 50)) : 5000;
   const blocks = shortBlocks(derived, ['thdv'], period);
-  const loadedBlocks = shortBlocks(loaded, ['tdd', 'ih', 'thdi'], period);
+  const loadedBlocks = shortBlocks(tddSamples, ['tdd', 'ih', 'thdi'], period);
 
   const last = derived[derived.length - 1];
   const live = lastLive > 0 && now - lastLive <= staleMs;
   const lastLiveSample = live ? derived.filter((s) => !s.backlog).slice(-1)[0] : null;
   const min = SETTINGS.minBlocksForVerdict;
   const thdv = assess('Voltage distortion (THDv)', 'thdv', '%', limits.thdv, ASSESSMENT.voltage, derived.map((s) => s.thdv), blocks, lastLiveSample ? lastLiveSample.thdv : null, min);
-  const tdd = assess('Current distortion (TDD)', 'tdd', '%', limits.tdd, ASSESSMENT.current, loaded.map((s) => s.tdd), loadedBlocks, lastLiveSample && lastLiveSample.loaded ? lastLiveSample.tdd : null, min);
+  const tdd = assess('Current distortion (TDD)', 'tdd', '%', limits.tdd, ASSESSMENT.current, tddSamples.map((s) => s.tdd), loadedBlocks, lastLiveSample && lastLiveSample.tddOk ? lastLiveSample.tdd : null, min);
 
   const events = [
     ...excursions(derived, 'thdv', limits.thdv, { metric: 'THDv' }),
-    ...excursions(loaded, 'tdd', limits.tdd, { metric: 'TDD' }),
+    ...excursions(tddSamples, 'tdd', limits.tdd, { metric: 'TDD' }),
   ].sort((a, b) => b.start - a.start);
 
   // Phase comparison on the recent loaded samples.
@@ -379,7 +398,7 @@ export function analyseStation(samples, cfg, now = Date.now()) {
   const windowHours = span / 3600000;
   const expected = Math.max(1, Math.round(Math.min(span, SETTINGS.keepHours * 3600000) / period) + 1);
   return {
-    cfg, samples: derived, blocks, loadedBlocks, live, lastLive, status: live ? 'live' : 'stale', overall,
+    cfg, samples: derived, blocks, loadedBlocks, tddFrom, live, lastLive, status: live ? 'live' : 'stale', overall,
     il: ilInfo.il, ilSource: ilInfo.source, kv: kvInfo.kv, kvSource: kvInfo.source, limits,
     thdv, tdd, events, phaseSpread, attr, extraHeat, distortionPf, harmonicMva, last, lastLiveSample,
     alerts, quality, impact: Math.max(thdv.ratio || 0, tdd.ratio || 0), windowHours,

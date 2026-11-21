@@ -164,7 +164,7 @@ export function StationAnalysis({ entry }) {
     const step = Math.max(1, Math.floor(hist.length / 500));
     const thin = hist.filter((_, i) => i % step === 0);
     const line = (key) => thin.map((s) => ({ t: s.t, v: s[key] }));
-    return { thin, thdv: line('thdv'), tdd: thin.map((s) => ({ t: s.t, v: s.loaded ? s.tdd : null })), ia: line('ia'), ib: line('ib'), ic: line('ic'), mw: line('mw'), ih: thin.map((s) => ({ t: s.t, v: s.ih })) };
+    return { thin, thdv: line('thdv'), tdd: thin.map((s) => ({ t: s.t, v: s.tddOk ? s.tdd : null })), ia: line('ia'), ib: line('ib'), ic: line('ic'), mw: line('mw'), ih: thin.map((s) => ({ t: s.t, v: s.ih })) };
   }, [a.samples, range, hist.length]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (a.overall === 'nodata') {
@@ -177,8 +177,8 @@ export function StationAnalysis({ entry }) {
   }
 
   const exportCsv = () => {
-    const rows = ['time,mw,current_a,kv,pf,thdv,thdia,thdib,thdic,tdd_calculated,tdd_meter,harmonic_current_a'];
-    a.samples.forEach((s) => rows.push([new Date(s.t).toISOString(), s.mw, s.a, s.v, s.pf, s.thdv, s.ia, s.ib, s.ic, s.tdd === null ? '' : s.tdd.toFixed(3), s.tddMeter, s.ih === null ? '' : s.ih.toFixed(3)].map((v) => v ?? '').join(',')));
+    const rows = ['time,mw,current_a,kv,pf,thdv,thdia,thdib,thdic,tdd_used,tdd_source,tdd_meter,tdd_calculated,harmonic_current_a'];
+    a.samples.forEach((s) => rows.push([new Date(s.t).toISOString(), s.mw, s.a, s.v, s.pf, s.thdv, s.ia, s.ib, s.ic, s.tdd === null ? '' : s.tdd.toFixed(3), s.tddSource, s.tddMeter, s.tddCalc === null ? '' : s.tddCalc.toFixed(3), s.ih === null ? '' : s.ih.toFixed(3)].map((v) => v ?? '').join(',')));
     const url = URL.createObjectURL(new Blob([rows.join('\n')], { type: 'text/csv' }));
     const link = document.createElement('a');
     link.href = url;
@@ -209,7 +209,8 @@ export function StationAnalysis({ entry }) {
 
       <div className="hx-gauges">
         <Gauge label="Voltage distortion (THDv)" value={live ? live.thdv : null} limit={a.limits.thdv} sub={a.limits.band} />
-        <Gauge label="Current distortion (TDD)" value={live && live.loaded ? live.tdd : null} limit={a.limits.tdd} sub={live && !live.loaded ? 'load too low to assess' : `IL ${fmt(a.il, 0)} A`} />
+        <Gauge label="Current distortion (TDD)" value={live && live.tddOk ? live.tdd : null} limit={a.limits.tdd}
+          sub={live && live.tddSource === 'meter' ? `from the meter${typeof live.tddCalc === 'number' && Number.isFinite(live.tddCalc) ? ` · worked out ${fmt(live.tddCalc)}%` : ''}` : live && !live.tddOk ? 'load too low to assess' : `worked out · IL ${fmt(a.il, 0)} A`} />
         <Gauge label="Worst phase current THD" value={live ? live.thdi : null} />
         <div className="hx-gauge"><span>Harmonic current</span><b>{fmt(live ? live.ih : null)}<small>A</small></b><small>{fmt(a.harmonicMva, 3)} MVA of distortion</small></div>
         <div className="hx-gauge"><span>Extra I²R heating</span><b>{fmt(a.extraHeat)}<small>%</small></b><small>Added to feeder and transformer losses</small></div>
@@ -233,7 +234,11 @@ export function StationAnalysis({ entry }) {
         <p className="hx-note">
           IEEE 519 assesses a full week: the 95th percentile of 10-minute values must stay under the limit, and short peaks may reach {`${1.5}`} to {`${2}`} times it.
           This device holds {SETTINGS.keepHours} hours ({fmt(a.windowHours, 1)} h so far, {fmt(a.coverage, 0)}% coverage), so treat this as an early indication, not a formal compliance finding.
-          TDD excludes periods below {SETTINGS.minLoadFraction * 100}% of demand current ({fmt(a.lowLoadShare, 0)}% of readings).
+          {a.tddFrom === 'meter'
+            ? 'TDD is the figure the meter sends, and the limits and alerts use it as sent.'
+            : a.tddFrom === 'mixed'
+              ? `TDD is the meter's figure where the meter sent one, and is worked out from THD and current otherwise (worked-out values exclude periods below ${SETTINGS.minLoadFraction * 100}% of demand current).`
+              : `This meter does not send TDD, so it is worked out from THD and current, excluding periods below ${SETTINGS.minLoadFraction * 100}% of demand current (${fmt(a.lowLoadShare, 0)}% of readings).`}
         </p>
         <BlockStrip blocks={a.blocks} field="thdv" limit={a.limits.thdv} label="THDv, each 10 min" />
         <BlockStrip blocks={a.loadedBlocks} field="tdd" limit={a.limits.tdd} label="TDD, each 10 min" />
@@ -338,7 +343,7 @@ export function StationsTable({ entries, selected, onSelect, linkPages = false }
                 <td><b>{linkPages && e.cfg.slug ? <Link to={`/${e.cfg.slug}_harmonics`}>{name}</Link> : name}</b>{!a.live && a.overall !== 'nodata' && <small className="hx-off">not reporting</small>}</td>
                 <td><StatusPill status={a.overall} /></td>
                 <td className="r">{fmt(s ? s.mw : null)}</td>
-                <td className={`r ${s && s.loaded && s.tdd > a.limits.tdd ? 'hx-over-d' : ''}`}>{fmt(s && s.loaded ? s.tdd : null)}</td>
+                <td className={`r ${s && s.tddOk && s.tdd > a.limits.tdd ? 'hx-over-d' : ''}`}>{fmt(s && s.tddOk ? s.tdd : null)}{s && s.tddOk && s.tddSource === 'calc' && <small className="hx-calc">calc</small>}</td>
                 <td className={`r ${s && s.thdv > a.limits.thdv ? 'hx-over-d' : ''}`}>{fmt(s ? s.thdv : null)}</td>
                 <td className="r">{fmt(s ? s.ia : null)}</td><td className="r">{fmt(s ? s.ib : null)}</td><td className="r">{fmt(s ? s.ic : null)}</td>
                 <td className="r">{a.impact ? `${(a.impact * 100).toFixed(0)}%` : '—'}</td>

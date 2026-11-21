@@ -26,7 +26,7 @@ const COLUMNS = [
   { key: 'amp', label: 'Current (A)', right: true, title: 'Line current in amps (sum of the meters behind this row)' },
   { key: 'mvar', label: 'MVar', right: true, title: 'Reactive power, as metered (sum of the meters behind this row)' },
   { key: 'pf', label: 'PF', right: true, title: 'Power factor as the meter sent it. Hover or tap a value for the value worked out from MW and MVar, and how. "calc" = no meter figure, worked out. "!" = the meter figure needs a look.' },
-  { key: 'tdd', label: 'TDD %', right: true, title: 'Total demand distortion of current, calculated' },
+  { key: 'tdd', label: 'TDD %', right: true, title: 'Total demand distortion of current, as the meter sent it. "calc" = the meter does not send TDD, so it is worked out from THD and current. Alerts use the same figure.' },
   { key: 'thdv', label: 'THDv %', right: true, title: 'Voltage total harmonic distortion' },
   { key: 'ia', label: 'THDia %', right: true, title: 'Current THD, phase A' },
   { key: 'ib', label: 'THDib %', right: true, title: 'Current THD, phase B' },
@@ -256,7 +256,7 @@ export default function BilateralTable({ title, eyebrow = 'Bilateral stations', 
   });
   const connected = enriched.filter((r) => r.connected).length;
   const top = enriched.filter((r) => r.connected && r.mwNum !== null).sort((a, b) => Math.abs(b.mwNum) - Math.abs(a.mwNum))[0];
-  const metered = enriched.filter((r) => r.thdv !== null || r.ia !== null).length;
+  const metered = enriched.filter((r) => r.thdv !== null || r.ia !== null || r.tddSource === 'meter').length;
   const over = enriched.filter((r) => r.overTdd || r.overThdv).length;
   const maxMw = Math.max(1, ...enriched.map((r) => Math.abs(r.mwNum || 0)));
 
@@ -325,7 +325,7 @@ export default function BilateralTable({ title, eyebrow = 'Bilateral stations', 
                 {shown.map((r) => (
                   <tr key={`${r.sn}-${r.label}`} className={`${r.connected ? '' : 'is-off'} ${onRowClick && r.modal ? 'can-open' : ''}`} onClick={onRowClick && r.modal ? () => onRowClick(r.modal) : undefined}>
                     <td className="hx-sn">{r.sn}</td>
-                    <td><b>{r.label}</b>{r.excluded && <small className="hx-off">not in total</small>}</td>
+                    <td><b>{r.label}</b>{r.note && <small className="hx-off">{r.note}</small>}{r.excluded && <small className="hx-off">not in total</small>}</td>
                     <td><span className={`hx-pill ${r.connected ? 'pass' : 'off'}`}><i aria-hidden="true" />{r.connected ? 'Connected' : 'Not connected'}</span></td>
                     <td className={`r hx-mw ${r.warn ? 'hx-warn' : ''}`}>
                       {show(r.mw)}
@@ -357,7 +357,14 @@ export default function BilateralTable({ title, eyebrow = 'Bilateral stations', 
                         </button>
                       )}
                     </td>
-                    <td className={`r ${r.overTdd ? 'hx-over-d' : ''}`}>{show(r.tdd)}</td>
+                    <td
+                      className={`r ${r.overTdd ? 'hx-over-d' : ''}`}
+                      title={r.tdd === null ? undefined : r.tddSource === 'meter'
+                        ? `TDD as the meter sent it.${r.tddCalc !== null ? ` Worked out from THD and current: ${r.tddCalc.toFixed(2)}%.` : ''}`
+                        : 'Worked out from THD and current: this meter does not send TDD.'}
+                    >
+                      {show(r.tdd)}{r.tddSource === 'calc' && <small className="hx-calc">calc</small>}
+                    </td>
                     <td className={`r ${r.overThdv ? 'hx-over-d' : ''}`}>{show(r.thdv)}</td>
                     <td className="r">{show(r.ia)}</td>
                     <td className="r">{show(r.ib)}</td>
