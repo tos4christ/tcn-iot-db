@@ -62,7 +62,17 @@ function NodeBox({ x, y, item, selected, onSelect }) {
 
 function FlowArrow({ x1, y1, x2, y2, value, cls }) {
   const dir = value === null ? 'none' : value > 0.05 ? 'fwd' : value < -0.05 ? 'rev' : 'none';
-  return <line x1={x1} y1={y1} x2={x2} y2={y2} className={`ax-wire ${cls} flow-${dir}`} />;
+  const wire = <line x1={x1} y1={y1} x2={x2} y2={y2} className={`ax-wire ${cls} flow-${dir}`} />;
+  if (dir === 'none' || Math.hypot(x2 - x1, y2 - y1) < 24) return wire;
+  // a pointed arrowhead in the middle of the wire, pointing the way power flows
+  const angle = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI + (dir === 'rev' ? 180 : 0);
+  return (
+    <g>
+      {wire}
+      <polygon points="-7,-6 8,0 -7,6" className={`ax-head ${cls}`}
+        transform={`translate(${(x1 + x2) / 2},${(y1 + y2) / 2}) rotate(${angle})`} />
+    </g>
+  );
 }
 
 function LineDiagram({ analysis, selected, onSelect }) {
@@ -173,17 +183,22 @@ function Coupler({ closed, transfer, onToggle }) {
   );
 }
 
-function TwinDiagram({ axis, coupled, selected, onSelect, onToggleCoupler }) {
+/** Natural (100 %) size of the single-line diagram. */
+function twinSize(axis) {
+  const taps = (L) => L.items.filter((i) => !i.node.fixedStart).length;
+  return { width: Math.max(760, TW_X0 + Math.max(taps(axis.lines[0]), taps(axis.lines[1]), 1) * SP), height: TW_OFF * 2 };
+}
+
+function TwinDiagram({ axis, coupled, selected, onSelect, onToggleCoupler, zoom = 1 }) {
   const { closed, transfer } = coupled;
   const lines = [
     twinLine(axis.lines[0], 0, transfer === null ? null : -transfer, closed),
     twinLine(axis.lines[1], TW_OFF, transfer, closed),
   ];
-  const width = Math.max(760, TW_X0 + Math.max(lines[0].taps.length, lines[1].taps.length, 1) * SP);
-  const height = TW_OFF * 2;
+  const { width, height } = twinSize(axis);
   return (
     <div className="ax-scroll" role="group" aria-label="Ikorodu–Sagamu Lines 1 and 2, single-line diagram">
-      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="ax-svg">
+      <svg width={Math.round(width * zoom)} height={Math.round(height * zoom)} viewBox={`0 0 ${width} ${height}`} className="ax-svg">
         {lines.map((g, li) => (
           <g key={li}>
             <text x={12} y={g.yOff + 22} className="ax-linelabel">{`Line ${li + 1}`}</text>
@@ -219,6 +234,112 @@ function TwinDiagram({ axis, coupled, selected, onSelect, onToggleCoupler }) {
         ))}
         <Coupler closed={closed} transfer={transfer} onToggle={onToggleCoupler} />
       </svg>
+    </div>
+  );
+}
+
+const ZOOM_MIN = 0.3;
+const ZOOM_MAX = 2.5;
+const VIEW_KEY = 'nas-axis-view';
+function readView() {
+  try { return JSON.parse(localStorage.getItem(VIEW_KEY)) || {}; } catch (e) { return {}; }
+}
+function writeView(v) {
+  try { localStorage.setItem(VIEW_KEY, JSON.stringify(v)); } catch (e) { /* storage blocked: not remembered */ }
+}
+
+/**
+ * The single-line diagram with its view controls: zoom out / in, 100 %, fit (whole diagram in
+ * view), balances beside or below, and full screen (the diagram alone). Full screen uses the
+ * browser's full-screen mode where it exists, else covers the page.
+ */
+function TwinView({ axis, coupled, selected, onSelect, onToggleCoupler, wide, setWide }) {
+  const stageRef = useRef(null);
+  const [full, setFull] = useState(false);
+  const [zoom, setZoom] = useState({ fit: false, value: 1 });
+  const [box, setBox] = useState({ w: 0, h: 0 });
+  const size = twinSize(axis);
+
+  // available room for the diagram (changes with the window, the layout and full screen)
+  useEffect(() => {
+    const el = stageRef.current && stageRef.current.querySelector('.ax-stage-body');
+    if (!el) return undefined;
+    const measure = () => setBox({ w: el.clientWidth, h: el.clientHeight });
+    measure();
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', measure);
+      return () => window.removeEventListener('resize', measure);
+    }
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [full, wide]);
+
+  const fitScale = () => {
+    const w = Math.max(100, box.w - 4) / size.width;
+    const h = full ? Math.max(100, box.h - 4) / size.height : Infinity;
+    return Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, w, h));
+  };
+  const scale = zoom.fit ? fitScale() : zoom.value;
+  const step = (d) => setZoom({ fit: false, value: Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, Math.round((scale + d) * 10) / 10)) });
+
+  // full screen: the browser's own where possible; it reports leaving (Esc) through an event
+  useEffect(() => {
+    const onChange = () => { if (!document.fullscreenElement) { setFull(false); setZoom({ fit: false, value: 1 }); } };
+    document.addEventListener('fullscreenchange', onChange);
+    return () => document.removeEventListener('fullscreenchange', onChange);
+  }, []);
+  useEffect(() => {
+    if (!full) return undefined;
+    const esc = (e) => { if (e.key === 'Escape' && !document.fullscreenElement) { setFull(false); setZoom({ fit: false, value: 1 }); } };
+    window.addEventListener('keydown', esc);
+    // the page behind does not scroll while the diagram covers it
+    const before = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { window.removeEventListener('keydown', esc); document.body.style.overflow = before; };
+  }, [full]);
+  const enterFull = async () => {
+    setZoom({ fit: true, value: scale });
+    setFull(true);
+    const el = stageRef.current;
+    try { if (el && el.requestFullscreen) await el.requestFullscreen(); } catch (e) { /* page overlay is used instead */ }
+  };
+  const exitFull = async () => {
+    setFull(false);
+    setZoom({ fit: false, value: 1 });
+    try { if (document.fullscreenElement && document.exitFullscreen) await document.exitFullscreen(); } catch (e) { /* already left */ }
+  };
+
+  const C = coupled.combined;
+  return (
+    <div className={`ax-stage ${full ? 'is-full' : ''}`} ref={stageRef}>
+      <div className="ax-toolbar" role="toolbar" aria-label="Load flow diagram view">
+        {full && <b className="ax-tb-title">Ikorodu–Sagamu load flow</b>}
+        {full && (
+          <span className={`ax-tb-sum v-${VERDICT[C.verdict].cls}`}>
+            {`Not accounted for, both lines: ${f2(C.unaccounted)} MW${C.missing.length ? ' (partial)' : ''} · coupler ${coupled.closed ? 'closed' : 'open'}`}
+          </span>
+        )}
+        <span className="ax-tb-group">
+          <button type="button" className="gx-btn" onClick={() => step(-0.2)} disabled={scale <= ZOOM_MIN} aria-label="Zoom out" title="Zoom out">−</button>
+          <span className="ax-tb-zoom" aria-live="polite">{`${Math.round(scale * 100)} %`}</span>
+          <button type="button" className="gx-btn" onClick={() => step(0.2)} disabled={scale >= ZOOM_MAX} aria-label="Zoom in" title="Zoom in">+</button>
+          <button type="button" className="gx-btn" onClick={() => setZoom({ fit: false, value: 1 })} aria-pressed={!zoom.fit && scale === 1} title="Actual size">100 %</button>
+          <button type="button" className="gx-btn" onClick={() => setZoom({ fit: true, value: scale })} aria-pressed={zoom.fit} title="Show the whole diagram">Fit</button>
+        </span>
+        {!full && (
+          <button type="button" className="gx-btn" onClick={() => setWide(!wide)} aria-pressed={!wide}
+            title={wide ? 'Put the line balances beside the diagram' : 'Give the diagram the full width; balances go below'}>
+            {wide ? 'Balances beside' : 'Balances below'}
+          </button>
+        )}
+        {full
+          ? <button type="button" className="gx-btn gx-btn-primary" onClick={exitFull}>✕ Exit full screen</button>
+          : <button type="button" className="gx-btn gx-btn-primary" onClick={enterFull} title="Show the load flow diagram alone">⛶ Full screen</button>}
+      </div>
+      <div className="ax-stage-body">
+        <TwinDiagram axis={axis} coupled={coupled} selected={selected} onSelect={onSelect} onToggleCoupler={onToggleCoupler} zoom={scale} />
+      </div>
     </div>
   );
 }
@@ -479,6 +600,8 @@ export default function AxisFlow({ state, singleLine = false }) {
   const [msg, setMsg] = useState(null);
   const [saving, setSaving] = useState(false);
   const [askPassword, setAskPassword] = useState(false);
+  // diagram full width with the balances below (default), or balances beside it; remembered per browser
+  const [wide, setWide] = useState(() => readView().wide !== false);
   const history = useRef([]);
   const lastSample = useRef(0);
 
@@ -580,8 +703,9 @@ export default function AxisFlow({ state, singleLine = false }) {
       </p>
 
       {singleLine && (
-        <div className="ax-line ax-twin">
-          <TwinDiagram axis={axis} coupled={coupled} selected={selected} onSelect={setSelected} onToggleCoupler={toggleCoupler} />
+        <div className={`ax-line ax-twin ${wide ? 'is-wide' : ''}`}>
+          <TwinView axis={axis} coupled={coupled} selected={selected} onSelect={setSelected} onToggleCoupler={toggleCoupler}
+            wide={wide} setWide={(w) => { setWide(w); writeView({ ...readView(), wide: w }); }} />
           <div className="ax-balance">
             <LineBalance L={axis.lines[0]} history={history} coupledClosed={coupled.closed} />
             <LineBalance L={axis.lines[1]} history={history} coupledClosed={coupled.closed} />

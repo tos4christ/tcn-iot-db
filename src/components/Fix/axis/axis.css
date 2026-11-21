@@ -111,6 +111,31 @@
 .ax-cb.is-edit { cursor: pointer; outline: none; }
 .ax-cb.is-edit:hover .ax-cb-box, .ax-cb.is-edit:focus-visible .ax-cb-box { stroke: #fff; }
 
+/* flow arrowheads (point the way power flows) */
+.ax-head { fill: var(--gx-accent); stroke: var(--gx-bg); stroke-width: 1; }
+.ax-head.ax-tap { fill: var(--gx-good); }
+
+/* diagram view: toolbar, balances below (wide), full screen */
+.ax-stage { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.ax-toolbar { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.ax-tb-group { display: inline-flex; gap: 4px; align-items: center; }
+.ax-toolbar .gx-btn { padding: 6px 10px; }
+.ax-toolbar .gx-btn[aria-pressed='true'] { border-color: var(--gx-accent); color: var(--gx-text); }
+.ax-tb-zoom { min-width: 52px; text-align: center; font: 600 13px var(--gx-mono); color: var(--gx-text); }
+.ax-tb-title { color: var(--gx-text); font-size: 15px; }
+.ax-tb-sum { color: var(--gx-text-2); font-size: 13px; padding-left: 8px; border-left: 3px solid var(--gx-border); }
+.ax-tb-sum.v-bad { border-left-color: var(--gx-critical); }
+.ax-tb-sum.v-watch { border-left-color: var(--gx-warning); }
+.ax-tb-sum.v-ok { border-left-color: var(--gx-good); }
+.ax-stage-body { min-width: 0; min-height: 0; }
+.ax-stage.is-full { position: fixed; inset: 0; z-index: 1000; background: var(--gx-bg, #0b111d); padding: 12px 16px; }
+.ax-stage.is-full .ax-toolbar .gx-btn-primary { margin-left: auto; }
+.ax-stage.is-full .ax-stage-body { flex: 1; }
+.ax-stage.is-full .ax-scroll { height: 100%; overflow: auto; }
+.ax-twin.is-wide { grid-template-columns: minmax(0, 1fr); }
+.ax-twin.is-wide .ax-balance { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; align-items: start; }
+.ax-twin.is-wide .ax-combined { border-top: 0; padding-top: 0; }
+
 .ax-jump { display: flex; align-items: center; gap: 12px 16px; flex-wrap: wrap; margin-bottom: 16px; padding: 12px 16px; border-radius: 14px; background: var(--gx-surface-2); border: 1px solid var(--gx-accent); }
 .ax-jump p { margin: 0; flex: 1 1 320px; color: var(--gx-text-2); font-size: 14px; }
 .ax-jump b { color: var(--gx-text); }
