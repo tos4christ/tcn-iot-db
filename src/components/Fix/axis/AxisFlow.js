@@ -69,7 +69,7 @@ function FlowArrow({ x1, y1, x2, y2, value, cls }) {
   return (
     <g>
       {wire}
-      <polygon points="-7,-6 8,0 -7,6" className={`ax-head ${cls}`}
+      <polygon points="-9,-8 10,0 -9,8" className={`ax-head ${cls}`}
         transform={`translate(${(x1 + x2) / 2},${(y1 + y2) / 2}) rotate(${angle})`} />
     </g>
   );

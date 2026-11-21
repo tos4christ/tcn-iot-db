@@ -112,8 +112,10 @@
 .ax-cb.is-edit:hover .ax-cb-box, .ax-cb.is-edit:focus-visible .ax-cb-box { stroke: #fff; }
 
 /* flow arrowheads (point the way power flows) */
-.ax-head { fill: var(--gx-accent); stroke: var(--gx-bg); stroke-width: 1; }
-.ax-head.ax-tap { fill: var(--gx-good); }
+/* bright yellow on the blue bus (opposite hue + much lighter = readable from afar; red is kept for
+   alarms and the closed coupler); bright green on the station taps; dark rim against the lines */
+.ax-head { fill: #ffd60a; stroke: #0b111d; stroke-width: 1.5; stroke-linejoin: round; }
+.ax-head.ax-tap { fill: #2ee86f; }
 
 /* diagram view: toolbar, balances below (wide), full screen */
 .ax-stage { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
