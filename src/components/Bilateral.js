@@ -445,7 +445,7 @@ import { parseMessage } from './Fix/live';
           notice={<AxisJump />}
           onRowClick={(modal) => this.setModalTrue(null, modal)}
         />
-        <main className="gx-main hx-under"><AxisFlow state={this.state} /></main>
+        <main className="gx-main hx-under"><AxisFlow state={this.state} singleLine /></main>
         <main className="gx-main hx-under"><HarmonicsSection group="critical" title="Harmonics analysis: critical off-takers" /></main>
         {this.state.ModalState && (Array.isArray(this.state.modal_data) && AXIS_LABELS.includes(this.state.modal_data[0])
           ? <ModalFix setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />
