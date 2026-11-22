@@ -20,6 +20,8 @@ import ModalFix from './ModalFix';
 import { scopedSocket, parseMessage } from './live';
 import { track } from './session';
 import { TrendChart } from '../GencoPortal/charts';
+import { page } from './paths';
+import { WeatherNotice } from './serviceStatus';
 
 const TREND_EVERY_MS = 10000;
 const TREND_POINTS = 720; // 2 hours
@@ -327,6 +329,7 @@ export class HomeFixView extends React.Component {
     const freqPoints = trend.filter((p) => p.f !== null).length;
     return (
       <main className="gx-main">
+        <WeatherNotice />
         <div className="fx-tiles">
           <div className="fx-tile hero"><span>Total IoT generation</span><b>{totalGeneration.toFixed(2)}<small>MW</small></b><em>{genOn} of {generation.length} stations connected</em></div>
           <div className="fx-tile hero"><span>Transmission stations</span><b>{totalTransmission.toFixed(2)}<small>MW</small></b><em>{trOn} of {transmission.length} connected</em></div>
@@ -349,13 +352,13 @@ export class HomeFixView extends React.Component {
         </div>
 
         <StationTable title="IoT power stations" rows={generation} total={totalGeneration} totalLabel="Total generation" onRowClick={this.setModalTrue}
-          note="Totals and connection rules are the same as /home. Negative MW is counted as 0 in the total." />
+          note="Totals and connection rules are the same as the old home page. Negative MW is counted as 0 in the total." />
         <StationTable title="IoT transmission stations" rows={transmission} total={totalTransmission} totalLabel="Total transmission" onRowClick={this.setModalTrue} />
 
         <section className="gx-panel">
           <header><h2>Tools</h2><span>Reports and analysis</span></header>
           <div className="fx-cards">
-            {TOOLS.map(([to, label, text]) => <Link key={to} to={to} className="fx-card"><b>{label}</b><span>{text}</span></Link>)}
+            {TOOLS.map(([to, label, text]) => <Link key={to} to={page(to)} className="fx-card"><b>{label}</b><span>{text}</span></Link>)}
           </div>
         </section>
         {this.state.ModalState && <ModalFix setModalFalse={this.setModalFalse} modalData={this.state.modal_data} />}

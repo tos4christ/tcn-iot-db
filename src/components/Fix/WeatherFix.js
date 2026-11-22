@@ -15,6 +15,8 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useHistory, useParams } from 'react-router-dom';
 import FixPage from './FixPage';
 import { api, downloadFile } from './fixApi';
+import { page } from './paths';
+import { WeatherNotice, isWeatherSuspendedError, useServiceStatus, refreshServiceStatus } from './serviceStatus';
 import WxMap from './weather/WxMap';
 import {
   ago, compass, fmt, fmt0, fmt1, fmtDay, fmtDayHour, fmtHour, hazardLabel, HourlyChart, isNum,
@@ -23,7 +25,7 @@ import {
 import './weather/weather.css';
 
 const NIGERIA = [[4.2, 2.6], [13.9, 14.7]];
-const stationPath = (name) => `/nccweather_fix/${encodeURIComponent(name)}`;
+const stationPath = (name) => page(`/nccweather_fix/${encodeURIComponent(name)}`);
 
 function Screen({ title, children }) {
   return (
@@ -96,7 +98,11 @@ function Overview({ session }) {
 
   const load = useCallback((signal) => api('/api2/weather/overview', { signal })
     .then((d) => { setData(d); setError(null); })
-    .catch((e) => { if (e.name !== 'AbortError') setError(e.message); }), []);
+    .catch((e) => {
+      if (e.name === 'AbortError') return;
+      if (isWeatherSuspendedError(e)) refreshServiceStatus(); // WeatherGate then shows the notice
+      setError(e.message);
+    }), []);
   const warming = !data || !data.national.stations;
   useEffect(() => {
     const ctrl = new AbortController();
@@ -256,7 +262,7 @@ function Overview({ session }) {
         <div className="fx-actions">
           <button type="button" className="gx-btn" onClick={download} disabled={!!busy}>{busy === 'report' ? 'Preparing…' : 'Forecast report (Excel, 72 h)'}</button>
           {isAdmin && <button type="button" className="gx-btn" onClick={refresh} disabled={!!busy}>{busy === 'refresh' ? 'Starting…' : 'Refresh forecast now'}</button>}
-          <Link className="gx-btn" to="/weather_download_fix">Observed rainfall report</Link>
+          <Link className="gx-btn" to={page('/weather_download_fix')}>Observed rainfall report</Link>
         </div>
         {note && <p className={note.ok ? 'fx-ok' : 'fx-warn'}>{note.text}</p>}
         <p className="fx-hint">
@@ -333,7 +339,11 @@ function Station({ session, name }) {
 
   const load = useCallback((signal) => api(`/api2/weather/stations/${encodeURIComponent(name)}`, { signal })
     .then((x) => { setD(x); setError(null); })
-    .catch((e) => { if (e.name !== 'AbortError') setError(e.message); }), [name]);
+    .catch((e) => {
+      if (e.name === 'AbortError') return;
+      if (isWeatherSuspendedError(e)) refreshServiceStatus(); // WeatherGate then shows the notice
+      setError(e.message);
+    }), [name]);
   useEffect(() => {
     const ctrl = new AbortController();
     setD(null);
@@ -346,7 +356,7 @@ function Station({ session, name }) {
   const nowSec = Date.now() / 1000;
   const window72 = useMemo(() => ((d && d.hourly) || []).filter((h) => h.t >= nowSec - 3 * 3600).slice(0, 75), [d]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const back = <Link to="/nccweather_fix" className="gx-btn wx-back">← Weather centre</Link>;
+  const back = <Link to={page('/nccweather_fix')} className="gx-btn wx-back">← Weather centre</Link>;
   if (error && !d) return <main className="gx-main">{back}<section className="gx-panel"><p className="gx-error-text">{error}</p></section></main>;
   if (!d) return <Screen title="Loading the station forecast…"><span className="fx-spinner" /></Screen>;
   if (d.pending) return <main className="gx-main">{back}<section className="gx-panel"><div className="fx-none">{d.station.name}: no forecast yet. The next engine run includes it.</div></section></main>;
@@ -567,12 +577,35 @@ function decodeName(raw) {
   try { return decodeURIComponent(raw); } catch (e) { return raw; }
 }
 
+/**
+ * While an administrator has suspended weather (subscription expired) the weather centre shows the
+ * notice instead and makes no weather calls; it comes back by itself when weather is turned on.
+ */
+function WeatherGate({ children }) {
+  const { weather } = useServiceStatus();
+  if (!weather.suspended) return children;
+  return (
+    <main className="gx-main">
+      <WeatherNotice />
+      <section className="gx-panel">
+        <div className="fx-none">
+          <b>Live weather and forecasts are paused</b>
+          <div style={{ marginTop: 6 }}>This page comes back by itself once the subscription is renewed and an administrator turns weather back on.</div>
+          <div className="fx-actions" style={{ marginTop: 12, justifyContent: 'center' }}>
+            <Link className="gx-btn" to={page('/weather_download_fix')}>Recorded weather report</Link>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
 export default function WeatherFix() {
   const params = useParams();
   const name = params.name ? decodeName(params.name) : null;
   return (
     <FixPage title={name ? `Weather · ${name}` : 'Weather centre'} eyebrow="NCC weather">
-      {(session) => (name ? <Station session={session} name={name} /> : <Overview session={session} />)}
+      {(session) => <WeatherGate>{name ? <Station session={session} name={name} /> : <Overview session={session} />}</WeatherGate>}
     </FixPage>
   );
 }

@@ -7,8 +7,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { api } from './fixApi';
 import { reconnectSocket } from './live';
+import { page } from './paths';
 
 export const SIGNIN_PATH = { ncc: '/signin_fix', bilateral: '/bilateral_signin_fix' };
+/** Sign-in page for this realm, on the same side (/signin or /signin_fix) as the page the visitor is on. */
+export const signInPath = (realm, from) => page(SIGNIN_PATH[realm] || SIGNIN_PATH.ncc, from);
 
 // ---- activity trail --------------------------------------------------------------------------
 let queue = [];
@@ -50,7 +53,7 @@ export function useSession({ realms = ['ncc'], kiosk = false } = {}) {
 
   const toSignIn = useCallback(() => {
     const next = encodeURIComponent(location.pathname + location.search);
-    history.replace(`${SIGNIN_PATH[realms[0]] || SIGNIN_PATH.ncc}?next=${next}${kiosk ? '&kiosk=1' : ''}`);
+    history.replace(`${signInPath(realms[0], location.pathname)}?next=${next}${kiosk ? '&kiosk=1' : ''}`);
   }, [history, location.pathname, location.search, realmKey, kiosk]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const check = useCallback(async (first) => {
@@ -82,7 +85,7 @@ export function useSession({ realms = ['ncc'], kiosk = false } = {}) {
     flush(true);
     try { await api('/auth2/signout', { method: 'POST' }); } catch (e) { /* cookie is cleared by the server when reachable */ }
     reconnectSocket();
-    history.replace(SIGNIN_PATH[realms[0]] || SIGNIN_PATH.ncc);
+    history.replace(signInPath(realms[0], window.location.pathname));
   }, [history, realmKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return { ...state, signOut, retry: () => check(true) };

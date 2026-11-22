@@ -8,6 +8,7 @@
 import React, { useState } from 'react';
 import FixPage from './FixPage';
 import { downloadFile } from './fixApi';
+import { WeatherNotice } from './serviceStatus';
 
 const p2 = (n) => String(n).padStart(2, '0');
 const wallNow = () => new Date(Date.now() + 3600000); // WAT
@@ -112,7 +113,8 @@ const PAGES = {
   collapse: { title: 'Generation analysis', body: () => <CollapseCard /> },
   weather: {
     title: 'Weather report',
-    body: () => <DateCard title="Weather report" kind="weather" fallbackName="weather.xlsx" text="Recorded weather at the stations for the day" />,
+    // Recorded data from the database: still downloads while live weather is suspended.
+    body: () => <><WeatherNotice /><DateCard title="Weather report" kind="weather" fallbackName="weather.xlsx" text="Recorded weather at the stations for the day" /></>,
   },
   bilateral: {
     title: 'Bilateral download',

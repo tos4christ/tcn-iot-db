@@ -15,6 +15,7 @@ import '../GencoPortal/genco_portal.css';
 import './fix.css';
 import { useSession, track } from './session';
 import { useSocketConnected } from './live';
+import { page } from './paths';
 
 export const NCC_NAV = [
   ['/home_fix', 'Home'],
@@ -70,7 +71,8 @@ export default function FixPage({ title, eyebrow = 'NISO IoT', realms = ['ncc'],
   const isKiosk = user && user.kind === 'kiosk';
   // Bilateral accounts only see their own page in the menu.
   const baseNav = user && user.realm === 'bilateral' && nav === NCC_NAV ? [['/sp_bilateral_fix', 'Bilateral download']] : nav;
-  const items = baseNav.concat(user && user.isAdmin ? [['/audit_fix', 'Audit']] : []);
+  const items = baseNav.concat(user && user.isAdmin ? [['/audit_fix', 'Audit'], ['/admin_fix', 'Admin']] : [])
+    .map(([to, label]) => [page(to), label]); // /home_fix stays on *_fix links, /home on the original addresses
   const top = (
     <>
       <header className="gx-top">
@@ -85,7 +87,7 @@ export default function FixPage({ title, eyebrow = 'NISO IoT', realms = ['ncc'],
         {user && status === 'ready' && (
           <div className="fx-user">
             <span className="fx-user-name">{user.name || user.email}<small>{isKiosk ? 'Wall screen' : user.realm === 'bilateral' ? 'Bilateral' : 'NCC'}</small></span>
-            {!isKiosk && !kiosk && <NavLink className="gx-btn fx-signout" to="/updatepassword_fix" title="Change password">Password</NavLink>}
+            {!isKiosk && !kiosk && <NavLink className="gx-btn fx-signout" to={page('/updatepassword_fix')} title="Change password">Password</NavLink>}
             {!isKiosk && !kiosk && <button type="button" className="gx-btn fx-signout" onClick={session.signOut}>Sign out</button>}
           </div>
         )}

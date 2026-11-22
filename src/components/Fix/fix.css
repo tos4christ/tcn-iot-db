@@ -120,3 +120,25 @@
   .gx-root .gx-table .fx-hide-sm { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .gx-root .fx-spinner { animation-duration: 3s; } }
+
+/* ---- "Weather API subscription expired" notice (serviceStatus.js) and the Admin page (AdminFix.js) ---- */
+.gx-root .fx-wx-expired { display: flex; gap: 12px; align-items: flex-start; background: rgb(208 59 59 / 0.14); border: 1px solid rgb(208 59 59 / 0.6); border-left: 5px solid var(--gx-critical); color: #f6c4c4; padding: 12px 14px; border-radius: 10px; }
+.gx-root .fx-wx-expired b { display: block; color: #ffd7d7; font-size: 15px; }
+.gx-root .fx-wx-expired p { margin: 2px 0 0; font-size: 14px; overflow-wrap: anywhere; }
+.gx-root .fx-wx-expired small { display: block; margin-top: 4px; font-size: 12px; color: #e7a9a9; }
+.gx-root .fx-wx-expired-icon { font-size: 20px; line-height: 1.1; color: #ff8a8a; flex: none; }
+.gx-root .fx-wx-expired.compact { padding: 10px 12px; }
+.gx-root .fx-wx-expired.compact b { font-size: 14px; }
+.gx-root .fx-wx-expired.compact p { font-size: 13px; }
+.gx-root .fx-admin-switch { display: flex; flex-direction: column; gap: 12px; }
+.gx-root .fx-switch-state { font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; }
+.gx-root .fx-switch-state.on { background: rgb(12 163 12 / 0.15); border: 1px solid rgb(12 163 12 / 0.5); color: #a6e9a6; }
+.gx-root .fx-switch-state.off { background: rgb(208 59 59 / 0.15); border: 1px solid rgb(208 59 59 / 0.6); color: #f3b4b4; }
+.gx-root .gx-field textarea { width: 100%; background: var(--gx-bg); color: var(--gx-text); border: 1px solid var(--gx-border); border-radius: 10px; padding: 10px 12px; font-size: 15px; font-family: inherit; resize: vertical; min-height: 72px; }
+.gx-root .gx-field textarea:focus { border-color: var(--gx-accent); outline: none; box-shadow: 0 0 0 3px rgb(57 135 229 / 0.25); }
+.gx-root .gx-field textarea::placeholder { color: var(--gx-muted); }
+.gx-root .fx-hint.fx-over { color: #f3a5a5; }
+.gx-root .gx-btn.fx-btn-danger { background: var(--gx-critical); border-color: var(--gx-critical); color: #fff; }
+.gx-root .gx-btn.fx-btn-danger:hover:not(:disabled) { filter: brightness(1.1); }
+.gx-root .fx-preview { display: flex; flex-direction: column; gap: 6px; border-top: 1px solid var(--gx-border); padding-top: 12px; }
+.gx-root .fx-admin-switch .fx-actions .gx-btn { height: auto; min-height: 42px; padding: 8px 16px; line-height: 1.3; }

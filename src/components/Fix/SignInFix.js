@@ -11,12 +11,16 @@ import '../GencoPortal/genco_portal.css';
 import './fix.css';
 import { api } from './fixApi';
 import { reconnectSocket } from './live';
+import { page } from './paths';
+import { WeatherNotice } from './serviceStatus';
 
-const HOME = { ncc: '/home_fix', bilateral: '/sp_bilateral_fix' };
+const HOME_FIX = { ncc: '/home_fix', bilateral: '/sp_bilateral_fix' };
+// /signin goes to /home, /signin_fix to /home_fix (paths.js)
+const home = (realm) => page(HOME_FIX[realm]);
 
 /** Only paths inside this site, so a crafted link cannot send people elsewhere after sign-in. */
 function safeNext(v, realm) {
-  return typeof v === 'string' && /^\/[A-Za-z0-9_\-/?=&%.]*$/.test(v) && !v.startsWith('//') ? v : HOME[realm];
+  return typeof v === 'string' && /^\/[A-Za-z0-9_\-/?=&%.]*$/.test(v) && !v.startsWith('//') ? v : home(realm);
 }
 
 export default function SignInFix({ realm = 'ncc' }) {
@@ -79,6 +83,7 @@ export default function SignInFix({ realm = 'ncc' }) {
           <span className="gx-eyebrow">{kiosk ? 'Wall screen sign-in' : realm === 'bilateral' ? 'Bilateral sign-in' : 'NCC sign-in'}</span>
           <h1>Sign in</h1>
         </div>
+        {realm === 'ncc' && !kiosk && <WeatherNotice compact />}
         {kiosk && <p className="fx-warn">This screen will stay signed in until an administrator ends it from the audit page.</p>}
         {current && (
           <p className="fx-ok">

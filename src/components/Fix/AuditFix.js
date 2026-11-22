@@ -9,11 +9,11 @@ import FixPage from './FixPage';
 import { api, saveCsv } from './fixApi';
 import { ColumnChart, Legend } from './FixCharts';
 
-const ACTIONS = ['signin', 'signin_failed', 'signin_blocked', 'signout', 'page_view', 'query', 'download', 'export', 'view_detail', 'password_changed', 'password_change_failed', 'session_revoked'];
+const ACTIONS = ['signin', 'signin_failed', 'signin_blocked', 'signout', 'page_view', 'query', 'download', 'export', 'view_detail', 'password_changed', 'password_change_failed', 'session_revoked', 'weather_suspended', 'weather_resumed'];
 const ACTION_LABEL = {
   signin: 'Signed in', signin_failed: 'Failed sign-in', signin_blocked: 'Sign-in blocked', signout: 'Signed out', page_view: 'Opened page',
   query: 'Query', download: 'Download', export: 'Export', view_detail: 'Meter detail', password_changed: 'Password changed',
-  password_change_failed: 'Password change failed', session_revoked: 'Session ended by admin', client_error: 'Page error', ui: 'Action',
+  password_change_failed: 'Password change failed', session_revoked: 'Session ended by admin', weather_suspended: 'Weather suspended', weather_resumed: 'Weather turned back on', client_error: 'Page error', ui: 'Action',
 };
 const BAD = ['signin_failed', 'signin_blocked', 'password_change_failed'];
 const lagos = (t) => (t ? new Date(t).toLocaleString('en-GB', { timeZone: 'Africa/Lagos', day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '—');

@@ -5,8 +5,15 @@
  *   Modern rebuilds  /home_fix, /charts_fix, /history_fix, /average_fix, /profile_fix, /downtime_fix, /uptime_fix,
  *                    /collapse_fix, /tem_fix, /voltageprofile_fix, /weather_download_fix,
  *                    /nccweather_fix (+ /nccweather_fix/:station),
- *                    /sp_bilateral_fix, /audit_fix, /updatepassword_fix,
+ *                    /sp_bilateral_fix, /audit_fix, /admin_fix, /updatepassword_fix,
  *                    /signin_fix, /bilateral_signin_fix
+ *   Original addresses taken over by the modern rebuilds (promotedRoutes, see paths.js):
+ *                    /, /home, /signin, /bilateral_signin, /updatepassword, /bilateral_updatepassword,
+ *                    /history, /average, /profile, /downtime, /uptime, /collapse, /tem, /voltageprofile,
+ *                    /weather_download, /sp_bilateral, /charts, /nccweather (+ /:station), /audit, /admin
+ *                    (these routes come before the old ones in App.js, so they win; the old
+ *                    components stay in the code. /signup, /bilateral_signup and the wall screen /
+ *                    NAS pages keep the old pages. The old sign-in is kept at /signin_old for them.)
  *   Fixed copies     /gridpageone_fix, /gridpagetwo_fix (wall screens: never signed out),
  *                    /nisonaspage_fix, /nisonaspage_sp_fix, /api/gridtable_fix, /bilateral_fix,
  *                    /bilaterals_fix, /mesl_bilaterals_fix, /fipl_bilaterals_fix,
@@ -18,7 +25,11 @@ import React, { lazy, Suspense } from 'react';
 import { Route } from 'react-router-dom';
 import Footer from '../Footer/Footer';
 import FixPage from './FixPage';
+// The old sign-in page (already in the main bundle through App.js), kept at /signin_old for the old pages that check the browser token (wall screens, NAS pages).
+import OldHeader from '../Header';
+import OldSignIn from '../Users/SignIn';
 import './fix.css';
+import { PROMOTED } from './paths';
 const SignInFix = lazy(() => import('./SignInFix'));
 const PasswordFix = lazy(() => import('./PasswordFix'));
 const HomeFix = lazy(() => import('./HomeFix'));
@@ -27,6 +38,7 @@ const DownloadsFix = lazy(() => import('./DownloadsFix'));
 const AuditFix = lazy(() => import('./AuditFix'));
 const ChartsFix = lazy(() => import('./ChartsFix'));
 const WeatherFix = lazy(() => import('./WeatherFix'));
+const AdminFix = lazy(() => import('./AdminFix'));
 const PageOneFix = lazy(() => import('./legacy/PageOneFix'));
 const PageTwoFix = lazy(() => import('./legacy/PageTwoFix'));
 const FullPageFix = lazy(() => import('./legacy/FullPageFix'));
@@ -64,6 +76,7 @@ export function fixRoutes() {
     <Route key="weather_download_fix" exact path="/weather_download_fix"><Suspense fallback={<Loading />}><DownloadsFix kind="weather" /></Suspense></Route>,
     <Route key="sp_bilateral_fix" exact path="/sp_bilateral_fix"><Suspense fallback={<Loading />}><DownloadsFix kind="bilateral" /></Suspense></Route>,
     <Route key="audit_fix" exact path="/audit_fix"><Suspense fallback={<Loading />}><AuditFix /></Suspense></Route>,
+    <Route key="admin_fix" exact path="/admin_fix"><Suspense fallback={<Loading />}><AdminFix /></Suspense></Route>,
     <Route key="charts_fix" exact path="/charts_fix"><Suspense fallback={<Loading />}><ChartsFix /></Suspense></Route>,
     // Weather centre (the NISO NAS v2 weather app): overview and one page per station.
     <Route key="nccweather_fix" exact path="/nccweather_fix"><Suspense fallback={<Loading />}><WeatherFix /></Suspense></Route>,
@@ -92,5 +105,39 @@ export function fixRoutes() {
     <Route key="taopex_bilaterals_fix" exact path="/taopex_bilaterals_fix"><Suspense fallback={<Loading />}><div className="taopex_background"><TAOPEXPageFix isLoggedIn={SIGNED_IN} /></div></Suspense></Route>,
     <Route key="ndphc_bilaterals_fix" exact path="/ndphc_bilaterals_fix"><Suspense fallback={<Loading />}><div className="ndphc_background"><NDPHCPageFix isLoggedIn={SIGNED_IN} /></div></Suspense></Route>,
     <Route key="sakete_bilaterals_fix" exact path="/sakete_bilaterals_fix"><Suspense fallback={<Loading />}><div><div className="sakete_background"><SaketePageFix isLoggedIn={SIGNED_IN} /></div></div></Suspense></Route>,
+    ...(PROMOTED ? promotedRoutes() : []),
+  ];
+}
+
+/**
+ * The modern rebuilds at the original addresses, so /, /home, /history, /signin ... open the new
+ * pages. Links between them stay on the original addresses (paths.js). Set PROMOTED to false in
+ * paths.js to give these addresses back to the old pages.
+ */
+function promotedRoutes() {
+  const lazyRoute = (key, path, element) => <Route key={`promoted_${key}`} exact path={path}><Suspense fallback={<Loading />}>{element}</Suspense></Route>;
+  return [
+    lazyRoute('root', '/', <HomeFix />),
+    lazyRoute('home', '/home', <HomeFix />),
+    lazyRoute('signin', '/signin', <SignInFix realm="ncc" />),
+    lazyRoute('bilateral_signin', '/bilateral_signin', <SignInFix realm="bilateral" />),
+    lazyRoute('updatepassword', '/updatepassword', <PasswordFix />),
+    lazyRoute('bilateral_updatepassword', '/bilateral_updatepassword', <PasswordFix />),
+    ...['history', 'average', 'profile', 'downtime', 'uptime'].map((m) => lazyRoute(m, `/${m}`, <AnalyticsFix mode={m} />)),
+    lazyRoute('tem', '/tem', <DownloadsFix kind="tem" />),
+    lazyRoute('voltageprofile', '/voltageprofile', <DownloadsFix kind="voltageprofile" />),
+    lazyRoute('collapse', '/collapse', <DownloadsFix kind="collapse" />),
+    lazyRoute('weather_download', '/weather_download', <DownloadsFix kind="weather" />),
+    lazyRoute('sp_bilateral', '/sp_bilateral', <DownloadsFix kind="bilateral" />),
+    lazyRoute('charts', '/charts', <ChartsFix />),
+    lazyRoute('nccweather', '/nccweather', <WeatherFix />),
+    lazyRoute('nccweather_station', '/nccweather/:name', <WeatherFix />),
+    lazyRoute('audit', '/audit', <AuditFix />),
+    lazyRoute('admin', '/admin', <AdminFix />),
+    // The old sign-in, for /gridpageone, /gridpagetwo, /nisonaspage, /nisonaspage_sp and the other old
+    // pages that still check the token the old sign-in leaves in the browser.
+    <Route key="signin_old" exact path="/signin_old">
+      <div className="body"><div className="App"><OldHeader /><OldSignIn /></div><Footer /></div>
+    </Route>,
   ];
 }

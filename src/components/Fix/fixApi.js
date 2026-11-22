@@ -4,20 +4,32 @@
  * localStorage. Same-origin only: the build is served by the backend at nisonas.org.
  */
 export class ApiError extends Error {
-  constructor(status, message) {
+  constructor(status, message, code = null) {
     super(message);
     this.status = status;
+    this.code = code; // the server's machine-readable reason, e.g. 'weather_suspended'
   }
 }
 
 const HEADERS = { 'X-Requested-With': 'nas-fix' };
 
+/** { message, code } from an error answer ({ error, code } or { data: 'text' }); nulls when absent. */
 async function readError(res) {
   try {
     const json = await res.json();
-    if (json && (json.error || json.data)) return typeof json.error === 'string' ? json.error : (typeof json.data === 'string' ? json.data : null);
+    if (json && (json.error || json.data)) {
+      return {
+        message: typeof json.error === 'string' ? json.error : (typeof json.data === 'string' ? json.data : null),
+        code: typeof json.code === 'string' ? json.code : null,
+      };
+    }
   } catch (e) { /* not JSON */ }
-  return null;
+  return { message: null, code: null };
+}
+
+async function errorFrom(res) {
+  const { message, code } = await readError(res);
+  return new ApiError(res.status, message || `The server answered ${res.status}.`, code);
 }
 
 export async function api(path, { method = 'GET', body, signal } = {}) {
@@ -34,7 +46,7 @@ export async function api(path, { method = 'GET', body, signal } = {}) {
     if (err.name === 'AbortError') throw err;
     throw new ApiError(0, 'Cannot reach the server. Check the network connection.');
   }
-  if (!res.ok) throw new ApiError(res.status, (await readError(res)) || `The server answered ${res.status}.`);
+  if (!res.ok) throw await errorFrom(res);
   const json = await res.json().catch(() => null);
   return json ? json.data : null;
 }
@@ -52,10 +64,10 @@ export async function downloadFile(path, { method = 'POST', body, fallbackName =
   } catch (err) {
     throw new ApiError(0, 'Cannot reach the server. Check the network connection.');
   }
-  if (!res.ok) throw new ApiError(res.status, (await readError(res)) || `The server answered ${res.status}.`);
+  if (!res.ok) throw await errorFrom(res);
   // Some old report endpoints answer 200 with a JSON message instead of a file.
   if (/application\/json/.test(res.headers.get('Content-Type') || '')) {
-    throw new ApiError(200, (await readError(res)) || 'The server returned no file.');
+    throw new ApiError(200, (await readError(res)).message || 'The server returned no file.');
   }
   const blob = await res.blob();
   if (!blob.size) throw new ApiError(200, 'The server returned an empty file. There may be no data for that date.');
